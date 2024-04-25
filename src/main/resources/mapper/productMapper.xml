@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homerunball.admin.product.dao.ProductMapper">
+    <select id="count" resultType="int">
+        select count(*) from prd
+    </select>
+
+    <delete id="deleteAll">
+        delete from prd
+    </delete>
+
+    <delete id="delete" parameterType="map">
+        delete
+        from prd
+        where pd_id = #{pd_id}
+    </delete>
+
+    <insert id="insert" parameterType="ProductDto">
+        insert into prd
+            (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_nm,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
+        values
+            (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_nm}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
+    </insert>
+
+    <select id="selectPrd" parameterType="ProductDto" resultType="ProductDto">
+        select *
+        from prd
+        where pd_id = #{pd_id}
+    </select>
+
+    <select id="selectPrdAll" resultType="ProductDto">
+        select *
+        from prd
+    </select>
+
+    <sql id="selectPrdStk">
+        select pd.pd_id, pd.pd_name, pd.qlt_cd, stk.pd_clsf_cd, stk.sls_prc
+        from prd as pd, stk
+        where pd.pd_id = stk.pd_id
+    </sql>
+
+    <select id="selectPrdPrcAll" resultType="ProductDto">
+        <include refid="selectPrdStk"/>
+    </select>
+
+    <select id="selectPrdPrc" parameterType="String" resultType="ProductDto">
+        select *
+        from (
+        <include refid="selectPrdStk"/>
+        ) as pd_stk
+        where pd_id = #{pd_id}
+    </select>
+
+    <!-- 내용 변경 쿼리 -->
+    <update id="updateContent" parameterType="ProductDto">
+        update prd
+        <set>
+            <if test="pd_name != null">pd_name = #{pd_name},</if>
+            <if test="mdl_name != null">mdl_name = #{mdl_name},</if>
+            <if test="pd_ad_cmt != null">pd_ad_cmt = #{pd_ad_cmt},</if>
+            <if test="pd_smr_dsc != null">pd_smr_dsc = #{pd_smr_dsc},</if>
+            <if test="pd_det_dsc != null">pd_det_dsc = #{pd_det_dsc},</if>
+            <if test="min_od_qty != null">min_od_qty = #{min_od_qty},</if>
+            <if test="max_od_qty != null">max_od_qty = #{max_od_qty},</if>
+            <if test="pd_is_show != null">pd_is_show = #{pd_is_show},</if>
+            <if test="sls_strt_dt != null">sls_strt_dt = #{sls_strt_dt},</if>
+            <if test="hit_cnt != null">hit_cnt = #{hit_cnt},</if>
+            <if test="rvw_cnt != null">rvw_cnt = #{rvw_cnt},</if>
+            <if test="wish_cnt != null">wish_cnt = #{wish_cnt},</if>
+            <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
+        </set>
+        where pd_id = #{pd_id};
+    </update>
+
+    <!-- 제품 상태 변경 쿼리 -->
+    <update id="updateStatus" parameterType="ProductDto">
+        update prd
+        set pd_stat_hist_cd = #{pd_stat_hist_cd}
+        where pd_id = #{pd_id};
+    </update>
+
+    <!-- 조회수 증가 쿼리 --> 
+    <update id="increaseHitCnt" parameterType="ProductDto">
+        update prd
+        set hit_cnt = hit_cnt + 1
+        where pd_id = #{pd_id};
+    </update>
+</mapper>
