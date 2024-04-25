@@ -1,4 +1,4 @@
-package com.homerunball;
+package homerunball;
 
 import java.sql.*;
 import org.springframework.stereotype.Controller;
