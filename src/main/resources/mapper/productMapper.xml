@@ -32,6 +32,7 @@
     <select id="selectPrdAll" resultType="ProductDto">
         select *
         from prd
+        order by frst_reg_dt desc
     </select>
 
     <sql id="selectPrdStk">
