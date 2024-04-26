@@ -56,7 +56,7 @@
                     <td colspan="7"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
                 </c:when>
                 <c:otherwise>
-                    <form action="/homerunball/cart/list" id="form">
+                    <form action="/cart/list" id="form">
                         <c:forEach var="cartDto" items="${list}">
                             <tr>
                                 <td><input type="checkbox" id="tb_checkbox" name="tb_checkbox" /></td>
@@ -120,9 +120,6 @@
             form.submit();
         })
     })
-
-
-
 </script>
 </body>
 </html>
