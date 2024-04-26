@@ -47,21 +47,19 @@
         </div>
 
     </div>
-
     <hr class="first__under" />
     <div class="title__order">상품정보</div>
     <hr class="second__under" />
     <div class="tb__order">
         <form action="/homerunball/order">
-            <table style="width: 100%">
+            <table style="width: 90%">
                 <colgroup>
                     <col width="70" />
                     <col width="*" />
-                    <col width="100" />
-                    <col width="80" />
-                    <col width="90" />
-                    <col width="90" />
-                    <col width="100" />
+                    <col width="150" />
+                    <col width="150" />
+                    <col width="150" />
+                    <col width="150" />
                 </colgroup>
                 <thead>
                 <tr>
@@ -75,16 +73,13 @@
                         <div>소비자가</div>
                     </th>
                     <th scope="col">
-                        <div>판매가</div>
-                    </th>
-                    <th scope="col">
                         <div>수량</div>
                     </th>
                     <th scope="col">
                         <div>배송구분</div>
                     </th>
                     <th scope="col">
-                        <div>합계</div>
+                        <div>판매가</div>
                     </th>
                 </tr>
                 </thead>
@@ -99,12 +94,9 @@
                             <span>색상+사이즈: 아이보리/FREE</span>
                         </td>
                         <td><span></span>원</td>
-                        <td><span>${ordDto.od_pay_amt}</span>원</td>
                         <td><span>${ordDto.od_pd_qty}</span>개</td>
-                        <td>
-                            <span>무료배송</span>
-                        </td>
-                        <td><span></span>원</td>
+                        <td><span>무료배송</span></td>
+                        <td><span>${ordDto.od_pay_amt}</span>원</td>
                     </tr>
                     </c:forEach>
                 </tbody>
