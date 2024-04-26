@@ -5,6 +5,6 @@
 <configuration>
   <typeAliases>
     <typeAlias alias="CartDto" type="com.homerunball.cart.domain.CartDto"/>
+    <typeAlias alias="ProductDto" type="com.homerunball.admin.product.ProductDto"/>
   </typeAliases>
 </configuration>
-
