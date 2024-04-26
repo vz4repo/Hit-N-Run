@@ -29,7 +29,7 @@ public class DBConnectionTest {
     while (rs.next()) {
       curDate = rs.getString(1);
       /* 읽어온 행의 첫번째 컬럼의 값을 String으로 읽어서 curDate에 저장 */
-      System.out.printf("##### DB 접속 성공 ##### %n[ SELECT now() -> %s ]", curDate);
+      System.out.printf("##### DB 접속 성공 ##### %n[ SELECT now() -> %s ]%n", curDate);
     }
     model.addAttribute("curDate", curDate);
 
