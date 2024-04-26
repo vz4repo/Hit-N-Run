@@ -5,3 +5,4 @@
 <h2>SYSDATE : ${empty curDate? "no conn" : curDate }</h2>
 </body>
 </html>
+
