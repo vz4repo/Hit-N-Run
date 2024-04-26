@@ -15,9 +15,8 @@
         <div class="right"><tiles:insertAttribute name="right" /></div>
 <%--        <div id="main"><tiles:insertAttribute name="main" /></div>--%>
         <!-- content -->
-        <p>CONTENT</p>
+        <div>    <%@include file="index.jsp"%></div>
 <%--        <tiles:insertAttribute name="content"/>--%>
-
         <div class="footer"><tiles:insertAttribute name="footer" /></div>
 </div>
 </body>

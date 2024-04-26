@@ -41,6 +41,6 @@
 <!--		<context:exclude-filter type="regex" expression="com.homerunball.*"/>-->
 	</context:component-scan>
 
-	<view-controller path="/" view-name="index"/>
+	<view-controller path="/" view-name="layout"/>
 
 </beans:beans>

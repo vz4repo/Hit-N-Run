@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value='/css//style.css'/>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>토스페이먼츠 샘플 프로젝트</title>
+    <title>결제 성공</title>
   </head>
   <body>
     <div class="box_section" style="width: 600px">
@@ -57,13 +57,12 @@
       const orderNameElement = document.querySelector("#orderName");
       const methodElement = document.querySelector("#method");
 
-      // 쿼리 파라미터 값이 결제 요청할 때 보낸 데이터와 동일한지 반드시 확인하세요.
-      // 클라이언트에서 결제 금액을 조작하는 행위를 방지할 수 있습니다.
+      /* TODO: 쿼리스트링 값, 결제 요청 보낸 데이터 정학성 체크로 결제금액 조작 여부 확인 */
       const urlParams = new URLSearchParams(window.location.search);
 
-      // 서버로 결제 승인에 필요한 결제 정보를 보내세요.
+      /* 서버로 결제승인에 필요한 결제 정보 requestData 전송 */
       async function confirm() {
-        var requestData = {
+        let requestData = {
           paymentKey: urlParams.get("paymentKey"),
           orderId: urlParams.get("orderId"),
           amount: urlParams.get("amount"),
@@ -80,17 +79,15 @@
         const json = await response.json();
 
         if (!response.ok) {
-          // TODO: 결제 실패 비즈니스 로직을 구현하세요.
-          console.log(json);
+          /* TODO: 결제 실패 비즈니스 로직을 구현하세요. */
           window.location.href = `/fail?message=${json.message}&code=${json.code}`;
         }
 
-        // TODO: 결제 성공 비즈니스 로직을 구현하세요.
-        // console.log(json);
+        /* TODO: 결제 성공 비즈니스 로직을 구현하세요. */
         return json;
       }
       confirm().then(function (data) {
-
+        /* 응답 정보 모두 출력 */
         responseElement.innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
 
         /* 추가 */
@@ -98,7 +95,7 @@
         orderNameElement.textContent = data.orderName;
         methodElement.textContent = data.method;
       });
-
+      /* 쿼리스트링 값 */
       orderIdElement.textContent = urlParams.get("orderId");
       amountElement.textContent = urlParams.get("amount") + "원";
       paymentKeyElement.textContent = urlParams.get("paymentKey");
