@@ -15,7 +15,7 @@
 <!-- 총 고객명수 조회-->
     <select id="count" resultType="int">
         select count(*) from cust
-
+    </select>
 <!-- 단일 고객 조회-->
     <select id="select" resultType="CustDto">
         select * from cust where c_email = #{c_email}

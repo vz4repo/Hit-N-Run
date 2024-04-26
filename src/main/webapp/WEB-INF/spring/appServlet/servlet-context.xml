@@ -25,9 +25,6 @@
 <!--		<context:exclude-filter type="regex" expression="com.homerunball.*"/>-->
 	</context:component-scan>
 
-	<view-controller path="/" view-name="registerForm"/>
-
-<!--	<view-controller path="/register/add" view-name="registerForm"/>-->
-
+	<view-controller path="/" view-name="index"/>
 
 </beans:beans>
