@@ -9,7 +9,7 @@ public interface OrdService {
 
     int remove(String od_id, String c_id) throws Exception;
 
-    OrdDto read(String od_id) throws Exception;
+    OrdDto read(String od_id, String c_id) throws Exception;
 
     int writer(OrdDto ord) throws Exception;
 

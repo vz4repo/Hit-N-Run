@@ -34,7 +34,10 @@ public class OrdDaoImpl implements OrdDao {
     } // int delete(String statement)
 
     @Override
-    public OrdDto select(String od_id) throws Exception {
+    public OrdDto select(String od_id, String c_id) throws Exception {
+
+        System.out.println("asdf" + od_id);
+
         return session.selectOne(namespace + "select", od_id);
     } // T selectOne(String statement, Object parameter)
 
@@ -42,6 +45,11 @@ public class OrdDaoImpl implements OrdDao {
     public List<OrdDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
     } // Li
+
+    @Override
+    public List<OrdDto> selectOdId(String od_id) throws Exception {
+        return session.selectList(namespace+"selectOdId",od_id);
+    }
 
     @Override
     public int insert(OrdDto od_id) throws Exception {

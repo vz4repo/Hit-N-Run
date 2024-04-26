@@ -27,6 +27,22 @@
         where od_id=#{od_id}
     </select>
 
+    <select id="selectOdId" parameterType="String" resultType="ordDto">
+        select od_id
+             , c_id
+             , od_dt
+             , od_stat_cd
+             , od_pd_qty
+             , od_tot_qty
+             , od_pay_amt
+             , frst_reg_dt
+             , frst_reg_id
+             , last_mod_dt
+             , last_mod_id
+        from ord
+        where od_id=#{od_id}
+    </select>
+
     <select id="selectAll" resultType="ordDto">
         select od_id
              , c_id

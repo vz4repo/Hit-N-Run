@@ -72,7 +72,7 @@ public class OrdDaoImplTest {
         assertFalse(ord.equals(ord2)); /*삽입은 실패해야 함*/
 
         /*2번 데이터 조회*/
-        OrdDto ord2rs = ordDao.select(ord2.getOd_id());
+        OrdDto ord2rs = ordDao.select(ord2.getOd_id(), ord2.getC_id());
         assertNotNull(ord2rs);
 
         /*수정*/
@@ -82,7 +82,7 @@ public class OrdDaoImplTest {
         assertTrue(ordDao.update(ord2rs) == 1);
 
         /*수정된 데이터 확인*/
-        OrdDto updatedOrd = ordDao.select(ord2rs.getOd_id());
+        OrdDto updatedOrd = ordDao.select(ord2rs.getOd_id(), ord2.getC_id());
         assertEquals("update", updatedOrd.getOd_stat_cd());
 
         /*다시 조회*/
@@ -93,7 +93,7 @@ public class OrdDaoImplTest {
         ord.setOd_id(od_id);
 
         /*od_id랑 od_id2 비교*/
-        OrdDto ord3 = ordDao.select(od_id);
+        OrdDto ord3 = ordDao.select(od_id, ord2.getC_id());
         System.out.println("ord = " + ord);
         System.out.println("ord2 = " + ord2);
         assertTrue(ord != ord2);

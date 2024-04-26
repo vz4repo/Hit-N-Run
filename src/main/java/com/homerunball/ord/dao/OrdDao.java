@@ -19,6 +19,8 @@ public interface OrdDao {
 
     List<OrdDto> selectAll() throws Exception; // List<E> selectList(String statement)
 
-    OrdDto select(String od_id) throws Exception; // T selectOne(String statement, Object parameter)
+    List<OrdDto> selectOdId(String od_id) throws Exception;
+
+    OrdDto select(String od_id, String c_id) throws Exception; // T selectOne(String statement, Object parameter)
 
 }

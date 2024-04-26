@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -34,6 +35,30 @@ public class OrdServiceImplTest {
         assertTrue(ordService.getcount()==2);
     }
 
+
+    @Test
+    public void writer() throws Exception {
+
+        for(int i = 0; 1 < 100; i++){
+            String od_id = "aaa2" + i;
+            String c_id = "123" + i;
+            Date od_dt = new Date();
+            String od_stat_cd = "1234";
+            Integer od_pd_qty = 1 + i;
+            Integer od_tot_qty = 200 - i;
+            Integer od_pay_amt = 1 * i;
+            Timestamp frst_reg_dt = new Timestamp(new Date().getTime());
+            String frst_reg_id = "asdf";
+            Timestamp last_mod_dt = new Timestamp(new Date().getTime());
+            String last_mod_id = "asdf";
+
+            OrdDto ord = new OrdDto(od_id, c_id, od_dt, od_stat_cd, od_pd_qty, od_tot_qty, od_pay_amt, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+            assertTrue(ordService.writer(ord) == 1);
+        }
+
+    }
+
+
     @Test
     public void read() throws Exception {
 
@@ -52,7 +77,7 @@ public class OrdServiceImplTest {
         assertFalse(ord.equals(ord2)); /*삽입은 실패해야 함*/
 
         /*2번 데이터 조회*/
-        OrdDto ord2rs = ordService.read(ord2.getOd_id());
+        OrdDto ord2rs = ordService.read(ord2.getOd_id(), ord2.getC_id());
         assertNotNull(ord2rs);
 
         /*수정*/
@@ -62,7 +87,7 @@ public class OrdServiceImplTest {
         assertTrue(ordService.modify(ord2rs) == 1);
 
         /*수정된 데이터 확인*/
-        OrdDto modifydOrd = ordService.read(ord2rs.getOd_id());
+        OrdDto modifydOrd = ordService.read(ord2rs.getOd_id(), ord2rs.getC_id());
         assertEquals("modify", modifydOrd.getOd_stat_cd());
     }
 

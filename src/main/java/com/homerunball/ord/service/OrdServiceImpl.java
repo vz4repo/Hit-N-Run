@@ -26,8 +26,11 @@ public class OrdServiceImpl implements OrdService {
    }
 
     @Override
-    public OrdDto read(String od_id) throws Exception {
-        return  ordDao.select(od_id);
+    public OrdDto read(String od_id, String c_id) throws Exception {
+
+        System.out.println(od_id);
+
+        return  ordDao.select(od_id, c_id);
     }
 
     @Override
