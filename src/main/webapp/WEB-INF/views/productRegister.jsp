@@ -16,33 +16,42 @@
             margin: 20px;
         }
         textarea {
-            width: 1084px;
+            width: 900px;
             height: 200px;
         }
     </style>
     <title>제품 등록 화면</title>
-</head>
-<body>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script>
-
         $(document).ready(function() {
-            $("searchProductIdBtn").on("click", function () {
+            $("#searchProductIdBtn").on("click", function () {
                 let form = $("form");
                 let pd_type=document.getElementById("main");
             });
 
             $("#textSummary").keyup(function(e) {
                 let content = $(this).val();
-
-                $("#textLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
+                $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
                 if (content.length > 200) {
                     alert("최대 200자까지 입력 가능합니다.");
                     $(this).val(content.substring(0, 200));
-                    $('#textLengthCheck').text("[200 / 200]");
+                    $('#summaryLengthCheck').text("[200 / 200]");
+                }
+            });
+
+            $("#textDescription").keyup(function(e) {
+                let content = $(this).val();
+                $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 5000) {
+                    alert("최대 5000자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 5000));
+                    $('#descriptionLengthCheck').text("[0 / 5000]");
                 }
             });
         });
     </script>
+</head>
+<body>
     <h1>제품 등록 화면</h1>
     <form id="form" method="post">
         <div class="product_register">
@@ -152,7 +161,7 @@
                             <input type="checkbox" id="hpd" name="hpd" value="H">
                             <label for="hpd">HOT</label><br>
                             <input type="checkbox" id="spd" name="spd" value="S">
-                            <label for="spd">스테디 셀러</label><br><br>
+                            <label for="spd">스테디 셀러</label><br>
                         </td>
                     </tr>
                 </table>
@@ -196,20 +205,45 @@
                             <input type="checkbox" id="use" name="use" value="USE">
                             <label for="use">중고제품</label><br>
                             <input type="checkbox" id="ref" name="ref" value="REF">
-                            <label for="ref">리퍼제품</label><br><br>
+                            <label for="ref">리퍼제품</label><br>
                         </td>
                     </tr>
                     <tr>
                         <th>제품 요약 설명</th>
                         <td>
-                            <input type="text" id="pd_smr_dsc" size="100" maxlength="200" id="textSummary"/>
-                            <span id="textLengthCheck"></span>
+                            <input type="text" name="pd_smr_dsc" size="100" maxlength="200" id="textSummary"/>
+                            <span id="summaryLengthCheck">[0 / 200]</span>
                         </td>
 
                     </tr>
                     <tr>
                         <th>제품 상세 설명</th>
-                        <td><textarea id="pd_det_dsc" style="resize: none" maxlength="5000"></textarea></td>
+                        <td>
+                            <textarea name="pd_det_dsc" id = "textDescription" style="resize: none" maxlength="5000"></textarea>
+                            <span id="descriptionLengthCheck">[0 / 5000]</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="product_content">
+                <table style="width:100%">
+                    <tr>
+                        <th colspan="2">판매 정보</th>
+                    </tr>
+                    <tr>
+                        <th>최소 주문 수량</th>
+                        <td>
+                            <label for="min_od_qty"></label>
+                            <input type="text" id="min_od_qty" name="min_od_qty" value="1">개 이상
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>최대 주문 수량</th>
+                        <td>
+                            <label for="max_od_qty"></label>
+                            <input type="text" id="max_od_qty" name="max_od_qty" value="1">개 이상
+                        </td>
                     </tr>
                 </table>
             </div>
