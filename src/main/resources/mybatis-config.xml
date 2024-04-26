@@ -4,6 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="ReviewDto" type="com.homerunball.review.repository.ReviewDto"/>
+<!--    <typeAlias alias="ReviewDto" type="com.homerunball.review.repository.ReviewDto"/>-->
   </typeAliases>
 </configuration>
