@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DBConnectionTest {
   @GetMapping("/")
-  public  String  connTest(Model model) throws Exception {
+  public String connTest(Model model) throws Exception {
     final String DB_URL = "jdbc:mysql://localhost:3306/homerunball?useUnicode=true&characterEncoding=utf8";
     final String DB_USER = "root";
     final String DB_PASSWORD = "12341234";
 
     Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     /* 데이터베이스의 연결을 얻는다. */
-    Statement stmt  = conn.createStatement();
+    Statement stmt = conn.createStatement();
     /* Statement를 생성한다. */
 
     String query = "SELECT now()";
