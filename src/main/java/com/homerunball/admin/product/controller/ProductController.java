@@ -17,11 +17,19 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    /*
+    대시보드로 이동하는 메서드
+     */
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         return "productDashboard";
     }
 
+    /*
+    등록된 제품을 출력하는 메서드
+    productList: 등록된 제품을 모두 저장한다.
+    productCount: 등록된 제품의 전체 개수를 센다.
+     */
     @GetMapping("/list")
     public String list(Model m) {
         try {
