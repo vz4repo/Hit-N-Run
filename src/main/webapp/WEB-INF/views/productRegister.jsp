@@ -15,7 +15,6 @@
         .product_content {
             margin: 20px;
         }
-
         textarea {
             width: 100%;
             height: 200px;
@@ -267,5 +266,6 @@
     </div>
 </form>
 <input type="submit" value="제품 등록">
+
 </body>
 </html>
