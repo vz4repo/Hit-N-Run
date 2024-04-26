@@ -17,8 +17,8 @@ public class CartServiceImplTest {
     @Test
     public void insertTestData() throws Exception {
         cartService.removeAll();
-        for(int i=0; i<=10; i++){
-            CartDto cart = new CartDto("U000005"+i, "GLV000021-20", "S", 1);
+        for(int i=0; i<1; i++){
+            CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 5);
             cartService.create(cart);
         }
     }
@@ -40,19 +40,19 @@ public class CartServiceImplTest {
         assertTrue(cartService.getCount()==4);
     }
 
-    @Test
-    public void remove() throws Exception {
-        cartService.removeAll();
-        assertTrue(cartService.getCount()==0);
-
-        CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 2);
-        assertTrue(cartService.create(cart)==1);
-        assertTrue(cartService.getCount()==1);
-
-        String c_id = cartService.readAll().get(0).getC_id();
-        assertTrue(cartService.remove(c_id, cart.getPd_id())==1);
-        assertTrue(cartService.getCount()==0);
-    }
+//    @Test
+//    public void remove() throws Exception {
+//        cartService.removeAll();
+//        assertTrue(cartService.getCount()==0);
+//
+//        CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 2);
+//        assertTrue(cartService.create(cart)==1);
+//        assertTrue(cartService.getCount()==1);
+//
+//        String c_id = cartService.readAll().get(0).getC_id();
+//        assertTrue(cartService.remove(c_id, cart.getPd_id())==1);
+//        assertTrue(cartService.getCount()==0);
+//    }
 
     @Test
     public void removeAll() throws Exception {

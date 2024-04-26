@@ -13,6 +13,11 @@ public class CartDto {
     private Date last_mod_dt;
     private String last_mod_id;
 
+    private int price;
+
+    private int totalPrice;
+
+
     public CartDto(){}
 
     public CartDto(String c_id, String pd_id, String pd_clsf_code, int cart_cnt){
@@ -20,6 +25,8 @@ public class CartDto {
         this.pd_id = pd_id;
         this.pd_clsf_code = pd_clsf_code;
         this.cart_cnt = cart_cnt;
+
+        totalPrice = cart_cnt*price;
     }
 
     @Override
@@ -67,6 +74,22 @@ public class CartDto {
         this.cart_cnt = cart_cnt;
     }
 
+    public int getprice() {
+        return price;
+    }
+
+    public void setprice(int price) {
+        this.price = price;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @Override
     public String toString() {
         return "CardDto{" +
@@ -74,6 +97,8 @@ public class CartDto {
                 ", pd_id='" + pd_id + '\'' +
                 ", pd_clsf_code='" + pd_clsf_code + '\'' +
                 ", cart_cnt=" + cart_cnt +
+                ", price=" + price +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }

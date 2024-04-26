@@ -54,5 +54,9 @@ public class CartDaoImpl implements CartDao {
         return session.selectList(namespace+"selectAll");
     }
 
+    public List<CartDto> selectUser(String c_id) throws Exception {
+        return session.selectList(namespace+"selectUser",c_id);
+    }
+
 
 }
