@@ -7,7 +7,8 @@
     <select id="count" resultType="int">
         select count(*) from cart;
     </select>
-    
+
+    <!--장바구니삭제-->
     <delete id="delete" parameterType="map">
         delete from cart where c_id = #{c_id} and pd_id = #{pd_id}
     </delete>
@@ -15,10 +16,12 @@
     <delete id="deleteAll">
         delete from cart
     </delete>
-    
+
+    <!--장바구니추가-->
     <insert id="insert" parameterType="CartDto">
         insert into cart (c_id, pd_id, pd_clsf_code, cart_cnt)
         values (#{c_id}, #{pd_id}, #{pd_clsf_code}, #{cart_cnt})
+        order by pd_clsf_code desc
     </insert>
 
     <sql id="selectCart">
@@ -26,16 +29,24 @@
         from cart
     </sql>
 
+    <!--select 1건-->
     <select id="select" parameterType="string" resultType="CartDto">
+        <include refid="selectCart"/>
+        where c_id = #{c_id}
+    </select>
+
+    <!--select List-->
+    <select id="selectUser" parameterType="string" resultType="CartDto">
         <include refid="selectCart"/>
         where c_id = #{c_id}
     </select>
 
     <select id="selectAll" resultType="CartDto">
         <include refid="selectCart"/>
-        order by c_id = #{c_id} and frst_reg_dt = #{frst_reg_dt}
+        order by c_id = #{c_id} and frst_reg_dt = #{frst_reg_dt} desc
     </select>
 
+    <!--장바구니 수정-->
     <update id="update" parameterType="CartDto">
         update cart
         set pd_id = #{pd_id}
