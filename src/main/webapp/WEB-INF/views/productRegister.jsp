@@ -24,44 +24,44 @@
     <title>제품 등록 화면</title>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-<script>
-    $(document).ready(function() {
-        $("#searchProductIdBtn").on("click", function () {
-            let form = $("form");
-            let pd_type=document.getElementById("main");
-        });
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#searchProductIdBtn").on("click", function () {
+                let form = $("form");
+                let pd_type=document.getElementById("main");
+            });
 
-        $("#textSummary").keyup(function(e) {
-            let content = $(this).val();
-            $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
-            if (content.length > 200) {
-                alert("최대 200자까지 입력 가능합니다.");
-                $(this).val(content.substring(0, 200));
-                $('#summaryLengthCheck').text("[200 / 200]");
-            }
-        });
+            $("#textSummary").keyup(function(e) {
+                let content = $(this).val();
+                $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 200) {
+                    alert("최대 200자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 200));
+                    $('#summaryLengthCheck').text("[200 / 200]");
+                }
+            });
 
-        $("#textDescription").keyup(function(e) {
-            let content = $(this).val();
-            $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
-            if (content.length > 5000) {
-                alert("최대 5000자까지 입력 가능합니다.");
-                $(this).val(content.substring(0, 5000));
-                $('#descriptionLengthCheck').text("[0 / 5000]");
-            }
-        });
-        // yesLimit 라디오 버튼 클릭 시
-        $("#yesLimit").on("click", function() {
-            $("#maxQty").removeAttr("disabled");
-        });
+            $("#textDescription").keyup(function(e) {
+                let content = $(this).val();
+                $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 5000) {
+                    alert("최대 5000자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 5000));
+                    $('#descriptionLengthCheck').text("[0 / 5000]");
+                }
+            });
+            // yesLimit 라디오 버튼 클릭 시
+            $("#yesLimit").on("click", function() {
+                $("#maxQty").removeAttr("disabled");
+            });
 
-        // noLimit 라디오 버튼 클릭 시
-        $("#noLimit").on("click", function() {
-            $("#maxQty").attr("disabled", "disabled");
+            // noLimit 라디오 버튼 클릭 시
+            $("#noLimit").on("click", function() {
+                $("#maxQty").attr("disabled", "disabled");
+            });
         });
-    });
-</script>
+    </script>
 
 <h1>제품 등록 화면</h1>
 

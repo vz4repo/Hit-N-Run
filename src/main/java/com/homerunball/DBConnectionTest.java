@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DBConnectionTest {
-  @GetMapping("/")
+  @GetMapping("/index")
   public String connTest(Model model) throws Exception {
     final String DB_URL = "jdbc:mysql://localhost:3306/homerunball?useUnicode=true&characterEncoding=utf8";
     final String DB_USER = "root";
