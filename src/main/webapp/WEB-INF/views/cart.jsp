@@ -22,7 +22,6 @@
     <hr class="first__under" />
     <div class="title__cart">장바구니</div>
     <hr class="second__under" />
-    <div class="tb__cart">
         <table style="width: 100%">
             <colgroup>
                 <c:choose>
@@ -56,7 +55,7 @@
                     <td colspan="7"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
                 </c:when>
                 <c:otherwise>
-                    <form action="/homerunball/cart/list" id="form">
+                    <form action="/cart/list" id="form">
                         <c:forEach var="cartDto" items="${list}">
                             <tr>
                                 <td><input type="checkbox" id="tb_checkbox" name="tb_checkbox" /></td>
@@ -64,7 +63,7 @@
                                     <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
                                 </td>
                                 <td>
-                                    <a href="#">상품명가져오기</a>
+                                    <a href="#">${cartDto.pd_id}</a>
                                     <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
                                 </td>
                                 <td><span name="price"></span>판매가 원</td>
@@ -82,13 +81,21 @@
                                     <span>무료배송</span>
                                 </td>
                                 <td>
-                                    <button type="button" class="deleteBtn">삭제</button>
+                                    <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
                                 </td>
                             </tr>
                         </c:forEach>
                     </form>
                 </c:otherwise>
             </c:choose>
+            <div>
+                <%-- CartController 의 remove 메서드로 데이터를 넘긴다 --%>
+                <form action="/cart/remove" method="post" class="delete_form">
+                    <input type="hidden" name="c_id" class="delete_c_id" value="${c_id}"/>
+                    <input type="hidden" name="pd_id" class="delete_pd_id" value="${pd_id}"/>
+                    <input type="hidden" name="pd_clsf_code" class="delete_pd_clsf_code" value="${pd_clsf_code}"/>
+                </form>
+            </div>
             </tbody>
             <tfoot>
             <tr>
@@ -106,23 +113,41 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="7">
+                    <form action="/cart/removeAll" method="post" id="remove_order_form" data-cust-id="${c_id}">
+                        <button type="button" id="delete_All_Btn">전체상품 삭제</button>
+                        <button type="button" id="order_All_Btn">전체상품 주문</button>
+                    </form>
+                </td>
+            </tr>
             </tfoot>
         </table>
-    </div>
 </main>
 <script>
+
+    // delete 선택삭제 Btn
     $(document).ready(function (){
+
+
         $('.deleteBtn').on("click", function(){
             if(!confirm("삭제하시겠습니까?")) return;
-            let form = $('form');
-            form.attr("action", "<c:url value='/cart/remove'/>")
+            let c_id = $(this).data("cid");
+            let pd_id = $(this).data("pdid");
+            let pd_clsf_code = $(this).data("sizecd");
+            $(".delete_c_id").val(c_id);
+            $(".delete_pd_id").val(pd_id);
+            $(".delete_pd_clsf_code").val(pd_clsf_code);
+            $(".delete_form").attr("action", "<c:url value='/cart/remove'/>").submit();
+        })
+
+        $('#delete_All_Btn').on("click", function (){
+            let form = $('#remove_order_form');
+            form.attr("action", "<c:url value='/cart/removeAll'/>");
             form.attr("method", "post");
             form.submit();
         })
     })
-
-
-
 </script>
 </body>
 </html>
