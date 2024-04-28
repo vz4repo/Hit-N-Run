@@ -17,7 +17,6 @@
         .product_content {
             margin: 20px;
         }
-
         textarea {
             width: 100%;
             height: 200px;
@@ -453,7 +452,6 @@
                 }
             });
         });
-
     </script>
 </body>
 </html>
