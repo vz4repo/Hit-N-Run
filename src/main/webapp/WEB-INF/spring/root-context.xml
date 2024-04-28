@@ -16,13 +16,12 @@
 		<property name="username" value="root"/>
 		<property name="password" value="12341234"/>
 	</bean>
-
 <!--	2. Sql Session Factory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation"  value="classpath:mybatis-config.xml"/>
+		<property name="configLocation"   value="classpath:mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
-	</bean>
+  </bean>
 <!--	3. Sql Session -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
@@ -32,8 +31,8 @@
 <!--		<context:exclude-filter type="regex" expression="com.homerunball.*"/>-->
 	</context:component-scan>
 
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"/>
-	</bean>
+	<!--	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--		<property name="dataSource" ref="dataSource"/>-->
+<!--	</bean>-->
 	<tx:annotation-driven/>
 </beans>

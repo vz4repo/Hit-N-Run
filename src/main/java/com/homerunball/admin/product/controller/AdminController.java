@@ -10,7 +10,6 @@ public class AdminController {
 
     @RequestMapping("/main")
     public String main(Model model) {
-        System.out.println("admin/main page");
         return "admin";
     }
 }
