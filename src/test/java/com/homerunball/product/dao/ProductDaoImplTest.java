@@ -4,6 +4,7 @@ import com.homerunball.admin.product.ProductDto;
 import com.homerunball.admin.product.dao.ProductDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
@@ -30,35 +31,38 @@ public class ProductDaoImplTest {
 
     /*
      ProductDaoImpl의 count 테스트하기
+     0. db 서버가 실행되지 않을 때 테스트하기
      1. 100개 추가 후 count
      2. 50개 삭제 후 count
      3. 50개 추가 후 count
+     4. 없는 것 count
      */
     @Test
-    public void countTest() throws Exception {
+    public void countAllTest() throws Exception {
+//        assertThrows(MyBatisSystemException.class, () -> productDao.countAll());
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 100);
+        assertTrue(productDao.countAll() == 100);
 
         for (int i = 99; i > 49; i--) {
-            productDao.delete("APP"+i+"-50");
+            productDao.delete(i+"");
         }
-        assertTrue(productDao.count() == 50);
+        assertTrue(productDao.countAll() == 50);
 
         for (int i = 50; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 100);
+        assertTrue(productDao.countAll() == 100);
     }
 
     /*
@@ -70,20 +74,20 @@ public class ProductDaoImplTest {
     @Test
     public void deleteAllTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
 
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
     }
 
     /*
@@ -95,25 +99,25 @@ public class ProductDaoImplTest {
     @Test
     public void deleteTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 100);
+        assertTrue(productDao.countAll() == 100);
 
         for(int i = 99; i > 49; i--) {
-            productDao.delete("APP"+i+"-50");
+            productDao.delete(i+"");
         }
-        assertTrue(productDao.count() == 50);
+        assertTrue(productDao.countAll() == 50);
 
         for(int i = 99; i > 49; i--) {
-            productDao.delete("APP"+i+"-50");
+            productDao.delete(i+"");
         }
-        assertTrue(productDao.count() == 50);
+        assertTrue(productDao.countAll() == 50);
     }
 
     /*
@@ -125,28 +129,28 @@ public class ProductDaoImplTest {
     @Test
     public void insertTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 1000; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 1000);
+        assertTrue(productDao.countAll() == 1000);
 
         for (int i = 1000; i < 1050; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 1050);
+        assertTrue(productDao.countAll() == 1050);
 
         for (int i = 1000; i < 1050; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             assertThrows(DuplicateKeyException.class, () -> productDao.insert(productDto));
         }
     }
@@ -160,18 +164,18 @@ public class ProductDaoImplTest {
     @Test
     public void selectPrdTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
-        assertTrue(productDao.count() == 100);
+        assertTrue(productDao.countAll() == 100);
 
-        assertEquals("mdl_name49", productDao.selectPrd("APP49-50").getMdl_name());
-        assertThrows(NullPointerException.class, () -> productDao.selectPrd("pd_id500").getMdl_name());
+        assertEquals("mdl_name49", productDao.selectPrd("49").getMdl_name());
+        assertThrows(NullPointerException.class, () -> productDao.selectPrd("500").getMdl_name());
     }
 
     /*
@@ -183,7 +187,7 @@ public class ProductDaoImplTest {
     @Test
     public void selectPrdAllTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         List<ProductDto> productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 0);
@@ -191,7 +195,7 @@ public class ProductDaoImplTest {
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
         productDtoList = productDao.selectPrdAll();
@@ -200,14 +204,14 @@ public class ProductDaoImplTest {
         for (int i = 100; i < 200; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
         productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 200);
 
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
     }
 
     /*
@@ -233,7 +237,7 @@ public class ProductDaoImplTest {
     @Test
     public void updateContentTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         List<ProductDto> productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 0);
@@ -241,21 +245,21 @@ public class ProductDaoImplTest {
         for (int i = 0; i < 20; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
         productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 20);
 
-        ProductDto productDto = productDao.selectPrd("APP19-50");
+        ProductDto productDto = productDao.selectPrd("19");
         productDto.setPd_name("pd_name190");
         productDao.updateContent(productDto);
-        assertEquals("pd_name190", productDao.selectPrd("APP19-50").getPd_name());
+        assertEquals("pd_name190", productDao.selectPrd("19").getPd_name());
 
-        productDto = productDao.selectPrd("APP18-50");
+        productDto = productDao.selectPrd("18");
         productDto.setMdl_name("mdl_name180");
         productDao.updateContent(productDto);
-        assertEquals("mdl_name180", productDao.selectPrd("APP18-50").getMdl_name());
+        assertEquals("mdl_name180", productDao.selectPrd("18").getMdl_name());
     }
 
     /*
@@ -267,7 +271,7 @@ public class ProductDaoImplTest {
     @Test
     public void updateStatusTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         List<ProductDto> productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 0);
@@ -275,17 +279,17 @@ public class ProductDaoImplTest {
         for (int i = 0; i < 20; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
         productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 20);
 
-        ProductDto productDto = productDao.selectPrd("APP19-50");
+        ProductDto productDto = productDao.selectPrd("19");
         for(int i=1;i<=10;i++) {
             productDto.setPd_stat_hist_cd(i+"");
             productDao.updateStatus(productDto);
-            assertEquals(i+"", productDao.selectPrd("APP19-50").getPd_stat_hist_cd());
+            assertEquals(i+"", productDao.selectPrd("19").getPd_stat_hist_cd());
         }
     }
 
@@ -298,7 +302,7 @@ public class ProductDaoImplTest {
     @Test
     public void increaseHitCntTest() throws Exception {
         productDao.deleteAll();
-        assertTrue(productDao.count() == 0);
+        assertTrue(productDao.countAll() == 0);
 
         List<ProductDto> productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 0);
@@ -306,19 +310,19 @@ public class ProductDaoImplTest {
         for (int i = 0; i < 100; i++) {
             Calendar calendar = Calendar.getInstance();
             Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', date, "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*1.05*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
         productDtoList = productDao.selectPrdAll();
         assertTrue(productDtoList.size() == 100);
         for(int i=1;i<=100;i++) {
-            productDao.increaseHitCnt("APP80-50");
+            productDao.increaseHitCnt("80");
         }
-        assertTrue(productDao.selectPrd("APP80-50").getHit_cnt() == 100);
+        assertTrue(productDao.selectPrd("80").getHit_cnt() == 100);
 
         for(int i=1;i<=100;i++) {
-            productDao.increaseHitCnt("APP800-50");
+            productDao.increaseHitCnt("800");
         }
-        assertThrows(NullPointerException.class, () -> productDao.selectPrd("APP800-50").getHit_cnt());
+        assertThrows(NullPointerException.class, () -> productDao.selectPrd("800").getHit_cnt());
     }
 }

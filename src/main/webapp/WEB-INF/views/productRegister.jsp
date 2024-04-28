@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,60 +24,27 @@
         }
 
         .buttons {
-            align-content: center;
+            margin-top: 30pt;
         }
 
-        .button {
+        .registerBtn {
             border-radius: 4px;
-            background-color: #2196F3;
             border: none;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 16px;
-            padding: 14px 28px;
-
-            transition: all 0.5s;
-            cursor: pointer;
-
-        }
-
-        .button span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-        }
-
-        .button span:after {
-            content: '\00bb';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            right: -20px;
-            transition: 0.5s;
-        }
-
-        .button:hover span {
-            padding-right: 25px;
-        }
-
-        .button:hover span:after {
-            opacity: 1;
-            right: 0;
-        }
-
-        .rightBtn {
-            border-radius: 4px;
-            border: 2px solid black;
-            background-color: white;
-            color: black;
+            color: white;
             padding: 14px 28px;
             font-size: 16px;
             cursor: pointer;
+            background-color: #2196F3;
         }
+        .registerBtn:hover {background: #0b7dda;}
 
         .cancelBtn {
-            border-color: #2196F3;
+            border-radius: 4px;
+            border: 2px solid #2196F3;
+            background-color: white;
+            padding: 14px 28px;
+            font-size: 16px;
+            cursor: pointer;
             color: dodgerblue;
         }
 
@@ -88,8 +56,9 @@
     <title>제품 등록 화면</title>
 </head>
 <body>
+<jsp:include page="adminMenu.jsp" flush="false" />
 <h1>제품 등록 화면</h1>
-    <form id="form" method="post">
+    <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
         <div class="product_register">
             <div class="product_content">
                 <table style="width:100%">
@@ -101,9 +70,9 @@
                     <tr>
                         <th>진열 상태</th>
                         <td>
-                            <input type='radio' id="onShow" name='isshow' value='onShow' required/>
+                            <input type='radio' id="onShow" name='pd_is_show' value='Y' required/>
                             <label for="onShow">진열하기</label>
-                            <input type='radio' id="noShow" name='isshow' value='noShow' />
+                            <input type='radio' id="noShow" name='pd_is_show' value='N' />
                             <label for="noShow">진열제외</label>
                         </td>
                     </tr>
@@ -161,7 +130,7 @@
                             </select>
 
                             <label for="brd_cd">브랜드</label>
-                            <select id="brd_cd" name="brd_cd">
+                            <select id="brd_cd" name="brd_cd" >
                                 <option value="GLD">골드</option>
                                 <option value="KBT">구보타슬러거</option>
                                 <option value="NB">뉴발란스</option>
@@ -195,13 +164,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>진열위치</th>
+                        <th>제품 특성</th>
                         <td>
-                            <input type="checkbox" id="npd" name="npd" value="N">
+                            <input type="checkbox" id="npd" name="pd_chr_cd" value="N">
                             <label for="npd">신상품</label><br>
-                            <input type="checkbox" id="hpd" name="hpd" value="H">
+                            <input type="checkbox" id="hpd" name="pd_chr_cd" value="H">
                             <label for="hpd">HOT</label><br>
-                            <input type="checkbox" id="spd" name="spd" value="S">
+                            <input type="checkbox" id="spd" name="pd_chr_cd" value="S">
                             <label for="spd">스테디 셀러</label><br>
                         </td>
                     </tr>
@@ -216,7 +185,7 @@
                     <tr>
                         <th>상품ID</th>
                         <td>
-                            <input type="text" placeholder="GLV000001-80">
+                            <input type="text" name="pd_id" placeholder="GLV000001-80" required>
                             <button type="button" id="searchProductIdBtn">최근 제품ID 검색하기</button>
                         </td>
                     </tr>
@@ -229,13 +198,13 @@
                     <tr>
                         <th>모델명</th>
                         <td>
-                            <input type="text" id="mdl_name" placeholder="하타케야마 포수미트" required>
+                            <input type="text" name="mdl_name" placeholder="하타케야마 포수미트" required>
                         </td>
                     </tr>
                     <tr>
                         <th>스포츠 유형</th>
                         <td>
-                            <select id="sprt_type_cd" name="sprt_type_cd">
+                            <select name="sprt_type_cd">
                                 <option value="BASE">경식</option>
                                 <option value="SOFT">연식</option>
                                 <option value="CASL">캐주얼</option>
@@ -252,7 +221,7 @@
                     <tr>
                         <th>제품 상태</th>
                         <td>
-                            <select id="qlt_cd" name="sprt_type_cd">
+                            <select name="qlt_cd" required>
                                 <option value="NEW">신제품</option>
                                 <option value="USE">중고제품</option>
                                 <option value="REF">리퍼제품</option>
@@ -287,16 +256,16 @@
                     <tr>
                         <th>사용 연령대</th>
                         <td>
-                            <input type='radio' id="adult" name='age' value='ADL' required/>
+                            <input type='radio' id="adult" name='age_grp_cd' value='ADL' required/>
                             <label for="adult">성인</label>
-                            <input type='radio' id="youth" name='age' value="YOU"/>
+                            <input type='radio' id="youth" name='age_grp_cd' value="YOU"/>
                             <label for="youth">유소년</label>
                         </td>
                     </tr>
                     <tr>
                         <th>사용 선수명</th>
                         <td>
-                            <input type="text" name="player_nm" maxlength="50" required>
+                            <input type="text" name="player_nm" maxlength="50" />
                         </td>
                     </tr>
                     <tr>
@@ -312,9 +281,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>무게</th>
+                        <th>무게(g)</th>
                         <td>
-                            <input type="text" name="wgh" maxlength="100" required>
+                            <input type="text" name="wgh" id="wgh" maxlength="100" required>
                         </td>
                     </tr>
                     <tr>
@@ -333,7 +302,7 @@
                     <tr>
                         <th>제품 상세 설명</th>
                         <td>
-                            <textarea name="pd_det_dsc" id = "textDescription" style="resize: none" maxlength="5000"></textarea>
+                            <textarea name="pd_det_dsc" id = "textDescription" style="resize: none" maxlength="5000" required></textarea>
                             <span id="descriptionLengthCheck">[0 / 5000]</span>
                         </td>
                     </tr>
@@ -348,16 +317,16 @@
                     <tr>
                         <th>최소 주문 수량</th>
                         <td>
-                            <input type="text" id="min_od_qty" name="min_od_qty" size="3" value="1">개 이상
+                            <input type="text" id="min_od_qty" name="min_od_qty" size="3" value="1" required>개 이상
                         </td>
                     </tr>
                     <tr>
                         <th>최대 주문 수량</th>
                         <td>
-                            <input type='radio' id="noLimit" name='max_od_qty' value='9999' required/>
+                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>
                             <label for="noLimit">제한 없음</label>
-                            <input type='radio' id="yesLimit" />
-                            <label for="yesLimit"><input type="text" size="3" name="max_od_qty" id="maxQty" disabled/> 개 이하로 제한</label>
+                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>
+                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>
                         </td>
                     </tr>
                     <tr>
@@ -384,23 +353,23 @@
                     <tr>
                         <th>대표 이미지</th>
                         <td>
-                            <input type="file"/>
+                            <input type="file" name="mn_img_fn" required/>
                         </td>
                     </tr>
                     <tr>
                         <th>상세 이미지</th>
                         <td>
-                            <input type="file">
+                            <input type="file" name="det_img_fn" required />
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
+        <div class="buttons">
+            <button type="submit" class="registerBtn" id="registerBtn">제품 등록</button>
+            <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
+        </div>
     </form>
-    <div class="buttons">
-        <button class="button">제품 등록</button>
-        <button class="rightBtn cancelBtn">취소</button>
-    </div>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script>
         $(document).ready(function() {
@@ -438,16 +407,53 @@
                     $('#descriptionLengthCheck').text("[0 / 5000]");
                 }
             });
-            // yesLimit 라디오 버튼 클릭 시
+
+            /* yesLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 있게 변한다.*/
             $("#yesLimit").on("click", function() {
                 $("#maxQty").removeAttr("disabled");
             });
 
-            // noLimit 라디오 버튼 클릭 시
+            /* noLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 없게 변한다. */
             $("#noLimit").on("click", function() {
                 $("#maxQty").attr("disabled", "disabled");
             });
+
+            /* cancelBtn을 클릭하면 admin/main으로 이동한다. */
+            $("#cancelBtn").on("click", function(){
+                location.href="<c:url value='/admin/main/'/>";
+            });
+
+            /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+            $("#wgh").keyup(function () {
+                /* 입력된 무게 값 */
+                let weight = $(this).val();
+                /* 숫자 패턴 정규식 */
+                let pattern = /^[0-9]+$/;
+
+                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
+                if (!pattern.test(weight)) {
+                    alert("무게는 숫자만 입력할 수 있습니다.");
+                    /* 입력 값에서 숫자가 아닌 문자 제거 */
+                    $(this).val(weight.replace(/[^0-9]/,''));
+                }
+            });
+
+            /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+            $("#maxQty").keyup(function () {
+                /* 입력된 최대 주문 수량 */
+                let weight = $(this).val();
+                /* 숫자 패턴 정규식 */
+                let pattern = /^[0-9]+$/;
+
+                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
+                if (!pattern.test(weight)) {
+                    alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
+                    /* 입력 값에서 숫자가 아닌 문자 제거 */
+                    $(this).val(weight.replace(/[^0-9]/,''));
+                }
+            });
         });
+
     </script>
 </body>
 </html>

@@ -5,7 +5,7 @@ import com.homerunball.admin.product.ProductDto;
 import java.util.List;
 
 public interface ProductDao {
-    int count() throws Exception;
+    int countAll() throws Exception;
 
     int deleteAll() throws Exception;
 

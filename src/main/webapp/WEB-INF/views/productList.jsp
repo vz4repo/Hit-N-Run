@@ -5,6 +5,7 @@
     <title>제품 목록</title>
 </head>
 <body>
+<jsp:include page="adminMenu.jsp" flush="false" />
 총 제품 개수: ${productCount}
 <table>
     <tr>

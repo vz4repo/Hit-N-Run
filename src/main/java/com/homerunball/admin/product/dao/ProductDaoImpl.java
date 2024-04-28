@@ -17,7 +17,7 @@ public class ProductDaoImpl implements ProductDao {
 
      */
     @Override
-    public int count() throws Exception {
+    public int countAll() throws Exception {
         return session.selectOne(NAMESPACE + "count");
     }
 
