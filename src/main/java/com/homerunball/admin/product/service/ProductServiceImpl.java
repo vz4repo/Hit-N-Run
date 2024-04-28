@@ -13,8 +13,8 @@ public class ProductServiceImpl implements ProductService {
     ProductDao productDao;
 
     @Override
-    public int getCount() throws Exception {
-        return productDao.count();
+    public int getAllCount() throws Exception {
+        return productDao.countAll();
     }
 
     @Override

@@ -13,8 +13,11 @@ public class ProductDaoImpl implements ProductDao {
     private SqlSession session;
     private static String NAMESPACE = "com.homerunball.admin.product.dao.ProductMapper.";
 
+    /*
+
+     */
     @Override
-    public int count() throws Exception {
+    public int countAll() throws Exception {
         return session.selectOne(NAMESPACE + "count");
     }
 
