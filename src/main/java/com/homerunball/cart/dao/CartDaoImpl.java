@@ -37,7 +37,7 @@ public class CartDaoImpl implements CartDao {
 
     @Override
     public int cidDeleteAll(String c_id) throws Exception {
-        return session.delete(namespace+"deleteAll", c_id);
+        return session.delete(namespace+"cidDeleteAll", c_id);
     }
 
     @Override
