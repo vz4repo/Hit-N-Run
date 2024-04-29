@@ -115,7 +115,6 @@ public class CartDaoImplTest {
         System.out.println(c_id); // U000003
 
         // 고객ID, 사이즈, 장바구니담은수량 변경
-        cart.setPd_id("HAD000032-12");
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
         assertTrue(cartDao.update(cart)==1);

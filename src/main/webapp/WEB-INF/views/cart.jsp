@@ -56,7 +56,6 @@
                 <td colspan="7"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
             </c:when>
             <c:otherwise>
-                <form action="/cart/list" id="form">
                     <c:forEach var="cartDto" items="${list}">
                         <tr>
                             <td><input type="checkbox" id="tb_checkbox" name="tb_checkbox" /></td>
@@ -74,10 +73,10 @@
                                         <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
                                         <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
                                         <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
-                                        <input type="text" name="count" id="update_count" value="${cartDto.cart_cnt}" />
+                                        <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
                                         <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>
                                         <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>
-                                        <button type="submit" id="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
+                                        <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
                                     </form>
                                 </div>
                             </td>
@@ -89,7 +88,6 @@
                             </td>
                         </tr>
                     </c:forEach>
-                </form>
             </c:otherwise>
         </c:choose>
         <div>
@@ -155,7 +153,7 @@
         /* plus 수량변경 */
         $('.plus_btn').on('click', function() {
             /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
-            let quantityInput = $(this).siblings('input[name="count"]');
+            let quantityInput = $(this).siblings('input[name="cart_cnt"]');
             console.log(quantityInput);
             /* 수량의 value를 parseInt해준다 */
             let quantity = parseInt(quantityInput.val());
@@ -168,24 +166,26 @@
 
         /* minus 수량변경 */
         $('.minus_btn').on('click', function (){
-            let quantityInput = $(this).siblings('input[name="count"]');
+            let quantityInput = $(this).siblings('input[name="cart_cnt"]');
             let quantity = parseInt(quantityInput.val());
-            quantity--;
-            quantityInput.val(quantity);
+            if(quantity > 1) {
+                quantity--;
+                quantityInput.val(quantity);
+            }
             return false;
         })
 
-        $('#quantity_modify_btn').on('click', function (){
+        /* 장바구니 수량 변경 동작버튼 구현 */
+        $(document).on('click', '.quantity_modify_btn', function(){
             let form = $(this).closest('#update_form');
             let c_id = $(this).data("cid");
             let pd_id = $(this).data("pdid");
             let pd_clsf_code = $(this).data("sizecd");
-            let quantityInputValue = form.find('input[name="count"]').val();
+            let cart_cnt = form.find('input[name="cart_cnt"]').val();
             form.find('input[name="c_id"]').val(c_id);
             form.find('input[name="pd_id"]').val(pd_id);
             form.find('input[name="pd_clsf_code"]').val(pd_clsf_code);
-            form.find('input[name="count"]').val(quantityInputValue);
-            form.attr("action", "<c:url value='/cart/update'/>?c_id=${c_id}");
+            form.find('input[name="cart_cnt"]').val(cart_cnt);
             form.submit();
         })
     })

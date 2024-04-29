@@ -33,14 +33,18 @@ public class CartController {
     */
 
     @PostMapping("/update")
-    public String update(CartDto cartDto, String pd_clsf_code, int cart_cnt){
+    public String update(String pd_clsf_code, String c_id, int cart_cnt, CartDto cartDto, Model m) {
         try {
+            cartDto.setPd_clsf_code(pd_clsf_code);
+            cartDto.setCart_cnt(cart_cnt);
             cartDao.update(cartDto);
             System.out.println(cartDto);
+
+            m.addAttribute("c_id", c_id);
         } catch (Exception e){
             e.printStackTrace();
         }
-        return "redirect:/cart/list/";
+        return "redirect:/cart/list";
     }
 
 

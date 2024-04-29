@@ -8,19 +8,19 @@
         select count(*) from cart;
     </select>
 
-    <!--장바구니삭제-->
+    <!-- 한 고객의 장바구니 선택 삭제-->
     <delete id="delete" parameterType="map" >
         delete from cart where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
-    </delete>
-
-    <!--모든유저 데이터 전체삭제-->
-    <delete id="deleteAll">
-        delete from cart
     </delete>
 
     <!--한 고객의 장바구니 전체삭제-->
     <delete id="cidDeleteAll" parameterType="string">
         delete from cart where c_id = #{c_id}
+    </delete>
+
+    <!--모든유저 데이터 전체삭제-->
+    <delete id="deleteAll">
+        delete from cart
     </delete>
 
     <!--장바구니추가-->
@@ -57,7 +57,8 @@
         set pd_id = #{pd_id}
         , pd_clsf_code = #{pd_clsf_code}
         , cart_cnt = #{cart_cnt}
-        where c_id = #{c_id}
+        where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
-
+<!--1차수정 제품코드-->
+<!--ajax 사용   fetch -->
 </mapper>
