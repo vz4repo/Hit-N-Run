@@ -7,9 +7,11 @@ import java.util.List;
 public interface CartDao {
     int count() throws Exception;
 
-    int delete(String c_id, String pd_id) throws Exception;
+    int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception;
 
     int deleteAll() throws Exception;
+
+    int cidDeleteAll(String c_id) throws Exception;
 
     int insert(CartDto cart) throws Exception;
 
