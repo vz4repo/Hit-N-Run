@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css//style.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/payStyle.css'/>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 test</title>
@@ -85,16 +85,16 @@
       /*
       * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
       * ------  결제위젯 초기화 ------
-      * TODO: clientKey는 개발자센터의 결제위젯 연동 키 > 클라이언트 키로 바꾸세요.
+      * TODO: widgetClientKey는 개발자센터의 결제위젯 연동 키 > 클라이언트 키로 바꾸세요.
       * TODO: 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요. 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
-      * clientKey: 혁락 테스트 클라이언트 키
+      * widgetClientKey: 혁락 테스트 클라이언트 키
       * customerKey: 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
       * paymentWidget: 회원/비회원마다 다른 호출
       */
-      const clientKey = "test_ck_GjLJoQ1aVZKoemEDjnD1rw6KYe2R";
+      const widgetClientKey = "${widgetClientKey}";
       const customerKey = generateRandomString();
-      const paymentWidget = PaymentWidget(clientKey, customerKey); /* 회원 결제 */
-      /* const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS); //비회원 결제 */
+      const paymentWidget = PaymentWidget(widgetClientKey, customerKey); /* 회원 결제 */
+      /* const paymentWidget = PaymentWidget(widgetClientKey, PaymentWidget.ANONYMOUS); //비회원 결제 */
 
       /* ------  결제 UI 렌더링 ------ */
       /* @docs https://docs.tosspayments.com/reference/widget-sdk#renderpaymentmethods선택자-결제-금액-옵션 */
