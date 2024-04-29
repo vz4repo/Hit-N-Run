@@ -1,4 +1,4 @@
-package com.homerunball.product.dao;
+package com.homerunball.admin.product.dao;
 
 import com.homerunball.admin.product.ProductDto;
 import com.homerunball.admin.product.dao.ProductDao;
@@ -167,8 +167,6 @@ public class ProductDaoImplTest {
         assertTrue(productDao.countAll() == 0);
 
         for (int i = 0; i < 100; i++) {
-            Calendar calendar = Calendar.getInstance();
-            Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
             ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
@@ -202,8 +200,6 @@ public class ProductDaoImplTest {
         assertTrue(productDtoList.size() == 100);
 
         for (int i = 100; i < 200; i++) {
-            Calendar calendar = Calendar.getInstance();
-            Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
             ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productDao.insert(productDto);
         }
@@ -226,6 +222,47 @@ public class ProductDaoImplTest {
      */
     @Test
     public void selectPrdPrcTest() {
+    }
+
+    /*
+    ProductDaoImpl의 searchBiggestSerialNumber 테스트
+    1. productDao로 db에 APP 데이터 100개 추가
+    2. APP의 시리얼 넘버가 가장 큰 경우는 99이다.
+    3. 추가가 되지 않은 GLV의 가장 큰 숫자는 null
+     */
+    @Test
+    public void searchBiggestSerialNumberTest() throws Exception {
+        productDao.deleteAll();
+        assertTrue(productDao.countAll() == 0);
+
+        for (int i = 0; i < 100; i++) {
+            ProductDto productDto = new ProductDto("APP" + i, "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            productDao.insert(productDto);
+        }
+        assertTrue(productDao.countAll() == 100);
+
+        assertTrue(productDao.searchBiggestSerialNumber("APP") == 99);
+        assertThrows(NullPointerException.class, () -> productDao.searchBiggestSerialNumber("GLV"));
+    }
+
+    /*
+    ProductDaoImpl의 countType 테스트
+    1. productDao로 db에 APP 데이터 100개 추가
+    2. APP의 개수 확인
+    3. 추가되지 않은 GLV의 개수 확인
+    */
+    @Test
+    public void countTypeTest() throws Exception {
+        productDao.deleteAll();
+        assertTrue(productDao.countAll() == 0);
+
+        for (int i = 0; i < 100; i++) {
+            ProductDto productDto = new ProductDto("APP" + i, "pd_name" + i, "mdl_name" + i, "qlt_cd" + i, "ctg", "mn_img_fn" + i, "det_img_fn" + i, "pd_ad_cmt" + i, "pd_smr_dsc" + i, "pd_det_dsc" + 1, i, i, 'N', "20240428", "20240414", "og_pd_num" + i, "origin", "mfr", "srs_id" + i, "ADT", "player_nm", "mtrl", "season", 100 * i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            productDao.insert(productDto);
+        }
+        assertTrue(productDao.countType("APP") == 100);
+
+        assertTrue(productDao.countType("GLV") == 0);
     }
 
     /*

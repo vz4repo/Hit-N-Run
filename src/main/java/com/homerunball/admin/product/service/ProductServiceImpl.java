@@ -45,6 +45,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public int findBiggestSerialNumber(String pd_type_cd) throws Exception {
+        return productDao.searchBiggestSerialNumber(pd_type_cd);
+    }
+
+    @Override
+    public int countProductType(String pd_type_cd) throws Exception {
+        return productDao.countType(pd_type_cd);
+    }
+
+    @Override
     public int modifyContent(ProductDto productDto) throws Exception {
         return productDao.updateContent(productDto);
     }

@@ -57,6 +57,16 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
+    public int searchBiggestSerialNumber(String pd_type_cd) throws Exception {
+        return session.selectOne(NAMESPACE + "searchBiggestSerialNumber", pd_type_cd);
+    }
+
+    @Override
+    public int countType(String pd_type_cd) throws Exception {
+        return session.selectOne(NAMESPACE + "countType", pd_type_cd);
+    }
+
+    @Override
     public int updateContent(ProductDto productDto) throws Exception {
         return session.update(NAMESPACE + "updateContent", productDto);
     }

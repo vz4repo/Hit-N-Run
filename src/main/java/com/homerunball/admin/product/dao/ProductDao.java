@@ -21,6 +21,10 @@ public interface ProductDao {
 
     ProductDto selectPrdPrc(String pd_id) throws Exception;
 
+    int searchBiggestSerialNumber(String pd_type_cd) throws Exception;
+
+    int countType(String pd_type_cd) throws Exception;
+
     int updateContent(ProductDto productDto) throws Exception;
 
     int updateStatus(ProductDto productDto) throws Exception;

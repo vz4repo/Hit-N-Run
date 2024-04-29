@@ -17,6 +17,10 @@ public interface ProductService {
 
     ProductDto getOneProduct(String pd_id) throws Exception;
 
+    int findBiggestSerialNumber(String pd_type_cd) throws Exception;
+
+    int countProductType(String pd_type_cd) throws Exception;
+
     int modifyContent(ProductDto productDto) throws Exception;
 
     int updateStatus(ProductDto productDto) throws Exception;

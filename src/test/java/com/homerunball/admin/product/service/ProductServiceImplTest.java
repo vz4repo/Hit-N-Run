@@ -1,4 +1,4 @@
-package com.homerunball.product.service;
+package com.homerunball.admin.product.service;
 
 import com.homerunball.admin.product.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
@@ -273,6 +273,7 @@ public class ProductServiceImplTest {
             ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             productService.create(productDto);
         }
+        assertTrue(productService.getAllCount() == 20);
 
         ProductDto productDto = productService.getOneProduct("19");
         for(int i=1;i<=10;i++) {
@@ -280,5 +281,48 @@ public class ProductServiceImplTest {
             productService.updateStatus(productDto);
             assertEquals(i+"", productService.getOneProduct("19").getPd_stat_hist_cd());
         }
+    }
+
+//    /*
+//    ProductServiceImpl의 findBiggestSerialNumber 테스트
+//    1. productDao로 db에 APP 데이터 100개 추가
+//    2. APP의 시리얼 넘버가 가장 큰 경우는 99이다.
+//    3. 추가가 되지 않은 GLV의 가장 큰 숫자는 null
+//    */
+//    @Test
+//    public void findBiggestSerialNumberTest() throws Exception {
+//        productService.removeAll();
+//        assertTrue(productService.getAllCount() == 0);
+//
+//        for (int i = 0; i < 100; i++) {
+//            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+//            productService.create(productDto);
+//        }
+//        assertTrue(productService.getAllCount() == 100);
+//
+//        System.out.println("productService.findBiggestSerialNumber(\"APP\") = " + productService.findBiggestSerialNumber("APP"));
+//        assertTrue(productService.findBiggestSerialNumber("APP") == 99);
+//
+//        assertThrows(NullPointerException.class, () -> productService.findBiggestSerialNumber("GLV"));
+//    }
+
+    /*
+    ProductServiceImpl의 countProductType 테스트
+    1. productDao로 db에 APP 데이터 100개 추가
+    2. APP의 개수 확인
+    3. 추가되지 않은 GLV의 개수 확인
+    */
+    @Test
+    public void countProductTypeTest() throws Exception {
+        productService.removeAll();
+        assertTrue(productService.getAllCount() == 0);
+
+        for (int i = 0; i < 100; i++) {
+            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            productService.create(productDto);
+        }
+        assertTrue(productService.countProductType("APP") == 100);
+
+        assertTrue(productService.countProductType("GLV") == 0);
     }
 }
