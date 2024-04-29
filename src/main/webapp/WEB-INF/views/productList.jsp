@@ -4,6 +4,13 @@
 <head>
     <title>제품 목록</title>
 </head>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        text-align: left;
+    }
+</style>
 <body>
 <jsp:include page="adminMenu.jsp" flush="false" />
 총 제품 개수: ${productCount}
