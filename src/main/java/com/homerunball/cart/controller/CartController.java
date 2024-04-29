@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,19 +32,45 @@ public class CartController {
     4. 삭제 버튼 만들기
     */
 
-    
+    @PostMapping("/update")
+    public String update(String pd_clsf_code, String c_id, int cart_cnt, CartDto cartDto, Model m) {
+        try {
+            cartDto.setPd_clsf_code(pd_clsf_code);
+            cartDto.setCart_cnt(cart_cnt);
+            cartDao.update(cartDto);
+            System.out.println(cartDto);
+
+            m.addAttribute("c_id", c_id);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/cart/list";
+    }
+
+
+    /* 고객 한명의 장바구니 전체삭제 */
+    @PostMapping("/removeAll")
+    public String removeAll(String c_id, Model m,HttpServletRequest request){
+        try{
+            cartDao.cidDeleteAll(c_id);
+            m.addAttribute("c_id", c_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/cart/list";
+    }
+
     /*고객장바구니 선택삭제*/
     @PostMapping("/remove")
-    public String remove(String c_id, String pd_id, Model m, HttpServletRequest request){
-        try {
-            // 고객의 장바구니를 삭제
-            int rowcnt = cartDao.delete(c_id, pd_id);
+    public String remove(String c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
 
-            System.out.println(rowcnt);
+        try {
+            // 고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다
+            int rowcnt = cartDao.delete(c_id, pd_id, pd_clsf_code);
+
+            // 1이 아닐경우 throw
             if(rowcnt !=1)
                 throw new Exception("Cart remove err");
-            m.addAttribute("c_id", c_id);
-            System.out.println("c_id : "+c_id + "pd_id: "+pd_id);
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -60,19 +87,20 @@ public class CartController {
 
             List<CartDto> list = cartDao.selectUser(c_id);
 
-            /*로그인고객의 id와 cart정보의 id가 일치한지 확인 */
-            /*cartDto의 c_id와 loginId가 일치한것만 가져온다*/
-
-
             /*Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력*/
             if(list.isEmpty()) {
                 m.addAttribute("cartEmpty", "CART_EMPTY");
             }
             m.addAttribute("list", list);
-
+            m.addAttribute("c_id", c_id);
         } catch (Exception e){
             e.printStackTrace();
         }
         return "cart";
+    }
+
+    private boolean loginChecked(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        return session.getAttribute("userId") != null;
     }
 }
