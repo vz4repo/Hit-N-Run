@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%--    <link rel="stylesheet" href="reset.css" />--%>
+<%--    <link rel="stylesheet" href="reset.css" />--%>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
-    <%--    <link rel="stylesheet" href="cart.css" />--%>
+<%--    <link rel="stylesheet" href="cart.css" />--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>장바구니</title>
 </head>
