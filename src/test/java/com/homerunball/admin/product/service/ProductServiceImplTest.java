@@ -21,6 +21,7 @@ public class ProductServiceImplTest {
     @Autowired
     private ProductService productService;
 
+    /* productService가 연결되었는지 테스트하기 */
     @Test
     public void linkTest() {
         System.out.println("ProductService = " + productService);
@@ -283,28 +284,28 @@ public class ProductServiceImplTest {
         }
     }
 
-//    /*
-//    ProductServiceImpl의 findBiggestSerialNumber 테스트
-//    1. productDao로 db에 APP 데이터 100개 추가
-//    2. APP의 시리얼 넘버가 가장 큰 경우는 99이다.
-//    3. 추가가 되지 않은 GLV의 가장 큰 숫자는 null
-//    */
-//    @Test
-//    public void findBiggestSerialNumberTest() throws Exception {
-//        productService.removeAll();
-//        assertTrue(productService.getAllCount() == 0);
-//
-//        for (int i = 0; i < 100; i++) {
-//            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
-//            productService.create(productDto);
-//        }
-//        assertTrue(productService.getAllCount() == 100);
-//
-//        System.out.println("productService.findBiggestSerialNumber(\"APP\") = " + productService.findBiggestSerialNumber("APP"));
-//        assertTrue(productService.findBiggestSerialNumber("APP") == 99);
-//
-//        assertThrows(NullPointerException.class, () -> productService.findBiggestSerialNumber("GLV"));
-//    }
+    /*
+    ProductServiceImpl의 findBiggestSerialNumber 테스트
+    1. productDao로 db에 APP 데이터 100개 추가
+    2. APP의 시리얼 넘버가 가장 큰 경우는 99이다.
+    3. 데이터가 추가되지 않은 GLV를 선택한 경우
+    */
+    @Test
+    public void findBiggestSerialNumberTest() throws Exception {
+        productService.removeAll();
+        assertTrue(productService.getAllCount() == 0);
+
+        for (int i = 0; i < 100; i++) {
+            ProductDto productDto = new ProductDto("APP" + i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            productService.create(productDto);
+        }
+        assertTrue(productService.getAllCount() == 100);
+
+        System.out.println("productService.findBiggestSerialNumber(\"APP\") = " + productService.findBiggestSerialNumber("APP"));
+        assertTrue(productService.findBiggestSerialNumber("APP") == 99);
+
+        assertThrows(NullPointerException.class, () -> productService.findBiggestSerialNumber("GLV"));
+    }
 
     /*
     ProductServiceImpl의 countProductType 테스트

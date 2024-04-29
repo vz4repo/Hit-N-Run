@@ -23,6 +23,7 @@ public class ProductDaoImplTest {
     @Autowired
     private ProductDao productDao;
 
+    /* productDao가 연결되었는지 테스트하기 */
     @Test
     public void linkTest() {
         System.out.println("ProductDao = " + productDao);

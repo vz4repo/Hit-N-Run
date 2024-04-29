@@ -66,13 +66,13 @@ public class ProductController {
 
         /* max_od_qty가 9999가 아니라면 */
         /* productRegister에서 입력한 maxQty를 최대 주문 수량의 값으로 저장한다. */
-        System.out.println("productDto.getMax_od_qty() = " + productDto.getMax_od_qty());
-        if (productDto.getMax_od_qty() != 9999) {
-            System.out.println("9999가 아니다");
-            int maxQty = (int) session.getAttribute("maxQty");
-            System.out.println("maxQty = " + maxQty);
-            productDto.setMax_od_qty(maxQty);
-        }
+//        System.out.println("productDto.getMax_od_qty() = " + productDto.getMax_od_qty());
+//        if (productDto.getMax_od_qty() != 9999) {
+//            System.out.println("9999가 아니다");
+//            int maxQty = (int) session.getAttribute("maxQty");
+//            System.out.println("maxQty = " + maxQty);
+//            productDto.setMax_od_qty(maxQty);
+//        }
 
         /* 입력한 제조년월에 포함된 "-"를 ""로 교체한다. */
         productDto.setPd_mnf_date(productDto.getPd_mnf_date().replace("-",""));
@@ -84,14 +84,21 @@ public class ProductController {
         String category = productDto.getPd_type_cd() + productDto.getPd_type_det_cd() + productDto.getBrd_cd();
         productDto.setCtg(category);
 
+        /* 이미지의 경우 경로를 지정해준다. */
+        String fileRoot = "src/main/resources/img/" + productDto.getPd_type_cd();
+        productDto.setMn_img_fn(fileRoot + "/mainImg/" + productDto.getMn_img_fn());
+        productDto.setDet_img_fn(fileRoot + "/detailImg/" + productDto.getDet_img_fn());
+
         try {
-            /* pd_type_cd에 해당하는 로우 수가 0개라면 */
-                /* serialNumber값은 000001이 되게 한다. */
-            /* pd_type_cd에 해당하는 로우 수가 0개가 아니라면 */
-                /* 이전 제품과 동일한 제품으로 체크되어 있으면 */
-                    /* max와 동일한 값이 시리얼 넘버가 된다. */
-                /* 이전 제품과 다른 새로운 제품으로 체크되어 있다면 */
-                    /* max에 +1한 값이 시리얼 넘버가 된다. */
+            /*
+            pd_type_cd에 해당하는 로우 수가 0개라면
+                serialNumber값은 000001이 되게 한다.
+            pd_type_cd에 해당하는 로우 수가 0개가 아니고
+                이전 제품과 동일한 제품으로 체크되어 있으면
+                    max와 동일한 값이 시리얼 넘버가 된다.
+                이전 제품과 다른 새로운 제품으로 체크되어 있다면
+                    max에 +1한 값이 시리얼 넘버가 된다.
+            */
             String serialNumber = "";
             if (productService.countProductType(productDto.getPd_type_cd()) == 0) {
                 serialNumber = String.format("%06d", 1);
@@ -105,8 +112,10 @@ public class ProductController {
                 }
             }
 
-            /* 시리얼 넘버 앞에는 제품 유형 코드를 붙인다. */
-            /* 시리얼 넘버 뒤에는 컬러 코드를 붙인다. */
+            /*
+            시리얼 넘버 앞에는 제품 유형 코드를 붙인다.
+            시리얼 넘버 뒤에는 컬러 코드를 붙인다.
+            */
             String pdId = productDto.getPd_type_cd() + serialNumber + "-" + productDto.getClr_cd();
             productDto.setPd_id(pdId);
 

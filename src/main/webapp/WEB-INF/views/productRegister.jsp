@@ -385,10 +385,12 @@
                     <tr>
                         <th>최대 주문 수량</th>
                         <td>
-                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>
-                            <label for="noLimit">제한 없음</label>
-                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>
-                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>
+                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
+<%--                            하고 싶은 것: 라디오 버튼을 사용해 값을 입력받기--%>
+<%--                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>--%>
+<%--                            <label for="noLimit">제한 없음</label>--%>
+<%--                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>--%>
+<%--                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>--%>
                         </td>
                     </tr>
                     <tr>
@@ -500,6 +502,21 @@
                 }
             });
 
+            /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+            $("#min_od_qty").keyup(function () {
+                /* 입력된 최소 주문 수량 */
+                let minQty = $(this).val();
+                /* 숫자 패턴 정규식 */
+                let pattern = /^[0-9]+$/;
+
+                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
+                if (!pattern.test(minQty)) {
+                    alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
+                    /* 입력 값에서 숫자가 아닌 문자 제거 */
+                    $(this).val(minQty.replace(/[^0-9]/,''));
+                }
+            });
+
             /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
             $("#maxQty").keyup(function () {
                 /* 입력된 최대 주문 수량 */
@@ -515,7 +532,6 @@
                 }
             });
         });
-
     </script>
 </body>
 </html>
