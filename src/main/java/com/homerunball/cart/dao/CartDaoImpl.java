@@ -41,8 +41,8 @@ public class CartDaoImpl implements CartDao {
 
 
     @Override
-    public int update(CartDto cart) throws Exception {
-        return session.update(namespace+"update", cart);
+    public int update(String c_id) throws Exception {
+        return session.update(namespace+"update", c_id);
     }
 
     public CartDto select(String c_id) throws Exception {

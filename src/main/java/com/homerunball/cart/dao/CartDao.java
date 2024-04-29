@@ -13,7 +13,7 @@ public interface CartDao {
 
     int insert(CartDto cart) throws Exception;
 
-    int update(CartDto cart) throws Exception;
+    int update(String c_id) throws Exception;
 
     CartDto select(String c_id) throws Exception;
 

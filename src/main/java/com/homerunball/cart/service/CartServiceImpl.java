@@ -34,8 +34,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int update(CartDto cart) throws Exception {
-        return cartDao.update(cart);
+    public int update(String c_id) throws Exception {
+        return cartDao.update(c_id);
     }
 
     @Override

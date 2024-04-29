@@ -13,7 +13,7 @@ public interface CartService {
 
     int create(CartDto cart) throws Exception;
 
-    int update(CartDto cart) throws Exception;
+    int update(String c_id) throws Exception;
 
     CartDto read(String c_id) throws Exception;
 

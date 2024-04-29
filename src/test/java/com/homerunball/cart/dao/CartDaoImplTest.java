@@ -118,7 +118,7 @@ public class CartDaoImplTest {
         cart.setPd_id("HAD000032-12");
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
-        assertTrue(cartDao.update(cart)==1);
+        assertTrue(cartDao.update(c_id)==1);
         System.out.println(cart); //CardDto{c_id='U000003', pd_id='HAD000032-12', pd_clsf_code='XS', cart_cnt=3}
 
         // 장바구니 User U000003 을 선택해서 cart2에 담는다

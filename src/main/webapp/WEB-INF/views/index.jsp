@@ -4,7 +4,7 @@
 <body>
 <h2>Hello Home run()</h2>
 <h2>SYSDATE : ${empty curDate? "no conn" : curDate }</h2>
-<a href="/homerunball/cart/list">cart 이동</a>
+<a href="/cart/list">cart 이동</a>
 </body>
 </html>
 

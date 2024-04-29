@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 <%--    <link rel="stylesheet" href="cart.css" />--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
     <title>장바구니</title>
 </head>
 <body>
@@ -56,7 +58,7 @@
                     <td colspan="7"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
                 </c:when>
                 <c:otherwise>
-                    <form action="/homerunball/cart/list" id="form">
+                    <form action="/cart/list" id="form">
                         <c:forEach var="cartDto" items="${list}">
                             <tr>
                                 <td><input type="checkbox" id="tb_checkbox" name="tb_checkbox" /></td>
@@ -72,10 +74,18 @@
                                     <div>
                                         <input type="text" name="count" value="${cartDto.cart_cnt}" />
                                         <span class="btns">
-                                          <a href=""></a>
-                                          <a href=""></a>
+<%--                                            <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>--%>
+<%--                                            <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>--%>
+
+                                        <!-- 수량 조정 form -->
+                                        <form action="/cart/list" id="form" method="post" class="quantity_update_form">
+                                            <input type="hidden" name="cartId" class="update_cartId">
+                                            <input type="hidden" name="cartCnt" class="update_cart_cnt">
+        <%--                                    <input type="hidden" name="memberId" value="${member.memberId}">--%>
+                                        </form>
+
                                         </span>
-                                        <a href="#">변경</a>
+                                        <a href="#" class="quantity_update_btn" data-cartId="${cartDto.c_id}">변경</a>
                                     </div>
                                 </td>
                                 <td>
@@ -84,6 +94,7 @@
                                 <td>
                                     <button type="button" class="deleteBtn">삭제</button>
                                 </td>
+
                             </tr>
                         </c:forEach>
                     </form>
@@ -119,8 +130,28 @@
             form.attr("method", "post");
             form.submit();
         })
-    })
 
+        /* 수량버튼 */
+        $(".plus_btn").on("click", function(){
+            let quantity = $(this).parent("div").find("input").val();
+            $(this).parent("div").find("input").val(++quantity);
+        });
+        $(".minus_btn").on("click", function(){
+            let quantity = $(this).parent("div").find("input").val();
+            if(quantity > 1){
+                $(this).parent("div").find("input").val(--quantity);
+            }
+        });
+
+        /* 수량 수정 버튼 */
+        $(".quantity_update_btn").on("click", function(){
+            let c_id = $(this).data("c_id");
+            let cart_cnt = $(this).parent("td").find("input").val();
+            $(".update_cartId").val(c_id);
+            $(".update_cart_cnt").val(cart_cnt);
+            $(".quantity_update_form").submit();
+        });
+    });
 
 
 </script>

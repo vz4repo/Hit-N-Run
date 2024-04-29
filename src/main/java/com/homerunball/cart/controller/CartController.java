@@ -2,6 +2,7 @@ package com.homerunball.cart.controller;
 
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.cart.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ import java.util.List;
 public class CartController {
     @Autowired
     CartDao cartDao;
+    @Autowired
+    CartService cartService;
     /*
     1. checked일때 전체 check
     2. 이미지 출력
@@ -75,4 +78,15 @@ public class CartController {
         }
         return "cart";
     }
+
+    @PostMapping("/update")
+    public  String update (String c_id, Model m) {
+        try {
+            cartService.update(c_id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return "redirect:/cart/list?c_id="+c_id;
+    }
+
 }
