@@ -35,15 +35,15 @@ where pd_id like concat('GLV', '%')
 order by serial_number desc
 limit 1;
 
-select ifnull(cast(substr(pd_id,4,6) as unsigned),"없다") as serial_number
+select cast(substr(pd_id,4,6) as unsigned) as serial_number
 from prd
-where pd_type_cd = 'GLV'
+where pd_type_cd = 'PRO'
 order by serial_number desc
 limit 1;
 
 select count(*)
 from prd
-where pd_type_cd = 'GLV'
+where pd_type_cd = 'PRO'
 ;
 
 -- 조회수 증가

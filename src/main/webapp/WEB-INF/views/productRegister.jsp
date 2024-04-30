@@ -53,6 +53,12 @@
         }
     </style>
     <title>제품 등록 화면</title>
+    <% String msg = (String) request.getAttribute("msg"); %>
+    <% if (msg != null && !msg.isEmpty()) { %>
+    <script>
+        alert("<%= msg %>");
+    </script>
+    <% } %>
 </head>
 <body>
 <jsp:include page="adminMenu.jsp" flush="false" />
@@ -171,6 +177,7 @@
                             <label for="hpd">HOT</label><br>
                             <input type="checkbox" id="spd" name="pd_chr_cd" value="S">
                             <label for="spd">스테디 셀러</label><br>
+                            <input type="hidden" name="pd_chr_cd" value="">
                         </td>
                     </tr>
                 </table>
@@ -518,7 +525,7 @@
             });
 
             /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $("#maxQty").keyup(function () {
+            $("#max_od_qty").keyup(function () {
                 /* 입력된 최대 주문 수량 */
                 let maxQty = $(this).val();
                 /* 숫자 패턴 정규식 */
