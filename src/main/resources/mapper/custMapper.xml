@@ -16,8 +16,9 @@
     <select id="count" resultType="int">
         select count(*) from cust
     </select>
+
 <!-- 단일 고객 조회-->
-    <select id="select" resultType="CustDto">
+    <select id="select" resultType="CustDto" parameterType="CustDto">
         select * from cust where c_email = #{c_email}
     </select>
 
@@ -29,7 +30,13 @@
 
 <!--고객 삭제-->
     <delete id="delete">
-    delete * from cust where c_email = #{c_email}
+        delete from cust where c_email = #{c_email}
     </delete>
+
+<!--고객 전체 삭제-->
+    <delete id="deleteAll">
+        delete from cust
+    </delete>
+
 
 </mapper>
