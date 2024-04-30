@@ -18,8 +18,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int remove(String c_id, String pd_id) throws Exception {
-        return cartDao.delete(c_id, pd_id);
+    public int remove(String c_id, String pd_id, String pd_clsf_code) throws Exception {
+        return cartDao.delete(c_id, pd_id, pd_clsf_code);
     }
 
     @Override
@@ -34,8 +34,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int update(String c_id) throws Exception {
-        return cartDao.update(c_id);
+    public int update(CartDto cart) throws Exception {
+        return cartDao.update(cart);
     }
 
     @Override

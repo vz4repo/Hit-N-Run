@@ -17,6 +17,7 @@
         .product_content {
             margin: 20px;
         }
+
         textarea {
             width: 100%;
             height: 200px;
@@ -184,10 +185,8 @@
                     <tr>
                         <th>상품ID</th>
                         <td>
-                            <input type='radio' id="new" name='pd_id' value="new"/>
-                            <label for="new">새로운 제품</label>
-                            <input type='radio' id="same" name='pd_id' value="same" required/>
-                            <label for="same">색깔만 다른 이전과 동일한 제품</label>
+                            <input type="text" name="pd_id" placeholder="GLV000001-80" required>
+                            <button type="button" id="searchProductIdBtn">최근 제품ID 검색하기</button>
                         </td>
                     </tr>
                     <tr>
@@ -290,68 +289,7 @@
                     <tr>
                         <th>색깔 코드</th>
                         <td>
-                            <select id="clr_cd" name="clr_cd">
-                                <option value="00">흰색</option>
-                                <option value="01">흰색_회색</option>
-                                <option value="02">흰색_검은색</option>
-                                <option value="03">흰색_분홍색</option>
-                                <option value="04">흰색_빨간색</option>
-                                <option value="05">흰색_주황색</option>
-                                <option value="06">흰색_노란색</option>
-                                <option value="07">흰색_초록색</option>
-                                <option value="08">흰색_파란색</option>
-                                <option value="09">흰색_보라색</option>
-                                <option value="10">회색</option>
-                                <option value="11">회색_검은색</option>
-                                <option value="12">회색_분홍색</option>
-                                <option value="13">회색_빨간색</option>
-                                <option value="14">회색_주황색</option>
-                                <option value="15">회색_노란색</option>
-                                <option value="16">회색_초록색</option>
-                                <option value="17">회색_파란색</option>
-                                <option value="18">회색_보라색</option>
-                                <option value="20">검은색</option>
-                                <option value="21">검은색_분홍색</option>
-                                <option value="22">검은색_빨간색</option>
-                                <option value="23">검은색_주황색</option>
-                                <option value="24">검은색_노란색</option>
-                                <option value="25">검은색_초록색</option>
-                                <option value="26">검은색_파란색</option>
-                                <option value="27">검은색_보라색</option>
-                                <option value="30">분홍색</option>
-                                <option value="31">분홍색_빨간색</option>
-                                <option value="32">분홍색_주황색</option>
-                                <option value="33">분홍색_노란색</option>
-                                <option value="34">분홍색_초록색</option>
-                                <option value="35">분홍색_파란색</option>
-                                <option value="36">분홍색_보라색</option>
-                                <option value="40">빨간색</option>
-                                <option value="41">빨간색_주황색</option>
-                                <option value="42">빨간색_노란색</option>
-                                <option value="43">빨간색_초록색</option>
-                                <option value="44">빨간색_파란색</option>
-                                <option value="45">빨간색_보라색</option>
-                                <option value="50">주황색</option>
-                                <option value="51">주황색_노란색</option>
-                                <option value="52">주황색_초록색</option>
-                                <option value="53">주황색_파란색</option>
-                                <option value="54">주황색_보라색</option>
-                                <option value="60">노란색</option>
-                                <option value="61">노란색_초록색</option>
-                                <option value="62">노란색_파란색</option>
-                                <option value="63">노란색_보라색</option>
-                                <option value="70">초록색</option>
-                                <option value="71">초록색_파란색</option>
-                                <option value="72">초록색_보라색</option>
-                                <option value="80">파란색</option>
-                                <option value="81">파란색_보라색</option>
-                                <option value="89">남색</option>
-                                <option value="90">보라색</option>
-                                <option value="91">금색</option>
-                                <option value="92">금색_검은색</option>
-                                <option value="98">탄색</option>
-                                <option value="99">갈색</option>
-                            </select>
+                            <input type="text" name="clr_cd" maxlength="10" required>
                         </td>
                     </tr>
                     <tr>
@@ -379,18 +317,16 @@
                     <tr>
                         <th>최소 주문 수량</th>
                         <td>
-                            <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" required>개 이상
+                            <input type="text" id="min_od_qty" name="min_od_qty" size="3" value="1" required>개 이상
                         </td>
                     </tr>
                     <tr>
                         <th>최대 주문 수량</th>
                         <td>
-                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
-<%--                            하고 싶은 것: 라디오 버튼을 사용해 값을 입력받기--%>
-<%--                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>--%>
-<%--                            <label for="noLimit">제한 없음</label>--%>
-<%--                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>--%>
-<%--                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>--%>
+                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>
+                            <label for="noLimit">제한 없음</label>
+                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>
+                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>
                         </td>
                     </tr>
                     <tr>
@@ -502,36 +438,22 @@
                 }
             });
 
-            /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $("#min_od_qty").keyup(function () {
-                /* 입력된 최소 주문 수량 */
-                let minQty = $(this).val();
-                /* 숫자 패턴 정규식 */
-                let pattern = /^[0-9]+$/;
-
-                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
-                if (!pattern.test(minQty)) {
-                    alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
-                    /* 입력 값에서 숫자가 아닌 문자 제거 */
-                    $(this).val(minQty.replace(/[^0-9]/,''));
-                }
-            });
-
             /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
             $("#maxQty").keyup(function () {
                 /* 입력된 최대 주문 수량 */
-                let maxQty = $(this).val();
+                let weight = $(this).val();
                 /* 숫자 패턴 정규식 */
                 let pattern = /^[0-9]+$/;
 
                 /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
-                if (!pattern.test(maxQty)) {
+                if (!pattern.test(weight)) {
                     alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
                     /* 입력 값에서 숫자가 아닌 문자 제거 */
-                    $(this).val(maxQty.replace(/[^0-9]/,''));
+                    $(this).val(weight.replace(/[^0-9]/,''));
                 }
             });
         });
+
     </script>
 </body>
 </html>

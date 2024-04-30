@@ -14,14 +14,14 @@
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 		<property name="url" value="jdbc:mysql://localhost:3306/homerunball?useUnicode=true&amp;characterEncoding=utf8"/>
 		<property name="username" value="root"/>
-		<property name="password" value="1234"/>
+		<property name="password" value="12341234"/>
 	</bean>
 <!--	2. Sql Session Factory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation"   value="classpath:mybatis-config.xml"/>
+		<property name="configLocation"  value="classpath:mybatis-config.xml"/>
 		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
-  </bean>
+		</bean>
 <!--	3. Sql Session -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>

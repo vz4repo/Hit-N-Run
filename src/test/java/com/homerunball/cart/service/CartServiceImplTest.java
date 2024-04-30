@@ -18,7 +18,7 @@ public class CartServiceImplTest {
     public void insertTestData() throws Exception {
         cartService.removeAll();
         for(int i=0; i<1; i++){
-            CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 5,1234, "asdf",1231, 2345);
+            CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 5);
             cartService.create(cart);
         }
     }
@@ -27,13 +27,13 @@ public class CartServiceImplTest {
         cartService.removeAll();
         assertTrue(cartService.getCount()==0);
 
-        CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 2,1234, "asdf",1231, 2345);
+        CartDto cart = new CartDto("U000005", "GLV000021-20", "S", 2);
         assertTrue(cartService.create(cart)==1);
         assertTrue(cartService.getCount()==1);
 
-        CartDto cart2 = new CartDto("U000005", "GLV000021-21", "XL", 2,1234, "asdf",1231, 2345);
-        CartDto cart3 = new CartDto("U000005", "GLV000021-21", "XL", 2,1234, "asdf",1231, 2345);
-        CartDto cart4 = new CartDto("U000005", "GLV000021-21", "XL", 2,1234, "asdf",1231, 2345);
+        CartDto cart2 = new CartDto("U000005", "GLV000021-21", "XL", 2);
+        CartDto cart3 = new CartDto("U000005", "GLV000021-21", "XL", 2);
+        CartDto cart4 = new CartDto("U000005", "GLV000021-21", "XL", 2);
         assertTrue(cartService.create(cart2)==1);
         assertTrue(cartService.create(cart3)==1);
         assertTrue(cartService.create(cart4)==1);

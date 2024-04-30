@@ -28,9 +28,10 @@ public class OrdController {
     @GetMapping("/order")
     public String read(String od_id,String c_id, Model m){
         try {
-            /*List<OrdDto> list = ordDao.selectOdId(od_id);*/
+            /*List<OrdDto> list = ordDao.selectOdId(od_id);
+            System.out.println(list);*/
             List<CartDto> list = cartDao.selectUser(c_id);
-            System.out.println(list);
+
             /*System.out.println("[controller]ordDto = " + ordDto);*/
             m.addAttribute("list",list);
         } catch (Exception e) {
@@ -39,4 +40,3 @@ public class OrdController {
         return "order";
     }
 }
-
