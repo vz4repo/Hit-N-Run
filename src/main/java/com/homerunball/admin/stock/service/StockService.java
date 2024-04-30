@@ -1,6 +1,6 @@
 package com.homerunball.admin.stock.service;
 
-import com.homerunball.admin.stock.dto.StockDto;
+import com.homerunball.admin.stock.domain.StockDto;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.homerunball.admin.stock.service;
 
 import com.homerunball.admin.stock.dao.StockDao;
-import com.homerunball.admin.stock.dto.StockDto;
+import com.homerunball.admin.stock.domain.StockDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.homerunball.admin.stock.dto;
+package com.homerunball.admin.stock.domain;
 
 import java.util.Date;
 import java.util.Objects;

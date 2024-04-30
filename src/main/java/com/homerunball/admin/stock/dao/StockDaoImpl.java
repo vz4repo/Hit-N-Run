@@ -1,6 +1,6 @@
 package com.homerunball.admin.stock.dao;
 
-import com.homerunball.admin.stock.dto.StockDto;
+import com.homerunball.admin.stock.domain.StockDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
