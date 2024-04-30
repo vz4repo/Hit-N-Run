@@ -18,11 +18,16 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
+    @GetMapping("/main")
+    public String main(Model model) {
+        return "adminStock";
+    }
+
     @GetMapping("/list")
     public String list(Model model) {
         try{
-            List<StockDto> list = stockService.getList();
-            model.addAttribute("list", list);
+            List<StockDto> stockList = stockService.getList();
+            model.addAttribute("stockList", stockList);
 
         } catch (Exception e){
             e.printStackTrace();

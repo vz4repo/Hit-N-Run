@@ -9,6 +9,7 @@
 <div><a href="/order">주문 이동</a></div>
 <div><a href="/register/add">회원등록 이동</a></div>
 <div><a href="/admin/main">제품 이동</a></div>
+<div><a href="/admin/stock/main">재고 이동</a></div>
 <div><a href="/payment">결제 이동</a></div>
 </div>
 

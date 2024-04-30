@@ -16,15 +16,16 @@
             text-decoration: none;
             color: black;
         }
-
+        /*
         button,
         input {
             border: none;
             outline: none;
         }
+        */
 
         .stock-container {
-            width: 90%;
+            width: 95%;
             height: 1200px;
             margin: 0 auto;
             /*border: 1px solid black;*/
@@ -53,34 +54,12 @@
         }
 
         .pd_id {
-            width: 150px;
+            width: 300px;
         }
 
         .pd_clsf_cd {
             width: 5%;
         }
-
-        td.pd_clsf_cd {
-            text-align: center;
-        }
-
-        td.nml_stk_qty,
-        td.rt_stk_qty,
-        td.rgn_stk_qty,
-        td.urgn_stk_qty,
-        td.sfty_stk_qty,
-        td.odpmt_stk,
-        td.pur_dt,
-        td.rcpt_dt,
-        td.rcpt_cp,
-        td.rcpt_prc,
-        td.rtl_prc,
-        td.sls_prc,
-        td.stk_plc_cd,
-        td.stk_stat_cd {
-            text-align: left;
-        }
-
         td.pd_id:hover {
             text-decoration: underline;
         }
@@ -123,9 +102,9 @@
             <th class="stk_plc_cd">재고 위치 코드</th>
             <th class="stk_stat_cd">재고진행상태코드</th>
         </tr>
-        <c:forEach var="stockDto" items="${list}">
+        <c:forEach var="stockDto" items="${stockList}">
             <tr>
-                <td class="pd_id">${stockDto.bno}</td>
+                <td class="pd_id">${stockDto.pd_id}</td>
                 <td class="pd_clsf_cd">${stockDto.pd_clsf_cd}</td>
                 <td class="nml_stk_qty">${stockDto.nml_stk_qty}</td>
                 <td class="rt_stk_qty">${stockDto.rt_stk_qty}</td>
