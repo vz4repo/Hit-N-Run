@@ -8,11 +8,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="reset.css" />
+    <%--<link rel="stylesheet" href="reset.css" />--%>
     <link
             href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
             rel="stylesheet" />
-    <link rel="stylesheet" href="order.css" />
+    <%--<link rel="stylesheet" href="order.css" />--%>
     <title>상품정보</title>
 </head>
 <body>
@@ -51,7 +51,7 @@
     <div class="title__order">상품정보</div>
     <hr class="second__under" />
     <div class="tb__order">
-        <form action="/homerunball/order">
+        <form action="/order">
             <table style="width: 90%">
                 <colgroup>
                     <col width="70" />
@@ -84,19 +84,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="ordDto" items="${list}">
+                    <c:forEach var="cartDto" items="${list}">
                     <tr>
                         <td>
                             <a href="#"><img src="#" alt="썸네일" /></a>
                         </td>
                         <td>
-                            <a href="#">상품명가져오기</a>
-                            <span>색상+사이즈: 아이보리/FREE</span>
+                            <a href="#">${cartDto.pd_name}</a>
+                            <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
                         </td>
                         <td><span></span>원</td>
-                        <td><span>${ordDto.od_pd_qty}</span>개</td>
+                        <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span>${ordDto.od_pay_amt}</span>원</td>
+                        <td><span>${cartDto.sls_prc}</span>원</td>
                     </tr>
                     </c:forEach>
                 </tbody>

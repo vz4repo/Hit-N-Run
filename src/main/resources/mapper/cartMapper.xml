@@ -21,12 +21,17 @@
     <insert id="insert" parameterType="CartDto">
         insert into cart (c_id, pd_id, pd_clsf_code, cart_cnt)
         values (#{c_id}, #{pd_id}, #{pd_clsf_code}, #{cart_cnt})
-        order by pd_clsf_code desc
     </insert>
 
-    <sql id="selectCart">
+    <!--<sql id="selectCart">
         select c_id, pd_id, pd_clsf_code, cart_cnt
         from cart
+    </sql>-->
+
+    <sql id="selectCart">
+        select c.c_id, c.pd_id, c.pd_clsf_code, c.cart_cnt, s.sls_prc, s.pd_name
+        from cart c
+        join stk s ON c.pd_id = s.pd_id
     </sql>
 
     <!--select 1건-->
@@ -43,7 +48,7 @@
 
     <select id="selectAll" resultType="CartDto">
         <include refid="selectCart"/>
-        order by c_id = #{c_id} and frst_reg_dt = #{frst_reg_dt} desc
+        order by c.c_id = #{c_id} and c.frst_reg_dt = #{frst_reg_dt} desc
     </select>
 
     <!--장바구니 수정-->

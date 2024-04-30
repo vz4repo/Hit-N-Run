@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
@@ -74,18 +74,10 @@
                                     <div>
                                         <input type="text" name="count" value="${cartDto.cart_cnt}" />
                                         <span class="btns">
-<%--                                            <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>--%>
-<%--                                            <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>--%>
-
-                                        <!-- 수량 조정 form -->
-                                        <form action="/cart/list" id="form" method="post" class="quantity_update_form">
-                                            <input type="hidden" name="cartId" class="update_cartId">
-                                            <input type="hidden" name="cartCnt" class="update_cart_cnt">
-        <%--                                    <input type="hidden" name="memberId" value="${member.memberId}">--%>
-                                        </form>
-
+                                          <a href=""></a>
+                                          <a href=""></a>
                                         </span>
-                                        <a href="#" class="quantity_update_btn" data-cartId="${cartDto.c_id}">변경</a>
+                                        <a href="#">변경</a>
                                     </div>
                                 </td>
                                 <td>
@@ -130,30 +122,7 @@
             form.attr("method", "post");
             form.submit();
         })
-
-        /* 수량버튼 */
-        $(".plus_btn").on("click", function(){
-            let quantity = $(this).parent("div").find("input").val();
-            $(this).parent("div").find("input").val(++quantity);
-        });
-        $(".minus_btn").on("click", function(){
-            let quantity = $(this).parent("div").find("input").val();
-            if(quantity > 1){
-                $(this).parent("div").find("input").val(--quantity);
-            }
-        });
-
-        /* 수량 수정 버튼 */
-        $(".quantity_update_btn").on("click", function(){
-            let c_id = $(this).data("c_id");
-            let cart_cnt = $(this).parent("td").find("input").val();
-            $(".update_cartId").val(c_id);
-            $(".update_cart_cnt").val(cart_cnt);
-            $(".quantity_update_form").submit();
-        });
-    });
-
-
+    })
 </script>
 </body>
 </html>

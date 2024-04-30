@@ -13,33 +13,56 @@ public class CartDto {
     private Date last_mod_dt;
     private String last_mod_id;
 
+
+    /*재고테이블 join*/
+    private int sls_prc;
+    private String pd_name;
+
+
     private int price;
 
     private int totalPrice;
 
 
-    public CartDto(){}
 
-    public CartDto(String c_id, String pd_id, String pd_clsf_code, int cart_cnt){
-        this.c_id = c_id;
-        this.pd_id = pd_id;
-        this.pd_clsf_code = pd_clsf_code;
-        this.cart_cnt = cart_cnt;
 
-        totalPrice = cart_cnt*price;
-    }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        CartDto cartDto = (CartDto) object;
-        return Objects.equals(c_id, cartDto.c_id) && Objects.equals(pd_id, cartDto.pd_id) && Objects.equals(pd_clsf_code, cartDto.pd_clsf_code);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CartDto cartDto = (CartDto) o;
+        return cart_cnt == cartDto.cart_cnt && sls_prc == cartDto.sls_prc && price == cartDto.price && totalPrice == cartDto.totalPrice && Objects.equals(c_id, cartDto.c_id) && Objects.equals(pd_id, cartDto.pd_id) && Objects.equals(pd_clsf_code, cartDto.pd_clsf_code) && Objects.equals(pd_name, cartDto.pd_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(c_id, pd_id, pd_clsf_code);
+        return Objects.hash(c_id, pd_id, pd_clsf_code, cart_cnt, sls_prc, pd_name, price, totalPrice);
+    }
+
+    @Override
+    public String toString() {
+        return "CartDto{" +
+                "c_id='" + c_id + '\'' +
+                ", pd_id='" + pd_id + '\'' +
+                ", pd_clsf_code='" + pd_clsf_code + '\'' +
+                ", cart_cnt=" + cart_cnt +
+                ", sls_prc=" + sls_prc +
+                ", pd_name='" + pd_name + '\'' +
+                ", price=" + price +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
+
+    public CartDto(String c_id, String pd_id, String pd_clsf_code, int cart_cnt, int sls_prc, String pd_name, int price, int totalPrice) {
+        this.c_id = c_id;
+        this.pd_id = pd_id;
+        this.pd_clsf_code = pd_clsf_code;
+        this.cart_cnt = cart_cnt;
+        this.sls_prc = sls_prc;
+        this.pd_name = pd_name;
+        this.price = price;
+        this.totalPrice = totalPrice;
     }
 
     public String getC_id() {
@@ -74,11 +97,27 @@ public class CartDto {
         this.cart_cnt = cart_cnt;
     }
 
-    public int getprice() {
+    public int getSls_prc() {
+        return sls_prc;
+    }
+
+    public void setSls_prc(int sls_prc) {
+        this.sls_prc = sls_prc;
+    }
+
+    public String getPd_name() {
+        return pd_name;
+    }
+
+    public void setPd_name(String pd_name) {
+        this.pd_name = pd_name;
+    }
+
+    public int getPrice() {
         return price;
     }
 
-    public void setprice(int price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -88,17 +127,5 @@ public class CartDto {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    @Override
-    public String toString() {
-        return "CardDto{" +
-                "c_id='" + c_id + '\'' +
-                ", pd_id='" + pd_id + '\'' +
-                ", pd_clsf_code='" + pd_clsf_code + '\'' +
-                ", cart_cnt=" + cart_cnt +
-                ", price=" + price +
-                ", totalPrice=" + totalPrice +
-                '}';
     }
 }
