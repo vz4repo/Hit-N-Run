@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css//style.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css//payStyle.css'/>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 성공</title>
@@ -83,7 +83,12 @@
           window.location.href = `/fail?message=${json.message}&code=${json.code}`;
         }
 
-        /* TODO: 결제 성공 비즈니스 로직을 구현하세요. */
+        /* TODO: 결제 성공 비즈니스 로직을 구현하세요.
+        * - 성공 후, modal로 띄우기
+        * - 성공 후, 3초 후 메인페이지
+        * - 성공 후, 결제상세 이동 버튼
+        * */
+
         return json;
       }
       confirm().then(function (data) {
