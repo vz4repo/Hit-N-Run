@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 <%--    <link rel="stylesheet" href="cart.css" />--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
     <title>장바구니</title>
 </head>
 <body>
@@ -126,8 +127,6 @@
     </table>
 </main>
 <script>
-
-
     $(document).ready(function (){
         /* 고객의 장바구니 한건 삭제 */
         $('.deleteBtn').on("click", function(){

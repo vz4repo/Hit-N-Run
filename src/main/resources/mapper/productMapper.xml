@@ -2,20 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.homerunball.admin.product.dao.ProductMapper">
+    <!-- 모든 제품의 수를 센다. -->
     <select id="count" resultType="int">
         select count(*) from prd
     </select>
 
+    <!--모든 제품을 삭제한다.-->
     <delete id="deleteAll">
         delete from prd
     </delete>
 
+    <!--지정된 pd_id만을 삭제한다.-->
     <delete id="delete" parameterType="map">
         delete
         from prd
         where pd_id = #{pd_id}
     </delete>
 
+    <!--제품 한 개를 prd(제품) 테이블에 삽입한다.-->
     <insert id="insert" parameterType="ProductDto">
         insert into prd
             (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_nm,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
@@ -23,28 +27,33 @@
             (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_nm}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
     </insert>
 
+    <!--제품 한 개를 prd(제품) 테이블에서 선택한다.-->
     <select id="selectPrd" parameterType="ProductDto" resultType="ProductDto">
         select *
         from prd
         where pd_id = #{pd_id}
     </select>
 
+    <!--prd 테이블에 있는 모든 제품을 선택한다.-->
     <select id="selectPrdAll" resultType="ProductDto">
         select *
         from prd
         order by frst_reg_dt desc
     </select>
 
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 선택하기 -->
     <sql id="selectPrdStk">
         select pd.pd_id, pd.pd_name, pd.qlt_cd, stk.pd_clsf_cd, stk.sls_prc
         from prd as pd, stk
         where pd.pd_id = stk.pd_id
     </sql>
 
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 모든 제품 선택하기 -->
     <select id="selectPrdPrcAll" resultType="ProductDto">
         <include refid="selectPrdStk"/>
     </select>
 
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 한 개 선택하기 -->
     <select id="selectPrdPrc" parameterType="String" resultType="ProductDto">
         select *
         from (
@@ -87,4 +96,21 @@
         set hit_cnt = hit_cnt + 1
         where pd_id = #{pd_id};
     </update>
+
+    <!-- 제품 ID에서 선택된 제품 유형 중 가장 큰 숫자를 찾는 쿼리-->
+    <select id="searchBiggestSerialNumber" parameterType="ProductDto" resultType="int">
+        select ifnull(cast(substr(pd_id,4,6) as unsigned),0) as serial_number
+        from prd
+        where pd_type_cd = #{pd_type_cd}
+        order by serial_number desc
+        limit 1;
+    </select>
+
+    <!--지정된 제품 유형에 포함된 제품의 개수를 센다.-->
+    <select id="countType" parameterType="ProductDto" resultType="int">
+        select count(*)
+        from prd
+        where pd_type_cd = #{pd_type_cd}
+        ;
+    </select>
 </mapper>
