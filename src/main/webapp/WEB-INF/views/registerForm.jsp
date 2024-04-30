@@ -203,8 +203,8 @@
             <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"> <a>[선택] 쇼핑정보 SMS 수신</a><br>
             <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
 
-<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" value="N">--%>
-<%--            <input type="hidden" id="email_agr_hidden" name="email_agr_hidden" value="N">--%>
+            <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" value="N">
+            <input type="hidden" id="email_agr_hidden" name="email_agr_hidden" value="N">
 
             <button>가입하기</button><br><br>
         </div>
@@ -470,6 +470,18 @@
 
 
 <script>
+
+
+    /*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
+    if (!document.getElementById("email_agr").checked) {
+        document.getElementById("email_agr_hidden.value");
+    }
+
+    /*SMS 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
+    if (!document.getElementById("sms_agr").checked) {
+        document.getElementById("sms_agr_hidden.value");
+    }
+
     document.getElementById("tou").addEventListener("click", function () {
         document.getElementById("myModal").style.display = "block";
         /*모달이 나타날 때 스크롤바 숨김*/
@@ -566,7 +578,7 @@
             alert('비밀번호를 입력해주세요.');
             return false;
         } else if (!isPwd) {
-            alert('비밀번호는 영문/숫자/특수문자 조합으로 6자 이상 15자 이하로 설정하셔야합니다.');
+            alert('비밀번호는 영문/숫자/특수문자 조합으로 8자 이상 15자 이하로 설정하셔야합니다.');
             return false;
         } else if (!pwd2) {
             alert('비밀번호 확인을 입력해주세요');
@@ -635,7 +647,7 @@
     function pwdCheck(frm) {
         var pwd = frm.c_pwd.value;
 
-        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{3,15}$/;
+        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,15}$/;
         if (!pwdPattern.test(pwd)) {
             return false;
         }
@@ -742,7 +754,7 @@
     }
 
 
-    /*sms 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
+    /*/!*sms 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
     const sms_agr = document.getElementById("sms_agr");
     sms_agr.addEventListener("change",function (){
         if (!sms_agr.checked) {
@@ -752,7 +764,7 @@
         }
     });
 
-    /*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
+    /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
     const email_agr = document.getElementById("email_agr");
     email_agr.addEventListener("change",function (){
         if (!email_agr.checked) {
@@ -760,20 +772,8 @@
         }else if(email_agr.checked){
             email_agr.value = 'Y'
         }
-    });
+    });*/
 
-    //
-    // /*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
-    // if (!document.getElementById("email_agr").checked) {
-    //     document.getElementById("email_agr").value = 'N';
-    // }
-
-    /*SMS 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
-    // if (!document.getElementById("sms_agr").checked) {
-    //     document.getElementById("sms_agr").value = 'N';
-    // }else if(document.getElementById("sms_agr").checked){
-    //     document.getElementById("sms_agr").value = 'Y';
-    // }
 
 
 <%--

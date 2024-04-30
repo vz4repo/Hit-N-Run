@@ -108,11 +108,11 @@ public class ProductDto {
         this.pd_is_show = pd_is_show;
     }
 
-    public Date getSls_strt_dt() {
+    public String getSls_strt_dt() {
         return sls_strt_dt;
     }
 
-    public void setSls_strt_dt(Date sls_strt_dt) {
+    public void setSls_strt_dt(String sls_strt_dt) {
         this.sls_strt_dt = sls_strt_dt;
     }
 
@@ -188,11 +188,11 @@ public class ProductDto {
         this.season = season;
     }
 
-    public double getWgh() {
+    public Integer getWgh() {
         return wgh;
     }
 
-    public void setWgh(double wgh) {
+    public void setWgh(Integer wgh) {
         this.wgh = wgh;
     }
 
@@ -321,7 +321,7 @@ public class ProductDto {
     private Integer min_od_qty;
     private Integer max_od_qty;
     private char pd_is_show;
-    private Date sls_strt_dt;
+    private String sls_strt_dt;
     private String pd_mnf_date;
     private String og_pd_num;
     private String origin;
@@ -331,7 +331,7 @@ public class ProductDto {
     private String player_nm;
     private String mtrl;
     private String season;
-    private double wgh;
+    private Integer wgh;
     private String clr_cd;
     private Integer hit_cnt;
     private Integer rvw_cnt;
@@ -349,12 +349,12 @@ public class ProductDto {
 
     public ProductDto() {}
 
-    public ProductDto(String pd_id, String pd_name, String mdl_name, String qlt_cd, String mn_img_fn, String det_img_fn, String pd_ad_cmt, String pd_smr_dsc, String pd_det_dsc, Integer min_od_qty, Integer max_od_qty, char pd_is_show, Date sls_strt_dt, String pd_mnf_date, String og_pd_num, String origin, String mfr, String srs_id, String age_grp_cd, String player_nm, String mtrl, String season, double wgh, String clr_cd, String pd_chr_cd, String sprt_type_cd, String pd_type_cd, String pd_type_det_cd, String brd_cd) {
-        this.pd_id = pd_type_cd + pd_id + "-" + clr_cd;
+    public ProductDto(String pd_id, String pd_name, String mdl_name, String qlt_cd, String ctg, String mn_img_fn, String det_img_fn, String pd_ad_cmt, String pd_smr_dsc, String pd_det_dsc, Integer min_od_qty, Integer max_od_qty, char pd_is_show, String sls_strt_dt, String pd_mnf_date, String og_pd_num, String origin, String mfr, String srs_id, String age_grp_cd, String player_nm, String mtrl, String season, Integer wgh, String clr_cd, String pd_chr_cd, String sprt_type_cd, String pd_type_cd, String pd_type_det_cd, String brd_cd) {
+        this.pd_id = pd_id;
         this.pd_name = pd_name;
         this.mdl_name = mdl_name;
         this.qlt_cd = qlt_cd;
-        this.ctg = pd_type_cd+pd_type_det_cd+brd_cd;
+        this.ctg = ctg;
         this.mn_img_fn = mn_img_fn;
         this.det_img_fn = det_img_fn;
         this.pd_ad_cmt = pd_ad_cmt;
@@ -427,7 +427,7 @@ public class ProductDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductDto that = (ProductDto) o;
-        return pd_is_show == that.pd_is_show && Double.compare(wgh, that.wgh) == 0 && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_name, that.pd_name) && Objects.equals(mdl_name, that.mdl_name) && Objects.equals(qlt_cd, that.qlt_cd) && Objects.equals(ctg, that.ctg) && Objects.equals(mn_img_fn, that.mn_img_fn) && Objects.equals(det_img_fn, that.det_img_fn) && Objects.equals(pd_ad_cmt, that.pd_ad_cmt) && Objects.equals(pd_smr_dsc, that.pd_smr_dsc) && Objects.equals(pd_det_dsc, that.pd_det_dsc) && Objects.equals(min_od_qty, that.min_od_qty) && Objects.equals(max_od_qty, that.max_od_qty) && Objects.equals(sls_strt_dt, that.sls_strt_dt) && Objects.equals(pd_mnf_date, that.pd_mnf_date) && Objects.equals(og_pd_num, that.og_pd_num) && Objects.equals(origin, that.origin) && Objects.equals(mfr, that.mfr) && Objects.equals(srs_id, that.srs_id) && Objects.equals(age_grp_cd, that.age_grp_cd) && Objects.equals(player_nm, that.player_nm) && Objects.equals(mtrl, that.mtrl) && Objects.equals(season, that.season) && Objects.equals(clr_cd, that.clr_cd) && Objects.equals(hit_cnt, that.hit_cnt) && Objects.equals(rvw_cnt, that.rvw_cnt) && Objects.equals(wish_cnt, that.wish_cnt) && Objects.equals(pd_chr_cd, that.pd_chr_cd) && Objects.equals(sprt_type_cd, that.sprt_type_cd) && Objects.equals(pd_type_cd, that.pd_type_cd) && Objects.equals(pd_type_det_cd, that.pd_type_det_cd) && Objects.equals(brd_cd, that.brd_cd) && Objects.equals(pd_stat_hist_cd, that.pd_stat_hist_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
+        return pd_is_show == that.pd_is_show && Objects.equals(wgh, that.wgh) && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_name, that.pd_name) && Objects.equals(mdl_name, that.mdl_name) && Objects.equals(qlt_cd, that.qlt_cd) && Objects.equals(ctg, that.ctg) && Objects.equals(mn_img_fn, that.mn_img_fn) && Objects.equals(det_img_fn, that.det_img_fn) && Objects.equals(pd_ad_cmt, that.pd_ad_cmt) && Objects.equals(pd_smr_dsc, that.pd_smr_dsc) && Objects.equals(pd_det_dsc, that.pd_det_dsc) && Objects.equals(min_od_qty, that.min_od_qty) && Objects.equals(max_od_qty, that.max_od_qty) && Objects.equals(sls_strt_dt, that.sls_strt_dt) && Objects.equals(pd_mnf_date, that.pd_mnf_date) && Objects.equals(og_pd_num, that.og_pd_num) && Objects.equals(origin, that.origin) && Objects.equals(mfr, that.mfr) && Objects.equals(srs_id, that.srs_id) && Objects.equals(age_grp_cd, that.age_grp_cd) && Objects.equals(player_nm, that.player_nm) && Objects.equals(mtrl, that.mtrl) && Objects.equals(season, that.season) && Objects.equals(clr_cd, that.clr_cd) && Objects.equals(hit_cnt, that.hit_cnt) && Objects.equals(rvw_cnt, that.rvw_cnt) && Objects.equals(wish_cnt, that.wish_cnt) && Objects.equals(pd_chr_cd, that.pd_chr_cd) && Objects.equals(sprt_type_cd, that.sprt_type_cd) && Objects.equals(pd_type_cd, that.pd_type_cd) && Objects.equals(pd_type_det_cd, that.pd_type_det_cd) && Objects.equals(brd_cd, that.brd_cd) && Objects.equals(pd_stat_hist_cd, that.pd_stat_hist_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
     }
 
     @Override
