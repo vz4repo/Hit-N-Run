@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homerunball.admin.stock.dao.StockMapper">
+    <!--전체 재고수량 조회-->
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM stk
+    </select>
+
+    <!--재고 1개 조회-->
+    <select id="selectStk" parameterType="StockDto" resultType="StockDto">
+        SELECT *
+        FROM stk
+        WHERE pd_clsf_cd = #{pd_clsf_cd}
+          AND pd_id = #{pd_id}
+    </select>
+
+    <!--재고 전체 조회-->
+    <select id="selectStkAll" resultType="StockDto">
+        SELECT *
+        FROM stk
+        ORDER BY pd_id DESC
+    </select>
+
+    <!--재고 등록하기-->
+    <insert id="insertStk">
+        INSERT INTO stk
+            (pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd)
+        VALUES
+            (#{pd_id}, #{pd_clsf_cd}, #{nml_stk_qty}, #{rt_stk_qty}, #{rgn_stk_qty}, #{urgn_stk_qty}, #{sfty_stk_qty}, #{odpmt_stk}, #{pur_dt}, #{rcpt_dt}, #{rcpt_cp}, #{rcpt_prc}, #{rtl_prc}, #{sls_prc}, #{stk_plc_cd}, #{stk_stat_cd})
+    </insert>
+
+    <!--재고 전체 삭제하기-->
+    <delete id="deleteAll">
+        DELETE FROM stk
+    </delete>
+
+    <!--재고 1개 삭제하기-->
+    <delete id="delete" parameterType="map">
+        DELETE
+        FROM stk
+        WHERE pd_id = #{pd_id} AND pd_clsf_cd = #{pd_clsf_cd}
+    </delete>
+</mapper>

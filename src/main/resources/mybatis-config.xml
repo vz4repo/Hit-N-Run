@@ -7,5 +7,6 @@
     <typeAlias alias="CustDto" type="com.homerunball.cust.dto.CustDto"/>
     <typeAlias alias="CartDto" type="com.homerunball.cart.domain.CartDto"/>
     <typeAlias alias="ProductDto" type="com.homerunball.admin.product.ProductDto"/>
+    <typeAlias alias="StockDto" type="com.homerunball.admin.stock.dto.StockDto"/>
   </typeAliases>
 </configuration>
