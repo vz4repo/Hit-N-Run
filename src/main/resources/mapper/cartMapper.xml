@@ -55,10 +55,10 @@
     <update id="update" parameterType="CartDto">
         update cart
         set pd_id = #{pd_id}
-        , pd_clsf_code = #{pd_clsf_code}
-        , cart_cnt = #{cart_cnt}
+          , pd_clsf_code = #{pd_clsf_code}
+          , cart_cnt = #{cart_cnt}
         where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
-<!--1차수정 제품코드-->
-<!--ajax 사용   fetch -->
+    <!--1차수정 제품코드-->
+    <!--ajax 사용   fetch -->
 </mapper>

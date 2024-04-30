@@ -51,8 +51,8 @@ public class CustDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustDto cust = (CustDto) o;
-        return Objects.equals(c_id, cust.c_id) && Objects.equals(c_grd_cd, cust.c_grd_cd) && Objects.equals(c_stat_cd, cust.c_stat_cd) && Objects.equals(c_email, cust.c_email) && Objects.equals(c_pwd, cust.c_pwd) && Objects.equals(c_nm, cust.c_nm) && Objects.equals(c_birth, cust.c_birth) && Objects.equals(c_gnd, cust.c_gnd) && Objects.equals(c_phn, cust.c_phn) && Objects.equals(c_zip, cust.c_zip) && Objects.equals(c_road_a, cust.c_road_a) && Objects.equals(c_jibun_a, cust.c_jibun_a) && Objects.equals(c_det_a, cust.c_det_a) && Objects.equals(c_ext_a, cust.c_ext_a) && Objects.equals(c_dlv_adr, cust.c_dlv_adr) && Objects.equals(sms_agr, cust.sms_agr) && Objects.equals(email_agr, cust.email_agr) && Objects.equals(reg_date, cust.reg_date) && Objects.equals(login_dt, cust.login_dt) && Objects.equals(tot_amt, cust.tot_amt) && Objects.equals(frst_reg_dt, cust.frst_reg_dt) && Objects.equals(frst_reg_id, cust.frst_reg_id) && Objects.equals(last_mod_dt, cust.last_mod_dt) && Objects.equals(last_mod_id, cust.last_mod_id);
+        CustDto custdto = (CustDto) o;
+        return Objects.equals(c_id, custdto.c_id) && Objects.equals(c_grd_cd, custdto.c_grd_cd) && Objects.equals(c_stat_cd, custdto.c_stat_cd) && Objects.equals(c_email, custdto.c_email) && Objects.equals(c_pwd, custdto.c_pwd) && Objects.equals(c_nm, custdto.c_nm) && Objects.equals(c_birth, custdto.c_birth) && Objects.equals(c_gnd, custdto.c_gnd) && Objects.equals(c_phn, custdto.c_phn) && Objects.equals(c_zip, custdto.c_zip) && Objects.equals(c_road_a, custdto.c_road_a) && Objects.equals(c_jibun_a, custdto.c_jibun_a) && Objects.equals(c_det_a, custdto.c_det_a) && Objects.equals(c_ext_a, custdto.c_ext_a) && Objects.equals(c_dlv_adr, custdto.c_dlv_adr) && Objects.equals(sms_agr, custdto.sms_agr) && Objects.equals(email_agr, custdto.email_agr) && Objects.equals(reg_date, custdto.reg_date) && Objects.equals(login_dt, custdto.login_dt) && Objects.equals(tot_amt, custdto.tot_amt) && Objects.equals(frst_reg_dt, custdto.frst_reg_dt) && Objects.equals(frst_reg_id, custdto.frst_reg_id) && Objects.equals(last_mod_dt, custdto.last_mod_dt) && Objects.equals(last_mod_id, custdto.last_mod_id);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class CustDto {
 
     @Override
     public String toString() {
-        return "toString() Cust{" +
+        return "toString() CustDto{" +
                 "c_id='" + c_id + '\'' +
                 ", c_grd_cd='" + c_grd_cd + '\'' +
                 ", c_stat_cd='" + c_stat_cd + '\'' +
