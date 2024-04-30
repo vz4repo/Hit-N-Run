@@ -84,21 +84,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="ordDto" items="${list}">
+                <c:forEach var="cartDto" items="${list}">
                     <tr>
                         <td>
                             <a href="#"><img src="#" alt="썸네일" /></a>
                         </td>
                         <td>
                             <a href="#">상품명가져오기</a>
-                            <span>색상+사이즈: 아이보리/FREE</span>
+                            <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span></span>원</td>
-                        <td><span>${ordDto.od_pd_qty}</span>개</td>
+                        <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
                         <td><span>${ordDto.od_pay_amt}</span>원</td>
                     </tr>
-                    </c:forEach>
+                </c:forEach>
                 </tbody>
                 <tfoot>
                 <tr>
