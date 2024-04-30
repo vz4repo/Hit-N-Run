@@ -22,16 +22,22 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public int delete(String c_id, String pd_id) throws Exception {
+    public int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception {
         Map map = new HashMap();
         map.put("c_id", c_id);
         map.put("pd_id", pd_id);
+        map.put("pd_clsf_code", pd_clsf_code);
         return session.delete(namespace+"delete", map);
     }
 
     @Override
     public int deleteAll() throws Exception {
         return session.delete(namespace+"deleteAll");
+    }
+
+    @Override
+    public int cidDeleteAll(String c_id) throws Exception {
+        return session.delete(namespace+"cidDeleteAll", c_id);
     }
 
     @Override
