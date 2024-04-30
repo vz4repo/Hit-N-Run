@@ -22,15 +22,14 @@
             border: none;
             outline: none;
         }
-        */
 
         .stock-container {
             width: 95%;
             height: 1200px;
             margin: 0 auto;
-            /*border: 1px solid black;*/
+            /*border: 1px solid black;
         }
-
+*/
         table {
             border-collapse: collapse;
             width: 100%;
