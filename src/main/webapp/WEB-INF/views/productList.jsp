@@ -3,6 +3,12 @@
 <html>
 <head>
     <title>제품 목록</title>
+    <% String msg = (String) request.getAttribute("msg"); %>
+    <% if (msg != null && !msg.isEmpty()) { %>
+    <script>
+        alert("<%= msg %>");
+    </script>
+    <% } %>
 </head>
 <style>
     table, th, td {
