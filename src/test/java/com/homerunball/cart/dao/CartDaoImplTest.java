@@ -47,13 +47,13 @@ public class CartDaoImplTest {
         // 장바구니 User U000005를 선택해서 id를 가져온다
         String c_id = cartDao.selectAll().get(0).getC_id();
         // id와 담은제품이 일치할경우 객체삭제
-        cartDao.delete(c_id, cart.getPd_id());
+        cartDao.delete(c_id, cart.getPd_id(), cart.getPd_clsf_code());
         assertTrue(cartDao.count()==0);
 
         // 장바구니 User U000005 생성
         assertTrue(cartDao.insert(cart)==1);
         // 장바구니에 userid와 제품id+1를 delete, count 할경우 존재하지 않는 제품id 이기때문에 count는 그대로
-        assertTrue(cartDao.delete(c_id, cart.getC_id()+1)==0);
+        assertTrue(cartDao.delete(c_id, cart.getC_id()+1, cart.getPd_clsf_code())==0);
         assertTrue(cartDao.count()==1);
     }
 
@@ -115,7 +115,6 @@ public class CartDaoImplTest {
         System.out.println(c_id); // U000003
 
         // 고객ID, 사이즈, 장바구니담은수량 변경
-        cart.setPd_id("HAD000032-12");
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
         assertTrue(cartDao.update(cart)==1);
