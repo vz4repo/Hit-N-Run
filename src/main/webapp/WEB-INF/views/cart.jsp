@@ -83,6 +83,7 @@
                                 <span>무료배송</span>
                             </td>
                             <td>
+                                <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
                                 <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
                             </td>
                         </tr>
