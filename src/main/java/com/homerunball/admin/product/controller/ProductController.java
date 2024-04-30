@@ -3,6 +3,7 @@ package com.homerunball.admin.product.controller;
 import com.homerunball.admin.product.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -123,13 +124,16 @@ public class ProductController {
             if (productService.create(productDto) != 1)
                 throw new Exception("Register failed.");
 
-            rattr.addFlashAttribute("msg", "WRT_OK");
+            rattr.addFlashAttribute("msg", "제품이 정상적으로 등록되었습니다.");
             return "redirect:/admin/product/list";
+        } catch (DuplicateKeyException e) {
+            e.printStackTrace();
+            m.addAttribute("msg", "제품ID가 중복되었습니다.");
+            return "productRegister";
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute(productDto);
-            m.addAttribute("mode", "new");
-            m.addAttribute("msg", "WRT_ERR");
+            m.addAttribute("msg", "제품이 정상적으로 등록되지 않았습니다.");
             return "productRegister";
         }
     }
