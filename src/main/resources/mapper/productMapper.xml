@@ -79,16 +79,17 @@
             <if test="rvw_cnt != null">rvw_cnt = #{rvw_cnt},</if>
             <if test="wish_cnt != null">wish_cnt = #{wish_cnt},</if>
             <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
+            <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
         where pd_id = #{pd_id};
     </update>
 
-    <!-- 제품 상태 변경 쿼리 -->
-    <update id="updateStatus" parameterType="ProductDto">
-        update prd
-        set pd_stat_hist_cd = #{pd_stat_hist_cd}
-        where pd_id = #{pd_id};
-    </update>
+<!--    &lt;!&ndash; 제품 상태 변경 쿼리 &ndash;&gt;-->
+<!--    <update id="updateStatus" parameterType="ProductDto">-->
+<!--        update prd-->
+<!--        set pd_stat_hist_cd = #{pd_stat_hist_cd}-->
+<!--        where pd_id = #{pd_id};-->
+<!--    </update>-->
 
     <!-- 조회수 증가 쿼리 --> 
     <update id="increaseHitCnt" parameterType="ProductDto">

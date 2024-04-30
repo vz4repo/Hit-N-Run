@@ -73,17 +73,17 @@ public class ProductDaoImpl implements ProductDao {
         return session.selectOne(NAMESPACE + "countType", pd_type_cd);
     }
 
-    /* 제품의 내용을 업데이트한다. */
+    /* 제품에 등록된 내용을 업데이트한다. */
     @Override
     public int updateContent(ProductDto productDto) throws Exception {
         return session.update(NAMESPACE + "updateContent", productDto);
     }
 
     /* 제품의 상태를 업데이트한다. */
-    @Override
-    public int updateStatus(ProductDto productDto) throws Exception {
-        return session.update(NAMESPACE + "updateStatus", productDto);
-    }
+//    @Override
+//    public int updateStatus(ProductDto productDto) throws Exception {
+//        return session.update(NAMESPACE + "updateStatus", productDto);
+//    }
 
     /* 상품이 선택될 때마다 조회수를 늘린다. */
     @Override

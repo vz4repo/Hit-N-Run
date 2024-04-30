@@ -39,7 +39,7 @@ public interface ProductDao {
     int updateContent(ProductDto productDto) throws Exception;
 
     /* 제품의 상태를 업데이트한다. */
-    int updateStatus(ProductDto productDto) throws Exception;
+//    int updateStatus(ProductDto productDto) throws Exception;
 
     /* 상품이 선택될 때마다 조회수를 늘린다. */
     int increaseHitCnt(String pd_id) throws Exception;

@@ -262,26 +262,26 @@ public class ProductServiceImplTest {
      2. 20번째 데이터 상태 1~10으로 변경
      3. 없는 데이터 상태 변경
      */
-    @Test
-    public void updateStatusTest() throws Exception {
-        productService.removeAll();
-        assertTrue(productService.getAllCount() == 0);
-
-        for (int i = 0; i < 20; i++) {
-            Calendar calendar = Calendar.getInstance();
-            Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
-            productService.create(productDto);
-        }
-        assertTrue(productService.getAllCount() == 20);
-
-        ProductDto productDto = productService.getOneProduct("19");
-        for(int i=1;i<=10;i++) {
-            productDto.setPd_stat_hist_cd(i+"");
-            productService.updateStatus(productDto);
-            assertEquals(i+"", productService.getOneProduct("19").getPd_stat_hist_cd());
-        }
-    }
+//    @Test
+//    public void updateStatusTest() throws Exception {
+//        productService.removeAll();
+//        assertTrue(productService.getAllCount() == 0);
+//
+//        for (int i = 0; i < 20; i++) {
+//            Calendar calendar = Calendar.getInstance();
+//            Date date = new Date(calendar.getTimeInMillis() - i * 24L * 60 * 60 * 1000);
+//            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+//            productService.create(productDto);
+//        }
+//        assertTrue(productService.getAllCount() == 20);
+//
+//        ProductDto productDto = productService.getOneProduct("19");
+//        for(int i=1;i<=10;i++) {
+//            productDto.setPd_stat_hist_cd(i+"");
+//            productService.updateStatus(productDto);
+//            assertEquals(i+"", productService.getOneProduct("19").getPd_stat_hist_cd());
+//        }
+//    }
 
     /*
     ProductServiceImpl의 findBiggestSerialNumber 테스트

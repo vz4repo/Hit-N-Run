@@ -33,5 +33,5 @@ public interface ProductService {
     int modifyContent(ProductDto productDto) throws Exception;
 
     /* 제품의 상태를 업데이트한다. */
-    int updateStatus(ProductDto productDto) throws Exception;
+//    int updateStatus(ProductDto productDto) throws Exception;
 }

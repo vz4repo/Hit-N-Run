@@ -68,9 +68,9 @@ public class ProductServiceImpl implements ProductService {
         return productDao.updateContent(productDto);
     }
 
-    /* 제품의 상태를 업데이트한다. */
-    @Override
-    public int updateStatus(ProductDto productDto) throws Exception {
-        return productDao.updateStatus(productDto);
-    }
+//    /* 제품의 상태를 업데이트한다. */
+//    @Override
+//    public int updateStatus(ProductDto productDto) throws Exception {
+//        return productDao.updateStatus(productDto);
+//    }
 }

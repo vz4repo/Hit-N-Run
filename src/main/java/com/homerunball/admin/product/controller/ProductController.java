@@ -128,6 +128,7 @@ public class ProductController {
             return "redirect:/admin/product/list";
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
+            m.addAttribute(productDto);
             m.addAttribute("msg", "제품ID가 중복되었습니다.");
             return "productRegister";
         } catch (Exception e) {
