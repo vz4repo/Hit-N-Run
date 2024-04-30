@@ -1,10 +1,8 @@
 package com.homerunball.admin.product.dao;
 
-import com.homerunball.admin.product.ProductDto;
-import com.homerunball.admin.product.dao.ProductDao;
+import com.homerunball.admin.product.domain.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;

@@ -1,4 +1,4 @@
-package com.homerunball.admin.product;
+package com.homerunball.admin.product.domain;
 
 import java.util.Date;
 import java.util.Objects;

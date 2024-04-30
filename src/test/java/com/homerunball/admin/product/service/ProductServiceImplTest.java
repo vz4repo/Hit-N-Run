@@ -1,7 +1,6 @@
 package com.homerunball.admin.product.service;
 
-import com.homerunball.admin.product.ProductDto;
-import com.homerunball.admin.product.service.ProductService;
+import com.homerunball.admin.product.domain.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
