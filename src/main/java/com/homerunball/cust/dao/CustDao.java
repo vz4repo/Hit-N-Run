@@ -7,7 +7,9 @@ public interface CustDao {
 
     CustDto selectCust(String c_email);
 
-    int insertCust(CustDto cust);
+    int insertCust(CustDto custdto) throws Exception;
 
-    int updateCust(CustDto cust);
+    int updateCust(CustDto custdto);
+
+    int deleteAll() throws Exception;
 }

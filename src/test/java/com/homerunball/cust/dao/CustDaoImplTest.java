@@ -1,4 +1,4 @@
-package com.homerunball;
+package com.homerunball.cust.dao;
 
 import com.homerunball.cust.dao.CustDao;
 import com.homerunball.cust.dto.CustDto;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration(locations ={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
 public class CustDaoImplTest {
     @Autowired
-    CustDao custDao;
+    private CustDao custDao;
 
     @Test
     public void deleteCust() {
@@ -25,7 +25,13 @@ public class CustDaoImplTest {
     }
 
     @Test
-    public void insertCust() {
+    public void insertCust() throws Exception{
+        custDao.deleteAll();
+        CustDto custdto = new CustDto("1111", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
+        int rowCnt = custDao.insertCust(custdto);
+
+        assertTrue(rowCnt==1);
+
     }
 
     @Test
@@ -33,7 +39,7 @@ public class CustDaoImplTest {
         /*테스트 중복방지*/
         custDao.deleteAll();
         /*고객 정보 추가*/
-        CustDto custdto = new CustDto("bbbbb", "1111", "aaa", "sss", "d", "888", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
+        CustDto custdto = new CustDto("1111", "1111", "aaa", "sss", "d", "888", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
         /*추가된 고객을 DB에 저장*/
         int rowCnt = custDao.insertCust(custdto);
         /*저장 성공*/
@@ -50,9 +56,5 @@ public class CustDaoImplTest {
         /*변경은 잘됐으나 DB에 저장이 실패, 이유가?..*/
         assertTrue(rowCnt == 1);
 
-       /* Cust cust2 = custDao.selectCust(cust.getC_email());
-        System.out.println("cust = " + cust);
-        System.out.println("cust2 = " + cust2);
-        assertTrue(cust.equals(cust2));*/
     }
     }
