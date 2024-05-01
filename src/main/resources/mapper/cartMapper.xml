@@ -16,7 +16,7 @@
         and pd_clsf_code = #{pd_clsf_code}
     </delete>
 
-    <!--한 고객의 장바구니 전체삭제 TDD구현하기-->
+    <!--한 고객의 장바구니 전체삭제 -->
     <delete id="cidDeleteAll" parameterType="string">
         delete from cart where c_id = #{c_id}
     </delete>
@@ -38,12 +38,6 @@
     </sql>
 
     <!--select 1건-->
-    <select id="select" parameterType="string" resultType="CartDto">
-        <include refid="selectCart"/>
-        where c_id = #{c_id}
-    </select>
-
-    <!--select List-->
     <select id="selectUser" parameterType="string" resultType="CartDto">
         <include refid="selectCart"/>
         where c_id = #{c_id}
@@ -63,8 +57,8 @@
         where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
 
-    <!-- Cart 장바구니 중복객체인지 확인 -->
-    <select id="cartCheck" resultType="CartDto">
+    <!-- Cart 장바구니 중복객체인지 확인 TDD구현하기 -->
+    <select id="cartCheck" parameterType="CartDto" resultType="int">
         select * from cart
         where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
     </select>

@@ -17,11 +17,9 @@ public interface CartDao {
 
     int update(CartDto cart) throws Exception;
 
-    CartDto select(String c_id) throws Exception;
-
     List<CartDto> selectAll() throws Exception;
 
     List<CartDto> selectUser(String c_id) throws Exception;
 
-    CartDto cartCheck(CartDto cart) throws Exception;
+/*    List<CartDto> cartCheck(CartDto cart) throws Exception;*/
 }

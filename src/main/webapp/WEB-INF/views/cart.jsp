@@ -30,9 +30,10 @@
                     <col width="100%" />
                 </c:when>
                 <c:otherwise>
-                    <col width="50" />
-                    <col width="70" />
+                    <col width="10" />
+                    <col width="80" />
                     <col width="*" />
+                    <col width="70" />
                     <col width="100" />
                     <col width="90" />
                     <col width="90" />
@@ -53,7 +54,7 @@
         <tbody>
         <c:choose>
             <c:when test="${cartEmpty == 'CART_EMPTY'}">
-                <td colspan="7"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
+                <td colspan="6"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
             </c:when>
             <c:otherwise>
                     <c:forEach var="cartDto" items="${list}">
@@ -123,6 +124,9 @@
                     <button type="button" id="order_Select_Btn"><a href="/order?c_id=${c_id}">선택상품 주문</a></button>
                     <button type="button" id="order_All_Btn"><a href="/order?c_id=${c_id}">전체상품 주문</a></button>
                 </form>
+            </td>
+            <td>
+                <a href="/cart/list?c_id=${c_id}">장바구니이동</a>
             </td>
         </tr>
         </tfoot>

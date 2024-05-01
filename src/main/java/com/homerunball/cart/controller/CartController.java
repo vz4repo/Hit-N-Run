@@ -30,10 +30,14 @@ public class CartController {
     4. 삭제 버튼 만들기 -ok
     */
 
+    
+    // 덜구현됨, 버튼만들고 연결시켜야함
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, Model m){
+    public String insert(CartDto cart, Model m){
         try{
-            cartDao.insert(cartDto);
+//            CartDto cartCheck = cartDao.cartCheck(cart);
+//            System.out.println(cartCheck);
+            cartDao.insert(cart);
         } catch (Exception e){
             e.printStackTrace();
         }

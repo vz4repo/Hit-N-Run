@@ -39,8 +39,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto read(String c_id) throws Exception {
-        return cartDao.select(c_id);
+    public List<CartDto> read(String c_id) throws Exception {
+        return cartDao.selectUser(c_id);
     }
 
     @Override

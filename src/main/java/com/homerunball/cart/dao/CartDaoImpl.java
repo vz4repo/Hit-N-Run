@@ -15,6 +15,7 @@ public class CartDaoImpl implements CartDao {
     private SqlSession session;
 
     private static String namespace = "com.homerunball.cart.dao.CartMapper.";
+    private CartDto cartDto;
 
     @Override
     public int count() throws Exception {
@@ -52,11 +53,6 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public CartDto select(String c_id) throws Exception {
-        return session.selectOne(namespace+"select",c_id);
-    }
-
-    @Override
     public List<CartDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
     }
@@ -66,8 +62,19 @@ public class CartDaoImpl implements CartDao {
         return session.selectList(namespace+"selectUser",c_id);
     }
 
-    @Override
-    public CartDto cartCheck(CartDto cart) throws Exception {
-        return session.selectOne(namespace+"cartCheck", cart);
-    }
+//    @Override
+//    public List<CartDto> cartCheck(CartDto cart) throws Exception {
+//        if(cartCheck(cart).size()==2){
+//            cartDto.getCart_cnt()++;
+//        }
+//        return session.selectList(namespace+"cartCheck", cart);
+//    }
 }
+
+//public int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception {
+//    Map map = new HashMap();
+//    map.put("c_id", c_id);
+//    map.put("pd_id", pd_id);
+//    map.put("pd_clsf_code", pd_clsf_code);
+//    return session.delete(namespace+"delete", map);
+//}
