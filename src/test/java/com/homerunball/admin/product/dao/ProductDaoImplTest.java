@@ -1,7 +1,6 @@
 package com.homerunball.admin.product.dao;
 
-import com.homerunball.admin.product.ProductDto;
-import com.homerunball.admin.product.dao.ProductDao;
+import com.homerunball.admin.product.domain.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.MyBatisSystemException;
@@ -40,7 +39,7 @@ public class ProductDaoImplTest {
      */
     @Test
     public void countAllTest() throws Exception {
-//        assertThrows(MyBatisSystemException.class, () -> productDao.countAll());
+        assertThrows(MyBatisSystemException.class, () -> productDao.countAll());
         productDao.deleteAll();
         assertTrue(productDao.countAll() == 0);
 
