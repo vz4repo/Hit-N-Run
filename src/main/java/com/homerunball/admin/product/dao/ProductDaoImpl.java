@@ -1,6 +1,6 @@
 package com.homerunball.admin.product.dao;
 
-import com.homerunball.admin.product.ProductDto;
+import com.homerunball.admin.product.domain.ProductDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,6 +43,12 @@ public class ProductDaoImpl implements ProductDao {
         return session.selectList(NAMESPACE + "selectPrdAll");
     }
 
+    /*진열되지 않은 모든 제품을 선택한다.*/
+    @Override
+    public List<ProductDto> selectAllOutProduct() throws Exception {
+        return session.selectList(NAMESPACE + "selectAllOutProduct");
+    }
+
     /* 지정된 제품 하나만을 선택한다. */
     @Override
     public ProductDto selectPrd(String pd_id) throws Exception {
@@ -73,21 +79,27 @@ public class ProductDaoImpl implements ProductDao {
         return session.selectOne(NAMESPACE + "countType", pd_type_cd);
     }
 
-    /* 제품의 내용을 업데이트한다. */
+    /* 제품에 등록된 내용을 업데이트한다. */
     @Override
     public int updateContent(ProductDto productDto) throws Exception {
         return session.update(NAMESPACE + "updateContent", productDto);
     }
 
     /* 제품의 상태를 업데이트한다. */
-    @Override
-    public int updateStatus(ProductDto productDto) throws Exception {
-        return session.update(NAMESPACE + "updateStatus", productDto);
-    }
+//    @Override
+//    public int updateStatus(ProductDto productDto) throws Exception {
+//        return session.update(NAMESPACE + "updateStatus", productDto);
+//    }
 
     /* 상품이 선택될 때마다 조회수를 늘린다. */
     @Override
     public int increaseHitCnt(String pd_id) throws Exception {
         return session.update(NAMESPACE + "increaseHitCnt", pd_id);
+    }
+
+    /*진열이 제외된 상품을 다시 진열한다.*/
+    @Override
+    public int updateToShow(List<String> pd_id) throws Exception {
+        return session.update(NAMESPACE + "updateToShow", pd_id);
     }
 }

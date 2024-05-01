@@ -1,6 +1,5 @@
 package com.homerunball.payment.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -9,25 +8,63 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+
+/* [GET]  /payment  결제창 이동  */
+/* [GET]  /success  인증 성공 처리 */
+/* [GET]  /fail     인증 실패 처리 */
+/* [POST] /confirm   승인 성공 후 처리 */
 @Controller
 public class WidgetController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value = "/confirm")
+    @Value("#{properties['widgetClientKey']}")
+    private String widgetClientKey;
+    @Value("#{properties['widgetSecretKey']}")
+    private String widgetSecretKey;
+    @GetMapping(value = "/payment")
+    public String index( Model model) throws Exception {
+        System.out.println("[paymentController] :: /payment ");
+        model.addAttribute("widgetClientKey", widgetClientKey);
+        return "/payCheckout";
+    }
+
+    /* 인증 성공 처리 */
+    @GetMapping(value = "/success")
+    public String successPayment(Model model) throws Exception {
+        System.out.println("[paymentController] :: /success ");
+        return "/paySuccess";
+    }
+
+    /* 인증 실패 처리 */
+    @GetMapping(value = "/fail")
+    public String failPayment(HttpServletRequest request, Model model) throws Exception {
+        System.out.println("[paymentController] :: /fail ");
+        String failCode = request.getParameter("code");
+        String failMessage = request.getParameter("message");
+
+        model.addAttribute("code", failCode);
+        model.addAttribute("message", failMessage);
+
+        return "/payFail";
+    }
+
+    /* 인증 성공 후, payCheckout.jsp 에서 호출 */
+    @PostMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
 
         JSONParser parser = new JSONParser();
@@ -35,7 +72,7 @@ public class WidgetController {
         String amount;
         String paymentKey;
         try {
-            /* 클라이언트에서 받은 JSON 요청 바디입니다. */
+            /* 클라이언트에서 받은 JSON 요청 바디 */
             JSONObject requestData = (JSONObject) parser.parse(jsonBody);
             paymentKey = (String) requestData.get("paymentKey");
             orderId = (String) requestData.get("orderId");
@@ -48,19 +85,17 @@ public class WidgetController {
         obj.put("amount", amount);
         obj.put("paymentKey", paymentKey);
 
-        /* TODO: 개발자센터에 로그인해서 내 결제위젯 연동 키 > 시크릿 키를 입력하세요. 시크릿 키는 외부에 공개되면 안돼요. */
-        /* @docs https://docs.tosspayments.com/reference/using-api/api-keys */
-        String widgetSecretKey = "test_sk_Gv6LjeKD8aPNWwEbq9JYrwYxAdXy";
 
-        /* 토스페이먼츠 API는 시크릿 키를 사용자 ID로 사용하고, 비밀번호는 사용하지 않습니다. */
-        /* 비밀번호가 없다는 것을 알리기 위해 시크릿 키 뒤에 콜론을 추가합니다. */
+        /* 토스페이먼츠 API는 시크릿 키를 사용자 ID로 사용, 비밀번호 미사용 */
+        /* 비밀번호가 없다는 것을 알리기 위해 시크릿 키 뒤에 콜론 추가 */
+        /* @docs https://docs.tosspayments.com/reference/using-api/api-keys */
         /* @docs https://docs.tosspayments.com/reference/using-api/authorization#%EC%9D%B8%EC%A6%9D */
         Base64.Encoder encoder = Base64.getEncoder();
         byte[] encodedBytes = encoder.encode((widgetSecretKey + ":").getBytes(StandardCharsets.UTF_8));
         String authorizations = "Basic " + new String(encodedBytes);
 
-        /* 결제 승인 API를 호출하세요. */
-        /* 결제를 승인하면 결제수단에서 금액이 차감돼요. */
+        /* 결제 승인 API를 호출 */
+        /* 결제를 승인하면 결제수단에서 금액이 차감 */
         /* @docs https://docs.tosspayments.com/guides/payment-widget/integration#3-결제-승인하기 */
         URL url = new URL("https://api.tosspayments.com/v1/payments/confirm");
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -78,37 +113,11 @@ public class WidgetController {
 
         InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
 
-        // TODO: 결제 성공 및 실패 비즈니스 로직을 구현하세요.
+        /* TODO: 결제 성공 및 실패 비즈니스 로직을 구현 */
         Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         responseStream.close();
 
         return ResponseEntity.status(code).body(jsonObject);
-    }
-
-    /* 인증성공처리 */
-    @GetMapping(value = "/success")
-    public String successPayment(Model model) throws Exception {
-        System.out.println("[WidgetController] :: /success ");
-        return "/success";
-    }
-
-    @GetMapping(value = "/payment")
-    public String index( Model model) throws Exception {
-        System.out.println("[WidgetController] :: /payment ");
-        return "/checkout";
-    }
-
-    /* 인증실패처리 */
-    @GetMapping(value = "/fail")
-    public String failPayment(HttpServletRequest request, Model model) throws Exception {
-        System.out.println("[WidgetController] :: /fail ");
-        String failCode = request.getParameter("code");
-        String failMessage = request.getParameter("message");
-
-        model.addAttribute("code", failCode);
-        model.addAttribute("message", failMessage);
-
-        return "/fail";
     }
 }
