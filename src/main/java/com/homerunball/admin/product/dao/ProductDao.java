@@ -1,6 +1,6 @@
 package com.homerunball.admin.product.dao;
 
-import com.homerunball.admin.product.ProductDto;
+import com.homerunball.admin.product.domain.ProductDto;
 
 import java.util.List;
 

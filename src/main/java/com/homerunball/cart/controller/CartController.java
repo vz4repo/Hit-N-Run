@@ -79,7 +79,6 @@ public class CartController {
     /*고객장바구니 선택삭제*/
     @PostMapping("/remove")
     public String remove(String c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
-
         try {
              /*고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다*/
             int rowcnt = cartDao.delete(c_id, pd_id, pd_clsf_code);
@@ -96,7 +95,11 @@ public class CartController {
 
     /*고객 장바구니 load*/
     @GetMapping("/list")
-    public String cartForm(String c_id, Model m, HttpSession session){
+    public String cartForm(String c_id, Model m, HttpSession session, HttpServletRequest request){
+
+        if(!loginCheck(request))
+            return "redirect:/login?toURL="+request.getRequestURI();
+
         try {
             /* 로그인한 고객이 세션에있는지 확인한다 */
             String loginId = (String)session.getAttribute(c_id);
@@ -117,8 +120,9 @@ public class CartController {
         return "cart";
     }
 
-    private boolean loginChecked(HttpServletRequest request){
+    private boolean loginCheck(HttpServletRequest request){
         HttpSession session = request.getSession();
-        return session.getAttribute("userId") != null;
+        return session.getAttribute("c_email") != null;
     }
 }
+

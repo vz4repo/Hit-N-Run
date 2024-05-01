@@ -164,7 +164,7 @@
             <label>비밀번호 확인</label>
             <input class="special-class" type="text" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요.">
             <label>이름</label>
-            <input class="special-class" type="text" name="c_nm">
+            <input class="special-class" type="text" name="c_name">
             <label>주소</label>
             <input type="text" id="zip" name="c_zip" placeholder="우편번호">
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
@@ -201,12 +201,33 @@
             <p id="pii">[필수] 개인정보 수집 및 이용</p><br>
 
 
-            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"> <a>[선택] 쇼핑정보 SMS 수신</a><br>
+            <%--                선택 체크박스 컬럼들을 NULL로 설정하는 방식으로 변경--%>
+            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>
             <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
 
-            <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" value="N">
-            <input type="hidden" id="email_agr_hidden" name="email_agr_hidden" value="N">
-            <button id="signup">가입하기</button><br><br>
+<%--            1. 인풋에 value 값을 넣는 방법--%>
+<%--            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"> <a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
+<%--            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
+
+<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr" value="N">--%>
+<%--            <input type="hidden" id="email_agr_hidden" name="email_agr" value="N">--%>
+
+<%--            2. 체크박스 인풋에만 value를 주는 방식--%>
+<%--            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
+<%--            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
+
+<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr" value="N">--%>
+<%--            <input type="hidden" id="email_agr_hidden" name="email_agr" value="N">--%>
+
+
+<%--            3. 인풋 전체에 value 값을 주지 않고 자스로 value 값을 넣는 방법--%>
+<%--            <input type="checkbox" id="sms_agr" name="sms_agr" ><a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
+<%--            <input type="checkbox" id="email_agr" name="email_agr"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
+
+<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" >--%>
+<%--            <input type="hidden" id="email_agr_hidden" name="email_agr_hidden">--%>
+
+            <button>가입하기</button><br><br>
         </div>
 <%--            </form:form>--%>
 </form>
@@ -472,17 +493,78 @@
 <script>
 
 
-    /*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
-    if (!document.getElementById("email_agr").checked) {
-        document.getElementById("email_agr_hidden.value");
-    }
+    // 1. 인풋 value 델꼬오기
+    //
+    // if (!document.getElementById("email_agr").checked) {
+    //     document.getElementById("email_agr_hidden.value");
+    // }
+    //
+    // if (!document.getElementById("sms_agr").checked) {
+    //     document.getElementById("sms_agr_hidden.value");
+    // }
+    //
+    // 2. 자스에서 value 넣어주기
 
-    /*SMS 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*/
-    if (!document.getElementById("sms_agr").checked) {
-        document.getElementById("sms_agr_hidden.value");
-    }
+   // if (!document.getElementById("email_agr").checked) {
+   //     document.getElementById("email_agr_hidden").value = "N";
+   // }
+   //
+   // if (!document.getElementById("sms_agr").checked) {
+   //     document.getElementById("sms_agr_hidden").value = "N";
+   // }
 
-    document.getElementById("tou").addEventListener("click", function () {
+   // 3. if else로도 만들어보기..
+
+   // if (!document.getElementById("email_agr").checked) {
+   //     document.getElementById("email_agr_hidden").value = "N";
+   // } else {
+   //     document.getElementById("email_agr_hidden").value = "Y";
+   // }
+
+   // if (!document.getElementById("sms_agr").checked) {
+   //     document.getElementById("sms_agr_hidden").value = "N"; // SMS 수신 동의하지 않음을 설정
+   // } else {
+   //     document.getElementById("sms_agr_hidden").value = "Y"; // SMS 수신 동의함을 설정
+   // }
+
+    // 4. 함수로도 만들어보기..(인풋에 value 없을시)
+
+   // function updateHiddenValues() {
+   //     if (!document.getElementById("email_agr").checked) {
+   //         document.getElementById("email_agr_hidden").value = "N";
+   //     } else {
+   //         document.getElementById("email_agr_hidden").value = "Y";
+   //     }
+   //
+   //     if (!document.getElementById("sms_agr").checked) {
+   //         document.getElementById("sms_agr_hidden").value = "N";
+   //     } else {
+   //         document.getElementById("sms_agr_hidden").value = "Y";
+   //     }
+   // }
+   //
+   // updateHiddenValues()
+
+
+    // 5. 함수로도 만들어보기 vol.2 (인풋에 value 있을시)
+    // function updateHiddenValues() {
+    //     if (!document.getElementById("email_agr").checked) {
+    //         document.getElementById("email_agr_hidden.value");
+    //     } else {
+    //         document.getElementById("email_agr.value");
+    //     }
+    //
+    //     if (!document.getElementById("sms_agr").checked) {
+    //         document.getElementById("sms_agr_hidden.value");
+    //     } else {
+    //         document.getElementById("sms_agr.value");
+    //     }
+    // }
+    // updateHiddenValues()
+
+
+
+   document.getElementById("tou").addEventListener("click", function () {
         document.getElementById("myModal").style.display = "block";
         /*모달이 나타날 때 스크롤바 숨김*/
         document.body.classList.add("modal-open");
@@ -560,7 +642,7 @@
         var email = frm.c_email.value.trim();
         var pwd = frm.c_pwd.value.trim();
         var pwd2 = frm.c_pwd2.value.trim();
-        var nm = frm.c_nm.value.trim();
+        var nm = frm.c_name.value.trim();
         var zip = frm.c_zip.value.trim();
         var road = frm.c_road_a.value.trim();
         var jibun = frm.c_jibun_a.value.trim();
@@ -627,6 +709,18 @@
             return false;
         }
 
+
+        if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
+            alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
+            return false;
+        }
+
+        /*ing*/
+        if (document.getElementById("check-result").innerText.includes("이메일을 입력해주세요.")) {
+            alert("이메일을 작성해주세요.");
+            return false;
+        }
+
     /*모든 유효성 검사를 통과한 경우*/
         return true;
     }
@@ -640,6 +734,52 @@
             return false;
         }
         return true;
+    }
+
+    /*이메일 중복체크*/
+    function emailCheck() {
+        const email = document.getElementById("c_email").value;
+        const checkResult = document.getElementById("check-result");
+
+
+        if (!email.trim()) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일을 입력해주세요.";
+            return; // 함수 종료
+        }
+
+        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (!emailPattern.test(email)) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
+            return; // 함수 종료
+        }
+
+        console.log("입력한 이메일", email);
+        $.ajax({
+            type: "post",
+            url: "/register/email-check",
+            data: {
+                "c_email": email
+            },
+            success: function(res) {
+                console.log("요청성공", res);
+                if (res == "ok") {
+                    console.log( "사용 가능한 이메일입니다.");
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "사용 가능한 이메일입니다.";
+                } else {
+                    console.log("이미 사용중인 이메일");
+                    // alert("이미 사용중인 이메일입니다.");
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
+                    return false;
+                }
+            },
+            error: function(err) {
+                console.log("에러발생", err);
+            }
+        });
     }
 
     /*3-2 비밀번호 유효성 검사*/
@@ -667,7 +807,7 @@
 
     /*  이름 유효성 검사*/
     function nmCheck(frm) {
-        var nm = frm.c_nm.value;
+        var nm = frm.c_name.value;
         if (nm.length >= 15) {
             return false;
         }
@@ -692,6 +832,7 @@
         }
         return true;
     }
+
     /*  성별 유효성 검사*/
     function genCheck(frm){
         var female = frm.querySelector('input[name="c_gnd"][value="여"]').checked;
@@ -762,10 +903,10 @@
         }else if(sms_agr.checked){
             sms_agr.value = 'Y'
         }
-    });*/
+    });
 
-    // /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
-/*    const email_agr = document.getElementById("email_agr");
+    /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
+    const email_agr = document.getElementById("email_agr");
     email_agr.addEventListener("change",function (){
         if (!email_agr.checked) {
             email_agr.value = 'N';
@@ -773,53 +914,6 @@
             email_agr.value = 'Y'
         }
     });*/
-<%--
-
-<script>
---%>
-    /*이메일 중복체크*/
-    function emailCheck() {
-        const email = document.getElementById("c_email").value;
-        const checkResult = document.getElementById("check-result");
-
-
-        if (!email.trim()) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일을 입력해주세요.";
-            return; // 함수 종료
-        }
-
-        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (!emailPattern.test(email)) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
-            return; // 함수 종료
-        }
-
-        console.log("입력한 이메일", email);
-        $.ajax({
-            type: "post",
-            url: "/register/email-check",
-            data: {
-                "c_email": email
-            },
-            success: function(res) {
-                console.log("요청성공", res);
-                if (res == "ok") {
-                    console.log( "사용 가능한 이메일입니다.");
-                    checkResult.style.color = "green";
-                    checkResult.innerHTML = "사용 가능한 이메일입니다.";
-                } else {
-                    console.log("이미 사용중인 이메일");
-                    checkResult.style.color = "red";
-                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
-                }
-            },
-            error: function(err) {
-                console.log("에러발생", err);
-            }
-        });
-    }
 
 </script>
 

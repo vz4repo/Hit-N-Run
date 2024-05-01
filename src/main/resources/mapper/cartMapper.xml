@@ -11,12 +11,10 @@
     <!-- 한 고객의 장바구니 선택 삭제-->
     <delete id="delete" parameterType="map" >
         delete from cart
-        where c_id = #{c_id}
-        and pd_id = #{pd_id}
-        and pd_clsf_code = #{pd_clsf_code}
+               where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
     </delete>
 
-    <!--한 고객의 장바구니 전체삭제 -->
+    <!--한 고객의 장바구니 전체삭제-->
     <delete id="cidDeleteAll" parameterType="string">
         delete from cart where c_id = #{c_id}
     </delete>
