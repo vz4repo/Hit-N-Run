@@ -14,8 +14,8 @@
 	<logger name="com.homerunball">
 		<level value="info" />
 	</logger>
-
-	<!-- 3rdparty Loggers -->
+	
+	<!-- 3rd party Loggers -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
