@@ -11,22 +11,6 @@
         delete from ord
     </delete>
 
-    <select id="select" parameterType="String" resultType="ordDto">
-        select od_id
-             , c_id
-             , od_dt
-             , od_stat_cd
-             , od_pd_qty
-             , od_tot_qty
-             , od_pay_amt
-             , frst_reg_dt
-             , frst_reg_id
-             , last_mod_dt
-             , last_mod_id
-        from ord
-        where od_id=#{od_id}
-    </select>
-
     <select id="selectOdId" parameterType="String" resultType="ordDto">
         select od_id
              , c_id
@@ -35,6 +19,7 @@
              , od_pd_qty
              , od_tot_qty
              , od_pay_amt
+             , rtl_prc
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
@@ -51,6 +36,7 @@
              , od_pd_qty
              , od_tot_qty
              , od_pay_amt
+             , rtl_prc
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
@@ -73,10 +59,10 @@
         ,   od_pd_qty   = #{od_pd_qty}
         ,   od_tot_qty  = #{od_tot_qty}
         ,   od_pay_amt  = #{od_pay_amt}
+        ,   rtl_prc     = #{rtl_prc}
         ,   frst_reg_id = #{frst_reg_id}
         ,   last_mod_id = #{last_mod_id}
         where od_id = #{od_id} and c_id = #{c_id} order by od_dt desc;
     </update>
-
 
 </mapper>

@@ -68,8 +68,8 @@ public class OrdDaoImplTest {
         OrdDto ord2 = new OrdDto("bbb2", "456", new Date(), "g6", 2, 2, 2, "fsds", "sdfs");
         assertTrue(ordDao.insert(ord2) == 1);
 
-        /*중복이니까 실패*/
-        assertFalse(ord.equals(ord2)); /*삽입은 실패해야 함*/
+        /*중복이니까 실패?*/
+        assertFalse(ord.equals(ord2));
 
         /*2번 데이터 조회*/
         OrdDto ord2rs = ordDao.select(ord2.getOd_id(), ord2.getC_id());

@@ -3,7 +3,6 @@ package com.homerunball.ord.service;
 import com.homerunball.ord.dao.OrdDao;
 import com.homerunball.ord.domain.OrdDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,8 +47,4 @@ public class OrdServiceImpl implements OrdService {
         return ordDao.update(ord);
     }
 
-  /*  @Override
-    public List<OrdDto> getPage(Map map) throws Exception {
-        return ordDao.selectPage(map);
-    }*/
 }

@@ -25,11 +25,13 @@ public class OrdController {
     CartDao cartDao;
 
 
+    /*cartDao의 정보를 가져와 출력한다*/
     @GetMapping("/order")
     public String read(String od_id,String c_id, Model m){
         try {
-            /*List<OrdDto> list = ordDao.selectOdId(od_id);
-            System.out.println(list);*/
+            /*List<OrdDto> list = ordDao.selectOdId(od_id);*/
+
+            /*장바구니 select를 가져옴*/
             List<CartDto> list = cartDao.selectUser(c_id);
 
             /*System.out.println("[controller]ordDto = " + ordDto);*/
