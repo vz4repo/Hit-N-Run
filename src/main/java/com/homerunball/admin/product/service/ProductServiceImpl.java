@@ -42,6 +42,12 @@ public class ProductServiceImpl implements ProductService {
         return productDao.selectPrdAll();
     }
 
+    /* 진열되지 않는 모든 제품을 list에 저장한다. */
+    @Override
+    public List<ProductDto> getAllOutProducts() throws Exception {
+        return productDao.selectAllOutProduct();
+    }
+
     /* 지정된 제품 하나만을 가져온다. */
     @Override
     public ProductDto getOneProduct(String pd_id) throws Exception {
@@ -68,9 +74,9 @@ public class ProductServiceImpl implements ProductService {
         return productDao.updateContent(productDto);
     }
 
-//    /* 제품의 상태를 업데이트한다. */
-//    @Override
-//    public int updateStatus(ProductDto productDto) throws Exception {
-//        return productDao.updateStatus(productDto);
-//    }
+    /*진열이 제외된 상품을 다시 진열한다.*/
+    @Override
+    public int showProduct(List<String> pd_id) throws Exception {
+        return productDao.updateToShow(pd_id);
+    }
 }

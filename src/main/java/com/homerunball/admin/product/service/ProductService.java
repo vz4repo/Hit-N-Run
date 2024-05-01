@@ -20,6 +20,9 @@ public interface ProductService {
     /* 모든 제품을 list에 저장한다. */
     List<ProductDto> getAllProducts() throws Exception;
 
+    /* 진열되지 않는 모든 제품을 list에 저장한다. */
+    public List<ProductDto> getAllOutProducts() throws Exception;
+
     /* 지정된 제품 하나만을 가져온다. */
     ProductDto getOneProduct(String pd_id) throws Exception;
 
@@ -32,6 +35,6 @@ public interface ProductService {
     /* 제품의 내용을 수정한다. */
     int modifyContent(ProductDto productDto) throws Exception;
 
-    /* 제품의 상태를 업데이트한다. */
-//    int updateStatus(ProductDto productDto) throws Exception;
+    /*진열이 제외된 상품을 다시 진열한다.*/
+    int showProduct(List<String> pd_id) throws Exception;
 }

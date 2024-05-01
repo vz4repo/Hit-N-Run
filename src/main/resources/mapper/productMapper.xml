@@ -41,6 +41,14 @@
         order by frst_reg_dt desc
     </select>
 
+    <!--prd 테이블에서 진열이 제외된 모든 제품을 선택한다.-->
+    <select id="selectAllOutProduct" resultType="ProductDto">
+        select *
+        from prd
+        where pd_is_show = 'N'
+        order by frst_reg_dt desc
+    </select>
+
     <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 선택하기 -->
     <sql id="selectPrdStk">
         select pd.pd_id, pd.pd_name, pd.qlt_cd, stk.pd_clsf_cd, stk.sls_prc
@@ -81,7 +89,7 @@
             <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
             <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
-        where pd_id = #{pd_id};
+        where pd_id = #{pd_id}
     </update>
 
 <!--    &lt;!&ndash; 제품 상태 변경 쿼리 &ndash;&gt;-->
@@ -95,16 +103,16 @@
     <update id="increaseHitCnt" parameterType="ProductDto">
         update prd
         set hit_cnt = hit_cnt + 1
-        where pd_id = #{pd_id};
+        where pd_id = #{pd_id}
     </update>
 
     <!-- 제품 ID에서 선택된 제품 유형 중 가장 큰 숫자를 찾는 쿼리-->
     <select id="searchBiggestSerialNumber" parameterType="ProductDto" resultType="int">
-        select ifnull(cast(substr(pd_id,4,6) as unsigned),0) as serial_number
+        select cast(substr(pd_id,4,6) as unsigned) as serial_number
         from prd
         where pd_type_cd = #{pd_type_cd}
         order by serial_number desc
-        limit 1;
+        limit 1
     </select>
 
     <!--지정된 제품 유형에 포함된 제품의 개수를 센다.-->
@@ -112,6 +120,15 @@
         select count(*)
         from prd
         where pd_type_cd = #{pd_type_cd}
-        ;
     </select>
+
+    <!--진열이 제외된 상품을 다시 진열하기 위한 쿼리-->
+    <update id="updateToShow" parameterType="java.util.List">
+        update prd
+        set pd_is_show = 'Y'
+        where pd_id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

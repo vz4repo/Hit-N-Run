@@ -2,6 +2,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
 <head>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: left;
+        }
+    </style>
     <title>제품 목록</title>
     <% String msg = (String) request.getAttribute("msg"); %>
     <% if (msg != null && !msg.isEmpty()) { %>
@@ -10,15 +17,8 @@
     </script>
     <% } %>
 </head>
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        text-align: left;
-    }
-</style>
 <body>
-<jsp:include page="adminMenu.jsp" flush="false" />
+<jsp:include page="../adminMenu.jsp" flush="false" />
 총 제품 개수: ${productCount}
 <table>
     <tr>

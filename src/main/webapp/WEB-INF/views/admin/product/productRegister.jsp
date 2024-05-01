@@ -61,7 +61,7 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="adminMenu.jsp" flush="false" />
+<jsp:include page="../adminMenu.jsp" flush="false" />
 <h1>제품 등록 화면</h1>
     <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
         <div class="product_register">
