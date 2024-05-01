@@ -265,7 +265,7 @@
                     <tr>
                         <th>사용 선수명</th>
                         <td>
-                            <input type="text" name="player_nm" maxlength="50" />
+                            <input type="text" name="player_name" maxlength="50" />
                         </td>
                     </tr>
                     <tr>

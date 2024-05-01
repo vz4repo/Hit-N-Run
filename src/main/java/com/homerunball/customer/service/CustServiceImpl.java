@@ -1,11 +1,12 @@
 package com.homerunball.customer.service;
 
+import com.homerunball.customer.service.CustService;
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import java.util.List;
 @Service
 public class CustServiceImpl implements CustService{
     @Autowired
@@ -16,7 +17,6 @@ public class CustServiceImpl implements CustService{
         return custDao.selectCust(c_email);
     }
 
-    /* exception handling*/
     public String emailCheck(String c_email){
         CustDto custDto = custDao.selectCust(c_email);
         if(custDto == null) {

@@ -3,9 +3,12 @@ import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.homerunball.customer.service.CustService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Controller
 @RequestMapping("/register")
@@ -22,22 +25,20 @@ public class RegisterController {
     public  String register(){
         return "registerForm";
     }
-
     @PostMapping("/add")
-    public String save(@ModelAttribute("custdto") CustDto custdto, BindingResult result) throws Exception {
+    public String save(@ModelAttribute("custdto") CustDto custdto, BindingResult result, RedirectAttributes Successful) throws Exception {
 
-
-        /*오류가 없을시 데이터 입력*/
-
+        /*에러가 없으면 DB에 값 저장*/
         if (!result.hasErrors()) {
             System.out.println("custdto.toString() = " + custdto.toString());
             int rowCnt = custDao.insertCust(custdto);
             if (rowCnt != FAIL){
-                return "registerInfo";
+//                return "registerInfo";
+                Successful.addFlashAttribute("signUp", "signUpOk");
+                return "redirect:/login";
             }
         }
-
-        /*오류 발생 회원가입 폼 이동*/
+        /*에러 있을시 회원가입 폼으로 이동*/
         return "registerForm";
     }
 

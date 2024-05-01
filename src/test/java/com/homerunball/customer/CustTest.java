@@ -58,12 +58,12 @@ public class CustTest {
     public int insertCust(CustDto custdto)throws Exception{
         Connection conn = ds.getConnection();
 
-    String sql = "insert into cust(c_email, c_pwd, c_nm, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    String sql = "insert into cust(c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, custdto.getC_email());
         pstmt.setString(2, custdto.getC_pwd());
-        pstmt.setString(3, custdto.getC_nm());
+        pstmt.setString(3, custdto.getC_name());
         pstmt.setString(4, custdto.getC_birth());
         pstmt.setString(5, custdto.getC_gnd());
         pstmt.setString(6, custdto.getC_phn());
@@ -83,7 +83,7 @@ public class CustTest {
     public CustDto selectCust(String c_email) throws Exception {
         Connection conn = ds.getConnection();
 
-        String sql = "select c_email, c_pwd, c_nm, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr from cust where c_email = ?";
+        String sql = "select c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr from cust where c_email = ?";
 
         PreparedStatement pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, c_email);
@@ -94,7 +94,7 @@ public class CustTest {
 
             custdto.setC_email(rs.getString(1));
             custdto.setC_pwd(rs.getString(2));
-            custdto.setC_nm(rs.getString(3));
+            custdto.setC_name(rs.getString(3));
             custdto.setC_birth(rs.getString(4));
             custdto.setC_gnd(rs.getString(5));
             custdto.setC_phn(rs.getString(6));
@@ -121,19 +121,19 @@ public class CustTest {
         rowCnt = updateCust(cust2);
         assertTrue(rowCnt == 1);
 
-        assertTrue(selectCust("bbb").getC_nm().equals("evra"));
+        assertTrue(selectCust("bbb").getC_name().equals("evra"));
     }
 
     public int updateCust(CustDto custdto) throws Exception{
         Connection conn = ds.getConnection();
 
         String sql = "update cust " +
-                "set c_pwd = ?, c_nm = ?, c_birth = ?, c_gnd = ?, c_phn = ?, c_zip = ?, c_road_a = ?, c_jibun_a = ?, c_det_a = ?, c_ext_a = ?, sms_agr = ?, email_agr = ?" + "where c_email = ?";
+                "set c_pwd = ?, c_name = ?, c_birth = ?, c_gnd = ?, c_phn = ?, c_zip = ?, c_road_a = ?, c_jibun_a = ?, c_det_a = ?, c_ext_a = ?, sms_agr = ?, email_agr = ?" + "where c_email = ?";
 
         PreparedStatement pstat = conn.prepareStatement(sql);
 
         pstat.setString(1, custdto.getC_pwd());
-        pstat.setString(2, custdto.getC_nm());
+        pstat.setString(2, custdto.getC_name());
         pstat.setString(3, custdto.getC_birth());
         pstat.setString(4, custdto.getC_gnd());
         pstat.setString(5, custdto.getC_phn());

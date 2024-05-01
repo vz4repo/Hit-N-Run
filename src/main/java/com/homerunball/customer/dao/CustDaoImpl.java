@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class CustDaoImpl implements CustDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.cust.dao.custMapper.";
+    private static String namespace = "com.homerunball.customer.dao.custMapper.";
 
     @Override
     public int deleteCust(String c_email) {
