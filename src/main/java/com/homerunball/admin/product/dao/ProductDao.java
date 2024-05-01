@@ -1,6 +1,6 @@
 package com.homerunball.admin.product.dao;
 
-import com.homerunball.admin.product.ProductDto;
+import com.homerunball.admin.product.domain.ProductDto;
 
 import java.util.List;
 
@@ -10,6 +10,9 @@ public interface ProductDao {
 
     /* 모든 제품을 삭제한다. */
     int deleteAll() throws Exception;
+
+    /*진열되지 않은 모든 제품을 선택한다.*/
+    List<ProductDto> selectAllOutProduct() throws Exception;
 
     /* 지정된 pd_id만을 삭제한다. */
     int delete(String pd_id) throws Exception;
@@ -39,8 +42,11 @@ public interface ProductDao {
     int updateContent(ProductDto productDto) throws Exception;
 
     /* 제품의 상태를 업데이트한다. */
-    int updateStatus(ProductDto productDto) throws Exception;
+//    int updateStatus(ProductDto productDto) throws Exception;
 
     /* 상품이 선택될 때마다 조회수를 늘린다. */
     int increaseHitCnt(String pd_id) throws Exception;
+
+    /*진열이 제외된 상품을 다시 진열한다.*/
+    int updateToShow(List<String> pd_id) throws Exception;
 }
