@@ -24,7 +24,7 @@
         </ul>
     </div>
     <div class="main_header">
-        <a href="#"><h1>HOME RUN</h1></a>
+        <a href="/"><h1>HOME RUN</h1></a>
         <div>
             <ul class="main_header_ul">
                 <a href="#"><li>HOME</li></a>

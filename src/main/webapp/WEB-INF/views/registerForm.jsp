@@ -200,13 +200,13 @@
             <input type="checkbox" id="piiBox" name ="piiBox" value="Y">
             <p id="pii">[필수] 개인정보 수집 및 이용</p><br>
 
+
             <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"> <a>[선택] 쇼핑정보 SMS 수신</a><br>
             <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
 
             <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" value="N">
             <input type="hidden" id="email_agr_hidden" name="email_agr_hidden" value="N">
-
-            <button>가입하기</button><br><br>
+            <button id="signup">가입하기</button><br><br>
         </div>
 <%--            </form:form>--%>
 </form>
@@ -762,10 +762,10 @@
         }else if(sms_agr.checked){
             sms_agr.value = 'Y'
         }
-    });
+    });*/
 
-    /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
-    const email_agr = document.getElementById("email_agr");
+    // /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
+/*    const email_agr = document.getElementById("email_agr");
     email_agr.addEventListener("change",function (){
         if (!email_agr.checked) {
             email_agr.value = 'N';
@@ -773,11 +773,7 @@
             email_agr.value = 'Y'
         }
     });*/
-
-
-
 <%--
-</script>
 
 <script>
 --%>

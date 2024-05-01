@@ -51,6 +51,7 @@ public class CartDaoImpl implements CartDao {
         return session.update(namespace+"update", cart);
     }
 
+    @Override
     public CartDto select(String c_id) throws Exception {
         return session.selectOne(namespace+"select",c_id);
     }
@@ -60,9 +61,13 @@ public class CartDaoImpl implements CartDao {
         return session.selectList(namespace+"selectAll");
     }
 
+    @Override
     public List<CartDto> selectUser(String c_id) throws Exception {
         return session.selectList(namespace+"selectUser",c_id);
     }
 
-
+    @Override
+    public CartDto cartCheck(CartDto cart) throws Exception {
+        return session.selectOne(namespace+"cartCheck", cart);
+    }
 }

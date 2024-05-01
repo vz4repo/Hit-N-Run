@@ -120,7 +120,8 @@
             <td colspan="7">
                 <form action="" id="removeAllForm">
                     <button type="button" id="delete_All_Btn">전체상품 삭제</button>
-                    <button type="button" id="order_All_Btn">전체상품 주문</button>
+                    <button type="button" id="order_Select_Btn"><a href="/order?c_id=${c_id}">선택상품 주문</a></button>
+                    <button type="button" id="order_All_Btn"><a href="/order?c_id=${c_id}">전체상품 주문</a></button>
                 </form>
             </td>
         </tr>
@@ -132,9 +133,11 @@
         /* 고객의 장바구니 한건 삭제 */
         $('.deleteBtn').on("click", function(){
             if(!confirm("삭제하시겠습니까?")) return;
+            /* data-cid 를 찾아서 c_id에 저장 */
             let c_id = $(this).data("cid");
             let pd_id = $(this).data("pdid");
             let pd_clsf_code = $(this).data("sizecd");
+            /* class delete_c_id 태그를 찾아서 c_id를 controller에 넘겨준다 */
             $(".delete_c_id").val(c_id);
             $(".delete_pd_id").val(pd_id);
             $(".delete_pd_clsf_code").val(pd_clsf_code);
@@ -153,7 +156,6 @@
         $('.plus_btn').on('click', function() {
             /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
             let quantityInput = $(this).siblings('input[name="cart_cnt"]');
-            console.log(quantityInput);
             /* 수량의 value를 parseInt해준다 */
             let quantity = parseInt(quantityInput.val());
             quantity++;
@@ -181,12 +183,25 @@
             let pd_id = $(this).data("pdid");
             let pd_clsf_code = $(this).data("sizecd");
             let cart_cnt = form.find('input[name="cart_cnt"]').val();
-            form.find('input[name="c_id"]').val(c_id);
-            form.find('input[name="pd_id"]').val(pd_id);
-            form.find('input[name="pd_clsf_code"]').val(pd_clsf_code);
-            form.find('input[name="cart_cnt"]').val(cart_cnt);
-            form.submit();
+
+            $.ajax({
+                url: '/cart/update',
+                method: 'POST',
+                data: {
+                    c_id: c_id,
+                    pd_id: pd_id,
+                    pd_clsf_code: pd_clsf_code,
+                    cart_cnt: cart_cnt
+                },
+                success: function (response){
+                    console.log('장바구니 수량이 변경되었습니다')
+                },
+                error: function(xhr, status, error){
+                    console.error('장바구니 수량변경에 실패하였습니다', error)
+                }
+            })
         })
+
     })
 </script>
 </body>

@@ -22,4 +22,6 @@ public interface CartDao {
     List<CartDto> selectAll() throws Exception;
 
     List<CartDto> selectUser(String c_id) throws Exception;
+
+    CartDto cartCheck(CartDto cart) throws Exception;
 }

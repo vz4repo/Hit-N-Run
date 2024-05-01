@@ -10,10 +10,13 @@
 
     <!-- 한 고객의 장바구니 선택 삭제-->
     <delete id="delete" parameterType="map" >
-        delete from cart where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
+        delete from cart
+        where c_id = #{c_id}
+        and pd_id = #{pd_id}
+        and pd_clsf_code = #{pd_clsf_code}
     </delete>
 
-    <!--한 고객의 장바구니 전체삭제-->
+    <!--한 고객의 장바구니 전체삭제 TDD구현하기-->
     <delete id="cidDeleteAll" parameterType="string">
         delete from cart where c_id = #{c_id}
     </delete>
@@ -48,10 +51,10 @@
 
     <select id="selectAll" resultType="CartDto">
         <include refid="selectCart"/>
-        order by c_id = #{c_id} and frst_reg_dt = #{frst_reg_dt} desc
+        order by frst_reg_dt desc, c_id desc
     </select>
 
-    <!--장바구니 수정-->
+    <!--장바구니 update-->
     <update id="update" parameterType="CartDto">
         update cart
         set pd_id = #{pd_id}
@@ -59,6 +62,11 @@
         , cart_cnt = #{cart_cnt}
         where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
-<!--1차수정 제품코드-->
-<!--ajax 사용   fetch -->
+
+    <!-- Cart 장바구니 중복객체인지 확인 -->
+    <select id="cartCheck" resultType="CartDto">
+        select * from cart
+        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
+    </select>
+
 </mapper>
