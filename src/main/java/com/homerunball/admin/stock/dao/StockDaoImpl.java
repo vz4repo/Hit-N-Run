@@ -14,18 +14,52 @@ public class StockDaoImpl implements StockDao {
     private SqlSession session;
     private static String namespace = "com.homerunball.admin.stock.dao.StockMapper.";
 
-    /*재고 전체조회하는 메서드. dto와 수신 */
+    /*모든 재고 선택*/
     @Override
     public List<StockDto> selectStkAll() throws Exception {
         List<StockDto> list = session.selectList(namespace + "selectStkAll");
         return list;
     }
 
-    /*재고 중 pd_id, pd_clsf_cd가 일치하는 제품 1개 조회하는 메서드. dto와 수신 */
+    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
     @Override
     public StockDto selectStk(String pd_id, String pd_clsf_cd) throws Exception {
         return session.selectOne(namespace+"selectStk");
     }
 
+    /*재고 전체 수량 카운트*/
+    @Override
+    public int count() throws Exception {
+        return session.selectOne(namespace+"count");
+    }
 
+    /*모든 재고 삭제*/
+    @Override
+    public int deleteAll() throws Exception {
+        return session.delete(namespace+"deleteAll");
+    }
+
+    /*재고 1개 삭제(지정된 제품ID, 사이즈코드 선택)*/
+    @Override
+    public int delete(String pd_id, String pd_clsf_cd) throws Exception {
+        return session.delete(namespace+"delete");
+    }
+
+    /*재고 하나 추가*/
+    @Override
+    public int insert(StockDto stockDto) throws Exception {
+        return session.insert(namespace+"insert");
+    }
+
+    /*재고의 내용을 업데이트 한다.*/
+    @Override
+    public int update(StockDto stockDto) throws Exception {
+        return session.update(namespace+"update");
+    }
+
+    /*재고의 상태를 업데이트 한다.*/
+    @Override
+    public int updateStatus(StockDto stockDto) throws Exception{
+        return session.update(namespace+"updateStatus");
+    }
 }

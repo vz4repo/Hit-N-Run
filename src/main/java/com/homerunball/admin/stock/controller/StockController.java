@@ -35,6 +35,4 @@ public class StockController {
 
         return "stockList";
     }
-
-
 }

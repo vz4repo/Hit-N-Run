@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.homerunball.admin.stock.dao.StockMapper">
-    <!--전체 재고수량 조회-->
+    <!--재고 전체 수량 조회-->
     <select id="count" resultType="int">
         SELECT count(*)
         FROM stk
@@ -23,7 +23,7 @@
         ORDER BY pd_id DESC
     </select>
 
-    <!--재고 등록하기-->
+    <!--재고 1개 등록하기-->
     <insert id="insertStk">
         INSERT INTO stk
             (pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd)
@@ -42,4 +42,30 @@
         FROM stk
         WHERE pd_id = #{pd_id} AND pd_clsf_cd = #{pd_clsf_cd}
     </delete>
+
+    <!--재고 수량 등 내용 변경-->
+    <update id="update" parameterType="StockDto">
+        UPDATE stk
+        SET nml_stk_qty = #{nml_stk_qty},
+            rt_stk_qty = #{rt_stk_qty},
+            rgn_stk_qty = #{rgn_stk_qty},
+            urgn_stk_qty = #{urgn_stk_qty},
+            sfty_stk_qty = #{sfty_stk_qty},
+            pur_dt = #{pur_dt},
+            rcpt_dt = #{rcpt_dt},
+            rcpt_cp = #{rcpt_cp},
+            rcpt_prc = #{rcpt_prc},
+            rtl_prc = #{rtl_prc},
+            sls_prc = #{sls_prc},
+            stk_plc_cd = #{stk_plc_cd},
+            last_mod_dt = #{last_mod_dt}
+        WHERE pd_id = #{pd_id} AND pd_clsf_cd = #{pd_clsf_cd}
+    </update>
+
+    <!--재고 진행상태 변경-->
+    <update id="updateStatus" parameterType="StockDto">
+        UPDATE stk
+        SET stk_stat_cd = #{stk_stat_cd}
+        WHERE pd_id = #{pd_id} AND pd_clsf_cd = #{pd_clsf_cd}
+    </update>
 </mapper>
