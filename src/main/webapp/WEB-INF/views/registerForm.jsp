@@ -164,7 +164,7 @@
             <label>비밀번호 확인</label>
             <input class="special-class" type="text" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요.">
             <label>이름</label>
-            <input class="special-class" type="text" name="c_nm">
+            <input class="special-class" type="text" name="c_name">
             <label>주소</label>
             <input type="text" id="zip" name="c_zip" placeholder="우편번호">
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
@@ -642,7 +642,7 @@
         var email = frm.c_email.value.trim();
         var pwd = frm.c_pwd.value.trim();
         var pwd2 = frm.c_pwd2.value.trim();
-        var nm = frm.c_nm.value.trim();
+        var nm = frm.c_name.value.trim();
         var zip = frm.c_zip.value.trim();
         var road = frm.c_road_a.value.trim();
         var jibun = frm.c_jibun_a.value.trim();
@@ -807,7 +807,7 @@
 
     /*  이름 유효성 검사*/
     function nmCheck(frm) {
-        var nm = frm.c_nm.value;
+        var nm = frm.c_name.value;
         if (nm.length >= 15) {
             return false;
         }

@@ -12,7 +12,7 @@
 <h1>c_email2=${param.c_email2}</h1>
 <h1>c_pwd=${custdto.c_pwd}</h1>
 <h1>c_pwd2=${param.c_pwd2}</h1>
-<h1>c_name=${custdto.c_nm}</h1>
+<h1>c_name=${custdto.c_name}</h1>
 <h1>c_zip=${custdto.c_zip}</h1>
 <h1>c_road_a=${custdto.c_road_a}</h1>
 <h1>c_jibun_a=${custdto.c_jibun_a}</h1>
