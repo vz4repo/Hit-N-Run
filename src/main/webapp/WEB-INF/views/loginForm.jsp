@@ -10,9 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <style>
 
-        #loginSection {
+        #loginform {
+            max-width: 1130px;
             text-align: center;
-            margin-top: 50px;
+            border: 3px solid #f1f1f1;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding-top: 7%;
+            padding-bottom: 10%; /* 세로 방향의 패딩만 설정 */
+            margin: 0 auto;
+            margin-top: 200px;
             margin-bottom: 150px;
         }
 
@@ -43,7 +50,8 @@
             color: whitesmoke;
         }
 
-        .container .subBtn {
+        /*.container */
+        .subBtn {
             width: 49%;
             margin-bottom: 10px;
         }
@@ -71,14 +79,15 @@
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        form {
-            max-width: 1130px;
-            margin: 0 auto;
-            border: 3px solid #f1f1f1;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding: 5%;
-        }
+        /*form {*/
+        /*    max-width: 1130px;*/
+        /*    margin: 0 auto;*/
+        /*    border: 3px solid #f1f1f1;*/
+        /*    border-radius: 10px;*/
+        /*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+        /*    padding: 5%;*/
+        /*}*/
+
         #error-message {
             position: absolute;
             color: gray;
@@ -89,58 +98,62 @@
         label{
             font-size: 13px;
         }
-
     </style>
-
-
-    <script>
-        let msg = "${sf}"
-        if(msg==="SF_OK") {
-            alert("회원가입이 되셨습니다.");
-        }
-    </script>
-
-
 </head>
 
 <body>
 
-<header>
+<div id="loginform">
+    <form action="<c:url value='/login'/>" method="post" onsubmit="return">
 
-    </header>
 
-    <form id="loginSection" action="<c:url value='/login'/>" method="post" onsubmit="return;">
+<%--        밑에 대신에 alert로 작성--%>
 
-    <%String msg =(String)request.getAttribute("msg");
-        if(msg!=null) {%>
-    <div id="error-message">
-    <label><%= msg %></label>
-    <% } %>
-    </div>
+<%--    <%String msg =(String)request.getAttribute("msg");--%>
+<%--        if(msg!=null) {%>--%>
+<%--    <div id="error-message">--%>
+<%--    <label><%= msg %></label>--%>
+<%--    <% } %>--%>
+<%--    </div>--%>
 
         <h1 id="loginTitle">Home Run Ball</h1>
     <div class="container">
-        <label>Email or ID</label>
-        <input value="${cookie.userID.value}" name="id" id="usernameInput" class="special-class" type="text" placeholder="Email or ID" required>
+        <label>Email</label>
+        <input value="${cookie.c_email.value}" name="c_email" class="special-class" type="text" placeholder="Email" required>
         <label>Password</label>
-        <input name="pwd" id="passwordInput" class="special-class" type="password" placeholder="Password" required>
+        <input class="special-class" type="password" name="c_pwd" placeholder="Password" required>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
 
         <div id="check">
-            <input type="checkbox" id="remember" name="rememberID" ${empty cookie.userID.value ? "":"checked"}> Remember Email or ID
+            <input type="checkbox" id="remember" name="rememberEmail" ${empty cookie.c_email.value ? "":"checked"}> Remember Email
         </div>
         <button type="submit">Continue</button>
-        <button type="button" class="subBtn">Forgot ID</button>
+        <button type="button" class="subBtn">Forgot Email</button>
         <button type="button" class="subBtn">Forgot pwd</button>
         <a href="/register/add"> <button type="button" id="signUpButton">Sign Up</button> </a>
-
-
     </div>
     </form>
+</div>
+
 
 <footer>
     </footer>
+
+
+<script>
+    let msg = "${signUp}"
+    if(msg==="signUpOk") {
+        alert("회원가입이 되셨습니다.");
+    }
+
+
+    let msg2 = "${loginTry}"
+    if(msg2==="loginFail") {
+        alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
+    }
+
+</script>
 
 </body>
 

@@ -26,8 +26,8 @@ public class CustDaoImplTest {
 
     @Test
     public void insertCust() throws Exception{
-        custDao.deleteAll();
-        CustDto custdto = new CustDto("1111", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
+//        custDao.deleteAll();
+        CustDto custdto = new CustDto("33313", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "", "");
         int rowCnt = custDao.insertCust(custdto);
 
         assertTrue(rowCnt==1);
