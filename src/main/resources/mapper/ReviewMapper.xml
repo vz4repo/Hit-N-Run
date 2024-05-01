@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.homerunball.review.repository.ReviewDao">
+<mapper namespace="com.homerunball.review.dao.ReviewDao">
   <select id="selectAllReviews" parameterType="int" resultType="HashMap">
         select * from revw where pd_id = #{pd_id};
   </select>

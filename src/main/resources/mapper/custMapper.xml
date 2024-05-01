@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.homerunball.cust.dao.custMapper">
+<mapper namespace="com.homerunball.customer.dao.custMapper">
 
 <!-- 회원가입   -->
     <insert id="insert" parameterType="CustDto">
-        insert into cust(c_email, c_pwd, c_nm, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr)
-        values (#{c_email}, #{c_pwd}, #{c_nm}, #{c_birth}, #{c_gnd}, #{c_phn}, #{c_zip}, #{c_road_a}, #{c_jibun_a}, #{c_det_a}, #{c_ext_a}, #{sms_agr}, #{email_agr})
+        insert into cust(c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, sms_agr, email_agr)
+        values (#{c_email}, #{c_pwd}, #{c_name}, #{c_birth}, #{c_gnd}, #{c_phn}, #{c_zip}, #{c_road_a}, #{c_jibun_a}, #{c_det_a}, #{c_ext_a}, #{sms_agr}, #{email_agr})
 
     </insert>
 
@@ -25,7 +25,7 @@
 <!--고객 정보 변경-->
     <update id="update" parameterType="CustDto">
         update cust
-        set c_pwd = #{c_pwd}, c_nm = #{c_nm}, c_birth = #{c_birth}, c_gnd = #{c_gnd}, c_phn = #{c_phn}, c_zip = #{c_zip}, c_road_a = #{c_road_a}, c_jibun_a = #{c_jibun_a}, c_det_a = #{c_det_a}, c_ext_a = #{c_ext_a}, sms_agr = #{sms_agr}, email_agr = #{email_agr} where c_email = #{c_email}
+        set c_pwd = #{c_pwd}, c_name = #{c_name}, c_birth = #{c_birth}, c_gnd = #{c_gnd}, c_phn = #{c_phn}, c_zip = #{c_zip}, c_road_a = #{c_road_a}, c_jibun_a = #{c_jibun_a}, c_det_a = #{c_det_a}, c_ext_a = #{c_ext_a}, sms_agr = #{sms_agr}, email_agr = #{email_agr} where c_email = #{c_email}
     </update>
 
 <!--고객 삭제-->
