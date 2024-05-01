@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.jungseok</groupId>
@@ -12,45 +13,35 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java-version>11</java-version>
-    <org.springframework-version>5.0.7.RELEASE</org.springframework-version>
-    <org.aspectj-version>1.6.10</org.aspectj-version>
+    <org.springframework-version>5.3.20</org.springframework-version>
+    <mysql.version>8.0.33</mysql.version>
+    <org.aspectj-version>1.9.7</org.aspectj-version>
     <org.slf4j-version>2.0.7</org.slf4j-version>
     <log4j2.version>2.20.0</log4j2.version>
     <jackson.version>2.16.1</jackson.version>
   </properties>
 
   <dependencies>
-    <!-- Test -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${org.springframework-version}</version>
-      <scope>test</scope>
-    </dependency>
-
     <!--  junit  -->
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<!--    <dependency>-->
+<!--      <groupId>org.junit.jupiter</groupId>-->
+<!--      <artifactId>junit-jupiter</artifactId>-->
+<!--      <version>5.8.2</version>-->
+<!--      <scope>test</scope>-->
+<!--    </dependency>-->
     <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.5.9</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
 
     <!-- Spring -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${org.springframework-version}</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -65,14 +56,14 @@
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${org.springframework-version}</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-    <dependency>
-      <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
       <version>${org.springframework-version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-test</artifactId>
+      <version>${org.springframework-version}</version>
+      <scope>test</scope>
     </dependency>
 
     <!-- AspectJ -->
@@ -81,33 +72,20 @@
       <artifactId>aspectjrt</artifactId>
       <version>${org.aspectj-version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>1.9.7</version>
+      <version>${org.aspectj-version}</version>
     </dependency>
 
-    <!-- Logging - slf4j -->
+    <!-- slf4j API -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${org.slf4j-version}</version>
     </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>${org.slf4j-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>${org.slf4j-version}</version>
-      <scope>runtime</scope>
-    </dependency>
-    
-    <!-- Logging - log4j2 -->
+
+    <!-- log4j2 Core, API -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
@@ -118,79 +96,35 @@
       <artifactId>log4j-api</artifactId>
       <version>${log4j2.version}</version>
     </dependency>
+
+    <!--  SLF4J to Log4j2 bridge  -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-web</artifactId>
-      <version>2.6.2</version>
+      <artifactId>log4j-slf4j2-impl</artifactId>
+      <version>${log4j2.version}</version>
     </dependency>
-
-<!--    <dependency>-->
-<!--      <groupId>log4j</groupId>-->
-<!--      <artifactId>log4j</artifactId>-->
-<!--      <version>1.2.15</version>-->
-<!--      <exclusions>-->
-<!--        <exclusion>-->
-<!--          <groupId>javax.mail</groupId>-->
-<!--          <artifactId>mail</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>javax.jms</groupId>-->
-<!--          <artifactId>jms</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>com.sun.jdmk</groupId>-->
-<!--          <artifactId>jmxtools</artifactId>-->
-<!--        </exclusion>-->
-<!--        <exclusion>-->
-<!--          <groupId>com.sun.jmx</groupId>-->
-<!--          <artifactId>jmxri</artifactId>-->
-<!--        </exclusion>-->
-<!--      </exclusions>-->
-<!--      <scope>runtime</scope>-->
-<!--    </dependency>-->
 
     <!-- @Inject -->
     <dependency>
-      <groupId>javax.inject</groupId>
-      <artifactId>javax.inject</artifactId>
-      <version>1</version>
+      <groupId>jakarta.inject</groupId>
+      <artifactId>jakarta.inject-api</artifactId>
+      <version>2.0.1</version>
     </dependency>
 
     <!-- Servlet -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
+      <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>javax.servlet.jsp</groupId>
-      <artifactId>jsp-api</artifactId>
-      <version>2.1</version>
+      <artifactId>javax.servlet.jsp-api</artifactId>
+      <version>2.3.3</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
-<!-- servlet 관련 확인 필요-->
-      <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>4.0.1</version>
-          <scope>provided</scope>
-      </dependency>
 
-      <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
-      <dependency>
-          <groupId>javax.servlet.jsp</groupId>
-          <artifactId>javax.servlet.jsp-api</artifactId>
-          <version>2.3.3</version>
-          <scope>provided</scope>
-      </dependency>
-    
     <!-- Validation -->
     <dependency>
       <groupId>javax.validation</groupId>
@@ -198,27 +132,16 @@
       <version>2.0.1.Final</version>
     </dependency>
 
-    <!-- Test -->
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${org.springframework-version}</version>
-      <scope>test</scope>
-    </dependency>
-
-
     <!--	DB Connection	-->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
       <version>${org.springframework-version}</version>
     </dependency>
-
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.33</version>
+      <version>${mysql.version}</version>
     </dependency>
 
     <!--	mybatis -->
@@ -258,24 +181,11 @@
     </dependency>
 
     <!--  jstl  -->
-<!--    <dependency>-->
-<!--      <groupId>jstl</groupId>-->
-<!--      <artifactId>jstl</artifactId>-->
-<!--      <version>1.2</version>-->
-<!--    </dependency>-->
-    <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api -->
-<!--    <dependency>-->
-<!--      <groupId>javax.servlet.jsp.jstl</groupId>-->
-<!--      <artifactId>javax.servlet.jsp.jstl-api</artifactId>-->
-<!--      <version>1.2.2</version>-->
-<!--    </dependency>-->
-    <!-- https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api -->
     <dependency>
-      <groupId>jakarta.servlet.jsp.jstl</groupId>
-      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-      <version>3.0.0</version>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.taglibs</groupId>
       <artifactId>taglibs-standard-impl</artifactId>
@@ -298,12 +208,6 @@
       <artifactId>tiles-extras</artifactId>
       <version>3.0.8</version>
     </dependency>
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.13.1</version>
-          <scope>test</scope>
-      </dependency>
   </dependencies>
 
   <build>
@@ -315,27 +219,15 @@
     </resources>
     <plugins>
       <plugin>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
-        <configuration>
-          <additionalProjectnatures>
-            <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
-          </additionalProjectnatures>
-          <additionalBuildcommands>
-            <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
-          </additionalBuildcommands>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>3.8.1</version>
         <configuration>
           <source>${java-version}</source>
           <target>${java-version}</target>
-          <compilerArgument>-Xlint:all</compilerArgument>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+          </compilerArgs>
           <showWarnings>true</showWarnings>
           <showDeprecation>true</showDeprecation>
         </configuration>

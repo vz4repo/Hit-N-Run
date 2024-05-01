@@ -1,6 +1,6 @@
 package com.homerunball.admin.product.controller;
 
-import com.homerunball.admin.product.ProductDto;
+import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;

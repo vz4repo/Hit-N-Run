@@ -1,6 +1,6 @@
 package com.homerunball.admin.product.service;
 
-import com.homerunball.admin.product.ProductDto;
+import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

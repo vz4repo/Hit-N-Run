@@ -22,9 +22,9 @@
     <!--제품 한 개를 prd(제품) 테이블에 삽입한다.-->
     <insert id="insert" parameterType="ProductDto">
         insert into prd
-            (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_nm,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
+            (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_name,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
         values
-            (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_nm}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
+            (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_name}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
     </insert>
 
     <!--제품 한 개를 prd(제품) 테이블에서 선택한다.-->
