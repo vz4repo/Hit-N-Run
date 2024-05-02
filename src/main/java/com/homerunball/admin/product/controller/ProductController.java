@@ -185,7 +185,7 @@ public class ProductController {
             /*선택된 제품들을 다시 진열한다.*/
             productService.showProduct(selectedProduct);
 
-            /*제품이 정상적으로 진열되면 productList페이지에서 알려준다.*/
+            /*제품이 정상적으로 진열되면 showHiddenProductList페이지에서 알려준다.*/
             rattr.addFlashAttribute("msg", "제품이 정상적으로 진열되었습니다.");
         } catch (Exception e) {
             /*에러가 발생하면 에러페이지로 이동한다.*/
@@ -194,7 +194,7 @@ public class ProductController {
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
         }
-        return "redirect:/admin/product/list";
+        return "redirect:/admin/product/showHiddenProductList";
     }
 
     /*진열하고 있지 않은 제품들 중에서 선택된 제품들을 삭제한다.*/
