@@ -150,13 +150,15 @@ public class ProductController {
         return "/admin/product/showDeleteProduct";
     }
 
-
+    /*진열이 제외된 제품들을 다시 진열한다.*/
     @PostMapping("/restoreExcludedProduct")
     public String restoreExcludedProduct(ProductDto productDto, Model m) {
         try {
-            System.out.println("productDto.getPd_id() = " + productDto.getPd_id());
+            /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
             String pdIds = productDto.getPd_id();
+            /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
             List<String> selectedProduct = List.of(pdIds.split(","));
+            /*선택된 제품들을 다시 진열한다.*/
             productService.showProduct(selectedProduct);
         } catch (Exception e) {
             e.printStackTrace();
