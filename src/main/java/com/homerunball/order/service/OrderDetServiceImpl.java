@@ -18,12 +18,12 @@ public class OrderDetServiceImpl implements OrderDetService {
     }
 
     @Override
-    public int delete(int od_det_seqnum, String od_id) throws Exception{
-        return orderdetDao.delete(od_det_seqnum,od_id);
+    public int delete(int od_det_seqnum, int od_id, String pd_id, String pd_clsf_cd) throws Exception{
+        return orderdetDao.delete(od_det_seqnum,od_id,pd_id,pd_clsf_cd);
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, String od_id) throws Exception {
+    public OrderDetDto select(int od_det_seqnum, int od_id) throws Exception {
 
         System.out.println(od_det_seqnum);
 

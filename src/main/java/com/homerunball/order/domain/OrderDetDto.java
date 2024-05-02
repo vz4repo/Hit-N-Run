@@ -12,7 +12,7 @@ public class OrderDetDto {
     private String pd_name;
     private Integer slg_prc;
     private Integer od_qty;
-    private String divry_sts_cd;
+    private String dlvry_stat_cd;
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
@@ -21,7 +21,7 @@ public class OrderDetDto {
 
     public OrderDetDto(){}
 
-    public OrderDetDto(Integer od_det_seqnum, Integer od_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer slg_prc, Integer od_qty, String divry_sts_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
+    public OrderDetDto(Integer od_det_seqnum, Integer od_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer slg_prc, Integer od_qty, String dlvry_stat_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
         this.od_det_seqnum = od_det_seqnum;
         this.od_id = od_id;
         this.pd_id = pd_id;
@@ -30,7 +30,7 @@ public class OrderDetDto {
         this.pd_name = pd_name;
         this.slg_prc = slg_prc;
         this.od_qty = od_qty;
-        this.divry_sts_cd = divry_sts_cd;
+        this.dlvry_stat_cd = dlvry_stat_cd;
         this.frst_reg_dt = frst_reg_dt;
         this.frst_reg_id = frst_reg_id;
         this.last_mod_dt = last_mod_dt;
@@ -89,7 +89,7 @@ public class OrderDetDto {
         return slg_prc;
     }
 
-    public void setSls_prc(Integer sls_prc) {
+    public void setSlg_prc(Integer slg_prc) {
         this.slg_prc = slg_prc;
     }
 
@@ -101,12 +101,12 @@ public class OrderDetDto {
         this.od_qty = od_qty;
     }
 
-    public String getDivry_sts_cd() {
-        return divry_sts_cd;
+    public String getDivry_stat_cd() {
+        return dlvry_stat_cd;
     }
 
-    public void setDivry_sts_cd(String divry_sts_cd) {
-        this.divry_sts_cd = divry_sts_cd;
+    public void setDlvry_stat_cd(String dlvry_stat_cd) {
+        this.dlvry_stat_cd = dlvry_stat_cd;
     }
 
     public Date getFrst_reg_dt() {
@@ -147,12 +147,12 @@ public class OrderDetDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OrderDetDto that = (OrderDetDto) o;
-        return Objects.equals(od_det_seqnum, that.od_det_seqnum) && Objects.equals(od_id, that.od_id) && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(od_dt, that.od_dt) && Objects.equals(pd_name, that.pd_name) && Objects.equals(slg_prc, that.slg_prc) && Objects.equals(od_qty, that.od_qty) && Objects.equals(divry_sts_cd, that.divry_sts_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
+        return Objects.equals(od_det_seqnum, that.od_det_seqnum) && Objects.equals(od_id, that.od_id) && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(od_dt, that.od_dt) && Objects.equals(pd_name, that.pd_name) && Objects.equals(slg_prc, that.slg_prc) && Objects.equals(od_qty, that.od_qty) && Objects.equals(dlvry_stat_cd, that.dlvry_stat_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, divry_sts_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+        return Objects.hash(od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, dlvry_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
     }
 
     @Override
@@ -166,7 +166,7 @@ public class OrderDetDto {
                 ", pd_name='" + pd_name + '\'' +
                 ", slg_prc=" + slg_prc +
                 ", od_qty=" + od_qty +
-                ", divry_sts_cd='" + divry_sts_cd + '\'' +
+                ", dlvry_stat_cd='" + dlvry_stat_cd + '\'' +
                 ", frst_reg_dt=" + frst_reg_dt +
                 ", frst_reg_id='" + frst_reg_id + '\'' +
                 ", last_mod_dt=" + last_mod_dt +

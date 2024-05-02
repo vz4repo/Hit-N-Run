@@ -9,7 +9,7 @@
     </select>
 
     <delete id="delete" parameterType="map" >
-        delete from ord_det where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id}
+        delete from ord_det where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id} and pd_id = #{pd_id} and pd_clsf_cd = #{pd_clsf_cd}
     </delete>
 
     <delete id="deleteAll">
@@ -68,7 +68,7 @@
         ,   pd_name         = #{pd_name}
         ,   slg_prc         = #{slg_prc}
         ,   od_qty          = #{od_qty}
-        ,   dlvry_stat_cd   = #{dlvry_sts_cd}
+        ,   dlvry_stat_cd   = #{dlvry_stat_cd}
         ,   frst_reg_dt     = #{frst_reg_dt}
         ,   frst_reg_id     = #{frst_reg_id}
         ,   last_mod_dt     = #{last_mod_dt}
@@ -77,6 +77,9 @@
         order by od_id desc;
     </update>
 
+    <select id="findById" parameterType="string" resultType="OrderDetDto">
+        SELECT * FROM ord_det WHERE od_id = #{od_Id}
+    </select>
 
 
 

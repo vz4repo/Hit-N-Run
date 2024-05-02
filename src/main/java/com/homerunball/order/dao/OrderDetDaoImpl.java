@@ -13,7 +13,7 @@ import java.util.Map;
 public class OrderDetDaoImpl implements OrderDetDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.ord.dao.OrderDetMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrderDetMapper.";
 
     /* 리스트 수를 센다*/
     @Override
@@ -23,10 +23,12 @@ public class OrderDetDaoImpl implements OrderDetDao {
 
     /*데이터를 삭제한다*/
     @Override
-    public int delete(int od_det_seqnum, String od_id) throws Exception {
+    public int delete(int od_det_seqnum, int od_id, String pd_id, String pd_clsf_cd) throws Exception {
         Map map = new HashMap();
         map.put("od_det_seqnum", od_det_seqnum);
         map.put("od_id", od_id);
+        map.put("pd_id", pd_id);
+        map.put("pd_clsf_cd", pd_clsf_cd);
         return session.delete(namespace+"delete", map);
     }
 
@@ -36,7 +38,7 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, String od_id) throws Exception {
+    public OrderDetDto select(int od_det_seqnum, int od_id) throws Exception {
 
         /*System.out.println("asdf" + od_det_seqnum);*/
 
@@ -49,11 +51,16 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
-    public int insert(OrderDetDto dto) throws Exception {
-        return session.insert(namespace+"insert", dto);
+    public int insert(OrderDetDto ord_det) throws Exception {
+        return session.insert(namespace+"insert", ord_det);
     }
     @Override
-    public int update(OrderDetDto dto) throws Exception {
-        return session.update(namespace+"update", dto);
+    public int update(OrderDetDto ord_det) throws Exception {
+        return session.update(namespace+"update", ord_det);
+    }
+
+    @Override
+    public OrderDetDto findById(int od_id) {
+        return session.selectOne("OrderDetMapper.findById", od_id);
     }
 }

@@ -1,5 +1,6 @@
 package com.homerunball.order.dao;
 
+import com.homerunball.customer.domain.CustDto;
 import com.homerunball.order.domain.OrdDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,12 @@ import java.util.Map;
 public class OrdDaoImpl implements OrdDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.ord.dao.OrdMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrdMapper.";
 
+    @Autowired
+    public String getcid() throws Exception{
+        return session.selectOne(namespace+"getcid");
+    }
     /* 리스트 수를 센다*/
     @Override
     public int count() throws Exception {
@@ -23,7 +28,7 @@ public class OrdDaoImpl implements OrdDao {
 
     /*데이터를 삭제한다*/
     @Override
-    public int delete(String od_id, String c_id) throws Exception {
+    public int delete(Integer od_id, String c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -38,7 +43,7 @@ public class OrdDaoImpl implements OrdDao {
 
     /*od_id 한개를 불러온다*/
     @Override
-    public OrdDto select(String od_id, String c_id) throws Exception {
+    public OrdDto select(Integer od_id, String c_id) throws Exception {
 
         System.out.println("asdf" + od_id);
 
@@ -53,22 +58,21 @@ public class OrdDaoImpl implements OrdDao {
 
 
     @Override
-    public List<OrdDto> selectOdId(String od_id) throws Exception {
+    public List<OrdDto> selectOdId(Integer od_id) throws Exception {
         return session.selectList(namespace+"selectOdId",od_id);
     }
 
     /* od_id 한개를 입력해준다*/
     @Override
-    public int insert(OrdDto od_id) throws Exception {
-        return session.insert(namespace+"insert", od_id);
+    public int insert(OrdDto ord) throws Exception {
+        return session.insert(namespace+"insert", ord);
     }
 //        OrdDto select(String od_id, String c_id) throws Exception; // T selectOne(String statement, Object parameter)
 
     /*주문 리스트를 업데이트한다*/
     @Override
-    public int update(OrdDto dto) throws Exception {
-        return session.update(namespace+"update", dto);
+    public int update(OrdDto ord) throws Exception {
+        return session.update(namespace+"update", ord);
     } // int update(String statement, Object parameter)
-
 
 }

@@ -7,9 +7,9 @@ import java.util.List;
 public interface OrdService {
     int getcount() throws Exception;
 
-    int remove(String od_id, String c_id) throws Exception;
+    int remove(Integer od_id, String c_id) throws Exception;
 
-    OrdDto read(String od_id, String c_id) throws Exception;
+    OrdDto read(Integer od_id, String c_id) throws Exception;
 
     int writer(OrdDto ord) throws Exception;
 
