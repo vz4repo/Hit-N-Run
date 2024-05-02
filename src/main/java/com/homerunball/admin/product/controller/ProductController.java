@@ -72,9 +72,9 @@ public class ProductController {
         productDto.setCtg(category);
 
         /* 이미지의 경우 경로를 지정해준다. */
-        String fileRoot = "src/main/resources/img/" + productDto.getPd_type_cd();
-        productDto.setMn_img_fn(fileRoot + "/mainImg/" + productDto.getMn_img_fn());
-        productDto.setDet_img_fn(fileRoot + "/detailImg/" + productDto.getDet_img_fn());
+        String fileRoot = productDto.getPd_type_cd();
+        productDto.setMn_img_fn(fileRoot + productDto.getMn_img_fn());
+        productDto.setDet_img_fn(fileRoot + productDto.getDet_img_fn());
 
         try {
             /*

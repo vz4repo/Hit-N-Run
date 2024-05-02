@@ -3,7 +3,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        <%@include file="/resources/css/adminMenu.css"%>
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -62,7 +64,8 @@
 </head>
 <body>
 <jsp:include page="../adminMenu.jsp" flush="false" />
-<h1>제품 등록 화면</h1>
+<div class="main">
+    <h1>제품 등록 화면</h1>
     <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
         <div class="product_register">
             <div class="product_content">
@@ -441,6 +444,7 @@
             <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
         </div>
     </form>
+</div>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
