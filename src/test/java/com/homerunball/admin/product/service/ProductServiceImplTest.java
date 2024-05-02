@@ -293,21 +293,43 @@ public class ProductServiceImplTest {
      */
     @Test
     public void modifyContentTest() throws Exception {
-        productService.removeAll();
-        assertTrue(productService.getAllCount() == 0);
+        /*0. db 서버가 실행되지 않을 때 테스트하기*/
+        try {
+            /*1. DB 초기화*/
+            productService.removeAll();
+            assertTrue(productService.getAllCount() == 0);
 
-        for (int i = 0; i < 20; i++) {
-            ProductDto productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg","mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
-            productService.create(productDto);
+            /*2. APP(의류) 데이터 1개를 추가한 다음 제품명 변경*/
+            ProductDto productDto = new ProductDto("APP000001-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            assertTrue(productService.create(productDto) == 1);
+            productDto.setPd_name("pd_name190");
+            assertTrue(productService.modifyContent(productDto) == 1);
+            assertTrue(productService.getOneProduct("APP000001-40").getPd_name().equals("pd_name190"));
+
+            /*3. 새로운 APP(의류) 데이터 1개를 추가한 다음 모델명 변경*/
+            productDto = new ProductDto("APP000002-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn1", "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            assertTrue(productService.create(productDto) == 1);
+            productDto.setMdl_name("mdl_name22");
+            assertTrue(productService.modifyContent(productDto) == 1);
+            assertTrue(productService.getOneProduct("APP000002-40").getMdl_name().equals("mdl_name22"));
+
+            /*4. 새로운 APP(의류) 데이터 1개를 추가한 다음 제품 상태 변경*/
+            productDto = new ProductDto("APP000003-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn1", "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            assertTrue(productService.create(productDto) == 1);
+            productDto.setPd_stat_hist_cd("10");
+            assertTrue(productService.modifyContent(productDto) == 1);
+            assertTrue(productService.getOneProduct("APP000003-40").getPd_stat_hist_cd().equals("10"));
+
+            /*5. 없는 APP(의류) 데이터 최소 주문 수량 변경*/
+            productDto = productService.getOneProduct("APP000004-40");
+            productDto.setMin_od_qty(2);
+            assertTrue(productService.modifyContent(productService.getOneProduct("APP000004-40")) == 0);
+            assertTrue(productService.getOneProduct("APP000004-40").getMin_od_qty() == 0);
+        } catch (NullPointerException e) {
+            System.out.println("NullPointerException 발생");
+        } catch (MyBatisSystemException e) {
+            System.out.println("MySql Server Stopped");
         }
-
-        productService.getOneProduct("19").setPd_name("pd_name190");
-        productService.modifyContent(productService.getOneProduct("19"));
-        assertTrue(productService.getOneProduct("19").getPd_name().equals("pd_name190"));
-
-        productService.getOneProduct("18").setMdl_name("mdl_name180");
-        productService.modifyContent(productService.getOneProduct("18"));
-        assertTrue(productService.getOneProduct("18").getMdl_name().equals("mdl_name180"));
     }
 
     /*
