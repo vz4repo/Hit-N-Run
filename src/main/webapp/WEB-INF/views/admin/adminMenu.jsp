@@ -8,7 +8,7 @@
     <li>제품 관리</li>
     <ul>
         <li><a href="<c:url value='/admin/product/manage'/>">제품 정보 일괄 변경</a></li>
-        <li><a href="<c:url value='/admin/product/deleteProductList'/>">진열 제외 제품 목록</a></li>
+        <li><a href="<c:url value='/admin/product/showHiddenProductList'/>">진열 제외 제품 목록</a></li>
     </ul>
     <li><a>재고 관리</a></li>
 

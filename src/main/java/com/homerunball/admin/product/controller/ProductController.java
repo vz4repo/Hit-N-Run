@@ -132,22 +132,22 @@ public class ProductController {
     }
 
     /*진열하지 않은 제품들의 목록을 보여준다.*/
-    @GetMapping("/deleteProductList")
-    public String deleteProductList(Model m) {
+    @GetMapping("/showHiddenProductList")
+    public String showHiddenProductList(Model m) {
         try {
             /*진열하지 않은 제품만 선택하여 deleteProductList에 리스트로 저장한다.*/
-            List<ProductDto> deleteProductList = productService.getAllOutProducts();
+            List<ProductDto> hiddenProductList = productService.getAllOutProducts();
 
             /*진열하지 않은 제품의 수를 세어서 deleteProductCount에 저장한다.*/
-            int deleteProductCount = deleteProductList.size();
-            m.addAttribute("deleteProductList", deleteProductList);
-            m.addAttribute("deleteProductCount", deleteProductCount);
+            int hiddenProductCount = hiddenProductList.size();
+            m.addAttribute("hiddenProductList", hiddenProductList);
+            m.addAttribute("hiddenProductCount", hiddenProductCount);
         } catch (Exception e) {
             /*에러가 발생하면 에러 페이지로 이동한다.*/
             e.printStackTrace();
             return "errorPage";
         }
-        return "/admin/product/showDeleteProduct";
+        return "/admin/product/showHiddenProduct";
     }
 
     /*진열이 제외된 제품들을 다시 진열한다.*/
@@ -160,6 +160,23 @@ public class ProductController {
             List<String> selectedProduct = List.of(pdIds.split(","));
             /*선택된 제품들을 다시 진열한다.*/
             productService.showProduct(selectedProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "errorPage";
+        }
+        return "redirect:/admin/product/list";
+    }
+
+    /*진열하고 있지 않은 제품들 중에서 선택된 제품들을 삭제한다.*/
+    @PostMapping("/deleteExcludedProduct")
+    public String deleteExcludedProduct(ProductDto productDto, Model m) {
+        try {
+            /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
+            String pdIds = productDto.getPd_id();
+            /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
+            List<String> selectedProduct = List.of(pdIds.split(","));
+            /*선택된 제품들을 삭제한다.*/
+            productService.removeSelectedProduct(selectedProduct);
         } catch (Exception e) {
             e.printStackTrace();
             return "errorPage";
