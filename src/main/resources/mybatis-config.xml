@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <typeAlias alias="CustDto" type="com.homerunball.cust.dto.CustDto"/>
+    <typeAlias alias="CustDto" type="com.homerunball.customer.dto.CustDto"/>
     <typeAlias alias="CartDto" type="com.homerunball.cart.domain.CartDto"/>
     <typeAlias alias="ProductDto" type="com.homerunball.admin.product.ProductDto"/>
-    <typeAlias alias="ordDto" type="com.homerunball.ord.domain.OrdDto"/>
-    <typeAlias alias="OrderDetDto" type="com.homerunball.ord.domain.OrderDetDto"/>
-<!--    <typeAlias alias="OrderStatDto" type="com.homerunball.ord.domain.OrderStatDto"/>-->
-<!--    <typeAlias alias="OrderHistDto" type="com.homerunball.ord.domain.OrderHistDto"/>-->
+    <typeAlias alias="ordDto" type="com.homerunball.order.domain.OrdDto"/>
+    <typeAlias alias="OrderDetDto" type="com.homerunball.order.domain.OrderDetDto"/>
+<!--    <typeAlias alias="OrderStatDto" type="com.homerunball.order.domain.OrderStatDto"/>-->
+<!--    <typeAlias alias="OrderHistDto" type="com.homerunball.order.domain.OrderHistDto"/>-->
   </typeAliases>
 </configuration>

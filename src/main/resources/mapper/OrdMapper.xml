@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.homerunball.ord.dao.OrdMapper">
+<mapper namespace="com.homerunball.order.dao.OrdMapper">
 
     <select id="count" resultType="int">
         select count(*) from ord
