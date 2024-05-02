@@ -1,4 +1,4 @@
-insert stk(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd) values('APP000001-10', 'M', 10, 0, 2, 2, 1, 12, '20240325', '20240327', '저기야구용품', 40000, 50000, 50000, '4A');
+insert STK(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd) values('APP000001-10', 'M', 10, 0, 2, 2, 1, 12, '20240325', '20240327', '저기야구용품', 40000, 50000, 50000, '4A');
 insert stk(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd) values('APP000001-10', 'L', 20, 3, 2, 1, 1, 25, '20240325', '20240327', '거기야구용품', 40000, 50000, 50000, '4A');
 insert stk(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd) values('APP000001-10', 'XL', 15, 1, 2, 1, 0, 18, '20240325', '20240327', '어디야구용품', 40000, 50000, 50000, '4A');
 
