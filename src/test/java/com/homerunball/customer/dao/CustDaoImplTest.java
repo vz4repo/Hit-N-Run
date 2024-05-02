@@ -1,6 +1,7 @@
 package com.homerunball.customer.dao;
 
-import com.homerunball.customer.dto.CustDto;
+import com.homerunball.customer.dao.CustDao;
+import com.homerunball.customer.domain.CustDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class CustDaoImplTest {
 
     @Test
     public void insertCust() throws Exception{
-        custDao.deleteAll();
-        CustDto custdto = new CustDto("1111", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
+//        custDao.deleteAll();
+        CustDto custdto = new CustDto("33313", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "", "");
         int rowCnt = custDao.insertCust(custdto);
 
         assertTrue(rowCnt==1);
@@ -46,7 +47,7 @@ public class CustDaoImplTest {
 
         /*고객 비번 변경*/
         custdto.setC_pwd("2222");
-        custdto.setC_nm("bbb");
+        custdto.setC_name("bbb");
 
         /*변경된 정보 DB에 저장*/
         rowCnt = custDao.updateCust(custdto);

@@ -1,6 +1,6 @@
 package com.homerunball.customer.dao;
 
-import com.homerunball.customer.dto.CustDto;
+import com.homerunball.customer.domain.CustDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class CustDaoImpl implements CustDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.cust.dao.custMapper.";
+    private static String namespace = "com.homerunball.customer.dao.custMapper.";
 
     @Override
     public int deleteCust(String c_email) {

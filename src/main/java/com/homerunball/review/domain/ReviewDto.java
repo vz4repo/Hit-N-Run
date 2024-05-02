@@ -1,4 +1,4 @@
-package com.homerunball.review.dto;
+package com.homerunball.review.domain;
 
 import java.time.LocalDateTime;
 

@@ -1,5 +1,5 @@
 package com.homerunball.customer.service;
-import com.homerunball.customer.dto.CustDto;
+import com.homerunball.customer.domain.CustDto;
 
 public interface CustService {
 
@@ -8,5 +8,8 @@ public interface CustService {
     CustDto read(String c_email);
 
 }
+
+
+
 
 
