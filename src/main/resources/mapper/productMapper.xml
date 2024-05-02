@@ -12,11 +12,21 @@
         delete from prd
     </delete>
 
-    <!--지정된 pd_id만을 삭제한다.-->
+    <!--지정된 pd_id 하나를 삭제한다.-->
     <delete id="delete" parameterType="map">
         delete
         from prd
         where pd_id = #{pd_id}
+    </delete>
+
+    <!--지정한 제품을 여러 개를 삭제한다.-->
+    <delete id="deleteSelected" parameterType="java.util.List">
+        delete
+        from prd
+        where pd_id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </delete>
 
     <!--제품 한 개를 prd(제품) 테이블에 삽입한다.-->
@@ -91,13 +101,6 @@
         </set>
         where pd_id = #{pd_id}
     </update>
-
-<!--    &lt;!&ndash; 제품 상태 변경 쿼리 &ndash;&gt;-->
-<!--    <update id="updateStatus" parameterType="ProductDto">-->
-<!--        update prd-->
-<!--        set pd_stat_hist_cd = #{pd_stat_hist_cd}-->
-<!--        where pd_id = #{pd_id};-->
-<!--    </update>-->
 
     <!-- 조회수 증가 쿼리 --> 
     <update id="increaseHitCnt" parameterType="ProductDto">

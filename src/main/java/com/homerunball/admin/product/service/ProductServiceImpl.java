@@ -24,10 +24,16 @@ public class ProductServiceImpl implements ProductService {
         return productDao.deleteAll();
     }
 
-    /* 지정된 pd_id만을 삭제한다. */
+    /* 지정한 제품 하나를 삭제한다. */
     @Override
     public int remove(String pd_id) throws Exception {
         return productDao.delete(pd_id);
+    }
+
+    /* 지정한 제품을 여러 개를 삭제한다. */
+    @Override
+    public int removeSelectedProduct(List<String> pd_id) throws Exception {
+        return productDao.deleteSelected(pd_id);
     }
 
     /* 제품 하나를 생성한다. */

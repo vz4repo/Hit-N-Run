@@ -112,7 +112,7 @@ public class ProductDaoImplTest {
         }
     }
 
-    /*ProductDaoImpl의 delete 테스트하기*/
+    /*지정한 제품 하나를 삭제하는 delete 테스트하기*/
     @Test
     public void deleteTest() throws Exception {
         /*0. db 서버가 실행되지 않을 때 테스트하기*/
@@ -153,6 +153,47 @@ public class ProductDaoImplTest {
                 assertTrue(productDao.delete(i+"") == 0);
             }
             assertTrue(productDao.countAll() == 50);
+        } catch (MyBatisSystemException e) {
+            System.out.println("MySql Server Stopped");
+        }
+    }
+
+    /*지정한 제품을 여러 개를 삭제하는 deleteSelected 테스트하기*/
+    @Test
+    public void deleteSelectedTest() throws Exception {
+        /*0. db 서버가 실행되지 않을 때 테스트하기*/
+        try {
+            /*1. DB 초기화*/
+            productDao.deleteAll();
+            assertTrue(productDao.countAll() == 0);
+
+            /*2. 1개 추가한 다음 deleteSelected로 데이터 지우기*/
+            ProductDto productDto = new ProductDto("APP000001-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            productDao.insert(productDto);
+            assertTrue(productDao.deleteSelected(List.of("APP000001-40")) == 1);
+
+            /*3. 2개 추가한 다음 두 개 모두 deleteSelected를 사용해서 한 번에 지우기*/
+            productDto = new ProductDto("APP000001-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            assertTrue(productDao.insert(productDto) == 1);
+            productDto = new ProductDto("APP000002-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+            assertTrue(productDao.insert(productDto) == 1);
+            assertTrue(productDao.countAll()==2);
+            assertTrue(productDao.deleteSelected(List.of("APP000001-40", "APP000002-40")) == 2);
+
+            /*4. 100개 추가*/
+            for (int i = 0; i < 100; i++) {
+                productDto = new ProductDto(i+"", "pd_name"+i, "mdl_name"+i, "qlt_cd"+i, "ctg", "mn_img_fn"+i, "det_img_fn"+i, "pd_ad_cmt"+i, "pd_smr_dsc"+i, "pd_det_dsc"+1, i, i, 'N', "20240428", "20240414", "og_pd_num"+i, "origin", "mfr", "srs_id"+i, "ADT", "player_nm", "mtrl", "season", 100*i, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
+                assertTrue(productDao.insert(productDto) == 1);
+            }
+            assertTrue(productDao.countAll() == 100);
+
+            /*5. 존재하는 데이터 10개 삭제 후 개수 확인*/
+            assertTrue(productDao.deleteSelected(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9")) == 10);
+            assertTrue(productDao.countAll() == 90);
+
+            /*6. 존재하지 않는 데이터 10개 삭제 후 개수 확인*/
+            assertTrue(productDao.deleteSelected(List.of("100", "101", "102", "103", "104", "105", "106", "107", "108", "109")) == 0);
+            assertTrue(productDao.countAll() == 90);
         } catch (MyBatisSystemException e) {
             System.out.println("MySql Server Stopped");
         }
