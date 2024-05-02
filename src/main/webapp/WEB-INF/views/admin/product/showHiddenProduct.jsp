@@ -16,13 +16,6 @@
         alert("<%= msg %>");
     </script>
     <% } %>
-    <script>
-        // 페이지 로딩이 완료되면 실행될 함수
-        window.onload = function() {
-            // alert 창 제목 변경
-            document.title = "관리자 메시지";
-        };
-    </script>
 </head>
 <body>
     <jsp:include page="../adminMenu.jsp" flush="false" />
