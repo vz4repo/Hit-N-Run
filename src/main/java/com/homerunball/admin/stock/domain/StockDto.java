@@ -103,7 +103,7 @@ public class StockDto {
     }
 
     public Integer getOdpmt_stk() {
-        return odpmt_stk;
+        return nml_stk_qty+rt_stk_qty+rgn_stk_qty;
     }
 
     public void setOdpmt_stk(Integer odpmt_stk) {

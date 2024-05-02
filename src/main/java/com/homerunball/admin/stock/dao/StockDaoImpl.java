@@ -5,7 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class StockDaoImpl implements StockDao {
@@ -24,7 +26,10 @@ public class StockDaoImpl implements StockDao {
     /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
     @Override
     public StockDto selectStk(String pd_id, String pd_clsf_cd) throws Exception {
-        return session.selectOne(namespace+"selectStk");
+        Map map = new HashMap();
+        map.put("pd_id", pd_id);
+        map.put("pd_clsf_cd", pd_clsf_cd);
+        return session.selectOne(namespace+"selectStk", map);
     }
 
     /*재고 전체 수량 카운트*/
@@ -42,24 +47,27 @@ public class StockDaoImpl implements StockDao {
     /*재고 1개 삭제(지정된 제품ID, 사이즈코드 선택)*/
     @Override
     public int delete(String pd_id, String pd_clsf_cd) throws Exception {
-        return session.delete(namespace+"delete");
+        Map map = new HashMap();
+        map.put("pd_id", pd_id);
+        map.put("pd_clsf_cd", pd_clsf_cd);
+        return session.delete(namespace+"delete", map);
     }
 
     /*재고 하나 추가*/
     @Override
-    public int insert(StockDto stockDto) throws Exception {
-        return session.insert(namespace+"insert");
+    public int insertStk(StockDto stockDto) throws Exception {
+        return session.insert(namespace+"insertStk", stockDto);
     }
 
     /*재고의 내용을 업데이트 한다.*/
     @Override
     public int update(StockDto stockDto) throws Exception {
-        return session.update(namespace+"update");
+        return session.update(namespace+"update", stockDto);
     }
 
     /*재고의 상태를 업데이트 한다.*/
     @Override
     public int updateStatus(StockDto stockDto) throws Exception{
-        return session.update(namespace+"updateStatus");
+        return session.update(namespace+"updateStatus", stockDto);
     }
 }

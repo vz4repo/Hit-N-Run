@@ -21,7 +21,7 @@ public interface StockDao {
     int delete(String pd_id, String pd_clsf_cd) throws Exception;
 
     /*재고 하나 추가*/
-    int insert(StockDto stockDto) throws Exception;
+    int insertStk(StockDto stockDto) throws Exception;
 
     /*재고의 내용을 업데이트 한다.*/
     int update(StockDto stockDto) throws Exception;

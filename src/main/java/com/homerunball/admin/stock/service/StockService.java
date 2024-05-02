@@ -17,6 +17,12 @@ public interface StockService {
     /*재고를 1개 추가하기*/
     int create(StockDto stockDto) throws Exception;
 
+    /*재고 삽입 시 중복을 확인하는 로직*/
+    void validateDuplicateStock(StockDto stockDto) throws Exception;
+
+    /*재고 삽입 시 필수값 누락 확인*/
+    void validateNotNullStock(StockDto stockDto) throws Exception;
+
     /*모든 재고를 삭제하기*/
     int removeAll() throws Exception;
 
