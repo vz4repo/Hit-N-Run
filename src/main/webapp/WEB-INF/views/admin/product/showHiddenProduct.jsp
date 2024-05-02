@@ -10,6 +10,19 @@
         }
     </style>
     <title>삭제된 제품 목록</title>
+    <% String msg = (String) request.getAttribute("msg"); %>
+    <% if (msg != null && !msg.isEmpty()) { %>
+    <script>
+        alert("<%= msg %>");
+    </script>
+    <% } %>
+    <script>
+        // 페이지 로딩이 완료되면 실행될 함수
+        window.onload = function() {
+            // alert 창 제목 변경
+            document.title = "관리자 메시지";
+        };
+    </script>
 </head>
 <body>
     <jsp:include page="../adminMenu.jsp" flush="false" />

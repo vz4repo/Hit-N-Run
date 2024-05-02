@@ -59,6 +59,13 @@
         alert("<%= msg %>");
     </script>
     <% } %>
+    <script>
+        // 페이지 로딩이 완료되면 실행될 함수
+        window.onload = function() {
+            // alert 창 제목 변경
+            document.title = "관리자 메시지";
+        };
+    </script>
 </head>
 <body>
 <jsp:include page="../adminMenu.jsp" flush="false" />
@@ -442,13 +449,15 @@
         </div>
     </form>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#searchProductIdBtn").on("click", function () {
-                let form = $("form");
-                let pd_type=document.getElementById("main");
-            });
+            // $("#searchProductIdBtn").on("click", function () {
+            //     let form = $("form");
+            //     let pd_type=document.getElementById("main");
+            // });
 
+            /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
             $("#adComment").keyup(function(e) {
                 let content = $(this).val();
                 $("#adLengthCheck").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
@@ -459,6 +468,7 @@
                 }
             });
 
+            /*제품 요약의 텍스트 길이가 200자가 넘지 않도록 하는 함수*/
             $("#textSummary").keyup(function(e) {
                 let content = $(this).val();
                 $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
@@ -469,6 +479,7 @@
                 }
             });
 
+            /*상품 상세 요약의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
             $("#textDescription").keyup(function(e) {
                 let content = $(this).val();
                 $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
@@ -477,16 +488,6 @@
                     $(this).val(content.substring(0, 5000));
                     $('#descriptionLengthCheck').text("[0 / 5000]");
                 }
-            });
-
-            /* yesLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 있게 변한다.*/
-            $("#yesLimit").on("click", function() {
-                $("#maxQty").removeAttr("disabled");
-            });
-
-            /* noLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 없게 변한다. */
-            $("#noLimit").on("click", function() {
-                $("#maxQty").attr("disabled", "disabled");
             });
 
             /* cancelBtn을 클릭하면 admin/main으로 이동한다. */
