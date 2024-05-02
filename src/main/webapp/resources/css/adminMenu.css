@@ -20,7 +20,7 @@ body {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
+    color: lightgrey;
     display: block;
     border: none;
     background: none;
@@ -44,7 +44,7 @@ body {
 
 /* Add an active class to the active dropdown button */
 .active {
-    background-color: green;
+    background-color: darkslategrey;
     color: white;
 }
 

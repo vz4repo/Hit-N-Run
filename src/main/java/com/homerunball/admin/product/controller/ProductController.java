@@ -129,6 +129,17 @@ public class ProductController {
     /*제품 관리 페이지로 이동한다.*/
     @GetMapping("/manage")
     public String manage(Model m) {
+        try {
+            /*productList: 등록된 제품을 모두 저장한다.*/
+            List<ProductDto> productList = productService.getAllProducts();
+            /*productCount: 등록된 제품의 전체 개수를 센다.*/
+            int productCount = productService.getAllCount();
+            m.addAttribute("productList", productList);
+            m.addAttribute("productCount", productCount);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "errorPage";
+        }
         return "/admin/product/productManage";
     }
 
