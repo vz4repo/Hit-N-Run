@@ -9,7 +9,8 @@
     </select>
 
     <delete id="delete" parameterType="map" >
-        delete from ord_det where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id} and pd_id = #{pd_id} and pd_clsf_cd = #{pd_clsf_cd}
+        delete from ord_det
+        where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id} and pd_id = #{pd_id} and pd_clsf_cd = #{pd_clsf_cd}
     </delete>
 
     <delete id="deleteAll">

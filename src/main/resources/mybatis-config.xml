@@ -9,7 +9,7 @@
     <typeAlias alias="ProductDto" type="com.homerunball.admin.product.domain.ProductDto"/>
     <typeAlias alias="OrdDto" type="com.homerunball.order.domain.OrdDto"/>
     <typeAlias alias="OrderDetDto" type="com.homerunball.order.domain.OrderDetDto"/>
-<!--    <typeAlias alias="OrderStatDto" type="com.homerunball.order.domain.OrderStatDto"/>-->
+    <typeAlias alias="OrderStatDto" type="com.homerunball.order.domain.OrderStatDto"/>
 <!--    <typeAlias alias="OrderHistDto" type="com.homerunball.order.domain.OrderHistDto"/>-->
   </typeAliases>
 </configuration>

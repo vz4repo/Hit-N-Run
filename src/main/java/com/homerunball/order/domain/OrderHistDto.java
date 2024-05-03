@@ -1,4 +1,4 @@
-//package com.homerunball.ord.domain;
+//package com.homerunball.order.domain;
 //
 //import java.util.Date;
 //import java.util.Objects;

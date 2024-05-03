@@ -1,11 +1,14 @@
-//package com.homerunball.ord.dao;
-//
-//import com.homerunball.ord.domain.OrderStatDto;
-//
-//public interface OrderStatDao {
-//    int count() throws Exception;
-//
-//    int delete(String od_stat_seqnum, String od_id, String c_id) throws Exception;
-//
-//    int insert(OrderStatDto ord_stat) throws Exception;
-//}
+package com.homerunball.order.dao;
+
+import com.homerunball.order.domain.OrderStatDto;
+
+public interface OrderStatDao {
+    int count() throws Exception;
+
+    int delete(int od_stat_seqnum, int od_id) throws Exception;
+
+    int insert(OrderStatDto ord_stat) throws Exception;
+
+    int deleteAll() throws Exception;
+
+}

@@ -27,8 +27,8 @@ public class OrdDaoImplTest {
         String c_id = ordDao.getcid();
         System.out.println(c_id);
 
-        OrdDto ord = new OrdDto(2024050, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
-        assertTrue(ordDao.insert(ord) == 1);
+        OrdDto orddet = new OrdDto(2024050, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
+        assertTrue(ordDao.insert(orddet) == 1);
         assertTrue(ordDao.count()==1);
 
         OrdDto ord2 = new OrdDto(2024051, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");

@@ -57,6 +57,8 @@ public class OrderDetDaoImplTest {
         // 상세에 od_det_seqnum와 od_id+1를 delete, count 할경우 존재하지 않는 제품id 이기때문에 count는 그대로
         assertTrue( orderdetDao.delete(od_det_seqnum, ord_det.getOd_id()+1, ord_det.getPd_id(), ord_det.getPd_clsf_cd())==0);
         assertTrue(orderdetDao.count()==1);
+
+
     }
 
     @Test
