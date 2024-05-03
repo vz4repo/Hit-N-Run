@@ -4,7 +4,6 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="adminMenu.jsp" flush="false" />
-<h1>제품 관리 페이지</h1>
+  <h1>에러 페이지입니다</h1>
 </body>
 </html>

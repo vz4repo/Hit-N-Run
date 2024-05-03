@@ -24,10 +24,16 @@ public class ProductServiceImpl implements ProductService {
         return productDao.deleteAll();
     }
 
-    /* 지정된 pd_id만을 삭제한다. */
+    /* 지정한 제품 하나를 삭제한다. */
     @Override
     public int remove(String pd_id) throws Exception {
         return productDao.delete(pd_id);
+    }
+
+    /* 지정한 제품을 여러 개를 삭제한다. */
+    @Override
+    public int removeSelectedProduct(List<String> pd_id) throws Exception {
+        return productDao.deleteSelected(pd_id);
     }
 
     /* 제품 하나를 생성한다. */
@@ -40,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() throws Exception {
         return productDao.selectPrdAll();
+    }
+
+    /* 진열되지 않는 모든 제품을 list에 저장한다. */
+    @Override
+    public List<ProductDto> getAllOutProducts() throws Exception {
+        return productDao.selectAllOutProduct();
     }
 
     /* 지정된 제품 하나만을 가져온다. */
@@ -68,9 +80,9 @@ public class ProductServiceImpl implements ProductService {
         return productDao.updateContent(productDto);
     }
 
-    /* 제품의 상태를 업데이트한다. */
+    /*진열이 제외된 상품을 다시 진열한다.*/
     @Override
-    public int updateStatus(ProductDto productDto) throws Exception {
-        return productDao.updateStatus(productDto);
+    public int showProduct(List<String> pd_id) throws Exception {
+        return productDao.updateToShow(pd_id);
     }
 }
