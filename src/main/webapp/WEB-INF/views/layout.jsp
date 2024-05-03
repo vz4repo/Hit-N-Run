@@ -5,8 +5,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tile Layout</title>
-    <link href="<c:url value='/css/layout.css'/>" rel="stylesheet">
+    <link href="<c:url value='/css/layout.css'/>" rel="stylesheet" />
+    <link href="<c:url value='/css/reset.css'/>" rel="stylesheet"  />
+    <link href="<c:url value='/css/header_footer.css'/>" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <title>Home-Run</title>
 </head>
 <body>
 <div>
