@@ -26,7 +26,7 @@
     <table style="width: 100%">
         <colgroup>
             <c:choose>
-                <c:when test="${cartEmpty == 'CART_EMPTY'}">
+                <c:when test="${msg == 'CART_EMPTY'}">
                     <col width="100%" />
                 </c:when>
                 <c:otherwise>
@@ -42,7 +42,7 @@
         </colgroup>
         <thead>
         <tr>
-            <th><input type="checkbox" id="th_checkbox" name="remember" checked="checked"/></th>
+            <th><input type="checkbox" id="allChk" checked="checked"/></th>
             <th scope="col"><div>이미지</div></th>
             <th scope="col"><div>상품정보</div></th>
             <th scope="col"><div>판매가</div></th>
@@ -53,13 +53,13 @@
         </thead>
         <tbody>
         <c:choose>
-            <c:when test="${cartEmpty == 'CART_EMPTY'}">
+            <c:when test="${msg == 'CART_EMPTY'}">
                 <td colspan="6"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
             </c:when>
             <c:otherwise>
                     <c:forEach var="cartDto" items="${list}">
                         <tr>
-                            <td><input type="checkbox" id="tb_checkbox" name="tb_checkbox" /></td>
+                            <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength" /></td>
                             <td>
                                 <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
                             </td>
@@ -70,7 +70,7 @@
                             <td><span name="price"></span>판매가 원</td>
                             <td>
                                 <div class="quantity_control">
-                                    <form action="/cart/update" method="post" id="update_form">
+                                    <form id="update_form">
                                         <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
                                         <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
                                         <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
@@ -133,7 +133,31 @@
     </table>
 </main>
 <script>
+
+
     $(document).ready(function (){
+        /* 선택된것만 주문으로 넘기기 */
+
+        /* 컬럼 체크박스 선택시 전체체크 or 해제 */
+        $('#allChk').on("click", function (){
+            const isChecked = $(this).prop('checked');
+            $(".chk").prop('checked', isChecked)
+        });
+        /* 개별 체크박스 선택 */
+        $('.chk').on("click", function (){
+            /* 체크박스 전체갯수 구하기*/
+            let chk = $('input:checkbox[name=checkboxlength]').length;
+            /* 체크박스 선택된갯수 구하기 */
+            let cnt = $('input:checkbox[name=checkboxlength]:checked').length;
+
+            /* 선택check(cnt)의 전체check(chk)와 일치할경우 allChk */
+            if(cnt===chk) {
+                $("#allChk").prop('checked', true);
+            } else {
+                $("#allChk").prop('checked', false);
+            }
+        })
+
         /* 고객의 장바구니 한건 삭제 */
         $('.deleteBtn').on("click", function(){
             if(!confirm("삭제하시겠습니까?")) return;
@@ -191,14 +215,18 @@
             $.ajax({
                 url: '/cart/update',
                 method: 'POST',
-                data: {
+                contentType: 'application/json',
+                data: JSON.stringify({
                     c_id: c_id,
                     pd_id: pd_id,
                     pd_clsf_code: pd_clsf_code,
                     cart_cnt: cart_cnt
-                },
+                }),
                 success: function (response){
-                    console.log('장바구니 수량이 변경되었습니다')
+                    alert('장바구니 수량이 변경되었습니다');
+                    let baseurl = '/cart/list';
+                    let updatedUrl = baseurl+'?c_id=' + c_id;
+                    window.location.href = updatedUrl;
                 },
                 error: function(xhr, status, error){
                     console.error('장바구니 수량변경에 실패하였습니다', error)

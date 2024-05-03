@@ -7,12 +7,12 @@ public class CartDto {
     private String c_id;
     private String pd_id;
     private String pd_clsf_code;
-    private int cart_cnt=0;
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
     private String last_mod_id;
 
+    private int cart_cnt;
     private int price;
 
     private int totalPrice;

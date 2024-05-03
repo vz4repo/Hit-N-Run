@@ -4,6 +4,7 @@
 
 
 <mapper namespace="com.homerunball.customer.dao.custMapper">
+    
 
 <!-- 회원가입   -->
     <insert id="insert" parameterType="CustDto">

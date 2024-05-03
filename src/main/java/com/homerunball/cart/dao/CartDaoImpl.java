@@ -1,6 +1,7 @@
 package com.homerunball.cart.dao;
 
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.customer.domain.CustDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -15,7 +16,16 @@ public class CartDaoImpl implements CartDao {
     private SqlSession session;
 
     private static String namespace = "com.homerunball.cart.dao.CartMapper.";
-    private CartDto cartDto;
+
+    @Override
+    public List<CustDto> getcustAll() throws Exception{
+        return session.selectList(namespace+"getcustAll");
+    }
+
+    @Override
+    public String getCidByEmail(String c_email) throws Exception {
+        return session.selectOne(namespace+"getCidByEmail", c_email);
+    }
 
     @Override
     public int count() throws Exception {
@@ -62,19 +72,8 @@ public class CartDaoImpl implements CartDao {
         return session.selectList(namespace+"selectUser",c_id);
     }
 
-//    @Override
-//    public List<CartDto> cartCheck(CartDto cart) throws Exception {
-//        if(cartCheck(cart).size()==2){
-//            cartDto.getCart_cnt()++;
-//        }
-//        return session.selectList(namespace+"cartCheck", cart);
-//    }
+    @Override
+    public List<CartDto> cartCheck(CartDto cart) throws Exception {
+        return session.selectList(namespace+"cartCheck", cart);
+    }
 }
-
-//public int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception {
-//    Map map = new HashMap();
-//    map.put("c_id", c_id);
-//    map.put("pd_id", pd_id);
-//    map.put("pd_clsf_code", pd_clsf_code);
-//    return session.delete(namespace+"delete", map);
-//}

@@ -1,10 +1,16 @@
 package com.homerunball.cart.dao;
 
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.customer.domain.CustDto;
 
 import java.util.List;
 
 public interface CartDao {
+
+    List<CustDto> getcustAll() throws Exception;
+
+    String getCidByEmail(String c_email) throws Exception;
+
     int count() throws Exception;
 
     int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception;
@@ -21,5 +27,5 @@ public interface CartDao {
 
     List<CartDto> selectUser(String c_id) throws Exception;
 
-/*    List<CartDto> cartCheck(CartDto cart) throws Exception;*/
+    List<CartDto> cartCheck(CartDto cart) throws Exception;
 }
