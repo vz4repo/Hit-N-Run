@@ -14,7 +14,7 @@ public class StockDaoImpl implements StockDao {
 
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.admin.stock.dao.StockMapper.";
+    private static String namespace = "com.homerunball.admin.stock.dao.stockMapper.";
 
     /*모든 재고 선택*/
     @Override

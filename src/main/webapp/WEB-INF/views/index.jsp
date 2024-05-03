@@ -15,23 +15,22 @@
 
 
 <div class="index">
-<h2>Hello! Home run()</h2>
-<h2> D - <span id="dDay">남은시간!</span></h2>
-<hr/>
+    <h2>Hello! Home run()</h2>
+    <h2> D - <span id="dDay">남은시간!</span></h2>
+    <hr/>
 
 
     <nav id="loginbtn">
         <ul>
-        <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+            <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </nav>
 
-<div><a href="/cart/list">장바구니 이동</a></div>
-<div><a href="/order">주문 이동</a></div>
-<%--<div><a href="/login">로그인 이동</a></div>--%>
-<div><a href="/admin/main">제품 이동</a></div>
-<div><a href="/admin/stock/main">재고 이동</a></div>
-<div><a href="/payment">결제 이동</a></div>
+    <div><a href="/cart/list">장바구니 이동</a></div>
+    <div><a href="/order">주문 이동</a></div>
+    <%--<div><a href="/login">로그인 이동</a></div>--%>
+    <div><a href="/admin/main">제품 이동</a></div>
+    <div><a href="/payment">결제 이동</a></div>
 </div>
 
 <script>
@@ -66,6 +65,3 @@
     setInterval(countDay, 1000);  /* 초마다 디데이 기능 실행 */
 
 </script>
-
-
-

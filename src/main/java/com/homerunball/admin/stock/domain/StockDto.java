@@ -6,6 +6,7 @@ import java.util.Objects;
 public class StockDto {
     private String pd_id;                   //제품ID
     private String pd_clsf_cd;              //제품 구분 코드
+    private String pd_name;                 //제품명
     private Integer nml_stk_qty;            //정상재고 수량
     private Integer rt_stk_qty;             //반품재고 수량
     private Integer rgn_stk_qty;            //재생가능재고 수량
@@ -25,11 +26,13 @@ public class StockDto {
     private Date last_mod_dt;               //최종수정일시
     private String last_mod_id;             //최종수정자
 
-    public StockDto() {}
+    public StockDto() {
+    }
 
-    public StockDto(String pd_id, String pd_clsf_cd, Integer nml_stk_qty, Integer rt_stk_qty, Integer rgn_stk_qty, Integer urgn_stk_qty, Integer sfty_stk_qty, String pur_dt, String rcpt_dt, String rcpt_cp, Integer rcpt_prc, Integer rtl_prc, Integer sls_prc, String stk_plc_cd, String stk_stat_cd) {
+    public StockDto(String pd_id, String pd_clsf_cd, String pd_name, Integer nml_stk_qty, Integer rt_stk_qty, Integer rgn_stk_qty, Integer urgn_stk_qty, Integer sfty_stk_qty, String pur_dt, String rcpt_dt, String rcpt_cp, Integer rcpt_prc, Integer rtl_prc, Integer sls_prc, String stk_plc_cd, String stk_stat_cd) {
         this.pd_id = pd_id;
         this.pd_clsf_cd = pd_clsf_cd;
+        this.pd_name = pd_name;
         this.nml_stk_qty = nml_stk_qty;
         this.rt_stk_qty = rt_stk_qty;
         this.rgn_stk_qty = rgn_stk_qty;
@@ -61,6 +64,10 @@ public class StockDto {
     public void setPd_clsf_cd(String pd_clsf_cd) {
         this.pd_clsf_cd = pd_clsf_cd;
     }
+
+    public String getPd_name() { return pd_name; }
+
+    public void setPd_name(String pd_name) { this.pd_name = pd_name; }
 
     public Integer getNml_stk_qty() {
         return nml_stk_qty;
@@ -103,7 +110,7 @@ public class StockDto {
     }
 
     public Integer getOdpmt_stk() {
-        return nml_stk_qty+rt_stk_qty+rgn_stk_qty;
+        return nml_stk_qty + rt_stk_qty + rgn_stk_qty;
     }
 
     public void setOdpmt_stk(Integer odpmt_stk) {
@@ -179,6 +186,7 @@ public class StockDto {
         return "StockDto{" +
                 "pd_id='" + pd_id + '\'' +
                 ", pd_clsf_cd='" + pd_clsf_cd + '\'' +
+                ", pd_name='" + pd_name + '\'' +
                 ", nml_stk_qty=" + nml_stk_qty +
                 ", rt_stk_qty=" + rt_stk_qty +
                 ", rgn_stk_qty=" + rgn_stk_qty +
@@ -201,11 +209,11 @@ public class StockDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockDto stockDto = (StockDto) o;
-        return Objects.equals(pd_id, stockDto.pd_id) && Objects.equals(pd_clsf_cd, stockDto.pd_clsf_cd) && Objects.equals(nml_stk_qty, stockDto.nml_stk_qty) && Objects.equals(rt_stk_qty, stockDto.rt_stk_qty) && Objects.equals(rgn_stk_qty, stockDto.rgn_stk_qty) && Objects.equals(urgn_stk_qty, stockDto.urgn_stk_qty) && Objects.equals(sfty_stk_qty, stockDto.sfty_stk_qty) && Objects.equals(odpmt_stk, stockDto.odpmt_stk) && Objects.equals(pur_dt, stockDto.pur_dt) && Objects.equals(rcpt_dt, stockDto.rcpt_dt) && Objects.equals(rcpt_cp, stockDto.rcpt_cp) && Objects.equals(rcpt_prc, stockDto.rcpt_prc) && Objects.equals(rtl_prc, stockDto.rtl_prc) && Objects.equals(sls_prc, stockDto.sls_prc) && Objects.equals(stk_plc_cd, stockDto.stk_plc_cd) && Objects.equals(stk_stat_cd, stockDto.stk_stat_cd) && Objects.equals(frst_reg_dt, stockDto.frst_reg_dt) && Objects.equals(frst_reg_id, stockDto.frst_reg_id) && Objects.equals(last_mod_dt, stockDto.last_mod_dt) && Objects.equals(last_mod_id, stockDto.last_mod_id);
+        return Objects.equals(pd_id, stockDto.pd_id) && Objects.equals(pd_clsf_cd, stockDto.pd_clsf_cd) && Objects.equals(pd_name, stockDto.pd_name) && Objects.equals(nml_stk_qty, stockDto.nml_stk_qty) && Objects.equals(rt_stk_qty, stockDto.rt_stk_qty) && Objects.equals(rgn_stk_qty, stockDto.rgn_stk_qty) && Objects.equals(urgn_stk_qty, stockDto.urgn_stk_qty) && Objects.equals(sfty_stk_qty, stockDto.sfty_stk_qty) && Objects.equals(odpmt_stk, stockDto.odpmt_stk) && Objects.equals(pur_dt, stockDto.pur_dt) && Objects.equals(rcpt_dt, stockDto.rcpt_dt) && Objects.equals(rcpt_cp, stockDto.rcpt_cp) && Objects.equals(rcpt_prc, stockDto.rcpt_prc) && Objects.equals(rtl_prc, stockDto.rtl_prc) && Objects.equals(sls_prc, stockDto.sls_prc) && Objects.equals(stk_plc_cd, stockDto.stk_plc_cd) && Objects.equals(stk_stat_cd, stockDto.stk_stat_cd) && Objects.equals(frst_reg_dt, stockDto.frst_reg_dt) && Objects.equals(frst_reg_id, stockDto.frst_reg_id) && Objects.equals(last_mod_dt, stockDto.last_mod_dt) && Objects.equals(last_mod_id, stockDto.last_mod_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+        return Objects.hash(pd_id, pd_clsf_cd, pd_name, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
     }
 }

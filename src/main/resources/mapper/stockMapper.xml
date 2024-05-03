@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.homerunball.admin.stock.dao.StockMapper">
+<mapper namespace="com.homerunball.admin.stock.dao.stockMapper">
     <!--재고 전체 수량 조회-->
     <select id="count" resultType="int">
         SELECT count(*)
@@ -34,10 +34,10 @@
     </sql>
     <insert id="insertStk" parameterType="StockDto">
         INSERT INTO stk
-        (pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt,
+        (pd_id, pd_clsf_cd, pd_name, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt,
         rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd)
         VALUES
-        (#{pd_id}, #{pd_clsf_cd}, #{nml_stk_qty}, #{rt_stk_qty}, #{rgn_stk_qty}, #{urgn_stk_qty}, #{sfty_stk_qty},
+        (#{pd_id}, #{pd_clsf_cd}, #{pd_name}, #{nml_stk_qty}, #{rt_stk_qty}, #{rgn_stk_qty}, #{urgn_stk_qty}, #{sfty_stk_qty},
         <include refid="calcOdpmtStk"/>
         , #{pur_dt}, #{rcpt_dt}, #{rcpt_cp}, #{rcpt_prc}, #{rtl_prc}, #{sls_prc}, #{stk_plc_cd}, #{stk_stat_cd})
     </insert>
@@ -56,24 +56,24 @@
           AND pd_clsf_cd = #{pd_clsf_cd}
     </delete>
 
-    <!--재고 수량 등 내용 변경-->
+    <!--재고 수량 등 내용 변경-->    <!--update id 추가해야해-->
     <update id="update" parameterType="StockDto">
         UPDATE stk
-        SET
-        <if test="nml_stk_qty != null">nml_stk_qty = #{nml_stk_qty},</if>
-        <if test="nml_stk_qty != null">rt_stk_qty = #{rt_stk_qty},</if>
-        <if test="rgn_stk_qty != null">rgn_stk_qty = #{rgn_stk_qty},</if>
-        <if test="urgn_stk_qty != null">urgn_stk_qty = #{urgn_stk_qty},</if>
-        <if test="sfty_stk_qty != null">sfty_stk_qty = #{sfty_stk_qty},</if>
-        <if test="pur_dt != null">pur_dt = #{pur_dt},</if>
-        <if test="rcpt_dt != null">rcpt_dt = #{rcpt_dt},</if>
-        <if test="rcpt_cp != null">rcpt_cp = #{rcpt_cp},</if>
-        <if test="rcpt_prc != null">rcpt_prc = #{rcpt_prc},</if>
-        <if test="rtl_prc != null">rtl_prc = #{rtl_prc},</if>
-        <if test="sls_prc != null">sls_prc = #{sls_prc},</if>
-        <if test="stk_plc_cd != null">stk_plc_cd = #{stk_plc_cd},</if>
-        last_mod_dt = NOW(),
-        last_mod_id = #{last_mod_id}
+        <set>
+            <if test="nml_stk_qty != null">nml_stk_qty = #{nml_stk_qty},</if>
+            <if test="nml_stk_qty != null">rt_stk_qty = #{rt_stk_qty},</if>
+            <if test="rgn_stk_qty != null">rgn_stk_qty = #{rgn_stk_qty},</if>
+            <if test="urgn_stk_qty != null">urgn_stk_qty = #{urgn_stk_qty},</if>
+            <if test="sfty_stk_qty != null">sfty_stk_qty = #{sfty_stk_qty},</if>
+            <if test="pur_dt != null">pur_dt = #{pur_dt},</if>
+            <if test="rcpt_dt != null">rcpt_dt = #{rcpt_dt},</if>
+            <if test="rcpt_cp != null">rcpt_cp = #{rcpt_cp},</if>
+            <if test="rcpt_prc != null">rcpt_prc = #{rcpt_prc},</if>
+            <if test="rtl_prc != null">rtl_prc = #{rtl_prc},</if>
+            <if test="sls_prc != null">sls_prc = #{sls_prc},</if>
+            <if test="stk_plc_cd != null">stk_plc_cd = #{stk_plc_cd},</if>
+            last_mod_dt = NOW()
+        </set>
         WHERE pd_id = #{pd_id} AND pd_clsf_cd = #{pd_clsf_cd}
     </update>
 

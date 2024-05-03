@@ -54,6 +54,10 @@ public class StockServiceImpl implements StockService {
 
     /*재고 삽입 시 필수값 누락 확인*/
     public void validateNotNullStock(StockDto stockDto) throws Exception {
+        if(stockDto == null) {
+            throw new IllegalArgumentException("재고 정보가 null 입니다.");
+        }
+
         if(stockDto.getPd_id() == null ||
            stockDto.getPd_clsf_cd() == null ||
            stockDto.getNml_stk_qty() == null ||

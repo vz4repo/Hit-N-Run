@@ -2,89 +2,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
 <head>
-    <title>재고 목록</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <style><%@include file="/resources/css/adminMenu.css"%></style>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: "Noto Sans KR", sans-serif;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
-        }
-        /*
-        button,
-        input {
-            border: none;
-            outline: none;
-        }
-
-        .stock-container {
-            width: 95%;
-            height: 1200px;
-            margin: 0 auto;
-            /*border: 1px solid black;
-        }
-*/
-        table {
+        table, th, td {
+            border: 1px solid black;
             border-collapse: collapse;
-            width: 100%;
-            border-top: 2px solid rgb(39, 39, 39);
+            text-align: left;
         }
-
-        tr:nth-child(even) {
-            background-color: #f0f0f070;
-        }
-
-        th,
-        td {
-            width: 300px;
-            text-align: center;
-            padding: 10px 12px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        td {
-            color: rgb(53, 53, 53);
-        }
-
-        .pd_id {
-            width: 300px;
-        }
-
-        .pd_clsf_cd {
-            width: 5%;
-        }
-        td.pd_id:hover {
-            text-decoration: underline;
-        }
-/*
-        .btn-write {
-            background-color: rgb(236, 236, 236); !*Blue background*!
-            border: none; !*Remove borders*!
-            color: black; !*White text*!
-            padding: 6px 12px; !*Some padding*!
-            font-size: 16px; !*Set a font size*!
-            cursor: pointer; !*Mouse pointer on hover*!
-            border-radius: 5px;
-            margin-left: 30px;
-        }
-
-        .btn-write:hover {
-            text-decoration: underline;
-        }
-        */
     </style>
+    <title>재고 목록</title>
 </head>
 <body>
-<div class="stock-container">
-    <table style="border: 1px">
+<jsp:include page="../adminMenu.jsp" flush="false" />
+<div class="main">
+    <table>
         <tr>
             <th class="pd_id">제품ID</th>
+            <th class="pd_name">제품명</th>
             <th class="pd_clsf_cd">제품 구분 코드</th>
             <th class="nml_stk_qty">정상재고 수량</th>
             <th class="rt_stk_qty">반품재고 수량</th>
@@ -99,11 +36,11 @@
             <th class="rtl_prc">소비자가격</th>
             <th class="sls_prc">판매가격</th>
             <th class="stk_plc_cd">재고 위치 코드</th>
-            <th class="stk_stat_cd">재고진행상태코드</th>
         </tr>
         <c:forEach var="stockDto" items="${stockList}">
             <tr>
                 <td class="pd_id">${stockDto.pd_id}</td>
+                <td class="pd_name">${stockDto.pd_name}</td>
                 <td class="pd_clsf_cd">${stockDto.pd_clsf_cd}</td>
                 <td class="nml_stk_qty">${stockDto.nml_stk_qty}</td>
                 <td class="rt_stk_qty">${stockDto.rt_stk_qty}</td>
@@ -118,7 +55,6 @@
                 <td class="rtl_prc">${stockDto.rtl_prc}</td>
                 <td class="sls_prc">${stockDto.sls_prc}</td>
                 <td class="stk_plc_cd">${stockDto.stk_plc_cd}</td>
-                <td class="stk_stat_cd">${stockDto.stk_stat_cd}</td>
             </tr>
         </c:forEach>
     </table>
