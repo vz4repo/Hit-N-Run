@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class OrdDto {
-    private String od_id;
+    private Integer od_id;
     private String c_id;
     private Date od_dt;
     private String od_stat_cd;
@@ -22,7 +22,7 @@ pd_name, sls_prc
     public  OrdDto(){
     }
 
-    public OrdDto(String od_id, String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer od_pay_amt, String frst_reg_id, String last_mod_id) {
+    public OrdDto(Integer od_id, String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer od_pay_amt, String frst_reg_id, String last_mod_id) {
         this.od_id = od_id;
         this.c_id = c_id;
         this.od_dt = od_dt;
@@ -34,7 +34,7 @@ pd_name, sls_prc
         this.last_mod_id = last_mod_id;
     }
 
-    public OrdDto(String od_id, String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer od_pay_amt, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
+    public OrdDto(Integer od_id, String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer od_pay_amt, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
         this.od_id = od_id;
         this.c_id = c_id;
         this.od_dt = od_dt;
@@ -48,11 +48,11 @@ pd_name, sls_prc
         this.last_mod_id = last_mod_id;
     }
 
-    public String getOd_id() {
+    public Integer getOd_id() {
         return od_id;
     }
 
-    public void setOd_id(String od_id) {
+    public void setOd_id(Integer od_id) {
         this.od_id = od_id;
     }
 

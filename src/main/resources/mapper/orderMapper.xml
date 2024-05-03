@@ -2,7 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.homerunball.order.dao.OrdMapper">
+<mapper namespace="com.homerunball.order.dao.OrdDao">
+
+    <select id="getcid" resultType="String">
+        select cust.c_id from cust
+    </select>
 
     <select id="count" resultType="int">
         select count(*) from ord
@@ -11,7 +15,7 @@
         delete from ord
     </delete>
 
-    <select id="select" parameterType="String" resultType="ordDto">
+    <select id="selectOdId" parameterType="Integer" resultType="OrdDto">
         select od_id
              , c_id
              , od_dt
@@ -19,6 +23,7 @@
              , od_pd_qty
              , od_tot_qty
              , od_pay_amt
+             , rtl_prc
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
@@ -27,7 +32,7 @@
         where od_id=#{od_id}
     </select>
 
-    <select id="selectOdId" parameterType="String" resultType="ordDto">
+    <select id="selectAll" resultType="OrdDto">
         select od_id
              , c_id
              , od_dt
@@ -35,22 +40,7 @@
              , od_pd_qty
              , od_tot_qty
              , od_pay_amt
-             , frst_reg_dt
-             , frst_reg_id
-             , last_mod_dt
-             , last_mod_id
-        from ord
-        where od_id=#{od_id}
-    </select>
-
-    <select id="selectAll" resultType="ordDto">
-        select od_id
-             , c_id
-             , od_dt
-             , od_stat_cd
-             , od_pd_qty
-             , od_tot_qty
-             , od_pay_amt
+             , rtl_prc
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
@@ -59,24 +49,24 @@
         order by frst_reg_dt desc , od_id desc
     </select>
 
-    <insert id="insert" parameterType="ordDto">
+    <insert id="insert" parameterType="OrdDto">
         insert into ord
             (od_id,c_id,od_dt, od_stat_cd, od_pd_qty,od_tot_qty,od_pay_amt, frst_reg_id,last_mod_id)
         values
             (#{od_id}, #{c_id}, #{od_dt}, #{od_stat_cd}, #{od_pd_qty},#{od_tot_qty},#{od_pay_amt},#{frst_reg_id},#{last_mod_id})
     </insert>
 
-    <update id="update" parameterType="ordDto">
+    <update id="update" parameterType="OrdDto">
         update ord
         set od_dt       = #{od_dt}
         ,   od_stat_cd  = #{od_stat_cd}
         ,   od_pd_qty   = #{od_pd_qty}
         ,   od_tot_qty  = #{od_tot_qty}
         ,   od_pay_amt  = #{od_pay_amt}
+        ,   rtl_prc     = #{rtl_prc}
         ,   frst_reg_id = #{frst_reg_id}
         ,   last_mod_id = #{last_mod_id}
         where od_id = #{od_id} and c_id = #{c_id} order by od_dt desc;
     </update>
-
 
 </mapper>
