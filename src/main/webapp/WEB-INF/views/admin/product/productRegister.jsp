@@ -3,7 +3,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        <%@include file="/resources/css/adminMenu.css"%>
         table, th, td {
             border: 1px solid black;
             border-collapse: collapse;
@@ -61,8 +63,9 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="adminMenu.jsp" flush="false" />
-<h1>제품 등록 화면</h1>
+<jsp:include page="../adminMenu.jsp" flush="false" />
+<div class="main">
+    <h1>제품 등록 화면</h1>
     <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
         <div class="product_register">
             <div class="product_content">
@@ -441,14 +444,17 @@
             <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
         </div>
     </form>
+</div>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#searchProductIdBtn").on("click", function () {
-                let form = $("form");
-                let pd_type=document.getElementById("main");
-            });
+            // $("#searchProductIdBtn").on("click", function () {
+            //     let form = $("form");
+            //     let pd_type=document.getElementById("main");
+            // });
 
+            /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
             $("#adComment").keyup(function(e) {
                 let content = $(this).val();
                 $("#adLengthCheck").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
@@ -459,6 +465,7 @@
                 }
             });
 
+            /*제품 요약의 텍스트 길이가 200자가 넘지 않도록 하는 함수*/
             $("#textSummary").keyup(function(e) {
                 let content = $(this).val();
                 $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
@@ -469,6 +476,7 @@
                 }
             });
 
+            /*상품 상세 요약의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
             $("#textDescription").keyup(function(e) {
                 let content = $(this).val();
                 $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
@@ -477,16 +485,6 @@
                     $(this).val(content.substring(0, 5000));
                     $('#descriptionLengthCheck').text("[0 / 5000]");
                 }
-            });
-
-            /* yesLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 있게 변한다.*/
-            $("#yesLimit").on("click", function() {
-                $("#maxQty").removeAttr("disabled");
-            });
-
-            /* noLimit 라디오 버튼 클릭하면 maxQty에 입력할 수 없게 변한다. */
-            $("#noLimit").on("click", function() {
-                $("#maxQty").attr("disabled", "disabled");
             });
 
             /* cancelBtn을 클릭하면 admin/main으로 이동한다. */
