@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.homerunball.order.dao.OrdMapper">
+<mapper namespace="com.homerunball.order.dao.OrdDao">
 
     <select id="getcid" resultType="String">
         select cust.c_id from cust

@@ -76,11 +76,11 @@ public class OrderStatDaoImplTest {
 
         String c_id = ordDao.getcid();
 
-        OrderStatDto ord_stat = new OrderStatDto(1,20240503,c_id,"주문완료",new Date(),new Date(),"a",new Date(),"a");
+        OrderStatDto ord_stat = new OrderStatDto(1,20240506,c_id,"주문완료",new Date(),new Date(),"a",new Date(),"a");
         assertTrue(orderStatDao.insert(ord_stat) == 1);
 
         //리스트 1개 더 추가
-        OrderStatDto ord_stat2 = new OrderDetDto(2,20240504,c_id,"주문완료",new Date(),new Date(),"a",new Date(),"a");
+        OrderStatDto ord_stat2 = new OrderStatDto(2,20240507,c_id,"주문완료",new Date(),new Date(),"a",new Date(),"a");
         assertTrue(orderStatDao.insert(ord_stat2)==1);
 
         //2다 모두 삭제
@@ -88,11 +88,11 @@ public class OrderStatDaoImplTest {
         assertTrue(orderStatDao.count()==0);
 
         for (int i = 1; i <= 10; i++) {
-            int od_stat_seqnum = 3 * 10 + i; // '20240117'와 '000001'을 결합하여 숫자로 표현합니다.
-            int od_id = 2024050 + i; // 2024050에 1부터 10까지의 숫자를 더하여 생성
+            int od_stat_seqnum = 3 + i; //
+            int od_id = 20240508 + i; // 20240503에 1부터 10까지의 숫자를 더하여 생성
 
-            OrderStatDto ord_stat3 = new OrderDetDto(1,20240503,c_id,"주문완료",new Date(),new Date(),"a",new Date(),"a");
-            assertEquals(1, orderStatDao.insert(ord_stat3)); // 리스트에 OrderDetDto 객체 추가
+            OrderStatDto ord_stat3 = new OrderStatDto(od_stat_seqnum, od_id, c_id, "주문완료", new Date(), new Date(), "a", new Date(), "a");
+            assertEquals(1, orderStatDao.insert(ord_stat3)); // 리스트에 OrderStatDto 객체 추가
         }
         assertTrue(orderStatDao.count()==10);
 

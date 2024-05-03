@@ -13,7 +13,7 @@ public class OrderStatDaoImpl implements com.homerunball.order.dao.OrderStatDao 
     @Autowired
     private SqlSession session;
 
-    private static String namespace = "com.homerunball.order.dao.OrderStatMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrderStatDao.";
 
     @Override
     public int count() throws Exception {

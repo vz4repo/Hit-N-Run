@@ -14,7 +14,7 @@ import java.util.Map;
 public class OrdDaoImpl implements OrdDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.order.dao.OrdMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrdDao.";
 
     @Autowired
     public String getcid() throws Exception{

@@ -12,7 +12,7 @@
 //public class OrderHistDaoImpl implements OrderHistDao {
 //    @Autowired
 //    private SqlSession session;
-//    private static String namespace = "com.homerunball.ord.dao.OrderHistMapper.";
+//    private static String namespace = "com.homerunball.ord.dao.OrderHistDao.";
 //
 //    @Override
 //    public  int count() throws Exception{

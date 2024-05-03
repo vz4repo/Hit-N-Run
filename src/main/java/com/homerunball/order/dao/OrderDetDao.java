@@ -8,7 +8,6 @@ import java.util.List;
 public interface OrderDetDao {
 
 
-    OrderDetDto findById(int od_id) throws Exception; //update할때 사용
     /* 리스트 수를 센다*/
     int count() throws Exception;
 

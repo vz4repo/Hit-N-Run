@@ -13,7 +13,7 @@ import java.util.Map;
 public class OrderDetDaoImpl implements OrderDetDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.order.dao.OrderDetMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrderDetDao.";
 
     /* 리스트 수를 센다*/
     @Override
@@ -59,8 +59,4 @@ public class OrderDetDaoImpl implements OrderDetDao {
         return session.update(namespace+"update", ord_det);
     }
 
-    @Override
-    public OrderDetDto findById(int od_id) {
-        return session.selectOne("OrderDetMapper.findById", od_id);
-    }
 }
