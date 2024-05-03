@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -21,30 +22,27 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    /*
-    대시보드로 이동하는 메서드
-     */
+    /*대시보드로 이동하는 메서드*/
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        return "productDashboard";
+        return "/admin/product/productDashboard";
     }
 
-    /*
-    등록된 제품을 출력하는 메서드
-    productList: 등록된 제품을 모두 저장한다.
-    productCount: 등록된 제품의 전체 개수를 센다.
-     */
+    /*등록된 제품을 출력하는 메서드*/
     @GetMapping("/list")
     public String list(Model m) {
         try {
+            /*productList: 등록된 제품을 모두 저장한다.*/
             List<ProductDto> productList = productService.getAllProducts();
+            /*productCount: 등록된 제품의 전체 개수를 센다.*/
             int productCount = productService.getAllCount();
             m.addAttribute("productList", productList);
             m.addAttribute("productCount", productCount);
         } catch (Exception e) {
             e.printStackTrace();
+            return "errorPage";
         }
-        return "productList";
+        return "/admin/product/productList";
     }
 
     /*
@@ -52,7 +50,7 @@ public class ProductController {
      */
     @GetMapping("/register")
     public String register(Model m) {
-        return "productRegister";
+        return "/admin/product/productRegister";
     }
 
     /*
@@ -62,19 +60,7 @@ public class ProductController {
     추가할 제품이 한 개라면 제품을 추가한 뒤에 productList로 이동한다.
      */
     @PostMapping("/register")
-    public String register(ProductDto productDto, RedirectAttributes rattr, Model m, @RequestParam("pd_id") String pd_id, HttpSession session) {
-        System.out.println("admin/product/register 도착했다");
-
-        /* max_od_qty가 9999가 아니라면 */
-        /* productRegister에서 입력한 maxQty를 최대 주문 수량의 값으로 저장한다. */
-//        System.out.println("productDto.getMax_od_qty() = " + productDto.getMax_od_qty());
-//        if (productDto.getMax_od_qty() != 9999) {
-//            System.out.println("9999가 아니다");
-//            int maxQty = (int) session.getAttribute("maxQty");
-//            System.out.println("maxQty = " + maxQty);
-//            productDto.setMax_od_qty(maxQty);
-//        }
-
+    public String register(ProductDto productDto, RedirectAttributes rattr, Model m) {
         /* 입력한 제조년월에 포함된 "-"를 ""로 교체한다. */
         productDto.setPd_mnf_date(productDto.getPd_mnf_date().replace("-",""));
 
@@ -86,9 +72,9 @@ public class ProductController {
         productDto.setCtg(category);
 
         /* 이미지의 경우 경로를 지정해준다. */
-        String fileRoot = "src/main/resources/img/" + productDto.getPd_type_cd();
-        productDto.setMn_img_fn(fileRoot + "/mainImg/" + productDto.getMn_img_fn());
-        productDto.setDet_img_fn(fileRoot + "/detailImg/" + productDto.getDet_img_fn());
+        String fileRoot = productDto.getPd_type_cd();
+        productDto.setMn_img_fn(fileRoot + productDto.getMn_img_fn());
+        productDto.setDet_img_fn(fileRoot + productDto.getDet_img_fn());
 
         try {
             /*
@@ -106,9 +92,10 @@ public class ProductController {
             } else {
                 /* biggestSerialNumber: 제품 유형 중 가장 큰 숫자를 저장하는 변수 */
                 int biggestSerialNumber = productService.findBiggestSerialNumber(productDto.getPd_type_cd());
-                if (pd_id.equals("same")) {
+                String getpdId = productDto.getPd_id();
+                if (getpdId.equals("same")) {
                     serialNumber = String.format("%06d", biggestSerialNumber);
-                } else if (pd_id.equals("new")) {
+                } else if (getpdId.equals("new")) {
                     serialNumber = String.format("%06d", biggestSerialNumber+1);
                 }
             }
@@ -128,18 +115,106 @@ public class ProductController {
             return "redirect:/admin/product/list";
         } catch (DuplicateKeyException e) {
             e.printStackTrace();
+            m.addAttribute(productDto);
             m.addAttribute("msg", "제품ID가 중복되었습니다.");
-            return "productRegister";
+            return "/admin/product/productRegister";
         } catch (Exception e) {
             e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품이 정상적으로 등록되지 않았습니다.");
-            return "productRegister";
+            return "/admin/product/productRegister";
         }
     }
 
+    /*제품 관리 페이지로 이동한다.*/
     @GetMapping("/manage")
     public String manage(Model m) {
-        return "productManage";
+        return "/admin/product/productManage";
+    }
+
+    /*진열하지 않은 제품들의 목록을 보여준다.*/
+    @GetMapping("/showHiddenProductList")
+    public String showHiddenProductList(Model m) {
+        try {
+            /*진열하지 않은 제품만 선택하여 deleteProductList에 리스트로 저장한다.*/
+            List<ProductDto> hiddenProductList = productService.getAllOutProducts();
+
+            /*진열하지 않은 제품의 수를 세어서 deleteProductCount에 저장한다.*/
+            int hiddenProductCount = hiddenProductList.size();
+            m.addAttribute("hiddenProductList", hiddenProductList);
+            m.addAttribute("hiddenProductCount", hiddenProductCount);
+        } catch (Exception e) {
+            /*에러가 발생하면 에러 페이지로 이동한다.*/
+            e.printStackTrace();
+            return "errorPage";
+        }
+        return "/admin/product/showHiddenProduct";
+    }
+
+    /*진열이 제외된 제품들을 다시 진열한다.*/
+    @PostMapping("/restoreExcludedProduct")
+    public String restoreExcludedProduct(ProductDto productDto, RedirectAttributes rattr, Model m) {
+        try {
+            /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
+            String pdIds = productDto.getPd_id();
+            System.out.println("pdIds = " + pdIds);
+            System.out.println("pdIds.length() = " + pdIds.length());
+
+            /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
+            if(pdIds == "") {
+                rattr.addFlashAttribute("msg", "선택된 제품이 없습니다.");
+                return "redirect:/admin/product/showHiddenProductList";
+            }
+
+            /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
+            List<String> selectedProduct = List.of(pdIds.split(","));
+            System.out.println("selectedProduct = " + selectedProduct);
+            System.out.println("selectedProduct.size() = " + selectedProduct.size());
+
+            /*선택된 제품들을 다시 진열한다.*/
+            productService.showProduct(selectedProduct);
+
+            /*제품이 정상적으로 진열되면 productList페이지에서 알려준다.*/
+            rattr.addFlashAttribute("msg", "제품이 정상적으로 진열되었습니다.");
+        } catch (Exception e) {
+            /*에러가 발생하면 에러페이지로 이동한다.*/
+            e.printStackTrace();
+            m.addAttribute(productDto);
+            m.addAttribute("msg", "에러가 발생했습니다.");
+            return "errorPage";
+        }
+        return "redirect:/admin/product/list";
+    }
+
+    /*진열하고 있지 않은 제품들 중에서 선택된 제품들을 삭제한다.*/
+    @PostMapping("/deleteExcludedProduct")
+    public String deleteExcludedProduct(ProductDto productDto, RedirectAttributes rattr, Model m) {
+        try {
+            /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
+            String pdIds = productDto.getPd_id();
+            System.out.println("pdIds = " + pdIds);
+            System.out.println("pdIds.length() = " + pdIds.length());
+
+            /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
+            if(pdIds == "") {
+                rattr.addFlashAttribute("msg", "선택된 제품이 없습니다.");
+                return "redirect:/admin/product/showHiddenProductList";
+            }
+
+            /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
+            List<String> selectedProduct = List.of(pdIds.split(","));
+
+            /*선택된 제품들을 삭제한다.*/
+            productService.removeSelectedProduct(selectedProduct);
+            /*제품이 정상적으로 삭제되면 productList페이지에서 알려준다.*/
+            rattr.addFlashAttribute("msg", "제품이 정상적으로 제거되었습니다.");
+        } catch (Exception e) {
+            /*에러가 발생하면 에러페이지로 이동한다.*/
+            e.printStackTrace();
+            m.addAttribute(productDto);
+            m.addAttribute("msg", "에러가 발생했습니다.");
+            return "errorPage";
+        }
+        return "redirect:/admin/product/list";
     }
 }
