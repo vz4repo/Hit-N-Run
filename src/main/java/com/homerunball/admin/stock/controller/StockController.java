@@ -37,20 +37,15 @@ public class StockController {
             model.addAttribute("msg", "LIST_ERR");
             return "errorPage";
         }
-
         return "/admin/stock/stockList";
     }
 
     @GetMapping("/register")
     public String register(Model model) {
-        return "/admin/main";
+        return "/admin/stock/stockRegister";
     }
-    /*
-    재고
-    */
 
+    /*선택한 상품 재고관리 버튼 클릭 -> 재고 등록 페이지로 이동*/
 
-//    GetMapping("")
-
-
+    /*상품목록 검색하는 기능 -> 검색해서 내가 원하는 상품 목록 조회 -> 선택한 상품 재고 등록 or 수정*/
 }
