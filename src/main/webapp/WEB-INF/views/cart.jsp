@@ -93,7 +93,7 @@
             </c:otherwise>
         </c:choose>
         <div>
-            <%-- CartController 의 remove 메서드로 데이터를 넘긴다 --%>
+            <%-- CartController 의 remove 메서드로 데이터를 넘긴다 선택삭제 --%>
             <form action="/cart/remove" method="post" class="delete_form">
                 <input type="hidden" name="c_id" class="delete_c_id" value="${c_id}"/>
                 <input type="hidden" name="pd_id" class="delete_pd_id" value="${pd_id}"/>
@@ -121,8 +121,10 @@
             <td colspan="7">
                 <form action="" id="removeAllForm">
                     <button type="button" id="delete_All_Btn">전체상품 삭제</button>
-                    <button type="button" id="order_Select_Btn"><a href="/order?c_id=${c_id}">선택상품 주문</a></button>
-                    <button type="button" id="order_All_Btn"><a href="/order?c_id=${c_id}">전체상품 주문</a></button>
+                    <button type="button" class="order_Btn" id="order_Select_Btn">선택상품 주문</button>
+                    <button type="button" class="order_Btn" id="order_All_Btn">
+                        <a href="/order?c_id=${c_id}">전체상품 주문</a>
+                    </button>
                 </form>
             </td>
             <td>
@@ -136,7 +138,8 @@
 
 
     $(document).ready(function (){
-        /* 선택된것만 주문으로 넘기기 */
+        /* 주문으로 넘기기 */
+
 
         /* 컬럼 체크박스 선택시 전체체크 or 해제 */
         $('#allChk').on("click", function (){

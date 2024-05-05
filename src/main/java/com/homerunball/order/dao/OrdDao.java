@@ -9,7 +9,7 @@ public interface OrdDao {
 
     int delete(String od_id, String c_id) throws Exception; // int delete(String statement, Object parameter)
 
-    int deleteAll(); // int delete(String statement)
+    int deleteAll() throws Exception;
 
     int insert(OrdDto dto) throws Exception;
 

@@ -15,7 +15,7 @@ public class CartDaoImpl implements CartDao {
     @Autowired
     private SqlSession session;
 
-    private static String namespace = "com.homerunball.cart.dao.CartMapper.";
+    private static String namespace = "com.homerunball.cart.dao.CartDao.";
 
     @Override
     public List<CustDto> getcustAll() throws Exception{
@@ -40,6 +40,7 @@ public class CartDaoImpl implements CartDao {
         map.put("pd_clsf_code", pd_clsf_code);
         return session.delete(namespace+"delete", map);
     }
+
 
     @Override
     public int deleteAll() throws Exception {

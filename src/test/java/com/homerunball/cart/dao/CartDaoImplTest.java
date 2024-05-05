@@ -187,14 +187,14 @@ public class CartDaoImplTest {
 
         // 0번쨰 고객의 고객ID 가져오기
         String c_id = cartDao.selectAll().get(0).getC_id();
-        System.out.println(c_id); // 100010
-
+        System.out.println(c_id); // 100001
+        System.out.println(cart); // CardDto{c_id='100001', pd_id='GLV000021-30', pd_clsf_code='333', cart_cnt=2, price=0, totalPrice=0}
          /*0번째고객의, 사이즈와 장바구니담은수량을 변경한다*/
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
 
         assertTrue(cartDao.update(cart)==1);
-        System.out.println("cart1: "+cart); //CardDto{c_id='100010', pd_id='GLV000021-30', pd_clsf_code='XS', cart_cnt=3}
+        System.out.println("cart1: "+cart); //CardDto{c_id='100001', pd_id='GLV000021-30', pd_clsf_code='XS', cart_cnt=3}
 
         /* 0번째고객을 선택해서 cart2에 담는다 */
         List<CartDto> cart2 = cartDao.selectUser(c_id);

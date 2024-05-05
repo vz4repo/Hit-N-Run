@@ -128,7 +128,7 @@ public class CartController {
                 throw new Exception();
             }
             m.addAttribute("list", list);
-//            m.addAttribute("c_id", c_id);
+            m.addAttribute("c_id", c_id);
         } catch (Exception e){
             e.printStackTrace();
             m.addAttribute("msg", "CART_EMPTY");

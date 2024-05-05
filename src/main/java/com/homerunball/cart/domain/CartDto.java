@@ -14,7 +14,6 @@ public class CartDto {
 
     private int cart_cnt;
     private int price;
-
     private int totalPrice;
 
 
@@ -25,8 +24,8 @@ public class CartDto {
         this.pd_id = pd_id;
         this.pd_clsf_code = pd_clsf_code;
         this.cart_cnt = cart_cnt;
-
-        totalPrice = cart_cnt*price;
+        this.price = price;
+        this.totalPrice = cart_cnt * price;
     }
 
     @Override
