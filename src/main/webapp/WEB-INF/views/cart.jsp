@@ -121,10 +121,10 @@
             <td colspan="7">
                 <form action="" id="removeAllForm">
                     <button type="button" id="delete_All_Btn">전체상품 삭제</button>
+                </form>
+                <form action="" id="orderForm" method="post">
                     <button type="button" class="order_Btn" id="order_Select_Btn">선택상품 주문</button>
-                    <button type="button" class="order_Btn" id="order_All_Btn">
-                        <a href="/order?c_id=${c_id}">전체상품 주문</a>
-                    </button>
+                    <button type="button" class="order_Btn" id="order_All_Btn">전체상품 주문</button>
                 </form>
             </td>
             <td>
@@ -139,6 +139,12 @@
 
     $(document).ready(function (){
         /* 주문으로 넘기기 */
+        $('#order_All_Btn').on("click", function (){
+            let orderForm = $('#orderForm');
+            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
+            orderForm.attr("method", "post");
+            orderForm.submit();
+        })
 
 
         /* 컬럼 체크박스 선택시 전체체크 or 해제 */

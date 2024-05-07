@@ -3,9 +3,10 @@
 
 
 
-<c:set var="loginOutLink" value="${sessionScope.c_email==null ? '/login' : '/logout'}"/>
-<c:set var="loginOut" value="${sessionScope.c_email==null ? '로그인' : '로그아웃'}"/>
+<c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
+<c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
+<link rel="icon" type="image/x-icon" href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
 <style>
 
     li {
@@ -26,16 +27,16 @@
         </ul>
     </nav>
 
+<div><a href="/mypage/add">마이페이지 이동</a></div>
 <div><a href="/cart/list">장바구니 이동</a></div>
 <div><a href="/order">주문 이동</a></div>
-<%--<div><a href="/login">로그인 이동</a></div>--%>
 <div><a href="/admin/main">제품 이동</a></div>
 <div><a href="/payment">결제 이동</a></div>
 </div>
 
 <script>
     window.onload = function() {
-        if("${sessionScope.c_email}" !== "") {
+        if("${sessionScope.c_id}" !== "") {
             document.getElementById('logoutLink').addEventListener('click', function(event) {
                 event.preventDefault();
                 if (confirm('정말로 로그아웃을 하시겠습니까?')) {

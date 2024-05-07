@@ -17,14 +17,10 @@ public class CartDaoImpl implements CartDao {
 
     private static String namespace = "com.homerunball.cart.dao.CartDao.";
 
+
     @Override
     public List<CustDto> getcustAll() throws Exception{
         return session.selectList(namespace+"getcustAll");
-    }
-
-    @Override
-    public String customerGetCid(String c_id) throws Exception {
-        return session.selectOne(namespace+"customerGetCid", c_id);
     }
 
     @Override

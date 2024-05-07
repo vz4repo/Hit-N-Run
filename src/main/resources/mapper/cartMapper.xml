@@ -13,12 +13,6 @@
         select c_id from cust
     </select>
 
-    <!-- cust테이블의 c_id 1건 가져오기 -->
-    <select id="customerGetCid" resultType="String" parameterType="String">
-        select c_id from cust
-    </select>
-
-
 
     <select id="count" resultType="int">
         select count(*) from cart;
@@ -65,10 +59,9 @@
     <!--장바구니 update-->
     <update id="update" parameterType="CartDto">
         update cart
-        set pd_id = #{pd_id}
-        , pd_clsf_code = #{pd_clsf_code}
+        set pd_clsf_code = #{pd_clsf_code}
         , cart_cnt = #{cart_cnt}
-        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code=#{pd_clsf_code}
+        where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
 
     <!-- Cart 장바구니 중복객체인지 확인 TDD구현하기 -->

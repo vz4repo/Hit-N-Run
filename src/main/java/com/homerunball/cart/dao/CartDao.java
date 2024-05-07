@@ -6,10 +6,7 @@ import com.homerunball.customer.domain.CustDto;
 import java.util.List;
 
 public interface CartDao {
-
     List<CustDto> getcustAll() throws Exception;
-
-    String customerGetCid(String c_id) throws Exception;
 
     int count() throws Exception;
 

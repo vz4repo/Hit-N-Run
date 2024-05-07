@@ -5,6 +5,7 @@ import com.homerunball.cart.domain.CartDto;
 import com.homerunball.order.dao.OrdDao;
 import com.homerunball.order.domain.OrdDto;
 import com.homerunball.order.service.OrdService;
+import freemarker.ext.beans.StringModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,20 +31,19 @@ public class OrdController {
 
 
 
-    @GetMapping("/order")
-    public String order(String od_id,String c_id, Model m, HttpSession session, HttpServletRequest request){
+    @PostMapping("/order")
+    public String order(Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
-
+        String c_id = (String)session.getAttribute("c_id");
         try {
+
             List<CartDto> list = cartDao.selectUser(c_id);
-
-            OrdDto dto = new OrdDto(c_id);
-
-            ordDao.insert(dto);
-//            System.out.println(dto);
-
             m.addAttribute("list",list);
+            OrdDto dto = new OrdDto(c_id);
+            ordDao.insert(dto);
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,6 +52,6 @@ public class OrdController {
 
     private boolean loginCheck(HttpServletRequest request){
         HttpSession session = request.getSession();
-        return session.getAttribute("c_email") != null;
+        return session.getAttribute("c_id") != null;
     }
 }

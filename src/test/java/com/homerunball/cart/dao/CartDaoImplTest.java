@@ -186,10 +186,11 @@ public class CartDaoImplTest {
         assertTrue(cartDao.count()==1);
 
         // 0번쨰 고객의 고객ID 가져오기
-        String c_id = cartDao.selectAll().get(0).getC_id();
+        String c_id = cart.getC_id();
         System.out.println(c_id); // 100001
         System.out.println(cart); // CardDto{c_id='100001', pd_id='GLV000021-30', pd_clsf_code='333', cart_cnt=2, price=0, totalPrice=0}
          /*0번째고객의, 사이즈와 장바구니담은수량을 변경한다*/
+        cart.setC_id(cid);
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
 
