@@ -145,6 +145,15 @@
             /*overflow: hidden; !* 오버플로우 내용 숨김 *!*/
         }
 
+        #birth {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
     </style>
 
 </head>
@@ -160,9 +169,9 @@
             <label>인증번호(예정)</label>
             <input class="special-class" type="text" name="c_email2" placeholder="test" value="test">
             <label>비밀번호</label>
-            <input class="special-class" type="text" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)">
+            <input class="special-class" type="password" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)">
             <label>비밀번호 확인</label>
-            <input class="special-class" type="text" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요.">
+            <input class="special-class" type="password" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요.">
             <label>이름</label>
             <input class="special-class" type="text" name="c_name">
             <label>주소</label>
@@ -182,16 +191,17 @@
                 <input type="radio" id="male" name="c_gnd" value="남"> 남성<br><br>
 
                 <label>생년월일</label>
-                <select class="box" id="birth-year" name="birth-year">
-                    <option disabled selected>출생 연도</option>
-                </select>
-                <select class="box" id="birth-month" name="birth-month">
-                    <option disabled selected>월 선택</option>
-                </select>
-                <select class="box" id="birth-day" name="birth-day">
-                    <option disabled selected>일 선택</option>
-                </select><br><br>
-            <input type="hidden" id="birth" name="c_birth">
+            <input type="date" id="birth" name="c_birth"><br><br>
+<%--                <select class="box" id="birth-year" name="birth-year">--%>
+<%--                    <option disabled selected>출생 연도</option>--%>
+<%--                </select>--%>
+<%--                <select class="box" id="birth-month" name="birth-month">--%>
+<%--                    <option disabled selected>월 선택</option>--%>
+<%--                </select>--%>
+<%--                <select class="box" id="birth-day" name="birth-day">--%>
+<%--                    <option disabled selected>일 선택</option>--%>
+<%--                </select><br><br>--%>
+<%--            <input type="hidden" id="birth" name="c_birth">--%>
 
             <input type="checkbox" id="touBox" name="touBox" value="Y">
             <p id="tou">[필수] 이용약관</p>
@@ -200,32 +210,8 @@
             <input type="checkbox" id="piiBox" name ="piiBox" value="Y">
             <p id="pii">[필수] 개인정보 수집 및 이용</p><br>
 
-
-            <%--                선택 체크박스 컬럼들을 NULL로 설정하는 방식으로 변경--%>
             <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>
             <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
-
-<%--            1. 인풋에 value 값을 넣는 방법--%>
-<%--            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"> <a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
-<%--            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
-
-<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr" value="N">--%>
-<%--            <input type="hidden" id="email_agr_hidden" name="email_agr" value="N">--%>
-
-<%--            2. 체크박스 인풋에만 value를 주는 방식--%>
-<%--            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
-<%--            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
-
-<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr" value="N">--%>
-<%--            <input type="hidden" id="email_agr_hidden" name="email_agr" value="N">--%>
-
-
-<%--            3. 인풋 전체에 value 값을 주지 않고 자스로 value 값을 넣는 방법--%>
-<%--            <input type="checkbox" id="sms_agr" name="sms_agr" ><a>[선택] 쇼핑정보 SMS 수신</a><br>--%>
-<%--            <input type="checkbox" id="email_agr" name="email_agr"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>--%>
-
-<%--            <input type="hidden" id="sms_agr_hidden" name="sms_agr_hidden" >--%>
-<%--            <input type="hidden" id="email_agr_hidden" name="email_agr_hidden">--%>
 
             <button>가입하기</button><br><br>
         </div>
@@ -491,79 +477,6 @@
 
 
 <script>
-
-
-    // 1. 인풋 value 델꼬오기
-    //
-    // if (!document.getElementById("email_agr").checked) {
-    //     document.getElementById("email_agr_hidden.value");
-    // }
-    //
-    // if (!document.getElementById("sms_agr").checked) {
-    //     document.getElementById("sms_agr_hidden.value");
-    // }
-    //
-    // 2. 자스에서 value 넣어주기
-
-   // if (!document.getElementById("email_agr").checked) {
-   //     document.getElementById("email_agr_hidden").value = "N";
-   // }
-   //
-   // if (!document.getElementById("sms_agr").checked) {
-   //     document.getElementById("sms_agr_hidden").value = "N";
-   // }
-
-   // 3. if else로도 만들어보기..
-
-   // if (!document.getElementById("email_agr").checked) {
-   //     document.getElementById("email_agr_hidden").value = "N";
-   // } else {
-   //     document.getElementById("email_agr_hidden").value = "Y";
-   // }
-
-   // if (!document.getElementById("sms_agr").checked) {
-   //     document.getElementById("sms_agr_hidden").value = "N"; // SMS 수신 동의하지 않음을 설정
-   // } else {
-   //     document.getElementById("sms_agr_hidden").value = "Y"; // SMS 수신 동의함을 설정
-   // }
-
-    // 4. 함수로도 만들어보기..(인풋에 value 없을시)
-
-   // function updateHiddenValues() {
-   //     if (!document.getElementById("email_agr").checked) {
-   //         document.getElementById("email_agr_hidden").value = "N";
-   //     } else {
-   //         document.getElementById("email_agr_hidden").value = "Y";
-   //     }
-   //
-   //     if (!document.getElementById("sms_agr").checked) {
-   //         document.getElementById("sms_agr_hidden").value = "N";
-   //     } else {
-   //         document.getElementById("sms_agr_hidden").value = "Y";
-   //     }
-   // }
-   //
-   // updateHiddenValues()
-
-
-    // 5. 함수로도 만들어보기 vol.2 (인풋에 value 있을시)
-    // function updateHiddenValues() {
-    //     if (!document.getElementById("email_agr").checked) {
-    //         document.getElementById("email_agr_hidden.value");
-    //     } else {
-    //         document.getElementById("email_agr.value");
-    //     }
-    //
-    //     if (!document.getElementById("sms_agr").checked) {
-    //         document.getElementById("sms_agr_hidden.value");
-    //     } else {
-    //         document.getElementById("sms_agr.value");
-    //     }
-    // }
-    // updateHiddenValues()
-
-
-
    document.getElementById("tou").addEventListener("click", function () {
         document.getElementById("myModal").style.display = "block";
         /*모달이 나타날 때 스크롤바 숨김*/
@@ -589,40 +502,42 @@
         /*모달이 사라질 때 스크롤바 다시 보이게 함*/
         document.body.classList.remove("modal-open");
     });
-    function birthUpdate() {
-        var birthYearSelect = document.getElementById('birth-year');
-        var birthMonthSelect = document.getElementById('birth-month');
-        var birthDaySelect = document.getElementById('birth-day');
 
-        var birthYear = birthYearSelect.value;
-        var birthMonth = birthMonthSelect.value;
-        var birthDay = birthDaySelect.value;
-
-        var birth = birthYear + '-' + birthMonth + '-' + birthDay;
-        /*var birth = birthYear + birthMonth + birthDay;*/
-
-        /*hidden input 요소에 값 설정*/
-        document.getElementById('birth').value = birth;
-    }
-
-    function xxxx(selectElement, start, end) {
-        for (var i = start; i <= end; i++) {
-            var option = document.createElement('option');
-            option.value = i;
-            option.textContent = i;
-            selectElement.appendChild(option);
-        }
-    }
-
-    xxxx(document.getElementById('birth-year'), 1950, 2024);
-    xxxx(document.getElementById('birth-month'), 1, 12);
-    xxxx(document.getElementById('birth-day'), 1, 31);
-
-    document.getElementById('birth-year').addEventListener('change', birthUpdate);
-    document.getElementById('birth-month').addEventListener('change', birthUpdate);
-    document.getElementById('birth-day').addEventListener('change', birthUpdate);
-    /*페이지 로드 후 초기 값 설정*/
-    birthUpdate();
+    // /*생년월일*/
+    // function birthUpdate() {
+    //     var birthYearSelect = document.getElementById('birth-year');
+    //     var birthMonthSelect = document.getElementById('birth-month');
+    //     var birthDaySelect = document.getElementById('birth-day');
+    //
+    //     var birthYear = birthYearSelect.value;
+    //     var birthMonth = birthMonthSelect.value;
+    //     var birthDay = birthDaySelect.value;
+    //
+    //     var birth = birthYear + '-' + birthMonth + '-' + birthDay;
+    //     /*var birth = birthYear + birthMonth + birthDay;*/
+    //
+    //     /*hidden input 요소에 값 설정*/
+    //     document.getElementById('birth').value = birth;
+    // }
+    //
+    // function xxxx(selectElement, start, end) {
+    //     for (var i = start; i <= end; i++) {
+    //         var option = document.createElement('option');
+    //         option.value = i;
+    //         option.textContent = i;
+    //         selectElement.appendChild(option);
+    //     }
+    // }
+    //
+    // xxxx(document.getElementById('birth-year'), 1950, 2024);
+    // xxxx(document.getElementById('birth-month'), 1, 12);
+    // xxxx(document.getElementById('birth-day'), 1, 31);
+    //
+    // document.getElementById('birth-year').addEventListener('change', birthUpdate);
+    // document.getElementById('birth-month').addEventListener('change', birthUpdate);
+    // document.getElementById('birth-day').addEventListener('change', birthUpdate);
+    // /*페이지 로드 후 초기 값 설정*/
+    // birthUpdate();
 
 
     /*3. 회원가입 유효성 검사*/
@@ -635,7 +550,7 @@
         var isZip = zipCheck(frm);
         var isPhn = phnCheck(frm);
         var isGen = genCheck(frm);
-        var isBirth = birthCheck(frm)
+        // var isBirth = birthCheck(frm)
         var isTou = touCheck(frm)
         var isPii = piiCheck(frm)
 
@@ -648,6 +563,7 @@
         var jibun = frm.c_jibun_a.value.trim();
         var det = frm.c_det_a.value.trim();
         var phn = frm.c_phn.value.trim();
+        var birth = frm.c_birth.value.trim();
 
         if (!email) {
             alert('이메일을 입력해주세요.');
@@ -698,7 +614,7 @@
         } else if (!isGen) {
             alert("성별을 선택해주세요.");
             return false;
-        } else if (!isBirth) {
+        } else if (!birth) {
             alert("생년월일을 선택해주세요.");
             return false;
         }   else if (!isTou) {
@@ -712,12 +628,6 @@
 
         if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
             alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
-            return false;
-        }
-
-        /*ing*/
-        if (document.getElementById("check-result").innerText.includes("이메일을 입력해주세요.")) {
-            alert("이메일을 작성해주세요.");
             return false;
         }
 
@@ -817,7 +727,7 @@
     /*  우편번호 유효성 검사*/
     function zipCheck(frm) {
         var zip = frm.c_zip.value;
-        if (zip.length >= 6) {
+        if (zip.length > 6) {
             return false;
         }
         return true;
@@ -844,16 +754,16 @@
         }
     }
     /* 생년월일 유효성 검사*/
-    function birthCheck(frm) {
-        var year = frm['birth-year'].value;
-        var month = frm['birth-month'].value;
-        var day = frm['birth-day'].value;
-
-        if (year === '출생 연도' || month === '월 선택' || day === '일 선택') {
-            return false;
-        }
-        return true;
-    }
+    // function birthCheck(frm) {
+    //     var year = frm['birth-year'].value;
+    //     var month = frm['birth-month'].value;
+    //     var day = frm['birth-day'].value;
+    //
+    //     if (year === '출생 연도' || month === '월 선택' || day === '일 선택') {
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     /* 필수 이용약관 유효성 검사*/
     function touCheck(frm){
@@ -894,27 +804,6 @@
         }
     }
 
-
-    /*/!*sms 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
-    const sms_agr = document.getElementById("sms_agr");
-    sms_agr.addEventListener("change",function (){
-        if (!sms_agr.checked) {
-            sms_agr.value = 'N';
-        }else if(sms_agr.checked){
-            sms_agr.value = 'Y'
-        }
-    });
-
-    /!*이메일 수신 동의 체크박스 상태 확인 및 hidden input 값 설정*!/
-    const email_agr = document.getElementById("email_agr");
-    email_agr.addEventListener("change",function (){
-        if (!email_agr.checked) {
-            email_agr.value = 'N';
-        }else if(email_agr.checked){
-            email_agr.value = 'Y'
-        }
-    });*/
-
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -923,6 +812,7 @@
     function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function (data) {
+
                 /*팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.*/
 
                 /*도로명 주소의 노출 규칙에 따라 주소를 표시한다.
@@ -946,6 +836,8 @@
 
                 /*우편번호와 주소 정보를 해당 필드에 넣는다.*/
                 document.getElementById('zip').value = data.zonecode;
+
+
                 document.getElementById("roadAddress").value = roadAddr;
                 document.getElementById("jibunAddress").value = data.jibunAddress;
 

@@ -1,38 +1,45 @@
 package com.homerunball.customer.dao;
 
-import com.homerunball.customer.dao.CustDao;
+import com.homerunball.customer.controller.CustValidator;
+import com.homerunball.customer.controller.LoginController;
 import com.homerunball.customer.domain.CustDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations ={"file:src/main/webapp/WEB-INF/spring/**/root-context.xml"})
+
 public class CustDaoImplTest {
     @Autowired
     private CustDao custDao;
+
 
     @Test
     public void deleteCust() {
     }
 
     @Test
-    public void selectCust() {
+    public void selectEmail() {
     }
 
     @Test
     public void insertCust() throws Exception{
-//        custDao.deleteAll();
-        CustDto custdto = new CustDto("33313", "1234", "aaa", "sss", "d", "000", "sss", "aaa", "sss", "ddd", "aaa", "", "");
+        custDao.deleteAll();
+        CustDto custdto = new CustDto("a2adhdwk", "1234", "aaa", "sss", "d", "000", "223", "aaa", "sss", "ddd", "aaa", null, "");
         int rowCnt = custDao.insertCust(custdto);
 
         assertTrue(rowCnt==1);
-
     }
+
+
 
     @Test
     public void updateCust() throws Exception{

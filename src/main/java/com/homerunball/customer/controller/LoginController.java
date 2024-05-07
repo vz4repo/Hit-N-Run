@@ -34,46 +34,73 @@ public class LoginController {
         return "redirect:/";
     }
 
+    //    로그인체크를 c_id로 바꾸면 404에러
     @PostMapping("/login")
     public String login(String c_email, String c_pwd, String toURL, String rememberEmail, HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes Successful) throws Exception {
-        if(!loginCheck(c_email, c_pwd)) {
+        if (!loginCheck(c_email, c_pwd, request)) {
+//        if(!loginCheck(c_id, c_pwd)) {
 
-//            model.addAttribute("msg", "아이디 또는 비밀번호를 잘못 입력했습니다.");
+
             Successful.addFlashAttribute("loginTry", "loginFail");
             return "redirect:/login";
-//            return "loginForm";
-
         }
-        HttpSession session = request.getSession();
-        session.setAttribute("c_email", c_email);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("c_email", c_email);
 
-        if(rememberEmail != null) {
+//        HttpSession session = request.getSession();
+//        session.setAttribute("c_id", c_id);
+
+        if (rememberEmail != null) {
             Cookie idcookie = new Cookie("c_email", c_email);
             idcookie.setMaxAge(3600);
             response.addCookie(idcookie);
-        }else {
+        } else {
 
-            Cookie idcookie = new Cookie("c_email","");
+            Cookie idcookie = new Cookie("c_email", "");
             idcookie.setMaxAge(0);
             response.addCookie(idcookie);
 
         }
 
-        toURL =  toURL==null || toURL.equals("") ? "/" : toURL;
-                return "redirect:"+toURL;
-//        return "/cart/list";
+        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
+        return "redirect:" + toURL;
     }
 
-    private boolean loginCheck(String c_email, String c_pwd) {
+
+    private boolean loginCheck(String c_email, String c_pwd, HttpServletRequest request) {
+
         CustDto custDto = null;
 
         try {
-            custDto = custDao.selectCust(c_email);
+            custDto = custDao.selectEmail(c_email);
+            if (!(custDto.getC_pwd().equals(c_pwd))) {
+                return false;
+            }
+            custDao.updateLoginDate(c_email);
+            HttpSession session = request.getSession();
+            session.setAttribute("c_id", custDto.getC_id());
+            System.out.println("custDto = " + custDto);
+            System.out.println("custDto.getC_id() = " + custDto.getC_id());
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-
-        return custDto!=null && custDto.getC_pwd().equals(c_pwd);
+        return true;
+//        return custDto != null && custDto.getC_pwd().equals(c_pwd);
     }
 }
+
+//    private boolean loginCheck(int c_id, String c_pwd) {
+//        CustDto custDto = null;
+//
+//        try {
+//            custDto = custDao.selectID(c_id);
+////            custDao.updateLoginDate(c_id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//
+//        return custDto!=null && custDto.getC_pwd().equals(c_pwd);
+//    }
+//}
