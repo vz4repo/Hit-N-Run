@@ -3,6 +3,7 @@ package com.homerunball.admin.product.controller;
 import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping("/admin/product")
@@ -143,6 +142,99 @@ public class ProductController {
         return "/admin/product/productManage";
     }
 
+    /*선택된 제품에 대한 수정사항을 반영한다.*/
+    @PostMapping("/manage")
+    public String manage(ProductDto productDto, @RequestParam("productNumber") String productNumber, @RequestParam("changeContent") String changeContent, @RequestParam("popupInput") String popupInput, RedirectAttributes rattr, Model m) {
+        try {
+            /*
+            productNumber가 selectedProduct라면
+                pd_Id에 선택된 제품 List로 저장한다.
+            productNumber가 allProduct라면
+                pd_Id에 모든 제품을 List로 저장한다.
+
+            changeContent에 저장된 값을 map의 key로 설정한다.
+            request에서 popupInput에 저장된 값을 value로 설정한다.
+
+            성공하면 성공했다는 메시지를 보내고, 제품 수정 페이지로 이동한다.
+            실패하면 실패했다는 메시지를 보내고, 에러 페이지로 이동한다.
+            */
+
+            List<String> productList = new ArrayList<>();
+            if (productNumber.equals("selectedProduct")) {
+                /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
+                if (productDto.getPd_id() == "") {
+                    rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
+                    return "redirect:/admin/product/manage";
+                }
+
+                String[] pdArr = productDto.getPd_id().split(",");
+                for(int i = 0;i<pdArr.length;i++) {
+                    productList.add(pdArr[i]);
+                }
+            } else if (productNumber.equals("allProduct")) {
+                int productSize = productService.getAllProducts().size();
+                for (int i=0; i<productSize; i++) {
+                    String pdId = productService.getAllProducts().get(i).getPd_id();
+                    productList.add(pdId);
+                }
+            }
+
+            /*변경된 컬럼과 값을 저장하기 위해 map타입의 productMap 선언*/
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put(changeContent, popupInput);
+
+            /*productMap에 선택된 pd_id도 저장한다.*/
+            productMap.put("pd_id", productList);
+
+            productService.modifyContent(productMap);
+            rattr.addFlashAttribute("msg", "제품의 내용을 성공적으로 수정하였습니다.");
+        } catch (DataIntegrityViolationException e) {
+          m.addAttribute(productDto);
+          m.addAttribute("msg", "수정할 값을 잘못 입력하셨습니다.");
+          return "redirect:/admin/product/manage";
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(productDto);
+            m.addAttribute("msg", "제품의 내용을 수정하는 데 실패하였습니다.");
+            return "errorPage";
+        }
+        return "redirect:/admin/product/manage";
+    }
+
+    @GetMapping("/manage/exposure")
+    public String productExposure(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
+        List<String> productList = new ArrayList<>();
+        try {
+            if (productNumber.equals("selectedProduct")) {
+                /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
+                if (productDto.getPd_id() == "") {
+                    rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
+                    return "redirect:/admin/product/manage";
+                }
+
+                String[] pdArr = productDto.getPd_id().split(",");
+                for(int i = 0;i<pdArr.length;i++) {
+                    productList.add(pdArr[i]);
+                }
+            } else if (productNumber.equals("allProduct")) {
+                int productSize = productService.getAllProducts().size();
+                for (int i=0; i<productSize; i++) {
+                    String pdId = productService.getAllProducts().get(i).getPd_id();
+                    productList.add(pdId);
+                }
+            }
+
+            m.addAttribute("productListSize", productList.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute(productDto);
+            m.addAttribute("msg", "에러가 발생했습니다.");
+            return "errorPage";
+        }
+
+        return "/admin/product/managePopup/productExposureManage";
+    }
+
     /*진열하지 않은 제품들의 목록을 보여준다.*/
     @GetMapping("/showHiddenProductList")
     public String showHiddenProductList(Model m) {
@@ -203,8 +295,6 @@ public class ProductController {
         try {
             /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
             String pdIds = productDto.getPd_id();
-            System.out.println("pdIds = " + pdIds);
-            System.out.println("pdIds.length() = " + pdIds.length());
 
             /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
             if(pdIds == "") {

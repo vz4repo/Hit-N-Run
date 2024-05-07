@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -76,8 +77,8 @@ public class ProductServiceImpl implements ProductService {
 
     /* 제품의 내용을 수정한다. */
     @Override
-    public int modifyContent(ProductDto productDto) throws Exception {
-        return productDao.updateContent(productDto);
+    public int modifyContent(Map<String, Object> productMap) throws Exception {
+        return productDao.updateContent(productMap);
     }
 
     /*진열이 제외된 상품을 다시 진열한다.*/

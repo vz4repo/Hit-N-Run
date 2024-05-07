@@ -449,11 +449,6 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
-            // $("#searchProductIdBtn").on("click", function () {
-            //     let form = $("form");
-            //     let pd_type=document.getElementById("main");
-            // });
-
             /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
             $("#adComment").keyup(function(e) {
                 let content = $(this).val();

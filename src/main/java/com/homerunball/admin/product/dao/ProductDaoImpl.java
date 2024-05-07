@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ProductDaoImpl implements ProductDao {
     @Autowired
     private SqlSession session;
-    private static String NAMESPACE = "com.homerunball.admin.product.dao.ProductMapper.";
+    private static String NAMESPACE = "com.homerunball.admin.product.dao.ProductDao.";
 
     /* 모든 제품의 수를 센다. */
     @Override
@@ -87,8 +88,8 @@ public class ProductDaoImpl implements ProductDao {
 
     /* 제품에 등록된 내용을 업데이트한다. */
     @Override
-    public int updateContent(ProductDto productDto) throws Exception {
-        return session.update(NAMESPACE + "updateContent", productDto);
+    public int updateContent(Map<String, Object> productMap) throws Exception {
+        return session.update(NAMESPACE + "updateContent", productMap);
     }
 
     /* 상품이 선택될 때마다 조회수를 늘린다. */

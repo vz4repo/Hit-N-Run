@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.homerunball.admin.product.dao.ProductMapper">
+<mapper namespace="com.homerunball.admin.product.dao.ProductDao">
     <!-- 모든 제품의 수를 센다. -->
     <select id="count" resultType="int">
         select count(*) from prd
@@ -81,7 +81,7 @@
     </select>
 
     <!-- 내용 변경 쿼리 -->
-    <update id="updateContent" parameterType="ProductDto">
+    <update id="updateContent" parameterType="map">
         update prd
         <set>
             <if test="pd_name != null">pd_name = #{pd_name},</if>
@@ -99,7 +99,10 @@
             <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
             <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
-        where pd_id = #{pd_id}
+        <!--키가 pd_id인 경우 value는 리스트의 형태로 저장한다.-->
+        <foreach item="item" collection="pd_id" open="where pd_id in (" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 
     <!-- 조회수 증가 쿼리 --> 

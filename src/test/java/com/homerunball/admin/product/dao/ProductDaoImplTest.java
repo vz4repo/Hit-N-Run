@@ -9,7 +9,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -495,7 +495,7 @@ public class ProductDaoImplTest {
         }
     }
 
-    /*ProductDaoImpl의 updateContent 테스트*/
+    /*제품의 내용을 수정하는 updateContent 테스트*/
     @Test
     public void updateContentTest() throws Exception {
         /*0. db 서버가 실행되지 않을 때 테스트하기*/
@@ -507,28 +507,58 @@ public class ProductDaoImplTest {
             /*2. APP(의류) 데이터 1개를 추가한 다음 제품명 변경*/
             ProductDto productDto = new ProductDto("APP000001-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             assertTrue(productDao.insert(productDto) == 1);
-            productDto.setPd_name("pd_name190");
-            assertTrue(productDao.updateContent(productDto) == 1);
+
+            /*2-1변경된 컬럼과 값을 저장하기 위해 map타입의 productMap 선언*/
+            Map<String, Object> productMap = new HashMap<>();
+            productMap.put("pd_name", "pd_name190");
+
+            /*2-2 제품 여러 개가 한 번에 바뀌는 경우를 고려하여 pd_id 컬럼의 값은 List로 선언*/
+            List<String> pdIdList = new ArrayList<>();
+            pdIdList.add("APP000001-40");
+            productMap.put("pd_id", pdIdList);
+            assertTrue(productDao.updateContent(productMap) == 1);
             assertTrue(productDao.selectPrd("APP000001-40").getPd_name().equals("pd_name190"));
 
-            /*3. 새로운 APP(의류) 데이터 1개를 추가한 다음 모델명 변경*/
+            /*3. 새로운 APP(의류) 데이터 1개를 추가한 다음 첫 번째 제품과 두 번째 제품의 모델명 변경*/
             productDto = new ProductDto("APP000002-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn1", "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             assertTrue(productDao.insert(productDto) == 1);
-            productDto.setMdl_name("mdl_name22");
-            assertTrue(productDao.updateContent(productDto) == 1);
+
+            productMap = new HashMap<>();
+            productMap.put("mdl_name", "mdl_name22");
+
+            pdIdList = new ArrayList<>();
+            pdIdList.add("APP000001-40");
+            pdIdList.add("APP000002-40");
+            productMap.put("pd_id", pdIdList);
+            assertTrue(productDao.updateContent(productMap) == 2);
+            assertTrue(productDao.selectPrd("APP000001-40").getMdl_name().equals("mdl_name22"));
             assertTrue(productDao.selectPrd("APP000002-40").getMdl_name().equals("mdl_name22"));
 
             /*4. 새로운 APP(의류) 데이터 1개를 추가한 다음 제품 상태 변경*/
             productDto = new ProductDto("APP000003-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn1", "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             assertTrue(productDao.insert(productDto) == 1);
-            productDto.setPd_stat_hist_cd("10");
-            assertTrue(productDao.updateContent(productDto) == 1);
+
+            productMap = new HashMap<>();
+            productMap.put("pd_stat_hist_cd", "10");
+
+            pdIdList = new ArrayList<>();
+            pdIdList.add("APP000003-40");
+            productMap.put("pd_id", pdIdList);
+            assertTrue(productDao.updateContent(productMap) == 1);
             assertTrue(productDao.selectPrd("APP000003-40").getPd_stat_hist_cd().equals("10"));
 
             /*5. 없는 APP(의류) 데이터 최소 주문 수량 변경*/
             productDto = productDao.selectPrd("APP000004-40");
             productDto.setMin_od_qty(2);
-            assertTrue(productDao.updateContent(productDao.selectPrd("APP000004-40")) == 0);
+
+            productMap = new HashMap<>();
+            productMap.put("min_od_qty", "10");
+
+            pdIdList = new ArrayList<>();
+            pdIdList.add("APP000004-40");
+            productMap.put("pd_id", pdIdList);
+
+            assertTrue(productDao.updateContent(productMap) == 0);
             assertTrue(productDao.selectPrd("APP000004-40").getMin_od_qty() == 0);
         } catch (NullPointerException e) {
             System.out.println("NullPointerException 발생");
@@ -593,11 +623,16 @@ public class ProductDaoImplTest {
             productDto = new ProductDto("APP000002-40", "pd_name1", "mdl_name1", "qlt_cd1", "ctg", "mn_img_fn"+1, "det_img_fn1", "pd_ad_cmt1", "pd_smr_dsc1", "pd_det_dsc"+1, 1,1, 'N', "20240428", "20240414", "og_pd_num1", "origin", "mfr", "srs_id", "ADT", "player_nm", "mtrl", "season", 100, "50", "pd_chr_cd", "BASE", "APP", "SMT", "MZN");
             assertTrue(productDao.insert(productDto) == 1);
             /*3-1진열 상태로 변경*/
+            System.out.println("productDao.updateToShow(List.of(\"APP000002-40\"))" + productDao.updateToShow(List.of("APP000002-40")));
             assertTrue(productDao.updateToShow(List.of("APP000002-40")) == 1);
             assertTrue(productDao.selectPrd("APP000002-40").getPd_is_show() == 'Y');
             /*3-2 진열 제외 상태로 변경*/
-            productDto.setPd_is_show('N');
-            assertTrue(productDao.updateContent(productDto) == 1);
+            HashMap<String, Object> productMap = new HashMap<>();
+            productMap.put("pd_is_show", "N");
+            List<String> pdIdList = new ArrayList<>();
+            pdIdList.add("APP000002-40");
+            productMap.put("pd_id", pdIdList);
+            assertTrue(productDao.updateContent(productMap) == 1);
             assertTrue(productDao.selectPrd("APP000002-40").getPd_is_show() == 'N');
             /*3-3 진열 상태로 변경*/
             assertTrue(productDao.updateToShow(List.of("APP000002-40")) == 1);
