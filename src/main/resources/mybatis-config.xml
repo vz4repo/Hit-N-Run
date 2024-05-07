@@ -11,5 +11,7 @@
     <typeAlias alias="OrderDetDto" type="com.homerunball.order.domain.OrderDetDto"/>
     <typeAlias alias="OrderStatDto" type="com.homerunball.order.domain.OrderStatDto"/>
 <!--    <typeAlias alias="OrderHistDto" type="com.homerunball.order.domain.OrderHistDto"/>-->
+    <typeAlias alias="PaymentDto" type="com.homerunball.payment.domain.PaymentDto"/>
+    <typeAlias alias="PaymentFailDto" type="com.homerunball.payment.domain.PaymentFailDto"/>
   </typeAliases>
 </configuration>

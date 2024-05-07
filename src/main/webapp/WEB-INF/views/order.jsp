@@ -1,22 +1,20 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<%--    <link rel="stylesheet" href="reset.css" />--%>
-    <link
-            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet" />
-<%--    <link rel="stylesheet" href="order.css" />--%>
-    <title>상품정보</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="reset.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="order.css" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/payStyle.css'/>"   rel="stylesheet" />
+    <!-- 결제위젯 SDK 추가 -->
+    <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+    <title> 주문 & 배송</title>
 </head>
 <body>
-<main>
     <div class="order__header">
         <a href="#" class="order__path">Homerun() > 주문서</a>
         <hr />
@@ -31,7 +29,7 @@
             </div>
         </div>
         <hr />
-        <div class="order_item_delivery">
+        <section class="order__delivery">
             <ul>
                 <li>
                     <span>배송지</span>
@@ -44,9 +42,9 @@
                     <span>이름 / 연락처</span>
                 </li>
             </ul>
-        </div>
-
+        </section>
     </div>
+    <section class="order__items">
     <hr class="first__under" />
     <div class="title__order">상품정보</div>
     <hr class="second__under" />
@@ -120,7 +118,12 @@
             </table>
         </form>
     </div>
-</main>
+    </section>
+<section class="order__payment">
+    <%@include file="payCheckout.jsp"%>
+<%--    <jsp:include page="payCheckout.jsp"/>--%>
+</section>
+<script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>
 </body>
 
 </html>
