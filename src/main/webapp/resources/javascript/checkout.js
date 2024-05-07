@@ -13,7 +13,7 @@
   * ------  결제위젯 초기화 ------
   * TODO: widgetClientKey는 개발자센터의 결제위젯 연동 키 > 클라이언트 키로 바꾸세요.
   * TODO: 구매자의 고유 아이디를 불러와서 customerKey로 설정하세요. 이메일・전화번호와 같이 유추가 가능한 값은 안전하지 않습니다.
-  * widgetClientKey: 혁락 테스트 클라이언트 키
+  * widgetClientKey: 테스트 클라이언트 키
   * customerKey: 내 상점에서 고객을 구분하기 위한 키
   * paymentWidget: 회원/비회원마다 다른 호출
   */
