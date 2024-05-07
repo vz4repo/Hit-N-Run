@@ -2,49 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.homerunball.admin.product.dao.ProductMapper">
+    <!-- 모든 제품의 수를 센다. -->
     <select id="count" resultType="int">
         select count(*) from prd
     </select>
 
+    <!--모든 제품을 삭제한다.-->
     <delete id="deleteAll">
         delete from prd
     </delete>
 
+    <!--지정된 pd_id 하나를 삭제한다.-->
     <delete id="delete" parameterType="map">
         delete
         from prd
         where pd_id = #{pd_id}
     </delete>
 
+    <!--지정한 제품을 여러 개를 삭제한다.-->
+    <delete id="deleteSelected" parameterType="java.util.List">
+        delete
+        from prd
+        where pd_id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--제품 한 개를 prd(제품) 테이블에 삽입한다.-->
     <insert id="insert" parameterType="ProductDto">
         insert into prd
-            (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_nm,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
+            (pd_id, pd_name, mdl_name,ctg,mn_img_fn,det_img_fn,pd_ad_cmt,pd_smr_dsc,pd_det_dsc,min_od_qty, max_od_qty, pd_is_show, sls_strt_dt,pd_mnf_date, og_pd_num,origin,mfr,srs_id,player_name,mtrl,season,wgh,qlt_cd,pd_chr_cd,sprt_type_cd,pd_type_cd,pd_type_det_cd,brd_cd,clr_cd,age_grp_cd)
         values
-            (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_nm}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
+            (#{pd_id}, #{pd_name}, #{mdl_name}, #{ctg}, #{mn_img_fn}, #{det_img_fn}, #{pd_ad_cmt}, #{pd_smr_dsc}, #{pd_det_dsc}, #{min_od_qty}, #{max_od_qty}, #{pd_is_show}, #{sls_strt_dt}, #{pd_mnf_date}, #{og_pd_num}, #{origin}, #{mfr}, #{srs_id}, #{player_name}, #{mtrl}, #{season}, #{wgh}, #{qlt_cd}, #{pd_chr_cd}, #{sprt_type_cd}, #{pd_type_cd}, #{pd_type_det_cd}, #{brd_cd}, #{clr_cd}, #{age_grp_cd})
     </insert>
 
+    <!--제품 한 개를 prd(제품) 테이블에서 선택한다.-->
     <select id="selectPrd" parameterType="ProductDto" resultType="ProductDto">
         select *
         from prd
         where pd_id = #{pd_id}
     </select>
 
+    <!--prd 테이블에 있는 모든 제품을 선택한다.-->
     <select id="selectPrdAll" resultType="ProductDto">
         select *
         from prd
         order by frst_reg_dt desc
     </select>
 
+    <!--prd 테이블에서 진열이 제외된 모든 제품을 선택한다.-->
+    <select id="selectAllOutProduct" resultType="ProductDto">
+        select *
+        from prd
+        where pd_is_show = 'N'
+        order by frst_reg_dt desc
+    </select>
+
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 선택하기 -->
     <sql id="selectPrdStk">
         select pd.pd_id, pd.pd_name, pd.qlt_cd, stk.pd_clsf_cd, stk.sls_prc
         from prd as pd, stk
         where pd.pd_id = stk.pd_id
     </sql>
 
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 모든 제품 선택하기 -->
     <select id="selectPrdPrcAll" resultType="ProductDto">
         <include refid="selectPrdStk"/>
     </select>
 
+    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 한 개 선택하기 -->
     <select id="selectPrdPrc" parameterType="String" resultType="ProductDto">
         select *
         from (
@@ -70,21 +97,41 @@
             <if test="rvw_cnt != null">rvw_cnt = #{rvw_cnt},</if>
             <if test="wish_cnt != null">wish_cnt = #{wish_cnt},</if>
             <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
+            <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
-        where pd_id = #{pd_id};
-    </update>
-
-    <!-- 제품 상태 변경 쿼리 -->
-    <update id="updateStatus" parameterType="ProductDto">
-        update prd
-        set pd_stat_hist_cd = #{pd_stat_hist_cd}
-        where pd_id = #{pd_id};
+        where pd_id = #{pd_id}
     </update>
 
     <!-- 조회수 증가 쿼리 --> 
     <update id="increaseHitCnt" parameterType="ProductDto">
         update prd
         set hit_cnt = hit_cnt + 1
-        where pd_id = #{pd_id};
+        where pd_id = #{pd_id}
+    </update>
+
+    <!-- 제품 ID에서 선택된 제품 유형 중 가장 큰 숫자를 찾는 쿼리-->
+    <select id="searchBiggestSerialNumber" parameterType="ProductDto" resultType="int">
+        select cast(substr(pd_id,4,6) as unsigned) as serial_number
+        from prd
+        where pd_type_cd = #{pd_type_cd}
+        order by serial_number desc
+        limit 1
+    </select>
+
+    <!--지정된 제품 유형에 포함된 제품의 개수를 센다.-->
+    <select id="countType" parameterType="ProductDto" resultType="int">
+        select count(*)
+        from prd
+        where pd_type_cd = #{pd_type_cd}
+    </select>
+
+    <!--진열이 제외된 상품을 다시 진열하기 위한 쿼리-->
+    <update id="updateToShow" parameterType="java.util.List">
+        update prd
+        set pd_is_show = 'Y'
+        where pd_id in
+        <foreach item="item" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </update>
 </mapper>
