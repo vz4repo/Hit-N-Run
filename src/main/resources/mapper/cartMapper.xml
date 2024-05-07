@@ -10,14 +10,9 @@
     </resultMap>
     <!-- cust테이블의 전체고객 가져오기 TDD코드에 이용 -->
     <select id="getcustAll" resultMap="custResultMap">
-        select * from cust
+        select c_id from cust
     </select>
 
-    <!-- cust테이블의 c_id 1건 가져오기 -->
-    <select id="getCidByEmail" resultType="String" parameterType="String">
-        select c_id from cust
-        where c_email = #{c_email};
-    </select>
 
     <select id="count" resultType="int">
         select count(*) from cart;
@@ -26,7 +21,7 @@
     <!-- 한 고객의 장바구니 선택 삭제-->
     <delete id="delete" parameterType="map" >
         delete from cart
-        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
+               where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
     </delete>
 
     <!--한 고객의 장바구니 전체삭제-->
@@ -64,10 +59,9 @@
     <!--장바구니 update-->
     <update id="update" parameterType="CartDto">
         update cart
-        set pd_id = #{pd_id}
-          , pd_clsf_code = #{pd_clsf_code}
-          , cart_cnt = #{cart_cnt}
-        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code=#{pd_clsf_code}
+        set pd_clsf_code = #{pd_clsf_code}
+        , cart_cnt = #{cart_cnt}
+        where c_id = #{c_id} and pd_id = #{pd_id}
     </update>
 
     <!-- Cart 장바구니 중복객체인지 확인 TDD구현하기 -->

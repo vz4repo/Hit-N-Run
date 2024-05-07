@@ -116,7 +116,7 @@ public class CartDaoImplTest {
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==1);
 
-        /* 0번째 고객이 장바구니에 한번 더 담은후 0번째 고객의 장바구니를 전체삭제 */
+         /* 0번째 고객이 장바구니에 한번 더 담은후 0번째 고객의 장바구니를 전체삭제 */
         cart = new CartDto(c_id, "GLV000021-20", "RRR",2);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==2);
@@ -186,10 +186,11 @@ public class CartDaoImplTest {
         assertTrue(cartDao.count()==1);
 
         // 0번쨰 고객의 고객ID 가져오기
-        String c_id = cartDao.selectAll().get(0).getC_id();
+        String c_id = cart.getC_id();
         System.out.println(c_id); // 100001
         System.out.println(cart); // CardDto{c_id='100001', pd_id='GLV000021-30', pd_clsf_code='333', cart_cnt=2, price=0, totalPrice=0}
-        /*0번째고객의, 사이즈와 장바구니담은수량을 변경한다*/
+         /*0번째고객의, 사이즈와 장바구니담은수량을 변경한다*/
+        cart.setC_id(cid);
         cart.setPd_clsf_code("XS");
         cart.setCart_cnt(3);
 

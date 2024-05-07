@@ -1,8 +1,8 @@
 package com.homerunball.order.controller;
 
-
-import com.homerunball.order.dao.OrderDetDao;
-import com.homerunball.order.domain.OrderDetDto;
+import com.homerunball.cart.dao.CartDao;
+import com.homerunball.cart.domain.CartDto;
+import com.homerunball.order.dao.OrdDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,22 +12,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/ord")
+@RequestMapping("/")
 public class OrdDetController {
     @Autowired
-    OrderDetDao orderDetDao;
+    CartDao cartDao;
+    @Autowired
+    OrdDao ordDao;
+    @GetMapping("/orderDetail")
+    public String orderDetail(String od_id,String c_id, Model m){
+        try {
+            /*List<OrdDto> list = ordDao.selectOdId(od_id);
+            System.out.println(list);*/
+            List<CartDto> list = cartDao.selectUser(c_id);
 
-    @GetMapping("/detail")
-    public String orderDetailForm(int od_det_seqnum, int od_id, Model m){
-        try{
-            List<OrderDetDto> list = orderDetDao.select(od_det_seqnum,od_id);
             System.out.println(list);
 
-            m.addAttribute("list", list);
-
-        }catch (Exception e){
+            /*System.out.println("[controller]ordDto = " + ordDto);*/
+            m.addAttribute("list",list);
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return "orderdetail";
+        return "orderList";
     }
 }

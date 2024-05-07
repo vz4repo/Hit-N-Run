@@ -44,11 +44,16 @@ public class OrdDaoImpl implements OrdDao {
     @Override
     public List<OrdDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
-    } // Li
+    }
 
     @Override
     public List<OrdDto> selectOdId(String od_id) throws Exception {
         return session.selectList(namespace+"selectOdId",od_id);
+    }
+
+    @Override
+    public List<OrdDto> selectCid(String c_id) throws Exception {
+        return session.selectList(namespace + "selectCid", c_id);
     }
 
     @Override

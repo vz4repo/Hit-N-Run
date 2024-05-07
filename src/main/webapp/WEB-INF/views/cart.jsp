@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%--    <link rel="stylesheet" href="reset.css" />--%>
+<%--    <link rel="stylesheet" href="reset.css" />--%>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <%--    <link rel="stylesheet" href="cart.css" />--%>
+<%--    <link rel="stylesheet" href="cart.css" />--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
     <title>장바구니</title>
@@ -57,39 +57,39 @@
                 <td colspan="6"><h1>장바구니에 담긴 상품이 없습니다.</h1></td>
             </c:when>
             <c:otherwise>
-                <c:forEach var="cartDto" items="${list}">
-                    <tr>
-                        <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength" /></td>
-                        <td>
-                            <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
-                        </td>
-                        <td>
-                            <a href="#">${cartDto.pd_id}</a>
-                            <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
-                        </td>
-                        <td><span name="price"></span>판매가 원</td>
-                        <td>
-                            <div class="quantity_control">
-                                <form id="update_form">
-                                    <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
-                                    <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
-                                    <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
-                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
-                                    <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>
-                                    <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>
-                                    <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
-                                </form>
-                            </div>
-                        </td>
-                        <td>
-                            <span>무료배송</span>
-                        </td>
-                        <td>
+                    <c:forEach var="cartDto" items="${list}">
+                        <tr>
+                            <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength" /></td>
+                            <td>
+                                <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
+                            </td>
+                            <td>
+                                <a href="#">${cartDto.pd_id}</a>
+                                <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
+                            </td>
+                            <td><span name="price"></span>판매가 원</td>
+                            <td>
+                                <div class="quantity_control">
+                                    <form id="update_form">
+                                        <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
+                                        <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
+                                        <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
+                                        <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
+                                        <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>
+                                        <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>
+                                        <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <span>무료배송</span>
+                            </td>
+                            <td>
                                 <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
-                            <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
-                        </td>
-                    </tr>
-                </c:forEach>
+                                <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
+                            </td>
+                        </tr>
+                    </c:forEach>
             </c:otherwise>
         </c:choose>
         <div>
@@ -122,11 +122,9 @@
                 <form action="" id="removeAllForm">
                     <button type="button" id="delete_All_Btn">전체상품 삭제</button>
                 </form>
-                <form action="/order" id="orderAllForm">
+                <form action="" id="orderForm" method="post">
                     <button type="button" class="order_Btn" id="order_Select_Btn">선택상품 주문</button>
-                    <button type="button" class="order_Btn" id="order_All_Btn">
-                       전체상품 주문
-                    </button>
+                    <button type="button" class="order_Btn" id="order_All_Btn">전체상품 주문</button>
                 </form>
             </td>
             <td>
@@ -141,6 +139,12 @@
 
     $(document).ready(function (){
         /* 주문으로 넘기기 */
+        $('#order_All_Btn').on("click", function (){
+            let orderForm = $('#orderForm');
+            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
+            orderForm.attr("method", "post");
+            orderForm.submit();
+        })
 
 
         /* 컬럼 체크박스 선택시 전체체크 or 해제 */
@@ -238,15 +242,6 @@
                 }
             })
         })
-
-        /* 주문하기 클릭시 c_id값 넘겨주기 */
-        $('#order_All_Btn').on("click", function(){
-            let form = $('#orderAllForm');
-            form.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
-            form.attr("method", "post");
-            form.submit();
-        });
-
 
     })
 </script>

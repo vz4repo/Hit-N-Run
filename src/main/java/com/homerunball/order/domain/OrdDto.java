@@ -17,18 +17,16 @@ public class OrdDto {
     private String frst_reg_id;
     private Date last_mod_dt;
     private String last_mod_id;
-    /*
-    추가 예정
-    pd_name, sls_prc
-    */
-    public  OrdDto(){}
-
-    public OrdDto(String c_id){
-
-        this(c_id, new Date(), "", 0, 0, 0, 0);
+/*
+추가 예정
+pd_name, sls_prc
+*/
+    public OrdDto(){
 
     }
-
+    public  OrdDto(String c_id){
+        this(c_id, new Date(), "", 0, 0, 0, 0);
+    }
 
     public OrdDto(String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer rtl_prc, Integer od_pay_amt) {
         this.c_id = c_id;
@@ -167,4 +165,5 @@ public class OrdDto {
                 '}';
     }
 }
+
 
