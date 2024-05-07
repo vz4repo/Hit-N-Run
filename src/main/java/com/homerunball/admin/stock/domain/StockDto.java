@@ -113,9 +113,7 @@ public class StockDto {
         return nml_stk_qty + rt_stk_qty + rgn_stk_qty;
     }
 
-    public void setOdpmt_stk(Integer odpmt_stk) {
-        this.odpmt_stk = odpmt_stk;
-    }
+    public void setOdpmt_stk(Integer odpmt_stk) { this.odpmt_stk = odpmt_stk; }
 
     public String getPur_dt() {
         return pur_dt;
@@ -179,6 +177,38 @@ public class StockDto {
 
     public void setStk_stat_cd(String stk_stat_cd) {
         this.stk_stat_cd = stk_stat_cd;
+    }
+
+    public Date getFrst_reg_dt() {
+        return frst_reg_dt;
+    }
+
+    public void setFrst_reg_dt(Date frst_reg_dt) {
+        this.frst_reg_dt = frst_reg_dt;
+    }
+
+    public String getFrst_reg_id() {
+        return frst_reg_id;
+    }
+
+    public void setFrst_reg_id(String frst_reg_id) {
+        this.frst_reg_id = frst_reg_id;
+    }
+
+    public Date getLast_mod_dt() {
+        return last_mod_dt;
+    }
+
+    public void setLast_mod_dt(Date last_mod_dt) {
+        this.last_mod_dt = last_mod_dt;
+    }
+
+    public String getLast_mod_id() {
+        return last_mod_id;
+    }
+
+    public void setLast_mod_id(String last_mod_id) {
+        this.last_mod_id = last_mod_id;
     }
 
     @Override

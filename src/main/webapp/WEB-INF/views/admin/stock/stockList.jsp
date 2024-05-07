@@ -1,12 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         <%@include file="/resources/css/adminMenu.css" %>
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
     </style>
     <style>
         .main {
@@ -20,6 +27,10 @@
             text-align: center;
         }
 
+        .tableLeft > tr > td {
+            text-align: left;
+        }
+
         table {
             width: 100%;
             text-align: center;
@@ -31,16 +42,15 @@
             padding: 5px;
         }
 
-        tr { text-align: center; }
-        td { text-align: left; }
+        /*
+                tr { text-align: center; }
+                td { text-align: left; }
+        */
 
         .search-option {
-            width: 100px;
-            height: 100%;
             outline: none;
             margin: 0 5px;
             border: 1px solid #ccc;
-            color: gray;
             padding: 5px;
         }
 
@@ -58,6 +68,16 @@
             padding: 5px;
         }
 
+        .search-inputDate {
+            color: gray;
+            background-color: white;
+            border: 1px solid #ccc;
+            height: 100%;
+            width: 100px;
+            font-size: 15px;
+            padding: 5px;
+        }
+
         .search-input::placeholder {
             color: gray;
         }
@@ -66,39 +86,58 @@
             margin: 20px;
         }
 
-        .searchBtn {
+        .sendBtn, .sendBtnSmall {
             border-radius: 4px;
             border: 1px solid #000000;
             color: white;
-            padding: 10px 20px;
-            font-size: 15px;
             cursor: pointer;
             background-color: #585858;
         }
 
-        .searchBtn:hover, .cancelBtn:hover {
-            background: #0b7dda;
-        }
-
-        .cancelBtn {
-            border-radius: 1px;
-            border: 1px solid #000000;
-            background-color: white;
+        .sendBtn, .cancelBtn {
             padding: 10px 20px;
             font-size: 15px;
+        }
+
+        .sendBtnSmall, .cancelBtnSmall {
+            padding: 5px 10px;
+            font-size: 10px;
+        }
+
+        .cancelBtn, .cancelBtnSmall {
+            border-radius: 4px;
+            border: 1px solid #000000;
+            background-color: white;
             cursor: pointer;
             color: #000000;
         }
+
+        .cancelBtn:hover, .cancelBtnSmall:hover {
+            background: #0b7dda;
+            color: white;
+        }
+
+        .sendBtn:hover, .sendBtnSmall:hover {
+            background: #0b7dda;
+        }
+
+        .createStockBtn[disabled] {
+            cursor: not-allowed;
+            background: #9e9ea4;
+            color: #7e7e87;
+        }
+
     </style>
     <title>재고 목록</title>
 </head>
 <body>
 <jsp:include page="../adminMenu.jsp" flush="false"/>
 <div class="main">
-    <h1>재고 검색 조회 화면</h1>
+    <h1>재고: 상품검색 > 상품조회 > 재고 개별 등록 화면</h1>
+    <%-- 재고관리를 위한 제품 검색 --%>
     <div class="search-container">
         <form action="<c:url value="/admin/stock/register"/>" class="search-form" method="get">
-            <table>
+            <table class="tableLeft">
                 <tr>
                     <th colspan="2">제품 검색</th>
                 </tr>
@@ -125,7 +164,7 @@
                     <th>상품 분류</th>
                     <td>
                         <label for="pd_type_cd">제품 유형</label>
-                        <select id="pd_type_cd" name="pd_type_cd">
+                        <select class="search-option" id="pd_type_cd" name="pd_type_cd">
                             <option value="GLV">글러브</option>
                             <option value="PRO">보호장비</option>
                             <option value="OGL">장갑</option>
@@ -137,7 +176,7 @@
                         </select>
 
                         <label for="pd_type_det_cd">제품 상세 유형</label>
-                        <select id="pd_type_det_cd" name="pd_type_det_cd">
+                        <select class="search-option" id="pd_type_det_cd" name="pd_type_det_cd">
                             <option value="CAT">포수</option>
                             <option value="INF">내야수</option>
                             <option value="FIR">1루수</option>
@@ -162,7 +201,7 @@
                         </select>
 
                         <label for="brd_cd">브랜드</label>
-                        <select id="brd_cd" name="brd_cd">
+                        <select class="search-option" id="brd_cd" name="brd_cd">
                             <option value="GLD">골드</option>
                             <option value="KBT">구보타슬러거</option>
                             <option value="NB">뉴발란스</option>
@@ -195,9 +234,21 @@
                         </select>
                     </td>
                 </tr>
-                <%--상품 등록일: 날짜 날짜--%>
+                <%--상품 등록일: 검색시작날짜 - 검색마지막날짜--%>
                 <tr>
                     <th>상품 등록일</th>
+                    <%--
+                        - 미선택 시 후 (1개월, 3개월, 6개월)버튼 클릭 시 오늘날짜 기준으로 조회
+                        - 검색 시작일자 기준 1개월, 3개월, 6개월
+                    --%>
+                    <td>
+                        기간선택 :
+                        <label for="sdate">시작일</label>
+                        <input class="search-inputDate" type="date" id="sdate">
+                        ~
+                        <label for="edate">종료일</label>
+                        <input class="search-inputDate" type="date" id="edate">
+                    </td>
                 </tr>
                 <%--진열 상태: 전체, 진열중, 진열 제외--%>
                 <tr>
@@ -205,7 +256,7 @@
                     <td>
                         <input type='radio' id="displayAll" name='pd_is_show'/>
                         <label for="displayAll">전체</label>
-                        <input type='radio' id="displayOn" name='pd_is_show' value='Y' required/>
+                        <input type='radio' id="displayOn" name='pd_is_show' value='Y'/>
                         <label for="displayOn">진열하기</label>
                         <input type='radio' id="displayNo" name='pd_is_show' value='N'/>
                         <label for="displayNo">진열제외</label>
@@ -217,7 +268,7 @@
                     <td>
                         <input type='radio' id="allSale" name='pd_stat_hist_cd'/>
                         <label for="allSale">전체</label>
-                        <input type='radio' id="planSale" name='pd_stat_hist_cd' value='planSale' required/>
+                        <input type='radio' id="planSale" name='pd_stat_hist_cd' value='planSale'/>
                         <label for="planSale">판매 예정</label>
                         <input type='radio' id="onSale" name='pd_stat_hist_cd' value='onSale'/>
                         <label for="onSale">판매 중</label>
@@ -225,34 +276,65 @@
                         <label for="notSale">판매 안 함</label>
                     </td>
                 </tr>
-                <tr>
-
-                </tr>
             </table>
             <div class="buttons">
-                <button type="submit" class="searchBtn" id="searchBtn">검색</button>
+                <button type="submit" class="sendBtn" id="searchBtn">검색</button>
                 <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
             </div>
         </form>
     </div>
+    <%-- 재고관리를 위한 제품 목록 조회 및 재고등록/수정/일괄설정 --%>
     <div class="product-container">
-        <h5>제품목록</h5>
         <table>
             <tr>
+                <th>
+                    <button type="button" class="sendBtnSmall" id="stockManage">재고 일괄설정</button>
+                </th>
+                <th colspan="12">제품목록(재고 등록할 제품 선택)</th>
+            </tr>
+            <tr>
+                <th class="select_checkbox">전체선택<input type="checkbox" id="selectAll"></th>
                 <th class="pd_id">제품ID</th>
                 <th class="pd_name">제품명</th>
+                <th class="frst_reg_dt">상품 등록일</th>
+                <th class="pd_clsf_cd">제품사이즈</th>
                 <th class="nml_stk_qty">정상재고 수량</th>
                 <th class="rt_stk_qty">반품재고 수량</th>
                 <th class="rgn_stk_qty">재생가능재고 수량</th>
                 <th class="urgn_stk_qty">재생불가능재고 수량</th>
                 <th class="sfty_stk_qty">안전재고 수량</th>
                 <th class="odpmt_stk">가용재고</th>
+                <th class="useStock">재고관리사용</th>
+                <th class="createStock">개별재고등록</th>
             </tr>
-            <c:forEach var="productDto" items="${productList}">
+            <c:forEach var="productDto" items="${productList}" varStatus="status">
                 <tr>
-                    <td class="pd_id">${productDto.pd_id}</td>
-                    <td class="pd_name">${productDto.pd_name}</td>
-
+                    <td class="select_checkbox">
+                        <input type="checkbox" name="selectedProduct" id="select_checkbox${status.index}"
+                               value="${productDto.pd_id}">
+                    </td>
+                    <td id="pd_id" class="pd_id">${productDto.pd_id}</td>
+                    <td id="pd_name" class="pd_name">${productDto.pd_name}</td>
+                    <td class="frst_reg_dt">
+                        <fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd"/>
+                    </td>
+                    <td id="pd_clsf_cd" class="pd_clsf_cd">
+                        <select class="search-option" name="pd_clsf_cd">
+                            <option value="ALL">모든사이즈</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="2XL">2XL</option>
+                            <option value="3XL">3XL</option>
+                                <%--
+                                <option value="LH">좌투(</option>
+                                <option value="RH">우투</option>
+                                <option value="FREE">FREE사이즈</option>
+                                --%>
+                        </select>
+                    </td>
                     <c:set var="foundStock" value="false"/>
                     <c:forEach var="stockDto" items="${stockList}">
                         <c:if test="${stockDto.pd_id eq productDto.pd_id}">
@@ -273,13 +355,75 @@
                         <td class="sfty_stk_qty">0</td>
                         <td class="odpmt_stk">0</td>
                     </c:if>
+                    <td class="useStock">
+                        <select class="search-option stockUse" id="stockUse${status.index}">
+                            <option value="used">사용함</option>
+                            <option value="unUsed">사용안함</option>
+                        </select>
+                    </td>
+                    <td class="createStock">
+                        <button type="button" class="sendBtnSmall createStockBtn" id="createStockBtn${status.index}">
+                            재고등록
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
-    <div class="stock-container">
+    <%-- 재고등록/수정/일괄설정 버튼 클릭 시 노출되는 화면 --%>
+    <div class="stock-container" id="managementStock">
+        <table>
+            <thead>
+            <tr>
+                <th class="pd_id">제품ID</th>
+                <th class="pd_name">제품명</th>
+                <th class="pd_clsf_cd">제품 구분 코드</th>
+                <th class="nml_stk_qty">정상재고 수량</th>
+                <th class="rt_stk_qty">반품재고 수량</th>
+                <th class="rgn_stk_qty">재생가능재고 수량</th>
+                <th class="urgn_stk_qty">재생불가능재고 수량</th>
+                <th class="sfty_stk_qty">안전재고 수량</th>
+                <th class="pur_dt">매입일</th>
+                <th class="rcpt_dt">입고일</th>
+                <th class="rcpt_cp">입고처</th>
+                <th class="rcpt_prc">입고가격</th>
+                <th class="rtl_prc">소비자가격</th>
+                <th class="sls_prc">판매가격</th>
+                <th class="stk_plc_cd">재고 위치 코드</th>
+            </tr>
+            </thead>
+            <tbody id="stockBody">
+
+            </tbody>
+            <%--<c:forEach var="stockDto" items="${stockList}">
+                <tr>
+                    <td class="pd_id">${stockDto.pd_id}</td>
+                    <td class="pd_name">${stockDto.pd_name}</td>
+                    <td class="pd_clsf_cd">${stockDto.pd_clsf_cd}</td>
+                    <td class="nml_stk_qty">${stockDto.nml_stk_qty}</td>
+                    <td class="rt_stk_qty">${stockDto.rt_stk_qty}</td>
+                    <td class="rgn_stk_qty">${stockDto.rgn_stk_qty}</td>
+                    <td class="urgn_stk_qty">${stockDto.urgn_stk_qty}</td>
+                    <td class="sfty_stk_qty">${stockDto.sfty_stk_qty}</td>
+                    <td class="odpmt_stk">${stockDto.odpmt_stk}</td>
+                    <td class="pur_dt">${stockDto.pur_dt}</td>
+                    <td class="rcpt_dt">${stockDto.rcpt_dt}</td>
+                    <td class="rcpt_cp">${stockDto.rcpt_cp}</td>
+                    <td class="rcpt_prc">${stockDto.rcpt_prc}</td>
+                    <td class="rtl_prc">${stockDto.rtl_prc}</td>
+                    <td class="sls_prc">${stockDto.sls_prc}</td>
+                    <td class="stk_plc_cd">${stockDto.stk_plc_cd}</td>
+                </tr>
+            </c:forEach>--%>
+        </table>
+        <button type="button" class="sendBtnSmall" id="confirmStockBtn">확인</button>
+        <button type="button" class="cancelBtnSmall" id="cancelStockBtn">취소</button>
+    </div>
+    <%-- 재고전체목록 > 리스트는 다로 빼내야하나?? --%>
+    <%--<div class="stock-container">
         <h5>재고목록</h5>
         <table>
+            <thead>
             <tr>
                 <th class="pd_id">제품ID</th>
                 <th class="pd_name">제품명</th>
@@ -298,6 +442,8 @@
                 <th class="sls_prc">판매가격</th>
                 <th class="stk_plc_cd">재고 위치 코드</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="stockDto" items="${stockList}">
                 <tr>
                     <td class="pd_id">${stockDto.pd_id}</td>
@@ -318,11 +464,181 @@
                     <td class="stk_plc_cd">${stockDto.stk_plc_cd}</td>
                 </tr>
             </c:forEach>
+            </tbody>
+
         </table>
-    </div>
-    <div class="paging-container">
-        <p>페이징자리</p>
-    </div>
+        <div class="buttons">
+            <button type="submit" class="sendBtn" id="stockBodyInsBtn">재고등록</button>
+        </div>
+    </div>--%>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        /* 재고를 등록하는 #managementStock div는 최초에 안보임 */
+        $('#managementStock').hide();
+
+        /* 재고사용 여부 변화에 따라 이벤트 처리
+           > used일 경우 재고등록 버튼 활성화
+           > unUsed일 경우 재고등록 버튼 비활성화 */
+        $('.stockUse').change(function () {
+            var index = $(this).attr('id').replace('stockUse', '');
+            var stockUseValue = $(this).val();
+            if (stockUseValue === 'used') {
+                $('#createStockBtn' + index).prop('disabled', false);
+            } else {
+                $('#createStockBtn' + index).prop('disabled', true);
+            }
+        });
+
+        /* 페이지 로딩 시 재고 사용 여부에 따라 버튼 활성/비활성 */
+        $('.stockUse').each(function () {
+            var index = $(this).attr('id').replace('stockUse', '');
+            if ($(this).val() === 'used') {
+                $('#createStockBtn' + index).prop('disabled', false);
+            } else {
+                $('#createStockBtn' + index).prop('disabled', true);
+            }
+        });
+
+        /* 재고등록 버튼 클릭 시 이벤트 발생 */
+        $('.createStockBtn').click(function () {
+            /*var index = $(this).attr('id').replace('createStockBtn', '');*/
+
+            /* 재고등록 하는 index의 pd_id, pd_name, pd_clsf_cd, 나머지재고 정보를 입력받을 폼을 tbody에 html 요소로 넣어주기*/
+            var pd_id = $(this).closest('tr').find('#pd_id').text();
+            var pd_name = $(this).closest('tr').find('#pd_name').text();
+            var pd_clsf_cd = $(this).closest('tr').find('#pd_clsf_cd select').val();
+
+            var stockBody = '<tr>' +
+                '<td class="pd_id">' + pd_id + '</td>' +
+                '<td class="pd_name">' + pd_name + '</td>' +
+                '<td class="pd_clsf_cd">' + pd_clsf_cd + '</td>' +
+                '<td class="nml_stk_qty"><input type="text"></td>' +
+                '<td class="rt_stk_qty"><input type="text"></td>' +
+                '<td class="rgn_stk_qty"><input type="text"></td>' +
+                '<td class="urgn_stk_qty"><input type="text"></td>' +
+                '<td class="sfty_stk_qty"><input type="text"></td>' +
+                '<td class="pur_dt"><input type="date"></td>' +
+                '<td class="rcpt_dt"><input type="date"></td>' +
+                '<td class="rcpt_cp"><input type="text"></td>' +
+                '<td class="rcpt_prc"><input type="text"></td>' +
+                '<td class="rtl_prc"><input type="text"></td>' +
+                '<td class="sls_prc"><input type="text"></td>' +
+                '<td class="stk_plc_cd"><input type="text"></td>' +
+                '</tr>';
+
+            $('#stockBody').html(stockBody);
+
+            /* #managementStock div 보이기로 설정 변경 */
+            $('#managementStock').show();
+        });
+
+        /* 확인 버튼 클릭 시 register controller 넘어가서 테이블에 데이터 삽입(재고 등록 처리) */
+        $('#confirmStockBtn').click(function () {
+            var pd_id = $('#stockBody .pd_id').text();
+            var pd_name = $('#stockBody .pd_name').text();
+            var pd_clsf_cd = $('#stockBody .pd_clsf_cd').text();
+            var nml_stk_qty = $('#stockBody .nml_stk_qty input').val();
+            var rt_stk_qty = $('#stockBody .rt_stk_qty input').val();
+            var rgn_stk_qty = $('#stockBody .rgn_stk_qty input').val();
+            var urgn_stk_qty = $('#stockBody .urgn_stk_qty input').val();
+            var sfty_stk_qty = $('#stockBody .sfty_stk_qty input').val();
+            var pur_dt = $('#stockBody .pur_dt input').val();
+            var rcpt_dt = $('#stockBody .rcpt_dt input').val();
+            var rcpt_cp = $('#stockBody .rcpt_cp input').val();
+            var rcpt_prc = $('#stockBody .rcpt_prc input').val();
+            var rtl_prc = $('#stockBody .rtl_prc input').val();
+            var sls_prc = $('#stockBody .sls_prc input').val();
+            var stk_plc_cd = $('#stockBody .stk_plc_cd input').val();
+
+            var data = {
+                pd_id:pd_id,
+                pd_name:pd_name,
+                pd_clsf_cd:pd_clsf_cd,
+                nml_stk_qty:nml_stk_qty,
+                rt_stk_qty:rt_stk_qty,
+                rgn_stk_qty:rgn_stk_qty,
+                urgn_stk_qty:urgn_stk_qty,
+                sfty_stk_qty:sfty_stk_qty,
+                pur_dt:pur_dt,
+                rcpt_dt:rcpt_dt,
+                rcpt_cp:rcpt_cp,
+                rcpt_prc:rcpt_prc,
+                rtl_prc:rtl_prc,
+                sls_prc:sls_prc,
+                stk_plc_cd:stk_plc_cd
+            };
+
+            $.ajax({
+                type: 'POST',       // 요청 메서드
+                url: '/admin/stock/register',  // 요청 URI
+                headers: {"content-type": "application/json"}, // 요청 헤더
+                /*dataType: 'json', // json 객체형으로 응답*/
+                data : JSON.stringify(data),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+                success: function() {
+                    alert("재고 추가 성공");       // response는 서버가 전송한 데이터
+                },
+                error: function(request, status, error) {
+                    alert("error");
+                    console.log("code: " + request.status)
+                    console.log("message: " + request.responseText)
+                    console.log("error: " + error);
+                } // 에러가 발생했을 때, 호출될 함수
+            });
+
+            alert("the request is sent")
+            $('#managementStock').hide();
+        });
+
+        /* 취소 버튼 클릭 시 재고 등록 화면 숨기기 */
+        $('#cancelStockBtn').click(function () {
+            $('#managementStock').hide();
+        });
+
+        /*
+        1. 재고 일괄설정 버튼클릭
+          1.1. checked가 0이면 제품을 선택해 달라는 알림 띄우기
+          1.2. checked된 제품 중 1개라도 재고관리 미사용이면 재고 등록을 먼저 하라는 알림 띄우기
+        2. 선택된 데이터의 pd_id, pd_name, pd_clsf_cd 를 stockModify.jsp로 넘겨서 테이블 수정하기
+        3. 재고 테이블에 데이터 수정하기
+        */
+
+        /* 날짜 검색하는 기능에서 시작일, 종료일 구현하는 js */
+        $.datepicker.setDefaults({
+            changeYear: true,
+            changeMonth: true,
+            dateFormat: 'yy-mm-dd',
+            prevText: '이전 달',
+            nextText: '다음 달',
+            closeText: '닫기',
+            currentText: '오늘',
+            monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+            dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+            dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+            showMonthAfterYear: true,
+            yearSuffix: '년',
+            showButtonPanel: true,
+        });
+
+        $('#sdate').datepicker();
+        $('#sdate').datepicker('setDate', 'today');
+        $('#sdate').datepicker("option", "maxDate", $('#edate').val());
+        $('#sdate').datepicker("option", "onClose", function (selectedDate) {
+            $('#edate').datapicker("option", "minDate", selectedDate);
+        });
+
+        $('#edate').datepicker();
+        $('#edate').datepicker('setDate', 'today');
+        $('#edate').datepicker("option", "minDate", $('#sdate').val());
+        $('#edate').datepicker("option", "onClose", function (selectedDate) {
+            $('#sdate').datapicker("option", "maxDate", selectedDate);
+        });
+        /*제품 전체선택 버튼 클릭시 제품 전체 선택 기능*/
+        $('#selectAll').click(function () {
+            $('input:checkbox').prop('checked', this.checked);
+        });
+    });
+</script>
 </html>
