@@ -25,26 +25,9 @@ from pd_stat_hist;
 -- 유형별 마지막 상품번호 검색하기
 select cast(substr(pd_id,4,6) as unsigned) as serial_number
 from prd
-where pd_id like concat('APP', '%')
+where pd_id like 'APP%'
 order by serial_number desc
 limit 1;
-
-select cast(substr(pd_id,4,6) as unsigned) as serial_number
-from prd
-where pd_id like concat('GLV', '%')
-order by serial_number desc
-limit 1;
-
-select cast(substr(pd_id,4,6) as unsigned) as serial_number
-from prd
-where pd_type_cd = 'PRO'
-order by serial_number desc
-limit 1;
-
-select count(*)
-from prd
-where pd_type_cd = 'PRO'
-;
 
 -- 조회수 증가
 update prd 
@@ -72,7 +55,3 @@ show triggers;
 
 select * from prd;
 update prd set pd_name = '투더문 쿨론 오버핏 메쉬 스판 언더셔츠 투톤 레드' where pd_id = 'APP000001-13';
-select * from rltd_pd;
-insert into rltd_pd(pd_id, rltd_pd_id) values("APP000001-08", "APP000002-08");
-
-delete from prd;
