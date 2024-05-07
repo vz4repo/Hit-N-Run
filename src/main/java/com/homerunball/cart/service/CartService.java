@@ -15,7 +15,7 @@ public interface CartService {
 
     int update(CartDto cart) throws Exception;
 
-    CartDto read(String c_id) throws Exception;
+    List<CartDto> read(String c_id) throws Exception;
 
     List<CartDto> readAll() throws Exception;
 }

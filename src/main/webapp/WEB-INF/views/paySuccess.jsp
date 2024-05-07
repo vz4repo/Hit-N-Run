@@ -39,7 +39,7 @@
         <div class="p-grid-col text--right" id="paymentKey" style="white-space: initial; width: 250px"></div>
       </div>
 <!--      dev:: 참고용-->
-      <div id="response" style="white-space: initial"></div>
+      <div id="response" style="white-space: initial; display: none"></div>
 <!--    개발자 가이드  -->
 <!--      <div class="p-grid" style="margin-top: 30px">-->
 <!--        <button class="button p-grid-col5" onclick="location.href='https://docs.tosspayments.com/guides/payment/integration';">연동 문서</button>-->
@@ -93,7 +93,7 @@
       }
       confirm().then(function (data) {
         /* 응답 정보 모두 출력 */
-        responseElement.innerHTML = `<pre>${JSON.stringify(data, null, 4)}</pre>`;
+        responseElement.innerHTML = `<pre>${'${JSON.stringify(data, null, 4)}'}</pre>`;
 
         /* 추가 */
         requestedAtElement.textContent = data.requestedAt;

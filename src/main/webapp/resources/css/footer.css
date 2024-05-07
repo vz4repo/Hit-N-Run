@@ -1,0 +1,104 @@
+* {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    height: 200vh;
+    margin-top: 20%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+footer {
+    width: 100%;
+    bottom: 0px;
+    position: absolute;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background-color: #cecece;
+}
+
+.top_footer,
+.main_footer {
+    display: grid;
+    justify-content: space-between;
+}
+
+.top_footer {
+    grid-template-columns: repeat(2, 50%);
+}
+
+.service,
+.return_addre {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.service {
+    margin-left: 15%;
+}
+
+.service > h4,
+.return_addre > h4 {
+    font-size: 22px;
+    font-weight: 900;
+    color: #404040;
+}
+
+
+.service_time {
+    display: flex;
+    flex-direction: column;
+}
+
+.service span,
+.return_addre span {
+    font-size: 12px;
+    margin: 5px 20px;
+    color: #a6a6a6;
+}
+
+.main_footer {
+    grid-template-columns: repeat(4, 25%);
+    margin-left: 5%;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+}
+
+.footer > h4 {
+    font-size: 17px;
+    font-weight: 900;
+    color: #404040;
+    margin-bottom: 10px;
+}
+
+.footer li {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #a6a6a6;
+}
