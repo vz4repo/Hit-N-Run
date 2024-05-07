@@ -76,4 +76,7 @@ public class LoginController {
 
         return custDto!=null && custDto.getC_pwd().equals(c_pwd);
     }
+
+
+
 }

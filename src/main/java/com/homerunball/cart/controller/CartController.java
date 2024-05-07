@@ -38,8 +38,8 @@ public class CartController {
     public String insert(CartDto cartDto, String pd_id, String pd_clsf_code, Integer cart_cnt, Model m, HttpSession session){
         try{
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            String c_email = (String)session.getAttribute("c_email"); // ccc@ccc.com
-            String c_id = cartDao.getCidByEmail(c_email);
+            String c_id = (String)session.getAttribute("c_id"); // ccc@ccc.com
+//            String c_id = cartDao.customerGetCid(cid);
             cartDto.setC_id(c_id);
             cartDto.setPd_id("update");
             cartDto.setPd_clsf_code("SSS");
@@ -49,7 +49,7 @@ public class CartController {
 //            System.out.println(cartCheck);
 
             int rowcnt = cartDao.insert(cartDto);
-            System.out.println(rowcnt);
+
             m.addAttribute("c_id",c_id);
         } catch (Exception e){
             e.printStackTrace();
@@ -111,15 +111,14 @@ public class CartController {
     /*고객 장바구니 load*/
     @GetMapping("/list")
     public String cartForm(Model m, HttpSession session, HttpServletRequest request){
-
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
 
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            String c_email = (String)session.getAttribute("c_email"); // ccc@ccc.com
+            String c_id = (String)session.getAttribute("c_id"); // ccc@ccc.com
             /* 로그인한 고객의 c_email을 이용해서 cust의 c_id를 가져온다 */
-            String c_id = cartDao.getCidByEmail(c_email);
+//            String c_id = cartDao.customerGetCid(cid);
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.selectUser(c_id);
 
@@ -138,7 +137,6 @@ public class CartController {
 
     private boolean loginCheck(HttpServletRequest request){
         HttpSession session = request.getSession();
-        return session.getAttribute("c_email") != null;
+        return session.getAttribute("c_id") != null;
     }
 }
-

@@ -10,13 +10,12 @@
     </resultMap>
     <!-- cust테이블의 전체고객 가져오기 TDD코드에 이용 -->
     <select id="getcustAll" resultMap="custResultMap">
-        select * from cust
+        select c_id from cust
     </select>
 
     <!-- cust테이블의 c_id 1건 가져오기 -->
-    <select id="getCidByEmail" resultType="String" parameterType="String">
+    <select id="customerGetCid" resultType="String" parameterType="String">
         select c_id from cust
-        where c_email = #{c_email};
     </select>
 
 

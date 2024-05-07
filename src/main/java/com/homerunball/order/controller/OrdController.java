@@ -27,23 +27,8 @@ public class OrdController {
     OrdDao ordDao;
     @Autowired
     CartDao cartDao;
-//    @Autowired
-//    OrdDto ordDto;
 
-    @GetMapping("/orderDetail")
-    public String orderDetail(String od_id,String c_id, Model m){
-        try {
-            /*List<OrdDto> list = ordDao.selectOdId(od_id);
-            System.out.println(list);*/
-            List<CartDto> list = cartDao.selectUser(c_id);
 
-            /*System.out.println("[controller]ordDto = " + ordDto);*/
-            m.addAttribute("list",list);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "orderList";
-    }
 
     @GetMapping("/order")
     public String order(String od_id,String c_id, Model m, HttpSession session, HttpServletRequest request){
@@ -52,13 +37,13 @@ public class OrdController {
 
         try {
             List<CartDto> list = cartDao.selectUser(c_id);
-//            OrdDto ordDto2 = new OrdDto(list., new Date(), "00주문완료", 1, 1, 30000, 30000);
 
+            OrdDto dto = new OrdDto(c_id);
 
-            System.out.println(list);
+            ordDao.insert(dto);
+//            System.out.println(dto);
 
             m.addAttribute("list",list);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

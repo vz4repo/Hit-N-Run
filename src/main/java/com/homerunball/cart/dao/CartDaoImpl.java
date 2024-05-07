@@ -23,8 +23,8 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public String getCidByEmail(String c_email) throws Exception {
-        return session.selectOne(namespace+"getCidByEmail", c_email);
+    public String customerGetCid(String c_id) throws Exception {
+        return session.selectOne(namespace+"customerGetCid", c_id);
     }
 
     @Override

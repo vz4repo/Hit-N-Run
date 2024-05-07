@@ -8,10 +8,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="reset.css" />
+<%--    <link rel="stylesheet" href="reset.css" />--%>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet" />
-    <link rel="stylesheet" href="order.css" />
+<%--    <link rel="stylesheet" href="order.css" />--%>
     <title>주문내역조회</title>
 </head>
 <body>

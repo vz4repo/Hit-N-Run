@@ -33,6 +33,11 @@
         where od_id=#{od_id} and c_id=#{c_id}
     </select>
 
+    <select id="selectCid" parameterType="String" resultType="OrdDto">
+        <include refid="selectOrd" />
+        where od_id=#{od_id} and c_id=#{c_id}
+    </select>
+
     <select id="selectOdId" parameterType="String" resultType="OrdDto">
         <include refid="selectOrd" />
         where od_id=#{od_id}

@@ -9,7 +9,7 @@ public interface CartDao {
 
     List<CustDto> getcustAll() throws Exception;
 
-    String getCidByEmail(String c_email) throws Exception;
+    String customerGetCid(String c_id) throws Exception;
 
     int count() throws Exception;
 
