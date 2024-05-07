@@ -1,5 +1,6 @@
 package com.homerunball.order.dao;
 
+
 import com.homerunball.order.domain.OrderDetDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,12 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, int od_id) throws Exception {
-
+    public List<OrderDetDto> select(int od_det_seqnum, int od_id) throws Exception {
         /*System.out.println("asdf" + od_det_seqnum);*/
-
-        return session.selectOne(namespace + "select", od_det_seqnum);
+        Map map = new HashMap();
+        map.put("od_det_seqnum",od_det_seqnum);
+        map.put("od_id",od_id);
+        return session.selectList(namespace + "select", map);
     }
 
     @Override

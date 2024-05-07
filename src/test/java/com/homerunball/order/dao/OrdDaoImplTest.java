@@ -1,6 +1,5 @@
 package com.homerunball.order.dao;
 
-import com.homerunball.customer.dao.CustDao;
 import com.homerunball.order.domain.OrdDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,19 +23,15 @@ public class OrdDaoImplTest {
         ordDao.deleteAll();
         assertTrue(ordDao.count()==0);
 
-        String c_id = ordDao.getcid();
-        System.out.println(c_id);
 
-        OrdDto orddet = new OrdDto(2024050, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
-        assertTrue(ordDao.insert(orddet) == 1);
+        OrdDto ord = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        assertTrue(ordDao.insert(ord) == 1);
         assertTrue(ordDao.count()==1);
 
-        OrdDto ord2 = new OrdDto(2024051, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
+        OrdDto ord2 = new OrdDto("100012", new Date(), "21구매확정", 1, 1, 50000, 50000);
 
         assertTrue(ordDao.insert(ord2) == 1);
         assertTrue(ordDao.count()==2);
-
-        System.out.println(ord2);
 
     }
 
@@ -45,16 +40,14 @@ public class OrdDaoImplTest {
         ordDao.deleteAll();
         assertTrue(ordDao.count()==0);
 
-        String c_id = ordDao.getcid();
-
-        OrdDto ordDto = new OrdDto(2024051, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
+        OrdDto ordDto = new OrdDto("100013", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.deleteAll()==1);
         assertTrue(ordDao.count()==0);
 
-        ordDto = new OrdDto(2024051, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
+        ordDto = new OrdDto("100014", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
-        ordDto = new OrdDto(2024052, c_id, new Date(), "1234", 1, 1, 1, new Date(), "legid", new Date(), "lastid");
+        ordDto = new OrdDto("100015", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.deleteAll()==2);
         assertTrue(ordDao.count()==0);
@@ -65,40 +58,41 @@ public class OrdDaoImplTest {
         /* 데이터 초기화*/
         ordDao.deleteAll();
         assertTrue(ordDao.count()==0);
-        String c_id = ordDao.getcid();
 
-        OrdDto ord = new OrdDto(2024054, c_id, new Date(), "1234", 1, 1, 1,"23e23","grgr");
+
+        OrdDto ord = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ord) == 1);
 
 
-
         /*2번 데이터*/
-        OrdDto ord2 = new OrdDto(2024058, c_id, new Date(), "g6", 2, 2, 2, "fsds", "sdfs");
+        OrdDto ord2 = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ord2) == 1);
 
-        /*중복이니까 실패?*/
-        assertFalse(ord.equals(ord2));
+        /* 한 고객(100012)이 주문을 각자 2번하고, od_id (주문번호는) 다르게 생성된다 */
+        assertFalse(ord.equals(ord2)); /* 다른 주문번호이기때문에 두 객체는 다르다. */
 
         /*2번 데이터 조회*/
-        List<OrdDto> ord2rs = ordDao.selectOdId(ord2.getOd_id());
-        assertNotNull(ord2rs);
+        String oid = ordDao.selectAll().get(0).getOd_id();
+        String cid = ordDao.selectAll().get(0).getC_id();
+        ord2 = ordDao.select(oid, cid);
 
         /*수정*/
-//        ord2rs.setOd_stat_cd("update");
-//
-//        /*수정된 데이터 업데이트*/
-//        assertTrue(ordDao.update(ord2rs) == 1);
-//
-//        /*수정된 데이터 확인*/
-//        OrdDto updatedOrd = ordDao.select(ord2rs.getOd_id(), ord2.getC_id());
-//        assertEquals("update", updatedOrd.getOd_stat_cd());
+        ord2.setOd_stat_cd("after");
+
+        /*수정된 데이터 업데이트*/
+        assertTrue(ordDao.update(ord2) == 1);
+
+        /*수정된 데이터 확인*/
+        OrdDto updatedOrd = ordDao.select(ord2.getOd_id(), ord2.getC_id());
+        assertEquals("after", updatedOrd.getOd_stat_cd());
 
         /*다시 조회*/
-        Integer od_id = ordDao.selectAll().get(0).getOd_id();
-        System.out.println("군고구마멍멍이"+ordDao.selectAll().get(0).getOd_id());
-
+        String od_id = ordDao.selectAll().get(0).getOd_id();
 
         ord.setOd_id(od_id);
+
+        /*od_id랑 od_id2 비교*/
+        assertTrue(ord != ord2);
     }
 
     @Test
@@ -106,18 +100,16 @@ public class OrdDaoImplTest {
         ordDao.deleteAll();
         assertTrue(ordDao.count()==0);
 
-        String c_id = ordDao.getcid();
-
         List<OrdDto> list = ordDao.selectAll();
         assertTrue(list.size() == 0);
 
-        OrdDto ordDto = new OrdDto(2024053, c_id, new Date(), "g6", 2, 2, 2, "fsds", "sdfs");
+        OrdDto ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
 
         list = ordDao.selectAll();
         assertTrue(list.size() == 1);
 
-        OrdDto ordDto2 = new OrdDto(2024055, c_id, new Date(), "g6", 2, 2, 2, "fsds", "sdfs");
+        OrdDto ordDto2 = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto2)==1);
         list = ordDao.selectAll();
         assertTrue(list.size()==2);
@@ -126,17 +118,15 @@ public class OrdDaoImplTest {
     @Test
     public void insert() throws Exception {
         ordDao.deleteAll();
-        String c_id = ordDao.getcid();
-
-        OrdDto ordDto = new OrdDto(2024053, c_id, new Date(), "g6", 2, 2, 2,"fsds", "sdfs");
+        OrdDto ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
 
-        ordDto = new OrdDto(2024052, c_id, new Date(), "g6", 2, 2, 2,"fsds", "sdfs");
+        ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.count()==2);
 
         ordDao.deleteAll();
-        ordDto = new OrdDto(2024055, c_id, new Date(), "g6", 2, 2, 2,"fsds", "sdfs");
+        ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.count()==1);
     }

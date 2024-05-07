@@ -9,7 +9,7 @@ public interface OrderDetService {
 
     int delete(int od_det_seqnum, int od_id, String pd_id, String pd_clsf_cd) throws Exception;
 
-    OrderDetDto select(int od_det_seqnum, int od_id) throws Exception;
+    List<OrderDetDto> select(int od_det_seqnum, int od_id) throws Exception;
 
     int insert(OrderDetDto ord_det) throws Exception;
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderDetServiceImpl implements OrderDetService {
@@ -23,10 +24,7 @@ public class OrderDetServiceImpl implements OrderDetService {
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, int od_id) throws Exception {
-
-        System.out.println(od_det_seqnum);
-
+    public List<OrderDetDto> select(int od_det_seqnum, int od_id) throws Exception {
         return  orderdetDao.select(od_det_seqnum, od_id);
     }
 

@@ -4,6 +4,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png" />
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/payStyle.css'/>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -146,6 +147,19 @@
           customerName: customerName.value,
           customerMobilePhone: customerMobilePhone.value
         });
+
+        /*결제 성공시(200) order테이블 insert*/
+        if(window.location.pathname === "/success") {
+          // 결제가 성공하면 주문을 처리하는 코드 실행
+          $.ajax({
+            url: "<c:url value='/order'/>?c_id=${c_id}",
+            type: "POST",
+            success: function(response) {
+              // 성공적으로 처리되었을때
+              console.log("주문이 성공적으로 처리되었습니다.");
+            }
+          });
+        }
       });
     </script>
   </body>

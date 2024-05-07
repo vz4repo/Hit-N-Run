@@ -19,15 +19,12 @@ public class OrdServiceImpl implements OrdService {
    }
 
    @Override
-   public int remove(Integer od_id, String c_id) throws Exception{
+   public int remove(String od_id, String c_id) throws Exception{
        return ordDao.delete(od_id,c_id);
    }
 
     @Override
-    public OrdDto read(Integer od_id, String c_id) throws Exception {
-
-        System.out.println(od_id);
-
+    public OrdDto read(String od_id, String c_id) throws Exception {
         return  ordDao.select(od_id, c_id);
     }
 

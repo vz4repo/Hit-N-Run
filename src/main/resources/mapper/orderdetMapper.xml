@@ -17,7 +17,7 @@
         delete from ord_det
     </delete>
 
-    <select id="select" parameterType="String" resultType="OrderDetDto">
+    <select id="select" parameterType="map" resultType="OrderDetDto">
         select od_det_seqnum
             ,  od_id
             ,  pd_id
@@ -50,7 +50,7 @@
              , last_mod_dt
              , last_mod_id
         from ord_det
-        order by frst_reg_dt desc, od_det_seqnum desc
+        order by last_mod_dt desc, od_det_seqnum desc
     </select>
 
     <insert id="insert" parameterType="OrderDetDto">

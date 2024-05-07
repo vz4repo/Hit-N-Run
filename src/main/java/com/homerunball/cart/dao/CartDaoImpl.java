@@ -1,6 +1,7 @@
 package com.homerunball.cart.dao;
 
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.customer.domain.CustDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -14,7 +15,17 @@ public class CartDaoImpl implements CartDao {
     @Autowired
     private SqlSession session;
 
-    private static String namespace = "com.homerunball.cart.dao.CartMapper.";
+    private static String namespace = "com.homerunball.cart.dao.CartDao.";
+
+    @Override
+    public List<CustDto> getcustAll() throws Exception{
+        return session.selectList(namespace+"getcustAll");
+    }
+
+    @Override
+    public String getCidByEmail(String c_email) throws Exception {
+        return session.selectOne(namespace+"getCidByEmail", c_email);
+    }
 
     @Override
     public int count() throws Exception {
@@ -29,6 +40,7 @@ public class CartDaoImpl implements CartDao {
         map.put("pd_clsf_code", pd_clsf_code);
         return session.delete(namespace+"delete", map);
     }
+
 
     @Override
     public int deleteAll() throws Exception {
@@ -51,18 +63,18 @@ public class CartDaoImpl implements CartDao {
         return session.update(namespace+"update", cart);
     }
 
-    public CartDto select(String c_id) throws Exception {
-        return session.selectOne(namespace+"select",c_id);
-    }
-
     @Override
     public List<CartDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
     }
 
+    @Override
     public List<CartDto> selectUser(String c_id) throws Exception {
         return session.selectList(namespace+"selectUser",c_id);
     }
 
-
+    @Override
+    public List<CartDto> cartCheck(CartDto cart) throws Exception {
+        return session.selectList(namespace+"cartCheck", cart);
+    }
 }

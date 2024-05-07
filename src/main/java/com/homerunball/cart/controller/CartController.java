@@ -2,13 +2,13 @@ package com.homerunball.cart.controller;
 
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.customer.domain.CustDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,26 +25,56 @@ public class CartController {
     2. 이미지 출력
     2-1. 상품명 출력
     2-2. 옵션 출력
-    2-3. 사이즈출력
+    2-3. 사이즈출력 -ok
     2-4. 판매가출력
-    2-5. 수량출력 및 변경
+    2-5. 수량출력 및 변경 -ok
     3. 판매가 * 수량 = 합계
-    4. 삭제 버튼 만들기
+    4. 삭제 버튼 만들기 -ok
     */
 
-    @PostMapping("/update")
-    public String update(String pd_clsf_code, String c_id, int cart_cnt, CartDto cartDto, Model m) {
-        try {
-            cartDto.setPd_clsf_code(pd_clsf_code);
-            cartDto.setCart_cnt(cart_cnt);
-            cartDao.update(cartDto);
-            System.out.println(cartDto);
 
-            m.addAttribute("c_id", c_id);
+    // 덜구현됨, 버튼만들고 연결시켜야함
+    @PostMapping("/insert")
+    public String insert(CartDto cartDto, String pd_id, String pd_clsf_code, Integer cart_cnt, Model m, HttpSession session){
+        try{
+            /* 로그인한 고객의 email이 세션에있는지 확인한다 */
+            String c_email = (String)session.getAttribute("c_email"); // ccc@ccc.com
+            String c_id = cartDao.getCidByEmail(c_email);
+            cartDto.setC_id(c_id);
+            cartDto.setPd_id("update");
+            cartDto.setPd_clsf_code("SSS");
+            cartDto.setCart_cnt(2);
+
+//            CartDto cartCheck = cartDao.cartCheck(cart);
+//            System.out.println(cartCheck);
+
+            int rowcnt = cartDao.insert(cartDto);
+            System.out.println(rowcnt);
+            m.addAttribute("c_id",c_id);
         } catch (Exception e){
             e.printStackTrace();
         }
         return "redirect:/cart/list";
+    }
+
+    /* pd_clsf_code 사이즈 , cart_cnt 제품개수 옵션변경할경우 update */
+    @PostMapping("/update")
+    @ResponseBody
+    public ResponseEntity<String> update(@RequestBody CartDto cartDto) {
+        try {
+//            /* 사이즈 변경한다 */
+//            cartDto.setPd_clsf_code(pd_clsf_code);
+//            /* 제품 Count 변경한다 */
+//            cartDto.setCart_cnt(cart_cnt);
+            /* update 실행 */
+            cartDao.update(cartDto);
+
+//            m.addAttribute("c_id", c_id);
+            return ResponseEntity.ok("Success");
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error");
+        }
     }
 
 
@@ -52,6 +82,7 @@ public class CartController {
     @PostMapping("/removeAll")
     public String removeAll(String c_id, Model m,HttpServletRequest request){
         try{
+            /* c_id 고객번호를 매개변수로 받아와서 장바구니 전체 삭제한다 */
             cartDao.cidDeleteAll(c_id);
             m.addAttribute("c_id", c_id);
         } catch (Exception e) {
@@ -64,10 +95,10 @@ public class CartController {
     @PostMapping("/remove")
     public String remove(String c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
         try {
-            // 고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다
+            /*고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다*/
             int rowcnt = cartDao.delete(c_id, pd_id, pd_clsf_code);
 
-            // 1이 아닐경우 throw
+            /* 1이 아닐경우 throw */
             if(rowcnt !=1)
                 throw new Exception("Cart remove err");
         } catch(Exception e){
@@ -79,25 +110,28 @@ public class CartController {
 
     /*고객 장바구니 load*/
     @GetMapping("/list")
-    public String cartForm(String c_id, Model m, HttpSession session, HttpServletRequest request){
+    public String cartForm(Model m, HttpSession session, HttpServletRequest request){
 
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
 
         try {
-            /*로그인한 고객이 세션에있는지 확인한다*/
-            String loginId = (String)session.getAttribute(c_id);
-
+            /* 로그인한 고객의 email이 세션에있는지 확인한다 */
+            String c_email = (String)session.getAttribute("c_email"); // ccc@ccc.com
+            /* 로그인한 고객의 c_email을 이용해서 cust의 c_id를 가져온다 */
+            String c_id = cartDao.getCidByEmail(c_email);
+            /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.selectUser(c_id);
 
-            /*Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력*/
+            /* Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력 */
             if(list.isEmpty()) {
-                m.addAttribute("cartEmpty", "CART_EMPTY");
+                throw new Exception();
             }
             m.addAttribute("list", list);
             m.addAttribute("c_id", c_id);
         } catch (Exception e){
             e.printStackTrace();
+            m.addAttribute("msg", "CART_EMPTY");
         }
         return "cart";
     }
@@ -107,4 +141,3 @@ public class CartController {
         return session.getAttribute("c_email") != null;
     }
 }
-
