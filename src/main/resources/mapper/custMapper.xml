@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.homerunball.cust.dao.custMapper">
+<mapper namespace="com.homerunball.customer.dao.custMapper">
 
 <!-- 회원가입   -->
     <insert id="insert" parameterType="CustDto">

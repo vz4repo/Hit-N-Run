@@ -69,14 +69,14 @@
                             <td><span name="price"></span>판매가 원</td>
                             <td>
                                 <div class="quantity_control">
-                                    <form action="/cart/update" method="post" id="update_form">
-                                        <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
-                                        <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
-                                        <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
-                                        <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
-                                        <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>
-                                        <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>
-                                        <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
+                                        <form action="/cart/update" method="post" id="update_form">
+                                            <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
+                                            <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
+                                            <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
+                                            <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
+                                            <button class="quantity_btn plus_btn"><i class="fas fa-sort-up"></i></button>
+                                            <button class="quantity_btn minus_btn"><i class="fas fa-sort-down"></i></button>
+                                            <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
                                     </form>
                                 </div>
                             </td>
