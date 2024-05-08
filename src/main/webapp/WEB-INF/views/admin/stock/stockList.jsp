@@ -319,7 +319,7 @@
                         <fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd"/>
                     </td>
                     <td id="pd_clsf_cd" class="pd_clsf_cd">
-                        <select class="search-option" name="pd_clsf_cd">
+                        <select class="search-option clsfCd" name="pd_clsf_cd" id="clsfCd${status.index}" onchange="optionChange(${status.index})">
                             <option value="ALL">모든사이즈</option>
                             <option value="XS">XS</option>
                             <option value="S">S</option>
@@ -336,17 +336,64 @@
                         </select>
                     </td>
                     <c:set var="foundStock" value="false"/>
-                    <c:forEach var="stockDto" items="${stockList}">
-                        <c:if test="${stockDto.pd_id eq productDto.pd_id}">
+                    <c:choose>
+                        <%-- 1. 제품 사이즈가 all 이면 --%>
+                        <c:when test="${selectOption eq 'ALL'}">
+                            <%-- 2. 토탈 변수 초기화 --%>
+                            <c:set var="total_nmlQty" value="0"/>
+                            <c:set var="total_rtQty" value="0"/>
+                            <c:set var="total_rgnQty" value="0"/>
+                            <c:set var="total_urgnQty" value="0"/>
+                            <c:set var="total_sftyQty" value="0"/>
+                            <c:set var="total_odpmtQty" value="0"/>
+
+                            <%-- 2. 동일한 제품id의 모든 사이즈 값을 순회 --%>
+                            <c:forEach var="stockDto" items="${stockList}">
+                                <c:if test="${stockDto.pd_id eq productDto.pd_id}">
+                                    <c:set var="total_nmlQty" value="${total_nmlQty + stockDto.nml_stk_qty}"/>
+                                    <c:set var="total_rtQty" value="${total_nmlQty + stockDto.rt_stk_qty}"/>
+                                    <c:set var="total_rgnQty" value="${total_nmlQty + stockDto.rgn_stk_qty}"/>
+                                    <c:set var="total_urgnQty" value="${total_nmlQty + stockDto.urgn_stk_qty}"/>
+                                    <c:set var="total_sftyQty" value="${total_nmlQty + stockDto.sfty_stk_qty}"/>
+                                    <c:set var="total_odpmtQty" value="${total_nmlQty + stockDto.odpmt_stk}"/>
+                                </c:if>
+                            </c:forEach>
+
+                            <%-- 3. total 값으로 재고수량 값 지정 --%>
+                            <c:set var="nmlQty" value="${total_nmlQty}"/>
+                            <c:set var="rtQty" value="${total_rtQty}"/>
+                            <c:set var="rgnQty" value="${total_rgnQty}"/>
+                            <c:set var="urgnQty" value="${total_urgnQty}"/>
+                            <c:set var="sftyQty" value="${total_sftyQty}"/>
+                            <c:set var="odpmtQty" value="${total_odpmtQty}"/>
+
                             <c:set var="foundStock" value="true"/>
-                            <td class="nml_stk_qty">${stockDto.nml_stk_qty}</td>
-                            <td class="rt_stk_qty">${stockDto.nml_stk_qty}</td>
-                            <td class="rgn_stk_qty">${stockDto.nml_stk_qty}</td>
-                            <td class="urgn_stk_qty">${stockDto.nml_stk_qty}</td>
-                            <td class="sfty_stk_qty">${stockDto.nml_stk_qty}</td>
-                            <td class="odpmt_stk">${stockDto.nml_stk_qty}</td>
-                        </c:if>
-                    </c:forEach>
+                        </c:when>
+                        <%-- 1. 제품 사이즈가 all을 제외한 option일 때 --%>
+                        <c:otherwise>
+                            <c:forEach var="stockDto" items="${stockList}">
+                                <c:if test="${stockDto.pd_id eq productDto.pd_id and stockDto.pd_clsf_cd eq selectOption}">
+                                    <c:set var="nmlQty" value="${stockDto.nml_stk_qty}"/>
+                                    <c:set var="rtQty" value="${stockDto.rt_stk_qty}"/>
+                                    <c:set var="rgnQty" value="${stockDto.rgn_stk_qty}"/>
+                                    <c:set var="urgnQty" value="${stockDto.urgn_stk_qty}"/>
+                                    <c:set var="sftyQty" value="${stockDto.sfty_stk_qty}"/>
+                                    <c:set var="odpmtQty" value="${stockDto.odpmt_stk}"/>
+                                </c:if>
+                            </c:forEach>
+
+                            <c:set var="foundStock" value="true"/>
+                        </c:otherwise>
+                    </c:choose>
+
+                    <td class="nml_stk_qty">${nmlQty}</td>
+                    <td class="rt_stk_qty">${rtQty}</td>
+                    <td class="rgn_stk_qty">${rgnQty}</td>
+                    <td class="urgn_stk_qty">${urgnQty}</td>
+                    <td class="sfty_stk_qty">${sftyQty}</td>
+                    <td class="odpmt_stk">${odpmtQty}</td>
+
+                    <%-- 재고가 없는 경우 0으로 표시 --%>
                     <c:if test="${foundStock eq false}">
                         <td class="nml_stk_qty">0</td>
                         <td class="rt_stk_qty">0</td>
@@ -419,7 +466,7 @@
         <button type="button" class="sendBtnSmall" id="confirmStockBtn">확인</button>
         <button type="button" class="cancelBtnSmall" id="cancelStockBtn">취소</button>
     </div>
-    <%-- 재고전체목록 > 리스트는 다로 빼내야하나?? --%>
+    <%-- 재고전체목록 > 리스트는 따로 빼내야하나?? --%>
     <%--<div class="stock-container">
         <h5>재고목록</h5>
         <table>
@@ -475,6 +522,28 @@
 </body>
 <script>
     $(document).ready(function () {
+        /* 상품의 사이즈 select option변경 시 Change 이벤트 발생 */
+        /* 1. option(ALL) : 모든 사이즈의 합계 수량 조회
+           2. option(개별 사이즈) : 개별 사이즈 코드와 일치하는 수량 조회 */
+        function optionChange(index) {
+            var selectOption = document.getElementById('clsfCd'+index).value;
+            var row = document.getElementById('clsfCd'+index).closest('tr');
+            var tdList = row.document.querySelectorAll('.nml_stk_qty, .rt_stk_qty, .rgn_stk_qty, .urgn_stk_qty, .sfty_stk_qty, .odpmt_stk');
+
+            tdList.forEach(function(td) {
+                td.style.display = 'table-cell';
+            });
+
+            if (selectOption !== 'ALL') {
+                // 해당 사이즈가 아닌 셀을 숨김
+                tdList.forEach(function(td) {
+                    if (!td.classList.contains(selectOption)) {
+                        td.style.display = 'none';
+                    }
+                });
+            }
+        }
+
         /* 재고를 등록하는 #managementStock div는 최초에 안보임 */
         $('#managementStock').hide();
 
@@ -553,21 +622,21 @@
             var stk_plc_cd = $('#stockBody .stk_plc_cd input').val();
 
             var data = {
-                pd_id:pd_id,
-                pd_name:pd_name,
-                pd_clsf_cd:pd_clsf_cd,
-                nml_stk_qty:nml_stk_qty,
-                rt_stk_qty:rt_stk_qty,
-                rgn_stk_qty:rgn_stk_qty,
-                urgn_stk_qty:urgn_stk_qty,
-                sfty_stk_qty:sfty_stk_qty,
-                pur_dt:pur_dt,
-                rcpt_dt:rcpt_dt,
-                rcpt_cp:rcpt_cp,
-                rcpt_prc:rcpt_prc,
-                rtl_prc:rtl_prc,
-                sls_prc:sls_prc,
-                stk_plc_cd:stk_plc_cd
+                pd_id: pd_id,
+                pd_name: pd_name,
+                pd_clsf_cd: pd_clsf_cd,
+                nml_stk_qty: nml_stk_qty,
+                rt_stk_qty: rt_stk_qty,
+                rgn_stk_qty: rgn_stk_qty,
+                urgn_stk_qty: urgn_stk_qty,
+                sfty_stk_qty: sfty_stk_qty,
+                pur_dt: pur_dt,
+                rcpt_dt: rcpt_dt,
+                rcpt_cp: rcpt_cp,
+                rcpt_prc: rcpt_prc,
+                rtl_prc: rtl_prc,
+                sls_prc: sls_prc,
+                stk_plc_cd: stk_plc_cd
             };
 
             $.ajax({
@@ -575,11 +644,11 @@
                 url: '/admin/stock/register',  // 요청 URI
                 headers: {"content-type": "application/json"}, // 요청 헤더
                 /*dataType: 'json', // json 객체형으로 응답*/
-                data : JSON.stringify(data),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
-                success: function() {
+                data: JSON.stringify(data),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
+                success: function () {
                     alert("재고 추가 성공");       // response는 서버가 전송한 데이터
                 },
-                error: function(request, status, error) {
+                error: function (request, status, error) {
                     alert("error");
                     console.log("code: " + request.status)
                     console.log("message: " + request.responseText)
