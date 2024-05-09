@@ -27,8 +27,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 /* [GET]  /success  인증 성공 처리 */
 /* [GET]  /fail     인증 실패 처리 */
 /* [POST] /confirm   승인 성공 후 처리 */
+
 @Controller
-public class WidgetController {
+public class PaymentController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -39,7 +40,7 @@ public class WidgetController {
 
     @GetMapping(value = "/payment")
     public String index( Model model) throws Exception {
-        System.out.println("[paymentController] :: /payment ");
+        logger.info("[paymentController] :: /payment ");
         model.addAttribute("widgetClientKey", widgetClientKey);
         return "/payCheckout";
     }
@@ -47,14 +48,14 @@ public class WidgetController {
     /* 인증 성공 처리 */
     @GetMapping(value = "/success")
     public String successPayment(Model model) throws Exception {
-        System.out.println("[paymentController] :: /success ");
+        logger.info("[paymentController] :: /success ");
         return "/paySuccess";
     }
 
     /* 인증 실패 처리 */
     @GetMapping(value = "/fail")
     public String failPayment(HttpServletRequest request, Model model) throws Exception {
-        System.out.println("[paymentController] :: /fail ");
+        logger.info("[paymentController] :: /fail ");
         String failCode = request.getParameter("code");
         String failMessage = request.getParameter("message");
 

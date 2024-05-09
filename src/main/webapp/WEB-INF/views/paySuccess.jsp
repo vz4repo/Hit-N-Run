@@ -84,22 +84,22 @@
         }
 
         /* TODO: 결제 성공 비즈니스 로직을 구현하세요.
-        * - 성공 후, modal로 띄우기
-        * - 성공 후, 3초 후 메인페이지
-        * - 성공 후, 결제상세 이동 버튼
+        * - 1. 성공 후, modal로 띄우기
+        * - 2. 성공 후, 3초 후 메인페이지
+        * - 3. 성공 후, 결제상세 이동 버튼
         * */
-
         return json;
       }
+
       confirm().then(function (data) {
         /* 응답 정보 모두 출력 */
         responseElement.innerHTML = `<pre>${'${JSON.stringify(data, null, 4)}'}</pre>`;
-
         /* 추가 */
         requestedAtElement.textContent = data.requestedAt;
         orderNameElement.textContent = data.orderName;
         methodElement.textContent = data.method;
       });
+
       /* 쿼리스트링 값 */
       orderIdElement.textContent = urlParams.get("orderId");
       amountElement.textContent = urlParams.get("amount") + "원";
