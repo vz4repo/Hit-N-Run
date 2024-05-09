@@ -11,11 +11,11 @@ public interface OrderDetDao {
     /* 리스트 수를 센다*/
     int count() throws Exception;
 
-    int delete(int od_det_seqnum, int od_id, String pd_id, String pd_clsf_cd) throws Exception;
+    int delete(int od_det_seqnum, String od_id, int c_id) throws Exception;
 
     int deleteAll() throws Exception;
 
-    OrderDetDto select(int od_det_seqnum, int od_id) throws Exception;
+    OrderDetDto select(int od_det_seqnum, String od_id, int c_id) throws Exception;
 
     List<OrderDetDto> selectAll() throws Exception;
 

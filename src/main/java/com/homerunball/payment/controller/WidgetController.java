@@ -8,12 +8,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.homerunball.cart.domain.CartDto;
+import com.homerunball.order.dao.OrdDao;
+import com.homerunball.order.dao.OrderDetDao;
+import com.homerunball.order.domain.OrdDto;
+import com.homerunball.order.domain.OrderDetDto;
+import freemarker.ext.beans.StringModel;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +39,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 /* [POST] /confirm   승인 성공 후 처리 */
 @Controller
 public class WidgetController {
+    @Autowired
+    OrderDetDao orderDetDao;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -48,6 +60,19 @@ public class WidgetController {
     @GetMapping(value = "/success")
     public String successPayment(Model model) throws Exception {
         System.out.println("[paymentController] :: /success ");
+
+        /* request session에서 로그인 했으면 c_id 가 저장되어있을것을 가정 */
+        Integer c_id = 0001;
+
+        OrderDetDto orderDetDto = new OrderDetDto(c_id);
+
+        System.out.println(c_id);
+
+        orderDetDao.insert(orderDetDto);
+
+        System.out.println("====" + orderDetDto);
+
+
         return "/paySuccess";
     }
 

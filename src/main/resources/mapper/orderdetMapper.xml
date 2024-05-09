@@ -10,7 +10,7 @@
 
     <delete id="delete" parameterType="map" >
         delete from ord_det
-        where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id} and pd_id = #{pd_id} and pd_clsf_cd = #{pd_clsf_cd}
+        where od_det_seqnum = #{od_det_seqnum} and od_id = #{od_id} and c_id = #{c_id}
     </delete>
 
     <delete id="deleteAll">
@@ -19,32 +19,36 @@
 
     <select id="select" parameterType="String" resultType="OrderDetDto">
         select od_det_seqnum
-             ,  od_id
-             ,  pd_id
-             ,  pd_clsf_cd
-             ,  od_dt
-             ,  pd_name
-             ,  slg_prc
-             ,  od_qty
-             ,  dlvry_stat_cd
+             , od_id
+             , c_id
+             , pd_id
+             , pd_clsf_cd
+             , od_dt
+             , pd_name
+             , slg_prc
+             , od_qty
+             , dlvry_stat_cd
+             , od_stat_cd
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
              , last_mod_id
         from ord_det
-        where od_det_seqnum=#{od_det_seqnum} and od_id = #{od_id}
+        where od_det_seqnum=#{od_det_seqnum} and od_id = #{od_id} and c_id = #{c_id}
     </select>
 
     <select id="selectAll" resultType="OrderDetDto">
-        select  od_det_seqnum
-             ,  od_id
-             ,  pd_id
-             ,  pd_clsf_cd
-             ,  od_dt
-             ,  pd_name
-             ,  slg_prc
-             ,  od_qty
-             ,  dlvry_stat_cd
+        select od_det_seqnum
+             , od_id
+             , c_id
+             , pd_id
+             , pd_clsf_cd
+             , od_dt
+             , pd_name
+             , slg_prc
+             , od_qty
+             , dlvry_stat_cd
+             , od_stat_cd
              , frst_reg_dt
              , frst_reg_id
              , last_mod_dt
@@ -53,16 +57,23 @@
         order by frst_reg_dt desc, od_det_seqnum desc
     </select>
 
-    <insert id="insert" parameterType="OrderDetDto">
+<!--    <insert id="insert" parameterType="OrderDetDto">
+        <selectKey keyProperty="od_id" order="BEFORE" resultType="java.lang.String">
+            SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(LAST_INSERT_ID() + 1, 4, '0')) AS od_id
+        </selectKey>
+        <selectKey keyProperty="od_det_seqnum" order="BEFORE" resultType="java.lang.String">
+            select 	(select IFNULL(max(od_det_seqnum), 0)+1  from ord_det where od_id = (select max(od_id)+1 from ord))
+        </selectKey>
         insert  into ord_det
-        (od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, dlvry_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
+        (c_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
         values
-            (#{od_det_seqnum}, #{od_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{dlvry_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})
-    </insert>
+            (#{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})
+    </insert>-->
 
     <update id="update" parameterType="OrderDetDto">
         update ord_det
-        set od_id           = #{od_id}
+        set   od_id           = #{od_id}
+          ,   c_id            = #{c_id}
           ,   pd_id           = #{pd_id}
           ,   pd_clsf_cd      = #{pd_clsf_cd}
           ,   od_dt           = #{od_dt}
@@ -70,11 +81,12 @@
           ,   slg_prc         = #{slg_prc}
           ,   od_qty          = #{od_qty}
           ,   dlvry_stat_cd   = #{dlvry_stat_cd}
+          ,   od_stat_cd      = #{od_stat_cd}
           ,   frst_reg_dt     = #{frst_reg_dt}
           ,   frst_reg_id     = #{frst_reg_id}
           ,   last_mod_dt     = #{last_mod_dt}
           ,   last_mod_id     = #{last_mod_id}
-        where od_det_seqnum = #{od_det_seqnum}
+        where od_det_seqnum   = #{od_det_seqnum}
         order by od_id desc;
     </update>
 

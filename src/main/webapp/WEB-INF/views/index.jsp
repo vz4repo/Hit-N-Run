@@ -16,14 +16,14 @@
 
 
 <div class="index">
-<h2>Hello! Home run()</h2>
-<h2> D - <span id="dDay">남은시간!</span></h2>
-<hr/>
+    <h2>Hello! Home run()</h2>
+    <h2> D - <span id="dDay">남은시간!</span></h2>
+    <hr/>
 
 
     <nav id="loginbtn">
         <ul>
-        <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+            <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </nav>
 
