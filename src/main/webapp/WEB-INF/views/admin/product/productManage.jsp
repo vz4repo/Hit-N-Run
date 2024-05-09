@@ -36,21 +36,13 @@
                     </select>
                     <select id="changeContent" name="changeContent">
                         <option value="option">- 구분 -</option>
-                        <option value="pd_name">제품명</option>
-                        <option value="mdl_name">모델명</option>
-                        <option value="pd_ad_cmt">제품 홍보 문구</option>
-                        <option value="pd_smr_dsc">제품 요약 설명</option>
-                        <option value="pd_det_dsc">제품 상세 설명</option>
-                        <option value="min_od_qty">최소 주문 수량</option>
-                        <option value="max_od_qty">최대 주문 수량</option>
-                        <option value="pd_is_show">진열 여부</option>
-                        <option value="sls_strt_dt">판매시작일</option>
-                        <option value="pd_chr_cd">제품 특성</option>
-                        <option value="pd_stat_hist_cd">제품상태이력</option>
+                        <option value="exposureSetting">표시 설정</option>
+                        <option value="basicInformation">기본 정보</option>
+                        <option value="salesInformation">판매 정보</option>
+                        <option value="imageRegistration">이미지 등록</option>
                     </select>
                     을
                     <button type="button" onclick="openPopup()">일괄 변경</button>
-
                 </td>
             </tr>
             <tr>
@@ -85,7 +77,6 @@
             </c:forEach>
         </table>
         <input type="hidden" id="popupInput" name="popupInput">
-
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script>
         function openPopup() {
@@ -95,49 +86,21 @@
                     /*구분을 선택한 경우 변경항목을 선택해달라는 경고창 띄우기*/
                     alert("변경항목을 선택해주세요.");
                     break;
-                case "pd_name":
-                    /*pdName에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품명을 입력하세요:");
+                case "exposureSetting":
+                    /*exposureSetting에 해당하는 새로운 창 열기*/
+                    exposureSettingWindow();
                     break;
-                case "mdl_name":
-                    /*mdlName에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품명을 입력하세요:");
+                case "basicInformation":
+                    /*basicInformation에 해당하는 새로운 창 열기*/
+                    basicInformationWindow();
                     break;
-                case "pd_ad_cmt":
-                    /*pdAdCmt에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품 홍보 문구를 입력하세요:");
+                case "salesInformation":
+                    /*salesInformation에 해당하는 새로운 창 열기*/
+                    salesInformationWindow();
                     break;
-                case "pd_smr_dsc":
-                    /*productSummary에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품 요약 설명을 입력하세요:");
-                    break;
-                case "pd_det_dsc":
-                    /*productDetail에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품 상세 설명을 입력하세요:");
-                    break;
-                case "min_od_qty":
-                    /*minQuantity에 해당하는 팝업 창 열기*/
-                    openNumberInputPopup("최소 주문 수량을 입력하세요:");
-                    break;
-                case "max_od_qty":
-                    /*maxQuantity에 해당하는 팝업 창 열기*/
-                    openNumberInputPopup("최대 주문 수량을 입력하세요:");
-                    break;
-                case "pd_is_show":
-                    /*pdIsShow에 해당하는 팝업 창 열기*/
-                    openBooleanInputPopup("진열 여부를 입력하세요 (Y/N):");
-                    break;
-                case "sls_strt_dt":
-                    /*salesStartDay에 해당하는 팝업 창 열기*/
-                    openDateInputPopup("판매 시작일을 입력하세요 (YYYYMMDD 형식):");
-                    break;
-                case "pd_chr_cd":
-                    /*productCharacter에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품 특성을 입력하세요:");
-                    break;
-                case "pd_stat_hist_cd":
-                    /*productStatus에 해당하는 팝업 창 열기*/
-                    openTextInputPopup("제품 상태를 입력하세요:");
+                case "imageRegistration":
+                    /*imageRegistration에 해당하는 새로운 창 열기*/
+                    imageRegistrationWindow();
                     break;
                 default:
                     alert("다시 선택해주세요");
@@ -145,63 +108,120 @@
             }
         }
 
-        function openTextInputPopup(promptMessage) {
-            let userInput = prompt(promptMessage);
-            /*userInput의 내용이 없다면*/
-            if (userInput.trim() === "" || userInput === null) {
-                /*변경할 내용을 입력해주세요*/
-                alert("변경할 내용을 입력해주세요.")
-            } else {
-                // hidden input에 사용자 입력값 설정
-                document.getElementById("popupInput").value = userInput;
-                // form 제출
-                makeForm();
-            }
+        function exposureSettingWindow() {
+            /*폼을 동적으로 생성한다.*/
+            let form = $('<form id="popupForm" action="<c:url value='/admin/product/manage/exposure'/>" method="post"></form>');
+
+            /*체크된 제품의 리스트를 저장하기 위해 변수를 선언한다.*/
+            let selectedProductList = [];
+
+            /*체크된 제품의 제품ID를 가져와서 폼에 추가한다.*/
+            $("input:checkbox[name=selectedProduct]:checked").each(function () {
+                selectedProductList.push($(this).closest('tr').find('.pd_id').text());
+            });
+
+            /*제품ID를 문자열로 결합하여 폼 데이터에 추가한다.*/
+            form.append('<input type="hidden" name="pd_id" value="' + selectedProductList.join(',') + '">');
+
+            /*productNumber의 값을 찾아서 저장한다.*/
+            productNumber = document.getElementById("productNumber").value;
+            form.append('<input type="hidden" name="productNumber" value="' + productNumber + '">');
+
+            /*폼을 body에 추가한다.*/
+            $(document.body).append(form);
+
+            /*폼을 전송한다.*/
+            form.submit();
+
+            /*폼을 제거한다.*/
+            form.remove();
         }
 
-        function openNumberInputPopup(promptMessage) {
-            let userInput = prompt(promptMessage);
-            if (userInput !== null) {
-                // hidden input에 사용자 입력값 설정
-                var number = parseInt(userInput);
-                if (!isNaN(number)) {
-                    document.getElementById("popupInput").value = number;
-                    // form 제출
-                    makeForm();
-                } else {
-                    alert("올바른 숫자를 입력하세요.");
-                }
-            }
+        function basicInformationWindow() {
+            /*폼을 동적으로 생성한다.*/
+            let form = $('<form id="popupForm" action="<c:url value='/admin/product/manage/basicInformation'/>" method="post"></form>');
+
+            /*체크된 제품의 리스트를 저장하기 위해 변수를 선언한다.*/
+            let selectedProductList = [];
+
+            /*체크된 제품의 제품ID를 가져와서 폼에 추가한다.*/
+            $("input:checkbox[name=selectedProduct]:checked").each(function () {
+                selectedProductList.push($(this).closest('tr').find('.pd_id').text());
+            });
+
+            /*제품ID를 문자열로 결합하여 폼 데이터에 추가한다.*/
+            form.append('<input type="hidden" name="pd_id" value="' + selectedProductList.join(',') + '">');
+
+            /*productNumber의 값을 찾아서 저장한다.*/
+            productNumber = document.getElementById("productNumber").value;
+            form.append('<input type="hidden" name="productNumber" value="' + productNumber + '">');
+
+            /*폼을 body에 추가한다.*/
+            $(document.body).append(form);
+
+            /*폼을 전송한다.*/
+            form.submit();
+
+            /*폼을 제거한다.*/
+            form.remove();
         }
 
-        function openBooleanInputPopup(promptMessage) {
-            let userInput = prompt(promptMessage);
-            if (userInput !== null) {
-                // hidden input에 사용자 입력값 설정
-                userInput = userInput.toUpperCase();
-                if (userInput === 'Y' || userInput === 'N') {
-                    document.getElementById("popupInput").value = userInput;
-                    // form 제출
-                    makeForm();
-                } else {
-                    alert("Y 또는 N 중 하나를 입력하세요.");
-                }
-            }
+        function salesInformationWindow() {
+            /*폼을 동적으로 생성한다.*/
+            let form = $('<form id="popupForm" action="<c:url value='/admin/product/manage/salesInformation'/>" method="post"></form>');
+
+            /*체크된 제품의 리스트를 저장하기 위해 변수를 선언한다.*/
+            let selectedProductList = [];
+
+            /*체크된 제품의 제품ID를 가져와서 폼에 추가한다.*/
+            $("input:checkbox[name=selectedProduct]:checked").each(function () {
+                selectedProductList.push($(this).closest('tr').find('.pd_id').text());
+            });
+
+            /*제품ID를 문자열로 결합하여 폼 데이터에 추가한다.*/
+            form.append('<input type="hidden" name="pd_id" value="' + selectedProductList.join(',') + '">');
+
+            /*productNumber의 값을 찾아서 저장한다.*/
+            productNumber = document.getElementById("productNumber").value;
+            form.append('<input type="hidden" name="productNumber" value="' + productNumber + '">');
+
+            /*폼을 body에 추가한다.*/
+            $(document.body).append(form);
+
+            /*폼을 전송한다.*/
+            form.submit();
+
+            /*폼을 제거한다.*/
+            form.remove();
         }
 
-        function openDateInputPopup(promptMessage) {
-            let userInput = prompt(promptMessage);
-            if (userInput !== null) {
-                // hidden input에 사용자 입력값 설정
-                var dateRegex = /^\d{8}$/;
-                if (dateRegex.test(userInput)) {
-                    document.getElementById("popupInput").value = userInput;
-                    // form 제출
-                    makeForm();
-                } else {
-                    alert("올바른 날짜 형식(YYYYMMDD)으로 입력하세요.");
-                }
-            }
+        function imageRegistrationWindow() {
+            /*폼을 동적으로 생성한다.*/
+            let form = $('<form id="popupForm" action="<c:url value='/admin/product/manage/imageRegistration'/>" method="post"></form>');
+
+            /*체크된 제품의 리스트를 저장하기 위해 변수를 선언한다.*/
+            let selectedProductList = [];
+
+            /*체크된 제품의 제품ID를 가져와서 폼에 추가한다.*/
+            $("input:checkbox[name=selectedProduct]:checked").each(function () {
+                selectedProductList.push($(this).closest('tr').find('.pd_id').text());
+            });
+
+            /*제품ID를 문자열로 결합하여 폼 데이터에 추가한다.*/
+            form.append('<input type="hidden" name="pd_id" value="' + selectedProductList.join(',') + '">');
+
+            /*productNumber의 값을 찾아서 저장한다.*/
+            productNumber = document.getElementById("productNumber").value;
+            form.append('<input type="hidden" name="productNumber" value="' + productNumber + '">');
+
+            /*폼을 body에 추가한다.*/
+            $(document.body).append(form);
+
+            /*폼을 전송한다.*/
+            form.submit();
+
+            /*폼을 제거한다.*/
+            form.remove();
         }
 
         function makeForm() {

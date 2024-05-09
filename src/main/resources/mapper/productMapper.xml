@@ -97,6 +97,10 @@
             <if test="rvw_cnt != null">rvw_cnt = #{rvw_cnt},</if>
             <if test="wish_cnt != null">wish_cnt = #{wish_cnt},</if>
             <if test="pd_chr_cd != null">pd_chr_cd = #{pd_chr_cd},</if>
+            <if test="sprt_type_cd != null">sprt_type_cd = #{sprt_type_cd},</if>
+            <if test="pd_type_cd != null">pd_type_cd = #{pd_type_cd},</if>
+            <if test="pd_type_det_cd != null">pd_type_det_cd = #{pd_type_det_cd},</if>
+            <if test="brd_cd != null">brd_cd = #{brd_cd},</if>
             <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
         <!--키가 pd_id인 경우 value는 리스트의 형태로 저장한다.-->
