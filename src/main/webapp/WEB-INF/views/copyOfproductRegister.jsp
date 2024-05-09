@@ -56,7 +56,7 @@
     <title>제품 등록 화면</title>
 </head>
 <body>
-<jsp:include page="adminMenu.jsp" flush="false" />
+<jsp:include page="admin/adminMenu.jsp" flush="false" />
 <h1>제품 등록 화면</h1>
     <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
         <div class="product_register">
@@ -265,7 +265,7 @@
                     <tr>
                         <th>사용 선수명</th>
                         <td>
-                            <input type="text" name="player_nm" maxlength="50" />
+                            <input type="text" name="player_name" maxlength="50" />
                         </td>
                     </tr>
                     <tr>

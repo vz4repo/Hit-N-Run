@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class CustDaoImpl implements CustDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.cust.dao.custMapper.";
+    private static String namespace = "com.homerunball.customer.dao.CustDao.";
 
     @Override
     public int deleteCust(String c_email) {
@@ -17,9 +17,12 @@ public class CustDaoImpl implements CustDao {
     }
 
     @Override
-    public CustDto selectCust(String c_email) {
-        return session.selectOne(namespace + "select", c_email);
-    }
+    public CustDto selectEmail(String c_email) {return session.selectOne(namespace + "selectEmail", c_email);}
+
+
+    @Override
+    public CustDto selectID(int c_id) {return session.selectOne(namespace + "selectID", c_id);}
+
 
     @Override
     public int insertCust(CustDto custdto) {
@@ -35,4 +38,14 @@ public class CustDaoImpl implements CustDao {
     public int deleteAll() throws Exception{
         return session.delete(namespace + "deleteAll");
     }
+//
+    @Override
+    public int updateLoginDate(String c_email) {
+        return session.update(namespace + "updateLoginDate", c_email);
+    }
+
+//    @Override
+//    public HashMap<String, String> selectCustomerWithGrade(String c_email){
+//        return session.selectOne(namespace + "CustGrdName", c_email);
+//    }
 }

@@ -1,6 +1,5 @@
 package com.homerunball.payment.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -9,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 /* [GET]  /success  인증 성공 처리 */
 /* [GET]  /fail     인증 실패 처리 */
 /* [POST] /confirm   승인 성공 후 처리 */
-
 @Controller
 public class WidgetController {
 
@@ -37,18 +36,19 @@ public class WidgetController {
     private String widgetClientKey;
     @Value("#{properties['widgetSecretKey']}")
     private String widgetSecretKey;
+
     @GetMapping(value = "/payment")
     public String index( Model model) throws Exception {
         System.out.println("[paymentController] :: /payment ");
         model.addAttribute("widgetClientKey", widgetClientKey);
-        return "/checkout";
+        return "/payCheckout";
     }
 
     /* 인증 성공 처리 */
     @GetMapping(value = "/success")
     public String successPayment(Model model) throws Exception {
         System.out.println("[paymentController] :: /success ");
-        return "/success";
+        return "/paySuccess";
     }
 
     /* 인증 실패 처리 */
@@ -61,10 +61,10 @@ public class WidgetController {
         model.addAttribute("code", failCode);
         model.addAttribute("message", failMessage);
 
-        return "/fail";
+        return "/payFail";
     }
 
-    /* 인증 성공 후, checkout.jsp 에서 호출 */
+    /* 인증 성공 후, payCheckout.jsp 에서 호출 */
     @PostMapping(value = "/confirm")
     public ResponseEntity<JSONObject> confirmPayment(@RequestBody String jsonBody) throws Exception {
 
@@ -73,7 +73,7 @@ public class WidgetController {
         String amount;
         String paymentKey;
         try {
-            /* 클라이언트에서 받은 JSON 요청 바디입니다. */
+            /* 클라이언트에서 받은 JSON 요청 바디 */
             JSONObject requestData = (JSONObject) parser.parse(jsonBody);
             paymentKey = (String) requestData.get("paymentKey");
             orderId = (String) requestData.get("orderId");
@@ -114,7 +114,7 @@ public class WidgetController {
 
         InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
 
-        /* TODO: 결제 성공 및 실패 비즈니스 로직을 구현하세요. */
+        /* TODO: 결제 성공 및 실패 비즈니스 로직을 구현 */
         Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         responseStream.close();

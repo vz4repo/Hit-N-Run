@@ -9,7 +9,7 @@ public class CustDto {
     private String c_stat_cd;
     private String c_email;
     private String c_pwd;
-    private String c_nm;
+    private String c_name;
     private String c_birth;
     private String c_gnd;
     private String c_phn;
@@ -21,8 +21,8 @@ public class CustDto {
     private String c_dlv_adr;
     private String sms_agr;
     private String email_agr;
-    private Date reg_date;
-    private Date login_dt;
+    private String reg_date;
+    private String login_dt;
     private String tot_amt;
     private Date frst_reg_dt;
     private String frst_reg_id;
@@ -31,10 +31,10 @@ public class CustDto {
 
     public CustDto(){}
 
-    public CustDto(String c_email, String c_pwd, String c_nm, String c_birth, String c_gnd, String c_phn, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_ext_a, String sms_agr, String email_agr) {
+    public CustDto(String c_email, String c_pwd, String c_name, String c_birth, String c_gnd, String c_phn, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_ext_a, String sms_agr, String email_agr) {
         this.c_email = c_email;
         this.c_pwd = c_pwd;
-        this.c_nm = c_nm;
+        this.c_name = c_name;
         this.c_birth = c_birth;
         this.c_gnd = c_gnd;
         this.c_phn = c_phn;
@@ -47,18 +47,6 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CustDto custdto = (CustDto) o;
-        return Objects.equals(c_id, custdto.c_id) && Objects.equals(c_grd_cd, custdto.c_grd_cd) && Objects.equals(c_stat_cd, custdto.c_stat_cd) && Objects.equals(c_email, custdto.c_email) && Objects.equals(c_pwd, custdto.c_pwd) && Objects.equals(c_nm, custdto.c_nm) && Objects.equals(c_birth, custdto.c_birth) && Objects.equals(c_gnd, custdto.c_gnd) && Objects.equals(c_phn, custdto.c_phn) && Objects.equals(c_zip, custdto.c_zip) && Objects.equals(c_road_a, custdto.c_road_a) && Objects.equals(c_jibun_a, custdto.c_jibun_a) && Objects.equals(c_det_a, custdto.c_det_a) && Objects.equals(c_ext_a, custdto.c_ext_a) && Objects.equals(c_dlv_adr, custdto.c_dlv_adr) && Objects.equals(sms_agr, custdto.sms_agr) && Objects.equals(email_agr, custdto.email_agr) && Objects.equals(reg_date, custdto.reg_date) && Objects.equals(login_dt, custdto.login_dt) && Objects.equals(tot_amt, custdto.tot_amt) && Objects.equals(frst_reg_dt, custdto.frst_reg_dt) && Objects.equals(frst_reg_id, custdto.frst_reg_id) && Objects.equals(last_mod_dt, custdto.last_mod_dt) && Objects.equals(last_mod_id, custdto.last_mod_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(c_id, c_grd_cd, c_stat_cd, c_email, c_pwd, c_nm, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, c_ext_a, c_dlv_adr, sms_agr, email_agr, reg_date, login_dt, tot_amt, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
-    }
 
     @Override
     public String toString() {
@@ -68,7 +56,7 @@ public class CustDto {
                 ", c_stat_cd='" + c_stat_cd + '\'' +
                 ", c_email='" + c_email + '\'' +
                 ", c_pwd='" + c_pwd + '\'' +
-                ", c_nm='" + c_nm + '\'' +
+                ", c_name='" + c_name + '\'' +
                 ", c_birth='" + c_birth + '\'' +
                 ", c_gnd='" + c_gnd + '\'' +
                 ", c_phn='" + c_phn + '\'' +
@@ -130,12 +118,12 @@ public class CustDto {
         this.c_pwd = c_pwd;
     }
 
-    public String getC_nm() {
-        return c_nm;
+    public String getC_name() {
+        return c_name;
     }
 
-    public void setC_nm(String c_nm) {
-        this.c_nm = c_nm;
+    public void setC_name(String c_name) {
+        this.c_name = c_name;
     }
 
     public String getC_birth() {
@@ -226,19 +214,19 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    public Date getReg_date() {
+    public String getReg_date() {
         return reg_date;
     }
 
-    public void setReg_date(Date reg_date) {
+    public void setReg_date(String reg_date) {
         this.reg_date = reg_date;
     }
 
-    public Date getLogin_dt() {
+    public String getLogin_dt() {
         return login_dt;
     }
 
-    public void setLogin_dt(Date login_dt) {
+    public void setLogin_dt(String login_dt) {
         this.login_dt = login_dt;
     }
 
@@ -281,4 +269,5 @@ public class CustDto {
     public void setLast_mod_id(String last_mod_id) {
         this.last_mod_id = last_mod_id;
     }
+
 }

@@ -11,16 +11,17 @@ import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/login")
+//@RequestMapping("/login")
 public class LoginController {
     @Autowired
     CustDao custDao;
-
 
     @GetMapping("/login")
     public String loginForm() {
@@ -29,50 +30,77 @@ public class LoginController {
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {
-         /*1. 세션을 종료*/
         session.invalidate();
-         /*2. 홈으로 이동/*/
         return "redirect:/";
     }
 
+    //    로그인체크를 c_id로 바꾸면 404에러
     @PostMapping("/login")
-    public String login(String c_email, String c_pwd, String toURL, boolean rememberId,
-                        HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String login(String c_email, String c_pwd, String toURL, String rememberEmail, HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes Successful) throws Exception {
+        if (!loginCheck(c_email, c_pwd, request)) {
+//        if(!loginCheck(c_id, c_pwd)) {
 
-        /* 1. id와 pwd를 확인*/
-        if(!loginCheck(c_email, c_pwd)) {
-            /* 2-1   일치하지 않으면, loginForm으로 이동*/
-            String msg = URLEncoder.encode("email 또는 pwd가 일치하지 않습니다.", "utf-8");
 
-            return "redirect:/login/login?msg="+msg;
+            Successful.addFlashAttribute("loginTry", "loginFail");
+            return "redirect:/login";
         }
-         /*2-2. id와 pwd가 일치하면 세션 객체를 얻어오기*/
-        HttpSession session = request.getSession();
-        //  세션 객체에 id를 저장
-        session.setAttribute("email", c_email);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("c_email", c_email);
 
-        if(rememberId) {
-            /*1. 쿠키를 생성*/
-            Cookie cookie = new Cookie("email", c_email); // ctrl+shift+o 자동 import
-            /*2. 응답에 저장*/
-            response.addCookie(cookie);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("c_id", c_id);
+
+        if (rememberEmail != null) {
+            Cookie idcookie = new Cookie("c_email", c_email);
+            idcookie.setMaxAge(3600);
+            response.addCookie(idcookie);
         } else {
-             /*1. 쿠키를 삭제*/
-            Cookie cookie = new Cookie("email", c_email); // ctrl+shift+o 자동 import
-            cookie.setMaxAge(0); // 쿠키를 삭제
-		       /*2. 응답에 저장*/
-            response.addCookie(cookie);
-        }
-            /*3. 홈으로 이동*/
-        toURL = toURL==null || toURL.equals("") ? "/" : toURL;
 
-        return "redirect:"+toURL;
+            Cookie idcookie = new Cookie("c_email", "");
+            idcookie.setMaxAge(0);
+            response.addCookie(idcookie);
+
+        }
+
+        toURL = toURL == null || toURL.equals("") ? "/" : toURL;
+        return "redirect:" + toURL;
     }
 
-    private boolean loginCheck(String c_email, String c_pwd) {
-        CustDto custDto = custDao.selectCust(c_email);
 
-        if(custDto==null) return false;
-        return custDto.getC_pwd().equals(custDto.getC_pwd());
+    private boolean loginCheck(String c_email, String c_pwd, HttpServletRequest request) {
+
+        CustDto custDto = null;
+
+        try {
+            custDto = custDao.selectEmail(c_email);
+            if (!(custDto.getC_pwd().equals(c_pwd))) {
+                return false;
+            }
+            custDao.updateLoginDate(c_email);
+            HttpSession session = request.getSession();
+            session.setAttribute("c_id", custDto.getC_id());
+            System.out.println("custDto = " + custDto);
+            System.out.println("custDto.getC_id() = " + custDto.getC_id());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+//        return custDto != null && custDto.getC_pwd().equals(c_pwd);
     }
 }
+
+//    private boolean loginCheck(int c_id, String c_pwd) {
+//        CustDto custDto = null;
+//
+//        try {
+//            custDto = custDao.selectID(c_id);
+////            custDao.updateLoginDate(c_id);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//
+//        return custDto!=null && custDto.getC_pwd().equals(c_pwd);
+//    }
+//}

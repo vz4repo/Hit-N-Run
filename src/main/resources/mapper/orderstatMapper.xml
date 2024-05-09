@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homerunball.order.dao.OrderStatDao">
+
+    <select id="count" resultType="int">
+        select count(*) from ord_stat
+    </select>
+
+    <!-- 한 고객의 삭제-->
+    <delete id="delete" parameterType="map" >
+        delete from ord_stat where od_stat_seqnum = #{od_stat_seqnum} and od_id = #{od_id}
+    </delete>
+
+    <!--모든데이터 전체삭제-->
+    <delete id="deleteAll">
+        delete from ord_stat
+    </delete>
+
+    <!--주문상태 추가-->
+    <insert id="insert" parameterType="OrderStatDto">
+        insert into ord_stat (od_stat_seqnum, od_id, c_id, od_stat_cd,od_stat_cng_dt, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
+        values
+            (#{od_stat_seqnum},#{od_id},#{c_id},#{od_stat_cd},#{od_stat_cng_dt},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})
+    </insert>
+
+
+</mapper>

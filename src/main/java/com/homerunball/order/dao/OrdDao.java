@@ -9,7 +9,7 @@ public interface OrdDao {
 
     int delete(String od_id, String c_id) throws Exception; // int delete(String statement, Object parameter)
 
-    int deleteAll(); // int delete(String statement)
+    int deleteAll() throws Exception;
 
     int insert(OrdDto dto) throws Exception;
 
@@ -20,6 +20,8 @@ public interface OrdDao {
     List<OrdDto> selectAll() throws Exception; // List<E> selectList(String statement)
 
     List<OrdDto> selectOdId(String od_id) throws Exception;
+
+    List<OrdDto> selectCid(String c_id) throws Exception;
 
     OrdDto select(String od_id, String c_id) throws Exception; // T selectOne(String statement, Object parameter)
 
