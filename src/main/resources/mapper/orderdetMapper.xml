@@ -57,7 +57,7 @@
         order by frst_reg_dt desc, od_det_seqnum desc
     </select>
 
-    <insert id="insert" parameterType="OrderDetDto">
+<!--    <insert id="insert" parameterType="OrderDetDto">
         <selectKey keyProperty="od_id" order="BEFORE" resultType="java.lang.String">
             SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(LAST_INSERT_ID() + 1, 4, '0')) AS od_id
         </selectKey>
@@ -68,7 +68,7 @@
         (c_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
         values
             (#{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})
-    </insert>
+    </insert>-->
 
     <update id="update" parameterType="OrderDetDto">
         update ord_det
