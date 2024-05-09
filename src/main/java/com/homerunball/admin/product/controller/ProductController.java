@@ -5,7 +5,6 @@ import com.homerunball.admin.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -195,6 +194,12 @@ public class ProductController {
                 /*productMap에 key는 changeContent, value는 changeValue에 저장한다.*/
                 productMap.put(changeContent, changeValue);
             }
+
+            /*제품의 카테고리를 변경해준다.*/
+            String category = productDto.getPd_type_cd() + productDto.getPd_type_det_cd() + productDto.getBrd_cd();
+            productDto.setCtg(category);
+            productMap.put("ctg", category);
+
 
             /*productMap에 선택된 pd_id를 저장한다.*/
             productMap.put("pd_id", productList);

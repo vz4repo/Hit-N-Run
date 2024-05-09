@@ -11,6 +11,11 @@
             border-collapse: collapse;
             text-align: left;
         }
+
+        strong {
+            font-weight: bold;
+            color: #1b64da;
+        }
     </style>
     <title>제품 목록</title>
     <% String msg = (String) request.getAttribute("msg"); %>
@@ -25,7 +30,7 @@
     <div class="main">
         <table>
             <tr>
-                <td colspan="12">[총 ${productCount}개]</td>
+                <td colspan="12">[총 <strong>${productCount}</strong>개]</td>
             </tr>
             <tr>
                 <th class="pd_id">제품ID</th>
