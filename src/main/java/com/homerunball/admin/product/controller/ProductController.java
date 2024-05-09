@@ -408,8 +408,8 @@ public class ProductController {
                 }
 
                 String[] pdArr = productDto.getPd_id().split(",");
-                for(int i = 0;i<pdArr.length;i++) {
-                    productList.add(pdArr[i]);
+                for (String s : pdArr) {
+                    productList.add(s);
                 }
             } else if (productNumber.equals("allProduct")) {
                 int productSize = productService.getAllProducts().size();
