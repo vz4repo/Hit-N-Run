@@ -14,5 +14,10 @@
     <typeAlias alias="PaymentDto" type="com.homerunball.payment.domain.PaymentDto"/>
     <typeAlias alias="PaymentFailDto" type="com.homerunball.payment.domain.PaymentFailDto"/>
     <typeAlias alias="StockDto" type="com.homerunball.admin.stock.domain.StockDto"/>
+    <typeAlias alias="pdViewDto" type="com.homerunball.product.customer.domain.ProductViewDto"/>
+    <typeAlias alias="rltdPdViewDto" type="com.homerunball.product.customer.domain.RelatedPrdViewDto"/>
+    <typeAlias alias="stkViewDto" type="com.homerunball.product.customer.domain.StockViewDto"/>
+    <typeAlias alias="prdDetViewDto" type="com.homerunball.product.customer.domain.PrdDetViewDto"/>
+
   </typeAliases>
 </configuration>
