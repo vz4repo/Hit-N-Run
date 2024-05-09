@@ -21,13 +21,14 @@ public class CustDto {
     private String c_dlv_adr;
     private String sms_agr;
     private String email_agr;
-    private String reg_date;
+    private String reg_dt;
     private String login_dt;
     private String tot_amt;
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
     private String last_mod_id;
+    private String grd_name;
 
     public CustDto(){}
 
@@ -45,6 +46,14 @@ public class CustDto {
         this.c_ext_a = c_ext_a;
         this.sms_agr = sms_agr;
         this.email_agr = email_agr;
+    }
+
+    public CustDto(String c_name, String grd_name, String tot_amt, String login_dt, String reg_dt){
+        this.c_name = c_name;
+        this.grd_name = grd_name;
+        this.tot_amt = tot_amt;
+        this.login_dt = login_dt;
+        this.reg_dt = reg_dt;
     }
 
 
@@ -68,13 +77,14 @@ public class CustDto {
                 ", c_dlv_adr='" + c_dlv_adr + '\'' +
                 ", sms_agr='" + sms_agr + '\'' +
                 ", email_agr='" + email_agr + '\'' +
-                ", reg_date=" + reg_date +
+                ", reg_dt=" + reg_dt +
                 ", login_dt=" + login_dt +
                 ", tot_amt='" + tot_amt + '\'' +
                 ", first_reg_dt=" + frst_reg_dt +
                 ", first_reg_id='" + frst_reg_id + '\'' +
                 ", last_mod_dt=" + last_mod_dt +
                 ", last_mod_id='" + last_mod_id + '\'' +
+//                ", grd_name='" + grd_name + '\'' +
                 '}';
     }
 
@@ -214,12 +224,12 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    public String getReg_date() {
-        return reg_date;
+    public String getReg_dt() {
+        return reg_dt;
     }
 
-    public void setReg_date(String reg_date) {
-        this.reg_date = reg_date;
+    public void setReg_dt(String reg_dt) {
+        this.reg_dt = reg_dt;
     }
 
     public String getLogin_dt() {
@@ -269,5 +279,14 @@ public class CustDto {
     public void setLast_mod_id(String last_mod_id) {
         this.last_mod_id = last_mod_id;
     }
+
+    public String getGrd_name() {
+        return grd_name;
+    }
+
+    public void setGrd_name(String grd_name) {
+        this.grd_name = grd_name;
+    }
+
 
 }

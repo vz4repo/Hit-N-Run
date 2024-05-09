@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -14,7 +13,6 @@
             width: 300px;
             margin: 0 auto;
             text-align: left;
-            /*padding: 30px;*/
         }
 
         .special-class {
@@ -159,15 +157,14 @@
 </head>
 <body>
 <div id="myform">
-<%--    <form action ="" method="POST" onsubmit="return formCheck(this)"/>--%>
-    <form action ="<c:url value="/register/add"/>" method="POST" onsubmit="return formCheck(this)"/>
+    <form action ="<c:url value="/register/add"/>" method="POST" onsubmit="return formCheck(this)">
     <h1 id="loginTitle">Sign Up</h1>
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
             <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com" autofocus>
             <label>인증번호(예정)</label>
-            <input class="special-class" type="text" name="c_email2" placeholder="test" value="test">
+            <input class="special-class" type="text" name="c_email2" placeholder="test" value="test" disabled>
             <label>비밀번호</label>
             <input class="special-class" type="password" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)">
             <label>비밀번호 확인</label>
@@ -192,17 +189,6 @@
 
                 <label>생년월일</label>
             <input type="date" id="birth" name="c_birth"><br><br>
-<%--                <select class="box" id="birth-year" name="birth-year">--%>
-<%--                    <option disabled selected>출생 연도</option>--%>
-<%--                </select>--%>
-<%--                <select class="box" id="birth-month" name="birth-month">--%>
-<%--                    <option disabled selected>월 선택</option>--%>
-<%--                </select>--%>
-<%--                <select class="box" id="birth-day" name="birth-day">--%>
-<%--                    <option disabled selected>일 선택</option>--%>
-<%--                </select><br><br>--%>
-<%--            <input type="hidden" id="birth" name="c_birth">--%>
-
             <input type="checkbox" id="touBox" name="touBox" value="Y">
             <p id="tou">[필수] 이용약관</p>
 
@@ -213,9 +199,11 @@
             <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>
             <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
 
+<%--            <input type="hidden" id="sms_no" name="sms_agr">--%>
+<%--            <input type="hidden" id="email_no" name="email_agr">--%>
+
             <button>가입하기</button><br><br>
         </div>
-<%--            </form:form>--%>
 </form>
 </div>
 
@@ -477,7 +465,7 @@
 
 
 <script>
-   document.getElementById("tou").addEventListener("click", function () {
+    document.getElementById("tou").addEventListener("click", function () {
         document.getElementById("myModal").style.display = "block";
         /*모달이 나타날 때 스크롤바 숨김*/
         document.body.classList.add("modal-open");
@@ -503,61 +491,23 @@
         document.body.classList.remove("modal-open");
     });
 
-    // /*생년월일*/
-    // function birthUpdate() {
-    //     var birthYearSelect = document.getElementById('birth-year');
-    //     var birthMonthSelect = document.getElementById('birth-month');
-    //     var birthDaySelect = document.getElementById('birth-day');
-    //
-    //     var birthYear = birthYearSelect.value;
-    //     var birthMonth = birthMonthSelect.value;
-    //     var birthDay = birthDaySelect.value;
-    //
-    //     var birth = birthYear + '-' + birthMonth + '-' + birthDay;
-    //     /*var birth = birthYear + birthMonth + birthDay;*/
-    //
-    //     /*hidden input 요소에 값 설정*/
-    //     document.getElementById('birth').value = birth;
-    // }
-    //
-    // function xxxx(selectElement, start, end) {
-    //     for (var i = start; i <= end; i++) {
-    //         var option = document.createElement('option');
-    //         option.value = i;
-    //         option.textContent = i;
-    //         selectElement.appendChild(option);
-    //     }
-    // }
-    //
-    // xxxx(document.getElementById('birth-year'), 1950, 2024);
-    // xxxx(document.getElementById('birth-month'), 1, 12);
-    // xxxx(document.getElementById('birth-day'), 1, 31);
-    //
-    // document.getElementById('birth-year').addEventListener('change', birthUpdate);
-    // document.getElementById('birth-month').addEventListener('change', birthUpdate);
-    // document.getElementById('birth-day').addEventListener('change', birthUpdate);
-    // /*페이지 로드 후 초기 값 설정*/
-    // birthUpdate();
-
-
     /*3. 회원가입 유효성 검사*/
 
     function formCheck(frm) {
         var isEmail = emailFormatCheck(frm);
         var isPwd = pwdCheck(frm);
         var isPwd2 = pwd2Check(frm);
-        var isNm = nmCheck(frm);
+        var isName = nameCheck(frm);
         var isZip = zipCheck(frm);
         var isPhn = phnCheck(frm);
         var isGen = genCheck(frm);
-        // var isBirth = birthCheck(frm)
         var isTou = touCheck(frm)
         var isPii = piiCheck(frm)
 
         var email = frm.c_email.value.trim();
         var pwd = frm.c_pwd.value.trim();
         var pwd2 = frm.c_pwd2.value.trim();
-        var nm = frm.c_name.value.trim();
+        var name = frm.c_name.value.trim();
         var zip = frm.c_zip.value.trim();
         var road = frm.c_road_a.value.trim();
         var jibun = frm.c_jibun_a.value.trim();
@@ -568,8 +518,7 @@
         if (!email) {
             alert('이메일을 입력해주세요.');
             return false;
-        }
-        else if (!isEmail) {
+        } else if (!isEmail) {
             alert('이메일 형식을 다시 확인해주세요.');
             return false;
         } else if (!pwd) {
@@ -584,10 +533,10 @@
         } else if (!isPwd2) {
             alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
             return false;
-        } else if (!nm) {
+        } else if (!name) {
             alert('이름을 입력해주세요.');
             return false;
-        } else if (!isNm) {
+        } else if (!isName) {
             alert("이름은 최대 15자 이하로 작성하셔야 합니다.");
             return false;
         } else if (!zip) {
@@ -617,10 +566,10 @@
         } else if (!birth) {
             alert("생년월일을 선택해주세요.");
             return false;
-        }   else if (!isTou) {
+        } else if (!isTou) {
             alert("회원가입을 하실려면 이용약관 동의를 하셔야합니다.");
             return false;
-        }   else if (!isPii) {
+        } else if (!isPii) {
             alert("회원가입을 하실려면 개인정보 동의를 하셔야합니다.");
             return false;
         }
@@ -631,7 +580,7 @@
             return false;
         }
 
-    /*모든 유효성 검사를 통과한 경우*/
+        /*모든 유효성 검사를 통과한 경우*/
         return true;
     }
 
@@ -672,10 +621,10 @@
             data: {
                 "c_email": email
             },
-            success: function(res) {
+            success: function (res) {
                 console.log("요청성공", res);
                 if (res == "ok") {
-                    console.log( "사용 가능한 이메일입니다.");
+                    console.log("사용 가능한 이메일입니다.");
                     checkResult.style.color = "green";
                     checkResult.innerHTML = "사용 가능한 이메일입니다.";
                 } else {
@@ -686,7 +635,7 @@
                     return false;
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.log("에러발생", err);
             }
         });
@@ -716,9 +665,9 @@
     }
 
     /*  이름 유효성 검사*/
-    function nmCheck(frm) {
-        var nm = frm.c_name.value;
-        if (nm.length >= 15) {
+    function nameCheck(frm) {
+        var name = frm.c_name.value;
+        if (name.length >= 15) {
             return false;
         }
         return true;
@@ -744,7 +693,7 @@
     }
 
     /*  성별 유효성 검사*/
-    function genCheck(frm){
+    function genCheck(frm) {
         var female = frm.querySelector('input[name="c_gnd"][value="여"]').checked;
         var male = frm.querySelector('input[name="c_gnd"][value="남"]').checked;
         if (female || male) {
@@ -753,56 +702,49 @@
             return false;
         }
     }
-    /* 생년월일 유효성 검사*/
-    // function birthCheck(frm) {
-    //     var year = frm['birth-year'].value;
-    //     var month = frm['birth-month'].value;
-    //     var day = frm['birth-day'].value;
-    //
-    //     if (year === '출생 연도' || month === '월 선택' || day === '일 선택') {
-    //         return false;
-    //     }
-    //     return true;
-    // }
+
 
     /* 필수 이용약관 유효성 검사*/
-    function touCheck(frm){
+    function touCheck(frm) {
         var tou = frm.querySelector('input[name="touBox"]').checked;
-        if(tou){
+        if (tou) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     /* 필수 개인정보 유효성 검사*/
-    function piiCheck(frm){
+    function piiCheck(frm) {
         var pii = frm.querySelector('input[name="piiBox"]').checked;
-        if(pii){
+        if (pii) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
 
-    function touCheck(frm){
+    function touCheck(frm) {
         var tou = frm.querySelector('input[name="touBox"]').checked;
-        if(tou){
+        if (tou) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
-    function piiCheck(frm){
+    function piiCheck(frm) {
         var pii = frm.querySelector('input[name="piiBox"]').checked;
-        if(pii){
+        if (pii) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
+
+</script>
+
 
 </script>
 

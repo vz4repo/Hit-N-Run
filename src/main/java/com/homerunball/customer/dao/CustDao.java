@@ -8,16 +8,18 @@ public interface CustDao {
 
     CustDto selectEmail(String c_email);
 
+    /*리절트타입 CustDto 파마리터타입 int*/
     CustDto selectID(int c_id);
 
+    int insert(CustDto custdto);
 
-    int insertCust(CustDto custdto);
-
-    int updateCust(CustDto custdto);
+    int updateAll(CustDto custdto);
 
     int deleteAll() throws Exception;
 
-    int updateLoginDate(String c_email);
+    int updateLoginDt(String c_email);
+
+    CustDto grdNameJoin(int c_id);
 
 
 }

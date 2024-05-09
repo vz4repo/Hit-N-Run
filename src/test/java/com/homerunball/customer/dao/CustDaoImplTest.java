@@ -31,37 +31,28 @@ public class CustDaoImplTest {
     }
 
     @Test
-    public void insertCust() throws Exception{
+    public void insert() throws Exception{
         custDao.deleteAll();
-        CustDto custdto = new CustDto("a2adhdwk", "1234", "aaa", "sss", "d", "000", "223", "aaa", "sss", "ddd", "aaa", null, "");
-        int rowCnt = custDao.insertCust(custdto);
-
+        CustDto custDto = new CustDto("asdf", "1234", "aaa", "bbb", "b", "000", "223", "aaa", "jjj", "ddd", "eee", "Y", "Y");
+        int rowCnt = custDao.insert(custDto);
         assertTrue(rowCnt==1);
     }
 
 
-
     @Test
-    public void updateCust() throws Exception{
-        /*테스트 중복방지*/
-        custDao.deleteAll();
-        /*고객 정보 추가*/
-        CustDto custdto = new CustDto("1111", "1111", "aaa", "sss", "d", "888", "sss", "aaa", "sss", "ddd", "aaa", "N", "N");
-        /*추가된 고객을 DB에 저장*/
-        int rowCnt = custDao.insertCust(custdto);
-        /*저장 성공*/
-        assertTrue(rowCnt == 1);
+    public void updateAll() throws Exception{
+        /*DB에서 아이디 100056번인 고객의 정보를 Dto에 저장*/
+        CustDto custDto = custDao.selectID(100056);
 
-        /*고객 비번 변경*/
-        custdto.setC_pwd("2222");
-        custdto.setC_name("bbb");
+        /*그 고객의 이름을 변경*/
+        custDto.setC_name("흥흥흥");
+        custDto.setC_phn("9999");
 
-        /*변경된 정보 DB에 저장*/
-        rowCnt = custDao.updateCust(custdto);
-        /*변경 잘됐는지 출력 > 변경 잘됨*/
-        System.out.println("custdto = " + custdto);
-        /*변경은 잘됐으나 DB에 저장이 실패, 이유가?..*/
+        /* 수정된 정보를 데이터베이스에 업데이트 */
+        int rowCnt = custDao.updateAll(custDto);
+        /* 업데이트가 성공적으로 수행되었는지 확인 */
         assertTrue(rowCnt == 1);
 
     }
+
     }
