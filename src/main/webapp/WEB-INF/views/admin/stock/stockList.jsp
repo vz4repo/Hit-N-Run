@@ -139,7 +139,7 @@
         <form action="<c:url value="/admin/stock/register"/>" class="search-form" method="get">
             <table class="tableLeft">
                 <tr>
-                    <th colspan="2">제품 검색</th>
+                    <th colspan="2">제품 검색(아직 기능구현 못했어요..ㅠㅠ)</th>
                 </tr>
                 <%--검색 분류: 상품ID, 상품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
                 <tr>
@@ -288,7 +288,10 @@
         <table>
             <tr>
                 <th>
-                    <button type="button" class="sendBtnSmall" id="stockManage">재고 일괄설정</button>
+                    <button type="button" class="sendBtnSmall" id="stockCreateManage">재고 일괄등록</button>
+                </th>
+                <th>
+                    <button type="button" class="sendBtnSmall" id="stockModifyManage">재고 일괄수정</button>
                 </th>
                 <th colspan="12">제품목록(재고 등록할 제품 선택)</th>
             </tr>
@@ -313,14 +316,15 @@
                         <input type="checkbox" name="selectedProduct" id="select_checkbox${status.index}"
                                value="${productDto.pd_id}">
                     </td>
-                    <td id="pd_id" class="pd_id">${productDto.pd_id}</td>
-                    <td id="pd_name" class="pd_name">${productDto.pd_name}</td>
+                    <td id="pd_id_${status.index}" class="pd_id">${productDto.pd_id}</td>
+                    <td id="pd_name_${status.index}" class="pd_name">${productDto.pd_name}</td>
                     <td class="frst_reg_dt">
                         <fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd"/>
                     </td>
-                    <td id="pd_clsf_cd" class="pd_clsf_cd">
-                        <select class="search-option clsfCd" name="pd_clsf_cd" id="clsfCd${status.index}" onchange="optionChange(${status.index})">
-                            <option value="ALL">모든사이즈</option>
+                    <td id="pd_clsf_cd_${status.index}" class="pd_clsf_cd">
+                        <select class="search-option clsfCd" name="pd_clsf_cd"
+                                onchange="getStockSize(${status.index},this.value)">
+                            <option value="ALL" selected="selected">모든사이즈</option>
                             <option value="XS">XS</option>
                             <option value="S">S</option>
                             <option value="M">M</option>
@@ -328,80 +332,14 @@
                             <option value="XL">XL</option>
                             <option value="2XL">2XL</option>
                             <option value="3XL">3XL</option>
-                                <%--
-                                <option value="LH">좌투(</option>
-                                <option value="RH">우투</option>
-                                <option value="FREE">FREE사이즈</option>
-                                --%>
                         </select>
                     </td>
-                    <c:set var="foundStock" value="false"/>
-                    <c:choose>
-                        <%-- 1. 제품 사이즈가 all 이면 --%>
-                        <c:when test="${selectOption eq 'ALL'}">
-                            <%-- 2. 토탈 변수 초기화 --%>
-                            <c:set var="total_nmlQty" value="0"/>
-                            <c:set var="total_rtQty" value="0"/>
-                            <c:set var="total_rgnQty" value="0"/>
-                            <c:set var="total_urgnQty" value="0"/>
-                            <c:set var="total_sftyQty" value="0"/>
-                            <c:set var="total_odpmtQty" value="0"/>
-
-                            <%-- 2. 동일한 제품id의 모든 사이즈 값을 순회 --%>
-                            <c:forEach var="stockDto" items="${stockList}">
-                                <c:if test="${stockDto.pd_id eq productDto.pd_id}">
-                                    <c:set var="total_nmlQty" value="${total_nmlQty + stockDto.nml_stk_qty}"/>
-                                    <c:set var="total_rtQty" value="${total_nmlQty + stockDto.rt_stk_qty}"/>
-                                    <c:set var="total_rgnQty" value="${total_nmlQty + stockDto.rgn_stk_qty}"/>
-                                    <c:set var="total_urgnQty" value="${total_nmlQty + stockDto.urgn_stk_qty}"/>
-                                    <c:set var="total_sftyQty" value="${total_nmlQty + stockDto.sfty_stk_qty}"/>
-                                    <c:set var="total_odpmtQty" value="${total_nmlQty + stockDto.odpmt_stk}"/>
-                                </c:if>
-                            </c:forEach>
-
-                            <%-- 3. total 값으로 재고수량 값 지정 --%>
-                            <c:set var="nmlQty" value="${total_nmlQty}"/>
-                            <c:set var="rtQty" value="${total_rtQty}"/>
-                            <c:set var="rgnQty" value="${total_rgnQty}"/>
-                            <c:set var="urgnQty" value="${total_urgnQty}"/>
-                            <c:set var="sftyQty" value="${total_sftyQty}"/>
-                            <c:set var="odpmtQty" value="${total_odpmtQty}"/>
-
-                            <c:set var="foundStock" value="true"/>
-                        </c:when>
-                        <%-- 1. 제품 사이즈가 all을 제외한 option일 때 --%>
-                        <c:otherwise>
-                            <c:forEach var="stockDto" items="${stockList}">
-                                <c:if test="${stockDto.pd_id eq productDto.pd_id and stockDto.pd_clsf_cd eq selectOption}">
-                                    <c:set var="nmlQty" value="${stockDto.nml_stk_qty}"/>
-                                    <c:set var="rtQty" value="${stockDto.rt_stk_qty}"/>
-                                    <c:set var="rgnQty" value="${stockDto.rgn_stk_qty}"/>
-                                    <c:set var="urgnQty" value="${stockDto.urgn_stk_qty}"/>
-                                    <c:set var="sftyQty" value="${stockDto.sfty_stk_qty}"/>
-                                    <c:set var="odpmtQty" value="${stockDto.odpmt_stk}"/>
-                                </c:if>
-                            </c:forEach>
-
-                            <c:set var="foundStock" value="true"/>
-                        </c:otherwise>
-                    </c:choose>
-
-                    <td class="nml_stk_qty">${nmlQty}</td>
-                    <td class="rt_stk_qty">${rtQty}</td>
-                    <td class="rgn_stk_qty">${rgnQty}</td>
-                    <td class="urgn_stk_qty">${urgnQty}</td>
-                    <td class="sfty_stk_qty">${sftyQty}</td>
-                    <td class="odpmt_stk">${odpmtQty}</td>
-
-                    <%-- 재고가 없는 경우 0으로 표시 --%>
-                    <c:if test="${foundStock eq false}">
-                        <td class="nml_stk_qty">0</td>
-                        <td class="rt_stk_qty">0</td>
-                        <td class="rgn_stk_qty">0</td>
-                        <td class="urgn_stk_qty">0</td>
-                        <td class="sfty_stk_qty">0</td>
-                        <td class="odpmt_stk">0</td>
-                    </c:if>
+                    <td id="nmlQty_${status.index}" class="nml_stk_qty"></td>
+                    <td id="rtQty_${status.index}" class="rt_stk_qty"></td>
+                    <td id="rgnQty_${status.index}" class="rgn_stk_qty"></td>
+                    <td id="urgnQty_${status.index}" class="urgn_stk_qty"></td>
+                    <td id="sftyQty_${status.index}" class="sfty_stk_qty"></td>
+                    <td id="odpmtQty_${status.index}" class="odpmt_stk"></td>
                     <td class="useStock">
                         <select class="search-option stockUse" id="stockUse${status.index}">
                             <option value="used">사용함</option>
@@ -411,6 +349,9 @@
                     <td class="createStock">
                         <button type="button" class="sendBtnSmall createStockBtn" id="createStockBtn${status.index}">
                             재고등록
+                        </button>
+                        <button type="button" class="sendBtnSmall modifyStockBtn" id="modifyStockBtn${status.index}">
+                            재고수정
                         </button>
                     </td>
                 </tr>
@@ -522,28 +463,6 @@
 </body>
 <script>
     $(document).ready(function () {
-        /* 상품의 사이즈 select option변경 시 Change 이벤트 발생 */
-        /* 1. option(ALL) : 모든 사이즈의 합계 수량 조회
-           2. option(개별 사이즈) : 개별 사이즈 코드와 일치하는 수량 조회 */
-        function optionChange(index) {
-            var selectOption = document.getElementById('clsfCd'+index).value;
-            var row = document.getElementById('clsfCd'+index).closest('tr');
-            var tdList = row.document.querySelectorAll('.nml_stk_qty, .rt_stk_qty, .rgn_stk_qty, .urgn_stk_qty, .sfty_stk_qty, .odpmt_stk');
-
-            tdList.forEach(function(td) {
-                td.style.display = 'table-cell';
-            });
-
-            if (selectOption !== 'ALL') {
-                // 해당 사이즈가 아닌 셀을 숨김
-                tdList.forEach(function(td) {
-                    if (!td.classList.contains(selectOption)) {
-                        td.style.display = 'none';
-                    }
-                });
-            }
-        }
-
         /* 재고를 등록하는 #managementStock div는 최초에 안보임 */
         $('#managementStock').hide();
 
@@ -551,35 +470,27 @@
            > used일 경우 재고등록 버튼 활성화
            > unUsed일 경우 재고등록 버튼 비활성화 */
         $('.stockUse').change(function () {
-            var index = $(this).attr('id').replace('stockUse', '');
-            var stockUseValue = $(this).val();
+            let index = $(this).attr('id').replace('stockUse', '');
+            let stockUseValue = $(this).val();
             if (stockUseValue === 'used') {
                 $('#createStockBtn' + index).prop('disabled', false);
             } else {
                 $('#createStockBtn' + index).prop('disabled', true);
             }
         });
+    });
 
-        /* 페이지 로딩 시 재고 사용 여부에 따라 버튼 활성/비활성 */
-        $('.stockUse').each(function () {
-            var index = $(this).attr('id').replace('stockUse', '');
-            if ($(this).val() === 'used') {
-                $('#createStockBtn' + index).prop('disabled', false);
-            } else {
-                $('#createStockBtn' + index).prop('disabled', true);
-            }
-        });
-
+    $(document).ready(function () {
         /* 재고등록 버튼 클릭 시 이벤트 발생 */
         $('.createStockBtn').click(function () {
-            /*var index = $(this).attr('id').replace('createStockBtn', '');*/
+            let index = $(this).attr('id').replace('createStockBtn', '');
 
             /* 재고등록 하는 index의 pd_id, pd_name, pd_clsf_cd, 나머지재고 정보를 입력받을 폼을 tbody에 html 요소로 넣어주기*/
-            var pd_id = $(this).closest('tr').find('#pd_id').text();
-            var pd_name = $(this).closest('tr').find('#pd_name').text();
-            var pd_clsf_cd = $(this).closest('tr').find('#pd_clsf_cd select').val();
+            let pd_id = $(this).closest('tr').find('#pd_id_' + index).text();
+            let pd_name = $(this).closest('tr').find('#pd_name_' + index).text();
+            let pd_clsf_cd = $(this).closest('tr').find('#pd_clsf_cd_' + index + ' select').val();
 
-            var stockBody = '<tr>' +
+            let stockBody = '<tr>' +
                 '<td class="pd_id">' + pd_id + '</td>' +
                 '<td class="pd_name">' + pd_name + '</td>' +
                 '<td class="pd_clsf_cd">' + pd_clsf_cd + '</td>' +
@@ -602,26 +513,28 @@
             /* #managementStock div 보이기로 설정 변경 */
             $('#managementStock').show();
         });
+    });
 
+    $(document).ready(function () {
         /* 확인 버튼 클릭 시 register controller 넘어가서 테이블에 데이터 삽입(재고 등록 처리) */
         $('#confirmStockBtn').click(function () {
-            var pd_id = $('#stockBody .pd_id').text();
-            var pd_name = $('#stockBody .pd_name').text();
-            var pd_clsf_cd = $('#stockBody .pd_clsf_cd').text();
-            var nml_stk_qty = $('#stockBody .nml_stk_qty input').val();
-            var rt_stk_qty = $('#stockBody .rt_stk_qty input').val();
-            var rgn_stk_qty = $('#stockBody .rgn_stk_qty input').val();
-            var urgn_stk_qty = $('#stockBody .urgn_stk_qty input').val();
-            var sfty_stk_qty = $('#stockBody .sfty_stk_qty input').val();
-            var pur_dt = $('#stockBody .pur_dt input').val();
-            var rcpt_dt = $('#stockBody .rcpt_dt input').val();
-            var rcpt_cp = $('#stockBody .rcpt_cp input').val();
-            var rcpt_prc = $('#stockBody .rcpt_prc input').val();
-            var rtl_prc = $('#stockBody .rtl_prc input').val();
-            var sls_prc = $('#stockBody .sls_prc input').val();
-            var stk_plc_cd = $('#stockBody .stk_plc_cd input').val();
+            let pd_id = $('#stockBody .pd_id').text();
+            let pd_name = $('#stockBody .pd_name').text();
+            let pd_clsf_cd = $('#stockBody .pd_clsf_cd').text();
+            let nml_stk_qty = $('#stockBody .nml_stk_qty input').val();
+            let rt_stk_qty = $('#stockBody .rt_stk_qty input').val();
+            let rgn_stk_qty = $('#stockBody .rgn_stk_qty input').val();
+            let urgn_stk_qty = $('#stockBody .urgn_stk_qty input').val();
+            let sfty_stk_qty = $('#stockBody .sfty_stk_qty input').val();
+            let pur_dt = $('#stockBody .pur_dt input').val();
+            let rcpt_dt = $('#stockBody .rcpt_dt input').val();
+            let rcpt_cp = $('#stockBody .rcpt_cp input').val();
+            let rcpt_prc = $('#stockBody .rcpt_prc input').val();
+            let rtl_prc = $('#stockBody .rtl_prc input').val();
+            let sls_prc = $('#stockBody .sls_prc input').val();
+            let stk_plc_cd = $('#stockBody .stk_plc_cd input').val();
 
-            var data = {
+            let data = {
                 pd_id: pd_id,
                 pd_name: pd_name,
                 pd_clsf_cd: pd_clsf_cd,
@@ -664,6 +577,7 @@
         $('#cancelStockBtn').click(function () {
             $('#managementStock').hide();
         });
+    });
 
         /*
         1. 재고 일괄설정 버튼클릭
@@ -673,6 +587,7 @@
         3. 재고 테이블에 데이터 수정하기
         */
 
+    $(document).ready(function () {
         /* 날짜 검색하는 기능에서 시작일, 종료일 구현하는 js */
         $.datepicker.setDefaults({
             changeYear: true,
@@ -709,5 +624,57 @@
             $('input:checkbox').prop('checked', this.checked);
         });
     });
+
+    $(document).ready(function(){
+        $('.clsfCd').each(function(index) {
+            getStockSize(index, 'ALL');
+        });
+    });
+
+    /* 상품의 사이즈 select option변경 시 Change 이벤트 발생 */
+    function getStockSize(index, item) {
+        console.log(index, item);
+        /*
+            선택한 제품의 index와 제품사이즈를 가져온다.
+            > 제품id와 size를 컨트롤러에 보낸다.
+            > 컨트롤러에서 stock테이블을 찾아 값을 재고 수량관련 데이터를 찾아온다.
+            > 해당 index에 해당하는 row에 데이터를 채워준다.
+        */
+
+        /* 제품의 id와 사이즈 정보 저장 */
+        let pdId = $('#pd_id_' + index).text();
+        let clsfCd = item;
+
+        console.log(pdId, clsfCd);
+
+        /* 제품id와 사이즈 정보를 data에 담아 ajax를 통해 컨트롤러로 보내준다. */
+        let data = {
+            pd_id: pdId,
+            pd_clsf_cd: clsfCd
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/admin/stock/count',
+            headers: {"Content-Type": "application/json"},
+            dataType: 'JSON',
+            data: JSON.stringify(data),
+            success: function (result) {
+                console.log("success >>>>> ", result);
+                $('#nmlQty_' + index).text(result.nml_stk_qty);
+                $('#rtQty_' + index).text(result.rt_stk_qty);
+                $('#rgnQty_' + index).text(result.rgn_stk_qty);
+                $('#urgnQty_' + index).text(result.urgn_stk_qty);
+                $('#sftyQty_' + index).text(result.sfty_stk_qty);
+                $('#odpmtQty_' + index).text(result.odpmt_stk);
+            },
+            error: function (request, status, error) {
+                /*alert("error");*/
+                console.log("code: " + request.status)
+                console.log("message: " + request.responseText)
+                console.log("error: " + error);
+            }
+        });
+    }
 </script>
 </html>
