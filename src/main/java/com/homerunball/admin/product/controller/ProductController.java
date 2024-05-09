@@ -146,7 +146,7 @@ public class ProductController {
     @PostMapping("/manage")
     public String manage(ProductDto productDto, @RequestParam("productList") String productID, @RequestParam("selectedContent") String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m) {
         /*이전 페이지의 url을 referer에 저장한다.*/
-        String referer = request.getHeader("Referer");
+        /*String referer = request.getHeader("Referer");*/
         try {
             /*
             productNumber가 selectedProduct라면
