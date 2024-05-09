@@ -1,4 +1,3 @@
-
 package com.homerunball.customer.domain;
 
 import java.util.Date;

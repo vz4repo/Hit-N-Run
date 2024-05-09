@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homerunball.payment.dao.PaymentDao">
+    <!-- 인증 성공 후, Response Body 정보 저장  -->
+    <insert id="insertPaymentSuccess" parameterType="PaymentDto" >
+      INSERT INTO pay ( pay_id             /* 결제번호     */
+                      , pay_seqnum         /* 결제일렬번호 */
+                      , c_id               /* 고객번호     */
+                      , od_id              /* 주문번호     */
+                      , trace_id           /* PG사로그번호 */
+#                       , disc_amt           /* 할인금액     */
+                      , od_pay_amt         /* 주문결제금액 */
+                      , pay_final_amt      /* 결제최종금액 */
+                      , pay_stat_cd        /* 결제상태코드 */
+                      , pay_dt             /* 결제일시     */
+                      , pay_meth_cd        /* 결제수단코드 */
+                      , pay_aprv_stat      /* 결제승인상태 */
+                      , pay_aprv_num       /* 결제승인번호 */
+                      , pay_aprv_dt        /* 결제승인일시 */
+                      , pay_resp_cd        /* 결제응답코드 */
+#                       , pay_canc_amt       /* 결제취소금액 */
+#                       , pay_canc_dt        /* 결제취소일시 */
+                      , c_name             /* 고객이름     */
+                      , issuer_cd          /* 발급사       */
+                      , acquier_cd         /* 매입사       */
+                      , trans_type         /* 거래종류     */
+                      , mth_instlmt        /* 할부개월     */
+                      , card_num)          /* 카드번호     */
+#                       , bank_name          /* 은행명       */
+#                       , acct_num           /* 계좌번호     */
+#                       , frst_reg_dt        /* 수정예정     */
+#                       , frst_reg_id        /* 수정예정     */
+#                       , last_mod_dt        /* 수정예정     */
+#                       , last_mod_id)       /* 수정예정     */
+      values ( #{pay_id}             /*  body.paymentKey                               */
+             , #{pay_seqnum}         /*  테이블 자체 생성                              */
+             , #{c_id}               /*  cust.c_id                                     */
+             , #{od_id}              /*  ord.od_id                                     */
+             , #{trace_id}           /*  header.X-TossPayments-Trace-Id                */
+#              , #{disc_amt}           /*  미사용                                        */
+             , #{od_pay_amt}         /*  주문결제금액                                  */
+             , #{pay_final_amt}      /*  최종결제금액. 후에 queryString.amount 비교    */
+             , #{pay_stat_cd}        /*  자체 코드값                                   */
+             , #{pay_dt}             /*  body.requestedAt                              */
+             , #{pay_meth_cd}        /*  body.method:간편결제->body.easyPay.provider   */
+             , #{pay_aprv_stat}      /*  body.status                                   */
+             , #{pay_aprv_num}       /*  body.card.approveNo                           */
+             , #{pay_aprv_dt}        /*  body.approvedAt                               */
+             , #{pay_resp_cd}        /*  요청 응답상태                                 */
+#              , #{pay_canc_amt}       /*  취소거래시 사용                               */
+#              , #{pay_canc_dt}        /*  취소거래시 사용                               */
+             , #{c_name}             /*  주문자명, 고객명                              */
+             , #{issuer_cd}          /*  body.card.issuerCode                          */
+             , #{acquier_cd}         /*  body.card.acquierCode                         */
+             , #{trans_type}         /*  body.card.ownerType+cardType                  */
+             , #{mth_instlmt}        /*  body.card.installmentPlanMonths               */
+             , #{card_num}       )   /*  body.card.number                              */
+#              , #{bank_name}          /*  미사용                                        */
+#              , #{acct_num}           /*  미사용                                        */
+#              , #{frst_reg_dt}        /*  추후 수정예정                                 */
+#              , #{frst_reg_id}        /*  추후 수정예정                                 */
+#              , #{last_mod_dt}        /*  추후 수정예정                                 */
+#              , #{last_mod_id}    )   /*  추후 수정예정                                 */
+    </insert>
+
+  <!-- 인증 실패 후, Response Body 정보 저장  -->
+  <insert id="insertPaymentFail" parameterType="PaymentFailDto">
+    insert into pay_err
+    ( pay_id                    /* 결제번호     */
+    , od_id                     /* 주문번호     */
+    , trace_id                  /* PG사로그번호 */
+#    , pay_meth_cd               /* 결제수단코드 */
+#    , inst_cd                   /* 기관코드     */
+    , pay_err_cd                /* 결제에러코드 */
+    , err_msg_ko)               /* 에러국문     */
+#    , frst_reg_dt               /* 수정예정     */
+#    , frst_reg_id               /* 수정예정     */
+#    , last_mod_dt               /* 수정예정     */
+#    , last_mod_id)              /* 수정예정     */
+    values( #{pay_id}           /* 값이 없으면 '-' */
+          , #{od_id}            /* request.orderId */
+          , #{trace_id}         /* header.X-TossPayments-Trace-Id */
+#          , #{pay_meth_cd}      /* 미사용 */
+#          , #{inst_cd}          /* 미사용 */
+          , #{pay_err_cd}       /* body.code */
+          , #{err_msg_ko} )     /* body.message */
+#          , #{frst_reg_dt}      /*  추후 수정예정   */
+#          , #{frst_reg_id}      /*  추후 수정예정   */
+#          , #{last_mod_dt}      /*  추후 수정예정   */
+#          , #{last_mod_id}    ) /*  추후 수정예정   */
+  </insert>
+
+</mapper>

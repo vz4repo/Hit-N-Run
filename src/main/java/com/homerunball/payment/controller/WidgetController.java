@@ -36,6 +36,7 @@ public class WidgetController {
     private String widgetClientKey;
     @Value("#{properties['widgetSecretKey']}")
     private String widgetSecretKey;
+
     @GetMapping(value = "/payment")
     public String index( Model model) throws Exception {
         System.out.println("[paymentController] :: /payment ");

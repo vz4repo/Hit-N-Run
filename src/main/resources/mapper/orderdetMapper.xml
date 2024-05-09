@@ -19,18 +19,18 @@
 
     <select id="select" parameterType="String" resultType="OrderDetDto">
         select od_det_seqnum
-            ,  od_id
-            ,  pd_id
-            ,  pd_clsf_cd
-            ,  od_dt
-            ,  pd_name
-            ,  slg_prc
-            ,  od_qty
-            ,  dlvry_stat_cd
-            , frst_reg_dt
-            , frst_reg_id
-            , last_mod_dt
-            , last_mod_id
+             ,  od_id
+             ,  pd_id
+             ,  pd_clsf_cd
+             ,  od_dt
+             ,  pd_name
+             ,  slg_prc
+             ,  od_qty
+             ,  dlvry_stat_cd
+             , frst_reg_dt
+             , frst_reg_id
+             , last_mod_dt
+             , last_mod_id
         from ord_det
         where od_det_seqnum=#{od_det_seqnum} and od_id = #{od_id}
     </select>
@@ -55,7 +55,7 @@
 
     <insert id="insert" parameterType="OrderDetDto">
         insert  into ord_det
-            (od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, dlvry_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
+        (od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, dlvry_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
         values
             (#{od_det_seqnum}, #{od_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{dlvry_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})
     </insert>
@@ -63,17 +63,17 @@
     <update id="update" parameterType="OrderDetDto">
         update ord_det
         set od_id           = #{od_id}
-        ,   pd_id           = #{pd_id}
-        ,   pd_clsf_cd      = #{pd_clsf_cd}
-        ,   od_dt           = #{od_dt}
-        ,   pd_name         = #{pd_name}
-        ,   slg_prc         = #{slg_prc}
-        ,   od_qty          = #{od_qty}
-        ,   dlvry_stat_cd   = #{dlvry_stat_cd}
-        ,   frst_reg_dt     = #{frst_reg_dt}
-        ,   frst_reg_id     = #{frst_reg_id}
-        ,   last_mod_dt     = #{last_mod_dt}
-        ,   last_mod_id     = #{last_mod_id}
+          ,   pd_id           = #{pd_id}
+          ,   pd_clsf_cd      = #{pd_clsf_cd}
+          ,   od_dt           = #{od_dt}
+          ,   pd_name         = #{pd_name}
+          ,   slg_prc         = #{slg_prc}
+          ,   od_qty          = #{od_qty}
+          ,   dlvry_stat_cd   = #{dlvry_stat_cd}
+          ,   frst_reg_dt     = #{frst_reg_dt}
+          ,   frst_reg_id     = #{frst_reg_id}
+          ,   last_mod_dt     = #{last_mod_dt}
+          ,   last_mod_id     = #{last_mod_id}
         where od_det_seqnum = #{od_det_seqnum}
         order by od_id desc;
     </update>
@@ -81,8 +81,4 @@
     <select id="findById" parameterType="string" resultType="OrderDetDto">
         SELECT * FROM ord_det WHERE od_id = #{od_Id}
     </select>
-
-
-
-
 </mapper>
