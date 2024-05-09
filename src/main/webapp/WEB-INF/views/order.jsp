@@ -11,6 +11,7 @@
     <link href="order.css" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/payStyle.css'/>"   rel="stylesheet" />
     <!-- 결제위젯 SDK 추가 -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
     <title> 주문 & 배송</title>
 </head>
@@ -49,7 +50,7 @@
     <div class="title__order">상품정보</div>
     <hr class="second__under" />
     <div class="tb__order">
-        <form action="/homerunball/order">
+        <form action="/order">
             <table style="width: 90%">
                 <colgroup>
                     <col width="70" />
