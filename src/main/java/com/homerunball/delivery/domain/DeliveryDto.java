@@ -24,63 +24,18 @@ public class DeliveryDto {
     /* constructor */
     public DeliveryDto() {}
 
-    public DeliveryDto(int c_adr_list_id, int c_id, String rcver, String adr_name, String rcver_phn, String rcver_adr) {
-        this.c_adr_list_id = c_adr_list_id;
-        this.c_id = c_id;
-        this.rcver = rcver;
-        this.adr_name = adr_name;
-        this.rcver_phn = rcver_phn;
-        this.rcver_adr = rcver_adr;
-    }
-
-    /* insert용 생성자 */
-    public DeliveryDto(int c_id, String adr_name, String rcver, String rcver_phn, String rcver_zip, String rcver_adr) {
-        this.c_id = c_id;
-        this.adr_name = adr_name;
-        this.rcver = rcver;
-        this.rcver_phn = rcver_phn;
-        this.rcver_zip = rcver_zip;
-        this.rcver_adr = rcver_adr;
-    }
-
-    public DeliveryDto(String adr_name, String rcver, String rcver_phn, String rcver_zip, String rcver_adr) {
-        this.adr_name = adr_name;
-        this.rcver = rcver;
-        this.rcver_phn = rcver_phn;
-        this.rcver_zip = rcver_zip;
-        this.rcver_adr = rcver_adr;
-    }
-
-    public DeliveryDto(int c_adr_list_id) {
-        this.c_id = c_adr_list_id;
-    }
-
-
-
     /* 메서드? 인터페이스?별로 생성자가 있을 필요 x 모든 변수를 한 생성자에 때려넣으면 됨 */
-/*    *//* select 의 생성자 *//*
-    public DeliveryDto(int c_id, int c_adr_list_id, String rcver, String adr_name, String rcver_phn, String rcver_adr) {
+    public DeliveryDto(int c_id, int c_adr_list_id, String adr_name, String rcver, String rcver_phn, String rcver_zip, String rcver_adr) {
         this.c_id = c_id;
         this.c_adr_list_id = c_adr_list_id;
-        this.rcver = rcver;
         this.adr_name = adr_name;
+        this.rcver = rcver;
         this.rcver_phn = rcver_phn;
+        this.rcver_zip = rcver_zip;
         this.rcver_adr = rcver_adr;
-    }*/
-
-
-
-
+    }
 
     /* getter setter */
-
-    public int getC_adr_list_id() {
-        return c_adr_list_id;
-    }
-
-    public void setC_adr_list_id(int c_adr_list_id) {
-        this.c_adr_list_id = c_adr_list_id;
-    }
 
     public int getC_id() {
         return c_id;
@@ -88,6 +43,14 @@ public class DeliveryDto {
 
     public void setC_id(int c_id) {
         this.c_id = c_id;
+    }
+
+    public int getC_adr_list_id() {
+        return c_adr_list_id;
+    }
+
+    public void setC_adr_list_id(int c_adr_list_id) {
+        this.c_adr_list_id = c_adr_list_id;
     }
 
     public String getAdr_name() {
@@ -161,14 +124,15 @@ public class DeliveryDto {
     public void setLast_mod_id(String last_mod_id) {
         this.last_mod_id = last_mod_id;
     }
+
     /* toString */
     /* toString은 그냥 모든걸 출력되게?해줘야하나... */
 
     @Override
     public String toString() {
         return "DeliveryDto{" +
-                "c_adr_list_id=" + c_adr_list_id +
-                ", c_id=" + c_id +
+                "c_id=" + c_id +
+                ", c_adr_list_id=" + c_adr_list_id +
                 ", adr_name='" + adr_name + '\'' +
                 ", rcver='" + rcver + '\'' +
                 ", rcver_phn='" + rcver_phn + '\'' +
@@ -181,8 +145,12 @@ public class DeliveryDto {
                 '}';
     }
 
+
+
+
+
     /* equlas */
-    /* 이것도 어떤 상황에 넣는건지 모르겠어서 일단 패스 */
+    /* 이것도 어떤 상황에 넣는건지 모르겠어서 일단 시시때때로 수정되는 그런건 빼고 만들기!  */
 
     @Override
     public boolean equals(Object o) {
@@ -191,8 +159,8 @@ public class DeliveryDto {
 
         DeliveryDto that = (DeliveryDto) o;
 
-        if (getC_adr_list_id() != that.getC_adr_list_id()) return false;
         if (getC_id() != that.getC_id()) return false;
+        if (getC_adr_list_id() != that.getC_adr_list_id()) return false;
         if (getAdr_name() != null ? !getAdr_name().equals(that.getAdr_name()) : that.getAdr_name() != null)
             return false;
         if (getRcver() != null ? !getRcver().equals(that.getRcver()) : that.getRcver() != null) return false;
@@ -200,26 +168,21 @@ public class DeliveryDto {
             return false;
         if (getRcver_zip() != null ? !getRcver_zip().equals(that.getRcver_zip()) : that.getRcver_zip() != null)
             return false;
-        if (getRcver_adr() != null ? !getRcver_adr().equals(that.getRcver_adr()) : that.getRcver_adr() != null)
-            return false;
-        if (getFrst_reg_dt() != null ? !getFrst_reg_dt().equals(that.getFrst_reg_dt()) : that.getFrst_reg_dt() != null)
-            return false;
-        return getFrst_reg_id() != null ? getFrst_reg_id().equals(that.getFrst_reg_id()) : that.getFrst_reg_id() == null;
+        return getRcver_adr() != null ? getRcver_adr().equals(that.getRcver_adr()) : that.getRcver_adr() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = getC_adr_list_id();
-        result = 31 * result + getC_id();
+        int result = getC_id();
+        result = 31 * result + getC_adr_list_id();
         result = 31 * result + (getAdr_name() != null ? getAdr_name().hashCode() : 0);
         result = 31 * result + (getRcver() != null ? getRcver().hashCode() : 0);
         result = 31 * result + (getRcver_phn() != null ? getRcver_phn().hashCode() : 0);
         result = 31 * result + (getRcver_zip() != null ? getRcver_zip().hashCode() : 0);
         result = 31 * result + (getRcver_adr() != null ? getRcver_adr().hashCode() : 0);
-        result = 31 * result + (getFrst_reg_dt() != null ? getFrst_reg_dt().hashCode() : 0);
-        result = 31 * result + (getFrst_reg_id() != null ? getFrst_reg_id().hashCode() : 0);
         return result;
     }
+    /* 객체의 주소값(int)를 이용해 객체 고유의 해시코드를 리턴  */
 }
 
 
