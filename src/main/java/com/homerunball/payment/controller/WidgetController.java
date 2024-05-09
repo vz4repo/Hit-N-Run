@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import com.homerunball.cart.domain.CartDto;
 import com.homerunball.order.dao.OrdDao;
+import com.homerunball.order.dao.OrderDetDao;
 import com.homerunball.order.domain.OrdDto;
+import com.homerunball.order.domain.OrderDetDto;
 import freemarker.ext.beans.StringModel;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,8 +40,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class WidgetController {
     @Autowired
-    OrdDao ordDao;
-
+    OrderDetDao orderDetDao;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -47,6 +48,7 @@ public class WidgetController {
     private String widgetClientKey;
     @Value("#{properties['widgetSecretKey']}")
     private String widgetSecretKey;
+
     @GetMapping(value = "/payment")
     public String index( Model model) throws Exception {
         System.out.println("[paymentController] :: /payment ");
@@ -60,12 +62,15 @@ public class WidgetController {
         System.out.println("[paymentController] :: /success ");
 
         /* request session에서 로그인 했으면 c_id 가 저장되어있을것을 가정 */
-        String c_id = "0001";
-        OrdDto ordDto = new OrdDto(c_id);
+        Integer c_id = 0001;
 
-        ordDao.insert(ordDto);
+        OrderDetDto orderDetDto = new OrderDetDto(c_id);
 
-        /*System.out.println("====" + ordDto);*/
+        System.out.println(c_id);
+
+        orderDetDao.insert(orderDetDto);
+
+        System.out.println("====" + orderDetDto);
 
 
         return "/paySuccess";

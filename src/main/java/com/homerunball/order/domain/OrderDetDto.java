@@ -8,11 +8,13 @@ public class OrderDetDto {
     private Integer od_id;
     private String pd_id;
     private String pd_clsf_cd;
+    private Integer c_id;
     private Date od_dt;
     private String pd_name;
     private Integer slg_prc;
     private Integer od_qty;
     private String dlvry_stat_cd;
+    private  String od_stat_cd;
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
@@ -21,8 +23,14 @@ public class OrderDetDto {
 
     public OrderDetDto(){}
 
-    public OrderDetDto(Integer od_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer slg_prc, Integer od_qty, String dlvry_stat_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
+    public  OrderDetDto(Integer c_id){
+
+        this(0, c_id, "", "", new Date(), "",0,0,"", "", new Date(),"", new Date(), "");
+    }
+
+    public OrderDetDto(Integer od_id, Integer c_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer slg_prc, Integer od_qty, String dlvry_stat_cd, String od_stat_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
         this.od_id = od_id;
+        this.c_id = c_id;
         this.pd_id = pd_id;
         this.pd_clsf_cd = pd_clsf_cd;
         this.od_dt = od_dt;
@@ -30,6 +38,7 @@ public class OrderDetDto {
         this.slg_prc = slg_prc;
         this.od_qty = od_qty;
         this.dlvry_stat_cd = dlvry_stat_cd;
+        this.od_stat_cd = od_stat_cd;
         this.frst_reg_dt = frst_reg_dt;
         this.frst_reg_id = frst_reg_id;
         this.last_mod_dt = last_mod_dt;
@@ -43,11 +52,13 @@ public class OrderDetDto {
                 ", od_id=" + od_id +
                 ", pd_id='" + pd_id + '\'' +
                 ", pd_clsf_cd='" + pd_clsf_cd + '\'' +
+                ", c_id='" + c_id + '\'' +
                 ", od_dt=" + od_dt +
                 ", pd_name='" + pd_name + '\'' +
                 ", slg_prc=" + slg_prc +
                 ", od_qty=" + od_qty +
                 ", dlvry_stat_cd='" + dlvry_stat_cd + '\'' +
+                ", od_stat_cd='" + od_stat_cd + '\'' +
                 ", frst_reg_dt=" + frst_reg_dt +
                 ", frst_reg_id='" + frst_reg_id + '\'' +
                 ", last_mod_dt=" + last_mod_dt +
@@ -60,12 +71,12 @@ public class OrderDetDto {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         OrderDetDto that = (OrderDetDto) object;
-        return Objects.equals(od_det_seqnum, that.od_det_seqnum) && Objects.equals(od_id, that.od_id) && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(od_dt, that.od_dt) && Objects.equals(pd_name, that.pd_name) && Objects.equals(dlvry_stat_cd, that.dlvry_stat_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
+        return Objects.equals(od_det_seqnum, that.od_det_seqnum) && Objects.equals(od_id, that.od_id) && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(c_id, that.c_id) && Objects.equals(od_dt, that.od_dt) && Objects.equals(pd_name, that.pd_name) && Objects.equals(dlvry_stat_cd, that.dlvry_stat_cd)  && Objects.equals(od_stat_cd, that.od_stat_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(od_det_seqnum, od_id, pd_id, pd_clsf_cd, od_dt, pd_name, dlvry_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+        return Objects.hash(od_det_seqnum, od_id, pd_id, pd_clsf_cd, c_id, od_dt, pd_name, dlvry_stat_cd, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
     }
 
     public Integer getOd_det_seqnum() {
@@ -99,6 +110,12 @@ public class OrderDetDto {
     public void setPd_clsf_cd(String pd_clsf_cd) {
         this.pd_clsf_cd = pd_clsf_cd;
     }
+
+    public Integer getC_id() {
+        return c_id;
+    }
+
+    public void setC_id(Integer c_id) { this.c_id = c_id;}
 
     public Date getOd_dt() {
         return od_dt;
@@ -138,6 +155,14 @@ public class OrderDetDto {
 
     public void setDlvry_stat_cd(String dlvry_stat_cd) {
         this.dlvry_stat_cd = dlvry_stat_cd;
+    }
+
+    public String getOd_stat_cd() {
+        return od_stat_cd;
+    }
+
+    public void setOd_stat_cd(String od_stat_cd) {
+        this.od_stat_cd = od_stat_cd;
     }
 
     public Date getFrst_reg_dt() {

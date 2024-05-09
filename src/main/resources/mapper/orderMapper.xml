@@ -49,9 +49,9 @@
     </select>
 
     <insert id="insert" parameterType="OrdDto" >
-        <selectKey keyProperty="od_id" order="BEFORE" resultType="java.lang.String">
-            SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(LAST_INSERT_ID() + 1, 4, '0')) AS od_id
-        </selectKey>
+<!--        <selectKey keyProperty="od_id" order="BEFORE" resultType="java.lang.String">-->
+<!--            SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(LAST_INSERT_ID() + 1, 4, '0')) AS od_id-->
+<!--        </selectKey>-->
         insert into ord
         (c_id, od_dt, od_stat_cd, od_pd_qty, od_tot_qty, rtl_prc, od_pay_amt)
         values
