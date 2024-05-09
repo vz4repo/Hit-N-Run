@@ -200,7 +200,6 @@ public class ProductController {
             productDto.setCtg(category);
             productMap.put("ctg", category);
 
-
             /*productMap에 선택된 pd_id를 저장한다.*/
             productMap.put("pd_id", productList);
 
