@@ -58,4 +58,3 @@
         <button class="button" id="payment-button" style="margin-top: 30px" disabled>결제하기</button>
       </div>
     </div>
-  </div>
