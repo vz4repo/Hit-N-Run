@@ -3,6 +3,7 @@ package com.homerunball.admin.product.service;
 import com.homerunball.admin.product.domain.ProductDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductService {
     /* 모든 제품의 수를 센다. */
@@ -36,7 +37,7 @@ public interface ProductService {
     int countProductType(String pd_type_cd) throws Exception;
 
     /* 제품의 내용을 수정한다. */
-    int modifyContent(ProductDto productDto) throws Exception;
+    int modifyContent(Map<String, Object> productMap) throws Exception;
 
     /*진열이 제외된 상품을 다시 진열한다.*/
     int showProduct(List<String> pd_id) throws Exception;

@@ -3,6 +3,7 @@ package com.homerunball.admin.product.dao;
 import com.homerunball.admin.product.domain.ProductDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductDao {
     /* 모든 제품의 수를 센다. */
@@ -42,7 +43,7 @@ public interface ProductDao {
     int countType(String pd_type_cd) throws Exception;
 
     /* 제품의 내용을 업데이트한다. */
-    int updateContent(ProductDto productDto) throws Exception;
+    int updateContent(Map<String, Object> productMap) throws Exception;
 
     /* 제품의 상태를 업데이트한다. */
 //    int updateStatus(ProductDto productDto) throws Exception;
