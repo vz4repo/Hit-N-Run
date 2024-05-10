@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,7 @@ public class StockController {
     @Autowired
     private ProductService productService;
 
-    /*재고관리 페이지에서 등록된 제품을 조회할 때 사용하는 메서드*/
+    /*재고관리 페이지에서 등록된 제품을 전체 조회할 때 사용하는 메서드*/
     @GetMapping("/list")
     public String list(Model model) {
         try {
@@ -41,10 +42,18 @@ public class StockController {
     /* 제품의 재고 사이즈를 조회하여 재고 수량을 조회하는 메서드 */
     @PostMapping("/count")
     @ResponseBody
-    public StockDto stockCount(@RequestBody Map getStockSize, Model model) throws Exception {
-        /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다. */
+    public Map<String, Object> stockCount(@RequestBody Map<String, String> getStockSize, Model model) throws Exception {
+        /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다.
+               재고정보가 이미 있으면 재고 등록버튼 비활성화
+                > 제품id와 사이즈 정보가 데이터베이스에 있는지 확인
+                > 재고정보가 있으면 재고등록 버튼을 비활성화
+                > 재고정보가 없으면 재고등록 버튼을 활성화 */
+
+        Map<String, Object> response = new HashMap<>();
         String pdId = getStockSize.get("pd_id").toString();
         String pdClsfCd = getStockSize.get("pd_clsf_cd").toString();
+
+        boolean isStockAvailable;
         StockDto stockDto = new StockDto();
         stockDto.setNml_stk_qty(0);
         stockDto.setRt_stk_qty(0);
@@ -55,6 +64,7 @@ public class StockController {
         try {
             /* 사이즈가 ALL이면 모든 사이즈의 재고수량을 더한다. */
             if (pdClsfCd.equals("ALL")) {
+                isStockAvailable = false;
                 String[] sizes = {"XS", "S", "M", "L", "XL", "2XL", "3XL"};
                 for (String size : sizes) {
                     StockDto tempStockDto = stockService.getOneStock(pdId, size);
@@ -69,6 +79,7 @@ public class StockController {
                 }
             } else { /* 개별 사이즈로 값이 넘어올 때 */
                 stockDto = stockService.getOneStock(pdId, pdClsfCd);
+                isStockAvailable = true;
                 /* 등록된 재고를 찾을 수 없으면 재고값을 0으로 반환 */
                 if (stockDto == null) {
                     stockDto = new StockDto();
@@ -77,34 +88,28 @@ public class StockController {
                     stockDto.setRgn_stk_qty(0);
                     stockDto.setUrgn_stk_qty(0);
                     stockDto.setSfty_stk_qty(0);
+                    isStockAvailable = false;
                 }
             }
+
+            response.put("isStockAvailable", isStockAvailable);
+            response.put("stockDto", stockDto);
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             model.addAttribute("msg", "NullPointException");
         }
-        return stockDto;
+        return response;
     }
 
-    /* 재고 일괄설정 버튼클릭 > 재고 수정 ajax 구동 */
-    @PostMapping("/modify")
-    @ResponseBody                               //비동기 통신
-    public String modify(Model model, HttpServletRequest request) {
-
-        return "/admin/stock/stockModify";
-    }
-
+    /* 재고 등록하는 메서드 */
     @PostMapping("/register")
-    @ResponseBody                               //비동기 통신
+    @ResponseBody
     public String register(@RequestBody StockDto stockDto, Model model) {
-
-        /* odpmt_stk(가용재고)는 (nml_stk_qty(정상재고) + rt_stk_qty(반품재고), rgn_stk_qty(재생가능재고)) 수량임 */
-
         /* 입력한 pur_dt(매입일), rcpt_dt(입고일)의 "-"를 공백으로 교체하고 varChar에 맞춰 String으로 변환 */
         stockDto.setPur_dt(stockDto.getPur_dt().replace("-", ""));
         stockDto.setRcpt_dt(stockDto.getRcpt_dt().replace("-", ""));
 
-        /*System.out.println(stockDto);*/
         try {
             /* pd_clsf_cd(제품사이즈)가 ALL 일 때 모든 사이즈를 insert 해야함..  */
             if (stockDto.getPd_clsf_cd().equals("ALL")) {
@@ -167,18 +172,18 @@ public class StockController {
             e.printStackTrace();
             return "redirect:/admin/product/list";
         }
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-
         return "redirect:/admin/stock/stockList";
     }
+
+    /* 재고 수정하는 메서드 ------작성해야해 */
+    @PostMapping("/modify")
+    @ResponseBody
+    public String modify(Model model, HttpServletRequest request) {
+
+        return "/admin/stock/stockModify";
+    }
+
+
 
 
 

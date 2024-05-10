@@ -121,7 +121,7 @@
             background: #0b7dda;
         }
 
-        .createStockBtn[disabled] {
+        .createStockBtn[disabled], .modifyStockBtn[disabled] {
             cursor: not-allowed;
             background: #9e9ea4;
             color: #7e7e87;
@@ -334,23 +334,23 @@
                             <option value="3XL">3XL</option>
                         </select>
                     </td>
-                    <td id="nmlQty_${status.index}" class="nml_stk_qty"></td>
+                    <td id="nmlQty_${status.index}" class="nml_stk_qty">6456</td>
                     <td id="rtQty_${status.index}" class="rt_stk_qty"></td>
                     <td id="rgnQty_${status.index}" class="rgn_stk_qty"></td>
                     <td id="urgnQty_${status.index}" class="urgn_stk_qty"></td>
                     <td id="sftyQty_${status.index}" class="sfty_stk_qty"></td>
                     <td id="odpmtQty_${status.index}" class="odpmt_stk"></td>
                     <td class="useStock">
-                        <select class="search-option stockUse" id="stockUse${status.index}">
+                        <select class="search-option stockUse" onchange="getStockUse(${status.index},this.value)">
                             <option value="used">사용함</option>
                             <option value="unUsed">사용안함</option>
                         </select>
                     </td>
                     <td class="createStock">
-                        <button type="button" class="sendBtnSmall createStockBtn" id="createStockBtn${status.index}">
+                        <button type="button" class="sendBtnSmall createStockBtn" id="createStockBtn_${status.index}">
                             재고등록
                         </button>
-                        <button type="button" class="sendBtnSmall modifyStockBtn" id="modifyStockBtn${status.index}">
+                        <button type="button" class="sendBtnSmall modifyStockBtn" id="modifyStockBtn_${status.index}">
                             재고수정
                         </button>
                     </td>
@@ -463,27 +463,22 @@
 </body>
 <script>
     $(document).ready(function () {
-        /* 재고를 등록하는 #managementStock div는 최초에 안보임 */
-        $('#managementStock').hide();
+        $('.clsfCd').each(function (index) {
+            getStockSize(index, 'ALL');
+        });
 
-        /* 재고사용 여부 변화에 따라 이벤트 처리
-           > used일 경우 재고등록 버튼 활성화
-           > unUsed일 경우 재고등록 버튼 비활성화 */
-        $('.stockUse').change(function () {
-            let index = $(this).attr('id').replace('stockUse', '');
-            let stockUseValue = $(this).val();
-            if (stockUseValue === 'used') {
-                $('#createStockBtn' + index).prop('disabled', false);
-            } else {
-                $('#createStockBtn' + index).prop('disabled', true);
-            }
+        $('.stockUse').each(function (index) {
+            getStockUse(index, 'used');
         });
     });
 
     $(document).ready(function () {
+        /* 재고를 등록하는 #managementStock div는 최초에 안보임 */
+        $('#managementStock').hide();
+
         /* 재고등록 버튼 클릭 시 이벤트 발생 */
         $('.createStockBtn').click(function () {
-            let index = $(this).attr('id').replace('createStockBtn', '');
+            let index = $(this).attr('id').replace('createStockBtn_', '');
 
             /* 재고등록 하는 index의 pd_id, pd_name, pd_clsf_cd, 나머지재고 정보를 입력받을 폼을 tbody에 html 요소로 넣어주기*/
             let pd_id = $(this).closest('tr').find('#pd_id_' + index).text();
@@ -579,14 +574,6 @@
         });
     });
 
-        /*
-        1. 재고 일괄설정 버튼클릭
-          1.1. checked가 0이면 제품을 선택해 달라는 알림 띄우기
-          1.2. checked된 제품 중 1개라도 재고관리 미사용이면 재고 등록을 먼저 하라는 알림 띄우기
-        2. 선택된 데이터의 pd_id, pd_name, pd_clsf_cd 를 stockModify.jsp로 넘겨서 테이블 수정하기
-        3. 재고 테이블에 데이터 수정하기
-        */
-
     $(document).ready(function () {
         /* 날짜 검색하는 기능에서 시작일, 종료일 구현하는 js */
         $.datepicker.setDefaults({
@@ -625,27 +612,30 @@
         });
     });
 
-    $(document).ready(function(){
-        $('.clsfCd').each(function(index) {
-            getStockSize(index, 'ALL');
-        });
-    });
+    /* 재고사용 여부 변화에 따라 이벤트 처리 > used일 경우 재고등록 버튼 활성화 > unUsed일 경우 재고등록 버튼 비활성화 */
+    function getStockUse(index, item) {
+        console.log(index, item);
+        if (item === 'used') {
+            $('#createStockBtn_' + index).prop('disabled', false);
+            $('#modifyStockBtn_' + index).prop('disabled', false);
+
+        } else {
+            $('#createStockBtn_' + index).prop('disabled', true);
+            $('#modifyStockBtn_' + index).prop('disabled', true);
+        }
+    }
 
     /* 상품의 사이즈 select option변경 시 Change 이벤트 발생 */
     function getStockSize(index, item) {
         console.log(index, item);
-        /*
-            선택한 제품의 index와 제품사이즈를 가져온다.
+        /* 선택한 제품의 index와 제품사이즈를 가져온다.
             > 제품id와 size를 컨트롤러에 보낸다.
             > 컨트롤러에서 stock테이블을 찾아 값을 재고 수량관련 데이터를 찾아온다.
             > 해당 index에 해당하는 row에 데이터를 채워준다.
-        */
-
+            > 재고가 이미 등록되어 있으면 등록 버튼 비활성화 */
         /* 제품의 id와 사이즈 정보 저장 */
         let pdId = $('#pd_id_' + index).text();
         let clsfCd = item;
-
-        console.log(pdId, clsfCd);
 
         /* 제품id와 사이즈 정보를 data에 담아 ajax를 통해 컨트롤러로 보내준다. */
         let data = {
@@ -659,7 +649,10 @@
             headers: {"Content-Type": "application/json"},
             dataType: 'JSON',
             data: JSON.stringify(data),
-            success: function (result) {
+            success: function (response) {
+                let result = response.stockDto;
+                let isStockAvailable = response.isStockAvailable;
+
                 console.log("success >>>>> ", result);
                 $('#nmlQty_' + index).text(result.nml_stk_qty);
                 $('#rtQty_' + index).text(result.rt_stk_qty);
@@ -667,6 +660,14 @@
                 $('#urgnQty_' + index).text(result.urgn_stk_qty);
                 $('#sftyQty_' + index).text(result.sfty_stk_qty);
                 $('#odpmtQty_' + index).text(result.odpmt_stk);
+
+                if (isStockAvailable) {
+                    $('#createStockBtn_' + index).prop('disabled', true);
+                    $('#modifyStockBtn_' + index).prop('disabled', false);
+                } else {
+                    $('#createStockBtn_' + index).prop('disabled', false);
+                    $('#modifyStockBtn_' + index).prop('disabled', true);
+                }
             },
             error: function (request, status, error) {
                 /*alert("error");*/
@@ -676,5 +677,13 @@
             }
         });
     }
+
+    /*
+    1. 재고 일괄설정 버튼클릭
+      1.1. checked가 0이면 제품을 선택해 달라는 알림 띄우기
+      1.2. checked된 제품 중 1개라도 재고관리 미사용이면 재고 등록을 먼저 하라는 알림 띄우기
+    2. 선택된 데이터의 pd_id, pd_name, pd_clsf_cd 를 stockModify.jsp로 넘겨서 테이블 수정하기
+    3. 재고 테이블에 데이터 수정하기
+    */
 </script>
 </html>
