@@ -29,7 +29,7 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public int delete(String c_id, String pd_id, String pd_clsf_code) throws Exception {
+    public int delete(int c_id, String pd_id, String pd_clsf_code) throws Exception {
         Map map = new HashMap();
         map.put("c_id", c_id);
         map.put("pd_id", pd_id);
@@ -44,7 +44,7 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public int cidDeleteAll(String c_id) throws Exception {
+    public int cidDeleteAll(int c_id) throws Exception {
         return session.delete(namespace+"cidDeleteAll", c_id);
     }
 
@@ -65,7 +65,7 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public List<CartDto> selectUser(String c_id) throws Exception {
+    public List<CartDto> selectUser(int c_id) throws Exception {
         return session.selectList(namespace+"selectUser",c_id);
     }
 

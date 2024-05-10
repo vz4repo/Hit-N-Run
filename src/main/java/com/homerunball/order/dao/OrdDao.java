@@ -7,7 +7,7 @@ import java.util.List;
 public interface OrdDao {
     int count() throws Exception; // T selectOne(String statement)
 
-    int delete(String od_id, String c_id) throws Exception; // int delete(String statement, Object parameter)
+    int delete(int od_id, int c_id) throws Exception; // int delete(String statement, Object parameter)
 
     int deleteAll() throws Exception;
 
@@ -19,10 +19,10 @@ public interface OrdDao {
 
     List<OrdDto> selectAll() throws Exception; // List<E> selectList(String statement)
 
-    List<OrdDto> selectOdId(String od_id) throws Exception;
+    List<OrdDto> selectOdId(int od_id) throws Exception;
 
-    List<OrdDto> selectCid(String c_id) throws Exception;
+    List<OrdDto> selectCid(int c_id) throws Exception;
 
-    OrdDto select(String od_id, String c_id) throws Exception; // T selectOne(String statement, Object parameter)
+    OrdDto select(int od_id, int c_id) throws Exception; // T selectOne(String statement, Object parameter)
 
 }

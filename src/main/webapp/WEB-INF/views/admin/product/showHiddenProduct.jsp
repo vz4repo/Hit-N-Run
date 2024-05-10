@@ -11,6 +11,11 @@
             border-collapse: collapse;
             text-align: left;
         }
+
+        strong {
+            font-weight: bold;
+            color: #1b64da;
+        }
     </style>
     <title>삭제된 제품 목록</title>
     <% String msg = (String) request.getAttribute("msg"); %>
@@ -26,7 +31,7 @@
         <h1>진열 제외 제품 목록</h1>
         <table>
             <tr>
-                <td colspan="16">[총 ${hiddenProductCount}개]</td>
+                <td colspan="16">[총 <strong>${hiddenProductCount}</strong>개]</td>
             </tr>
             <tr>
                 <td colspan="16">

@@ -3,7 +3,10 @@ package com.homerunball.order.controller;
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
 import com.homerunball.order.dao.OrdDao;
+import com.homerunball.order.dao.OrderAndStkDao;
+import com.homerunball.order.domain.OrdAndStkDto;
 import com.homerunball.order.domain.OrdDto;
+import com.homerunball.order.domain.OrderDetDto;
 import com.homerunball.order.service.OrdService;
 import freemarker.ext.beans.StringModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,30 +31,35 @@ public class OrdController {
     OrdDao ordDao;
     @Autowired
     CartDao cartDao;
-
+    @Autowired
+    OrderAndStkDao orderAndStkDao;
 
 
     @PostMapping("/order")
     public String order(Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
-        String c_id = (String)session.getAttribute("c_id");
+        int c_id = (int)session.getAttribute("c_id");
         try {
 
             List<CartDto> list = cartDao.selectUser(c_id);
+         //String pd_name, int sls_prc, int cart_cnt, int c_id
+
+            List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);
+//            int totalPrice = OrdAndStkDto.OrdAndStkTotalPrice();
+//            OrdAndStkDto ordDto = new OrdAndStkDto();
+//            ordDao.insert(ord);
+
             m.addAttribute("list",list);
-            OrdDto dto = new OrdDto(c_id);
-            ordDao.insert(dto);
-
-
+            m.addAttribute("stkList", stkList);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "order";
     }
-
     private boolean loginCheck(HttpServletRequest request){
         HttpSession session = request.getSession();
         return session.getAttribute("c_id") != null;
     }
+
 }
