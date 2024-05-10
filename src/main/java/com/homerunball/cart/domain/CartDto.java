@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class CartDto {
-    private String c_id;
+    private int c_id;
     private String pd_id;
     private String pd_clsf_code;
     private Date frst_reg_dt;
@@ -19,7 +19,7 @@ public class CartDto {
 
     public CartDto(){}
 
-    public CartDto(String c_id, String pd_id, String pd_clsf_code, int cart_cnt){
+    public CartDto(int c_id, String pd_id, String pd_clsf_code, int cart_cnt){
         this.c_id = c_id;
         this.pd_id = pd_id;
         this.pd_clsf_code = pd_clsf_code;
@@ -41,11 +41,11 @@ public class CartDto {
         return Objects.hash(c_id, pd_id, pd_clsf_code);
     }
 
-    public String getC_id() {
+    public int getC_id() {
         return c_id;
     }
 
-    public void setC_id(String c_id) {
+    public void setC_id(int c_id) {
         this.c_id = c_id;
     }
 

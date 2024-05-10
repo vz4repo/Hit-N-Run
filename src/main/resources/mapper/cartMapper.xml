@@ -46,7 +46,7 @@
     </sql>
 
     <!--select 1건-->
-    <select id="selectUser" parameterType="string" resultType="CartDto">
+    <select id="selectUser" parameterType="int" resultType="CartDto">
         <include refid="selectCart"/>
         where c_id = #{c_id}
     </select>

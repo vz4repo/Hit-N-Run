@@ -38,7 +38,7 @@ public class CartController {
     public String insert(CartDto cartDto, String pd_id, String pd_clsf_code, Integer cart_cnt, Model m, HttpSession session){
         try{
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            String c_id = (String)session.getAttribute("c_id"); // ccc@ccc.com
+            int c_id = (int)session.getAttribute("c_id"); // ccc@ccc.com
 //            String c_id = cartDao.customerGetCid(cid);
             cartDto.setC_id(c_id);
             cartDto.setPd_id("update");
@@ -80,7 +80,7 @@ public class CartController {
 
     /* 고객 한명의 장바구니 전체삭제 */
     @PostMapping("/removeAll")
-    public String removeAll(String c_id, Model m,HttpServletRequest request){
+    public String removeAll(int c_id, Model m,HttpServletRequest request){
         try{
             /* c_id 고객번호를 매개변수로 받아와서 장바구니 전체 삭제한다 */
             cartDao.cidDeleteAll(c_id);
@@ -93,7 +93,7 @@ public class CartController {
 
     /*고객장바구니 선택삭제*/
     @PostMapping("/remove")
-    public String remove(String c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
+    public String remove(int c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
         try {
              /*고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다*/
             int rowcnt = cartDao.delete(c_id, pd_id, pd_clsf_code);
@@ -116,7 +116,7 @@ public class CartController {
 
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            String c_id = (String)session.getAttribute("c_id"); // ccc@ccc.com
+            int c_id = (int)session.getAttribute("c_id"); // ccc@ccc.com
             /* 로그인한 고객의 c_email을 이용해서 cust의 c_id를 가져온다 */
 //            String c_id = cartDao.customerGetCid(cid);
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
