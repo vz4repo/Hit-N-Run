@@ -6,9 +6,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link href="reset.css" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="order.css" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/payStyle.css'/>"   rel="stylesheet" />
     <!-- 결제위젯 SDK 추가 -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
