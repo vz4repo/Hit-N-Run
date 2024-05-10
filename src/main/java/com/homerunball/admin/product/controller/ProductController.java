@@ -237,6 +237,7 @@ public class ProductController {
         return "/admin/product/managePopup/productExposureManage";
     }
 
+    /*제품의 표시 설정을 변경하기 위한 메서드*/
     @PostMapping("/manage/exposure")
     public String productExposure(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
         /*
@@ -286,6 +287,7 @@ public class ProductController {
         return "/admin/product/managePopup/productExposureManage";
     }
 
+    /*제품의 기초 정보를 수정하기 위한 메서드*/
     @PostMapping("/manage/basicInformation")
     public String manageBasicInformation(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
         /*
@@ -335,6 +337,7 @@ public class ProductController {
         return "/admin/product/managePopup/manageBasicInformation";
     }
 
+    /*판매 정보를 수정하기 위한 메서드*/
     @PostMapping("/manage/salesInformation")
     public String manageSalesInformation(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
         /*
@@ -384,6 +387,7 @@ public class ProductController {
         return "/admin/product/managePopup/manageSalesInformation";
     }
 
+    /*이미지를 등록한 내용을 수정하기 위한 메서드*/
     @PostMapping("/manage/imageRegistration")
     public String manageImageRegistration(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
         /*
