@@ -83,19 +83,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="cartDto" items="${list}">
+                <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
                             <a href="#"><img src="#" alt="썸네일" /></a>
                         </td>
                         <td>
-                            <a href="#">상품명가져오기</a>
+                            <a href="#">${stkList[status.index].pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
-                        <td><span></span>원</td>
-                        <td><span>${cartDto.cart_cnt}</span>개</td>
+                        <td><span class="priceFormat">${stkList[status.index].sls_prc}</span></td>
+                        <td><span>${stkList[status.index].cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span>${ordDto.od_pay_amt}</span>원</td>
+                        <td><span class="priceFormat">${stkList[status.index].cart_cnt*stkList[status.index].sls_prc}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -109,8 +109,8 @@
                     <td colspan="7">
                         <div class="tb__right">
                             <span>상품구매금액</span>
-                            <span>배송비 : 0</span>
-                            <span>= 합계:</span>
+                            <span>배송비 무료</span>
+                            <span class="priceFormat">합계:</span>
                             <span>원</span>
                         </div>
                     </td>
@@ -125,6 +125,17 @@
 <%--    <jsp:include page="payCheckout.jsp"/>--%>
 </section>
 <script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>
+<script>
+    $(document).ready(function(){
+        $('.priceFormat').each(function (){
+            let value = $(this).text();
+            value = value.replace(/,/g, '');
+            const numbericValue = parseInt(value);
+            const formatValue = numbericValue.toLocaleString('ko-KR');
+            $(this).text(formatValue+'원');
+        })
+    })
+</script>
 </body>
 
 </html>

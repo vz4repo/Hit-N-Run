@@ -5,6 +5,7 @@ import com.homerunball.order.domain.OrderDetDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Service
@@ -18,16 +19,13 @@ public class OrderDetServiceImpl implements OrderDetService {
     }
 
     @Override
-    public int delete(int od_det_seqnum, String od_id, int c_id) throws Exception{
+    public int delete(int od_det_seqnum, BigInteger od_id, int c_id) throws Exception{
         return orderdetDao.delete(od_det_seqnum,od_id,c_id);
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, String od_id, int c_id) throws Exception {
-
-        System.out.println(od_det_seqnum);
-
-        return  orderdetDao.select(od_det_seqnum, od_id, c_id);
+    public List<OrderDetDto> select(int c_id) throws Exception {
+        return  orderdetDao.select(c_id);
     }
 
     @Override

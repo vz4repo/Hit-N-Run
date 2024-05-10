@@ -23,7 +23,7 @@
     </div>
     <hr class="second__under" />
     <div class="tb__order">
-        <form action="">
+        <form action="/orderDetail">
             <table style="width: 90%">
                 <colgroup>
                     <col width="*" />
@@ -67,7 +67,7 @@
                                 <span>${orderdetDto.od_qty}</span>
                             </td>
                             <td>
-                                <a href="#">${orderdetDto.dlvry_stat_cd}</a>
+                                <a href="#">${orderdetDto.od_stat_cd}</a>
                                 <button>후기작성</button>
                             </td>
                         </tr>

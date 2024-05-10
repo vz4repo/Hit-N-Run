@@ -14,8 +14,8 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml"})
 public class OrderDetDaoImplTest {
-//    @Autowired
-//    private OrderDetDao orderdetDao;
+    @Autowired
+    private OrderDetDao orderdetDao;
 //
 //    @Test
 //    public void count() throws Exception{
@@ -86,36 +86,37 @@ public class OrderDetDaoImplTest {
 //
 //    }
 //
-//    @Test
-//    public void insert() throws Exception {
-//        orderdetDao.deleteAll();
-//        assertTrue(orderdetDao.count()==0);
-//
-//        //리스트 1개 추가
-//        OrderDetDto ord_det = new OrderDetDto(20240117-000001, 2024051, "GLV000001-80","XS", new Date(),"XANDER BOGAERTS",940000,2,"asdf",new Date(),"a",new Date(),"a");
-//        assertTrue(orderdetDao.insert(ord_det)==1);
-//        assertTrue(orderdetDao.count()==1);
-//
-//        //리스트 1개 더 추가
-//        OrderDetDto ord_det2 = new OrderDetDto(20240117-000002, 2024052, "GLV000001-81","S", new Date(),"XANDER BOGAERTS",940000,2,"asdf",new Date(),"a",new Date(),"a");
-//        assertTrue(orderdetDao.insert(ord_det2)==1);
-//
-//        //2다 모두 삭제
-//        orderdetDao.deleteAll();
-//        assertTrue(orderdetDao.count()==0);
-//
-//        for (int i = 1; i <= 10; i++) {
-//            int od_det_seqnum = 20240117 * 1000000 + i; // '20240117'와 '000001'을 결합하여 숫자로 표현합니다.
-//            int od_id = 2024050 + i; // 2024050에 1부터 10까지의 숫자를 더하여 생성
-//
-//            OrderDetDto ord_det3 = new OrderDetDto(od_det_seqnum, od_id, "GLV000001-80", "XS", new Date(), "XANDER BOGAERTS", 940000, 2, "asdf", new Date(), "a", new Date(), "a");
-//            assertEquals(1, orderdetDao.insert(ord_det3)); // 리스트에 OrderDetDto 객체 추가
-//        }
-//        assertTrue(orderdetDao.count()==10);
-//
-//        assertEquals(10, orderdetDao.count());
-//
-//    }
+    @Test
+    public void insert() throws Exception {
+        orderdetDao.deleteAll();
+        assertTrue(orderdetDao.count()==0);
+
+        //리스트 1개 추가
+        OrderDetDto ord_det = new OrderDetDto(100003, "pd_aa","aaa", new Date(), "pd_name", 1000, 2, "aaa",  new Date(), "testuser", new Date(), "testuser");
+        assertTrue(orderdetDao.insert(ord_det)==1);
+        assertTrue(orderdetDao.count()==1);
+
+        //리스트 1개 더 추가
+        OrderDetDto ord_det2 = new OrderDetDto(100003, "pd_aa","aaa", new Date(), "pd_name", 1000, 2, "aaa",  new Date(), "testuser", new Date(), "testuser");
+        assertTrue(orderdetDao.insert(ord_det)==1);
+        assertTrue(orderdetDao.insert(ord_det2)==1);
+
+        //2다 모두 삭제
+        orderdetDao.deleteAll();
+        assertTrue(orderdetDao.count()==0);
+
+        for (int i = 1; i <= 10; i++) {
+            int od_det_seqnum = 20240117 * 1000000 + i; // '20240117'와 '000001'을 결합하여 숫자로 표현합니다.
+            int od_id = 2024050 + i; // 2024050에 1부터 10까지의 숫자를 더하여 생성
+
+            OrderDetDto ord_det3 = new OrderDetDto(100003, "pd_aa","aaa", new Date(), "pd_name", 1000, 2, "aaa",  new Date(), "testuser", new Date(), "testuser");
+            assertEquals(1, orderdetDao.insert(ord_det3)); // 리스트에 OrderDetDto 객체 추가
+        }
+        assertTrue(orderdetDao.count()==10);
+
+        assertEquals(10, orderdetDao.count());
+
+    }
 //
 //    @Test
 //    public void update() throws Exception {

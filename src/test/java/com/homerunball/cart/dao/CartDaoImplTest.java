@@ -23,7 +23,7 @@ public class CartDaoImplTest {
         cartDao.deleteAll();
         assertTrue(cartDao.count()==0);
 
-        String c_id = cartDao.getcustAll().get(0).getC_id();
+        int c_id = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(c_id, "GLV000021-20", "RRR", 2);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==1);
@@ -39,12 +39,12 @@ public class CartDaoImplTest {
         cartDao.deleteAll();
         assertTrue(cartDao.count()==0);
 
-        String c_id = cartDao.getcustAll().get(0).getC_id();
+        int c_id = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(c_id, "GLV000021-20", "RRR", 1);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==1);
         /* 장바구니 User U000005를 선택해서 id를 가져온다*/
-        String getcid = cartDao.selectAll().get(0).getC_id();
+        int getcid = cartDao.selectAll().get(0).getC_id();
         /* id와 담은제품이 일치할경우 객체삭제 */
         cartDao.delete(getcid, cart.getPd_id(), cart.getPd_clsf_code());
         assertTrue(cartDao.count()==0);
@@ -52,7 +52,7 @@ public class CartDaoImplTest {
         /* 장바구니 User U000005 생성*/
         assertTrue(cartDao.insert(cart)==1);
         // 장바구니에 userid와 제품id+1를 delete, count 할경우 존재하지 않는 제품id 이기때문에 count는 그대로
-        assertTrue(cartDao.delete(getcid, cart.getC_id()+1, cart.getPd_clsf_code())==0);
+        assertTrue(cartDao.delete(getcid,  cart.getPd_id()+1, cart.getPd_clsf_code())==0);
         assertTrue(cartDao.count()==1);
     }
 
@@ -62,7 +62,7 @@ public class CartDaoImplTest {
         cartDao.deleteAll();
         assertTrue(cartDao.count()==0);
 
-        String c_id = cartDao.getcustAll().get(0).getC_id();
+        int c_id = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(c_id, "GLV000021-20", "RRR",1);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.deleteAll()==1);
@@ -83,14 +83,14 @@ public class CartDaoImplTest {
 
 
         /* cart에 0번고객이 장바구니에 2개를추가,  */
-        String c_id = cartDao.getcustAll().get(0).getC_id();
+        int c_id = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(c_id, "GLV000021-21", "RRR",1);
         CartDto cart2 = new CartDto(c_id, "GLV000022-21", "RR",1);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.insert(cart2)==1);
 
         /* 1번고객이 장바구니에 1개추가 총 count는 3개 */
-        String c_id2 = cartDao.getcustAll().get(1).getC_id();
+        int c_id2 = cartDao.getcustAll().get(1).getC_id();
         CartDto cart3 = new CartDto(c_id2, "GLV000021-21", "RR",1);
         assertTrue(cartDao.insert(cart3)==1);
         assertTrue(cartDao.count()==3);
@@ -111,7 +111,7 @@ public class CartDaoImplTest {
         assertTrue(cartDao.count()==0);
 
         /* 0번째 고객이 장바구니에 물건을 담음 */
-        String c_id = cartDao.getcustAll().get(0).getC_id();
+        int c_id = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(c_id, "GLV000021-20", "RRR",1);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==1);
@@ -136,12 +136,12 @@ public class CartDaoImplTest {
         assertTrue(cartDao.count()==0);
 
         /* 0번째고객이 장바구니에 물건을 담는다 */
-        String cid = cartDao.getcustAll().get(0).getC_id();
+        int cid = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(cid, "GLV000021-30", "333",2);
         assertTrue(cartDao.insert(cart)==1);
 
         /* 1번째고객이 장바구니에 물건을 담는다 */
-        String cid2 = cartDao.getcustAll().get(1).getC_id();
+        int cid2 = cartDao.getcustAll().get(1).getC_id();
         CartDto cart2 = new CartDto(cid2, "GLV000021-30", "333",2);
 
         /* cart 0번째고객과 cart3번째 고객이 같은지 비교 */
@@ -159,7 +159,7 @@ public class CartDaoImplTest {
         assertTrue(list.size()==0);
 
         /* 0번째고객이 장바구니에 물건을 담는다 */
-        String cid = cartDao.getcustAll().get(0).getC_id();
+        int cid = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(cid, "GLV000021-30", "333",2);
         assertTrue(cartDao.insert(cart)==1);
 
@@ -180,13 +180,13 @@ public class CartDaoImplTest {
 
 
         /* 0번째고객이 장바구니에 물건을 담는다 */
-        String cid = cartDao.getcustAll().get(0).getC_id();
+        int cid = cartDao.getcustAll().get(0).getC_id();
         CartDto cart = new CartDto(cid, "GLV000021-30", "333",2);
         assertTrue(cartDao.insert(cart)==1);
         assertTrue(cartDao.count()==1);
 
         // 0번쨰 고객의 고객ID 가져오기
-        String c_id = cart.getC_id();
+        int c_id = cart.getC_id();
         System.out.println(c_id); // 100001
         System.out.println(cart); // CardDto{c_id='100001', pd_id='GLV000021-30', pd_clsf_code='333', cart_cnt=2, price=0, totalPrice=0}
          /*0번째고객의, 사이즈와 장바구니담은수량을 변경한다*/
@@ -202,7 +202,7 @@ public class CartDaoImplTest {
 
         // 동일한 객체인지 확인
         System.out.println("cart2: "+cart2);
-        assertTrue(c_id.equals(cart2.get(0).getC_id()));
+        assertTrue(c_id==cart2.get(0).getC_id());
     }
 
 //    @Test
@@ -211,7 +211,7 @@ public class CartDaoImplTest {
 //        assertTrue(cartDao.count()==0);
 //
 //        /* 0번째고객이 장바구니에 물건을 담는다 */
-//        String c_id = cartDao.selectAll().get(0).getC_id();
+//        int c_id = cartDao.selectAll().get(0).getC_id();
 //        CartDto cart = new CartDto(c_id, "GLV000021-21", "S",1);
 //        CartDto cart2 = new CartDto(c_id, "GLV000021-21", "S",1);
 //        CartDto cart3 = new CartDto(c_id, "GLV000021-21", "S",1);
