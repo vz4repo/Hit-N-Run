@@ -46,7 +46,7 @@ public class OrdController {
          //String pd_name, int sls_prc, int cart_cnt, int c_id
 
             List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);
-            int totalPrice = OrdAndStkDto.OrdAndStkTotalPrice();
+//            int totalPrice = OrdAndStkDto.OrdAndStkTotalPrice();
 //            OrdAndStkDto ordDto = new OrdAndStkDto();
 //            ordDao.insert(ord);
 

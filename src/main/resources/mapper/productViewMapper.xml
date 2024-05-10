@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.homerunball.product.customer.dao.ProductViewMapper">
+<!--    Prd Table-->
+    <select id="countPrd" resultType="int">
+        select count(*) from prd;
+    </select>
+<!--    선택한 제품의 상세정보를 조회-->
+    <select id="selectPrd" resultType="pdViewDto" parameterType="String">
+        select * from prd where pd_id = #{pd_id}
+    </select>
+<!--    등록된 제품 전체를 검색-->
+    <select id="selectAllPrd" resultType="pdViewDto">
+        select * from prd;
+    </select>
+<!--    선택한 제품의 재고 속성들을 조회(재고 옵션중 1개만 검색-->
+    <select id="selectStk" resultType="stkViewDto" parameterType="String">
+        select * from stk where pd_id = #{pd_id} limit 1;
+    </select>
+<!--    제품과 옵션을 선택, 선택한 정보로 재고 테이블을 조회-->
+    <select id="selectStkOpt" resultType="stkViewDto" parameterType="map">
+        select * from stk where pd_id = #{pd_id} and pd_clsf_cd = #{pd_clsf_cd};
+    </select>
+</mapper>
