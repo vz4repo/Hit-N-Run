@@ -5,8 +5,8 @@
 }
 
 body{
-    height: 200vh;
-    margin-top: 20%;
+    height: 80vh;
+    margin-top: 10%;
 }
 
 a {
@@ -19,14 +19,14 @@ ul {
     display: flex;
 }
 
-.wrapper {
+.footer_wrapper {
     min-height: 100%;
     position: relative;
 }
 
 footer {
     width: 100%;
-    bottom: 0px;
+    bottom: 0;
     position: absolute;
 }
 

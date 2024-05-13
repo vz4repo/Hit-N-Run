@@ -9,5 +9,4 @@
             from cart c , stk p
             where c.pd_id = p.pd_id and c.c_id = #{c_id};
     </select>
-
 </mapper>

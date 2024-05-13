@@ -49,6 +49,9 @@ public class OrdController {
 //            int totalPrice = OrdAndStkDto.OrdAndStkTotalPrice();
 //            OrdAndStkDto ordDto = new OrdAndStkDto();
 //            ordDao.insert(ord);
+            System.out.println(stkList);
+
+
 
             m.addAttribute("list",list);
             m.addAttribute("stkList", stkList);
