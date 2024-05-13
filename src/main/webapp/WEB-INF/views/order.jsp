@@ -90,10 +90,10 @@
                             <a href="#">${stkList[status.index].pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
-                        <td><span class="priceFormat">${stkList[status.index].rtl_prc}</span></td>
+                        <td><span class="priceFormat">${stkList[status.index].sls_prc}</span></td>
                         <td><span>${stkList[status.index].cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat">${stkList[status.index].od_pay_amt}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${stkList[status.index].sls_prc * stkList[status.index].cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -109,7 +109,7 @@
                             <span>상품구매금액</span>
                             <span>배송비 무료</span>
                             <div>합계:
-                                <span class="priceFormat">${ordAmount}</span>
+                                <span class="" id="totalSum"></span>
                             </div>
                         </div>
                     </td>
@@ -134,7 +134,23 @@
             const formatValue = numbericValue.toLocaleString('ko-KR');
             $(this).text(formatValue+'원');
         })
+
     })
+
+    /*테이블의 행 수를 동적으로 계산*/
+    window.onload = function() {
+        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        let totalSum = 0;
+
+        rows.forEach(function(row) {
+            /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
+            const price = row.cells[5].innerText;
+            totalSum += parseInt(price.replace(/[^\d]/g, ''));
+        });
+        <%--/*총합을 나타낼 위치*/--%>
+        document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
+    }
+
 </script>
 </body>
 

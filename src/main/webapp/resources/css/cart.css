@@ -98,7 +98,8 @@ tfoot td, tfoot tr{
 }
 
 .nonCart {
-    margin-left: 24%;
+    text-align: center;
+    margin-right: 120px;
     line-height: 1.35;
     color: black;
     padding: 20px;

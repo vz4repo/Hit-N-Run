@@ -50,14 +50,11 @@ public class OrdController {
 //            OrdAndStkDto ordDto = new OrdAndStkDto();
 //            ordDao.insert(ord);
             System.out.println(stkList);
-            int ordAmount = OrdAndStkDto.calculateTotalAmount(stkList); // 주문총금액계산
-            System.out.println(ordAmount);
 
 
 
             m.addAttribute("list",list);
             m.addAttribute("stkList", stkList);
-            m.addAttribute("ordAmount", ordAmount);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,7 @@
 <mapper namespace="com.homerunball.order.dao.OrderAndStkDao">
 
     <select id="getcartItem" resultType="OrdAndStkDto" parameterType="int">
-            select  p.pd_name, p.rtl_prc, c.cart_cnt, c.c_id
+            select  p.pd_name, p.sls_prc, c.cart_cnt, c.c_id
             from cart c , stk p
             where c.pd_id = p.pd_id and c.c_id = #{c_id};
     </select>

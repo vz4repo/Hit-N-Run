@@ -131,7 +131,7 @@ public class CartController {
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.selectUser(c_id);
 
-            System.out.println("pd_id="+pd_id);
+//            System.out.println("pd_id="+pd_id);
 
             /* Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력 */
             if(list.isEmpty()) {
