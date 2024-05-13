@@ -47,6 +47,8 @@ public class OrdController {
             List<CartDto> list = cartDao.selectUser(c_id);
             List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);
 
+
+            System.out.println("list = " +list);
             System.out.println("stkList=" + stkList);
 
             m.addAttribute("list", list);
@@ -54,21 +56,23 @@ public class OrdController {
 
 
 
-            OrderDetDto ord_det = new OrderDetDto(c_id);
-//            ord_det.setC_id(c_id);
+            OrderDetDto ord_det = new OrderDetDto();
+            /*list*/
+            for (CartDto cart : list){
+                ord_det.setPd_id(cart.getPd_id());
+                ord_det.setPd_clsf_cd(cart.getPd_clsf_code());
+            }
+            for (OrdAndStkDto stk : stkList) {
 
+                ord_det.setPd_name(stk.getPd_name()); // 상품 이름
+                ord_det.setSlg_prc(stk.getSls_prc()); // 상품 갸격
+                ord_det.setOd_qty(stk.getCart_cnt()); // 주문 수량
+                ord_det.setC_id(stk.getC_id()); // 주문한 사용자의 ID
 
-            for (OrdAndStkDto item : stkList) {
-//                OrderDetDto ord_det = new OrderDetDto();
-                ord_det.setPd_name(item.getPd_name()); // 상품 이름
-                ord_det.setSlg_prc(item.getSls_prc()); // 상품 갸격
-//                ord_det.setCart_cnt(item.getCart_cnt()); // 주문 수량
-                ord_det.setC_id(item.getC_id()); // 주문한 사용자의 ID
-
-//                orderdetDao.insert(ord_det); // 생성된 OrderDetDto 객체를 데이터베이스에 삽입
+              orderdetDao.insert(ord_det);
             }
 
-            orderdetDao.insert(ord_det);
+
 
         } catch (Exception e) {
             e.printStackTrace();

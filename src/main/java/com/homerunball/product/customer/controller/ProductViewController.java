@@ -24,8 +24,13 @@ public class ProductViewController {
         String pd_clsf_cd = request.getParameter("pd_clsf_cd");
 
         ProductViewDto prd = productViewService.read(pd_id);
+        System.out.println("prd" + prd);
+
         StockViewDto stkInfo = productViewService.readStkInfo(pd_id);
+        System.out.println("stkInfo" + stkInfo);
+
         StockViewDto stkOptInfo = productViewService.readStkOptInfo(pd_id, pd_clsf_cd);
+        System.out.println("stkOptInfo" + stkOptInfo);
 
         m.addAttribute("prd", prd);
         m.addAttribute("stkInfo", stkInfo);
