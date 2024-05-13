@@ -6,9 +6,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link href="reset.css" type="text/css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="order.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css'/>" />
+    <link href="<c:url value='/css/order.css'/>"   rel="stylesheet" />
     <link href="<c:url value='/css/payStyle.css'/>"   rel="stylesheet" />
     <!-- 결제위젯 SDK 추가 -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -16,13 +16,12 @@
     <title> 주문 & 배송</title>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/header.jsp"/>
     <div class="order__header">
-        <a href="#" class="order__path">Homerun() > 주문서</a>
-        <hr />
+        <a href="#" class="head_main">Homerun() > 주문서</a>
+        <hr class="first__under" />
         <div class="order__title">
-            <h1>
-                Order / Payment
-            </h1>
+            <div class="head_order">Order / Payment</div>
             <div class="order__title__detail">
                 <a href="#">장바구니 > </a>
                 <a href="#">주문서</a>
@@ -48,10 +47,9 @@
     <section class="order__items">
     <hr class="first__under" />
     <div class="title__order">상품정보</div>
-    <hr class="second__under" />
     <div class="tb__order">
         <form action="/order">
-            <table style="width: 90%">
+            <table>
                 <colgroup>
                     <col width="70" />
                     <col width="*" />
@@ -95,13 +93,13 @@
                         <td><span class="priceFormat">${stkList[status.index].sls_prc}</span></td>
                         <td><span>${stkList[status.index].cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat">${stkList[status.index].cart_cnt*stkList[status.index].sls_prc}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${stkList[status.index].sls_prc * stkList[status.index].cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="1">
                         <div class="tb__left"><span>[기본배송]</span></div>
                     </td>
                 </tr>
@@ -110,8 +108,9 @@
                         <div class="tb__right">
                             <span>상품구매금액</span>
                             <span>배송비 무료</span>
-                            <span class="priceFormat">합계:</span>
-                            <span>원</span>
+                            <div>합계:
+                                <span class="" id="totalSum"></span>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -125,6 +124,7 @@
 <%--    <jsp:include page="payCheckout.jsp"/>--%>
 </section>
 <script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>
+<jsp:include page="/WEB-INF/views/footer.jsp"/>
 <script>
     $(document).ready(function(){
         $('.priceFormat').each(function (){
@@ -134,7 +134,23 @@
             const formatValue = numbericValue.toLocaleString('ko-KR');
             $(this).text(formatValue+'원');
         })
+
     })
+
+    /*테이블의 행 수를 동적으로 계산*/
+    window.onload = function() {
+        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        let totalSum = 0;
+
+        rows.forEach(function(row) {
+            /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
+            const price = row.cells[5].innerText;
+            totalSum += parseInt(price.replace(/[^\d]/g, ''));
+        });
+        <%--/*총합을 나타낼 위치*/--%>
+        document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
+    }
+
 </script>
 </body>
 

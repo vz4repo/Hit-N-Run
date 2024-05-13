@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Objects;
 
 public class OrdDto {
-    private int od_id;
-    private int c_id;
-    private Date od_dt;
-    private String od_stat_cd;
-    private Integer od_pd_qty;
-    private  Integer od_tot_qty;
-    private Integer rtl_prc;
-    private  Integer od_pay_amt;
+    private int od_id; /*주문번호*/
+    private int c_id; /*고객번호*/
+    private Date od_dt; /*주문일시*/
+    private String od_stat_cd; /*주문상태코드*/
+    private Integer od_pd_qty; /*제품가지수*/
+    private  Integer od_tot_qty; /*주문총수량*/
+    private Integer rtl_prc; /*소비자가격*/
+    private  Integer od_pay_amt; /*주문결제금액*/
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
