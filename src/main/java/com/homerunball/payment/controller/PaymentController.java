@@ -54,7 +54,7 @@ public class PaymentController {
     public String index( Model model) throws Exception {
         logger.info("[paymentController] :: /payment ");
         model.addAttribute("widgetClientKey", widgetClientKey);
-        return "/payCheckout";
+        return "/payCheckout_bak";
     }
 
     /* 인증 성공 처리 */

@@ -77,7 +77,8 @@ btnPayment.addEventListener("click", function () {
   });
 });
 
-/*결제 성공시(200) order테이블 insert*/
+/*
+/!*결제 성공시(200) order테이블 insert*!/
 if (window.location.pathname === "/success") {
   // 결제가 성공하면 주문을 처리하는 코드 실행
   $.ajax({
@@ -88,4 +89,4 @@ if (window.location.pathname === "/success") {
       console.log("주문이 성공적으로 처리되었습니다.");
     }
   });
-}
+}*/

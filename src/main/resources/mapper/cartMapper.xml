@@ -25,7 +25,7 @@
     </delete>
 
     <!--한 고객의 장바구니 전체삭제-->
-    <delete id="cidDeleteAll" parameterType="string">
+    <delete id="cidDeleteAll" parameterType="int">
         delete from cart where c_id = #{c_id}
     </delete>
 
