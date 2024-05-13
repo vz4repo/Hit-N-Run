@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class CustDto {
-    private String c_id;
+    private Integer c_id;
     private String c_grd_cd;
     private String c_stat_cd;
     private String c_email;
@@ -78,11 +78,11 @@ public class CustDto {
                 '}';
     }
 
-    public String getC_id() {
+    public int getC_id() {
         return c_id;
     }
 
-    public void setC_id(String c_id) {
+    public void setC_id(int c_id) {
         this.c_id = c_id;
     }
 
