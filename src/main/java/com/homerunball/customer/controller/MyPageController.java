@@ -31,7 +31,11 @@ public class MyPageController {
             return "redirect:/login?toURL=" + request.getRequestURI();
         }
 
-        CustDto custDto = custDao.selectID(Integer.parseInt((String) session.getAttribute("c_id")));
+        CustDto custDto = null;
+        Integer custId = (Integer) session.getAttribute("c_id");
+        if (custId != null) {
+        custDto = custDao.selectID(custId);
+        }
 //
 //        HttpSession session = request.getSession();
 //        String c_email = (String) session.getAttribute("c_email");

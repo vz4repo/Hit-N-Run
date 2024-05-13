@@ -11,8 +11,9 @@
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/payStyle.css'/>"   rel="stylesheet" />
     <!-- 결제위젯 SDK 추가 -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+    <%-- jquery --%>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title> 주문 & 배송</title>
 </head>
 <body>
@@ -110,7 +111,7 @@
                         <div class="tb__right">
                             <span>상품구매금액</span>
                             <span>배송비 무료</span>
-                            <span class="priceFormat">합계:</span>
+                            <span class="priceFormat totalSum">합계:</span>
                             <span>원</span>
                         </div>
                     </td>
@@ -122,19 +123,39 @@
     </section>
 <section class="order__payment">
     <%@include file="payCheckout.jsp"%>
-<%--    <jsp:include page="payCheckout.jsp"/>--%>
 </section>
 <script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>
 <script>
-    $(document).ready(function(){
-        $('.priceFormat').each(function (){
-            let value = $(this).text();
-            value = value.replace(/,/g, '');
-            const numbericValue = parseInt(value);
-            const formatValue = numbericValue.toLocaleString('ko-KR');
-            $(this).text(formatValue+'원');
-        })
+  $(document).ready(function(){
+    $('.priceFormat').each(function (){
+      let value = $(this).text();
+      value = value.replace(/,/g, '');
+      const numbericValue = parseInt(value);
+      const formatValue = numbericValue.toLocaleString('ko-KR');
+      $(this).text(formatValue+'원');
     })
+  })
+
+  /*총합을 저장할 변수*/
+  let totalSum = 0;
+
+  /*테이블의 행 수를 동적으로 계산*/
+  const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+  const rowCount = rows.length;
+
+  /*각 행의 부분합으로 총합구하기*/
+  for (let i = 1; i <= rowCount; i++) {
+    const selector = `body > section.order__items > div.tb__order > form > table > tbody > tr:nth-child(${'${i}'}) > td:nth-child(6) > span`;
+    const spanElement = document.querySelector(selector);
+
+    if (spanElement) {
+      const value = parseInt(spanElement.textContent.replace(/[^\d]/g, ''), 10);
+      totalSum += value;
+    }
+  }
+
+  /*총합을 나타낼 위치*/
+  document.querySelector('.totalSum').textContent = totalSum;
 </script>
 </body>
 

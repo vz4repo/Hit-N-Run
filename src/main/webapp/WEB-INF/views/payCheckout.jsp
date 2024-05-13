@@ -55,7 +55,7 @@
           </label>
         </div>
         <!-- 결제하기 버튼 -->
-        <button class="button" id="payment-button" style="margin-top: 30px" disabled>결제하기</button>
+        <button class="button" id="btnPayment" style="margin-top: 30px" disabled>결제하기</button>
       </div>
     </div>
   </div>
