@@ -12,9 +12,6 @@ public interface ProductDao {
     /* 모든 제품을 삭제한다. */
     int deleteAll() throws Exception;
 
-    /*진열되지 않은 모든 제품을 선택한다.*/
-    List<ProductDto> selectAllOutProduct() throws Exception;
-
     /* 지정한 제품 하나를 삭제한다. */
     int delete(String pd_id) throws Exception;
 
@@ -29,6 +26,15 @@ public interface ProductDao {
 
     /* 모든 제품을 선택한다. */
     List<ProductDto> selectPrdAll() throws Exception;
+
+    /*진열되지 않은 모든 제품을 선택한다.*/
+    List<ProductDto> selectAllOutProduct() throws Exception;
+
+//    /*판매 중인 모든 제품을 선택한다.*/
+//    public List<ProductDto> selectAllSalesProduct() throws Exception;
+//
+//    /*판매 중인 모든 신제품을 선택한다.*/
+//    public List<ProductDto> selectAllNewSalesProduct() throws Exception;
 
     /* prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 모든 제품 선택하기 */
     List<ProductDto> selectPrdPrcAll() throws Exception;

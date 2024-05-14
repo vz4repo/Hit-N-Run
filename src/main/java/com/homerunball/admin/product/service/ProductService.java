@@ -27,6 +27,12 @@ public interface ProductService {
     /* 진열되지 않는 모든 제품을 list에 저장한다. */
     public List<ProductDto> getAllOutProducts() throws Exception;
 
+//    /* 판매중인 모든 제품을 list에 저장한다. */
+//    public List<ProductDto> getAllSalesProduct() throws Exception;
+//
+//    /* 판매중인 모든 신제품을 list에 저장한다. */
+//    public List<ProductDto> getAllNewSalesProduct() throws Exception;
+
     /* 지정한 제품 하나만을 가져온다. */
     ProductDto getOneProduct(String pd_id) throws Exception;
 
