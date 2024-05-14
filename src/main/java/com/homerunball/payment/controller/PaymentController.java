@@ -31,6 +31,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 
 /* [GET]  /payment  결제창 이동  */
@@ -59,20 +60,13 @@ public class PaymentController {
 
     /* 인증 성공 처리 */
     @GetMapping(value = "/success")
-    public String successPayment(Model model) throws Exception {
+    public String successPayment(@SessionAttribute("c_id") String sessionId, Model model) throws Exception {
         logger.info("[paymentController] :: /success ");
 
         /* request session에서 로그인 했으면 c_id 가 저장되어있을것을 가정 */
-        Integer c_id = 0001;
-
+        int c_id =  Integer.parseInt(sessionId);
         OrderDetDto orderDetDto = new OrderDetDto(c_id);
-
-        System.out.println(c_id);
-
         orderDetDao.insert(orderDetDto);
-
-        System.out.println("====" + orderDetDto);
-
 
         return "/paySuccess";
     }

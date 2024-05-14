@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
+
 
   <div>
     <%-- 테스트값 입력 영역(dev) --%>
@@ -59,3 +61,4 @@
       </div>
     </div>
   </div>
+<script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>

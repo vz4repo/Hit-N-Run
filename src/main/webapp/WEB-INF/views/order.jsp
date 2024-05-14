@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +11,12 @@
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css"  rel="stylesheet" />
+
+    <%--   다니님 header, footer --%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+
     <!-- 결제위젯 SDK 추가 -->
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
     <%-- jquery --%>
@@ -17,7 +24,8 @@
     <title> 주문 & 배송</title>
 </head>
 <body>
-<jsp:include page="template/header.jsp"/>
+<%--<jsp:include page="template/header.jsp"/>--%>
+<%@include file="template/header.jsp"%>
     <div class="order__header">
         <a href="#" class="head_main">Homerun() > 주문서</a>
         <hr class="first__under" />
@@ -123,8 +131,7 @@
 <section class="order__payment">
     <%@include file="payCheckout.jsp"%>
 </section>
-<script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>
-<jsp:include page="template/footer.jsp"/>
+<%@include file="template/footer.jsp"%>
 <script>
     $(document).ready(function(){
         $('.priceFormat').each(function (){

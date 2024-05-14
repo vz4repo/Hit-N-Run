@@ -6,7 +6,7 @@ const generateRandomString = () => window.btoa(Math.random()).slice(0, 20);
 const testAmountElement = document.querySelector("#testAmount");
 const testCouponElement = document.querySelector("#testCoupon");
 
-let amount = 1;
+let amount = 9999;
 
 /*
 * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
@@ -77,8 +77,7 @@ btnPayment.addEventListener("click", function () {
   });
 });
 
-/*
-/!*결제 성공시(200) order테이블 insert*!/
+/*결제 성공시(200) order테이블 insert*/
 if (window.location.pathname === "/success") {
   // 결제가 성공하면 주문을 처리하는 코드 실행
   $.ajax({
@@ -89,4 +88,4 @@ if (window.location.pathname === "/success") {
       console.log("주문이 성공적으로 처리되었습니다.");
     }
   });
-}*/
+}

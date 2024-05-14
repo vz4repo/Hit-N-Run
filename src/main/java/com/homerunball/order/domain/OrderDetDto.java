@@ -12,7 +12,7 @@ public class OrderDetDto {
     private Integer c_id;
     private Date od_dt;
     private String pd_name;
-    private Integer slg_prc;
+    private Integer sls_prc;
     private Integer od_qty;
     private  String od_stat_cd;
     private Date frst_reg_dt;
@@ -28,14 +28,14 @@ public class OrderDetDto {
         this(c_id, "", "", new Date(), "",0,0,"", new Date(),"", new Date(), "");
     }
 
-    public OrderDetDto(Integer c_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer slg_prc, Integer od_qty,  String od_stat_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
+    public OrderDetDto(Integer c_id, String pd_id, String pd_clsf_cd, Date od_dt, String pd_name, Integer sls_prc, Integer od_qty,  String od_stat_cd, Date frst_reg_dt, String frst_reg_id, Date last_mod_dt, String last_mod_id) {
 
         this.c_id = c_id;
         this.pd_id = pd_id;
         this.pd_clsf_cd = pd_clsf_cd;
         this.od_dt = od_dt;
         this.pd_name = pd_name;
-        this.slg_prc = slg_prc;
+        this.sls_prc = sls_prc;
         this.od_qty = od_qty;
         this.od_stat_cd = od_stat_cd;
         this.frst_reg_dt = frst_reg_dt;
@@ -54,7 +54,7 @@ public class OrderDetDto {
                 ", c_id='" + c_id + '\'' +
                 ", od_dt=" + od_dt +
                 ", pd_name='" + pd_name + '\'' +
-                ", slg_prc=" + slg_prc +
+                ", sls_prc=" + sls_prc +
                 ", od_qty=" + od_qty +
                 ", od_stat_cd='" + od_stat_cd + '\'' +
                 ", frst_reg_dt=" + frst_reg_dt +
@@ -131,12 +131,12 @@ public class OrderDetDto {
         this.pd_name = pd_name;
     }
 
-    public Integer getSlg_prc() {
-        return slg_prc;
+    public Integer getsls_prc() {
+        return sls_prc;
     }
 
-    public void setSlg_prc(Integer slg_prc) {
-        this.slg_prc = slg_prc;
+    public void setsls_prc(Integer sls_prc) {
+        this.sls_prc = sls_prc;
     }
 
     public Integer getOd_qty() {
