@@ -1,5 +1,7 @@
 package com.homerunball.payment.controller;
 
+import com.homerunball.order.dao.OrderDetDao;
+import com.homerunball.order.domain.OrderDetDto;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -8,16 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import com.homerunball.cart.domain.CartDto;
-import com.homerunball.order.dao.OrdDao;
-import com.homerunball.order.dao.OrderDetDao;
-import com.homerunball.order.domain.OrdDto;
-import com.homerunball.order.domain.OrderDetDto;
-import freemarker.ext.beans.StringModel;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,8 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 /* [GET]  /payment  결제창 이동  */
 /* [GET]  /success  인증 성공 처리 */
 /* [GET]  /fail     인증 실패 처리 */
-/* [POST] /confirm   승인 성공 후 처리 */
-
+/* [POST] /confirm  승인 성공 후 처리 */
 @Controller
 public class PaymentController {
     @Autowired
