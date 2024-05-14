@@ -59,6 +59,18 @@
         order by frst_reg_dt desc
     </select>
 
+<!--    <select id="selectAllSalesProduct" resultType="ProductDto">-->
+<!--        select *-->
+<!--        from prd-->
+<!--        where pd_stat_hist_cd like "onSale"-->
+<!--    </select>-->
+
+<!--    <select id="selectAllNewSalesProduct" resultType="ProductDto">-->
+<!--        select *-->
+<!--        from prd-->
+<!--        where pd_chr_cd like "N" and pd_stat_hist_cd like "onSale"-->
+<!--    </select>-->
+
     <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 선택하기 -->
     <sql id="selectPrdStk">
         select pd.pd_id, pd.pd_name, pd.qlt_cd, stk.pd_clsf_cd, stk.sls_prc
@@ -69,15 +81,6 @@
     <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 모든 제품 선택하기 -->
     <select id="selectPrdPrcAll" resultType="ProductDto">
         <include refid="selectPrdStk"/>
-    </select>
-
-    <!--prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 제품 한 개 선택하기 -->
-    <select id="selectPrdPrc" parameterType="String" resultType="ProductDto">
-        select *
-        from (
-        <include refid="selectPrdStk"/>
-        ) as pd_stk
-        where pd_id = #{pd_id}
     </select>
 
     <!-- 내용 변경 쿼리 -->
