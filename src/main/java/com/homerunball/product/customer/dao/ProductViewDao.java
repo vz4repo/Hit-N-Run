@@ -12,7 +12,9 @@ public interface ProductViewDao {
 
     List<ProductViewDto> selectAllPrd() throws Exception;
 
-    StockViewDto selectStk(String pd_id) throws Exception;
+    StockViewDto selectStkRandOne(String pd_id) throws Exception;
+
+    List<StockViewDto> selectAllStkId(String pd_id) throws Exception;
 
     StockViewDto selectStkOpt(String pd_id, String pd_clsf_cd) throws Exception;
 }
