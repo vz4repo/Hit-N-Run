@@ -27,7 +27,11 @@ public class ProductViewServiceImpl implements ProductViewService {
     }
     @Override
     public StockViewDto readStkInfo(String pd_id) throws Exception {
-        return productViewDao.selectStk(pd_id);
+        return productViewDao.selectStkRandOne(pd_id);
+    }
+    @Override
+    public List<StockViewDto> getListStkId(String pd_id) throws Exception{
+        return productViewDao.selectAllStkId(pd_id);
     }
     @Override
     public StockViewDto readStkOptInfo(String pd_id, String pd_clsf_cd) throws Exception{
