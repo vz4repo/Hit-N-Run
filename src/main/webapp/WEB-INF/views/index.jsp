@@ -190,11 +190,13 @@
         </ul>
     </nav>
 
-    <div><a href="/mypage/add">마이페이지 이동</a></div>
-    <div><a href="/cart/list">장바구니 이동</a></div>
-    <div><a href="/order">주문 이동</a></div>
-    <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/payment">결제 이동</a></div>
+<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/cart/list">장바구니 이동</a></div>
+<div><a href="/order">주문 이동</a></div>
+<div><a href="/admin/main">제품 이동</a></div>
+    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
+<div><a href="/payment">결제 이동</a></div>
+<div><a href="/product/detail">제품 상세 이동</a></div>
 </div>
 
 <%--상품 진열 시작--%>
@@ -293,9 +295,9 @@
     </div>
 <%--<script src="https://cdn.tailwindcss.com"></script>--%>
 <script>
-    window.onload = function () {
-        if ("${sessionScope.c_id}" !== "") {
-            document.getElementById('logoutLink').addEventListener('click', function (event) {
+    window.onload = function() {
+        if("${sessionScope.c_id}" !== "") {
+            document.getElementById('logoutLink').addEventListener('click', function(event) {
                 event.preventDefault();
                 if (confirm('정말로 로그아웃을 하시겠습니까?')) {
                     window.location.href = event.target.href;
