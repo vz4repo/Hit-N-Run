@@ -33,11 +33,16 @@ ProductViewDao productViewDao;
 
     @Test
     public  void selectStk() throws Exception {
-        System.out.println("productViewDao.selectStk(\"GLV000001-99\") = " + productViewDao.selectStk("GLV000001-99"));
+        System.out.println("productViewDao.selectStk(\"GLV000001-99\") = " + productViewDao.selectStkRandOne("GLV000001-99"));
     }
 
     @Test
     public void selectStkOpt() throws Exception {
         System.out.println("productViewDao.selectStkOpt(\"GLV000001-99\", \"RH\") = " + productViewDao.selectStkOpt("GLV000001-99", "RH"));
+    }
+
+    @Test
+    public void selectAllStkId() throws  Exception{
+        System.out.println("productViewDao.selectAllStkId(\"GLV000001-99\") = " + productViewDao.selectAllStkId("GLV000001-99"));
     }
 }
