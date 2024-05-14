@@ -10,6 +10,7 @@ import java.util.Objects;
 public class StockViewDto {
     String pd_id;
     String pd_clsf_cd;
+    String pd_name;
     int nml_stk_qty;
     int rt_stk_qry;
     int rgn_stk_qty;
@@ -30,10 +31,24 @@ public class StockViewDto {
     String last_mod_id;
 
     @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        StockViewDto that = (StockViewDto) object;
+        return nml_stk_qty == that.nml_stk_qty && rt_stk_qry == that.rt_stk_qry && rgn_stk_qty == that.rgn_stk_qty && urgn_stk_qty == that.urgn_stk_qty && stfy_stk_qty == that.stfy_stk_qty && odpmt_stk == that.odpmt_stk && rcpt_prc == that.rcpt_prc && rtl_prc == that.rtl_prc && sls_prc == that.sls_prc && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(pd_name, that.pd_name) && Objects.equals(pur_dt, that.pur_dt) && Objects.equals(rcpt_dt, that.rcpt_dt) && Objects.equals(rcpt_cp, that.rcpt_cp) && Objects.equals(stk_plc_cd, that.stk_plc_cd) && Objects.equals(stk_stat_cd, that.stk_stat_cd) && Objects.equals(frst_reg_dt, that.frst_reg_dt) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_dt, that.last_mod_dt) && Objects.equals(last_mod_id, that.last_mod_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pd_id, pd_clsf_cd, pd_name, nml_stk_qty, rt_stk_qry, rgn_stk_qty, urgn_stk_qty, stfy_stk_qty, odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+    }
+
+    @Override
     public String toString() {
         return "StockViewDto{" +
                 "pd_id='" + pd_id + '\'' +
                 ", pd_clsf_cd='" + pd_clsf_cd + '\'' +
+                ", pd_name='" + pd_name + '\'' +
                 ", nml_stk_qty=" + nml_stk_qty +
                 ", rt_stk_qry=" + rt_stk_qry +
                 ", rgn_stk_qty=" + rgn_stk_qty +
@@ -55,19 +70,13 @@ public class StockViewDto {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StockViewDto that = (StockViewDto) o;
-        return nml_stk_qty == that.nml_stk_qty && rt_stk_qry == that.rt_stk_qry && rgn_stk_qty == that.rgn_stk_qty && urgn_stk_qty == that.urgn_stk_qty && stfy_stk_qty == that.stfy_stk_qty && rcpt_prc == that.rcpt_prc && rtl_prc == that.rtl_prc && sls_prc == that.sls_prc && Objects.equals(pd_id, that.pd_id) && Objects.equals(pd_clsf_cd, that.pd_clsf_cd) && Objects.equals(pur_dt, that.pur_dt) && Objects.equals(rcpt_dt, that.rcpt_dt) && Objects.equals(rcpt_cp, that.rcpt_cp) && Objects.equals(stk_stat_cd, that.stk_stat_cd) && Objects.equals(frst_reg_id, that.frst_reg_id) && Objects.equals(last_mod_id, that.last_mod_id);
+    public String getPd_name() {
+        return pd_name;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(pd_id, pd_clsf_cd, nml_stk_qty, rt_stk_qry, rgn_stk_qty, urgn_stk_qty, stfy_stk_qty, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_stat_cd, frst_reg_id, last_mod_id);
+    public void setPd_name(String pd_name) {
+        this.pd_name = pd_name;
     }
-
     public String getPd_id() {
         return pd_id;
     }

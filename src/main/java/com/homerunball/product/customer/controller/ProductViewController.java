@@ -20,6 +20,7 @@ public class ProductViewController {
     @GetMapping("/item")
     public String item(HttpServletRequest request,
                        Model m) throws Exception {
+
         String pd_id = request.getParameter("pd_id");
         String pd_clsf_cd = request.getParameter("pd_clsf_cd");
 
@@ -30,6 +31,8 @@ public class ProductViewController {
         m.addAttribute("prd", prd);
         m.addAttribute("stkInfo", stkInfo);
         m.addAttribute("stkOptInfo", stkOptInfo);
-        return "productItem";}
+        return "productItem";
+    }
+
 }
 

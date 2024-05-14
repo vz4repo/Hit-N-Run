@@ -5,6 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css'/>" />
     <title>제품 상세페이지</title>
     <style>
         .title{
@@ -62,11 +65,16 @@
             <option value="option3">L</option>
         </select>
         <div class="button">
-            <form action="directOrder" method="post">
+            <form action="/order" method="post">
                 <button type="submit">바로구매</button>
             </form>
-            <form action="putInCart" method="post">
+            <form action="/cart/insert" id="cartForm" method="post">
+                <input type="hidden" name="pd_id" value="${stkInfo.pd_id}"/>
+                <input type="hidden" name="pd_clsf_cd" value="${stkInfo.pd_clsf_cd}"/>
                 <button type="submit">장바구니</button>
+            </form>
+            <form action="/cart/list">
+
             </form>
             <form action="putInWish" method="post">
                 <button type="submit">찜하기</button>
@@ -163,4 +171,7 @@
     </p>
 </div>
 </body>
+<script>
+
+</script>
 </html>
