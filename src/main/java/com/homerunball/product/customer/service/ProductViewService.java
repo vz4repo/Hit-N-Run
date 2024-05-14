@@ -10,5 +10,6 @@ public interface ProductViewService {
     ProductViewDto read(String pd_id) throws Exception;
     List<ProductViewDto> getList() throws Exception;
     StockViewDto readStkInfo(String pd_id) throws Exception;
+    List<StockViewDto> getListStkId(String pd_id) throws Exception;
     StockViewDto readStkOptInfo(String pd_id, String pd_clsf_cd) throws Exception;
 }
