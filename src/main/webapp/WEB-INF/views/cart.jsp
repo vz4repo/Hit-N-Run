@@ -53,10 +53,10 @@
                             <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
                         </td>
                         <td>
-                            <a href="#">${cartDto.pd_id}</a>
-                            <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
+                            <a href="/product/item?pd_id=${cartDto.pd_name}">${cartDto.pd_name}</a>
+                            <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
                         </td>
-                        <td><span name="price"></span>판매가 원</td>
+                        <td><span name="price" class="priceFormat">${cartDto.rtl_prc}</span></td>
                         <td>
                             <div class="quantity_control">
                                 <form action="/cart/update" method="post" id="update_form">
@@ -102,9 +102,7 @@
         <tr>
             <td colspan="7">
                 <div class="tb__right">
-                    <span>상품구매금액</span>
                     <span>배송비 무료</span>
-                    <span>합계:원</span>
                 </div>
             </td>
         </tr>
@@ -125,6 +123,15 @@
 <jsp:include page="template/footer.jsp"/>
 <script>
     $(document).ready(function (){
+        /* 각 단가의금액의 Format형식 #,##0 */
+        $('.priceFormat').each(function (){
+            let value = $(this).text();
+            value = value.replace(/,/g, '');
+            const numbericValue = parseInt(value);
+            const formatValue = numbericValue.toLocaleString('ko-KR');
+            $(this).text(formatValue+'원');
+        })
+
         /* 선택주문하기 버튼을 누를경우 주문으로 넘기기 */
         $('#order_Select_Btn').on("click", function (){
             let orderForm = $('#orderForm');

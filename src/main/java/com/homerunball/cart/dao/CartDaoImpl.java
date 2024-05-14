@@ -70,7 +70,8 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
-    public List<CartDto> cartCheck(CartDto cart) throws Exception {
-        return session.selectList(namespace+"cartCheck", cart);
+    public List<CartDto> getStk(int c_id) throws Exception {
+        return session.selectList(namespace+"getStk",c_id);
     }
+
 }

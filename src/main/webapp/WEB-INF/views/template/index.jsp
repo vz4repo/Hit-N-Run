@@ -32,6 +32,7 @@
 <%--<div><a href="/order">주문 이동</a></div>--%>
 <div><a href="/admin/main">제품 이동</a></div>
 <%--<div><a href="/payment">결제 이동</a></div>--%>
+<div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동(?pd_id=GLV000001-99)</a></div>
 <div><a href="/product/detail">제품 상세 이동</a></div>
 </div>
 
