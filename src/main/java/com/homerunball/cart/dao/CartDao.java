@@ -8,6 +8,7 @@ import java.util.List;
 public interface CartDao {
     List<CustDto> getcustAll() throws Exception;
 
+
     int count() throws Exception;
 
     int delete(int c_id, String pd_id, String pd_clsf_code) throws Exception;
@@ -24,5 +25,6 @@ public interface CartDao {
 
     List<CartDto> selectUser(int c_id) throws Exception;
 
-    List<CartDto> cartCheck(CartDto cart) throws Exception;
+    List<CartDto> getStk(int c_id) throws Exception;
+
 }
