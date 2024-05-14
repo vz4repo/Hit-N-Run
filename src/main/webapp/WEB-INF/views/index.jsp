@@ -129,8 +129,17 @@
     .carousel .carousel-control.left i {
         margin-left: -2px;
     }
+
+    .carousel-control .left {
+        left: -20px;
+    }
+
     .carousel .carousel-control.right i {
         margin-right: -4px;
+    }
+
+    .carousel-control .right {
+        right: 20px;
     }
     .carousel .carousel-indicators {
         bottom: -50px;
@@ -175,309 +184,103 @@
     <h2> D - <span id="dDay">남은시간!</span></h2>
     <hr/>
 
-
     <nav id="loginbtn">
         <ul>
             <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </nav>
 
-    <div><a href="/mypage/add">마이페이지 이동</a></div>
-    <div><a href="/cart/list">장바구니 이동</a></div>
-    <div><a href="/order">주문 이동</a></div>
-    <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/payment">결제 이동</a></div>
+<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/cart/list">장바구니 이동</a></div>
+<div><a href="/order">주문 이동</a></div>
+<div><a href="/admin/main">제품 이동</a></div>
+    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
+<div><a href="/payment">결제 이동</a></div>
+<div><a href="/product/detail">제품 상세 이동</a></div>
 </div>
 
 <%--상품 진열 시작--%>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Featured <b>Products</b></h2>
+            <h2><b>신제품</b></h2>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
+                    <%--4로 나눴을 때 몫 + 1만큼 반복--%>
+                    <%--첫 번째 클래스만 class가 active고 나머지는 클래스를 적용하지 않는다.--%>
                     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                     <li data-target="#myCarousel" data-slide-to="1"></li>
                     <li data-target="#myCarousel" data-slide-to="2"></li>
+
+                        <%-- 4로 나눴을 때 몫 + 1만큼 반복 --%>
+<%--                        <%--%>
+<%--                            int itemCount = (int)pageContext.getAttribute("mainProductNumber"); // 아이템 개수--%>
+<%--                            int slideCount = itemCount / 4 + 1; // 슬라이드 개수--%>
+
+<%--                            for (int i = 0; i < slideCount; i++) {--%>
+<%--                        %>--%>
+<%--                        <li data-target="#myCarousel" data-slide-to="<%= i %>" <% if (i == 0) { %>class="active"<% } %>></li>--%>
+<%--                        <%--%>
+<%--                            }--%>
+<%--                        %>--%>
                 </ol>
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
+                    <c:forEach var="product" items="${mainProductList}" varStatus="status">
+                        <%--mainProductList의 인덱스를 4로 나눴을 때 0이라면 <div class="item">을 추가한다.--%>
+                        <c:if test="${status.index % 4 == 0}">
+                            <%--만약 status.index가 0인 경우에만 div class = "item active"이고--%>
+                            <c:choose>
+                                <c:when test="${status.index == 0}">
                     <div class="item active">
+                                </c:when>
+                                <c:otherwise>
+                    <div class="item">
+                                </c:otherwise>
+                            </c:choose>
+                            <%--그 이외에는 div class="item"이다.--%>
                         <div class="row">
+                        </c:if>
                             <div class="col-sm-3">
                                 <div class="thumb-wrapper">
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <img src="/examples/images/products/ipad.jpg" class="img-responsive" alt="">
+                                        <a href="/product/detail/${product.pd_id}">
+                                            <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                        </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4>Apple iPad</h4>
+                                        <h4><a href="/product/detail/${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
                                                 <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                             </ul>
                                         </div>
-                                        <p class="item-price"><strike>$400.00</strike> <b>$369.00</b></p>
+                                        <c:choose>
+                                            <%--만약 소비자가격(max_rtl_prc)이 판매가격(max_sls_prc)보다 크다면 소비자가격은 가로 선을 긋고 판매가격을 보여준다.--%>
+                                            <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                        <p class="item-price"><strike>${product.max_rtl_prc}원</strike> <span>${product.max_sls_prc}원</span></p>
+                                            </c:when>
+                                            <%--그렇지 않다면 판매가격만 보여준다.--%>
+                                            <c:otherwise>
+                                        <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <a href="#" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/headphone.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Sony Headphone</h4>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <p class="item-price"><strike>$25.00</strike> <b>$23.99</b></p>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/macbook-air.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Macbook Air</h4>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <p class="item-price"><strike>$899.00</strike> <b>$649.00</b></p>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/nikon.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Nikon DSLR</h4>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <p class="item-price"><strike>$315.00</strike> <b>$250.00</b></p>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <%--mainProductList의 인덱스를 4로 나눴을 때 3이라면 div태그를 닫아준다.--%>
+                        <c:if test="${status.index % 4 == 3}">
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/play-station.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Sony Play Station</h4>
-                                        <p class="item-price"><strike>$289.00</strike> <span>$269.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/macbook-pro.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Macbook Pro</h4>
-                                        <p class="item-price"><strike>$1099.00</strike> <span>$869.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/speaker.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Bose Speaker</h4>
-                                        <p class="item-price"><strike>$109.00</strike> <span>$99.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/galaxy.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Samsung Galaxy S8</h4>
-                                        <p class="item-price"><strike>$599.00</strike> <span>$569.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/iphone.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Apple iPhone</h4>
-                                        <p class="item-price"><strike>$369.00</strike> <span>$349.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/canon.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Canon DSLR</h4>
-                                        <p class="item-price"><strike>$315.00</strike> <span>$250.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/pixel.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Google Pixel</h4>
-                                        <p class="item-price"><strike>$450.00</strike> <span>$418.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumb-wrapper">
-                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                    <div class="img-box">
-                                        <img src="/examples/images/products/watch.jpg" class="img-responsive" alt="">
-                                    </div>
-                                    <div class="thumb-content">
-                                        <h4>Apple Watch</h4>
-                                        <p class="item-price"><strike>$350.00</strike> <span>$330.00</span></p>
-                                        <div class="star-rating">
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </c:if>
+                    </c:forEach>
                     </div>
                 </div>
                 <!-- Carousel controls -->
@@ -490,12 +293,11 @@
             </div>
         </div>
     </div>
-</div>
-<script src="https://cdn.tailwindcss.com"></script>
+<%--<script src="https://cdn.tailwindcss.com"></script>--%>
 <script>
-    window.onload = function () {
-        if ("${sessionScope.c_id}" !== "") {
-            document.getElementById('logoutLink').addEventListener('click', function (event) {
+    window.onload = function() {
+        if("${sessionScope.c_id}" !== "") {
+            document.getElementById('logoutLink').addEventListener('click', function(event) {
                 event.preventDefault();
                 if (confirm('정말로 로그아웃을 하시겠습니까?')) {
                     window.location.href = event.target.href;
@@ -529,5 +331,4 @@
             $(this).toggleClass("fa-heart fa-heart-o");
         });
     });
-</script>
 </script>

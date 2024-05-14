@@ -29,8 +29,12 @@ public class ProductViewDaoImpl implements ProductViewDao {
         return session.selectList(namespace+"selectAllPrd");
     }
     @Override
-    public StockViewDto selectStk(String pd_id) throws Exception{
-        return session.selectOne(namespace+"selectStk", pd_id);
+    public StockViewDto selectStkRandOne(String pd_id) throws Exception{
+        return session.selectOne(namespace+"selectStkRandOne", pd_id);
+    }
+    @Override
+    public List<StockViewDto> selectAllStkId(String pd_id) throws Exception{
+        return session.selectList(namespace+"selectAllStkId", pd_id);
     }
     @Override
     public StockViewDto selectStkOpt(String pd_id, String pd_clsf_cd) throws Exception{
