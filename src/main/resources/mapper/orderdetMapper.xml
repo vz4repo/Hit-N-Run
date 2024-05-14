@@ -17,7 +17,7 @@
         delete from ord_det
     </delete>
 
-    <select id="select" parameterType="String" resultType="OrderDetDto">
+    <select id="select" parameterType="int" resultType="OrderDetDto">
         select od_det_seqnum
              , od_id
              , c_id
@@ -25,7 +25,7 @@
              , pd_clsf_cd
              , od_dt
              , pd_name
-             , slg_prc
+             , sls_prc
              , od_qty
              , od_stat_cd
              , frst_reg_dt
@@ -44,7 +44,7 @@
              , pd_clsf_cd
              , od_dt
              , pd_name
-             , slg_prc
+             , sls_prc
              , od_qty
              , od_stat_cd
              , frst_reg_dt
@@ -57,10 +57,10 @@
 
     <insert id="insert" parameterType="OrderDetDto">
         INSERT INTO ord_det
-        (od_det_seqnum, od_id, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, od_stat_cd,  frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)
+        (od_det_seqnum, od_id, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, sls_prc, od_qty, od_stat_cd)
         select 	(select IFNULL(max(od_det_seqnum), 0)+1  from ord_det where od_id = (select max(od_id)+1 from ord))
              ,(select max(od_id)+1 from ord)
-            ,#{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id} ;
+            ,#{c_id}, #{pd_id}, #{pd_clsf_cd}, now(),#{pd_name},#{sls_prc},#{od_qty},#{od_stat_cd} ;
     </insert>
 
 <!--    <insert id="insert" parameterType="OrderDetDto">-->
@@ -83,7 +83,7 @@
           ,   pd_clsf_cd      = #{pd_clsf_cd}
           ,   od_dt           = #{od_dt}
           ,   pd_name         = #{pd_name}
-          ,   slg_prc         = #{slg_prc}
+          ,   sls_prc         = #{sls_prc}
           ,   od_qty          = #{od_qty}
           ,   od_stat_cd      = #{od_stat_cd}
           ,   frst_reg_dt     = #{frst_reg_dt}

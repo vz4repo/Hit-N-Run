@@ -39,7 +39,7 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request){
+    public String order(Integer rtl_prc, Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
@@ -51,10 +51,8 @@ public class OrdController {
             System.out.println("list = " +list);
             System.out.println("stkList=" + stkList);
 
-            m.addAttribute("list", list);
-            m.addAttribute("stkList", stkList);
 
-
+            System.out.println(rtl_prc);
 
             OrderDetDto ord_det = new OrderDetDto();
             /*list*/
@@ -65,12 +63,30 @@ public class OrdController {
             for (OrdAndStkDto stk : stkList) {
 
                 ord_det.setPd_name(stk.getPd_name()); // 상품 이름
-                ord_det.setSlg_prc(stk.getSls_prc()); // 상품 갸격
+                ord_det.setSls_prc(stk.getSls_prc()); // 상품 갸격
                 ord_det.setOd_qty(stk.getCart_cnt()); // 주문 수량
                 ord_det.setC_id(stk.getC_id()); // 주문한 사용자의 ID
 
               orderdetDao.insert(ord_det);
             }
+
+
+            OrdDto ord = new OrdDto();
+                ord.setC_id(ord_det.getC_id());
+                ord.setRtl_prc(rtl_prc);
+                ord.setRtl_prc(1);
+                ord.setOd_pd_qty(10);
+                ord.setOd_tot_qty(20);
+                ord.setOd_pay_amt(50000);
+
+                ordDao.insert(ord);
+
+            System.out.println("ord_det.getC_id()" +ord_det.getC_id());
+            System.out.println("rtl_prc" +rtl_prc);
+            System.out.println(ord);
+
+            m.addAttribute("list", list);
+            m.addAttribute("stkList", stkList);
 
 
 

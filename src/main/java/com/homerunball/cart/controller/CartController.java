@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -95,23 +96,32 @@ public class CartController {
 
     // 덜구현됨, 버튼만들고 연결시켜야함
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, String pd_id, String pd_clsf_code, Integer cart_cnt, Model m, HttpSession session){
+    public String insert(String pd_id, String pd_name, String pd_clsf_cd, int sls_prc, int rtl_prc, CartDto cartDto, Model m, HttpSession session, HttpServletRequest request){
+//        if(!loginCheck(request)){
+//            Cookie cookie = new Cookie("c_id", c_id);
+//            response.addCookie(cookie);
+//        }
         try{
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
             int c_id = (int)session.getAttribute("c_id"); // ccc@ccc.com
 //            String c_id = cartDao.customerGetCid(cid);
+//            List<CartDto> cid = cartDao.getCartAndStk();
+
+            System.out.println(rtl_prc);
             cartDto.setC_id(c_id);
             cartDto.setPd_id(pd_id);
-            cartDto.setPd_clsf_code(pd_clsf_code);
-            cartDto.setCart_cnt(cart_cnt);
-
+            cartDto.setPd_clsf_code(pd_clsf_cd);
+            cartDto.setCart_cnt(1);
+            cartDto.setSls_prc(sls_prc);
+            cartDto.setRtl_prc(rtl_prc);
+            System.out.println(cartDto);
+            int rowcnt = cartDao.insert(cartDto);
 //            CartDto cartCheck = cartDao.cartCheck(cart);
 //            System.out.println(cartCheck);
 
-            int rowcnt = cartDao.insert(cartDto);
-
+            if(rowcnt !=1)
+                throw new Exception("Cart insert err");
             m.addAttribute("cartDto",cartDto);
-            m.addAttribute("c_id",c_id);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -127,11 +137,9 @@ public class CartController {
         try {
             /* 로그인한 고객의 c_id가 세션에있는지 확인한다 */
             int c_id = (int)session.getAttribute("c_id"); // ccc@ccc.com
-;
+            ;
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.selectUser(c_id);
-
-//            System.out.println("pd_id="+pd_id);
 
             /* Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력 */
             if(list.isEmpty()) {

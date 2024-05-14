@@ -5,6 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css'/>" />
     <title>제품 상세페이지</title>
     <style>
         .title{
@@ -62,10 +65,15 @@
             <option value="option3">L</option>
         </select>
         <div class="button">
-            <form action="directOrder" method="post">
+            <form action="/order" method="post">
                 <button type="submit">바로구매</button>
             </form>
-            <form action="putInCart" method="post">
+            <form action="/cart/insert" id="cartForm" method="post">
+                <input type="hidden" name="pd_id" value="${stkInfo.pd_id}"/>
+                <input type="hidden" name="pd_name" value="${stkInfo.pd_name}"/>
+                <input type="hidden" name="pd_clsf_cd" value="${stkInfo.pd_clsf_cd}"/>
+                <input type="hidden" name="sls_prc" value="${stkInfo.sls_prc}"/>
+                <input type="hidden" name="rtl_prc" value="${stkInfo.rtl_prc}"/>
                 <button type="submit">장바구니</button>
             </form>
             <form action="putInWish" method="post">
@@ -101,7 +109,7 @@
 </div>
 <hr>
 <div id="scroll3">배송안내
-<p>무료배송입니다.</p>
+    <p>무료배송입니다.</p>
 </div>
 <hr>
 <div id="scroll4">교환환불안내
@@ -140,26 +148,26 @@
 <div id="scroll5">리뷰
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tellus nulla, commodo ac blandit nec, ornare et dolor. Nunc pharetra mollis est, in efficitur metus venenatis sit amet. Aliquam id urna vitae lorem faucibus luctus at nec felis. Proin sed nibh sed nunc viverra porta in quis sem. Fusce vitae commodo purus, sit amet accumsan augue. Ut dignissim vel lorem eu semper. Sed tincidunt, diam vitae euismod laoreet, nibh diam auctor lectus, quis placerat ex turpis in augue.
 
-    Nam nec ligula lacinia, laoreet orci sit amet, scelerisque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut nibh ac lacus ultrices pulvinar. In porttitor orci consequat tellus sodales, eu porttitor turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet diam eu urna vestibulum lacinia. Proin id tempus ante. Duis commodo, arcu vitae bibendum faucibus, nisi eros posuere sapien, nec interdum enim ligula eu mi. Nunc gravida malesuada ante imperdiet lobortis.
+        Nam nec ligula lacinia, laoreet orci sit amet, scelerisque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut nibh ac lacus ultrices pulvinar. In porttitor orci consequat tellus sodales, eu porttitor turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet diam eu urna vestibulum lacinia. Proin id tempus ante. Duis commodo, arcu vitae bibendum faucibus, nisi eros posuere sapien, nec interdum enim ligula eu mi. Nunc gravida malesuada ante imperdiet lobortis.
 
-    Cras quis tortor quis mauris pellentesque mattis sed eu risus. Vestibulum ultrices sed lectus at sollicitudin. Quisque in rhoncus magna. In tincidunt iaculis tellus, eu dapibus ex rutrum a. Nam sed nisl eget velit tempus suscipit. Integer molestie libero dolor, non aliquam mauris ultricies nec. Ut ornare, sapien sit amet ullamcorper semper, nulla sapien elementum massa, sed luctus arcu nulla nec tellus. Integer laoreet rhoncus velit, sit amet vehicula justo porttitor eu. Integer accumsan erat felis, ac viverra risus faucibus nec. Pellentesque laoreet sem at justo tincidunt vestibulum at a lorem. Nam tellus sapien, gravida varius pellentesque ac, molestie non quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a hendrerit ex. Maecenas metus nulla, pulvinar in lorem ac, pulvinar blandit est.
+        Cras quis tortor quis mauris pellentesque mattis sed eu risus. Vestibulum ultrices sed lectus at sollicitudin. Quisque in rhoncus magna. In tincidunt iaculis tellus, eu dapibus ex rutrum a. Nam sed nisl eget velit tempus suscipit. Integer molestie libero dolor, non aliquam mauris ultricies nec. Ut ornare, sapien sit amet ullamcorper semper, nulla sapien elementum massa, sed luctus arcu nulla nec tellus. Integer laoreet rhoncus velit, sit amet vehicula justo porttitor eu. Integer accumsan erat felis, ac viverra risus faucibus nec. Pellentesque laoreet sem at justo tincidunt vestibulum at a lorem. Nam tellus sapien, gravida varius pellentesque ac, molestie non quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a hendrerit ex. Maecenas metus nulla, pulvinar in lorem ac, pulvinar blandit est.
 
-    Mauris facilisis lorem nec nunc placerat, ac aliquam tellus porttitor. Maecenas molestie nec ipsum in sodales. Nulla vitae sem semper, rutrum lorem nec, aliquet sapien. In pretium elit in lacinia congue. Integer et auctor diam, sit amet faucibus nunc. Sed efficitur non orci et suscipit. Vestibulum eget ipsum congue ex pretium venenatis.
+        Mauris facilisis lorem nec nunc placerat, ac aliquam tellus porttitor. Maecenas molestie nec ipsum in sodales. Nulla vitae sem semper, rutrum lorem nec, aliquet sapien. In pretium elit in lacinia congue. Integer et auctor diam, sit amet faucibus nunc. Sed efficitur non orci et suscipit. Vestibulum eget ipsum congue ex pretium venenatis.
 
-    Vivamus sit amet leo augue. Maecenas eleifend maximus nulla commodo porttitor. Sed nec magna urna. Duis hendrerit sapien posuere diam ultrices volutpat. Nam vel porttitor orci. Ut velit magna, finibus id feugiat congue, cursus cursus purus. Phasellus tincidunt neque sed tristique maximus. Phasellus placerat venenatis lacus, id accumsan orci feugiat sit amet. Sed laoreet nisl nec tortor vehicula pharetra. Fusce vel pharetra risus. Fusce eget imperdiet lorem, sit amet molestie est. Nulla urna ligula, fermentum id massa a, rutrum consequat sem. Sed molestie auctor mauris sed bibendum. Sed in vulputate ligula, sed vulputate nisl. In eu hendrerit neque.
+        Vivamus sit amet leo augue. Maecenas eleifend maximus nulla commodo porttitor. Sed nec magna urna. Duis hendrerit sapien posuere diam ultrices volutpat. Nam vel porttitor orci. Ut velit magna, finibus id feugiat congue, cursus cursus purus. Phasellus tincidunt neque sed tristique maximus. Phasellus placerat venenatis lacus, id accumsan orci feugiat sit amet. Sed laoreet nisl nec tortor vehicula pharetra. Fusce vel pharetra risus. Fusce eget imperdiet lorem, sit amet molestie est. Nulla urna ligula, fermentum id massa a, rutrum consequat sem. Sed molestie auctor mauris sed bibendum. Sed in vulputate ligula, sed vulputate nisl. In eu hendrerit neque.
     </p>
 </div>
 <hr>
 <div id="scroll6">제품문의
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tellus nulla, commodo ac blandit nec, ornare et dolor. Nunc pharetra mollis est, in efficitur metus venenatis sit amet. Aliquam id urna vitae lorem faucibus luctus at nec felis. Proin sed nibh sed nunc viverra porta in quis sem. Fusce vitae commodo purus, sit amet accumsan augue. Ut dignissim vel lorem eu semper. Sed tincidunt, diam vitae euismod laoreet, nibh diam auctor lectus, quis placerat ex turpis in augue.
 
-    Nam nec ligula lacinia, laoreet orci sit amet, scelerisque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut nibh ac lacus ultrices pulvinar. In porttitor orci consequat tellus sodales, eu porttitor turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet diam eu urna vestibulum lacinia. Proin id tempus ante. Duis commodo, arcu vitae bibendum faucibus, nisi eros posuere sapien, nec interdum enim ligula eu mi. Nunc gravida malesuada ante imperdiet lobortis.
+        Nam nec ligula lacinia, laoreet orci sit amet, scelerisque ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut nibh ac lacus ultrices pulvinar. In porttitor orci consequat tellus sodales, eu porttitor turpis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Phasellus sit amet diam eu urna vestibulum lacinia. Proin id tempus ante. Duis commodo, arcu vitae bibendum faucibus, nisi eros posuere sapien, nec interdum enim ligula eu mi. Nunc gravida malesuada ante imperdiet lobortis.
 
-    Cras quis tortor quis mauris pellentesque mattis sed eu risus. Vestibulum ultrices sed lectus at sollicitudin. Quisque in rhoncus magna. In tincidunt iaculis tellus, eu dapibus ex rutrum a. Nam sed nisl eget velit tempus suscipit. Integer molestie libero dolor, non aliquam mauris ultricies nec. Ut ornare, sapien sit amet ullamcorper semper, nulla sapien elementum massa, sed luctus arcu nulla nec tellus. Integer laoreet rhoncus velit, sit amet vehicula justo porttitor eu. Integer accumsan erat felis, ac viverra risus faucibus nec. Pellentesque laoreet sem at justo tincidunt vestibulum at a lorem. Nam tellus sapien, gravida varius pellentesque ac, molestie non quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a hendrerit ex. Maecenas metus nulla, pulvinar in lorem ac, pulvinar blandit est.
+        Cras quis tortor quis mauris pellentesque mattis sed eu risus. Vestibulum ultrices sed lectus at sollicitudin. Quisque in rhoncus magna. In tincidunt iaculis tellus, eu dapibus ex rutrum a. Nam sed nisl eget velit tempus suscipit. Integer molestie libero dolor, non aliquam mauris ultricies nec. Ut ornare, sapien sit amet ullamcorper semper, nulla sapien elementum massa, sed luctus arcu nulla nec tellus. Integer laoreet rhoncus velit, sit amet vehicula justo porttitor eu. Integer accumsan erat felis, ac viverra risus faucibus nec. Pellentesque laoreet sem at justo tincidunt vestibulum at a lorem. Nam tellus sapien, gravida varius pellentesque ac, molestie non quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In a hendrerit ex. Maecenas metus nulla, pulvinar in lorem ac, pulvinar blandit est.
 
-    Mauris facilisis lorem nec nunc placerat, ac aliquam tellus porttitor. Maecenas molestie nec ipsum in sodales. Nulla vitae sem semper, rutrum lorem nec, aliquet sapien. In pretium elit in lacinia congue. Integer et auctor diam, sit amet faucibus nunc. Sed efficitur non orci et suscipit. Vestibulum eget ipsum congue ex pretium venenatis.
+        Mauris facilisis lorem nec nunc placerat, ac aliquam tellus porttitor. Maecenas molestie nec ipsum in sodales. Nulla vitae sem semper, rutrum lorem nec, aliquet sapien. In pretium elit in lacinia congue. Integer et auctor diam, sit amet faucibus nunc. Sed efficitur non orci et suscipit. Vestibulum eget ipsum congue ex pretium venenatis.
 
-    Vivamus sit amet leo augue. Maecenas eleifend maximus nulla commodo porttitor. Sed nec magna urna. Duis hendrerit sapien posuere diam ultrices volutpat. Nam vel porttitor orci. Ut velit magna, finibus id feugiat congue, cursus cursus purus. Phasellus tincidunt neque sed tristique maximus. Phasellus placerat venenatis lacus, id accumsan orci feugiat sit amet. Sed laoreet nisl nec tortor vehicula pharetra. Fusce vel pharetra risus. Fusce eget imperdiet lorem, sit amet molestie est. Nulla urna ligula, fermentum id massa a, rutrum consequat sem. Sed molestie auctor mauris sed bibendum. Sed in vulputate ligula, sed vulputate nisl. In eu hendrerit neque.
+        Vivamus sit amet leo augue. Maecenas eleifend maximus nulla commodo porttitor. Sed nec magna urna. Duis hendrerit sapien posuere diam ultrices volutpat. Nam vel porttitor orci. Ut velit magna, finibus id feugiat congue, cursus cursus purus. Phasellus tincidunt neque sed tristique maximus. Phasellus placerat venenatis lacus, id accumsan orci feugiat sit amet. Sed laoreet nisl nec tortor vehicula pharetra. Fusce vel pharetra risus. Fusce eget imperdiet lorem, sit amet molestie est. Nulla urna ligula, fermentum id massa a, rutrum consequat sem. Sed molestie auctor mauris sed bibendum. Sed in vulputate ligula, sed vulputate nisl. In eu hendrerit neque.
     </p>
 </div>
 </body>
