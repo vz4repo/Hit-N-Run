@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -39,56 +41,74 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Integer rtl_prc, Model m, HttpSession session, HttpServletRequest request){
+    public String order(Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
         try {
-            List<CartDto> list = cartDao.selectUser(c_id);
-            List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);
-
+//            List<CartDto> list = cartDao.selectUser(c_id);
+            List<CartDto> list =cartDao.getStk(c_id);
+           /* List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);*/
 
             System.out.println("list = " +list);
-            System.out.println("stkList=" + stkList);
-
-
-            System.out.println(rtl_prc);
 
             OrderDetDto ord_det = new OrderDetDto();
-            /*list*/
+            OrdDto ord = new OrdDto();
+
+
+            /*장바구니에서 data 가져와서 order_det 테이블에 insert */
             for (CartDto cart : list){
                 ord_det.setPd_id(cart.getPd_id());
                 ord_det.setPd_clsf_cd(cart.getPd_clsf_code());
-            }
-            for (OrdAndStkDto stk : stkList) {
+                ord_det.setPd_name(cart.getPd_name());
+                ord_det.setSls_prc(cart.getSls_prc());
+                ord_det.setOd_qty(cart.getCart_cnt());
+                ord_det.setC_id(cart.getC_id());
 
-                ord_det.setPd_name(stk.getPd_name()); // 상품 이름
-                ord_det.setSls_prc(stk.getSls_prc()); // 상품 갸격
-                ord_det.setOd_qty(stk.getCart_cnt()); // 주문 수량
-                ord_det.setC_id(stk.getC_id()); // 주문한 사용자의 ID
-
-              orderdetDao.insert(ord_det);
+                orderdetDao.insert(ord_det);
             }
 
 
-            OrdDto ord = new OrdDto();
-                ord.setC_id(ord_det.getC_id());
-                ord.setRtl_prc(rtl_prc);
-                ord.setRtl_prc(1);
-                ord.setOd_pd_qty(10);
-                ord.setOd_tot_qty(20);
-                ord.setOd_pay_amt(50000);
+            int totalpd_qty = 0;
+            int totalqty = 0;
+            int totalamount = 0;
+            int totalrtlamount = 0;
 
-                ordDao.insert(ord);
+            /*중복 안돼는 set을 만든다*/
+            Set<String> od_pd_qtyid = new HashSet<>();
+
+            for (CartDto cart : list) {
+                /*제품 가지 수*/
+                od_pd_qtyid.add(cart.getPd_id());     /*set에 상품 id를 넣어서 for문 돌려줌*/
+
+                /*주문 총 수량 구하기*/
+                totalqty += cart.getCart_cnt();
+
+                /*주문 총 금액 구하기*/
+                int itemtotal = cart.getSls_prc() * cart.getCart_cnt();
+                totalamount += itemtotal;
+
+                /*주문 총 소비자가 구하기*/
+                totalrtlamount += cart.getRtl_prc();
+            }
+
+            /*상품 id를 담은 set(od_pd_qtyid)의 사이즈를 담아줌*/
+            totalpd_qty = od_pd_qtyid.size();
+
+
+            ord.setC_id(ord_det.getC_id());
+            ord.setOd_pd_qty(totalpd_qty);
+            ord.setOd_tot_qty(totalqty);
+            ord.setOd_pay_amt(totalamount);
+            ord.setRtl_prc(totalrtlamount);
+
+            ordDao.insert(ord);
 
             System.out.println("ord_det.getC_id()" +ord_det.getC_id());
-            System.out.println("rtl_prc" +rtl_prc);
             System.out.println(ord);
 
             m.addAttribute("list", list);
-            m.addAttribute("stkList", stkList);
-
-
+            /*m.addAttribute("stkList", stkList);*/
 
         } catch (Exception e) {
             e.printStackTrace();
