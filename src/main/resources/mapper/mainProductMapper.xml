@@ -9,6 +9,7 @@
         select *
         from prd
         where pd_chr_cd like "N" and pd_stat_hist_cd like "onSale"
+        order by frst_reg_dt
         ) as p, (
         SELECT pd_id, MAX(rtl_prc) AS max_rtl_prc, MAX(sls_prc) AS max_sls_prc
         FROM stk
