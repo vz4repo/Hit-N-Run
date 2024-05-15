@@ -71,11 +71,12 @@ public class PaymentDto {
   }
 
   /* constructor : selectPaymentHistoryWithDateRange() */
-  public PaymentDto(int c_id, int pay_final_amt, LocalDateTime pay_dt, String pay_od_name) {
+  public PaymentDto(int c_id, int pay_final_amt, LocalDateTime pay_dt, String pay_od_name, int od_id) {
     this.c_id = c_id;
     this.pay_final_amt = pay_final_amt;
     this.pay_dt = pay_dt;
     this.pay_od_name = pay_od_name;
+    this.od_id = od_id;
   }
 
   /* getter, setter */

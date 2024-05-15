@@ -64,6 +64,7 @@ public class PaymentDaoTest {
     /* 현제시각(param2) */
     LocalDate currentDate = LocalDate.now();
     System.out.println("origin currentDate = " + currentDate);
+
     /* 1, 3, 6, 5*12 개월 */
     /*
     int param1 = 1;
@@ -73,7 +74,6 @@ public class PaymentDaoTest {
     LocalDate targetDate = currentDate.minusMonths(1);
     System.out.println("params >> [FROM] "+targetDate+", [TO] "+ currentDate );
 
-
     targetDate = currentDate.minusMonths(3);
         System.out.println("params >> [FROM] "+targetDate+", [TO] "+ currentDate );
 
@@ -82,9 +82,9 @@ public class PaymentDaoTest {
 
     targetDate = currentDate.minusMonths(5*12);
         System.out.println("params >> [FROM] "+targetDate+", [TO] "+ currentDate );
-/*
-    currentDate = LocalDate.parse("20240511");
-    targetDate = LocalDate.parse("20230512");
+/*  // service 에서 테스트하기로..
+    currentDate = LocalDate.parse("20240511", formatter자리);
+    targetDate = LocalDate.parse("20230512", formatter자리);
         System.out.println("params >> [FROM] "+targetDate+", [TO] "+ currentDate );
 */
   }

@@ -23,14 +23,19 @@ public class PaymentServiceImplTest {
   @Test
   public void 결제내역_날짜범위로_조회() {
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
+    /* service에서 쓸 param 3개 */
     int c_id = 100006;
-    LocalDate fromDate = LocalDate.parse("20230101", formatter);
-    LocalDate toDate = LocalDate.parse("20240514", formatter);
+    String strFromDate = "2019-05-15";
+    String strToDate = "2024-05-15";
 
-    List<PaymentDto> resultDtoList = paymentService.selectPaymentHistoryWithDateRange(c_id,fromDate, toDate);
-    System.out.println("resultDtoList = " + resultDtoList);
-
+    /* service 수행 */
+    List<PaymentDto> resultDtoList = paymentService.selectPaymentHistoryWithDateRange(c_id,strFromDate, strToDate);
+    /* resultDtoList.stream().forEach(System.out::println); */
+    /* 출력값 (주문명, 주문일, 주문금액) 확인 */
+    resultDtoList.stream()
+        .map(resultDto -> String.format("주문명: %s, 주문일: %s, 주문금액: %s, 주문번호: %d", resultDto.getPay_final_amt(), resultDto.getPay_dt(), resultDto.getPay_od_name(), resultDto.getOd_id()))
+        .forEach(System.out::println);
   }
 }

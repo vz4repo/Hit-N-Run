@@ -83,6 +83,11 @@ public class MyPageController {
         return "myPageInfo";
     }
 
+    @GetMapping(value = "pay")
+    public String myPayInfo() {
+        return "payList";
+    }
+
     private boolean loginCheck(HttpServletRequest request) {
         HttpSession session = request.getSession();
         return session.getAttribute("c_id") != null;

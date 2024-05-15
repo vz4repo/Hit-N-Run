@@ -2,6 +2,8 @@ package com.homerunball.payment.controller;
 
 import com.homerunball.order.dao.OrderDetDao;
 import com.homerunball.order.domain.OrderDetDto;
+import com.homerunball.payment.domain.PaymentDto;
+import com.homerunball.payment.service.PaymentService;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -10,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,21 +23,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-
-/* [GET]  /payment  결제창 이동  */
-/* [GET]  /success  인증 성공 처리 */
-/* [GET]  /fail     인증 실패 처리 */
-/* [POST] /confirm  승인 성공 후 처리 */
+/* [GET]  /payment  index()             결제모듈 호출 */
+/* [GET]  /success  successPayment()    인증 성공 처리 */
+/* [GET]  /fail     failPayment()       인증 실패 처리 */
+/* [POST] /confirm  confirmPayment()    승인 성공 후 처리 */
+/* [GET]  /pay/list getPaymentList()    요청한 날짜범위에 대한 내용 */
 @Controller
 public class PaymentController {
+
     @Autowired
     OrderDetDao orderDetDao;
+    @Autowired
+    PaymentService paymentService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -44,7 +53,7 @@ public class PaymentController {
     private String widgetSecretKey;
 
     @GetMapping(value = "/payment")
-    public String index( Model model) throws Exception {
+    public String index(Model model) throws Exception {
         logger.info("[paymentController] :: /payment ");
         model.addAttribute("widgetClientKey", widgetClientKey);
         return "/payCheckout_bak";
@@ -56,7 +65,7 @@ public class PaymentController {
         logger.info("[paymentController] :: /success ");
 
         /* request session에서 로그인 했으면 c_id 가 저장되어있을것을 가정 */
-        int c_id =  Integer.parseInt(sessionId);
+        int c_id = Integer.parseInt(sessionId);
         OrderDetDto orderDetDto = new OrderDetDto(c_id);
         orderDetDao.insert(orderDetDto);
 
@@ -92,7 +101,8 @@ public class PaymentController {
             amount = (String) requestData.get("amount");
         } catch (ParseException e) {
             throw new RuntimeException(e);
-        };
+        }
+        ;
         JSONObject obj = new JSONObject();
         obj.put("orderId", orderId);
         obj.put("amount", amount);
@@ -117,7 +127,6 @@ public class PaymentController {
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
 
-
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(obj.toString().getBytes("UTF-8"));
 
@@ -132,5 +141,21 @@ public class PaymentController {
         responseStream.close();
 
         return ResponseEntity.status(code).body(jsonObject);
+    }
+
+    @GetMapping(value = "/pay/list")
+    @ResponseBody
+    public List<PaymentDto> getPaymentList( @SessionAttribute(name = "c_id") int c_id
+        , @RequestParam("fromDate") String fromDate
+        , @RequestParam("toDate") String toDate) {
+        logger.info("[paymentController] :: /pay/list ");
+        System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
+
+        return paymentService.selectPaymentHistoryWithDateRange(c_id, fromDate, toDate);
+    }
+
+    @GetMapping(value = "/receipt")
+    public String getReceipt() {
+        return "payReceipt";
     }
 }

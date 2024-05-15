@@ -70,6 +70,7 @@
       pay_od_name     /* 상품명   */
     , pay_dt          /* 결제일자 */
     , pay_final_amt   /* 결제금액 */
+    , od_id           /* 주문번호 */
     FROM pay
     WHERE  c_id = #{c_id}
       and	 pay_dt BETWEEN #{fromDate} AND #{toDate};
