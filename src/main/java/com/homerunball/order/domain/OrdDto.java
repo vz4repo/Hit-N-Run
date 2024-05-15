@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Objects;
 
 public class OrdDto {
-    private String od_id;
-    private String c_id;
-    private Date od_dt;
-    private String od_stat_cd;
-    private Integer od_pd_qty;
-    private  Integer od_tot_qty;
-    private Integer rtl_prc;
-    private  Integer od_pay_amt;
+    private int od_id; /*주문번호*/
+    private int c_id; /*고객번호*/
+    private Date od_dt; /*주문일시*/
+    private String od_stat_cd; /*주문상태코드*/
+    private Integer od_pd_qty; /*제품가지수*/
+    private  Integer od_tot_qty; /*주문총수량*/
+    private Integer rtl_prc; /*소비자가격*/
+    private  Integer od_pay_amt; /*주문결제금액*/
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
@@ -24,11 +24,11 @@ pd_name, sls_prc
     public OrdDto(){
 
     }
-    public  OrdDto(String c_id){
+    public  OrdDto(int c_id){
         this(c_id, new Date(), "", 0, 0, 0, 0);
     }
 
-    public OrdDto(String c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer rtl_prc, Integer od_pay_amt) {
+    public OrdDto(int c_id, Date od_dt, String od_stat_cd, Integer od_pd_qty, Integer od_tot_qty, Integer rtl_prc, Integer od_pay_amt) {
         this.c_id = c_id;
         this.od_dt = od_dt;
         this.od_stat_cd = od_stat_cd;
@@ -38,19 +38,19 @@ pd_name, sls_prc
         this.od_pay_amt = od_pay_amt;
     }
 
-    public String getOd_id() {
+    public int getOd_id() {
         return od_id;
     }
 
-    public void setOd_id(String od_id) {
+    public void setOd_id(int od_id) {
         this.od_id = od_id;
     }
 
-    public String getC_id() {
+    public int getC_id() {
         return c_id;
     }
 
-    public void setC_id(String c_id) {
+    public void setC_id(int c_id) {
         this.c_id = c_id;
     }
 

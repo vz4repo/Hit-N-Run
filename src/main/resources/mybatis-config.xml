@@ -7,12 +7,18 @@
     <typeAlias alias="CustDto" type="com.homerunball.customer.domain.CustDto"/>
     <typeAlias alias="CartDto" type="com.homerunball.cart.domain.CartDto"/>
     <typeAlias alias="ProductDto" type="com.homerunball.admin.product.domain.ProductDto"/>
+    <typeAlias alias="MainProductDto" type="com.homerunball.admin.product.domain.MainProductDto"/>
     <typeAlias alias="OrdDto" type="com.homerunball.order.domain.OrdDto"/>
     <typeAlias alias="OrderDetDto" type="com.homerunball.order.domain.OrderDetDto"/>
     <typeAlias alias="OrderStatDto" type="com.homerunball.order.domain.OrderStatDto"/>
+    <typeAlias alias="OrdAndStkDto" type="com.homerunball.order.domain.OrdAndStkDto"/>
 <!--    <typeAlias alias="OrderHistDto" type="com.homerunball.order.domain.OrderHistDto"/>-->
     <typeAlias alias="PaymentDto" type="com.homerunball.payment.domain.PaymentDto"/>
     <typeAlias alias="PaymentFailDto" type="com.homerunball.payment.domain.PaymentFailDto"/>
     <typeAlias alias="StockDto" type="com.homerunball.admin.stock.domain.StockDto"/>
+    <typeAlias alias="pdViewDto" type="com.homerunball.product.customer.domain.ProductViewDto"/>
+    <typeAlias alias="rltdPdViewDto" type="com.homerunball.product.customer.domain.RelatedPrdViewDto"/>
+    <typeAlias alias="stkViewDto" type="com.homerunball.product.customer.domain.StockViewDto"/>
+    <typeAlias alias="prdDetViewDto" type="com.homerunball.product.customer.domain.PrdDetViewDto"/>
   </typeAliases>
 </configuration>

@@ -24,11 +24,11 @@ public class OrdDaoImplTest {
         assertTrue(ordDao.count()==0);
 
 
-        OrdDto ord = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ord = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ord) == 1);
         assertTrue(ordDao.count()==1);
 
-        OrdDto ord2 = new OrdDto("100012", new Date(), "21구매확정", 1, 1, 50000, 50000);
+        OrdDto ord2 = new OrdDto(100012, new Date(), "21구매확정", 1, 1, 50000, 50000);
 
         assertTrue(ordDao.insert(ord2) == 1);
         assertTrue(ordDao.count()==2);
@@ -40,14 +40,14 @@ public class OrdDaoImplTest {
         ordDao.deleteAll();
         assertTrue(ordDao.count()==0);
 
-        OrdDto ordDto = new OrdDto("100013", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.deleteAll()==1);
         assertTrue(ordDao.count()==0);
 
-        ordDto = new OrdDto("100014", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
-        ordDto = new OrdDto("100015", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.deleteAll()==2);
         assertTrue(ordDao.count()==0);
@@ -60,20 +60,20 @@ public class OrdDaoImplTest {
         assertTrue(ordDao.count()==0);
 
 
-        OrdDto ord = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ord = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ord) == 1);
 
 
         /*2번 데이터*/
-        OrdDto ord2 = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ord2 = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ord2) == 1);
 
         /* 한 고객(100012)이 주문을 각자 2번하고, od_id (주문번호는) 다르게 생성된다 */
         assertFalse(ord.equals(ord2)); /* 다른 주문번호이기때문에 두 객체는 다르다. */
 
         /*2번 데이터 조회*/
-        String oid = ordDao.selectAll().get(0).getOd_id();
-        String cid = ordDao.selectAll().get(0).getC_id();
+        int oid = ordDao.selectAll().get(0).getOd_id();
+        int cid = ordDao.selectAll().get(0).getC_id();
         ord2 = ordDao.select(oid, cid);
 
         /*수정*/
@@ -87,7 +87,7 @@ public class OrdDaoImplTest {
         assertEquals("after", updatedOrd.getOd_stat_cd());
 
         /*다시 조회*/
-        String od_id = ordDao.selectAll().get(0).getOd_id();
+        int od_id = ordDao.selectAll().get(0).getOd_id();
 
         ord.setOd_id(od_id);
 
@@ -103,13 +103,13 @@ public class OrdDaoImplTest {
         List<OrdDto> list = ordDao.selectAll();
         assertTrue(list.size() == 0);
 
-        OrdDto ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
 
         list = ordDao.selectAll();
         assertTrue(list.size() == 1);
 
-        OrdDto ordDto2 = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ordDto2 = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto2)==1);
         list = ordDao.selectAll();
         assertTrue(list.size()==2);
@@ -118,15 +118,15 @@ public class OrdDaoImplTest {
     @Test
     public void insert() throws Exception {
         ordDao.deleteAll();
-        OrdDto ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        OrdDto ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
 
-        ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.count()==2);
 
         ordDao.deleteAll();
-        ordDto = new OrdDto("100012", new Date(), "00주문완료", 1, 1, 30000, 30000);
+        ordDto = new OrdDto(100012, new Date(), "00주문완료", 1, 1, 30000, 30000);
         assertTrue(ordDao.insert(ordDto)==1);
         assertTrue(ordDao.count()==1);
     }

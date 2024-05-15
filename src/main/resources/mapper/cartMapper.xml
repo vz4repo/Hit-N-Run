@@ -13,7 +13,6 @@
         select c_id from cust
     </select>
 
-
     <select id="count" resultType="int">
         select count(*) from cart;
     </select>
@@ -25,7 +24,7 @@
     </delete>
 
     <!--한 고객의 장바구니 전체삭제-->
-    <delete id="cidDeleteAll" parameterType="string">
+    <delete id="cidDeleteAll" parameterType="int">
         delete from cart where c_id = #{c_id}
     </delete>
 
@@ -41,12 +40,12 @@
     </insert>
 
     <sql id="selectCart">
-        select c_id, pd_id, pd_clsf_code, cart_cnt
+        select *
         from cart
     </sql>
 
     <!--select 1건-->
-    <select id="selectUser" parameterType="string" resultType="CartDto">
+    <select id="selectUser" parameterType="int" resultType="CartDto">
         <include refid="selectCart"/>
         where c_id = #{c_id}
     </select>
@@ -56,23 +55,19 @@
         order by frst_reg_dt desc, c_id desc
     </select>
 
-    <!--장바구니 update-->
+    <!--장바구니 담은상품이 중복일경우 수량 update-->
     <update id="update" parameterType="CartDto">
         update cart
-        set pd_clsf_code = #{pd_clsf_code}
-        , cart_cnt = #{cart_cnt}
-        where c_id = #{c_id} and pd_id = #{pd_id}
+        set cart_cnt = #{cart_cnt}
+        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
     </update>
 
-    <!-- Cart 장바구니 중복객체인지 확인 TDD구현하기 -->
-    <!-- 같은고객, 같은제품, 같은컬러가 2번 담긴경우? -->
-    <!-- 입력으로 들어온 두객체가 같은지 비교해서  -->
-    <!-- 같은경우? cart_cnt의 개수를 합친후 update -->
-    <!-- 같을경우? 처음에들어온것만 삭제 -->
-
-    <select id="cartCheck" parameterType="CartDto" resultType="int">
-        select * from cart
-        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
+    <!-- cart와 재고 join-->
+    <select id="getStk" resultType="CartDto" parameterType="int">
+        select c.c_id, c.pd_id,c.pd_clsf_code,c.cart_cnt,s.pd_name,s.sls_prc,s.rtl_prc
+        from cart c
+        join stk s on c.pd_id=s.pd_id
+        where c.c_id=#{c_id};
     </select>
 
 </mapper>
