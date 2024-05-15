@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,12 +24,11 @@ public class OrderDetDaoImpl implements OrderDetDao {
 
     /*데이터를 삭제한다*/
     @Override
-    public int delete(int od_det_seqnum, int od_id, String pd_id, String pd_clsf_cd) throws Exception {
+    public int delete(int od_det_seqnum, BigInteger od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_det_seqnum", od_det_seqnum);
         map.put("od_id", od_id);
-        map.put("pd_id", pd_id);
-        map.put("pd_clsf_cd", pd_clsf_cd);
+        map.put("c_id", c_id);
         return session.delete(namespace+"delete", map);
     }
 
@@ -38,11 +38,8 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
-    public OrderDetDto select(int od_det_seqnum, int od_id) throws Exception {
-
-        /*System.out.println("asdf" + od_det_seqnum);*/
-
-        return session.selectOne(namespace + "select", od_det_seqnum);
+    public  List<OrderDetDto> select(int c_id) throws Exception {
+       return session.selectList(namespace + "select", c_id);
     }
 
     @Override

@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                         <th>
-                            상품분류 선택
+                            품분류 선택
                         </th>
                         <td>
                             <label for="pd_type_cd">제품 유형</label>
@@ -192,7 +192,7 @@
                         <th colspan="2">기본 정보</th>
                     </tr>
                     <tr>
-                        <th>상품ID</th>
+                        <th>제품ID</th>
                         <td>
                             <input type='radio' id="new" name='pd_id' value="new"/>
                             <label for="new">새로운 제품</label>
@@ -201,15 +201,17 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>상품명</th>
+                        <th>제품명</th>
                         <td>
-                            <input type="text" name="pd_name" placeholder="하타케야마 포수미트 M2 양의지 강민호 스펙 글러브 블루/블랙/레드 H29" required>
+                            <input type="text" name="pd_name" class="pdNameCnt" maxlength="100" placeholder="하타케야마 포수미트 M2 양의지 강민호 스펙 글러브 블루/블랙/레드 H29" required>
+                            <span id="pdNameCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
                         <th>모델명</th>
                         <td>
-                            <input type="text" name="mdl_name" placeholder="하타케야마 포수미트" required>
+                            <input type="text" name="mdl_name" class="modelNameCnt" maxlength="100" placeholder="하타케야마 포수미트" required>
+                            <span id="modelNameCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -226,7 +228,8 @@
                     <tr>
                         <th>자체 제품 코드</th>
                         <td>
-                            <input type="text" name="og_pd_num" required>
+                            <input type="text" name="og_pd_num" class="originProductNum" maxlength="100" required>
+                            <span id="originProductNum">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -242,8 +245,8 @@
                     <tr>
                         <th>제품 홍보문구</th>
                         <td>
-                            <input type="text" name="pd_ad_cmt" size="50" maxlength="100" id="adComment" style="width: inherit" required/>
-                            <span id="adLengthCheck">[0 / 100]</span>
+                            <input type="text" name="pd_ad_cmt" class="productAdCommentCnt" size="50" maxlength="100" id="adComment" style="width: inherit" required/>
+                            <span id="productAdCommentCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -261,7 +264,8 @@
                     <tr>
                         <th>시리즈</th>
                         <td>
-                            <input type="text" name="srs_id" maxlength="100" required>
+                            <input type="text" name="srs_id" class="seriesIdCnt" maxlength="100" required>
+                            <span id="seriesIdCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -282,7 +286,8 @@
                     <tr>
                         <th>제품 소재</th>
                         <td>
-                            <input type="text" name="mtrl" maxlength="100" required>
+                            <input type="text" name="mtrl" class="materialCnt" maxlength="100" required>
+                            <span id="materialCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -294,7 +299,8 @@
                     <tr>
                         <th>무게(g)</th>
                         <td>
-                            <input type="text" name="wgh" id="wgh" maxlength="100" required>
+                            <input type="text" name="wgh" id="wgh" class="weighCnt" maxlength="100" required>
+                            <span id="weighCnt">[0 / 100]</span>
                         </td>
                     </tr>
                     <tr>
@@ -341,6 +347,7 @@
                                 <option value="43">빨간색_초록색</option>
                                 <option value="44">빨간색_파란색</option>
                                 <option value="45">빨간색_보라색</option>
+                                <option value="49">핑크색</option>
                                 <option value="50">주황색</option>
                                 <option value="51">주황색_노란색</option>
                                 <option value="52">주황색_초록색</option>
@@ -355,6 +362,7 @@
                                 <option value="72">초록색_보라색</option>
                                 <option value="80">파란색</option>
                                 <option value="81">파란색_보라색</option>
+                                <option value="88">하늘색</option>
                                 <option value="89">남색</option>
                                 <option value="90">보라색</option>
                                 <option value="91">금색</option>
@@ -396,11 +404,6 @@
                         <th>최대 주문 수량</th>
                         <td>
                             <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
-<%--                            하고 싶은 것: 라디오 버튼을 사용해 값을 입력받기--%>
-<%--                            <input type='radio' id="noLimit" name="max_od_qty" value="9999" required/>--%>
-<%--                            <label for="noLimit">제한 없음</label>--%>
-<%--                            <input type='radio' id="yesLimit" name="max_od_qty" value="0"/>--%>
-<%--                            <label for="yesLimit"><input type="text" size="3" id="maxQty" name="maxQty" disabled/> 개 이하로 제한</label>--%>
                         </td>
                     </tr>
                     <tr>
@@ -415,7 +418,6 @@
                             <input type='date' id="pd_mnf_date" name='pd_mnf_date' required/>
                         </td>
                     </tr>
-
                 </table>
             </div>
 
@@ -449,24 +451,96 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
-            // $("#searchProductIdBtn").on("click", function () {
-            //     let form = $("form");
-            //     let pd_type=document.getElementById("main");
-            // });
+            /*제품명 글자 수 세기*/
+            $(".pdNameCnt").keyup(function() {
+                let content = $(this).val();
+                $("#pdNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#pdNameCnt').text("[100 / 100]");
+                }
+            });
+
+            /*모델명 글자 수 세기*/
+            $(".modelNameCnt").keyup(function() {
+                let content = $(this).val();
+                $("#modelNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#modelNameCnt').text("[100 / 100]");
+                }
+            });
+
+            /*자체 제품 코드 글자 수 세기*/
+            $(".originProductNum").keyup(function() {
+                let content = $(this).val();
+                $("#originProductNum").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#originProductNum').text("[100 / 100]");
+                }
+            });
+
+            /*제품 홍보문구 글자 수 세기*/
+            $(".productAdCommentCnt").keyup(function() {
+                let content = $(this).val();
+                $("#productAdCommentCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#productAdCommentCnt').text("[100 / 100]");
+                }
+            });
+
+            /*시리즈 글자 수 세기*/
+            $(".seriesIdCnt").keyup(function() {
+                let content = $(this).val();
+                $("#seriesIdCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#seriesIdCnt').text("[100 / 100]");
+                }
+            });
+
+            /*제품 소재 글자 수 세기*/
+            $(".materialCnt").keyup(function() {
+                let content = $(this).val();
+                $("#materialCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#materialCnt').text("[100 / 100]");
+                }
+            });
+
+            /*무게 글자 수 세기*/
+            $(".weighCnt").keyup(function() {
+                let content = $(this).val();
+                $("#weighCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 100) {
+                    alert("최대 100자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 100));
+                    $('#weighCnt').text("[100 / 100]");
+                }
+            });
 
             /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
-            $("#adComment").keyup(function(e) {
+            $("#adComment").keyup(function() {
                 let content = $(this).val();
                 $("#adLengthCheck").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
                 if (content.length > 100) {
                     alert("최대 100자까지 입력 가능합니다.");
                     $(this).val(content.substring(0, 100));
-                    $('#summaryLengthCheck').text("[100 / 100]");
+                    $('#adLengthCheck').text("[100 / 100]");
                 }
             });
 
             /*제품 요약의 텍스트 길이가 200자가 넘지 않도록 하는 함수*/
-            $("#textSummary").keyup(function(e) {
+            $("#textSummary").keyup(function() {
                 let content = $(this).val();
                 $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
                 if (content.length > 200) {
@@ -476,8 +550,8 @@
                 }
             });
 
-            /*상품 상세 요약의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
-            $("#textDescription").keyup(function(e) {
+            /*제품 상세 설명의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
+            $("#textDescription").keyup(function() {
                 let content = $(this).val();
                 $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
                 if (content.length > 5000) {

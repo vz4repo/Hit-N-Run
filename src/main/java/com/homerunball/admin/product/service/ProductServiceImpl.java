@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -54,6 +55,18 @@ public class ProductServiceImpl implements ProductService {
         return productDao.selectAllOutProduct();
     }
 
+//    /* 판매중인 모든 제품을 list에 저장한다. */
+//    @Override
+//    public List<ProductDto> getAllSalesProduct() throws Exception {
+//        return productDao.selectAllSalesProduct();
+//    }
+//
+//    /* 판매중인 모든 신제품을 list에 저장한다. */
+//    @Override
+//    public List<ProductDto> getAllNewSalesProduct() throws Exception {
+//        return productDao.selectAllNewSalesProduct();
+//    }
+
     /* 지정된 제품 하나만을 가져온다. */
     @Override
     public ProductDto getOneProduct(String pd_id) throws Exception {
@@ -76,8 +89,8 @@ public class ProductServiceImpl implements ProductService {
 
     /* 제품의 내용을 수정한다. */
     @Override
-    public int modifyContent(ProductDto productDto) throws Exception {
-        return productDao.updateContent(productDto);
+    public int modifyContent(Map<String, Object> productMap) throws Exception {
+        return productDao.updateContent(productMap);
     }
 
     /*진열이 제외된 상품을 다시 진열한다.*/

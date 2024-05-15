@@ -4,84 +4,80 @@
     font-style: normal;
 }
 
-
 body {
     height: 100vh;
     margin-top: 10%;
 }
 
+table {
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.35;
+    color: #777;
+}
+
 a {
     text-decoration: none;
     color: black;
-
 }
 
+th, td {
+    text-align: center;
+}
+
+td {
+    padding: 15px 0;
+}
 
 hr {
-    width: 100%;
+    width: 90%;
     height: 1px;
     border: 0;
     background-color: #cecece;
 }
 
 .first__under {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
-.second__under {
-    margin-top: 25px;
-    height: 2px;
-    background-color: #dddddd;
+thead th {
+    padding: 7px 0 6px;
+    background-color: #fff;
+    border-top: 2px solid #ddd;
+    font-weight: normal;
+    color: #9b9a9a;
+    border-bottom: 1px solid #ddd;
 }
 
-
-.title__order {
-    margin-left: 50px;
+.head_main {
+    display: flex;
+    justify-content: left;
+    align-items: center;
     font-size: 12px;
-    font-weight: 600;
+    line-height: 1.35;
+    color: #777;
+    margin-left: 100px;
 }
 
-.tb__order {
-    display: grid;
-    /* grid-auto-flow: column; */
-    margin-left: 30px;
-    font-size: 12px;
+.head_order {
+    padding-bottom: 10px;
     text-align: center;
-    color: #a3a3a3;
-}
-
-.tb__right {
-    text-align: end;
-}
-
-table {
-    width: 95%;
-
-}
-
-tfoot td, tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
-    padding: 10px;
-}
-
-.order__path {
+    color: #333;
+    font-size: 15px;
     font-weight: 600;
-    font-size: 12px;
-    margin-left: 12px;
+    letter-spacing: 1.4px;
 }
 
 .order__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 15px 1%;
+    margin: 15px 100px;
 }
-.order__title h1 {
-    font-weight: 600;
-    font-size: 25px;
 
-}
 
 .order__title__detail {
     font-size: 12px;
@@ -94,3 +90,30 @@ tfoot td, tfoot tr{
 .order__title__detail a:last-child {
     color: #8d8d8d;
 }
+
+.order__delivery{
+
+}
+
+
+.title__order {
+    margin-left: 100px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+.tb__right {
+    display: grid;
+    grid-template-columns: repeat(4, 33%);
+    place-items: center center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+tfoot td, tfoot tr{
+    border-bottom: 1px solid #a3a3a3;
+    padding: 10px;
+}
+

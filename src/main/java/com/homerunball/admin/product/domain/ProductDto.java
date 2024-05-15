@@ -349,7 +349,7 @@ public class ProductDto {
 
     public ProductDto() {}
 
-    public ProductDto(String pd_id, String pd_name, String mdl_name, String qlt_cd, String ctg, String mn_img_fn, String det_img_fn, String pd_ad_cmt, String pd_smr_dsc, String pd_det_dsc, Integer min_od_qty, Integer max_od_qty, char pd_is_show, String sls_strt_dt, String pd_mnf_date, String og_pd_num, String origin, String mfr, String srs_id, String age_grp_cd, String player_name, String mtrl, String season, Integer wgh, String clr_cd, String pd_chr_cd, String sprt_type_cd, String pd_type_cd, String pd_type_det_cd, String brd_cd) {
+    public ProductDto(String pd_id, String pd_name, String mdl_name, String qlt_cd, String ctg, String mn_img_fn, String det_img_fn, String pd_ad_cmt, String pd_smr_dsc, String pd_det_dsc, Integer min_od_qty, Integer max_od_qty, char pd_is_show, String sls_strt_dt, String pd_mnf_date, String og_pd_num, String origin, String mfr, String srs_id, String age_grp_cd, String player_name, String mtrl, String season, Integer wgh, String clr_cd, String pd_chr_cd, String sprt_type_cd, String pd_type_cd, String pd_type_det_cd, String brd_cd, String pd_stat_hist_cd) {
         this.pd_id = pd_id;
         this.pd_name = pd_name;
         this.mdl_name = mdl_name;
@@ -380,6 +380,7 @@ public class ProductDto {
         this.pd_type_cd = pd_type_cd;
         this.pd_type_det_cd = pd_type_det_cd;
         this.brd_cd = brd_cd;
+        this.pd_stat_hist_cd = pd_stat_hist_cd;
     }
 
     @Override

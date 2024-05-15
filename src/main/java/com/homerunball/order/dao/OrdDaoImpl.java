@@ -21,7 +21,7 @@ public class OrdDaoImpl implements OrdDao {
     } // T selectOne(String statement)
 
     @Override
-    public int delete(String od_id, String c_id) throws Exception {
+    public int delete(int od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -34,7 +34,7 @@ public class OrdDaoImpl implements OrdDao {
     }
 
     @Override
-    public OrdDto select(String od_id, String c_id) throws Exception {
+    public OrdDto select(int od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -47,12 +47,12 @@ public class OrdDaoImpl implements OrdDao {
     }
 
     @Override
-    public List<OrdDto> selectOdId(String od_id) throws Exception {
+    public List<OrdDto> selectOdId(int od_id) throws Exception {
         return session.selectList(namespace+"selectOdId",od_id);
     }
 
     @Override
-    public List<OrdDto> selectCid(String c_id) throws Exception {
+    public List<OrdDto> selectCid(int c_id) throws Exception {
         return session.selectList(namespace + "selectCid", c_id);
     }
 

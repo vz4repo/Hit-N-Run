@@ -3,6 +3,7 @@ package com.homerunball.admin.product.dao;
 import com.homerunball.admin.product.domain.ProductDto;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProductDao {
     /* 모든 제품의 수를 센다. */
@@ -10,9 +11,6 @@ public interface ProductDao {
 
     /* 모든 제품을 삭제한다. */
     int deleteAll() throws Exception;
-
-    /*진열되지 않은 모든 제품을 선택한다.*/
-    List<ProductDto> selectAllOutProduct() throws Exception;
 
     /* 지정한 제품 하나를 삭제한다. */
     int delete(String pd_id) throws Exception;
@@ -29,6 +27,15 @@ public interface ProductDao {
     /* 모든 제품을 선택한다. */
     List<ProductDto> selectPrdAll() throws Exception;
 
+    /*진열되지 않은 모든 제품을 선택한다.*/
+    List<ProductDto> selectAllOutProduct() throws Exception;
+
+//    /*판매 중인 모든 제품을 선택한다.*/
+//    public List<ProductDto> selectAllSalesProduct() throws Exception;
+//
+//    /*판매 중인 모든 신제품을 선택한다.*/
+//    public List<ProductDto> selectAllNewSalesProduct() throws Exception;
+
     /* prd(제품) 테이블과 stk(재고) 테이블에서 pd_id(제품ID)가 동일한 모든 제품 선택하기 */
     List<ProductDto> selectPrdPrcAll() throws Exception;
 
@@ -42,7 +49,7 @@ public interface ProductDao {
     int countType(String pd_type_cd) throws Exception;
 
     /* 제품의 내용을 업데이트한다. */
-    int updateContent(ProductDto productDto) throws Exception;
+    int updateContent(Map<String, Object> productMap) throws Exception;
 
     /* 제품의 상태를 업데이트한다. */
 //    int updateStatus(ProductDto productDto) throws Exception;
