@@ -2,6 +2,7 @@ package com.homerunball.admin.product.controller;
 
 import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
+import com.homerunball.admin.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
@@ -72,9 +73,10 @@ public class ProductController {
         productDto.setCtg(category);
 
         /* 이미지의 경우 경로를 지정해준다. */
-        String fileRoot = productDto.getPd_type_cd();
-        productDto.setMn_img_fn(fileRoot + productDto.getMn_img_fn());
-        productDto.setDet_img_fn(fileRoot + productDto.getDet_img_fn());
+//        System.out.println("productDto.getMn_img_fn() = " + productDto.getMn_img_fn());
+//        String fileRoot = "/Users/ikjuncho/Desktop/Homerunball/img/" + productDto.getPd_type_cd();
+//        productDto.setMn_img_fn(fileRoot + "main/" + productDto.getMn_img_fn());
+//        productDto.setDet_img_fn(fileRoot + "detail/" + productDto.getDet_img_fn());
 
         try {
             /*
