@@ -15,7 +15,7 @@ public class DeliveryDaoImpl implements DeliveryDao {
     @Autowired
     private SqlSession session;
 
-    private String namespace = "com.homerunball.delivery.dao.deliveryMapper.";
+    private String namespace = "com.homerunball.delivery.dao.DeliveryDao.";
 
     /* 한 고객의 모든 배송지 목록 조회 */
     @Override
@@ -66,8 +66,6 @@ public class DeliveryDaoImpl implements DeliveryDao {
         // Map에 담기
         map.put("c_id", c_id);
         map.put("c_adr_list_id", c_adr_list_id);
-
-
         return session.delete(namespace + "delete", map);
     }
 
@@ -82,7 +80,6 @@ public class DeliveryDaoImpl implements DeliveryDao {
     public int deleteAll() throws Exception {
         return session.delete(namespace + "deleteAll");
     }
-
 
 
     /* ⭐⭐ returyType 확신이 없다....ㅜㅜ⭐⭐ */

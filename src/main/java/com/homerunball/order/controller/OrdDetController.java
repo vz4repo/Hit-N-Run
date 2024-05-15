@@ -3,10 +3,6 @@ package com.homerunball.order.controller;
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
 import com.homerunball.order.dao.OrdDao;
-<<<<<<<< HEAD:src/main/java/com/homerunball/order/controller/OrdController.java
-import com.homerunball.order.service.OrdService;
-========
->>>>>>>> 5dcd5bcad282c0832d64b5281c86f84e891a183c:src/main/java/com/homerunball/order/controller/OrdDetController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
