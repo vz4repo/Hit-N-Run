@@ -246,12 +246,12 @@
                                 <div class="thumb-wrapper">
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <a href="/product/detail/${product.pd_id}">
+                                        <a href="/product/detail?pd_id=${product.pd_id}">
                                             <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                         </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4><a href="/product/detail/${product.pd_id}">${product.pd_name}</a></h4>
+                                        <h4><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>

@@ -97,7 +97,7 @@
                     </tr>
                     <tr>
                         <th>
-                            품분류 선택
+                            제품분류 선택
                         </th>
                         <td>
                             <label for="pd_type_cd">제품 유형</label>

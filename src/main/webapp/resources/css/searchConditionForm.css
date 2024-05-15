@@ -1,0 +1,80 @@
+.search-container, .product-container, .stock-container {
+    width: 100%;
+    margin: 20px 0px;
+    display: inline-block;
+    text-align: center;
+}
+
+.search-option {
+    outline: none;
+    margin: 0 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.search-option > option {
+    text-align: center;
+}
+
+.search-input {
+    color: gray;
+    background-color: white;
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 300px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.search-inputDate {
+    color: gray;
+    background-color: white;
+    border: 1px solid #ccc;
+    height: 100%;
+    width: 100px;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.search-input::placeholder {
+    color: gray;
+}
+
+.buttons {
+    margin: 20px;
+}
+
+.sendBtn, .sendBtnSmall {
+    border-radius: 4px;
+    border: 1px solid #000000;
+    color: white;
+    cursor: pointer;
+    background-color: #585858;
+}
+
+.sendBtn, .cancelBtn {
+    padding: 10px 20px;
+    font-size: 15px;
+}
+
+.sendBtnSmall, .cancelBtnSmall {
+    padding: 5px 10px;
+    font-size: 10px;
+}
+
+.cancelBtn, .cancelBtnSmall {
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background-color: white;
+    cursor: pointer;
+    color: #000000;
+}
+
+.cancelBtn:hover, .cancelBtnSmall:hover {
+    background: #0b7dda;
+    color: white;
+}
+
+.sendBtn:hover, .sendBtnSmall:hover {
+    background: #0b7dda;
+}
