@@ -347,6 +347,7 @@
                                 <option value="43">빨간색_초록색</option>
                                 <option value="44">빨간색_파란색</option>
                                 <option value="45">빨간색_보라색</option>
+                                <option value="49">핑크색</option>
                                 <option value="50">주황색</option>
                                 <option value="51">주황색_노란색</option>
                                 <option value="52">주황색_초록색</option>
@@ -361,6 +362,7 @@
                                 <option value="72">초록색_보라색</option>
                                 <option value="80">파란색</option>
                                 <option value="81">파란색_보라색</option>
+                                <option value="88">하늘색</option>
                                 <option value="89">남색</option>
                                 <option value="90">보라색</option>
                                 <option value="91">금색</option>

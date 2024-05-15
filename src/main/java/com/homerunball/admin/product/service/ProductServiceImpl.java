@@ -55,6 +55,18 @@ public class ProductServiceImpl implements ProductService {
         return productDao.selectAllOutProduct();
     }
 
+//    /* 판매중인 모든 제품을 list에 저장한다. */
+//    @Override
+//    public List<ProductDto> getAllSalesProduct() throws Exception {
+//        return productDao.selectAllSalesProduct();
+//    }
+//
+//    /* 판매중인 모든 신제품을 list에 저장한다. */
+//    @Override
+//    public List<ProductDto> getAllNewSalesProduct() throws Exception {
+//        return productDao.selectAllNewSalesProduct();
+//    }
+
     /* 지정된 제품 하나만을 가져온다. */
     @Override
     public ProductDto getOneProduct(String pd_id) throws Exception {
