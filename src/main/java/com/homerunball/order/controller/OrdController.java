@@ -36,7 +36,7 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request){
+    public String order(CartDto selectCart, Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
@@ -49,7 +49,7 @@ public class OrdController {
 //            int totalPrice = OrdAndStkDto.OrdAndStkTotalPrice();
 //            OrdAndStkDto ordDto = new OrdAndStkDto();
 //            ordDao.insert(ord);
-            System.out.println(stkList);
+            System.out.println(selectCart);
 
 
 

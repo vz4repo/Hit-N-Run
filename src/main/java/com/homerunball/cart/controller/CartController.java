@@ -106,17 +106,14 @@ public class CartController {
             cartDto.setPd_clsf_code(pd_clsf_cd);
             cartDto.setCart_cnt(1);
 
+            boolean exists = cartDao.exists(cartDto);
 
-            int updateCnt = cartDao.update(cartDto);
-
-            int insertCnt = 0;
-            if (updateCnt != 1) {
-                insertCnt = cartDao.insert(cartDto);
-            }
-            if (insertCnt != 1) {
+            if (exists) {
                 cartDto.setCart_cnt(cartDto.getCart_cnt()+1);
                 cartDao.update(cartDto);
                 throw new Exception("Cart insert err: 이미 존재하는 상품입니다.");
+            } else {
+                cartDao.insert(cartDto);
             }
 
             System.out.println("insert:" + cartDto);
@@ -136,11 +133,12 @@ public class CartController {
         try {
             /* 로그인한 고객의 c_id가 세션에있는지 확인한다 */
             int c_id = (int)session.getAttribute("c_id");
-;
+
 
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.getStk(c_id);
             System.out.println("stklist=========="+list);
+
 
             /* Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력 */
             if(list.isEmpty()) {
