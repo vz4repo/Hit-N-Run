@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class OrdDaoImplTest {
         assertFalse(ord.equals(ord2)); /* 다른 주문번호이기때문에 두 객체는 다르다. */
 
         /*2번 데이터 조회*/
-        int oid = ordDao.selectAll().get(0).getOd_id();
+        BigInteger oid = ordDao.selectAll().get(0).getOd_id();
         int cid = ordDao.selectAll().get(0).getC_id();
         ord2 = ordDao.select(oid, cid);
 
@@ -87,7 +88,7 @@ public class OrdDaoImplTest {
         assertEquals("after", updatedOrd.getOd_stat_cd());
 
         /*다시 조회*/
-        int od_id = ordDao.selectAll().get(0).getOd_id();
+        BigInteger od_id = ordDao.selectAll().get(0).getOd_id();
 
         ord.setOd_id(od_id);
 

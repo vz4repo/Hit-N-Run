@@ -1,10 +1,12 @@
 package com.homerunball.customer.domain;
 
+import com.homerunball.customer.service.CustService;
+
 import java.util.Date;
 import java.util.Objects;
 
 public class CustDto {
-    private Integer c_id;
+    private int c_id;
     private String c_grd_cd;
     private String c_stat_cd;
     private String c_email;
@@ -17,21 +19,22 @@ public class CustDto {
     private String c_road_a;
     private String c_jibun_a;
     private String c_det_a;
-    private String c_ext_a;
+//    private String c_ext_a;
     private String c_dlv_adr;
     private String sms_agr;
     private String email_agr;
-    private String reg_date;
+    private String reg_dt;
     private String login_dt;
     private String tot_amt;
     private Date frst_reg_dt;
     private String frst_reg_id;
     private Date last_mod_dt;
     private String last_mod_id;
+    private String grd_name;
 
     public CustDto(){}
 
-    public CustDto(String c_email, String c_pwd, String c_name, String c_birth, String c_gnd, String c_phn, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_ext_a, String sms_agr, String email_agr) {
+    public CustDto(String c_email, String c_pwd, String c_name, String c_birth, String c_gnd, String c_phn, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String sms_agr, String email_agr) {
         this.c_email = c_email;
         this.c_pwd = c_pwd;
         this.c_name = c_name;
@@ -42,11 +45,30 @@ public class CustDto {
         this.c_road_a = c_road_a;
         this.c_jibun_a = c_jibun_a;
         this.c_det_a = c_det_a;
-        this.c_ext_a = c_ext_a;
         this.sms_agr = sms_agr;
         this.email_agr = email_agr;
     }
 
+    public CustDto(String c_name, String grd_name, String tot_amt, String login_dt, String reg_dt){
+        this.c_name = c_name;
+        this.grd_name = grd_name;
+        this.tot_amt = tot_amt;
+        this.login_dt = login_dt;
+        this.reg_dt = reg_dt;
+    }
+
+//    public CustDto(int c_id, String c_pwd, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_ext_a, String c_phn, String sms_agr, String email_agr){
+//        this.c_id = c_id;
+//        this.c_pwd = c_pwd;
+//        this.c_zip = c_zip;
+//        this.c_road_a = c_road_a;
+//        this.c_jibun_a = c_jibun_a;
+//        this.c_det_a = c_det_a;
+//        this.c_ext_a = c_ext_a;
+//        this.c_phn = c_phn;
+//        this.sms_agr = sms_agr;
+//        this.email_agr = email_agr;
+//    }
 
     @Override
     public String toString() {
@@ -64,17 +86,38 @@ public class CustDto {
                 ", c_road_a='" + c_road_a + '\'' +
                 ", c_jibun_a='" + c_jibun_a + '\'' +
                 ", c_det_a='" + c_det_a + '\'' +
-                ", c_ext_a='" + c_ext_a + '\'' +
+//                ", c_ext_a='" + c_ext_a + '\'' +
                 ", c_dlv_adr='" + c_dlv_adr + '\'' +
                 ", sms_agr='" + sms_agr + '\'' +
                 ", email_agr='" + email_agr + '\'' +
-                ", reg_date=" + reg_date +
+                ", reg_dt=" + reg_dt +
                 ", login_dt=" + login_dt +
                 ", tot_amt='" + tot_amt + '\'' +
                 ", first_reg_dt=" + frst_reg_dt +
                 ", first_reg_id='" + frst_reg_id + '\'' +
                 ", last_mod_dt=" + last_mod_dt +
                 ", last_mod_id='" + last_mod_id + '\'' +
+                '}';
+    }
+
+    public String toStringV1() {
+        return "고객 아이디 " +c_id+"번님의 수정 후 정보는" +
+                "{" +
+                "c_pwd='" + c_pwd + '\'' +
+                ", c_phn='" + c_phn + '\'' +
+                ", c_zip='" + c_zip + '\'' +
+                ", c_road_a='" + c_road_a + '\'' +
+                ", c_jibun_a='" + c_jibun_a + '\'' +
+                ", c_det_a='" + c_det_a + '\'' +
+                ", sms_agr='" + sms_agr + '\'' +
+                ", email_agr='" + email_agr + '\'' +
+                '}';
+    }
+
+    public String toStringV2() {
+        return "고객 아이디 " +c_id+"번님의 수정 후 정보는" +
+                "{" +
+                "c_pwd='" + c_pwd + '\'' +
                 '}';
     }
 
@@ -182,13 +225,13 @@ public class CustDto {
         this.c_det_a = c_det_a;
     }
 
-    public String getC_ext_a() {
-        return c_ext_a;
-    }
-
-    public void setC_ext_a(String c_ext_a) {
-        this.c_ext_a = c_ext_a;
-    }
+//    public String getC_ext_a() {
+//        return c_ext_a;
+//    }
+//
+//    public void setC_ext_a(String c_ext_a) {
+//        this.c_ext_a = c_ext_a;
+//    }
 
     public String getC_dlv_adr() {
         return c_dlv_adr;
@@ -214,12 +257,12 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    public String getReg_date() {
-        return reg_date;
+    public String getReg_dt() {
+        return reg_dt;
     }
 
-    public void setReg_date(String reg_date) {
-        this.reg_date = reg_date;
+    public void setReg_dt(String reg_dt) {
+        this.reg_dt = reg_dt;
     }
 
     public String getLogin_dt() {
@@ -269,5 +312,14 @@ public class CustDto {
     public void setLast_mod_id(String last_mod_id) {
         this.last_mod_id = last_mod_id;
     }
+
+    public String getGrd_name() {
+        return grd_name;
+    }
+
+    public void setGrd_name(String grd_name) {
+        this.grd_name = grd_name;
+    }
+
 
 }

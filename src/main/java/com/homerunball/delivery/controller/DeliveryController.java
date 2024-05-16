@@ -1,6 +1,5 @@
 package com.homerunball.delivery.controller;
 
-import com.homerunball.customer.dao.CustDao;
 import com.homerunball.delivery.dao.DeliveryDao;
 import com.homerunball.delivery.domain.DeliveryDto;
 import com.homerunball.delivery.service.DeliveryService;

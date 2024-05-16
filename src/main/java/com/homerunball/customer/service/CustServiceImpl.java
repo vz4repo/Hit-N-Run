@@ -1,24 +1,15 @@
 package com.homerunball.customer.service;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class CustServiceImpl implements CustService {
     @Autowired
     private CustDao custDao;
-
-//    private final SqlSessionFactory sqlSessionFactory;
-//
-//    public CustServiceImpl(SqlSessionFactory sqlSessionFactory) {
-//        this.sqlSessionFactory = sqlSessionFactory;
-//    }
 
 
     public String emailCheck(String c_email) {
@@ -29,15 +20,11 @@ public class CustServiceImpl implements CustService {
             return "no";
         }
     }
-
-
-//    public String emailCheck(int c_id) {
-//        CustDto custDto = custDao.selectCust(c_id);
-//        if (custDto == null) {
-//            return "ok";
-//        } else {
-//            return "no";
-//        }
-//    }
+    /*비밀번호 암호화를 위해 메이븐에 스프링 시큐리티 코어 추가
+    코어가 갖고 있는 BCryptPasswordEncoder 클래스 사용*/
+    public String pwdEncrypt(String c_pwd) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.encode(c_pwd);
+    }
 
 }

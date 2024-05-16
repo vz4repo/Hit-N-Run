@@ -14,6 +14,7 @@
 
 <link rel="icon" type="image/x-icon" href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
 <style>
+
     li {
         list-style: none;
     }
@@ -180,22 +181,23 @@
 
 
 <div class="index">
-    <h2>Hello! Home run()</h2>
-    <h2> D - <span id="dDay">남은시간!</span></h2>
-    <hr/>
+<h2>Hello! Home run()</h2>
+<h2> D - <span id="dDay">남은시간!</span></h2>
+<hr/>
+
 
     <nav id="loginbtn">
         <ul>
-            <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+        <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </nav>
 
-<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/mypage/list">마이페이지 이동</a></div>
 <div><a href="/cart/list">장바구니 이동</a></div>
-<div><a href="/order">주문 이동</a></div>
+<%--<div><a href="/order">주문 이동</a></div>--%>
 <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
-<div><a href="/payment">결제 이동</a></div>
+<div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
+<%--<div><a href="/payment">결제 이동</a></div>--%>
 <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>
 
@@ -250,12 +252,12 @@
                                 <div class="thumb-wrapper">
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <a href="/product/detail/${product.pd_id}">
+                                        <a href="/product/detail?pd_id=${product.pd_id}">
                                             <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                         </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4><a href="/product/detail/${product.pd_id}">${product.pd_name}</a></h4>
+                                        <h4><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -275,7 +277,7 @@
                                         <p class="item-price"><span>${product.max_sls_prc}원</span></p>
                                             </c:otherwise>
                                         </c:choose>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -336,3 +338,6 @@
         });
     });
 </script>
+
+
+

@@ -28,6 +28,8 @@ public class ProductViewController {
         StockViewDto stkOptInfo = productViewService.readStkOptInfo(pd_id, pd_clsf_cd);
         List<StockViewDto> listStkOpt = productViewService.getListStkId(pd_id);
 
+        System.out.println("stkInfo="+stkInfo);
+        System.out.println("listStkOpt="+listStkOpt);
         m.addAttribute("prd", prd);
         m.addAttribute("stkInfo", stkInfo);
         m.addAttribute("stkOptInfo", stkOptInfo);
