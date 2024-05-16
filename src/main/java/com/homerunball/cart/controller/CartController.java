@@ -91,11 +91,7 @@ public class CartController {
 
     // 덜구현됨, 버튼만들고 연결시켜야함
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, String pd_id, String pd_clsf_cd, Model m, HttpSession session, HttpServletRequest request) {
-//        if(!loginCheck(request)){
-//            Cookie cookie = new Cookie("c_id", c_id);
-//            response.addCookie(cookie);
-//        }
+    public String insert(CartDto cartDto, String pd_id, String pd_clsf_cd, Model m, HttpSession session) {
         int c_id = 0;
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
@@ -126,9 +122,7 @@ public class CartController {
 
     /*고객 장바구니 load*/
     @GetMapping("/list")
-    public String cartForm(Model m, HttpSession session, HttpServletRequest request){
-        if(!loginCheck(request))
-            return "redirect:/login?toURL="+request.getRequestURI();
+    public String cartForm(Model m, HttpSession session){
 
         try {
             /* 로그인한 고객의 c_id가 세션에있는지 확인한다 */
@@ -151,10 +145,5 @@ public class CartController {
             m.addAttribute("msg", "CART_EMPTY");
         }
         return "cart";
-    }
-
-    private boolean loginCheck(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        return session.getAttribute("c_id") != null;
     }
 }
