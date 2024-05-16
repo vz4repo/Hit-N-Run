@@ -1,16 +1,19 @@
 package com.homerunball.order.domain;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
 public class OrdDto {
-    private int od_id; /*주문번호*/
+    private BigInteger od_id; /*주문번호*/
     private int c_id; /*고객번호*/
     private Date od_dt; /*주문일시*/
     private String od_stat_cd; /*주문상태코드*/
     private Integer od_pd_qty; /*제품가지수*/
     private  Integer od_tot_qty; /*주문총수량*/
+
+
     private Integer rtl_prc; /*소비자가격*/
     private  Integer od_pay_amt; /*주문결제금액*/
     private Date frst_reg_dt;
@@ -38,11 +41,11 @@ pd_name, sls_prc
         this.od_pay_amt = od_pay_amt;
     }
 
-    public int getOd_id() {
+    public BigInteger getOd_id() {
         return od_id;
     }
 
-    public void setOd_id(int od_id) {
+    public void setOd_id(BigInteger od_id) {
         this.od_id = od_id;
     }
 
@@ -135,22 +138,9 @@ pd_name, sls_prc
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        OrdDto ordDto = (OrdDto) o;
-        return Objects.equals(od_id, ordDto.od_id) && Objects.equals(c_id, ordDto.c_id) && Objects.equals(od_dt, ordDto.od_dt) && Objects.equals(od_stat_cd, ordDto.od_stat_cd) && Objects.equals(frst_reg_dt, ordDto.frst_reg_dt) && Objects.equals(frst_reg_id, ordDto.frst_reg_id) && Objects.equals(last_mod_dt, ordDto.last_mod_dt) && Objects.equals(last_mod_id, ordDto.last_mod_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(od_id, c_id, od_dt, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
-    }
-
-    @Override
     public String toString() {
         return "OrdDto{" +
-                "od_id='" + od_id + '\'' +
+                "  od_id='" + od_id + '\'' +
                 ", c_id='" + c_id + '\'' +
                 ", od_dt=" + od_dt +
                 ", od_stat_cd='" + od_stat_cd + '\'' +
@@ -164,6 +154,20 @@ pd_name, sls_prc
                 ", last_mod_id='" + last_mod_id + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrdDto ordDto = (OrdDto) o;
+        return c_id == ordDto.c_id && Objects.equals(od_id, ordDto.od_id) && Objects.equals(od_dt, ordDto.od_dt) && Objects.equals(od_stat_cd, ordDto.od_stat_cd) && Objects.equals(od_pd_qty, ordDto.od_pd_qty) && Objects.equals(od_tot_qty, ordDto.od_tot_qty) && Objects.equals(rtl_prc, ordDto.rtl_prc) && Objects.equals(od_pay_amt, ordDto.od_pay_amt) && Objects.equals(frst_reg_dt, ordDto.frst_reg_dt) && Objects.equals(frst_reg_id, ordDto.frst_reg_id) && Objects.equals(last_mod_dt, ordDto.last_mod_dt) && Objects.equals(last_mod_id, ordDto.last_mod_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(od_id, c_id, od_dt, od_stat_cd, od_pd_qty, od_tot_qty, rtl_prc, od_pay_amt, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id);
+    }
+
 }
 
 

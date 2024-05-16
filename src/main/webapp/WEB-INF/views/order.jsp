@@ -87,13 +87,13 @@
                             <a href="#"><img src="#" alt="썸네일" /></a>
                         </td>
                         <td>
-                            <a href="#">${stkList[status.index].pd_name}</a>
+                            <a href="#">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
-                        <td><span class="priceFormat">${stkList[status.index].sls_prc}</span></td>
-                        <td><span>${stkList[status.index].cart_cnt}</span>개</td>
+                        <td><span class="priceFormat">${cartDto.rtl_prc}</span></td>
+                        <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat" id="payAmt">${stkList[status.index].sls_prc * stkList[status.index].cart_cnt}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
