@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class OrdDaoImpl implements OrdDao {
     } // T selectOne(String statement)
 
     @Override
-    public int delete(int od_id, int c_id) throws Exception {
+    public int delete(BigInteger od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -34,7 +35,7 @@ public class OrdDaoImpl implements OrdDao {
     }
 
     @Override
-    public OrdDto select(int od_id, int c_id) throws Exception {
+    public OrdDto select(BigInteger od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -47,7 +48,7 @@ public class OrdDaoImpl implements OrdDao {
     }
 
     @Override
-    public List<OrdDto> selectOdId(int od_id) throws Exception {
+    public List<OrdDto> selectOdId(BigInteger od_id) throws Exception {
         return session.selectList(namespace+"selectOdId",od_id);
     }
 
