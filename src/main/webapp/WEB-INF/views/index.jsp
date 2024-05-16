@@ -192,11 +192,11 @@
         </ul>
     </nav>
 
-<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/mypage/list">마이페이지 이동</a></div>
 <div><a href="/cart/list">장바구니 이동</a></div>
 <div><a href="/order">주문 이동</a></div>
 <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
+    <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
 <div><a href="/payment">결제 이동</a></div>
 <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>
@@ -277,7 +277,7 @@
                                         <p class="item-price"><span>${product.max_sls_prc}원</span></p>
                                             </c:otherwise>
                                         </c:choose>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
