@@ -48,7 +48,9 @@
         <p>제조사:${prd.mfr}</p>
         <p>배송:무료배송</p>
         <p>구매 주의사항</p>
-        <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
+        <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
+<%--        <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>--%>
+        <button type="button" id="cartBtn">장바구니</button>
         <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
     </form>
 </div>
@@ -68,24 +70,35 @@
     /*버튼별 이동 페이지 설정*/
     function submitForm(action){
         var form = document.getElementById('purchaseInfo');
-        var selectElement = document.getElementById("mySelect");
-        var selectedValue = selectElement.value;
-        document.getElementById("pd_clsf_cd").value = selectedValue;
 
-        /*action에 따라 처리*/
+        /* 선택한 옵션을 pd_clsf_cd의 value로 설정*/
+        var selectElement = document.getElementById("mySelect"); //mySelect의 참조 설정
+        var selectedValue = selectElement.value; // mySelect의 값을 변수에 저장
+        document.getElementById("pd_clsf_cd").value = selectedValue; //pd_clsf_cd라는 input태그에 담아서 넘긴다.
+
+        /*form action의 경로 설정*/
         if(action === 'cart'){
-            /*첫 번째 버튼의 목적지로 전송*/
-            form.action = '/cart/insert';
+            form.action = '/cart/insert'; //장바구니
         }
         else if (action === 'wish'){
-            /*두 번째 버튼의 목적지로 전송*/
-            form.action = '/product/test';
+            form.action = '/product/test'; //찜하기
+        }
+        else if (action === 'directOrder'){
+            form.action = '/cart/insert'; //바로구매
         }
 
         /*폼 제출*/
         form.method = 'post'; //method 속성을 POST로 설정
         form.submit();
     }
+
+    /* 장바구니에 담을때, 제품상세 또는 장바구니 페이지로 이동할지 선택*/
+    // 1. 장바구니 버튼을 누를시 장바구니에 제품상세의 정보를 넘겨야한다.
+    // 2. 페이지 이동을 할지 묻는 버튼
+    // 3. 이동 버튼을 누르면, 장바구니 페이지로 이동. 아니라면, 기존페이지에 있는다.
+    // 방법이 두가지 있다. 넘기기전에 이동할지 이동안할지 묻고, 이동하면 컨트롤러에서 그대로 보내주면 되고, 아니면 리다리렉트로 다시 돌아오기
+    // 하나는 ajax로 서버에 정보를 보내주고, 메세지 또는 경고창으로 이동유무를 묻고 이어준다.
+
     // /*선택한 옵션을 다음페이지에 넘겨주기 ajax로 구현하다가 안되서 보류*/
     // $(document).ready(function(){
     //     $(".submitBtn").click(function (){

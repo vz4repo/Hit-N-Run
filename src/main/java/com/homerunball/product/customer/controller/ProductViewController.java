@@ -55,5 +55,15 @@ public class ProductViewController {
          m.addAttribute("stkOptInfo", stkOptInfo);
         return "productTest";
     }
+    @PostMapping("/cart")
+    @ResponseBody
+    public StockViewDto itemPutCart(@RequestBody StockViewDto stk,
+                                    @RequestParam String pd_id,
+                                    @RequestParam String pd_clsf_cd){
+        stk.setPd_id(pd_id);
+        stk.setPd_clsf_cd(pd_clsf_cd);
+
+        return stk;
+    }
 }
 
