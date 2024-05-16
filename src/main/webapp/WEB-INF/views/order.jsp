@@ -25,7 +25,7 @@
 </head>
 <body>
 <%--<jsp:include page="template/header.jsp"/>--%>
-<%@include file="template/header.jsp"%>
+<%@include file="header.jsp"%>
     <div class="order__header">
         <a href="#" class="head_main">Homerun() > 주문서</a>
         <hr class="first__under" />
@@ -131,7 +131,7 @@
 <section class="order__payment">
     <%@include file="payCheckout.jsp"%>
 </section>
-<%@include file="template/footer.jsp"%>
+<%@include file="footer.jsp"%>
 <script>
     $(document).ready(function(){
         $('.priceFormat').each(function (){
