@@ -17,7 +17,7 @@
 <p><a href="/product/detail?pd_id=SHO000001-00">신발</a></p>
 <div class="productMain">
     <form id="purchaseInfo" method="post">
-        <p><img src="${prd.mn_img_fn}" alt="이미지를 준비중입니다."></p>
+        <p><img src="/img/product/app/main/${prd.mn_img_fn}" alt="이미지를 준비중입니다."></p>
         <p>${prd.pd_name}</p>
         <p>${prd.pd_ad_cmt}</p>
 
@@ -56,7 +56,7 @@
 <div class="relatedProduct"></div>
 <%--제품 상세 내용--%>
 <div class="detailProductContents">
-    <p><img src="${prd.det_img_fn}" alt="이미지 준비중입니다."></p>
+    <p><img src="/img/product/app/main/${prd.det_img_fn}" alt="이미지 준비중입니다."></p>
     <p>${prd.pd_smr_dsc}</p>
 </div>
 <%--제품 리뷰(구현 안함 3차때 추후 개발예정)--%>
