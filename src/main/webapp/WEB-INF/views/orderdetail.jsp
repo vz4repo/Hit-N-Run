@@ -63,7 +63,7 @@
                             <td><span>${orderdetDto.frst_reg_dt}</span></td>
                             <td><a href="#">${orderdetDto.od_id}</a></td>
                             <td>
-                                <span>${orderdetDto.slg_prc}</span>
+                                <span>${orderdetDto.sls_prc}</span>
                                 <span>${orderdetDto.od_qty}</span>
                             </td>
                             <td>

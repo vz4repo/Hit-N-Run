@@ -29,17 +29,19 @@ public class OrdDetController {
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
         try {
-
-            List<CartDto> list = cartDao.selectUser(c_id);
-            System.out.println("list=" + list);
+            List<OrderDetDto> list = orderdetDao.select(c_id);
+//            List<CartDto> list = cartDao.selectUser(c_id);
+            System.out.println("김다니 돼지쌔끼=" + list);
             m.addAttribute("list",list);
-            OrderDetDto ord_det = new OrderDetDto(c_id);
-            orderdetDao.insert(ord_det);
+
+
+            /*OrderDetDto ord_det = new OrderDetDto(c_id);
+            orderdetDao.insert(ord_det);*/
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "orderList";
+        return "orderdetail";
     }
     private boolean loginCheck(HttpServletRequest request){
         HttpSession session = request.getSession();
