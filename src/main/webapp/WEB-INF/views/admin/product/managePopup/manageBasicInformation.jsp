@@ -214,6 +214,7 @@
                             <option value="90">보라색</option>
                             <option value="91">금색</option>
                             <option value="92">금색_검은색</option>
+                            <option value="97">카멜</option>
                             <option value="98">탄색</option>
                             <option value="99">갈색</option>
                         </select>

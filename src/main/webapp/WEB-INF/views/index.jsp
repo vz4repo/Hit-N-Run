@@ -32,6 +32,11 @@
         position: relative;
         margin: 30px 0 60px;
     }
+
+    .productName {
+        height: 40px;
+    }
+
     .carousel {
         margin: 50px auto;
         padding: 0 70px;
@@ -131,10 +136,6 @@
         margin-left: -2px;
     }
 
-    .carousel-control .left {
-        left: -20px;
-    }
-
     .carousel .carousel-control.right i {
         margin-right: -4px;
     }
@@ -214,11 +215,11 @@
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <%--4로 나눴을 때 몫 + 1만큼 반복--%>
-                    <%--첫 번째 li 태그만 class가 active고 나머지는 클래스를 적용하지 않는다.--%>
+                    <%--첫 번째 li 태그만 class가 active고 나머지는 active 클래스를 적용하지 않는다.--%>
                         <c:set var="num" value="${mainProductNumber % 4 == 0 ? mainProductNumber / 4 : mainProductNumber / 4 + 1}" />
-                        <c:forEach var="i" begin="1" end="${num}" step="1">
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
                             <c:choose>
-                                <c:when test="${i == 1}">
+                                <c:when test="${i == 0}">
                                     <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
                                 </c:when>
                                 <c:otherwise>
@@ -249,11 +250,11 @@
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
                                         <a href="/product/detail?pd_id=${product.pd_id}">
-                                            <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                            <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                         </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                        <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -295,6 +296,7 @@
                 </a>
         </div>
     </div>
+</div>
 <%--<script src="https://cdn.tailwindcss.com"></script>--%>
 <script>
     window.onload = function() {
