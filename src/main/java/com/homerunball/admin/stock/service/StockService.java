@@ -35,4 +35,5 @@ public interface StockService {
     /*재고 진행 상태 업데이트*/
     int updateStatus(StockDto stockDto) throws Exception;
 
+    /*검색하기*/
 }
