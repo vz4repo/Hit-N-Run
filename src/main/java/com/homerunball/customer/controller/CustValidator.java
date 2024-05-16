@@ -1,6 +1,5 @@
 package com.homerunball.customer.controller;
 
-//import com.example.green.domain.User;
 import com.homerunball.customer.domain.CustDto;
 
 import com.homerunball.customer.domain.CustDto;

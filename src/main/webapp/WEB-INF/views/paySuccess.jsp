@@ -4,8 +4,7 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="https://static.toss.im/icons/png/4x/icon-toss-logo.png" />
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css//payStyle.css'/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/payStyle.css'/>" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>결제 성공</title>
@@ -45,6 +44,10 @@
 <!--        <button class="button p-grid-col5" onclick="location.href='https://docs.tosspayments.com/guides/payment/integration';">연동 문서</button>-->
 <!--        <button class="button p-grid-col5" onclick="location.href='https://discord.gg/A4fRFXQhRu';" style="background-color: #e8f3ff; color: #1b64da">실시간 문의</button>-->
 <!--      </div>-->
+      <div>
+        <button class="button" id="btnBackToHome">홈 화면</button>
+        <button class="button" id="btnGotoOrderDetail">주문상세</button>
+      </div>
     </div>
 
     <script>
@@ -52,10 +55,15 @@
       const orderIdElement = document.querySelector("#orderId");
       const amountElement = document.querySelector("#amount");
       const responseElement = document.querySelector("#response");
-      /* 추가 */
+      /* 추가 출력사항 */
       const requestedAtElement = document.querySelector("#requestedAt");
       const orderNameElement = document.querySelector("#orderName");
       const methodElement = document.querySelector("#method");
+      /* 리다이렉트 버튼 */
+      const btnBackToHome = document.querySelector("#btnBackToHome");
+      const btnGotoOrderDetail = document.querySelector("#btnGotoOrderDetail");
+      const BASE_URL = "http://127.0.0.1:9090/";
+
 
       /* TODO: 쿼리스트링 값, 결제 요청 보낸 데이터 정학성 체크로 결제금액 조작 여부 확인 */
       const urlParams = new URLSearchParams(window.location.search);
@@ -67,7 +75,7 @@
           orderId: urlParams.get("orderId"),
           amount: urlParams.get("amount"),
         };
-
+        /* POST:confirn() */
         const response = await fetch("/confirm", {
           method: "POST",
           headers: {
@@ -84,22 +92,40 @@
         }
 
         /* TODO: 결제 성공 비즈니스 로직을 구현하세요.
-        * - 성공 후, modal로 띄우기
-        * - 성공 후, 3초 후 메인페이지
-        * - 성공 후, 결제상세 이동 버튼
+        * - 1. 성공 후, modal로 띄우기      -> index페이지로 이동 후 띄우는건 Ok, 여기서 띄우는건 X
+        * - 2. 성공 후, 3초 후 메인페이지   -> 이동안하고 그대로 유지
+        * - 3. 성공 후, 결제상세 이동 버튼  -> 하단에 표시(마이페이지>결제내역>결제상세)
         * */
-
         return json;
       }
+
+      /* 홈 이동 */
+      btnBackToHome.addEventListener("click", function(){
+        document.location.href = BASE_URL;
+      });
+
+      /* 해당 주문상세 이동 */
+      btnGotoOrderDetail.addEventListener("click", function(){
+/*        const response = fetch("/orderDetail", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(requestData),
+        });
+*/
+        console.log(" !! btnGotoOrderDetail !! ")
+      });
+
       confirm().then(function (data) {
         /* 응답 정보 모두 출력 */
         responseElement.innerHTML = `<pre>${'${JSON.stringify(data, null, 4)}'}</pre>`;
-
         /* 추가 */
         requestedAtElement.textContent = data.requestedAt;
         orderNameElement.textContent = data.orderName;
         methodElement.textContent = data.method;
       });
+
       /* 쿼리스트링 값 */
       orderIdElement.textContent = urlParams.get("orderId");
       amountElement.textContent = urlParams.get("amount") + "원";

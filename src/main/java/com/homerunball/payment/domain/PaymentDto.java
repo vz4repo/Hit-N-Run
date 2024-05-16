@@ -1,6 +1,6 @@
 package com.homerunball.payment.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PaymentDto {
 
@@ -14,14 +14,14 @@ public class PaymentDto {
   int od_pay_amt;
   int pay_final_amt;
   String pay_stat_cd;
-  Date pay_dt;
+  LocalDateTime pay_dt;
   String pay_meth_cd;
   String pay_aprv_stat;
   String pay_aprv_num;
-  Date pay_aprv_dt;
+  LocalDateTime pay_aprv_dt;
   String pay_resp_cd;
   int pay_canc_amt;
-  Date pay_canc_dt;
+  LocalDateTime pay_canc_dt;
   String c_name;
   String issuer_cd;
   String acquier_cd;
@@ -30,19 +30,23 @@ public class PaymentDto {
   String card_num;
   String bank_name;
   String acct_num;
-  Date frst_reg_dt;
+  LocalDateTime frst_reg_dt;
   String frst_reg_id;
-  Date last_mod_dt;
+  LocalDateTime last_mod_dt;
   String last_mod_id;
 
-  /* constructor */
+
+  String pay_od_name;
+
+  /* constructor : default */
   public PaymentDto() {
   }
 
+  /* constructor : insertPaymentSuccess() */
   public PaymentDto(String pay_id, int pay_seqnum, int c_id, int od_id, String trace_id, int od_pay_amt,
-      int pay_final_amt, String pay_stat_cd, Date pay_dt, String pay_meth_cd, String pay_aprv_stat, String pay_aprv_num,
-      Date pay_aprv_dt, String pay_resp_cd, String c_name, String issuer_cd, String acquier_cd, String trans_type,
-      int mth_instlmt, String card_num) {
+      int pay_final_amt, String pay_stat_cd, LocalDateTime pay_dt, String pay_meth_cd, String pay_aprv_stat, String pay_aprv_num,
+      LocalDateTime pay_aprv_dt, String pay_resp_cd, String c_name, String issuer_cd, String acquier_cd, String trans_type,
+      int mth_instlmt, String card_num, String pay_od_name) {
     this.pay_id = pay_id;
     this.pay_seqnum = pay_seqnum;
     this.c_id = c_id;
@@ -63,6 +67,16 @@ public class PaymentDto {
     this.trans_type = trans_type;
     this.mth_instlmt = mth_instlmt;
     this.card_num = card_num;
+    this.pay_od_name = pay_od_name;
+  }
+
+  /* constructor : selectPaymentHistoryWithDateRange() */
+  public PaymentDto(int c_id, int pay_final_amt, LocalDateTime pay_dt, String pay_od_name, int od_id) {
+    this.c_id = c_id;
+    this.pay_final_amt = pay_final_amt;
+    this.pay_dt = pay_dt;
+    this.pay_od_name = pay_od_name;
+    this.od_id = od_id;
   }
 
   /* getter, setter */
@@ -138,11 +152,11 @@ public class PaymentDto {
     this.pay_stat_cd = pay_stat_cd;
   }
 
-  public Date getPay_dt() {
+  public LocalDateTime getPay_dt() {
     return pay_dt;
   }
 
-  public void setPay_dt(Date pay_dt) {
+  public void setPay_dt(LocalDateTime pay_dt) {
     this.pay_dt = pay_dt;
   }
 
@@ -170,11 +184,11 @@ public class PaymentDto {
     this.pay_aprv_num = pay_aprv_num;
   }
 
-  public Date getPay_aprv_dt() {
+  public LocalDateTime getPay_aprv_dt() {
     return pay_aprv_dt;
   }
 
-  public void setPay_aprv_dt(Date pay_aprv_dt) {
+  public void setPay_aprv_dt(LocalDateTime pay_aprv_dt) {
     this.pay_aprv_dt = pay_aprv_dt;
   }
 
@@ -194,11 +208,11 @@ public class PaymentDto {
     this.pay_canc_amt = pay_canc_amt;
   }
 
-  public Date getPay_canc_dt() {
+  public LocalDateTime getPay_canc_dt() {
     return pay_canc_dt;
   }
 
-  public void setPay_canc_dt(Date pay_canc_dt) {
+  public void setPay_canc_dt(LocalDateTime pay_canc_dt) {
     this.pay_canc_dt = pay_canc_dt;
   }
 
@@ -266,11 +280,11 @@ public class PaymentDto {
     this.acct_num = acct_num;
   }
 
-  public Date getFrst_reg_dt() {
+  public LocalDateTime getFrst_reg_dt() {
     return frst_reg_dt;
   }
 
-  public void setFrst_reg_dt(Date frst_reg_dt) {
+  public void setFrst_reg_dt(LocalDateTime frst_reg_dt) {
     this.frst_reg_dt = frst_reg_dt;
   }
 
@@ -282,11 +296,11 @@ public class PaymentDto {
     this.frst_reg_id = frst_reg_id;
   }
 
-  public Date getLast_mod_dt() {
+  public LocalDateTime getLast_mod_dt() {
     return last_mod_dt;
   }
 
-  public void setLast_mod_dt(Date last_mod_dt) {
+  public void setLast_mod_dt(LocalDateTime last_mod_dt) {
     this.last_mod_dt = last_mod_dt;
   }
 
@@ -298,6 +312,9 @@ public class PaymentDto {
     this.last_mod_id = last_mod_id;
   }
 
+  public String getPay_od_name() {    return pay_od_name;  }
+
+  public void setPay_od_name(String pay_od_name) {    this.pay_od_name = pay_od_name;  }
 
   /* toString() */
   @Override
@@ -311,6 +328,9 @@ public class PaymentDto {
         + ", issuer_cd='" + issuer_cd + '\'' + ", acquier_cd='" + acquier_cd + '\'' + ", trans_type='" + trans_type
         + '\'' + ", mth_instlmt=" + mth_instlmt + ", card_num='" + card_num + '\'' + ", bank_name='" + bank_name + '\''
         + ", acct_num='" + acct_num + '\'' + ", frst_reg_dt=" + frst_reg_dt + ", frst_reg_id='" + frst_reg_id + '\''
-        + ", last_mod_dt=" + last_mod_dt + ", last_mod_id='" + last_mod_id + '\'' + '}';
+        + ", last_mod_dt=" + last_mod_dt + ", last_mod_id='" + last_mod_id +  ", pay_od_name=" + pay_od_name +'\'' + '}';
   }
+
+
+
 }

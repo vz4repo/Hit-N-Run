@@ -49,6 +49,11 @@ public class CartDaoImpl implements CartDao {
     }
 
     @Override
+    public boolean exists(CartDto cart) throws Exception {
+        return session.selectOne(namespace+"exists", cart);
+    }
+
+    @Override
     public int insert(CartDto cart) throws Exception {
         return session.insert(namespace+"insert", cart);
     }

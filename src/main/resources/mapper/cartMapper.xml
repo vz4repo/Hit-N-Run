@@ -33,6 +33,14 @@
         delete from cart
     </delete>
 
+    <select id="exists" resultType="boolean" parameterType="CartDto">
+        select exists(
+            select 1
+            from cart
+            where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
+        )
+    </select>
+
     <!--장바구니추가-->
     <insert id="insert" parameterType="CartDto">
         insert into cart (c_id, pd_id, pd_clsf_code, cart_cnt)
@@ -66,7 +74,7 @@
     <select id="getStk" resultType="CartDto" parameterType="int">
         select c.c_id, c.pd_id,c.pd_clsf_code,c.cart_cnt,s.pd_name,s.sls_prc,s.rtl_prc
         from cart c
-        join stk s on c.pd_id=s.pd_id
+        join stk s on c.pd_id=s.pd_id and c.pd_clsf_code=s.pd_clsf_cd
         where c.c_id=#{c_id};
     </select>
 

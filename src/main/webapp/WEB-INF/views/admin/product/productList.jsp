@@ -11,12 +11,15 @@
         table, tr, th, td {
             border: 1px solid black;
             border-collapse: collapse;
-            text-align: left;
+        }
+
+        th {
+            text-align: center;
         }
 
         table {
             width: 100%;
-            text-align: center;
+            text-align: left;
         }
 
         strong {

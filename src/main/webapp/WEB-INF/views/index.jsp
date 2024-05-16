@@ -32,6 +32,11 @@
         position: relative;
         margin: 30px 0 60px;
     }
+
+    .productName {
+        height: 40px;
+    }
+
     .carousel {
         margin: 50px auto;
         padding: 0 70px;
@@ -131,10 +136,6 @@
         margin-left: -2px;
     }
 
-    .carousel-control .left {
-        left: -20px;
-    }
-
     .carousel .carousel-control.right i {
         margin-right: -4px;
     }
@@ -192,12 +193,12 @@
         </ul>
     </nav>
 
-<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/mypage/list">마이페이지 이동</a></div>
 <div><a href="/cart/list">장바구니 이동</a></div>
-<div><a href="/order">주문 이동</a></div>
+<%--<div><a href="/order">주문 이동</a></div>--%>
 <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
-<div><a href="/payment">결제 이동</a></div>
+<div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
+<%--<div><a href="/payment">결제 이동</a></div>--%>
 <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>
 
@@ -214,38 +215,34 @@
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <%--4로 나눴을 때 몫 + 1만큼 반복--%>
-                    <%--첫 번째 클래스만 class가 active고 나머지는 클래스를 적용하지 않는다.--%>
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-
-                        <%-- 4로 나눴을 때 몫 + 1만큼 반복 --%>
-<%--                        <%--%>
-<%--                            int itemCount = (int)pageContext.getAttribute("mainProductNumber"); // 아이템 개수--%>
-<%--                            int slideCount = itemCount / 4 + 1; // 슬라이드 개수--%>
-
-<%--                            for (int i = 0; i < slideCount; i++) {--%>
-<%--                        %>--%>
-<%--                        <li data-target="#myCarousel" data-slide-to="<%= i %>" <% if (i == 0) { %>class="active"<% } %>></li>--%>
-<%--                        <%--%>
-<%--                            }--%>
-<%--                        %>--%>
+                    <%--첫 번째 li 태그만 class가 active고 나머지는 active 클래스를 적용하지 않는다.--%>
+                        <c:set var="num" value="${mainProductNumber % 4 == 0 ? mainProductNumber / 4 : mainProductNumber / 4 + 1}" />
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
                 </ol>
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
                     <c:forEach var="product" items="${mainProductList}" varStatus="status">
                         <%--mainProductList의 인덱스를 4로 나눴을 때 0이라면 <div class="item">을 추가한다.--%>
                         <c:if test="${status.index % 4 == 0}">
-                            <%--만약 status.index가 0인 경우에만 div class = "item active"이고--%>
                             <c:choose>
+                                <%--만약 status.index가 0인 경우에만 div class = "item active"이고--%>
                                 <c:when test="${status.index == 0}">
                     <div class="item active">
                                 </c:when>
+                                <%--그 이외에는 div class="item"이다.--%>
                                 <c:otherwise>
                     <div class="item">
                                 </c:otherwise>
                             </c:choose>
-                            <%--그 이외에는 div class="item"이다.--%>
                         <div class="row">
                         </c:if>
                             <div class="col-sm-3">
@@ -253,11 +250,11 @@
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
                                         <a href="/product/detail?pd_id=${product.pd_id}">
-                                            <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                            <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                         </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                        <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -277,7 +274,7 @@
                                         <p class="item-price"><span>${product.max_sls_prc}원</span></p>
                                             </c:otherwise>
                                         </c:choose>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -289,6 +286,7 @@
                     </c:forEach>
                     </div>
                 </div>
+            </div>
                 <!-- Carousel controls -->
                 <a class="carousel-control left" href="#myCarousel" data-slide="prev">
                     <i class="fa fa-angle-left"></i>
@@ -296,9 +294,9 @@
                 <a class="carousel-control right" href="#myCarousel" data-slide="next">
                     <i class="fa fa-angle-right"></i>
                 </a>
-            </div>
         </div>
     </div>
+</div>
 <%--<script src="https://cdn.tailwindcss.com"></script>--%>
 <script>
     window.onload = function() {
@@ -338,6 +336,3 @@
         });
     });
 </script>
-
-
-
