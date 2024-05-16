@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class OrdDaoImpl implements OrdDao {
     @Autowired
     private SqlSession session;
-    private static String namespace = "com.homerunball.ord.dao.OrdMapper.";
+    private static String namespace = "com.homerunball.order.dao.OrdDao.";
 
     @Override
     public int count() throws Exception {
@@ -21,7 +22,7 @@ public class OrdDaoImpl implements OrdDao {
     } // T selectOne(String statement)
 
     @Override
-    public int delete(String od_id, String c_id) throws Exception {
+    public int delete(BigInteger od_id, int c_id) throws Exception {
         Map map = new HashMap();
         map.put("od_id", od_id);
         map.put("c_id", c_id);
@@ -29,26 +30,31 @@ public class OrdDaoImpl implements OrdDao {
     }
 
     @Override
-    public int deleteAll() {
+    public int deleteAll() throws Exception {
         return session.delete(namespace+"deleteAll");
-    } // int delete(String statement)
+    }
 
     @Override
-    public OrdDto select(String od_id, String c_id) throws Exception {
-
-        System.out.println("asdf" + od_id);
-
-        return session.selectOne(namespace + "select", od_id);
+    public OrdDto select(BigInteger od_id, int c_id) throws Exception {
+        Map map = new HashMap();
+        map.put("od_id", od_id);
+        map.put("c_id", c_id);
+        return session.selectOne(namespace + "select", map);
     } // T selectOne(String statement, Object parameter)
 
     @Override
     public List<OrdDto> selectAll() throws Exception {
         return session.selectList(namespace+"selectAll");
-    } // Li
+    }
 
     @Override
-    public List<OrdDto> selectOdId(String od_id) throws Exception {
+    public List<OrdDto> selectOdId(BigInteger od_id) throws Exception {
         return session.selectList(namespace+"selectOdId",od_id);
+    }
+
+    @Override
+    public List<OrdDto> selectCid(int c_id) throws Exception {
+        return session.selectList(namespace + "selectCid", c_id);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public int remove(String c_id, String pd_id, String pd_clsf_code) throws Exception {
+    public int remove(int c_id, String pd_id, String pd_clsf_code) throws Exception {
         return cartDao.delete(c_id, pd_id, pd_clsf_code);
     }
 
@@ -39,8 +39,8 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto read(String c_id) throws Exception {
-        return cartDao.select(c_id);
+    public List<CartDto> read(int c_id) throws Exception {
+        return cartDao.selectUser(c_id);
     }
 
     @Override

@@ -2,7 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.homerunball.cart.dao.CartMapper">
+<mapper namespace="com.homerunball.cart.dao.CartDao">
+
+    <!-- getcustAll 을 사용하기위한 resultMap작성 -->
+    <resultMap id="custResultMap" type="com.homerunball.customer.domain.CustDto">
+        <id property="c_id" column="c_id"/>
+    </resultMap>
+    <!-- cust테이블의 전체고객 가져오기 TDD코드에 이용 -->
+    <select id="getcustAll" resultMap="custResultMap">
+        select c_id from cust
+    </select>
 
     <select id="count" resultType="int">
         select count(*) from cart;
@@ -15,7 +24,7 @@
     </delete>
 
     <!--한 고객의 장바구니 전체삭제-->
-    <delete id="cidDeleteAll" parameterType="string">
+    <delete id="cidDeleteAll" parameterType="int">
         delete from cart where c_id = #{c_id}
     </delete>
 
@@ -31,35 +40,34 @@
     </insert>
 
     <sql id="selectCart">
-        select c_id, pd_id, pd_clsf_code, cart_cnt
+        select *
         from cart
     </sql>
 
     <!--select 1건-->
-    <select id="select" parameterType="string" resultType="CartDto">
-        <include refid="selectCart"/>
-        where c_id = #{c_id}
-    </select>
-
-    <!--select List-->
-    <select id="selectUser" parameterType="string" resultType="CartDto">
+    <select id="selectUser" parameterType="int" resultType="CartDto">
         <include refid="selectCart"/>
         where c_id = #{c_id}
     </select>
 
     <select id="selectAll" resultType="CartDto">
         <include refid="selectCart"/>
-        order by c_id = #{c_id} and frst_reg_dt = #{frst_reg_dt} desc
+        order by frst_reg_dt desc, c_id desc
     </select>
 
-    <!--장바구니 수정-->
+    <!--장바구니 담은상품이 중복일경우 수량 update-->
     <update id="update" parameterType="CartDto">
         update cart
-        set pd_id = #{pd_id}
-          , pd_clsf_code = #{pd_clsf_code}
-          , cart_cnt = #{cart_cnt}
-        where c_id = #{c_id} and pd_id = #{pd_id}
+        set cart_cnt = #{cart_cnt}
+        where c_id = #{c_id} and pd_id = #{pd_id} and pd_clsf_code = #{pd_clsf_code}
     </update>
-    <!--1차수정 제품코드-->
-    <!--ajax 사용   fetch -->
+
+    <!-- cart와 재고 join-->
+    <select id="getStk" resultType="CartDto" parameterType="int">
+        select c.c_id, c.pd_id,c.pd_clsf_code,c.cart_cnt,s.pd_name,s.sls_prc,s.rtl_prc
+        from cart c
+        join stk s on c.pd_id=s.pd_id
+        where c.c_id=#{c_id};
+    </select>
+
 </mapper>
