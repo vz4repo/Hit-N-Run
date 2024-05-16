@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -190,19 +191,38 @@ public class StockController {
         return "register success";
     }
 
+    @GetMapping("/selectOne")
+    @ResponseBody   // String code, String message, Map<String, Object> data or Object data
+    public StockDto selectOne(@RequestParam("pdId") String pdId,
+                              @RequestParam("pdClsfCd") String pdClsfCd) throws Exception {
+        StockDto stockDto = stockService.getOneStock(pdId, pdClsfCd);
+        /* 매입일? 날짜로 변환하는 로직 필요 ( 날짜 빼고 모든 값 받아와짐 )
+
+           재고 코드가 ALL 일 때 > 개별 사이즈를 선택하라는 문구 안내
+           재고가 없으면 재고를 등록하라는 안내
+           일괄수정은.. 해야하나 말아야하나? 우선 버튼빼자 */
+
+        try{
+            if(pdClsfCd.equals("ALL")){
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return stockDto;
+    }
+
     /* 재고 수정하는 메서드 ------작성해야해 */
     @PostMapping("/modify")
     @ResponseBody
-    public StockDto modify(@RequestBody Map<String, String> getOneStock, Model model) throws Exception {
+    public StockDto modify(@RequestBody StockDto stockDto, Model model) throws Exception {
         /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다.
             > 제품id와 사이즈 정보가 데이터베이스에 있는지 확인
               > 재고정보가 있으면 객체를 전달한다.
               > 재고 정보가 없으면 "재고가 없습니다. 재고를 등록 해주세요." 문구를 alert한다. */
 
-        String pdId = getOneStock.get("pd_id");
-        String pdClsfCd = getOneStock.get("pd_clsf_cd");
-        StockDto stockDto = new StockDto();
-        boolean isStockAvailable;
+        String pdId = stockDto.getPd_id();
+        String pdClsfCd = stockDto.getPd_clsf_cd();
 
         try{
             /* 사이즈가 ALL이면 모든 사이즈의 재고수량을 수정한다. 배열을 순회하며 list를 조회하고 화면에 뿌려준다.
@@ -226,18 +246,10 @@ public class StockController {
             if (stockService.modify(selectModifyStock) != 1) {
                 throw new Exception("수정에 실패했습니다.");
             }
-
         } catch (Exception e) {
             e.printStackTrace();
-
         }
-
         return stockDto;
     }
-
-
-
-
-
     /*상품목록 검색하는 기능 -> 검색해서 내가 원하는 상품 목록 조회 -> 선택한 상품 재고 등록 or 수정*/
 }

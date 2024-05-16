@@ -6,7 +6,7 @@
 
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="stockModalLabel">재고등록</h5>
+                <h5 class="modal-title" id="stockModalLabel">재고수정</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
@@ -16,68 +16,68 @@
                     <table class="table table-striped">
                         <tbody>
                         <tr>
-                            <td><label for="pd_id">제품ID</label></td>
-                            <td><input type="text" id="pd_id" name="pd_id"></td>
+                            <td><label for="modify_pd_id">제품ID</label></td>
+                            <td><input type="text" id="modify_pd_id" name="pd_id"></td>
                         </tr>
                         <tr>
-                            <td><label for="pd_name">제품명</label></td>
-                            <td><input type="text" id="pd_name" name="pd_name"></td>
+                            <td><label for="modify_pd_name">제품명</label></td>
+                            <td><input type="text" id="modify_pd_name" name="pd_name"></td>
                         </tr>
                         <tr>
-                            <td><label for="pd_clsf_cd">제품구분코드(사이즈)</label></td>
-                            <td><input type="text" id="pd_clsf_cd" name="pd_clsf_cd"></td>
+                            <td><label for="modify_pd_clsf_cd">제품구분코드(사이즈)</label></td>
+                            <td><input type="text" id="modify_pd_clsf_cd" name="pd_clsf_cd"></td>
                         </tr>
                         <tr>
-                            <td><label for="nml_stk_qty">정상재고수량</label></td>
-                            <td><input type="text" id="nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
+                            <td><label for="modify_nml_stk_qty">정상재고수량</label></td>
+                            <td><input type="text" id="modify_nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="rt_stk_qty">반품재고수량</label></td>
-                            <td><input type="text" id="rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
+                            <td><label for="modify_rt_stk_qty">반품재고수량</label></td>
+                            <td><input type="text" id="modify_rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="rgn_stk_qty">재생가능재고수량</label></td>
-                            <td><input type="text" id="rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
+                            <td><label for="modify_rgn_stk_qty">재생가능재고수량</label></td>
+                            <td><input type="text" id="modify_rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="urgn_stk_qty">재생불가능재고수량</label></td>
-                            <td><input type="text" id="urgn_stk_qty" name="urgn_stk_qty"
+                            <td><label for="modify_urgn_stk_qty">재생불가능재고수량</label></td>
+                            <td><input type="text" id="modify_urgn_stk_qty" name="urgn_stk_qty"
                                        placeholder="재생불가능재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="sfty_stk_qty">안전재고수량</label></td>
-                            <td><input type="text" id="sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
+                            <td><label for="modify_sfty_stk_qty">안전재고수량</label></td>
+                            <td><input type="text" id="modify_sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="pur_dt">매입일</label></td>
-                            <td><input type="date" class="dateForm" id="pur_dt" name="pur_dt" placeholder="매입일을 입력하세요."></td>
+                            <td><label for="modify_pur_dt">매입일</label></td>
+                            <td><input type="date" class="search-inputDate dateForm" id="modify_pur_dt" name="pur_dt" placeholder="매입일을 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="rcpt_dt">입고일</label></td>
-                            <td><input type="date" class="dateForm" id="rcpt_dt" name="rcpt_dt" placeholder="입고일을 입력하세요."></td>
+                            <td><label for="modify_rcpt_dt">입고일</label></td>
+                            <td><input type="date" class="search-inputDate dateForm" id="modify_rcpt_dt" name="rcpt_dt" placeholder="입고일을 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="rcpt_cp">입고처</label></td>
-                            <td><input type="text" id="rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
+                            <td><label for="modify_rcpt_cp">입고처</label></td>
+                            <td><input type="text" id="modify_rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="rcpt_prc">입고가격</label></td>
-                            <td><input type="text" id="rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
+                            <td><label for="modify_rcpt_prc">입고가격</label></td>
+                            <td><input type="text" id="modify_rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="rtl_prc">소비자가격</label></td>
-                            <td><input type="text" id="rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
+                            <td><label for="modify_rtl_prc">소비자가격</label></td>
+                            <td><input type="text" id="modify_rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="sls_prc">판매가격</label></td>
-                            <td><input type="text" id="sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
+                            <td><label for="modify_sls_prc">판매가격</label></td>
+                            <td><input type="text" id="modify_sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
                         </tr>
                         <tr>
-                            <td><label for="stk_plc_cd">재고위치코드</label></td>
-                            <td><input type="text" id="stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
+                            <td><label for="modify_stk_plc_cd">재고위치코드</label></td>
+                            <td><input type="text" id="modify_stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
                         </tr>
                         </tbody>
                     </table>
@@ -86,7 +86,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="modifyStock()" id="confirmStockBtn">확인</button> <!--data-bs-dismiss="modal"-->
+                <button type="button" class="btn btn-danger" onclick="modifyStock()" id="confirmStockBtn">수정완료(아직 반영전)</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="cancelStockBtn">취소</button>
             </div>
 
@@ -96,20 +96,55 @@
         /* 재고수정 버튼을 누르면 모달창이 열린다.
            재고 정보를 한번에 불러온다. */
         function openModifyModal(pdId, pdClsfCd) {
-
             /* 모달창에 재고테이블의 정보를 가져온다. */
-            $('#pd_id').val(pdId);
-            $('#pd_name').val(pdName);
-            $('#pd_clsf_cd').val(pdClsfCd);
+            $('#modify_pd_id').prop('disabled', true);
+            $('#modify_pd_name').prop('disabled', true);
+            $('#modify_pd_clsf_cd').prop('disabled', true);
+            $.ajax({
+                type: 'GET',       // 요청 메서드
+                url: '/admin/stock/selectOne',  // 요청 URI
+                headers: {"Content-Type": "application/json"}, // 요청 헤더
+                dataType: 'json', // json 객체형으로 응답
+                data: {
+                    pdId:pdId,
+                    pdClsfCd:pdClsfCd
+                },  // 서버로 전송할 데이터. stringify()로 직렬화 필요. JSON.stringify()
+                success: function (result) {
+                    function formatDate(dateStr) {
 
-            $('#pd_id').prop('disabled', true);
-            $('#pd_name').prop('disabled', true);
-            $('#pd_clsf_cd').prop('disabled', true);
+                        return dateStr.slice(0, 4) + '-' + dateStr.slice(4, 6) + '-' + dateStr.slice(6, 8);
+                    }
 
+                    console.log("통신성공!"+result);
+                    $('#modify_pd_id').val(result.pd_id);
+                    $('#modify_pd_name').val(result.pd_name);
+                    $('#modify_pd_clsf_cd').val(result.pd_clsf_cd);
+                    $('#modify_nml_stk_qty').val(result.nml_stk_qty);
+                    $('#modify_rt_stk_qty').val(result.rt_stk_qty);
+                    $('#modify_rgn_stk_qty').val(result.rgn_stk_qty);
+                    $('#modify_urgn_stk_qty').val(result.urgn_stk_qty);
+                    $('#modify_sfty_stk_qty').val(result.sfty_stk_qty);
+                    $('#modify_pur_dt').val(formatDate(result.pur_dt));
+                    $('#modify_rcpt_dt').val(formatDate(result.rcpt_dt));
+                    $('#modify_rcpt_cp').val(result.rcpt_cp);
+                    $('#modify_rcpt_prc').val(result.rcpt_prc);
+                    $('#modify_rtl_prc').val(result.rtl_prc);
+                    $('#modify_sls_prc').val(result.sls_prc);
+                    $('#modify_stk_plc_cd').val(result.stk_plc_cd);
+                    $('#modifyModal').modal("show");
+                },
+                error: function (request, status, error) {
+                    alert("error");
+                    $('#modifyModal').modal("hide");
+                    console.log("code: " + request.status)
+                    console.log("message: " + request.responseText)
+                    console.log("error: " + error);
+                } // 에러가 발생했을 때, 호출될 함수
+            });
         }
 
-        /* 확인 버튼을 누르면 재고가 등록된다. */
-        function registStock() {
+        /* 확인 버튼을 누르면 재고가 수정된다. */
+        function modifyStock() {
 
             if (!idValidateParams()) {
                 return;
@@ -119,18 +154,19 @@
 
             $.ajax({
                 type: 'POST',       // 요청 메서드
-                url: '/admin/stock/register',  // 요청 URI
+                url: '/admin/stock/modify',  // 요청 URI
                 headers: {"Content-Type": "application/json"}, // 요청 헤더
                 /*dataType: 'json', // json 객체형으로 응답*/
                 data: JSON.stringify(params),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success: function (result) {
-                    if(result == "duplicate"){
+                    console.log(result)
+                    /*if(result == "duplicate"){
                         alert("이미 재고등록을 했습니다. 재고 수정 버튼을 눌러주세요.");
                     } else {
-                        alert("재고 추가 성공");       // response는 서버가 전송한 데이터
-                        $('#createModal').modal("hide"); // 모달 비활성화
+                        alert("재고 수정 성공");       // response는 서버가 전송한 데이터
+                        $('#modifyModal').modal("hide"); // 모달 비활성화
                         window.location.href = "/admin/stock/list";
-                    }
+                    }*/
 
                 },
                 error: function (request, status, error) {
@@ -179,7 +215,7 @@
             };
         }
 
-        /*function idValidateParams() {
+        function idValidateParams() {
             if ($('#pd_id').val() == null || $('#pd_id').val().length < 1) {
                 alert('제품ID를 입력해주세요.');
                 return false;
@@ -256,7 +292,7 @@
             }
 
             return true;
-        }*/
+        }
     </script>
 </div>
 

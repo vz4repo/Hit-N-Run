@@ -16,8 +16,7 @@
             -webkit-appearance: none;
             appearance: none;
         }
-    </style>
-    <style>
+
         .main {
             text-align: center;
         }
@@ -347,7 +346,7 @@
                     </td>
                     <td class="createStock">
                         <button type="button" class="sendBtnSmall createStockBtn" data-bs-toggle="modal" data-bs-target="#createModal" onclick="registModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">재고등록</button>
-                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="modifyModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">재고수정</button>
+                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -405,6 +404,7 @@
                 $('#sdate').datepicker('option', 'maxDate', selectedDate);
             }
         });
+        $('.dateForm').datepicker();
 
         var today = new Date();
         $('#sdate, #edate, .dateForm').datepicker('setDate', today);
@@ -421,14 +421,17 @@
         openRegisterModal(pdId, pdName, pdClsfCd);
     }
 
-    function modifyModal(index, pdId) {
+    function updateModal(index, pdId) {
+/*
+        e.preventDefault();
+*/
+
         let pdClsfCd = $('#pd_clsf_cd_'+index+' select').val();
         if(pdClsfCd == null) {
             alert("사이즈를 골라주세요");
             return;
         }
 
-        $('#createModal').modal("show");
         openModifyModal(pdId, pdClsfCd);
     }
 

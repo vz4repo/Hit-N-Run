@@ -156,7 +156,6 @@
                         $('#createModal').modal("hide"); // 모달 비활성화
                         window.location.href = "/admin/stock/list";
                     }
-
                 },
                 error: function (request, status, error) {
                     alert("error");
