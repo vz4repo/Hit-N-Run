@@ -131,11 +131,11 @@ public class OrderDetDto {
         this.pd_name = pd_name;
     }
 
-    public Integer getsls_prc() {
+    public Integer getSls_prc() {
         return sls_prc;
     }
 
-    public void setsls_prc(Integer sls_prc) {
+    public void setSls_prc(Integer sls_prc) {
         this.sls_prc = sls_prc;
     }
 

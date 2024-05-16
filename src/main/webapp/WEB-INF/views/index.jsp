@@ -14,6 +14,7 @@
 
 <link rel="icon" type="image/x-icon" href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
 <style>
+
     li {
         list-style: none;
     }
@@ -180,13 +181,14 @@
 
 
 <div class="index">
-    <h2>Hello! Home run()</h2>
-    <h2> D - <span id="dDay">남은시간!</span></h2>
-    <hr/>
+<h2>Hello! Home run()</h2>
+<h2> D - <span id="dDay">남은시간!</span></h2>
+<hr/>
+
 
     <nav id="loginbtn">
         <ul>
-            <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+        <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </nav>
 
@@ -336,3 +338,6 @@
         });
     });
 </script>
+
+
+
