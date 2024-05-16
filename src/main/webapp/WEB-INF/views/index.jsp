@@ -192,7 +192,7 @@
         </ul>
     </nav>
 
-<div><a href="/mypage/add">마이페이지 이동</a></div>
+<div><a href="/mypage/list">마이페이지 이동</a></div>
 <div><a href="/cart/list">장바구니 이동</a></div>
 <div><a href="/order">주문 이동</a></div>
 <div><a href="/admin/main">제품 이동</a></div>

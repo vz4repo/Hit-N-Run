@@ -52,14 +52,16 @@
 <body>
 <div id="sidebar">
     <h1>
-        <%= session.getAttribute("c_name") %>님의 회원등급은 <%=session.getAttribute("c_grd_cd")%>입니다.
+        <%= session.getAttribute("c_name") %>님의 회원등급은 <%=session.getAttribute("grd_name")%>입니다.
     </h1>
     <h5>
-        홈런볼 가입날짜: <%= session.getAttribute("reg_date")%><br>
+        총 누적 금액: <%=session.getAttribute("tot_amt")%>원<br>
+        홈런볼 가입날짜: <%= session.getAttribute("reg_dt")%><br>
         홈런볼 최근 로그인:  <%= session.getAttribute("login_dt")%>
     </h5><br>
     <h2>My Info</h2>
     <ul>
+        <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
         <li><a href="/mypage/info">개인정보 관리</a></li>
         <li><a href="#">배송지 관리</a></li>
         <li><a href="#">회원탈퇴</a></li>
@@ -68,7 +70,6 @@
     <h2>My Shopping</h2>
     <ul>
         <li><a href="#">주문/배송조회</a></li>
-        <li><a href="#">취소/교환/반품조회</a></li>
     </ul>
 
     <h2>My Activity</h2>
@@ -79,4 +80,12 @@
         <li><a href="#">제품 문의내역</a></li>
     </ul>
 </div>
+
+<script>
+    let pwdClear = "${pwdClear}"
+    if(pwdClear==="pwdMsg2") {
+        alert("비밀번호 변경에 성공했습니다.")
+    }
+</script>
+
 </body>
