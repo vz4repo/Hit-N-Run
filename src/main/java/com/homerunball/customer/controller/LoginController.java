@@ -1,5 +1,6 @@
 package com.homerunball.customer.controller;
 
+
 import java.net.URLEncoder;
 
 import javax.servlet.http.Cookie;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +43,7 @@ public class LoginController {
     /*겟맵핑 login의 포스트맵핑*/
     @PostMapping("/login")
     public String login(String c_email, String c_pwd, String toURL, String rememberEmail, HttpServletRequest request, HttpServletResponse response, RedirectAttributes msg) throws Exception {
-        if (!loginCheck(c_email, c_pwd, request)) {
+        if (!validateLogin(c_email, c_pwd, request)) {
 
             /*RedirectAttributes의 속성 addFlashAttribute를 통해 로그인 실패시 출력할 수 있는 변수와 공간을 저장*/
             msg.addFlashAttribute("loginFail", "msg");
@@ -70,13 +73,14 @@ public class LoginController {
     }
 
 
-    private boolean loginCheck(String c_email, String c_pwd, HttpServletRequest request) {
+    private boolean validateLogin(String c_email, String c_pwd, HttpServletRequest request) {
 
         try {
-            /*db에 있는 이메일을 Dto로 지정*/
+            /*db에 있는 이메일을 Dto에 대입*/
             CustDto custDto = custDao.selectEmail(c_email);
             /*dto가 가져온 비밀번호와 내가 입력한 비밀번호와 같지 않다면 로그인 실패*/
-            if (!(custDto.getC_pwd().equals(c_pwd))) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (!encoder.matches(c_pwd, custDto.getC_pwd())) {
                 return false;
             }
             /*로그인 성공시 updateLoginDate 메서드 실행*/

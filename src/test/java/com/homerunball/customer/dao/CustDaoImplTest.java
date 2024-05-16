@@ -3,6 +3,7 @@ package com.homerunball.customer.dao;
 import com.homerunball.customer.controller.CustValidator;
 import com.homerunball.customer.controller.LoginController;
 import com.homerunball.customer.domain.CustDto;
+//import com.homerunball.customer.domain.CustHistDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,7 @@ public class CustDaoImplTest {
     @Test
     public void insert() throws Exception{
         custDao.deleteAll();
-        CustDto custDto = new CustDto("asdf", "1234", "aaa", "bbb", "b", "000", "223", "aaa", "jjj", "ddd", "eee", "Y", "Y");
+        CustDto custDto = new CustDto("asdf", "1234", "aaa", "bbb", "b", "000", "223", "aaa", "jjj", "ddd", "Y", "Y");
         int rowCnt = custDao.insert(custDto);
         assertTrue(rowCnt==1);
     }
@@ -52,7 +53,11 @@ public class CustDaoImplTest {
         int rowCnt = custDao.updateAll(custDto);
         /* 업데이트가 성공적으로 수행되었는지 확인 */
         assertTrue(rowCnt == 1);
-
     }
 
-    }
+
+//    @Test
+//    public void histInsert() throws Exception{
+//        CustHistDto custHistDto = custDao
+//    }
+}

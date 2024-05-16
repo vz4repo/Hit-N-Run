@@ -15,11 +15,12 @@ public interface CustDao {
 
     int updateAll(CustDto custdto);
 
+    int updatePwd(CustDto custDto);
+
     int deleteAll() throws Exception;
 
     int updateLoginDt(String c_email);
 
     CustDto grdNameJoin(int c_id);
-
 
 }

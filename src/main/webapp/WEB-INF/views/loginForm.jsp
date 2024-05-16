@@ -79,22 +79,13 @@
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        /*form {*/
-        /*    max-width: 1130px;*/
-        /*    margin: 0 auto;*/
-        /*    border: 3px solid #f1f1f1;*/
-        /*    border-radius: 10px;*/
-        /*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-        /*    padding: 5%;*/
+        /*#error-message {*/
+        /*    position: absolute;*/
+        /*    color: gray;*/
+        /*    top: 26%;*/
+        /*    left: 50%;*/
+        /*    transform: translate(-50%, -50%);*/
         /*}*/
-
-        #error-message {
-            position: absolute;
-            color: gray;
-            top: 26%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
         label{
             font-size: 13px;
         }

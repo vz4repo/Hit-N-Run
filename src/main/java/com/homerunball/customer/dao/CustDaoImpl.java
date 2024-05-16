@@ -11,6 +11,7 @@ public class CustDaoImpl implements CustDao {
     /*DB를 연결하기 위한 세션, HTTP 세션이랑 별개*/
     @Autowired
     private SqlSession session;
+
     private static String namespace = "com.homerunball.customer.dao.CustDao.";
 
     @Override
@@ -33,6 +34,9 @@ public class CustDaoImpl implements CustDao {
 
     @Override
     public int updateAll(CustDto custdto) { return session.update(namespace + "updateAll", custdto);
+    }
+    @Override
+    public int updatePwd(CustDto custDto) { return session.update(namespace + "updatePwd", custDto);
     }
 
     @Override

@@ -61,6 +61,7 @@
     </h5><br>
     <h2>My Info</h2>
     <ul>
+        <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
         <li><a href="/mypage/info">개인정보 관리</a></li>
         <li><a href="#">배송지 관리</a></li>
         <li><a href="#">회원탈퇴</a></li>
@@ -79,4 +80,12 @@
         <li><a href="#">제품 문의내역</a></li>
     </ul>
 </div>
+
+<script>
+    let pwdClear = "${pwdClear}"
+    if(pwdClear==="pwdMsg2") {
+        alert("비밀번호 변경에 성공했습니다.")
+    }
+</script>
+
 </body>
