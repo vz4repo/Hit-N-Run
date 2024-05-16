@@ -68,9 +68,9 @@
 <!--            select 	(select IFNULL(max(od_det_seqnum), 0)+1  from ord_det where od_id = (select max(od_id)+1 from ord))-->
 <!--        </selectKey>-->
 <!--        insert  into ord_det-->
-<!--        (od_det_seqnum, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, slg_prc, od_qty, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)-->
+<!--        (od_det_seqnum, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, sls_prc, od_qty, od_stat_cd, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id)-->
 <!--        values-->
-            <!--(#{od_det_seqnum},#{od_id}, #{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{slg_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})-->
+            <!--(#{od_det_seqnum},#{od_id}, #{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{sls_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})-->
 <!--    </insert>-->
 
 

@@ -14,7 +14,7 @@
     <title>장바구니</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
+<jsp:include page="header.jsp"/>
 <div class="head_cart">SHOPPING CART</div>
 <main>
     <hr class="first__under" />
@@ -120,7 +120,7 @@
         </tfoot>
     </table>
 </main>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 <script>
     $(document).ready(function (){
         /* 각 단가의금액의 Format형식 #,##0 */

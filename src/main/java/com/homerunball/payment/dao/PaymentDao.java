@@ -2,6 +2,10 @@ package com.homerunball.payment.dao;
 
 import com.homerunball.payment.domain.PaymentDto;
 import com.homerunball.payment.domain.PaymentFailDto;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 /**================================
@@ -14,4 +18,6 @@ public interface PaymentDao {
 
     /* 인증 실패 후, Response Body 정보 저장 */
     int insertPaymentFailure(PaymentFailDto paymentFailDto);
+
+    List<PaymentDto> selectPaymentHistoryWithDateRange(Map<String,Object> localDateMap);
 }
