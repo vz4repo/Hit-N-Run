@@ -2,6 +2,10 @@ package com.homerunball.payment.dao;
 
 import com.homerunball.payment.domain.PaymentDto;
 import com.homerunball.payment.domain.PaymentFailDto;
+import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,5 +24,10 @@ public class PaymentDaoImpl implements PaymentDao{
   @Override
   public int insertPaymentFailure(PaymentFailDto paymentFailDto) {
     return session.insert(NAMESPACE+"insertPaymentFail", paymentFailDto);
+  }
+
+  @Override
+  public List<PaymentDto> selectPaymentHistoryWithDateRange(Map<String,Object> localDateMap) {
+    return session.selectList(NAMESPACE + "selectPaymentHistoryWithDateRange", localDateMap );
   }
 }

@@ -85,6 +85,13 @@ public class LoginController {
             if (!encoder.matches(c_pwd, custDto.getC_pwd())) {
                 return false;
             }
+
+            /* 데이터로 강제로 넣은 가져온 비밀번호와 내가 입력한 비밀번호와 같지 않다면 로그인 실패*/
+          /*  if (!(custDto.getC_pwd().equals(c_pwd))) {
+                return false;
+            }*/
+
+
             /*로그인 성공시 updateLoginDate 메서드 실행*/
             custDao.updateLoginDt(c_email);
             /*새로운 세션 생성*/

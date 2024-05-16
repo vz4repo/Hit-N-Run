@@ -39,17 +39,17 @@
 	<context:component-scan base-package="com.homerunball">
 	</context:component-scan>
 
-<!--	<view-controller path="/" view-name="index"/>-->
+<!--	<view-controller path="/" view-name="template/index"/>-->
 
 
 	<interceptors>
 		<interceptor>
 			<mapping path="/mypage/list"/>
 			<mapping path="/cart/list"/>
-<!--			<mapping path="/order"/>-->
 			<mapping path="/payment"/>
 			<beans:ref bean="custInterceptor"/>
 		</interceptor>
 	</interceptors>
+
 
 </beans:beans>

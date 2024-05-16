@@ -17,6 +17,9 @@ public interface CartDao {
 
     int cidDeleteAll(int c_id) throws Exception;
 
+
+    boolean exists(CartDto cart) throws Exception;
+
     int insert(CartDto cart) throws Exception;
 
     int update(CartDto cart) throws Exception;

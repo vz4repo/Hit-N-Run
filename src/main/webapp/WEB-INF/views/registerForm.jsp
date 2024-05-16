@@ -91,13 +91,13 @@
             width: 70%;
         }
 
-        .modal-open {
-            overflow: hidden;
-        }
+        /*.modal-open {*/
+        /*    overflow: hidden;*/
+        /*}*/
 
-        isModalOpen{
-            overflow: hidden;
-        }
+        /*isModalOpen{*/
+        /*    overflow: hidden;*/
+        /*}*/
 
         #touModal {
             color: black;
@@ -202,7 +202,6 @@
         </div>
 </form>
 </div>
-
 
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -423,32 +422,7 @@
     </div>
 </div>
 
-
 <script>
-    // function openModal() {
-    //     var modal = document.getElementById("myModal");
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    // }
-    //
-    // function openModal2() {
-    //     var modal = document.getElementById("myModal2");
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    // }
-    //
-    // function closeModal() {
-    //     var modal = document.getElementById("myModal");
-    //     modal.style.display = "none";
-    //     document.body.style.overflow = "auto";
-    // }
-    //
-    // function closeModal2() {
-    //     var modal = document.getElementById("myModal2");
-    //     modal.style.display = "none";
-    //     document.body.style.overflow = "auto";
-    // }
-
     var modalSeen = false;
     var modalSeen2 = false;
 
@@ -466,18 +440,22 @@
     // 모달 열기 함수
     function openModal() {
         var modal = document.getElementById("myModal");
+        var touBox = document.getElementById('touBox');
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
         modalSeen = true; // 모달을 본 것으로 표시
         enableTouBox(); // touBox 활성화
+        touBox.checked = true;
     }
 
     function openModal2(){
         var modal = document.getElementById("myModal2");
+        var piiBox = document.getElementById('piiBox');
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
         modalSeen2 = true; // 모달을 본 것으로 표시
         enablePiiBox(); // touBox 활성화
+        piiBox.checked = true;
     }
 
     // 모달 닫기 함수
@@ -495,31 +473,31 @@
 
     document.addEventListener("keydown", function(event) {
         if (event.key === "Escape") {
-            closeModal(); // 첫 번째 모달 창 닫기
+            closeModal();
         }
     });
 
 
     document.addEventListener("keydown", function(event) {
         if (event.key === "Escape") {
-            closeModal2(); // e두 번째 모달 창 닫기
+            closeModal2();
         }
     });
 
 
-    // 페이지 로드시 이벤트 리스너 등록
+    /*페이지 로드시 이벤트 리스너 등록*/
     document.addEventListener('DOMContentLoaded', function () {
         var touModal = document.getElementById("touModal");
 
-        // touModal을 클릭했을 때 모달 열기
+        /*touModal을 클릭했을 때 모달 열기*/
         touModal.addEventListener('click', openModal);
 
-        // touBox를 클릭했을 때
+        /*touBox를 클릭했을 때*/
         document.getElementById('touBox').addEventListener('click', function () {
-            // 모달을 아직 보지 않았다면
+            /*모달을 아직 보지 않았다면*/
             if (!modalSeen) {
                 alert("이용약관을 먼저 확인해주세요.");
-                // 체크박스 다시 체크 해제
+                /*체크박스 다시 체크 해제*/
                 this.checked = false;
             }
         });
@@ -528,15 +506,15 @@
     document.addEventListener('DOMContentLoaded', function () {
         var piiModal = document.getElementById("piiModal");
 
-        // touModal을 클릭했을 때 모달 열기
+        /*touModal을 클릭했을 때 모달 열기*/
         piiModal.addEventListener('click', openModal2);
 
-        // touBox를 클릭했을 때
+        /*touBox를 클릭했을 때*/
         document.getElementById('piiBox').addEventListener('click', function () {
-            // 모달을 아직 보지 않았다면
+            /*모달을 아직 보지 않았다면*/
             if (!modalSeen2) {
                 alert("개인정보 약관을 먼저 확인해주세요.");
-                // 체크박스 다시 체크 해제
+                /*체크박스 다시 체크 해제*/
                 this.checked = false;
             }
         });
@@ -560,7 +538,6 @@
         var name = frm.c_name.value;
         var zip = frm.c_zip.value;
         var road = frm.c_road_a.value;
-        // var jibun = frm.c_jibun_a.value;
         var det = frm.c_det_a.value;
         var phn = frm.c_phn.value;
         var birth = frm.c_birth.value;
