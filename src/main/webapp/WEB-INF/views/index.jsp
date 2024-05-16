@@ -196,7 +196,7 @@
 <div><a href="/cart/list">장바구니 이동</a></div>
 <div><a href="/order">주문 이동</a></div>
 <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
+    <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
 <div><a href="/payment">결제 이동</a></div>
 <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>
@@ -252,12 +252,12 @@
                                 <div class="thumb-wrapper">
                                     <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                     <div class="img-box">
-                                        <a href="/product/detail/${product.pd_id}">
+                                        <a href="/product/detail?pd_id=${product.pd_id}">
                                             <img src="img/product/app/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                         </a>
                                     </div>
                                     <div class="thumb-content">
-                                        <h4><a href="/product/detail/${product.pd_id}">${product.pd_name}</a></h4>
+                                        <h4><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                         <div class="star-rating">
                                             <ul class="list-inline">
                                                 <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -277,7 +277,7 @@
                                         <p class="item-price"><span>${product.max_sls_prc}원</span></p>
                                             </c:otherwise>
                                         </c:choose>
-                                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                                        <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
