@@ -172,10 +172,11 @@
       <artifactId>jackson-annotations</artifactId>
       <version>${jackson.version}</version>
     </dependency>
+    <!-- 2024.05.15 [혁락] 의존성 문제로 추가 -->
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>${jackson.version}</version> <!-- 최신 버전으로 변경 -->
+      <version>${jackson.version}</version>
     </dependency>
     <!-- json-simple/json-simple -->
     <dependency>

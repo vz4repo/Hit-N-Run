@@ -71,7 +71,8 @@
   const testAmountElement = document.querySelector("#testAmount");
   const testCouponElement = document.querySelector("#testCoupon");
 
-  let amount = 9999;
+  /* TODO: 수정 및 cors 이슈 해결 필요 */
+  let amount = 99999;
 
   /*
   * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화

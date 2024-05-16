@@ -154,7 +154,6 @@
             const price = row.cells[5].innerText;
             totalSum += parseInt(price.replace(/[^\d]/g, ''));
         });
-        amount = totalSum;
         <%--/*총합을 나타낼 위치*/--%>
         document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
     }
