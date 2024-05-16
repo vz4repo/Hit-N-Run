@@ -1,7 +1,9 @@
 package com.homerunball.delivery.controller;
 
+import com.homerunball.customer.dao.CustDao;
 import com.homerunball.delivery.dao.DeliveryDao;
 import com.homerunball.delivery.domain.DeliveryDto;
+import com.homerunball.delivery.service.DeliveryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,12 @@ import java.util.List;
 @RequestMapping("/delivery") /* 원하는 url을 사용해서 해당 메서드 실행할수있게 해줌 */
 public class DeliveryController {
     @Autowired /* 의존성 주입 */
-            DeliveryDao deliveryDao;
+    DeliveryDao deliveryDao;
+    /*고객서비스 의존성 주입*/
+    @Autowired
+    DeliveryService deliveryService;
 
+    /* 유저 개인의 배송지 전체 목록 띄우는 */
     @GetMapping("/deliveryList")
     /*public String deliveryList(HttpServletRequest request) {*/
     /* 고객 배송지 목록 출력 <- CartController 의 cartForm 에서 뺏겨옴*/
@@ -30,7 +36,7 @@ public class DeliveryController {
 
 //        int c_id = Integer.parseInt(request.getParameter("c_id"));
 
-        List<DeliveryDto> list = deliveryDao.selectAll(dto.getC_id());
+        List<DeliveryDto> list = deliveryService.readAll(dto.getC_id());
         /*List<DeliveryDto> list = deliveryDao.selectAll(c_id);*/
         model.addAttribute("list", list);
 
@@ -45,7 +51,7 @@ public class DeliveryController {
     @GetMapping("/deliverySelected")
     public String selectedList(@SessionAttribute(name = "c_id")int sessionId, Model model, DeliveryDto dto, @RequestParam("dlvId") Integer dlvId) throws Exception {
         try {
-            DeliveryDto deliveryDto = deliveryDao.select(sessionId, dlvId);
+            DeliveryDto deliveryDto = deliveryService.read(sessionId, dlvId);
             model.addAttribute("deliveryDto", deliveryDto);
             model.addAttribute("dlvId", dlvId); // dlvId도 모델에 추가
             System.out.println("dto = " + dto); // 얘는 null
@@ -59,6 +65,16 @@ public class DeliveryController {
         }
         /*        System.out.println("deliveryDto = " + deliveryDto.toString());*/
         return "deliverySelected";
+    }
+
+    @PostMapping("/deliveryAddrInput")
+    public String newAddrInput() throws Exception {
+//        try {
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        return "deliveryAddrInput";
     }
 
 

@@ -56,6 +56,13 @@
 <%--    <option value="1005"> 5번고객 </option>--%>
 <%--</select>--%>
 
+
+<%-- 신규 배송지 입력 버튼 --%>
+<div>
+<button id="newDlvInput">신규 배송지 입력</button>
+</div>
+
+
 <%-- 로그인이 되면 session을 통해 c_id를 가져옴 --%>
 <div style="text-align: center;">
     <div>
@@ -125,6 +132,15 @@
             setSelectedDLV(c_adr_list_id);
         });
 
+        // "newDlvInput" 버튼 클릭 시 deliveryAddrInput 으로 이동 (post방식)
+        $('#newDlvInput').click(function(event) {
+            event.preventDefault(); // 버튼의 기본 동작 막기
+
+            // toUpdateNewDlv 함수호출
+            toUpdateNewDlv();
+        })
+
+
         // setDefault 함수 정의
         function setDefault() {
             // AJAX를 사용하여 서버로 데이터 요청
@@ -156,7 +172,7 @@
                 },
                 success: function(response) {
                     // 페이지 이동
-                    window.location.href = '<%= request.getContextPath() %>/delivery/deliverySelected?dlvId=' + c_adr_list_id;;
+                    window.location.href = '<%= request.getContextPath() %>/delivery/deliverySelected?dlvId=' + c_adr_list_id;
                 },
                 error: function(xhr, status, error) {
                     console.error(error);
@@ -164,6 +180,16 @@
 
             });
         }
+
+
+        // toUpdateNewDlv 함수 정의
+        function toUpdateNewDlv() {
+            window.location.href = '<%= request.getContextPath() %>/delivery/deliveryAddrInput';
+
+        }
+
+
+
     });
 
 
