@@ -195,7 +195,6 @@
                             <option value="43">빨간색_초록색</option>
                             <option value="44">빨간색_파란색</option>
                             <option value="45">빨간색_보라색</option>
-                            <option value="49">핑크색</option>
                             <option value="50">주황색</option>
                             <option value="51">주황색_노란색</option>
                             <option value="52">주황색_초록색</option>
