@@ -69,7 +69,7 @@
 
     <h2>My Shopping</h2>
     <ul>
-        <li><a href="#">주문/배송조회</a></li>
+        <li><a href="/mypage/pay">주문/배송조회</a></li>
     </ul>
 
     <h2>My Activity</h2>

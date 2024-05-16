@@ -78,6 +78,11 @@ public class MyPageController {
         return "myPageInfo";
     }
 
+    @GetMapping(value = "pay")
+    public String myPayInfo() {
+        return "payList";
+    }
+
     @InitBinder
     /*유효성 검사를 위해 WebDataBinder클래스의 객체를 사용*/
     public void custValid(WebDataBinder binder){
