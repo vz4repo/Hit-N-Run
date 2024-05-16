@@ -18,21 +18,19 @@ public class CustInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
         if(session.getAttribute("c_id") == null) {
             response.sendRedirect("/login?toURL=" + request.getRequestURI());
-            return false;   // 컨트롤러 핸들러로 요청 전달하지 않음
+            return false;
         }
-        return true;      // 컨트롤러 핸들러로 요청 전달
+        return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
                            ModelAndView modelAndView) throws Exception {
-        // 요청 처리 후 수행
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response,
                                 Object handler, Exception ex) throws Exception {
-        // 요청 처리 완료 후  수행
     }
 
 }

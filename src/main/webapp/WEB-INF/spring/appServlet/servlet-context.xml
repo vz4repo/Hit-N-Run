@@ -48,9 +48,6 @@
 			<mapping path="/cart/list"/>
 			<mapping path="/order"/>
 			<mapping path="/payment"/>
-<!--			<exclude-mapping path="/login"/>-->
-<!--			<exclude-mapping path="/"/>-->
-<!--			<exclude-mapping path="/admin/main"/>-->
 			<beans:ref bean="custInterceptor"/>
 		</interceptor>
 	</interceptors>

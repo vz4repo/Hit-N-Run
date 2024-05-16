@@ -57,13 +57,10 @@
       border: 3px solid #f1f1f1;
       border-radius: 50px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      /*padding: 30%;*/
       margin: 0 auto;
       margin-top: 150px;
       margin-bottom: 150px;
     }
-
-
 
     span {
       color: gray;
@@ -74,29 +71,6 @@
       font-family: 'IBM Plex Sans', sans-serif;
     }
 
-    #roadAddress {
-      width: 265.5px;
-    }
-
-    #jibunAddress {
-      width: 265.5px;
-    }
-
-    #detailAddress {
-      width: 265.5px;
-    }
-
-
-
-    /* Input 스타일 */
-    #birth {
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1em;
-      width: 100%;
-      box-sizing: border-box;
-    }
   </style>
 </head>
 
@@ -125,13 +99,8 @@
 
     let pwdFail = "${pwdFail}"
     if(pwdFail==="pwdMsg") {
-        alert("현재 비밀번호와 일치하지 않습니다.")
+        alert("현재 비밀번호가 일치하지 않습니다.")
     }
-
-    <%--let pwdClear = "${pwdClear}"--%>
-    <%--if(pwdClear==="pwdMsg2") {--%>
-    <%--    alert("비밀번호 변경에 성공했습니다.")--%>
-    <%--}--%>
 
   function pwdEditCheck(){
     var curPwd = document.getElementById("curPwd").value;

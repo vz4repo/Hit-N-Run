@@ -33,12 +33,6 @@ public class MyPageController {
     @GetMapping("/list")
     /*세션 속성에 저장되어있는 c_id를 가져와서 c_id 변수로 지정함*/
     public String myPage(HttpServletRequest request) {
-//        if (!loginCheck(request)) {
-//            /*여기서 request.getRequestURI은 /myPage/list
-//            로그인안되면 /login으로 이동 후 여기서 로그인 되면 toURL로 리다이렉트
-//             */
-//            return "redirect:/login?toURL=" + request.getRequestURI();
-//        }
 
         /*세션 객체 생성*/
         HttpSession session = request.getSession();
@@ -70,7 +64,6 @@ public class MyPageController {
 
         if (custDto != null) {
             session.setAttribute("c_email", custDto.getC_email());
-//            session.setAttribute("c_pwd", custDto.getC_pwd());
             session.setAttribute("c_name", custDto.getC_name());
             session.setAttribute("c_zip", custDto.getC_zip());
             session.setAttribute("c_road_a", custDto.getC_road_a());
@@ -102,7 +95,6 @@ public class MyPageController {
         int c_id = (int) session.getAttribute("c_id");
 
         custDto.setC_id(c_id);
-//        custDto.setC_pwd(custService.pwdEncrypt(custDto.getC_pwd()));
         custDto.setC_zip(c_zip);
         custDto.setC_road_a(c_road_a);
         custDto.setC_jibun_a(c_jibun_a);
@@ -119,32 +111,9 @@ public class MyPageController {
     }
 
     @GetMapping("/pwdEdit")
-//    public String pwdEdit(HttpServletRequest request) {
         public String pwdEdit() {
-//        HttpSession session = request.getSession();
-//        int c_id = (int) session.getAttribute("c_id");
-//        CustDto custDto = custDao.selectID(c_id);
         return "pwdEdit";
     }
-
-//    @PostMapping("/pwdEdit")
-//    public String pwdModify(HttpServletRequest request, String c_pwd){
-//
-//        HttpSession session = request.getSession();
-//        int c_id = (int) session.getAttribute("c_id");
-//
-//        CustDto custDto = custDao.selectID(c_id);
-//
-//        custDto.setC_id(c_id);
-//       /* custDto.setC_pwd(custService.pwdEncrypt(custDto.getC_pwd()));*/
-//        custDto.setC_pwd(custService.pwdEncrypt(c_pwd));
-//
-//        custDao.updatePwd(custDto);
-//
-//        System.out.println(custDto.toStringV2());
-//
-//        return "redirect:/mypage/list";
-//    }
 
     @PostMapping("/pwdEdit")
     public String pwdModify(HttpServletRequest request, String c_pwd, String curPwd, RedirectAttributes msg){

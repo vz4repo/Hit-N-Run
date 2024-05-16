@@ -77,11 +77,10 @@ public class RegisterController {
         return "redirect:/login";
     }
 
-//    /*이메일 중복 체크*/
+    /*이메일 중복 체크*/
     @PostMapping("/email-check")
     public @ResponseBody String emailCheck(@RequestParam("c_email") String c_email) {
         String checkResult = custService.emailCheck(c_email);
         return checkResult;
     }
-
 }

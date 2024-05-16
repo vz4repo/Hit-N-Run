@@ -50,7 +50,6 @@
             color: whitesmoke;
         }
 
-        /*.container */
         .subBtn {
             width: 49%;
             margin-bottom: 10px;
