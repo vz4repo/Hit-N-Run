@@ -194,7 +194,7 @@
 <div><a href="/cart/list">장바구니 이동</a></div>
 <div><a href="/order">주문 이동</a></div>
 <div><a href="/admin/main">제품 이동</a></div>
-    <div><a href="/product/detail?pd_id=GLV000001-99">제품상세 이동</a></div>
+    <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
 <div><a href="/payment">결제 이동</a></div>
 <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>

@@ -112,9 +112,6 @@
                     <button type="button" id="delete_All_Btn" class="removeAllBtn">장바구니 비우기</button>
                 </form>
                 <form action="" id="orderForm" method="post">
-                    <input type="hidden" name="c_id" id="order_c_id" data-cid="${cartDto.c_id}" value="${cartDto.c_id}"/>
-                    <input type="hidden" name="pd_id" id="order_pd_id" data-pdid="${cartDto.pd_id}" value="${cartDto.pd_id}"/>
-                    <input type="hidden" name="pd_clsf_code" id="order_pd_clsf_code" data-sizecd="${cartDto.pd_clsf_code}"  value="${cartDto.pd_clsf_code}"/>
                     <button type="button" class="order_Btn" id="order_Select_Btn">선택상품 주문</button>
                     <button type="button" class="order_Btn" id="order_All_Btn">전체상품 주문</button>
                 </form>
@@ -137,38 +134,32 @@
 
         /* 선택주문하기 버튼을 누를경우 주문으로 넘기기 */
         $('#order_Select_Btn').on("click", function (){
+            let selectedItems = [];
             let orderForm = $('#orderForm');
-            let cnt = $('input:checkbox[name=checkboxlength]:checked');
-            let cartDto = {
-                c_id: $(this).data("pdid"), // c_id 설정
-                pd_id: $(this).data("pdid"), // pd_id 설정
-                pd_clsf_code: $(this).data("sizecd"), // pd_clsf_code 설정
-                // pd_name: $(this).data("pdname"), // pd_name 설정 (만약 data-pdname 속성이 있다면)
-                // cart_cnt: $(this).data("cartcnt") // cart_cnt 설정 (만약 data-cartcnt 속성이 있다면)
-            };
-            cnt.each(function(){
-                let c_id = $(this).data("cid");
-                let pd_id = $(this).data("pdid");
-                let pd_clsf_code = $(this).data("sizecd");
 
-                $('#orderForm').find('input[name="c_id"]').val(c_id);
-                $("#order_c_id").val(c_id);
-                $("#order_pd_id").val(pd_id);
-                $("#order_pd_clsf_code").val(pd_clsf_code);
-                console.log(c_id);
-                console.log($('#orderForm').find('input[name="c_id"]').val(c_id));
-            })
+            // 선택된 각 체크박스의 부모 요소인 <tr>을 찾아 그 안의 데이터를 가져옴
+            $('input:checkbox[name=checkboxlength]:checked').each(function(){
+                let c_id = $(this).closest('tr').find('.deleteBtn').data("cid");
+                let pd_id = $(this).closest('tr').find('.deleteBtn').data("pdid");
+                let pd_clsf_code = $(this).closest('tr').find('.deleteBtn').data("sizecd");
+                selectedItems.push({
+                    c_id: c_id,
+                    pd_id: pd_id,
+                    pd_clsf_code: pd_clsf_code
+                });
+            });
 
-            <%--cnt.each(function (){--%>
-            <%--    $('<input>').attr({--%>
-            <%--        type: 'hidden',--%>
-            <%--        name: 'selectCart',--%>
-            <%--        value: JSON.stringify(cartDto)--%>
-            <%--    }).appendTo(orderForm);--%>
-            <%--});--%>
-            <%--orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");--%>
-            <%--orderForm.attr("method", "post");--%>
-            <%--orderForm.submit();--%>
+            selectedItems.forEach(function(item) {
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'selectedItems',
+                    value: JSON.stringify(item)
+                }).appendTo(orderForm);
+            });
+
+            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
+            orderForm.attr("method", "post");
+            orderForm.submit();
         })
 
         /* 주문하기버튼을 누를경우 주문으로 넘기기 */
