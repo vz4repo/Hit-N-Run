@@ -50,7 +50,6 @@
             color: whitesmoke;
         }
 
-        /*.container */
         .subBtn {
             width: 49%;
             margin-bottom: 10px;
@@ -79,22 +78,13 @@
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        /*form {*/
-        /*    max-width: 1130px;*/
-        /*    margin: 0 auto;*/
-        /*    border: 3px solid #f1f1f1;*/
-        /*    border-radius: 10px;*/
-        /*    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-        /*    padding: 5%;*/
+        /*#error-message {*/
+        /*    position: absolute;*/
+        /*    color: gray;*/
+        /*    top: 26%;*/
+        /*    left: 50%;*/
+        /*    transform: translate(-50%, -50%);*/
         /*}*/
-
-        #error-message {
-            position: absolute;
-            color: gray;
-            top: 26%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
         label{
             font-size: 13px;
         }
@@ -105,17 +95,6 @@
 
 <div id="loginform">
     <form action="<c:url value='/login'/>" method="post" onsubmit="return">
-
-
-<%--        밑에 대신에 alert로 작성--%>
-
-<%--    <%String msg =(String)request.getAttribute("msg");--%>
-<%--        if(msg!=null) {%>--%>
-<%--    <div id="error-message">--%>
-<%--    <label><%= msg %></label>--%>
-<%--    <% } %>--%>
-<%--    </div>--%>
-
         <h1 id="loginTitle">Home Run Ball</h1>
     <div class="container">
         <label>Email</label>
@@ -142,14 +121,13 @@
 
 
 <script>
-    let msg = "${signUp}"
-    if(msg==="signUpOk") {
+    let signUpClear = "${signUpClear}"
+    if(signUpClear==="msg") {
         alert("회원가입이 되셨습니다.");
     }
 
-
-    let msg2 = "${loginTry}"
-    if(msg2==="loginFail") {
+    let loginFail = "${loginFail}"
+    if(loginFail==="msg") {
         alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
     }
 
