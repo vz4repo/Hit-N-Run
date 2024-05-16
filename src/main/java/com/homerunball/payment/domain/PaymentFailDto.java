@@ -1,6 +1,6 @@
 package com.homerunball.payment.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class PaymentFailDto {
 
@@ -12,16 +12,25 @@ public class PaymentFailDto {
   String inst_cd;
   String pay_err_cd;
   String err_msg_ko;
-  Date pay_err_dt;
-  Date frst_reg_dt;
+  LocalDateTime pay_err_dt;
+  LocalDateTime frst_reg_dt;
   String frst_reg_id;
-  Date last_mod_dt;
+  LocalDateTime last_mod_dt;
   String last_mod_id;
 
   /* constructor */
   public PaymentFailDto() {
   }
 
+  public PaymentFailDto(String pay_id, int od_id, String trace_id, String pay_err_cd, String err_msg_ko,
+      LocalDateTime pay_err_dt) {
+    this.pay_id = pay_id;
+    this.od_id = od_id;
+    this.trace_id = trace_id;
+    this.pay_err_cd = pay_err_cd;
+    this.err_msg_ko = err_msg_ko;
+    this.pay_err_dt = pay_err_dt;
+  }
 
   /* getter, setter */
   public String getPay_id() {
@@ -80,19 +89,19 @@ public class PaymentFailDto {
     this.err_msg_ko = err_msg_ko;
   }
 
-  public Date getPay_err_dt() {
+  public LocalDateTime getPay_err_dt() {
     return pay_err_dt;
   }
 
-  public void setPay_err_dt(Date pay_err_dt) {
+  public void setPay_err_dt(LocalDateTime pay_err_dt) {
     this.pay_err_dt = pay_err_dt;
   }
 
-  public Date getFrst_reg_dt() {
+  public LocalDateTime getFrst_reg_dt() {
     return frst_reg_dt;
   }
 
-  public void setFrst_reg_dt(Date frst_reg_dt) {
+  public void setFrst_reg_dt(LocalDateTime frst_reg_dt) {
     this.frst_reg_dt = frst_reg_dt;
   }
 
@@ -104,11 +113,11 @@ public class PaymentFailDto {
     this.frst_reg_id = frst_reg_id;
   }
 
-  public Date getLast_mod_dt() {
+  public LocalDateTime getLast_mod_dt() {
     return last_mod_dt;
   }
 
-  public void setLast_mod_dt(Date last_mod_dt) {
+  public void setLast_mod_dt(LocalDateTime last_mod_dt) {
     this.last_mod_dt = last_mod_dt;
   }
 
