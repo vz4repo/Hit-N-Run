@@ -46,7 +46,7 @@
 		<interceptor>
 			<mapping path="/mypage/list"/>
 			<mapping path="/cart/list"/>
-			<mapping path="/order"/>
+<!--			<mapping path="/order"/>-->
 			<mapping path="/payment"/>
 			<beans:ref bean="custInterceptor"/>
 		</interceptor>

@@ -79,6 +79,8 @@ public class LoginController {
             /*db에 있는 이메일을 Dto에 대입*/
             CustDto custDto = custDao.selectEmail(c_email);
             /*dto가 가져온 비밀번호와 내가 입력한 비밀번호와 같지 않다면 로그인 실패*/
+
+            /*DB에서 암호화된 비밀번호를와 입력한 비밀번호가 다르면 false*/
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             if (!encoder.matches(c_pwd, custDto.getC_pwd())) {
                 return false;

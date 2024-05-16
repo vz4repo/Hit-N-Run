@@ -121,18 +121,18 @@ public class MyPageController {
         HttpSession session = request.getSession();
         int c_id = (int) session.getAttribute("c_id");
 
-        // 현재 로그인한 사용자의 실제 비밀번호 가져오기
+         /*현재 로그인한 사용자의 실제 비밀번호 가져오기*/
         CustDto custDto = custDao.selectID(c_id);
         String actualPwd = custDto.getC_pwd();
 
-        // 입력한 현재 비밀번호와 실제 비밀번호가 일치하는지 확인
+        /* 입력한 현재 비밀번호와 실제 비밀번호가 일치하는지 확인*/
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (!encoder.matches(curPwd, actualPwd)) {
             msg.addFlashAttribute("pwdFail", "pwdMsg");
             return "redirect:/mypage/pwdEdit";
         }
 
-        // 현재 비밀번호가 일치하면 새로운 비밀번호로 업데이트
+        /* 현재 비밀번호가 일치하면 새로운 비밀번호로 업데이트*/
         custDto.setC_id(c_id);
         custDto.setC_pwd(custService.pwdEncrypt(c_pwd));
         custDao.updatePwd(custDto);
