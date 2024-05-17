@@ -60,7 +60,7 @@
         (od_det_seqnum, od_id, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, sls_prc, od_qty, od_stat_cd)
         select 	(select IFNULL(max(od_det_seqnum), 0)+1  from ord_det where od_id = (select max(od_id)+1 from ord))
              ,(select CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(IFNULL(max(substr(o.od_id, 9)),0)+1, 4, '0')) from ord o)
-             ,#{c_id}, #{pd_id}, #{pd_clsf_cd}, now(),#{pd_name},#{sls_prc},#{od_qty},#{od_stat_cd} ;
+             ,#{c_id}, #{pd_id}, #{pd_clsf_cd}, now(),#{pd_name},#{sls_prc},#{od_qty},'00';
     </insert>
 
 <!--    <insert id="insert" parameterType="OrderDetDto">-->
