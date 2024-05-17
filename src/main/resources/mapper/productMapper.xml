@@ -104,6 +104,7 @@
             <if test="pd_type_cd != null">pd_type_cd = #{pd_type_cd},</if>
             <if test="pd_type_det_cd != null">pd_type_det_cd = #{pd_type_det_cd},</if>
             <if test="brd_cd != null">brd_cd = #{brd_cd},</if>
+            <if test="wgh != null">wgh = #{wgh},</if>
             <if test="pd_stat_hist_cd != null">pd_stat_hist_cd = #{pd_stat_hist_cd},</if>
         </set>
         <!--키가 pd_id인 경우 value는 리스트의 형태로 저장한다.-->

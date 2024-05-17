@@ -140,10 +140,11 @@ public class ProductController {
 
     /*선택된 제품에 대한 수정사항을 반영한다.*/
     @PostMapping("/manage")
-    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m) {
+    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd, int wgh, int min_od_qty, int max_od_qty) {
         /*이전 페이지의 url을 referer에 저장한다.*/
         /*String referer = request.getHeader("Referer");*/
         try {
+            System.out.println("manage 도착");
             /*
             productNumber가 selectedProduct라면
                 pd_Id에 선택된 제품 List로 저장한다.
@@ -173,23 +174,41 @@ public class ProductController {
             List<String> selectedContentList = new ArrayList<>();
             /*productExposureMangage에서 selectedContent를 가져와서 배열 contentArr에 하나씩 저장한다.*/
             String[] contentArr = selectedContent.split(",");
-            System.out.println("contentArr = " + contentArr);
             /*contentArr의 원소를 selectedContentList에 하나씩 추가한다.*/
             for(int i = 0;i<contentArr.length;i++) {
                 selectedContentList.add(contentArr[i]);
             }
+
 
             /*선택된 변경 항목을 selectedContentList에 있는 문자열을 반복하는 iterator을 선언한다.*/
             Iterator<String> iterator = selectedContentList.iterator();
             while (iterator.hasNext()) {
                 /*변경할 항목을 changeContent에 저장한다.*/
                 String changeContent = iterator.next().trim();
-                /*productExposureManage페이지에서 changeContent를 name으로 갖는 파라미터를 changeValue에 저장한다.*/
-                String changeValue = request.getParameter(changeContent);
-                /*만약 changeValue가 null이라면 에러 발생*/
-                if (changeValue == null || changeValue == "") throw new IllegalArgumentException();
-                /*productMap에 key는 changeContent, value는 changeValue에 저장한다.*/
-                productMap.put(changeContent, changeValue);
+                String changeStringValue = "";
+
+                /*만약 changeContent가 pd_chr_cd라면*/
+                if (changeContent.equals("pd_chr_cd")) {
+                    /* 제품 특성에 포함된 ","를 ""로 교체한다. */
+                    changeStringValue = pd_chr_cd.replace(",","");
+                    /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+                    productMap.put(changeContent, changeStringValue);
+                } else if (changeContent.equals("weight")) {
+                    productMap.put("wgh", wgh);
+                } else if (changeContent.equals("min_od_qty")) {
+                    productMap.put("min_od_qty", min_od_qty);
+                } else if (changeContent.equals("max_od_qty")) {
+                    productMap.put("max_od_qty", max_od_qty);
+                } else { /*만약 changeContent가 pd_chr_cd, min_od_qty, max_od_qty, wgh가 아니라면*/
+                    /*productExposureManage페이지에서 changeContent를 name으로 갖는 파라미터를 changeStringValue에 저장한다.*/
+                    changeStringValue = request.getParameter(changeContent);
+                    /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+                    productMap.put(changeContent, changeStringValue);
+                }
+                /*만약 changeStringValue가 null이라면 에러 발생*/
+                if (productMap.size() == 0 && (changeStringValue == null || changeStringValue.equals(""))) throw new IllegalArgumentException();
+//                /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+//                productMap.put(changeContent, changeStringValue);
             }
 
             /*제품의 카테고리를 변경해준다.*/

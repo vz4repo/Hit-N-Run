@@ -603,7 +603,6 @@
         // countDay();
         setInterval(countDay, 1000);  /* 초마다 디데이 기능 실행 */
 
-
         $(document).ready(function(){
             $(".wish-icon i").click(function () {
                 $(this).toggleClass("fa-heart fa-heart-o");

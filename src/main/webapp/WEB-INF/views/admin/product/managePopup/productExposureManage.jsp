@@ -170,6 +170,7 @@
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
+    console.log("pd_chr_cd")
     $(document).ready(function() {
         /*전체 선택을 클릭하는 경우 발생하는 함수*/
         $("#selectAll").click(function() {

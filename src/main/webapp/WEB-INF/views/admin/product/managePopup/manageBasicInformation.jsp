@@ -147,8 +147,8 @@
                 <tr>
                     <th><input type="checkbox" name="selectedContent" id="weight" value="weight"><label for="weight">무게(g)</label></th>
                     <td>
-                        <input type="text" name="wgh" id="wgh" class="weighCnt" maxlength="100" required>
-                        <span id="weighCnt">[0 / 100]</span>
+                        <input type="text" name="wgh" id="wgh" class="weightCnt" maxlength="100">
+                        <span id="weightCnt">[0 / 100]</span>
                     </td>
                 </tr>
                 <tr>
