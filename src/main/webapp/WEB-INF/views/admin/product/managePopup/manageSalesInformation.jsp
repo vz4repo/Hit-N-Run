@@ -122,6 +122,24 @@
                 selectedContent[$(this).attr('id')] = $('input[name="' + $(this).attr('id') + '"]:checked').val();
             }
         });
+
+        /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#min_od_qty').on('blur', function () {
+            let minQty = $(this).val();
+            if (isNaN(minQty) || minQty.trim() === '') {
+                alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
+                $(this).val('');
+            }
+        });
+
+        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#max_od_qty').on('blur', function () {
+            let maxQty = $(this).val();
+            if (isNaN(maxQty) || maxQty.trim() === '') {
+                alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
+                $(this).val('');
+            }
+        });
     });
 
     // 취소 버튼 클릭하면 뒤로 가기

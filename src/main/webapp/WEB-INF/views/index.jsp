@@ -11,13 +11,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
     <c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
     <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
     <link rel="icon" type="image/x-icon" href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
     <style>
-
         li {
             list-style: none;
         }
@@ -44,12 +42,7 @@
             padding: 0 70px;
             /*width: 1040px;*/
         }
-        /*.carousel-inner {*/
-        /*    width: 1000px;*/
-        /*}*/
-        /*.carousel-control .left {*/
-        /*    width: 40px;*/
-        /*}*/
+
         .carousel .item {
             color: #747d89;
             min-height: 325px;
@@ -187,6 +180,9 @@
             font-size: 14px;
             color: #ffc000;
         }
+
+        /*mainCategory에 필요한 css include*/
+        <%@include file="/resources/css/mainCategory.css"%>
     </style>
     <title>Home-Run</title>
 </head>
@@ -218,7 +214,7 @@
                 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                     <!-- Carousel indicators -->
                     <ol class="carousel-indicators">
-                        <c:set var="num" value="${mainProductNumber % 4 == 0 ? mainProductNumber / 4 : mainProductNumber / 4 + 1}" />
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
                         <c:forEach var="i" begin="0" end="${num-1}" step="1">
                             <c:choose>
                                 <c:when test="${i == 0}">
@@ -232,7 +228,7 @@
                     </ol>
                     <!-- Wrapper for carousel items -->
                     <div class="carousel-inner">
-                        <c:forEach var="product" items="${mainProductList}" varStatus="status">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
                         <c:if test="${status.index % 4 == 0}">
                         <c:choose>
                         <c:when test="${status.index == 0}">
@@ -280,8 +276,8 @@
                             </div> <!-- item 닫기 -->
                             </c:if>
                             </c:forEach>
-                            <!-- mainProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
-                            <c:if test="${mainProductNumber % 4 != 0}">
+                            <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
+                            <c:if test="${newProductNumber % 4 != 0}">
                         </div> <!-- row 닫기 -->
                     </div> <!-- item 닫기 -->
                     </c:if>
@@ -295,6 +291,285 @@
                 </a>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2><b>인기 제품</b></h2>
+                <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel1" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel1" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                        <c:choose>
+                        <c:when test="${status.index == 0}">
+                        <div class="item active">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="item">
+                                </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    </c:if>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                            <div class="img-box">
+                                                <a href="/product/detail?pd_id=${product.pd_id}">
+                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <c:choose>
+                                                    <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                                        <p class="item-price"><strike>${product.max_rtl_prc}원</strike> <span>${product.max_sls_prc}원</span></p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <c:if test="${status.index % 4 == 3}">
+                                </div> <!-- row 닫기 -->
+                            </div> <!-- item 닫기 -->
+                            </c:if>
+                            </c:forEach>
+                            <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
+                            <c:if test="${newProductNumber % 4 != 0}">
+                        </div> <!-- row 닫기 -->
+                    </div> <!-- item 닫기 -->
+                    </c:if>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel1" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel1" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2><b>스테디 셀러 제품</b></h2>
+                <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel2" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel2" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                        <c:choose>
+                        <c:when test="${status.index == 0}">
+                        <div class="item active">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="item">
+                                </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    </c:if>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                            <div class="img-box">
+                                                <a href="/product/detail?pd_id=${product.pd_id}">
+                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <c:choose>
+                                                    <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                                        <p class="item-price"><strike>${product.max_rtl_prc}원</strike> <span>${product.max_sls_prc}원</span></p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <c:if test="${status.index % 4 == 3}">
+                                </div> <!-- row 닫기 -->
+                            </div> <!-- item 닫기 -->
+                            </c:if>
+                            </c:forEach>
+                            <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
+                            <c:if test="${newProductNumber % 4 != 0}">
+                        </div> <!-- row 닫기 -->
+                    </div> <!-- item 닫기 -->
+                    </c:if>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel2" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel2" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2><b>추천 제품</b></h2>
+                <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel3" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel3" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
+                        <c:choose>
+                        <c:when test="${status.index == 0}">
+                        <div class="item active">
+                            </c:when>
+                            <c:otherwise>
+                            <div class="item">
+                                </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    </c:if>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper">
+                                            <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                            <div class="img-box">
+                                                <a href="/product/detail?pd_id=${product.pd_id}">
+                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <c:choose>
+                                                    <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                                        <p class="item-price"><strike>${product.max_rtl_prc}원</strike> <span>${product.max_sls_prc}원</span></p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <c:if test="${status.index % 4 == 3}">
+                                </div> <!-- row 닫기 -->
+                            </div> <!-- item 닫기 -->
+                            </c:if>
+                            </c:forEach>
+                            <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
+                            <c:if test="${newProductNumber % 4 != 0}">
+                        </div> <!-- row 닫기 -->
+                    </div> <!-- item 닫기 -->
+                    </c:if>
+                </div>
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel3" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel3" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <%--안 된다--%>
+        <%--https://youtu.be/nS_Ht0lT-uQ?si=8ucZnwSst4IOJccY--%>
+        <%--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="/img/product/player/acuna.jpeg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="/img/product/player/arenado.png" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="/img/product/player/correa.png" alt="Third slide">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>--%>
+
+        <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
+        <jsp:include page="mainCategory.jsp" flush="false" />
     </div>
     </div>
     <script>
