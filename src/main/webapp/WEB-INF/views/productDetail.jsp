@@ -9,15 +9,14 @@
 <%--선택된 옵션으로 제품을 넘겨주기--%>
 
 <%--넘겨줄 정보를 담는다--%>
-<p><a href="/product/detail?pd_id=APP000001-20">의류</a></p>
-<p><a href="/product/detail?pd_id=BAT000001-99">배트1</a></p>
-<p><a href="/product/detail?pd_id=BAT000002-20">배트2</a></p>
-<p><a href="/product/detail?pd_id=GLV000001-99">글러브1</a></p>
-<p><a href="/product/detail?pd_id=GLV000002-50">글러브2</a></p>
-<p><a href="/product/detail?pd_id=SHO000001-00">신발</a></p>
 <div class="productMain">
     <form id="purchaseInfo" method="post">
-        <p><img src="/img/product/app/main/${prd.mn_img_fn}" alt="이미지를 준비중입니다."></p>
+        <h1 id="result"></h1>
+        <p>
+            <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}"
+                 alt="이미지 준비 중 입니다"
+                 onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
+        </p>
         <p>${prd.pd_name}</p>
         <p>${prd.pd_ad_cmt}</p>
 
@@ -49,8 +48,8 @@
         <p>배송:무료배송</p>
         <p>구매 주의사항</p>
         <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
-<%--        <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>--%>
-        <button type="button" id="cartBtn">장바구니</button>
+        <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
+<%--        찜하기 3차 개발예정--%>
         <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
     </form>
 </div>
@@ -58,7 +57,11 @@
 <div class="relatedProduct"></div>
 <%--제품 상세 내용--%>
 <div class="detailProductContents">
-    <p><img src="/img/product/app/main/${prd.det_img_fn}" alt="이미지 준비중입니다."></p>
+    <p>
+        <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.det_img_fn}"
+             alt="이미지 준비 중 입니다"
+             onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
+    </p>
     <p>${prd.pd_smr_dsc}</p>
 </div>
 <%--제품 리뷰(구현 안함 3차때 추후 개발예정)--%>
