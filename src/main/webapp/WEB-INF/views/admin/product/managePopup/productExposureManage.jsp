@@ -190,19 +190,23 @@
             else $("#selectAll").prop("checked", true);
         });
 
+        /*아무것도 선택하지 않았으면 값을 입력해달라고 경고창 띄우기*/
         $("#registerBtn").on("click",function(event){
             let checked = $("input[name=selectedContent]:checked").length;
             if (checked == 0) {
                 alert("하나 이상의 항목을 선택해주세요.");
                 event.preventDefault();
             }
-
-            /*아무것도 선택하지 않았으면 값을 입력해달라고 경고창 띄우기*/
         });
 
+        /*선택된 항목들의 데이터를 저장할 selectedContent를 선언한다.*/
         let selectedContent = {};
+        /*name 속성이 selectedContent인 체크박스를 반복한다.*/
         $('input:checkbox[name="selectedContent"]').each(function() {
+            /*만약 체크박스가 체크되어 있다면*/
             if (this.checked) {
+                /*체크된 체크박스의 id속성을 키로 사용하여 selectedContent 객체에 값을 추가한다.*/
+                /*이 때 해당 id를 가진 라디오 버튼 중 체크된 값(value)을 가져와서 저장한다.*/
                 selectedContent[$(this).attr('id')] = $('input[name="' + $(this).attr('id') + '"]:checked').val();
             }
         });
@@ -212,7 +216,6 @@
     document.getElementById("cancelBtn").addEventListener("click", function() {
         window.history.back();
     });
-</script>
 </script>
 </body>
 </html>

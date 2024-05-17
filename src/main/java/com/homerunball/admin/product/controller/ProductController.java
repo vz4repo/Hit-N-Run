@@ -173,6 +173,7 @@ public class ProductController {
             List<String> selectedContentList = new ArrayList<>();
             /*productExposureMangage에서 selectedContent를 가져와서 배열 contentArr에 하나씩 저장한다.*/
             String[] contentArr = selectedContent.split(",");
+            System.out.println("contentArr = " + contentArr);
             /*contentArr의 원소를 selectedContentList에 하나씩 추가한다.*/
             for(int i = 0;i<contentArr.length;i++) {
                 selectedContentList.add(contentArr[i]);

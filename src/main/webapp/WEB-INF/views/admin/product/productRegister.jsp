@@ -598,15 +598,6 @@
                     $(this).val('');
                 }
             });
-
-            /*모든 input 값에 대해 빈칸을 삭제하는 함수*/
-            $('#registerForm').on('submit', function() {
-                // 모든 input 필드를 순회
-                $('input[type="text"]').each(function() {
-                    let trimmedValue = $.trim($(this).val()); // 값의 앞뒤 공백 제거
-                    $(this).val(trimmedValue); // 트리밍된 값으로 설정
-                });
-            });
         });
     </script>
 </body>
