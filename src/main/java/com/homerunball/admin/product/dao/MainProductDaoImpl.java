@@ -16,6 +16,6 @@ public class MainProductDaoImpl implements MainProductDao {
     /*판매중인 신제품을 선택한다.*/
     @Override
     public List<MainProductDto> selectAllNewSalesProduct() throws Exception {
-        return session.selectList(NAMESPACE + "selectMainProduct");
+        return session.selectList(NAMESPACE + "selectNewMainProduct");
     }
 }

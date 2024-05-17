@@ -3,12 +3,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.homerunball.admin.product.dao.MainProductDao">
     <!--prd(제품) 테이블에서 판매중인 신제품의 최대 소비자 가격과 최대 판매 가격을 stk(재고) 테이블에서 가져온다.-->
-    <select id="selectMainProduct" resultType="MainProductDto">
+    <select id="selectNewMainProduct" resultType="MainProductDto">
         select p.pd_id, pd_name, mdl_name, mn_img_fn, pd_ad_cmt, pd_is_show, pd_chr_cd, pd_type_cd, pd_stat_hist_cd, max_rtl_prc, max_sls_prc, p.frst_reg_dt
         from (
         select *
         from prd
-        where pd_chr_cd like "N" and pd_stat_hist_cd like "onSale" and pd_is_show like "Y"
+        where pd_chr_cd like "%N%" and pd_stat_hist_cd like "onSale" and pd_is_show like "Y"
         ) as p, (
         SELECT pd_id, MAX(rtl_prc) AS max_rtl_prc, MAX(sls_prc) AS max_sls_prc
         FROM stk

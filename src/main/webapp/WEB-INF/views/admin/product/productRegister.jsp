@@ -26,6 +26,7 @@
 
         .buttons {
             margin-top: 30pt;
+            text-align: center;
         }
 
         .registerBtn {
@@ -52,6 +53,11 @@
         .cancelBtn:hover {
             background: #2196F3;
             color: white;
+        }
+
+        .clickButton {
+            display: inline-block;
+            height: 50px;
         }
     </style>
     <title>제품 등록 화면</title>
@@ -442,8 +448,8 @@
             </div>
         </div>
         <div class="buttons">
-            <button type="submit" class="registerBtn" id="registerBtn">제품 등록</button>
-            <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
+            <button type="submit" class="registerBtn clickButton" id="registerBtn">제품 등록</button>
+            <button type="button" class="cancelBtn clickButton" id="cancelBtn">취소</button>
         </div>
     </form>
 </div>
@@ -591,6 +597,15 @@
                     alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
                     $(this).val('');
                 }
+            });
+
+            /*모든 input 값에 대해 빈칸을 삭제하는 함수*/
+            $('#registerForm').on('submit', function() {
+                // 모든 input 필드를 순회
+                $('input[type="text"]').each(function() {
+                    let trimmedValue = $.trim($(this).val()); // 값의 앞뒤 공백 제거
+                    $(this).val(trimmedValue); // 트리밍된 값으로 설정
+                });
             });
         });
     </script>

@@ -72,12 +72,6 @@ public class ProductController {
         String category = productDto.getPd_type_cd() + productDto.getPd_type_det_cd() + productDto.getBrd_cd();
         productDto.setCtg(category);
 
-        /* 이미지의 경우 경로를 지정해준다. */
-//        System.out.println("productDto.getMn_img_fn() = " + productDto.getMn_img_fn());
-//        String fileRoot = "/Users/ikjuncho/Desktop/Homerunball/img/" + productDto.getPd_type_cd();
-//        productDto.setMn_img_fn(fileRoot + "main/" + productDto.getMn_img_fn());
-//        productDto.setDet_img_fn(fileRoot + "detail/" + productDto.getDet_img_fn());
-
         try {
             /*
             pd_type_cd에 해당하는 로우 수가 0개라면
@@ -209,7 +203,6 @@ public class ProductController {
             while (iteratorMap.hasNext()) {
                 Map.Entry entry = (Map.Entry) iteratorMap.next();
                 System.out.println(entry.getKey() + " = " + entry.getValue());
-                /*만약 key에 제품유형이 있다면 카테고리를 수정한다.*/
             }
             productService.modifyContent(productMap);
             rattr.addFlashAttribute("msg", "제품의 내용을 성공적으로 수정하였습니다.");
@@ -464,8 +457,6 @@ public class ProductController {
         try {
             /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
             String pdIds = productDto.getPd_id();
-            System.out.println("pdIds = " + pdIds);
-            System.out.println("pdIds.length() = " + pdIds.length());
 
             /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
             if(pdIds == "") {
@@ -475,8 +466,6 @@ public class ProductController {
 
             /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
             List<String> selectedProduct = List.of(pdIds.split(","));
-            System.out.println("selectedProduct = " + selectedProduct);
-            System.out.println("selectedProduct.size() = " + selectedProduct.size());
 
             /*선택된 제품들을 다시 진열한다.*/
             productService.showProduct(selectedProduct);
