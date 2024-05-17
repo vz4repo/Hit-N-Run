@@ -119,7 +119,7 @@
   /* 추가 DEV */
   testAmountElement.addEventListener("change", function () {
     // amount = testAmountElement.value;
-    amount = totalSum;
+    amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
     console.log("totalSum: " + totalSum + ", amount: " + amount);
     paymentMethodWidget.updateAmount(amount);
   });
