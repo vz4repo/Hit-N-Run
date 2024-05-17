@@ -23,7 +23,6 @@
         }
 
         body {
-            background: #e2eaef;
             font-family: "Open Sans", sans-serif;
         }
         h2 {
