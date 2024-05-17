@@ -147,9 +147,7 @@ public class OrderDetDto {
         this.od_qty = od_qty;
     }
 
-    public String getOd_stat_cd() {
-        return od_stat_cd;
-    }
+    public String getOd_stat_cd() { return od_stat_cd; }
 
     public void setOd_stat_cd(String od_stat_cd) {
         this.od_stat_cd = od_stat_cd;

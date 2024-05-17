@@ -55,6 +55,9 @@ public class OrdController {
             OrderDetDto ord_det = new OrderDetDto();
             OrdDto ord = new OrdDto();
 
+            System.out.println(ord_det);
+
+            System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
 
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
             for (CartDto cart : list){
@@ -67,7 +70,7 @@ public class OrdController {
 
                 orderdetDao.insert(ord_det);
             }
-
+            System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());
 
             int totalpd_qty = 0;
             int totalqty = 0;
