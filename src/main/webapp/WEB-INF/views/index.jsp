@@ -58,7 +58,7 @@
         }
         .carousel .thumb-wrapper {
             padding: 25px 15px;
-            background: #fff;
+            background: #d7e9de;
             border-radius: 6px;
             text-align: center;
             position: relative;
