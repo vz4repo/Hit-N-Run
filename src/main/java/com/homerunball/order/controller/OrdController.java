@@ -69,7 +69,6 @@ public class OrdController {
                 ord_det.setSls_prc(cart.getSls_prc());
                 ord_det.setOd_qty(cart.getCart_cnt());
                 ord_det.setC_id(cart.getC_id());
-                ord_det.setMn_img_fn(cart.getMn_img_fn());
 
                 orderdetDao.insert(ord_det);
             }

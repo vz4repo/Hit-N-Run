@@ -76,9 +76,9 @@
                                 </form>
                             </div>
                         </td>
-                        <td>
-                            <span>무료배송</span>
-                        </td>
+<%--                        <td>--%>
+<%--                            <span>무료배송</span>--%>
+<%--                        </td>--%>
                         <td>
                                 <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
                             <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
@@ -98,20 +98,20 @@
         </tbody>
         <tfoot>
         <tr class="tb__left">
-            <td colspan="1">
-                <div><span>[기본배송]</span></div>
-            </td>
+<%--            <td colspan="1">--%>
+<%--                <div><span>[기본배송]</span></div>--%>
+<%--            </td>--%>
             <td colspan="7">
                 <c:if test="${msg == 'CART_EMPTY'}"><h1 class="nonCart">장바구니에 담긴 상품이 없습니다.</h1></c:if>
             </td>
         </tr>
-        <tr>
-            <td colspan="7">
-                <div class="tb__right">
-                    <span>배송비 무료</span>
-                </div>
-            </td>
-        </tr>
+<%--        <tr>--%>
+<%--            <td colspan="7">--%>
+<%--                <div class="tb__right">--%>
+<%--                    <span>배송비 무료</span>--%>
+<%--                </div>--%>
+<%--            </td>--%>
+<%--        </tr>--%>
         <tr>
             <td colspan="7" class="btnStyle">
                 <form action=""  id="removeAllForm">

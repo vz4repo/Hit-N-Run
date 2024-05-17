@@ -94,7 +94,7 @@
                     <tr>
                         <td>
                             <a href="/product/detail?pd_id = ${cartDto.pd_id}">
-                                <img src="/img/product/main/${cartDto.mn_img_fn}" alt="썸네일" />
+                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}" alt="썸네일" name="thumbnail" />
                             </a>
                         </td>
                         <td>
