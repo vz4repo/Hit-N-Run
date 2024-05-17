@@ -45,6 +45,7 @@
 
         li {
             margin-bottom: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -55,7 +56,7 @@
         <%= session.getAttribute("c_name") %>님의 회원등급은 <%=session.getAttribute("grd_name")%>입니다.
     </h1>
     <h5>
-        총 누적 금액: <%=session.getAttribute("tot_amt")%>원<br>
+        총 누적 금액: <%=session.getAttribute("tot_amt")%>원(test)<br>
         홈런볼 가입날짜: <%= session.getAttribute("reg_dt")%><br>
         홈런볼 최근 로그인:  <%= session.getAttribute("login_dt")%>
     </h5><br>
@@ -64,7 +65,7 @@
         <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
         <li><a href="/mypage/info">개인정보 관리</a></li>
         <li><a href="#">배송지 관리</a></li>
-        <li><a href="#">회원탈퇴</a></li>
+        <li><a onclick="test()">회원탈퇴</a></li>
     </ul>
 
     <h2>My Shopping</h2>
@@ -85,6 +86,10 @@
     let pwdClear = "${pwdClear}"
     if(pwdClear==="pwdMsg2") {
         alert("비밀번호 변경에 성공했습니다.")
+    }
+
+    function test(){
+        alert("아직 테스트중입니다!")
     }
 </script>
 

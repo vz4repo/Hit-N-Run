@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -55,7 +56,6 @@
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-             /*padding: 30%;*/
             margin: 0 auto;
             margin-top: 50px;
             margin-bottom: 150px;
@@ -90,14 +90,6 @@
             border: 1px solid #888;
             width: 70%;
         }
-
-        /*.modal-open {*/
-        /*    overflow: hidden;*/
-        /*}*/
-
-        /*isModalOpen{*/
-        /*    overflow: hidden;*/
-        /*}*/
 
         #touModal {
             color: black;
@@ -151,6 +143,14 @@
             box-sizing: border-box;
             font-family: 'IBM Plex Sans', sans-serif;
         }
+
+        #email, #verify{
+            display: inline;
+        }
+        #verify{
+            margin-left: 158px;
+            margin-bottom: 5px;
+        }
     </style>
 
 </head>
@@ -162,11 +162,13 @@
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
+            <input id="verify" type="button" onclick="" value="인증번호 받기" readonly><br>
             <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com" autofocus>
             <label>인증번호(예정)</label>
-            <input class="special-class" type="text" name="c_email2" placeholder="test" value="test" disabled>
+            <input class="special-class" type="text" name="c_email2" placeholder="인증번호 6자리를 입력해주세요" disabled>
+            <span id="mail-check-warn"></span>
             <label>비밀번호</label>
-            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)" oninput="pwd2Check(this.form)">
+            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (3자 이상 15자 이하)" oninput="pwd2Check(this.form)">
             <p id="check-pwd"></p>
             <label id="pwdCheck">비밀번호 확인</label>
             <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." oninput="pwd2Check(this.form)">
@@ -176,6 +178,7 @@
             <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly>
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly>
             <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly>
+            <%--지번이 공백이어도 오류 안뜨는 이유: 값이 없을시 카카오 api가 자동으로 ''을 추가하게 만듬--%>
             <input type="text" id="jibunAddress" name ="c_jibun_a" placeholder="지번주소" readonly>
             <span id="guide" style="color:#999;display:none"></span>
             <input type="text" id="detailAddress" name="c_det_a" placeholder="건물명+상세주소"><br><br>
@@ -423,6 +426,137 @@
 </div>
 
 <script>
+
+    $('#c_email').on('input', function() {
+        emailCheck(); // 이메일 체크 함수 호출
+    });
+    /*이메일 중복체크*/
+
+    function emailCheck() {
+        const email = document.getElementById("c_email").value;
+        const checkResult = document.getElementById("check-result");
+        const verifyButton = $('#verify');
+
+        if (!email.trim()) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일을 입력해주세요.";
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
+        }
+
+        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (!emailPattern.test(email)) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
+        }
+
+        console.log("입력한 이메일", email);
+        $.ajax({
+            type: "post",
+            url: "/register/email-check",
+            data: {
+                "c_email": email
+            },
+            success: function (res) {
+                console.log("요청성공", res);
+                if (res == "ok") {
+                    console.log("적합한 이메일 양식입니다.");
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "적합한 이메일 양식입니다.";
+                    verifyButton.prop('disabled', false); // 버튼 활성화
+                } else {
+                    console.log("이미 사용중인 이메일");
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
+                    verifyButton.prop('disabled', true); // 버튼 비활성화
+                }
+            },
+            error: function (err) {
+                console.log("에러발생", err);
+            }
+        });
+    }
+
+    // function emailCheck() {
+    //     const email = document.getElementById("c_email").value;
+    //     const checkResult = document.getElementById("check-result");
+    //
+    //
+    //     if (!email.trim()) {
+    //         checkResult.style.color = "red";
+    //         checkResult.innerHTML = "이메일을 입력해주세요.";
+    //         return; // 함수 종료
+    //     }
+    //
+    //     var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    //     if (!emailPattern.test(email)) {
+    //         checkResult.style.color = "red";
+    //         checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
+    //         return; // 함수 종료
+    //     }
+    //
+    //     console.log("입력한 이메일", email);
+    //     $.ajax({
+    //         type: "post",
+    //         url: "/register/email-check",
+    //         data: {
+    //             "c_email": email
+    //         },
+    //         success: function (res) {
+    //             console.log("요청성공", res);
+    //             if (res == "ok") {
+    //                 console.log("사용 가능한 이메일입니다.");
+    //                 checkResult.style.color = "green";
+    //                 checkResult.innerHTML = "사용 가능한 이메일입니다.";
+    //                 $('#verify').prop('disabled', false);
+    //             } else {
+    //                 console.log("이미 사용중인 이메일");
+    //                 checkResult.style.color = "red";
+    //                 checkResult.innerHTML = "이미 사용중인 이메일입니다.";
+    //                 $('#verify').prop('disabled', true);
+    //                 return false;
+    //             }
+    //         },
+    //         error: function (err) {
+    //             console.log("에러발생", err);
+    //         }
+    //     });
+    // }
+
+
+    $('#verify').click(function() {
+        const email = $('#c_email').val(); // 이메일 주소값 얻어오기!
+        console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
+        const checkInput = $('#c_email2') // 인증번호 입력하는곳
+        $.ajax({
+            type : 'get',
+            url : '<c:url value ="/register/mailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+            success : function (data) {
+                console.log("data : " +  data);
+                checkInput.attr('disabled',false);
+                code =data;
+                alert('인증번호가 전송되었습니다(test)')
+            }
+        });
+    });
+
+    // $('#c_email2').blur(function () {
+    //     const inputCode = $(this).val();
+    //     const $resultMsg = $('#mail-check-warn');
+    //
+    //     if(inputCode === code){
+    //         $resultMsg.html('인증번호가 일치합니다.');
+    //         $resultMsg.css('color','green');
+    //         $('#verify').attr('disabled',true);
+    //         $('#c_email').attr('readonly',true);
+    //     }else{
+    //         $resultMsg.html('인증번호가 불일치 합니다. 다시 확인해주세요!.');
+    //         $resultMsg.css('color','red');
+    //     }
+    // });
+
     var modalSeen = false;
     var modalSeen2 = false;
 
@@ -552,7 +686,7 @@
             alert('비밀번호를 입력해주세요.');
             return false;
         } else if (!isPwd) {
-            alert('비밀번호는 영문/숫자/특수문자 조합으로 8자 이상 15자 이하로 설정하셔야합니다.');
+            alert('비밀번호는 영문/숫자/특수문자 조합으로 3자 이상 15자 이하로 설정하셔야합니다.');
             return false;
         } else if (!pwd2) {
             alert('비밀번호 확인을 입력해주세요');
@@ -575,9 +709,6 @@
         } else if (!road) {
             alert('도로명주소를 입력해주세요.');
             return false;
-        // } else if (!jibun) {
-        //     alert('지번주소를 입력해주세요.');
-        //     return false;
         } else if (!det) {
             alert('상세주소를 입력해주세요.');
             return false;
@@ -621,60 +752,11 @@
         return true;
     }
 
-    /*이메일 중복체크*/
-    function emailCheck() {
-        const email = document.getElementById("c_email").value;
-        const checkResult = document.getElementById("check-result");
-
-
-        if (!email.trim()) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일을 입력해주세요.";
-            return; // 함수 종료
-        }
-
-        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (!emailPattern.test(email)) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
-            return; // 함수 종료
-        }
-
-        console.log("입력한 이메일", email);
-        $.ajax({
-            type: "post",
-            url: "/register/email-check",
-            data: {
-                "c_email": email
-            },
-            success: function (res) {
-                console.log("요청성공", res);
-                if (res == "ok") {
-                    console.log("사용 가능한 이메일입니다.");
-                    checkResult.style.color = "green";
-                    checkResult.innerHTML = "사용 가능한 이메일입니다.";
-                } else {
-                    console.log("이미 사용중인 이메일");
-                    checkResult.style.color = "red";
-                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
-                    return false;
-                }
-            },
-            error: function (err) {
-                console.log("에러발생", err);
-            }
-        });
-    }
-
     /*3-2 비밀번호 유효성 검사*/
 
     function pwdCheck(frm) {
         var pwd = frm.c_pwd.value;
-        // var pwd2 = frm.c_pwd2.value;
-        // var pwdResult = document.getElementById("check-pwd")
-        //
-
-        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,15}$/;
+        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{3,15}$/;
         if (!pwdPattern.test(pwd)) {
             return false;
         }

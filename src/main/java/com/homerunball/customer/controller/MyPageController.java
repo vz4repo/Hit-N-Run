@@ -3,13 +3,10 @@ package com.homerunball.customer.controller;
 
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
-//import com.homerunball.customer.domain.CustHistDto;
 import com.homerunball.customer.service.CustService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/mypage")
@@ -140,4 +135,3 @@ public class MyPageController {
         return "redirect:/mypage/list";
     }
 }
-
