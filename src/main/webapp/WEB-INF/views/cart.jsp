@@ -151,7 +151,7 @@
                 selectedItems.push({
                     c_id: c_id,
                     pd_id: pd_id,
-                    pd_clsf_code: pd_clsf_code,
+                    pd_clsf_code: pd_clsf_code
                 });
             });
 

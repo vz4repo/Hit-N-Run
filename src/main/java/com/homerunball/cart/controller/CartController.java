@@ -115,6 +115,7 @@ public class CartController {
                 cartDao.insert(cartDto);
             }
 
+            System.out.println("insert:" + cartDto);
             m.addAttribute("cartDto", cartDto);
         } catch (Exception e) {
             e.printStackTrace();

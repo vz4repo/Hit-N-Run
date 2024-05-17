@@ -116,7 +116,6 @@ public class CartDto {
     public void setRtl_prc(int rtl_prc) {
         this.rtl_prc = rtl_prc;
     }
-
     @Override
     public String toString() {
         return "CartDto{" +
