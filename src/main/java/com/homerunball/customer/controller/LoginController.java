@@ -86,6 +86,8 @@ public class LoginController {
             if (!(custDto.getC_pwd().equals(c_pwd))) {
                 return false;
             }
+
+
             /*로그인 성공시 updateLoginDate 메서드 실행*/
             custDao.updateLoginDt(c_email);
             /*새로운 세션 생성*/
