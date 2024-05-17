@@ -15,6 +15,10 @@ table {
     line-height: 1.35;
     color: #777;
 }
+img {
+    height: 80px;
+    width: 80px;
+}
 
 th, td {
     text-align: center;
@@ -22,6 +26,7 @@ th, td {
 
 td {
     padding: 10px 0;
+    vertical-align: middle;
 }
 
 hr {
@@ -81,10 +86,11 @@ thead th {
 
 .tb__right {
     display: grid;
-    grid-template-columns: repeat(4, 33%);
-    place-items: center center;
+    /*justify-content: center;*/
+    place-items: end;
     font-weight: bold;
     font-size: 14px;
+    margin-right: 1%;
 }
 
 tfoot td, tfoot tr{

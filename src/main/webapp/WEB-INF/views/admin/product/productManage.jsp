@@ -4,11 +4,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style><%@include file="/resources/css/adminMenu.css"%></style>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        table, th, td {
+        <%@include file="/resources/css/adminMenu.css"%>
+        <%@include file="/resources/css/searchConditionForm.css"%>
+        table, tr, th, td {
             border: 1px solid black;
             border-collapse: collapse;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
             text-align: left;
         }
 
@@ -28,7 +38,11 @@
 <body>
 <jsp:include page="../adminMenu.jsp" flush="false" />
 <div class="main">
-    <h1>제품 관리 페이지</h1>
+    <h1>제품 정보 일괄 변경</h1>
+
+    <jsp:include page="../searchConditionForm.jsp" flush="false" />
+
+    <h1>제품 목록</h1>
         <table>
             <tr>
                 <td colspan="12">[총 <strong>${productCount}</strong>개]</td>

@@ -1,5 +1,6 @@
 package com.homerunball.cart.dao;
 
+import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.cart.domain.CartDto;
 import com.homerunball.customer.domain.CustDto;
 import org.apache.ibatis.session.SqlSession;
@@ -56,6 +57,15 @@ public class CartDaoImpl implements CartDao {
     @Override
     public int insert(CartDto cart) throws Exception {
         return session.insert(namespace+"insert", cart);
+    }
+
+    @Override
+    public CartDto selectCart(int c_id, String pd_id, String pd_clsf_code) throws Exception {
+        Map map = new HashMap();
+        map.put("c_id", c_id);
+        map.put("pd_id", pd_id);
+        map.put("pd_clsf_code", pd_clsf_code);
+        return session.selectOne(namespace+"selectCart", map);
     }
 
 
