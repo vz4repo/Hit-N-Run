@@ -73,6 +73,8 @@
 
   /* TODO: 수정 및 cors 이슈 해결 필요 */
   let amount = 99999;
+  amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
+
 
   /*
   * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
@@ -119,7 +121,7 @@
   /* 추가 DEV */
   testAmountElement.addEventListener("change", function () {
     // amount = testAmountElement.value;
-    amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
+    amount = testAmountElement.value;
     console.log("totalSum: " + totalSum + ", amount: " + amount);
     paymentMethodWidget.updateAmount(amount);
   });
