@@ -12,20 +12,20 @@ public class CartDto {
     private Date last_mod_dt;
     private String last_mod_id;
 
+    private String mn_img_fn;
     private  String pd_name;
-    private int cart_cnt;
+    private int cart_cnt=1;
     private int sls_prc;
     private int rtl_prc;
 
-
-
     public CartDto(){}
 
-    public CartDto(int c_id, String pd_id, String pd_clsf_code, int cart_cnt, String pd_name, int sls_prc, int rtl_prc){
+    public CartDto(int c_id, String pd_id, String pd_clsf_code, int cart_cnt, String mn_img_fn, String pd_name, int sls_prc, int rtl_prc){
         this.c_id = c_id;
         this.pd_id = pd_id;
         this.pd_clsf_code = pd_clsf_code;
         this.cart_cnt = cart_cnt;
+        this.mn_img_fn = mn_img_fn;
         this.pd_name = pd_name;
         this.sls_prc = sls_prc;
         this.rtl_prc = rtl_prc;
@@ -36,14 +36,13 @@ public class CartDto {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         CartDto cartDto = (CartDto) object;
-        return c_id == cartDto.c_id && cart_cnt == cartDto.cart_cnt && sls_prc == cartDto.sls_prc && rtl_prc == cartDto.rtl_prc && Objects.equals(pd_id, cartDto.pd_id) && Objects.equals(pd_clsf_code, cartDto.pd_clsf_code) && Objects.equals(frst_reg_dt, cartDto.frst_reg_dt) && Objects.equals(frst_reg_id, cartDto.frst_reg_id) && Objects.equals(last_mod_dt, cartDto.last_mod_dt) && Objects.equals(last_mod_id, cartDto.last_mod_id) && Objects.equals(pd_name, cartDto.pd_name);
+        return c_id == cartDto.c_id && cart_cnt == cartDto.cart_cnt && sls_prc == cartDto.sls_prc && rtl_prc == cartDto.rtl_prc && Objects.equals(pd_id, cartDto.pd_id) && Objects.equals(pd_clsf_code, cartDto.pd_clsf_code) && Objects.equals(frst_reg_dt, cartDto.frst_reg_dt) && Objects.equals(frst_reg_id, cartDto.frst_reg_id) && Objects.equals(last_mod_dt, cartDto.last_mod_dt) && Objects.equals(last_mod_id, cartDto.last_mod_id) && Objects.equals(mn_img_fn, cartDto.mn_img_fn) && Objects.equals(pd_name, cartDto.pd_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(c_id, pd_id, pd_clsf_code, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id, pd_name, cart_cnt, sls_prc, rtl_prc);
+        return Objects.hash(c_id, pd_id, pd_clsf_code, frst_reg_dt, frst_reg_id, last_mod_dt, last_mod_id, mn_img_fn, pd_name, cart_cnt, sls_prc, rtl_prc);
     }
-
 
     public int getC_id() {
         return c_id;
@@ -77,6 +76,13 @@ public class CartDto {
         this.cart_cnt = cart_cnt;
     }
 
+    public String getMn_img_fn() {
+        return mn_img_fn;
+    }
+
+    public void setMn_img_fn(String mn_img_fn) {
+        this.mn_img_fn = mn_img_fn;
+    }
     public String getPd_name() {
         return pd_name;
     }
@@ -100,7 +106,6 @@ public class CartDto {
     public void setRtl_prc(int rtl_prc) {
         this.rtl_prc = rtl_prc;
     }
-
     @Override
     public String toString() {
         return "CartDto{" +
@@ -111,11 +116,11 @@ public class CartDto {
                 ", frst_reg_id='" + frst_reg_id + '\'' +
                 ", last_mod_dt=" + last_mod_dt +
                 ", last_mod_id='" + last_mod_id + '\'' +
+                ", mn_img_fn='" + mn_img_fn + '\'' +
                 ", pd_name='" + pd_name + '\'' +
                 ", cart_cnt=" + cart_cnt +
                 ", sls_prc=" + sls_prc +
                 ", rtl_prc=" + rtl_prc +
                 '}';
     }
-
 }
