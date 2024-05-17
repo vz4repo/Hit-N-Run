@@ -567,47 +567,29 @@
             });
 
             /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
-            $("#wgh").keyup(function () {
-                /* 입력된 무게 값 */
-                let weight = $(this).val();
-                /* 숫자 패턴 정규식 */
-                let pattern = /^[0-9]+$/;
-
-                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
-                if (!pattern.test(weight)) {
+            $('#wgh').on('blur', function () {
+                let weightInput = $(this).val();
+                if (isNaN(weightInput) || weightInput.trim() === '') {
                     alert("무게는 숫자만 입력할 수 있습니다.");
-                    /* 입력 값에서 숫자가 아닌 문자 제거 */
-                    $(this).val(weight.replace(/[^0-9]/,''));
+                    $(this).val('');
                 }
             });
 
             /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $("#min_od_qty").keyup(function () {
-                /* 입력된 최소 주문 수량 */
+            $('#min_od_qty').on('blur', function () {
                 let minQty = $(this).val();
-                /* 숫자 패턴 정규식 */
-                let pattern = /^[0-9]+$/;
-
-                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
-                if (!pattern.test(minQty)) {
+                if (isNaN(minQty) || minQty.trim() === '') {
                     alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
-                    /* 입력 값에서 숫자가 아닌 문자 제거 */
-                    $(this).val(minQty.replace(/[^0-9]/,''));
+                    $(this).val('');
                 }
             });
 
             /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $("#max_od_qty").keyup(function () {
-                /* 입력된 최대 주문 수량 */
+            $('#max_od_qty').on('blur', function () {
                 let maxQty = $(this).val();
-                /* 숫자 패턴 정규식 */
-                let pattern = /^[0-9]+$/;
-
-                /* 숫자 패턴에 맞지 않은 경우 경고 출력 */
-                if (!pattern.test(maxQty)) {
+                if (isNaN(maxQty) || maxQty.trim() === '') {
                     alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
-                    /* 입력 값에서 숫자가 아닌 문자 제거 */
-                    $(this).val(maxQty.replace(/[^0-9]/,''));
+                    $(this).val('');
                 }
             });
         });
