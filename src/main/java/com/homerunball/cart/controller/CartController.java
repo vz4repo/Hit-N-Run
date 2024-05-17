@@ -92,7 +92,7 @@ public class CartController {
 
 
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_clsf_cd, Model m, HttpSession session) {
+    public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session) {
         int c_id = 0;
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
@@ -102,6 +102,7 @@ public class CartController {
             cartDto.setPd_id(pd_id);
             cartDto.setPd_clsf_code(pd_clsf_cd);
             cartDto.setMn_img_fn(mn_img_fn);
+            cartDto.setPd_type_cd(pd_type_cd);
 
             boolean exists = cartDao.exists(cartDto);
 
