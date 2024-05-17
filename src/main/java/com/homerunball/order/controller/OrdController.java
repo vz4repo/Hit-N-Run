@@ -59,6 +59,8 @@ public class OrdController {
 
             System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
 
+
+
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
             for (CartDto cart : list){
                 ord_det.setPd_id(cart.getPd_id());
@@ -67,6 +69,7 @@ public class OrdController {
                 ord_det.setSls_prc(cart.getSls_prc());
                 ord_det.setOd_qty(cart.getCart_cnt());
                 ord_det.setC_id(cart.getC_id());
+                ord_det.setMn_img_fn(cart.getMn_img_fn());
 
                 orderdetDao.insert(ord_det);
             }
@@ -108,7 +111,7 @@ public class OrdController {
             ordDao.insert(ord);
 
             System.out.println("ord_det.getC_id()" +ord_det.getC_id());
-            System.out.println(ord);
+            System.out.println(list+"===========================");
 
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/

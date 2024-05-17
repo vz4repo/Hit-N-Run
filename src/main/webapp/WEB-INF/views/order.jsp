@@ -93,7 +93,9 @@
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="#"><img src="#" alt="썸네일" /></a>
+                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
+                                <img src="/img/product/main/${cartDto.mn_img_fn}" alt="썸네일" />
+                            </a>
                         </td>
                         <td>
                             <a href="#">${cartDto.pd_name}</a>
