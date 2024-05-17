@@ -4,11 +4,21 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         <%@include file="/resources/css/adminMenu.css"%>
-        table, th, td {
+        <%@include file="/resources/css/searchConditionForm.css"%>
+        table, tr, th, td {
             border: 1px solid black;
             border-collapse: collapse;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
             text-align: left;
         }
 
@@ -28,6 +38,9 @@
 <body>
     <jsp:include page="../adminMenu.jsp" flush="false" />
     <div class="main">
+        <h1>삭제 제품 목록</h1>
+        <jsp:include page="../searchConditionForm.jsp" flush="false" />
+
         <h1>진열 제외 제품 목록</h1>
         <table>
             <tr>

@@ -146,7 +146,7 @@ public class ProductController {
 
     /*선택된 제품에 대한 수정사항을 반영한다.*/
     @PostMapping("/manage")
-    public String manage(ProductDto productDto, @RequestParam("productList") String productID, @RequestParam("selectedContent") String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m) {
+    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m) {
         /*이전 페이지의 url을 referer에 저장한다.*/
         /*String referer = request.getHeader("Referer");*/
         try {
@@ -241,7 +241,7 @@ public class ProductController {
 
     /*제품의 표시 설정을 변경하기 위한 메서드*/
     @PostMapping("/manage/exposure")
-    public String productExposure(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
+    public String productExposure(ProductDto productDto, String productNumber, Model m, RedirectAttributes rattr) {
         /*
         productNumber가 selectedProduct라면
             pd_Id에 선택된 제품 List로 저장한다.
@@ -291,7 +291,7 @@ public class ProductController {
 
     /*제품의 기초 정보를 수정하기 위한 메서드*/
     @PostMapping("/manage/basicInformation")
-    public String manageBasicInformation(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
+    public String manageBasicInformation(ProductDto productDto, String productNumber, Model m, RedirectAttributes rattr) {
         /*
         productNumber가 selectedProduct라면
             pd_Id에 선택된 제품 List로 저장한다.
@@ -341,7 +341,7 @@ public class ProductController {
 
     /*판매 정보를 수정하기 위한 메서드*/
     @PostMapping("/manage/salesInformation")
-    public String manageSalesInformation(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
+    public String manageSalesInformation(ProductDto productDto, String productNumber, Model m, RedirectAttributes rattr) {
         /*
         productNumber가 selectedProduct라면
             pd_Id에 선택된 제품 List로 저장한다.
@@ -391,7 +391,7 @@ public class ProductController {
 
     /*이미지를 등록한 내용을 수정하기 위한 메서드*/
     @PostMapping("/manage/imageRegistration")
-    public String manageImageRegistration(ProductDto productDto, @RequestParam("productNumber") String productNumber, Model m, RedirectAttributes rattr) {
+    public String manageImageRegistration(ProductDto productDto, String productNumber, Model m, RedirectAttributes rattr) {
         /*
         productNumber가 selectedProduct라면
             pd_Id에 선택된 제품 List로 저장한다.
