@@ -1,5 +1,6 @@
 package com.homerunball.cart.controller;
 
+import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
 import com.homerunball.product.customer.domain.StockViewDto;
@@ -89,9 +90,9 @@ public class CartController {
         return "redirect:/cart/list?c_id="+c_id;
     }
 
-    // 덜구현됨, 버튼만들고 연결시켜야함
+
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, String pd_id, String pd_clsf_cd, Model m, HttpSession session) {
+    public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_clsf_cd, Model m, HttpSession session) {
         int c_id = 0;
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
@@ -100,19 +101,19 @@ public class CartController {
             cartDto.setC_id(c_id);
             cartDto.setPd_id(pd_id);
             cartDto.setPd_clsf_code(pd_clsf_cd);
-            cartDto.setCart_cnt(1);
+            cartDto.setMn_img_fn(mn_img_fn);
 
             boolean exists = cartDao.exists(cartDto);
 
             if (exists) {
-                cartDto.setCart_cnt(cartDto.getCart_cnt()+1);
+                CartDto dao = cartDao.selectCart(c_id, pd_id, pd_clsf_cd);
+                int currentCart = dao.getCart_cnt();
+                cartDto.setCart_cnt(currentCart+1);
                 cartDao.update(cartDto);
-                throw new Exception("Cart insert err: 이미 존재하는 상품입니다.");
             } else {
                 cartDao.insert(cartDto);
             }
 
-            System.out.println("insert:" + cartDto);
             m.addAttribute("cartDto", cartDto);
         } catch (Exception e) {
             e.printStackTrace();
@@ -130,6 +131,8 @@ public class CartController {
 
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.getStk(c_id);
+
+//            List<ProductDto> prdImg = cartDao.getProductImg()
             System.out.println("stklist=========="+list);
 
 
