@@ -14,7 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
 </head>
 <body>
