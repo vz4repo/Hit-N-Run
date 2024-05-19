@@ -64,11 +64,11 @@
                                 <a href="#">${orderdetDto.pd_name}</a>
                                 <span>사이즈: ${orderdetDto.pd_clsf_cd}</span>
                             </td>
-                            <td><span>${orderdetDto.frst_reg_dt}</span></td>
+                            <td><span data-oddt="${orderdetDto.od_dt}" id="od_dt">${orderdetDto.od_dt}</span></td>
                             <td><a href="#">${orderdetDto.od_id}</a></td>
                             <td>
-                                <span>${orderdetDto.sls_prc}</span>
-                                <span>${orderdetDto.od_qty}</span>
+                                <span>${orderdetDto.sls_prc * Imglist[status.index].cart_cnt}</span>
+                                <span>(${orderdetDto.od_qty}개)</span>
                             </td>
                             <td>
                                 <a href="#">${orderdetDto.od_stat_cd}</a>
@@ -82,5 +82,17 @@
     </div>
 </main>
 <jsp:include page="footer.jsp"/>
+<script>
+
+    $(document).ready(function(){
+        $('#od_dt').each(function (){
+            let oddt = parseInt($(this).data("oddt")); /* od_dt 데이터 가져오기 */
+            let today = new Date();
+            let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt)+1) + '.' + today.getDate(oddt);
+            $(this).text(dateFormat);
+        })
+    })
+</script>
+
 </body>
 </html>
