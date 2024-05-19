@@ -366,6 +366,9 @@
                             <option value="XL">XL</option>
                             <option value="2XL">2XL</option>
                             <option value="3XL">3XL</option>
+                            <option value="LH">좌투</option>
+                            <option value="RH">우투</option>
+                            <option value="FREE">프리사이즈</option>
                         </select>
                     </td>
                     <td id="nmlQty_${status.index}" class="nml_stk_qty"></td>
