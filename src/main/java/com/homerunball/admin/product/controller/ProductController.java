@@ -140,7 +140,7 @@ public class ProductController {
 
     /*선택된 제품에 대한 수정사항을 반영한다.*/
     @PostMapping("/manage")
-    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd, int wgh, int min_od_qty, int max_od_qty) {
+    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd) {
         /*이전 페이지의 url을 referer에 저장한다.*/
         /*String referer = request.getHeader("Referer");*/
         try {
@@ -193,12 +193,6 @@ public class ProductController {
                     changeStringValue = pd_chr_cd.replace(",","");
                     /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
                     productMap.put(changeContent, changeStringValue);
-                } else if (changeContent.equals("weight")) {
-                    productMap.put("wgh", wgh);
-                } else if (changeContent.equals("min_od_qty")) {
-                    productMap.put("min_od_qty", min_od_qty);
-                } else if (changeContent.equals("max_od_qty")) {
-                    productMap.put("max_od_qty", max_od_qty);
                 } else { /*만약 changeContent가 pd_chr_cd, min_od_qty, max_od_qty, wgh가 아니라면*/
                     /*productExposureManage페이지에서 changeContent를 name으로 갖는 파라미터를 changeStringValue에 저장한다.*/
                     changeStringValue = request.getParameter(changeContent);
@@ -206,7 +200,7 @@ public class ProductController {
                     productMap.put(changeContent, changeStringValue);
                 }
                 /*만약 changeStringValue가 null이라면 에러 발생*/
-                if (productMap.size() == 0 && (changeStringValue == null || changeStringValue.equals(""))) throw new IllegalArgumentException();
+                if (changeStringValue == null || changeStringValue.equals("")) throw new IllegalArgumentException();
 //                /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
 //                productMap.put(changeContent, changeStringValue);
             }
