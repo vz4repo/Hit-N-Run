@@ -144,7 +144,6 @@ public class ProductController {
         /*이전 페이지의 url을 referer에 저장한다.*/
         /*String referer = request.getHeader("Referer");*/
         try {
-            System.out.println("manage 도착");
             /*
             productNumber가 selectedProduct라면
                 pd_Id에 선택된 제품 List로 저장한다.
@@ -178,7 +177,6 @@ public class ProductController {
             for(int i = 0;i<contentArr.length;i++) {
                 selectedContentList.add(contentArr[i]);
             }
-
 
             /*선택된 변경 항목을 selectedContentList에 있는 문자열을 반복하는 iterator을 선언한다.*/
             Iterator<String> iterator = selectedContentList.iterator();

@@ -6,22 +6,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<%--    <link rel="stylesheet" href="reset.css" />--%>
-<%--    <link rel="stylesheet" href="order.css" />--%>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/cart.css'/>"   rel="stylesheet" />
+    <%--   다니님 header, footer --%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
 
     <title>주문내역조회</title>
 </head>
 <body>
+<jsp:include page="header.jsp"/>
 <main>
     <div class="order__header">
         <a href="#" class="order__path">Homerun() > 주문내역조회</a>
-        <hr />
     </div>
-    <hr class="second__under" />
+<%--    <hr class="second__under" />--%>
     <div class="tb__order">
         <form action="/orderDetail">
             <table style="width: 90%">
@@ -53,10 +55,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="orderdetDto" items="${list}">
+                    <c:forEach var="orderdetDto" items="${list}"  varStatus="status" >
                         <tr>
                             <td>
-                                <a href="#"><img src="#" alt="썸네일" /></a>
+                                <a href="/product/detail?pd_id=${Imglist[status.index].pd_id}">
+                                    <img src="/img/product/${Imglist[status.index].pd_type_cd.toLowerCase()}/main/${Imglist[status.index].mn_img_fn}" alt="썸네일" name="thumbnail" />
+                                </a>
                                 <a href="#">${orderdetDto.pd_name}</a>
                                 <span>사이즈: ${orderdetDto.pd_clsf_cd}</span>
                             </td>
@@ -77,5 +81,6 @@
         </form>
     </div>
 </main>
+<jsp:include page="footer.jsp"/>
 </body>
 </html>

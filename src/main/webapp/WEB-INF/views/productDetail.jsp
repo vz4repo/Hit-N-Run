@@ -33,6 +33,7 @@
             <input id="pd_id" name="pd_id" value="${stkInfo.pd_id}" style="display: none">
             <input id="pd_clsf_cd" name="pd_clsf_cd" style="display: none">
             <input id="mn_img_fn" name="mn_img_fn" value="${prd.mn_img_fn}" style="display: none">
+            <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
         </p>
 
         <p>판매가격:${stkInfo.sls_prc}</p>

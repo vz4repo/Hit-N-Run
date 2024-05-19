@@ -12,6 +12,7 @@ public interface DeliveryDao {
     /* 주문페이지에서 선택한 배송지 띄우기 */
     DeliveryDto select(int c_id, int c_adr_list_id) throws Exception;
 
+    DeliveryDto selecteDefault(int c_id) throws Exception;
 
         /* 신규 배송지 입력 */
         /* insert는 반환값이 없어서 returnType이 void이지만, 업데이트 된 행의 갯수를 return 받을 용도로 int를 반환값으로 받고,

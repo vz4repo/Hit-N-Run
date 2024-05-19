@@ -26,7 +26,6 @@ import java.util.Objects;
 public class MyPageController {
     @Autowired
     CustDao custDao;
-
     @Autowired
     CustService custService;
 
