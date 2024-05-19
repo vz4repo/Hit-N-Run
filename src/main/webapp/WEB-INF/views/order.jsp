@@ -76,7 +76,7 @@
                         <div>상품정보</div>
                     </th>
                     <th scope="col">
-                        <div>소비자가</div>
+                        <div>판매가</div>
                     </th>
                     <th scope="col">
                         <div>수량</div>
@@ -85,7 +85,7 @@
                         <div>배송구분</div>
                     </th>
                     <th scope="col">
-                        <div>판매가</div>
+                        <div>주문금액</div>
                     </th>
                 </tr>
                 </thead>
@@ -93,13 +93,15 @@
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="#"><img src="#" alt="썸네일" /></a>
+                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
+                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}" alt="썸네일" name="thumbnail" />
+                            </a>
                         </td>
                         <td>
                             <a href="#">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
-                        <td><span class="priceFormat">${cartDto.rtl_prc}</span></td>
+                        <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
@@ -117,8 +119,8 @@
                         <div class="tb__right">
                             <span>상품구매금액</span>
                             <span>배송비 무료</span>
-                            <div>합계:
-                                <span class="" id="totalSum"></span>
+                            <div>최종 결제 금액
+                                <span class="" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
                             </div>
                         </div>
                     </td>

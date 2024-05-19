@@ -47,13 +47,18 @@ public class OrdController {
         int c_id = (int)session.getAttribute("c_id");
         try {
 //            List<CartDto> list = cartDao.selectUser(c_id);
-            List<CartDto> list =cartDao.getStk(c_id);
+            List<CartDto> list = cartDao.getStk(c_id);
            /* List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);*/
 
             System.out.println("list = " +list);
 
             OrderDetDto ord_det = new OrderDetDto();
             OrdDto ord = new OrdDto();
+
+            System.out.println(ord_det);
+
+            System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
+
 
 
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
@@ -67,7 +72,7 @@ public class OrdController {
 
                 orderdetDao.insert(ord_det);
             }
-
+            System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());
 
             int totalpd_qty = 0;
             int totalqty = 0;
@@ -105,7 +110,7 @@ public class OrdController {
             ordDao.insert(ord);
 
             System.out.println("ord_det.getC_id()" +ord_det.getC_id());
-            System.out.println(ord);
+            System.out.println(list+"===========================");
 
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/

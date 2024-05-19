@@ -215,7 +215,7 @@ public class StockController {
     /* 재고 수정하는 메서드 ------작성해야해 */
     @PostMapping("/modify")
     @ResponseBody
-    public StockDto modify(@RequestBody StockDto stockDto, Model model) throws Exception {
+    public String modify(@RequestBody StockDto stockDto, Model model) throws Exception {
         /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다.
             > 제품id와 사이즈 정보가 데이터베이스에 있는지 확인
               > 재고정보가 있으면 객체를 전달한다.
@@ -223,7 +223,8 @@ public class StockController {
 
         String pdId = stockDto.getPd_id();
         String pdClsfCd = stockDto.getPd_clsf_cd();
-
+        stockDto.setPur_dt(stockDto.getPur_dt().replace("-", ""));
+        stockDto.setRcpt_dt(stockDto.getRcpt_dt().replace("-", ""));
         try{
             /* 사이즈가 ALL이면 모든 사이즈의 재고수량을 수정한다. 배열을 순회하며 list를 조회하고 화면에 뿌려준다.
            if (pdClsfCd.equals("ALL")) {
@@ -242,14 +243,27 @@ public class StockController {
                 }
             } else {*/
             //개별 사이즈로 값이 넘어올 때
+            //jsp로부터 넘겨받은 stockDto와 selectModifyStock의 값을 비교
             StockDto selectModifyStock = stockService.getOneStock(pdId, pdClsfCd);
-            if (stockService.modify(selectModifyStock) != 1) {
-                throw new Exception("수정에 실패했습니다.");
+            // 재고에 있는 값과 모두 일치하면? > 동일한 데이터 입니다. 수정해주세요.
+            if(selectModifyStock.equals(stockDto)){
+                throw new IllegalArgumentException("Same Data");
             }
+            if (stockService.modify(stockDto) != 1) {
+                throw new Exception("modify fail");
+            }
+
+            model.addAttribute("msg", "modify success");
+
+        } catch(IllegalArgumentException e) {
+            model.addAttribute("msg", e.getMessage());
+            return (String) model.getAttribute("msg");
         } catch (Exception e) {
             e.printStackTrace();
+            model.addAttribute("msg", e.getMessage());
+            return (String) model.getAttribute("msg");
         }
-        return stockDto;
+        return (String) model.getAttribute("msg");
     }
     /*상품목록 검색하는 기능 -> 검색해서 내가 원하는 상품 목록 조회 -> 선택한 상품 재고 등록 or 수정*/
 }

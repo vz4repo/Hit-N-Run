@@ -8,9 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css'/>" />
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/cart.css'/>"   rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <%--   다니님 header, footer --%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
 </head>
 <body>
@@ -50,10 +54,12 @@
                     <tr>
                         <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength" /></td>
                         <td>
-                            <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}" alt="썸네일" name="thumbnail" />
+                            </a>
                         </td>
                         <td>
-                            <a href="/product/item?pd_id=${cartDto.pd_name}">${cartDto.pd_name}</a>
+                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
                         </td>
                         <td><span name="price" class="priceFormat">${cartDto.rtl_prc}</span></td>
@@ -70,9 +76,9 @@
                                 </form>
                             </div>
                         </td>
-                        <td>
-                            <span>무료배송</span>
-                        </td>
+<%--                        <td>--%>
+<%--                            <span>무료배송</span>--%>
+<%--                        </td>--%>
                         <td>
                                 <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
                             <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
@@ -92,20 +98,20 @@
         </tbody>
         <tfoot>
         <tr class="tb__left">
-            <td colspan="1">
-                <div><span>[기본배송]</span></div>
-            </td>
+<%--            <td colspan="1">--%>
+<%--                <div><span>[기본배송]</span></div>--%>
+<%--            </td>--%>
             <td colspan="7">
                 <c:if test="${msg == 'CART_EMPTY'}"><h1 class="nonCart">장바구니에 담긴 상품이 없습니다.</h1></c:if>
             </td>
         </tr>
-        <tr>
-            <td colspan="7">
-                <div class="tb__right">
-                    <span>배송비 무료</span>
-                </div>
-            </td>
-        </tr>
+<%--        <tr>--%>
+<%--            <td colspan="7">--%>
+<%--                <div class="tb__right">--%>
+<%--                    <span>배송비 무료</span>--%>
+<%--                </div>--%>
+<%--            </td>--%>
+<%--        </tr>--%>
         <tr>
             <td colspan="7" class="btnStyle">
                 <form action=""  id="removeAllForm">

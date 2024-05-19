@@ -23,6 +23,7 @@ public class HomeController {
             int mainProductNumber = mainProductList.size();
             m.addAttribute("mainProductList", mainProductList);
             m.addAttribute("mainProductNumber", mainProductNumber);
+            System.out.println("mainProductNumber = " + mainProductNumber);
         } catch (Exception e) {
             e.printStackTrace();
             return "errorPage";

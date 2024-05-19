@@ -27,11 +27,14 @@ public class OrdDetController {
         int c_id = (int)session.getAttribute("c_id");
         try {
             List<OrderDetDto> list = orderdetDao.select(c_id);
+            List<CartDto> Imglist =cartDao.getStk(c_id);
 //            List<CartDto> list = cartDao.selectUser(c_id);
             System.out.println("김다니 돼지쌔끼=" + list);
+
             m.addAttribute("list",list);
+            m.addAttribute("Imglist",Imglist);
 
-
+            System.out.println("김다니 존나 돼지쌔끼" + Imglist);
             /*OrderDetDto ord_det = new OrderDetDto(c_id);
             orderdetDao.insert(ord_det);*/
 
