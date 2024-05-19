@@ -136,11 +136,11 @@
         /* 확인 버튼을 누르면 재고가 등록된다. */
         function registStock() {
 
-            if (!idValidateParams()) {
+            if (!idValidateRegisterParams()) {
                 return;
             }
 
-            let params = getParams();
+            let params = getRegisterParams();
 
             $.ajax({
                 type: 'POST',       // 요청 메서드
@@ -169,7 +169,7 @@
         }
 
         /* 모달창에서 입력된 재고 정보를 받아온다. */
-        function getParams() {
+        function getRegisterParams() {
             let pd_id = $('#pd_id').val();
             let pd_name = $('#pd_name').val();
             let pd_clsf_cd = $('#pd_clsf_cd').val();
@@ -205,7 +205,7 @@
             };
         }
 
-        function idValidateParams() {
+        function idValidateRegisterParams() {
             if ($('#pd_id').val() == null || $('#pd_id').val().length < 1) {
                 alert('제품ID를 입력해주세요.');
                 return false;
