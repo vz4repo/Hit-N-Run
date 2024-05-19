@@ -17,7 +17,6 @@ import java.util.List;
 public class DeliveryController {
     @Autowired /* 의존성 주입 */
     DeliveryDao deliveryDao;
-    /*고객서비스 의존성 주입*/
     @Autowired
     DeliveryService deliveryService;
 

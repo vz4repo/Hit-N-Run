@@ -2,6 +2,9 @@ package com.homerunball.order.controller;
 
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.delivery.dao.DeliveryDao;
+import com.homerunball.delivery.domain.DeliveryDto;
+import com.homerunball.delivery.service.DeliveryService;
 import com.homerunball.order.dao.OrdDao;
 import com.homerunball.order.dao.OrderAndStkDao;
 import com.homerunball.order.dao.OrderDetDao;
@@ -16,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,9 +43,16 @@ public class OrdController {
     @Autowired
     OrderAndStkDao orderAndStkDao;
 
+    /* 김수연 시작 */
+    @Autowired /* 의존성 주입 */
+            DeliveryDao deliveryDao;
+    @Autowired
+    DeliveryService deliveryService;
+    /* 김수연 끝 */
+
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request){
+    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
@@ -114,6 +125,15 @@ public class OrdController {
 
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/
+
+            /* 김수연 시작 */
+            DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);
+            model.addAttribute("selectedDto", deliveryDto);
+
+            System.out.println("deliveryDto = " + deliveryDto);
+
+            System.out.println("[DeliveryController]deliveryDto = " + deliveryDto);
+            /* 김수연 끝 */
 
         } catch (Exception e) {
             e.printStackTrace();
