@@ -59,10 +59,10 @@
                             </a>
                         </td>
                         <td>
-                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
                         </td>
-                        <td><span name="price" class="priceFormat">${cartDto.rtl_prc}</span></td>
+                        <td><span name="price" class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td>
                             <div class="quantity_control">
                                 <form action="/cart/update" method="post" id="update_form">
