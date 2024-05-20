@@ -11,8 +11,11 @@ public interface StockService {
     /*모든 제고의 수량을 센다.(ROW개수)*/
     int getCount() throws Exception;
 
-    /*선택한 재고 상품 상세 보여주기*/
+    /*선택한 재고 상품 상세 보여주기 -- size별 수량조회에 사용*/
     StockDto getOneStock(String pd_id, String pd_clsf_cd) throws Exception;
+
+    /*선택한 재고 상품 상세 보여주기*/
+    StockDto getStockInfo(String pd_id, String pd_clsf_cd) throws Exception;
 
     /*재고를 1개 추가하기*/
     int create(StockDto stockDto) throws Exception;

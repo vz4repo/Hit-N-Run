@@ -32,7 +32,7 @@ public class CustValidator implements Validator {
             errors.rejectValue("c_email", "invalidCredentials", "이메일 뚫을려고?");
         }
         else {
-        if (c_pwd == null || !c_pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+={};':\"|,.<>?]).{8,15}$")) {
+        if (c_pwd == null || !c_pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$")) {
             errors.rejectValue("c_pwd", "invalidLength", "비밀번호 뚫을려고?" );
         }}
     }}
