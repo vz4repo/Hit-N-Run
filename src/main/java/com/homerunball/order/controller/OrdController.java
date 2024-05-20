@@ -41,7 +41,7 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request){
+    public String order(OrderDetDto orderDetDto, OrdDto ordDto, Model m, HttpSession session, HttpServletRequest request){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
@@ -52,27 +52,27 @@ public class OrdController {
 
             System.out.println("list = " +list);
 
-            OrderDetDto ord_det = new OrderDetDto();
-            OrdDto ord = new OrdDto();
+//            OrderDetDto ord_det = new OrderDetDto();
+//            OrdDto ord = new OrdDto();
 
-            System.out.println(ord_det);
+            System.out.println(orderDetDto);
 
-            System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
+            System.out.println("od_stat_cd=" + orderDetDto.getOd_stat_cd());
 
 
 
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
             for (CartDto cart : list){
-                ord_det.setPd_id(cart.getPd_id());
-                ord_det.setPd_clsf_cd(cart.getPd_clsf_code());
-                ord_det.setPd_name(cart.getPd_name());
-                ord_det.setSls_prc(cart.getSls_prc());
-                ord_det.setOd_qty(cart.getCart_cnt());
-                ord_det.setC_id(cart.getC_id());
+                orderDetDto.setPd_id(cart.getPd_id());
+                orderDetDto.setPd_clsf_cd(cart.getPd_clsf_code());
+                orderDetDto.setPd_name(cart.getPd_name());
+                orderDetDto.setSls_prc(cart.getSls_prc());
+                orderDetDto.setOd_qty(cart.getCart_cnt());
+                orderDetDto.setC_id(cart.getC_id());
 
-                orderdetDao.insert(ord_det);
+                orderdetDao.insert(orderDetDto);
             }
-            System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());
+            System.out.println("od_stat_cd" + orderDetDto.getOd_stat_cd());
 
             int totalpd_qty = 0;
             int totalqty = 0;
@@ -80,7 +80,7 @@ public class OrdController {
             int totalrtlamount = 0;
 
             /*중복 안돼는 set을 만든다*/
-            Set<String> od_pd_qtyid = new HashSet<>();
+            Set<String> od_pd_qtyid = new HashSet<>(); 
 
             for (CartDto cart : list) {
                 /*제품 가지 수*/
@@ -101,15 +101,15 @@ public class OrdController {
             totalpd_qty = od_pd_qtyid.size();
 
 
-            ord.setC_id(ord_det.getC_id());
-            ord.setOd_pd_qty(totalpd_qty);
-            ord.setOd_tot_qty(totalqty);
-            ord.setOd_pay_amt(totalamount);
-            ord.setRtl_prc(totalrtlamount);
+            ordDto.setC_id(orderDetDto.getC_id());
+            ordDto.setOd_pd_qty(totalpd_qty);
+            ordDto.setOd_tot_qty(totalqty);
+            ordDto.setOd_pay_amt(totalamount);
+            ordDto.setRtl_prc(totalrtlamount);
 
-            ordDao.insert(ord);
+            ordDao.insert(ordDto);
 
-            System.out.println("ord_det.getC_id()" +ord_det.getC_id());
+            System.out.println("ord_det.getC_id()" +orderDetDto.getC_id());
             System.out.println(list+"===========================");
 
             m.addAttribute("list", list);

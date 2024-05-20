@@ -34,7 +34,7 @@
              , last_mod_id
         from ord_det
         where c_id = #{c_id}
-        order by frst_reg_dt desc, od_det_seqnum desc
+#         order by od_dt desc, od_det_seqnum desc
     </select>
 
     <select id="selectAll" resultType="OrderDetDto">

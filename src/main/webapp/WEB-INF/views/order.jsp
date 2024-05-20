@@ -16,6 +16,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
     <!-- 결제위젯 SDK 추가 -->
     <script src="https://js.tosspayments.com/v1/payment-widget"></script>
@@ -25,7 +26,7 @@
 </head>
 <body>
 <%--<jsp:include page="template/header.jsp"/>--%>
-<%@include file="header.jsp"%>
+<jsp:include page="header.jsp"/>
     <div class="order__header">
         <a href="#" class="head_main">Homerun() > 주문서</a>
         <hr class="first__under" />
@@ -60,12 +61,12 @@
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="70" />
-                    <col width="*" />
-                    <col width="150" />
-                    <col width="150" />
-                    <col width="150" />
-                    <col width="150" />
+                    <col width="20%" />
+                    <col width="30%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="10%" />
                 </colgroup>
                 <thead>
                 <tr>
@@ -98,7 +99,7 @@
                             </a>
                         </td>
                         <td>
-                            <a href="#">${cartDto.pd_name}</a>
+                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
