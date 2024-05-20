@@ -62,8 +62,6 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
         <hr />
         <section class="order__delivery">
             <%-- 김수연 시작 --%>
-
-
                 <%-- 고객이 선택한 배송지 뜨는 페이지 _ order.jsp --%>
                 <div>
                     <div id = "delivery_left" class="head_order">
