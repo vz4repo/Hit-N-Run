@@ -70,12 +70,12 @@
         .active,
         .demo:hover {
             opacity: 1;
+            background-color: #717171;
         }
 
         .video {
             position: relative;
         }
-
 
         .prev2,
         .next2 {

@@ -99,5 +99,3 @@ public class RegisterController {
 //        return email;
     }
 }
-
-//        return custService.joinEmail(email);
