@@ -60,15 +60,15 @@
                         <tr>
                             <td>
                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${Imglist[status.index].pd_type_cd.toLowerCase()}/main/${Imglist[status.index].mn_img_fn}" alt="썸네일" name="thumbnail" />
+                                    <img src="/img/product/${orderdetDto.cartDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.cartDto.mn_img_fn}" alt="썸네일" name="thumbnail" />
                                 </a>
                                 <a href="#">${orderdetDto.pd_name}</a>
                                 <span>사이즈: ${orderdetDto.pd_clsf_cd}</span>
                             </td>
-                            <td><span data-oddt="${orderdetDto.od_dt}" id="od_dt">${orderdetDto.od_dt}</span></td>
+                            <td><span data-oddt="${orderdetDto.od_dt}" class="od_dt">${orderdetDto.od_dt}</span></td>
                             <td><a href="#">${orderdetDto.od_id}</a></td>
                             <td>
-                                <span>${orderdetDto.sls_prc * Imglist[status.index].cart_cnt}</span>
+                                <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
                                 <span>(${orderdetDto.od_qty}개)</span>
                             </td>
                             <td>
@@ -86,7 +86,7 @@
 <script>
 
     $(document).ready(function(){
-        $('#od_dt').each(function (){
+        $('.od_dt').each(function (){
             let oddt = parseInt($(this).data("oddt")); /* od_dt 데이터 가져오기 */
             let today = new Date();
             let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt)+1) + '.' + today.getDate(oddt);

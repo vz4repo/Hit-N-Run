@@ -86,7 +86,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" onclick="modifyStock()" id="confirmStockBtn">수정완료(아직 반영전)</button>
+                <button type="button" class="btn btn-danger" onclick="modifyStock()" id="confirmStockBtn">수정완료</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="cancelStockBtn">취소</button>
             </div>
 
@@ -146,11 +146,11 @@
         /* 확인 버튼을 누르면 재고가 수정된다. */
         function modifyStock() {
 
-            if (!idValidateParams()) {
+            if (!idValidateModifyParams()) {
                 return;
             }
 
-            let params = getParams();
+            let params = getModifyParams();
 
             $.ajax({
                 type: 'POST',       // 요청 메서드
@@ -160,14 +160,15 @@
                 data: JSON.stringify(params),  // 서버로 전송할 데이터. stringify()로 직렬화 필요.
                 success: function (result) {
                     console.log(result)
-                    /*if(result == "duplicate"){
-                        alert("이미 재고등록을 했습니다. 재고 수정 버튼을 눌러주세요.");
-                    } else {
+                    if(result == "modify success") {
                         alert("재고 수정 성공");       // response는 서버가 전송한 데이터
                         $('#modifyModal').modal("hide"); // 모달 비활성화
                         window.location.href = "/admin/stock/list";
-                    }*/
-
+                    } else if(result == "Same Data"){
+                        alert("동일한 데이터 입니다. 내용을 수정해주세요.");
+                    } else {
+                        alert("등록에 실패했습니다.");
+                    }
                 },
                 error: function (request, status, error) {
                     alert("error");
@@ -179,22 +180,22 @@
         }
 
         /* 모달창에서 입력된 재고 정보를 받아온다. */
-        function getParams() {
-            let pd_id = $('#pd_id').val();
-            let pd_name = $('#pd_name').val();
-            let pd_clsf_cd = $('#pd_clsf_cd').val();
-            let nml_stk_qty = $('#nml_stk_qty').val();
-            let rt_stk_qty = $('#rt_stk_qty').val();
-            let rgn_stk_qty = $('#rgn_stk_qty').val();
-            let urgn_stk_qty = $('#urgn_stk_qty').val();
-            let sfty_stk_qty = $('#sfty_stk_qty').val();
-            let pur_dt = $('#pur_dt').val();
-            let rcpt_dt = $('#rcpt_dt').val();
-            let rcpt_cp = $('#rcpt_cp').val();
-            let rcpt_prc = $('#rcpt_prc').val();
-            let rtl_prc = $('#rtl_prc').val();
-            let sls_prc = $('#sls_prc').val();
-            let stk_plc_cd = $('#stk_plc_cd').val();
+        function getModifyParams() {
+            let pd_id = $('#modify_pd_id').val();
+            let pd_name = $('#modify_pd_name').val();
+            let pd_clsf_cd = $('#modify_pd_clsf_cd').val();
+            let nml_stk_qty = $('#modify_nml_stk_qty').val();
+            let rt_stk_qty = $('#modify_rt_stk_qty').val();
+            let rgn_stk_qty = $('#modify_rgn_stk_qty').val();
+            let urgn_stk_qty = $('#modify_urgn_stk_qty').val();
+            let sfty_stk_qty = $('#modify_sfty_stk_qty').val();
+            let pur_dt = $('#modify_pur_dt').val();
+            let rcpt_dt = $('#modify_rcpt_dt').val();
+            let rcpt_cp = $('#modify_rcpt_cp').val();
+            let rcpt_prc = $('#modify_rcpt_prc').val();
+            let rtl_prc = $('#modify_rtl_prc').val();
+            let sls_prc = $('#modify_sls_prc').val();
+            let stk_plc_cd = $('#modify_stk_plc_cd').val();
 
             return {
                 pd_id: pd_id,
@@ -215,78 +216,78 @@
             };
         }
 
-        function idValidateParams() {
-            if ($('#pd_id').val() == null || $('#pd_id').val().length < 1) {
+        function idValidateModifyParams() {
+            if ($('#modify_pd_id').val() == null || $('#modify_pd_id').val().length < 1) {
                 alert('제품ID를 입력해주세요.');
                 return false;
             }
 
-            if ($('#pd_name').val() == null || $('#pd_name').val().length < 1) {
+            if ($('#modify_pd_name').val() == null || $('#modify_pd_name').val().length < 1) {
                 alert('제품명을 입력해주세요.');
                 return false;
             }
 
-            if ($('#pd_clsf_cd').val() == null || $('#pd_clsf_cd').val().length < 1) {
+            if ($('#modify_pd_clsf_cd').val() == null || $('#modify_pd_clsf_cd').val().length < 1) {
                 alert('제품사이즈를 선택해주세요.');
                 return false;
             }
 
-            if ($('#nml_stk_qty').val() == null || $('#nml_stk_qty').val().length < 1) {
+            if ($('#modify_nml_stk_qty').val() == null || $('#modify_nml_stk_qty').val().length < 1) {
                 alert('정상재고수량을 입력해주세요.');
                 return false;
             }
 
-            if ($('#rt_stk_qty').val() == null || $('#rt_stk_qty').val().length < 1) {
+            if ($('#modify_rt_stk_qty').val() == null || $('#modify_rt_stk_qty').val().length < 1) {
                 alert('반품재고수량을 입력해주세요.');
                 return false;
             }
 
-            if ($('#rgn_stk_qty').val() == null || $('#rgn_stk_qty').val().length < 1) {
+            if ($('#modify_rgn_stk_qty').val() == null || $('#modify_rgn_stk_qty').val().length < 1) {
                 alert('재생가능재고수량을 입력해주세요.');
                 return false;
             }
 
-            if ($('#urgn_stk_qty').val() == null || $('#urgn_stk_qty').val().length < 1) {
+            if ($('#modify_urgn_stk_qty').val() == null || $('#modify_urgn_stk_qty').val().length < 1) {
                 alert('재생불가능재고수량을 입력해주세요.');
                 return false;
             }
 
-            if ($('#sfty_stk_qty').val() == null || $('#sfty_stk_qty').val().length < 1) {
+            if ($('#modify_sfty_stk_qty').val() == null || $('#modify_sfty_stk_qty').val().length < 1) {
                 alert('안전재고재고수량을 입력해주세요.');
                 return false;
             }
 
-            if ($('#pur_dt').val() == null || $('#pur_dt').val().length < 1) {
+            if ($('#modify_pur_dt').val() == null || $('#modify_pur_dt').val().length < 1) {
                 alert('매입일을 입력해주세요.');
                 return false;
             }
 
-            if ($('#rcpt_dt').val() == null || $('#rcpt_dt').val().length < 1) {
+            if ($('#modify_rcpt_dt').val() == null || $('#modify_rcpt_dt').val().length < 1) {
                 alert('입고일을 입력해주세요.');
                 return false;
             }
 
-            if ($('#rcpt_cp').val() == null || $('#rcpt_cp').val().length < 1) {
+            if ($('#modify_rcpt_cp').val() == null || $('#modify_rcpt_cp').val().length < 1) {
                 alert('입고처를 입력해주세요.');
                 return false;
             }
 
-            if ($('#rcpt_prc').val() == null || $('#rcpt_prc').val().length < 1) {
+            if ($('#modify_rcpt_prc').val() == null || $('#modify_rcpt_prc').val().length < 1) {
                 alert('입고가격을 입력해주세요.');
                 return false;
             }
 
-            if ($('#rtl_prc').val() == null || $('#rtl_prc').val().length < 1) {
+            if ($('#modify_rtl_prc').val() == null || $('#modify_rtl_prc').val().length < 1) {
                 alert('소비자가격을 입력해주세요.');
                 return false;
             }
 
-            if ($('#sls_prc').val() == null || $('#sls_prc').val().length < 1) {
+            if ($('#modify_sls_prc').val() == null || $('#modify_sls_prc').val().length < 1) {
                 alert('판매가격을 입력해주세요.');
                 return false;
             }
 
-            if ($('#stk_plc_cd').val() == null || $('#stk_plc_cd').val().length < 1) {
+            if ($('#modify_stk_plc_cd').val() == null || $('#modify_stk_plc_cd').val().length < 1) {
                 alert('재고위치를 입력해주세요.');
                 return false;
             }

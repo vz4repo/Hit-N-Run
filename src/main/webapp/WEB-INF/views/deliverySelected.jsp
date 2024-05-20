@@ -13,7 +13,7 @@
 <style>
     .center-table {
         margin: 0 auto;
-        width: 100%;
+        width: 70%;
         text-align: center;
     }
     table {
@@ -22,7 +22,7 @@
     }
 
     th, td {
-        border: 1px solid black;
+        border: 1px solid lightgray;
         padding: 8px;
         text-align: center;
     }
