@@ -1,6 +1,73 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<style>
+    :root {
+        --btn-width : 100%;
+        --btn-min-width : 10px;
+        --btn-height : 5vh;
+        --btn-min-height : 5px;
+        --menu-height : calc(var(--btn-height) * 8);
+        --menu-min-height : calc(var(--btn-min-height) * 2);
+        --border-rad : 5px;
+        --font-size : 2vw;
+    }
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: var(--btn-width);
+    }
+    .label {
+        width: 100%;
+        height: var(--btn-height);
+        min-height: var(--btn-min-height);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-top: 0.5px solid black
+    }
+    .ball{
+        width: calc(var(--btn-height) * 0.4);
+        height: calc(var(--btn-height) * 0.4);
+        transition: 0.5s ease-in-out;
+    }
+    .menu {
+        width: var(--btn-width);
+        min-width: var(--btn-min-width);
+        height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-evenly;
+        align-items: center;
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+        list-style: none;
+        margin: 0px;
+        padding: 0;
+        box-sizing: border-box;
+        border-bottom: 0.5px solid black;
+    }
+    .toggle:checked ~ .menu{
+        height: var(--menu-height);
+        min-height: var(--menu-min-height);
+        opacity: 1;
+        display: block;
+    }
+    .toggle:checked ~ .label > .ball{
+        transform: rotate(540deg);
+    }
+    .productMainContainer{
+        display: flex;
+    }
+    .productItem{
+        flex: 1;
+    }
+</style>
 <head>
     <title>홈런볼 제품 상세페이지</title>
 </head>
@@ -9,8 +76,8 @@
 <%--선택된 옵션으로 제품을 넘겨주기--%>
 
 <%--넘겨줄 정보를 담는다--%>
-<div class="productMainContainer">
-    <form id="purchaseInfo" method="post">
+<form id="purchaseInfo" method="post">
+    <div class="productMainContainer">
 <%--    상단 왼쪽에 위치한 대표이미지--%>
         <div class="productItem">
             <p>
@@ -22,6 +89,10 @@
         <div class="productItem">
             <p>${prd.pd_name}</p>
             <p>${prd.pd_ad_cmt}</p>
+            <p>판매가격:${stkInfo.sls_prc}</p>
+            <p>소비자가격:${stkInfo.rtl_prc}</p>
+            <p>배송:무료배송</p>
+            <p>구매 주의사항</p>
 
             <p>옵션:
                 <select id="mySelect" name="selectedOption">
@@ -38,28 +109,38 @@
                 <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
             </p>
 
-            <p>판매가격:${stkInfo.sls_prc}</p>
-            <p>소비자가격:${stkInfo.rtl_prc}</p>
-            <p>제품 상세 설명(제품post연결후 토글로)</p>
-            <p>${prd.pd_det_dsc}</p>
-            <p>제품 특징(제품post연결후 토글로)</p>
-            <p>제품 상태:${prd.qlt_cd}</p>
-            <p>제조 국가:${prd.origin}</p>
-            <p>브랜드:${prd.brd_cd}</p>
-            <p>제품 제조일자:${prd.pd_mnf_date}</p>
-            <p>재질:${prd.mtrl}</p>
-            <p>제품 무게:${prd.wgh}</p>
-            <p>제조사:${prd.mfr}</p>
-            <p>배송:무료배송</p>
-            <p>구매 주의사항</p>
+            <div class="container">
+                <input type="checkbox" id="toggle1" class="toggle" hidden>
+                <label for="toggle1" class="label">
+                    제품 상세 설명 <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                </label>
+                <ul class="menu">
+                    <li>${prd.pd_det_dsc}</li>
+                </ul>
+            </div>
+
+            <div class="container">
+                <input type="checkbox" id="toggle2" class="toggle" hidden>
+                <label for="toggle2" class="label">
+                    제품 특징 <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                </label>
+                <ul class="menu">
+                    <li>제품 상태:${prd.qlt_cd}</li>
+                    <li>제조 국가:${prd.origin}</li>
+                    <li>브랜드:${prd.brd_cd}</li>
+                    <li>제품 제조일자:${prd.pd_mnf_date}</li>
+                    <li>재질:${prd.mtrl}</li>
+                    <li>제품 무게:${prd.wgh}</li>
+                    <li>제조사:${prd.mfr}</li>
+                </ul>
+            </div>
             <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
             <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
     <%--            찜하기 3차 개발예정--%>
             <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
-
         </div>
-    </form>
-</div>
+    </div>
+</form>
 <%--연관 제품 (구현 안함 발표전에 시간이 가능하면 개발)--%>
 <div class="relatedProduct"></div>
 <%--제품 상세 내용--%>
@@ -91,7 +172,8 @@
             form.action = '/cart/insert'; //장바구니
         }
         else if (action === 'wish'){
-            form.action = '/product/test'; //찜하기
+            alert("개발예정입니다.")
+            // form.action = '/product/test'; //찜하기
         }
         else if (action === 'directOrder'){
             form.action = '/cart/insert'; //바로구매
@@ -101,6 +183,16 @@
         form.method = 'post'; //method 속성을 POST로 설정
         form.submit();
     }
+    // 각 토글 체크박스에 이벤트 리스너 추가
+    document.querySelectorAll('.toggle').forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+            document.querySelectorAll('.toggle').forEach(function(otherCheckbox) {
+                if (otherCheckbox !== checkbox) {
+                    otherCheckbox.checked = false;
+                }
+            });
+        });
+    });
 
     /* 장바구니에 담을때, 제품상세 또는 장바구니 페이지로 이동할지 선택*/
     // 1. 장바구니 버튼을 누를시 장바구니에 제품상세의 정보를 넘겨야한다.
