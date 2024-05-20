@@ -87,7 +87,7 @@
 
     $(document).ready(function(){
         $('.od_dt').each(function (){
-            let oddt = parseInt($(this).data("oddt")); /* od_dt 데이터 가져오기 */
+            let oddt = $(this).data("oddt"); /* od_dt 데이터 가져오기 */
             let today = new Date();
             let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt)+1) + '.' + today.getDate(oddt);
             $(this).text(dateFormat);

@@ -59,7 +59,7 @@
 
     <update id="update" parameterType="OrdDto">
         update ord
-        set od_dt         = #{od_dt}
+        set   od_dt       = #{od_dt}
           ,   od_pd_qty   = #{od_pd_qty}
           ,   od_tot_qty  = #{od_tot_qty}
           ,   rtl_prc     = #{rtl_prc}

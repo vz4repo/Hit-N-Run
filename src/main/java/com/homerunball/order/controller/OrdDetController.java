@@ -33,19 +33,21 @@ public class OrdDetController {
             List<OrderDetDto> list = orderdetDao.select(c_id);
             List<CartDto> imglist = cartDao.getStk(c_id);
 
-            // CartDto를 pd_id로 매핑하는 맵을 생성
+            // CartDto를 map에 넣어 줌
             Map<String, CartDto> imgMap = new HashMap<>();
             for (CartDto img : imglist) {
                 imgMap.put(img.getPd_id(), img);
             }
 
-// orderList를 순회하면서 CartDto를 매칭
+            // map에 넣어준걸 다시  orderdetDto에 넣어 줌
             for (OrderDetDto order : list) {
                 CartDto matchedCart = imgMap.get(order.getPd_id());
                 if (matchedCart != null) {
-                    order.setCartDto(matchedCart); // OrderDetDto에 CartDto를 추가하는 필드를 만든다고 가정
+                    order.setCartDto(matchedCart);
                 }
             }
+
+            System.out.println("aaa" + list);
 
             m.addAttribute("list", list);
 
