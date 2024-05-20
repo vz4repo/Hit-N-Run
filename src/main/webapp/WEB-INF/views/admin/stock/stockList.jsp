@@ -322,29 +322,32 @@
     <jsp:include page="modal/stockModifyModal.jsp"/>
     <div class="w3-container product-container" style="overflow-x:auto;">
         <table>
-            <tr>
-                <th colspan="2">
-                    <button type="button" class="sendBtnSmall" id="stockCreateManage">재고 일괄등록</button>
-                    <button type="button" class="sendBtnSmall" id="stockModifyManage">재고 일괄수정</button>
-                </th>
-                <th colspan="12">제품목록/재고등록</th>
-            </tr>
-            <tr>
-                <th class="select_checkbox">전체<input type="checkbox" id="selectAll"></th>
-                <th class="pd_id">제품ID</th>
-                <th class="pd_name">제품명</th>
-                <th class="frst_reg_dt">상품 등록일</th>
-                <th class="pd_clsf_cd">제품사이즈</th>
-                <th class="nml_stk_qty">정상재고 수량</th>
-                <th class="rt_stk_qty">반품재고 수량</th>
-                <th class="rgn_stk_qty">재생가능재고 수량</th>
-                <th class="urgn_stk_qty">재생불가능재고 수량</th>
-                <th class="sfty_stk_qty">안전재고 수량</th>
-                <th class="odpmt_stk">가용재고</th>
-                <th class="useStock">재고관리사용</th>
-                <th class="createStock">개별재고등록</th>
-            </tr>
-            <c:forEach var="productDto" items="${productList}" varStatus="status">
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        <button type="button" class="sendBtnSmall" id="stockCreateManage">재고 일괄등록</button>
+                        <button type="button" class="sendBtnSmall" id="stockModifyManage">재고 일괄수정</button>
+                    </th>
+                    <th colspan="12">제품목록/재고등록</th>
+                </tr>
+                <tr>
+                    <th class="select_checkbox">전체<input type="checkbox" id="selectAll"></th>
+                    <th class="pd_id">제품ID</th>
+                    <th class="pd_name">제품명</th>
+                    <th class="frst_reg_dt">상품 등록일</th>
+                    <th class="pd_clsf_cd">제품사이즈</th>
+                    <th class="nml_stk_qty">정상재고 수량</th>
+                    <th class="rt_stk_qty">반품재고 수량</th>
+                    <th class="rgn_stk_qty">재생가능재고 수량</th>
+                    <th class="urgn_stk_qty">재생불가능재고 수량</th>
+                    <th class="sfty_stk_qty">안전재고 수량</th>
+                    <th class="odpmt_stk">가용재고</th>
+                    <th class="useStock">재고관리사용</th>
+                    <th class="createStock">개별재고등록</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach var="productDto" items="${productList}" varStatus="status">
                 <tr>
                     <td class="select_checkbox">
                         <input type="checkbox" name="selectedProduct" id="select_checkbox${status.index}"
@@ -384,6 +387,7 @@
                     </td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
     </div>
 </div>
