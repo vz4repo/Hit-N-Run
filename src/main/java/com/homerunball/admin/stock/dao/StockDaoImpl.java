@@ -23,13 +23,22 @@ public class StockDaoImpl implements StockDao {
         return list;
     }
 
-    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
+    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택) -- size별 수량조회에 사용*/
     @Override
     public StockDto selectStk(String pd_id, String pd_clsf_cd) throws Exception {
         Map map = new HashMap();
         map.put("pd_id", pd_id);
         map.put("pd_clsf_cd", pd_clsf_cd);
         return session.selectOne(namespace+"selectStk", map);
+    }
+
+    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
+    @Override
+    public StockDto selectOneStk(String pd_id, String pd_clsf_cd) throws Exception {
+        Map map = new HashMap();
+        map.put("pd_id", pd_id);
+        map.put("pd_clsf_cd", pd_clsf_cd);
+        return session.selectOne(namespace+"selectOneStk", map);
     }
 
     /*재고 전체 수량 카운트*/

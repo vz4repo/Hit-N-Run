@@ -145,9 +145,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="weight" value="weight"><label for="weight">무게(g)</label></th>
+                    <th><input type="checkbox" name="selectedContent" id="weight" value="wgh"><label for="weight">무게(g)</label></th>
                     <td>
-                        <input type="text" name="wgh" class="weightCnt" maxlength="100" >
+                        <input type="text" name="wgh" id="wgh" class="weightCnt" maxlength="100">
                         <span id="weightCnt">[0 / 100]</span>
                     </td>
                 </tr>
@@ -392,6 +392,15 @@
         $('input:checkbox[name="selectedContent"]').each(function() {
             if (this.checked) {
                 selectedContent[$(this).attr('id')] = $('input[name="' + $(this).attr('id') + '"]:checked').val();
+            }
+        });
+
+        /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#wgh').on('blur', function () {
+            let weightInput = $(this).val();
+            if (isNaN(weightInput) || weightInput.trim() === '') {
+                alert("무게는 숫자만 입력할 수 있습니다.");
+                $(this).val('');
             }
         });
     });
