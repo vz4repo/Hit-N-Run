@@ -10,19 +10,6 @@
     <script src="https://kit.fontawesome.com/f0e73cfa04.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    /*.dlvAddrList {*/
-    /*    border: 1px solid black;*/
-    /*    padding: 10px;*/
-    /*    margin-bottom: 10px;*/
-    /*    width: 50%; !* 50% width *!*/
-    /*}*/
-    /*.dlvAddrList table {*/
-    /*    margin: 0 auto; !* 테이블 가운데 정렬 *!*/
-    /*}*/
-    /*.dlvAddrList button {*/
-    /*    margin-left: 10px;*/
-    /*}*/
-
     /*.modal{*/
     /*    position:absolute;*/
     /*    top:50%;*/
@@ -91,7 +78,7 @@
     </div>
 </div>
 
-<hr class="first__under" />
+<hr class="first__under" >
 <div id="selectedDLV" class="center-table">
     <table>
         <tr>
@@ -116,9 +103,10 @@
         </tr>
         <tr>
             <td colspan="2">
-                <%-- 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. --%>
-                <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
                 <button id="selectAllBtn">배송지 전체 조회</button>
+                <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
+<%--                    <button id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
+<%--                        <button type="submit" id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
             </td>
         </tr>
     </table>
@@ -129,7 +117,7 @@
 
 <%--<div class="modal" style="display: none">--%>
 <%--    <div>--%>
-<h2>모달창 제목</h2>
+<h2>전체 배송지 목록</h2>
 <div id="deliveryForm">
     <c:forEach var="list" items="${list}">
         <div class="dlvAddrList">
@@ -140,7 +128,7 @@
                     <td>배송지주소 고유번호</td>
                     <td>${list.c_adr_list_id}</td>
                     <td>배송지명</td>
-                    <td name="rcver" value="${list.rcver}">${list.rcver}</td>
+                    <td>${list.rcver}</td>
                     <td>배송지명</td>
                     <td>${list.adr_name}</td>
                     <td>연락처</td>
@@ -160,33 +148,42 @@
 <%--    </div>--%>
 <%--</div>--%>
 
-</body>
 <script>
     // window.onload = function(){
     $(document).ready(function(){
 
         var dlvId = <%= request.getParameter("dlvId") %>;
 
-    });
+        /* selectAll 버튼 누르자마자 바로 setAllList 호출되게 변경해서 일단 삭제 */
+        // "selectAll" 버튼 클릭 시 데이터 요청
+        // $('#selectAllBtn').click(function(event) {
+        //     // event.preventDefault(); // 버튼의 기본 동작 막기
+        //     // setAllList 함수 호출
+        //     setAllList();
+        // })
 
-    // "selectAll" 버튼 클릭 시 데이터 요청
-    $('#selectAllBtn').click(function(event) {
-        // event.preventDefault(); // 버튼의 기본 동작 막기
-        // setAllList 함수 호출
-        setAllList();
-    })
+        $('#selectAllBtn').one("click", (function(event) {
+            // event.preventDefault(); // 버튼의 기본 동작 막기
+            // setAllList 함수 호출
+            setAllList();
+        }));
 
-    // "selectDLV" 버튼 클릭시 데이터 전송
-    $('.selectDLV').click(function(event) {
-        // event.preventDefault(); // 버튼의 기본 동작 막기
-        // 클릭된 버튼의 data-c_adr_list_id 속성값 가져오기
-        var c_adr_list_id = $(this).data('c_adr_list_id');
-        setSelectedDLV(c_adr_list_id);
+
+        // "selectDLV" 버튼 클릭시 데이터 전송
+        $('.selectDLV').click(function(event) {
+            // event.preventDefault(); // 버튼의 기본 동작 막기
+            // 클릭된 버튼의 data-c_adr_list_id 속성값 가져오기
+            var c_adr_list_id = $(this).data('c_adr_list_id');
+            setSelectedDLV(c_adr_list_id);
+        });
+
     });
 
 
     // setAllList 함수 정의
     function setAllList() {
+
+
         // AJAX를 사용하여 서버로 데이터 요청
         $.ajax({
             type: "GET",
@@ -197,6 +194,7 @@
             success: function(response) {
                 // 받아온 데이터를 deliveryForm 의 HTML에 채워 넣음
                 $("#deliveryForm").html(response);
+                // alert(response);
                 // $(".modal").attr("style", "display:flex");
             },
             error: function(xhr, status, error) {
@@ -217,6 +215,8 @@
             success: function(response) {
                 // 받아온 데이터를 selectedDLV 의 HTML에 채워 넣음
                 $("#selectedDLV").html(response);
+                alert(response);
+                console.log(response);
                 console.log("호출이 안됨");
                 // 페이지 이동
                 <%--window.location.href = '<%= request.getContextPath() %>/delivery/deliveryList?dlvId=' + c_adr_list_id;--%>
@@ -229,4 +229,5 @@
     }
 
 </script>
+</body>
 </html>
