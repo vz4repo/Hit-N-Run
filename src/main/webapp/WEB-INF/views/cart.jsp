@@ -62,7 +62,7 @@
                             <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
                         </td>
-                        <td><span name="price" class="priceFormat">${cartDto.rtl_prc}</span></td>
+                        <td><span name="price" class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td>
                             <div class="quantity_control">
                                 <form action="/cart/update" method="post" id="update_form">
@@ -76,9 +76,9 @@
                                 </form>
                             </div>
                         </td>
-<%--                        <td>--%>
-<%--                            <span>무료배송</span>--%>
-<%--                        </td>--%>
+                       <td>
+                            <span>무료배송</span>
+                        </td>
                         <td>
                                 <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
                             <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
