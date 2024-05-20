@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%--가격 형식 지정 태그--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,31 +200,31 @@
                                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="text">2024 Wilson Glove Day - Pittsburgh</div>
                     </div>
-                </div><br><br>
-            </section>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h2><b>신제품</b></h2>
-                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
-                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
-                            <c:choose>
-                                <c:when test="${i == 0}">
-                                    <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </ol>
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                        <c:forEach var="product" items="${newProductList}" varStatus="status">
-                        <c:if test="${status.index % 4 == 0}">
+
+                    <a class="prev2" onclick="plusSlides2(-1)">❮</a>
+                    <a class="next2" onclick="plusSlides2(1)">❯</a>
+
+                    <div style="text-align:center" class="videoDot">
+                        <span class="dot" onclick="currentSlide2(1)"></span>
+                        <span class="dot" onclick="currentSlide2(2)"></span>
+                        <span class="dot" onclick="currentSlide2(3)"></span>
+                        <span class="dot" onclick="currentSlide2(4)"></span>
+                        <span class="dot" onclick="currentSlide2(5)"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2><b>신제품</b></h2>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <c:set var="num"
+                           value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
+                    <c:forEach var="i" begin="0" end="${num-1}" step="1">
                         <c:choose>
                             <c:when test="${i == 0}">
                                 <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
@@ -253,7 +254,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
@@ -269,11 +271,11 @@
                                             </div> <%--end of star-rating class--%>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                    <p class="item-price"><strike>${product.max_rtl_prc}원</strike>
-                                                        <span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                        <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
@@ -339,8 +341,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -358,11 +360,11 @@
                                             </div>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                    <p class="item-price"><strike>${product.max_rtl_prc}원</strike>
-                                                        <span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                        <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
@@ -428,8 +430,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -447,11 +449,11 @@
                                             </div>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                    <p class="item-price"><strike>${product.max_rtl_prc}원</strike>
-                                                        <span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                        <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
@@ -517,8 +519,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -536,11 +538,11 @@
                                             </div>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                    <p class="item-price"><strike>${product.max_rtl_prc}원</strike>
-                                                        <span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                        <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <p class="item-price"><span>${product.max_sls_prc}원</span></p>
+                                                    <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
@@ -566,24 +568,8 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
-        <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
-        <jsp:include page="mainCategory.jsp" flush="false" />
-
     </div>
 
-    <jsp:include page="footer.jsp" flush="false"/>
-    <script>
-        window.onload = function() {
-            if("${sessionScope.c_id}" !== "") {
-                document.getElementById('logoutLink').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    if (confirm('정말로 로그아웃을 하시겠습니까?')) {
-                        window.location.href = event.target.href;
-                        alert('로그아웃이 되셨습니다.');
-                    }
-                });
-            }
-        };
     <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
     <jsp:include page="mainCategory.jsp" flush="false"/>
 </div>
@@ -604,21 +590,21 @@
 
     const dDay = document.querySelector("#dDay");
 
-    function countDay() {
-        const now = new Date();
-        const dueDate = new Date("2024-05-30T11:59:59").getTime();  /* 디데이 설정 */
+    <%--function countDay() {--%>
+    <%--    const now = new Date();--%>
+    <%--    const dueDate = new Date("2024-05-30T11:59:59").getTime();  /* 디데이 설정 */--%>
 
-        const timeRemaining = dueDate - now;  /* 남은시간 */
-        const day = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hour = Math.floor(timeRemaining / (1000 * 60 * 60) % 24);
-        const min = Math.floor(timeRemaining / (1000 * 60) % 60);
-        const sec = Math.floor(timeRemaining / 1000 % 60);
+    <%--    const timeRemaining = dueDate - now;  /* 남은시간 */--%>
+    <%--    const day = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));--%>
+    <%--    const hour = Math.floor(timeRemaining / (1000 * 60 * 60) % 24);--%>
+    <%--    const min = Math.floor(timeRemaining / (1000 * 60) % 60);--%>
+    <%--    const sec = Math.floor(timeRemaining / 1000 % 60);--%>
 
-        dDay.innerText = `${'${day}'} [${'${hour}'}:${'${min}'}:${'${sec}'}]`;
-    }
+    <%--    dDay.innerText = `${'${day}'} [${'${hour}'}:${'${min}'}:${'${sec}'}]`;--%>
+    <%--}--%>
 
-    // countDay();
-    setInterval(countDay, 1000);  /* 초마다 디데이 기능 실행 */
+    <%--// countDay();--%>
+    <%--setInterval(countDay, 1000);  /* 초마다 디데이 기능 실행 */--%>
 
     $(document).ready(function () {
         $(".wish-icon i").click(function () {
