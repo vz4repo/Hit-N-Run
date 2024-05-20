@@ -60,14 +60,10 @@
                 <th class="pd_type_cd">제품유형</th>
                 <th class="pd_type_det_cd">제품상세유형</th>
                 <th class="brd_cd">브랜드</th>
-                <th class="mn_img_fn">대표 사진 파일명</th>
-                <th class="det_img_fn">상세 사진 파일명</th>
-                <th class="sls_strt_dt">판매시작일시</th>
                 <th class="pd_chr_cd">제품 특성</th>
-                <th class="age_grp_cd">사용 연령대</th>
                 <th class="qlt_cd">제품품질</th>
                 <th class="pd_is_show">제품노출여부</th>
-                <th class="hit_cnt">조회수</th>
+                <th class="pd_stat_hist_cd">제품 상태 이력</th>
                 <th class="frst_reg_dt">제품 최초 등록일</th>
             </tr>
             <c:forEach var="hiddenProduct" items="${hiddenProductList}">
@@ -79,15 +75,11 @@
                     <td class="pd_type_cd">${hiddenProduct.pd_type_cd}</td>
                     <td class="pd_type_det_cd">${hiddenProduct.pd_type_det_cd}</td>
                     <td class="brd_cd">${hiddenProduct.brd_cd}</td>
-                    <th class="mn_img_fn">${hiddenProduct.mn_img_fn}</th>
-                    <th class="det_img_fn">${hiddenProduct.det_img_fn}</th>
-                    <th class="sls_strt_dt">${hiddenProduct.sls_strt_dt}</th>
-                    <th class="pd_chr_cd">${hiddenProduct.pd_chr_cd}</th>
-                    <th class="age_grp_cd">${hiddenProduct.age_grp_cd}</th>
-                    <th class="qlt_cd">${hiddenProduct.qlt_cd}</th>
-                    <th class="pd_is_show">${hiddenProduct.pd_is_show}</th>
-                    <th class="hit_cnt">${hiddenProduct.hit_cnt}</th>
-                    <th class="frst_reg_dt">${hiddenProduct.frst_reg_dt}</th>
+                    <td class="pd_chr_cd">${hiddenProduct.pd_chr_cd}</td>
+                    <td class="qlt_cd">${hiddenProduct.qlt_cd}</td>
+                    <td class="pd_is_show">${hiddenProduct.pd_is_show}</td>
+                    <td class="pd_stat_hist_cd">${hiddenProduct.pd_stat_hist_cd}</td>
+                    <td class="frst_reg_dt">${hiddenProduct.frst_reg_dt}</td>
                 </tr>
             </c:forEach>
         </table>
