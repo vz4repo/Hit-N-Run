@@ -51,8 +51,8 @@ public class CustValidatorTest {
 
     @Test
     public void regTest(){
-        String regex = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+={};':\"|,.<>?]).{8,15}$";
-        String input = "11111qqq@q";
+        String regex = "^(?=.*[0-9])(?=.*[a-zA-Z]).{3,15}$";
+        String input = "1234q";
 
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
