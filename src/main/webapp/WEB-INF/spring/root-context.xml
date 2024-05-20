@@ -30,6 +30,26 @@
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
 
+	<!-- 메일링 -->
+	<context:component-scan base-package="com.homerunball.customer.service" />
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="username" value="homerunball46g"/>
+		<property name="password" value="tawqdzjrpvdhxgkn"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+
+
+
 	<context:component-scan base-package="com.homerunball">
 <!--		<context:exclude-filter type="regex" expression="com.homerunball.*"/>-->
 	</context:component-scan>

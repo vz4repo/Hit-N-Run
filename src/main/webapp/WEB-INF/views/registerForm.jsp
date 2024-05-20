@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -50,17 +51,17 @@
         }
 
         #myform {
-            max-width: 1130px;
+            max-width: 700px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-             /*padding: 30%;*/
+            padding-top: 3%;
+            padding-bottom: 3%;
             margin: 0 auto;
             margin-top: 50px;
-            margin-bottom: 150px;
+            margin-bottom: 50px;
         }
-
 
         span {
             color: gray;
@@ -89,14 +90,6 @@
             padding: 20px;
             border: 1px solid #888;
             width: 70%;
-        }
-
-        .modal-open {
-            overflow: hidden;
-        }
-
-        isModalOpen{
-            overflow: hidden;
         }
 
         #touModal {
@@ -138,10 +131,6 @@
             width: 265.5px;
         }
 
-        #check-result {
-            height: 20px;
-        }
-
         #birth {
             padding: 8px;
             border: 1px solid #ccc;
@@ -151,6 +140,15 @@
             box-sizing: border-box;
             font-family: 'IBM Plex Sans', sans-serif;
         }
+
+        #email, #verify{
+            display: inline;
+        }
+        #verify{
+            margin-left: 158px;
+            margin-bottom: 5px;
+        }
+
     </style>
 
 </head>
@@ -162,11 +160,13 @@
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
-            <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com" autofocus>
-            <label>인증번호(예정)</label>
-            <input class="special-class" type="text" name="c_email2" placeholder="test" value="test" disabled>
+            <input id="verify" type="button" onclick="" value="인증번호 받기" readonly><br>
+            <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com">
+            <p id="mail-check-warn"></p>
+            <label>인증번호</label>
+            <input class="special-class" type="text" id="c_email2" name="c_email2">
             <label>비밀번호</label>
-            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)" oninput="pwd2Check(this.form)">
+            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="pwd2Check(this.form)">
             <p id="check-pwd"></p>
             <label id="pwdCheck">비밀번호 확인</label>
             <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." oninput="pwd2Check(this.form)">
@@ -176,6 +176,7 @@
             <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly>
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly>
             <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly>
+            <%--지번이 공백이어도 오류 안뜨는 이유: 값이 없을시 카카오 api가 자동으로 ''을 추가하게 만듬--%>
             <input type="text" id="jibunAddress" name ="c_jibun_a" placeholder="지번주소" readonly>
             <span id="guide" style="color:#999;display:none"></span>
             <input type="text" id="detailAddress" name="c_det_a" placeholder="건물명+상세주소"><br><br>
@@ -202,7 +203,6 @@
         </div>
 </form>
 </div>
-
 
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -423,128 +423,102 @@
     </div>
 </div>
 
-
 <script>
-    // function openModal() {
-    //     var modal = document.getElementById("myModal");
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    // }
-    //
-    // function openModal2() {
-    //     var modal = document.getElementById("myModal2");
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    // }
-    //
-    // function closeModal() {
-    //     var modal = document.getElementById("myModal");
-    //     modal.style.display = "none";
-    //     document.body.style.overflow = "auto";
-    // }
-    //
-    // function closeModal2() {
-    //     var modal = document.getElementById("myModal2");
-    //     modal.style.display = "none";
-    //     document.body.style.overflow = "auto";
-    // }
-
-    var modalSeen = false;
-    var modalSeen2 = false;
-
-    // touBox를 활성화하는 함수
-    function enableTouBox() {
-        var touBox = document.getElementById("touBox");
-        touBox.disabled = false;
-    }
-
-    function enablePiiBox() {
-        var piiBox = document.getElementById("piiBox");
-        piiBox.disabled = false;
-    }
-
-    // 모달 열기 함수
-    function openModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
-        modalSeen = true; // 모달을 본 것으로 표시
-        enableTouBox(); // touBox 활성화
-    }
-
-    function openModal2(){
-        var modal = document.getElementById("myModal2");
-        modal.style.display = "block";
-        document.body.style.overflow = "hidden";
-        modalSeen2 = true; // 모달을 본 것으로 표시
-        enablePiiBox(); // touBox 활성화
-    }
-
-    // 모달 닫기 함수
-    function closeModal() {
-        var modal = document.getElementById("myModal");
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-
-    function closeModal2() {
-        var modal = document.getElementById("myModal2");
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-
-    document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape") {
-            closeModal(); // 첫 번째 모달 창 닫기
-        }
+    $('#c_email').on('input', function() {
+        emailCheck();
     });
 
-
-    document.addEventListener("keydown", function(event) {
-        if (event.key === "Escape") {
-            closeModal2(); // e두 번째 모달 창 닫기
-        }
+    $('#c_email2').on('input', function() {
+        verifyNumber();
     });
+    /*이메일 중복체크*/
 
+    function emailCheck() {
+        const email = document.getElementById("c_email").value;
+        const checkResult = document.getElementById("check-result");
+        const verifyButton = $('#verify');
 
-    // 페이지 로드시 이벤트 리스너 등록
-    document.addEventListener('DOMContentLoaded', function () {
-        var touModal = document.getElementById("touModal");
+        if (!email.trim()) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일을 입력해주세요.";
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
+        }
 
-        // touModal을 클릭했을 때 모달 열기
-        touModal.addEventListener('click', openModal);
+        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        if (!emailPattern.test(email)) {
+            checkResult.style.color = "red";
+            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
+        }
 
-        // touBox를 클릭했을 때
-        document.getElementById('touBox').addEventListener('click', function () {
-            // 모달을 아직 보지 않았다면
-            if (!modalSeen) {
-                alert("이용약관을 먼저 확인해주세요.");
-                // 체크박스 다시 체크 해제
-                this.checked = false;
+        console.log("입력한 이메일", email);
+        $.ajax({
+            type: "post",
+            url: "/register/email-check",
+            data: {
+                "c_email": email
+            },
+            success: function (emailGood) {
+                console.log("요청성공", emailGood);
+                if (emailGood == "ok") {
+                    console.log("적합한 이메일 양식입니다.");
+                    checkResult.style.color = "green";
+                    checkResult.innerHTML = "적합한 이메일 양식입니다.";
+                    verifyButton.prop('disabled', false); // 버튼 활성화
+                } else {
+                    console.log("이미 사용중인 이메일");
+                    checkResult.style.color = "red";
+                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
+                    verifyButton.prop('disabled', true); // 버튼 비활성화
+                }
+            },
+            error: function (err) {
+                console.log("에러발생", err);
+            }
+        });
+    }
+
+    $('#verify').click(function() {
+        const email = $('#c_email').val(); // 이메일 주소값 얻어오기!
+        console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
+        const checkInput = $('#c_email2') // 인증번호 입력하는곳
+        $.ajax({
+            type : 'get',
+            url : '<c:url value ="/register/mailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+            success : function (data) {
+                console.log("data : " +  data);
+                checkInput.attr('disabled',false);
+                code =data;
+                alert('인증번호가 전송되었습니다.')
             }
         });
     });
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var piiModal = document.getElementById("piiModal");
+    function verifyNumber() {
+        const inputCode = $('#c_email2').val();
+        const $resultMsg = $('#mail-check-warn');
 
-        // touModal을 클릭했을 때 모달 열기
-        piiModal.addEventListener('click', openModal2);
-
-        // touBox를 클릭했을 때
-        document.getElementById('piiBox').addEventListener('click', function () {
-            // 모달을 아직 보지 않았다면
-            if (!modalSeen2) {
-                alert("개인정보 약관을 먼저 확인해주세요.");
-                // 체크박스 다시 체크 해제
-                this.checked = false;
-            }
-        });
-    });
+        if (inputCode === code) {
+            $resultMsg.html('인증번호가 일치합니다.');
+            $resultMsg.css('color', 'green');
+            $('#verify').attr('disabled', true);
+            $('#c_email').attr('readonly', true);
+            $('#c_email').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+            $('#c_email').attr('onChange', 'this.selectedIndex = this.initialSelect');
+            return true;
+        } else {
+            $resultMsg.html('인증번호를 다시 확인해주세요');
+            $resultMsg.css('color', 'red');
+            return false;
+        }
+    }
 
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
-        var isEmail = emailFormatCheck(frm);
+        // var isEmail = emailTrimCheck(frm);
+        var isEmailFormat = emailFormatCheck(frm);
         var isPwd = pwdCheck(frm);
         var isPwd2 = pwd2Check(frm);
         var isName = nameCheck(frm);
@@ -553,29 +527,28 @@
         var isGen = genCheck(frm);
         var isTou = touCheck(frm)
         var isPii = piiCheck(frm)
+        var isCodeVerified = verifyNumber(frm);
 
-        var email = frm.c_email.value;
+
         var pwd = frm.c_pwd.value;
         var pwd2 = frm.c_pwd2.value;
         var name = frm.c_name.value;
         var zip = frm.c_zip.value;
         var road = frm.c_road_a.value;
-        // var jibun = frm.c_jibun_a.value;
         var det = frm.c_det_a.value;
         var phn = frm.c_phn.value;
         var birth = frm.c_birth.value;
 
-        if (!email) {
-            alert('이메일을 입력해주세요.');
+        if (!isEmailFormat) {
             return false;
-        } else if (!isEmail) {
-            alert('이메일 형식을 다시 확인해주세요.');
+        } else if (!isCodeVerified) {
+            alert('인증번호가 맞지 않아 회원가입에 실패합니다.');
             return false;
         } else if (!pwd) {
             alert('비밀번호를 입력해주세요.');
             return false;
         } else if (!isPwd) {
-            alert('비밀번호는 영문/숫자/특수문자 조합으로 8자 이상 15자 이하로 설정하셔야합니다.');
+            alert('비밀번호는 영문/숫자 조합으로 4자 이상 15자 이하로 설정하셔야합니다.');
             return false;
         } else if (!pwd2) {
             alert('비밀번호 확인을 입력해주세요');
@@ -598,9 +571,6 @@
         } else if (!road) {
             alert('도로명주소를 입력해주세요.');
             return false;
-        // } else if (!jibun) {
-        //     alert('지번주소를 입력해주세요.');
-        //     return false;
         } else if (!det) {
             alert('상세주소를 입력해주세요.');
             return false;
@@ -624,6 +594,11 @@
             return false;
         }
 
+        // if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
+        //     alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
+        //     return false;
+        // }
+
         if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
             alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
             return false;
@@ -634,70 +609,26 @@
     }
 
     /*3-1 이메일 형식 유효성 검사*/
+
     function emailFormatCheck(frm) {
-        var email = frm.c_email.value;
+        var email = frm.c_email.value.trim(); // 공백 제거한 이메일
         var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
 
-        if (!emailPattern.test(email)) {
+        if (!email) {
+            alert("이메일을 입력해주세요.");
+            return false;
+        } else if (!emailPattern.test(email)) {
+            alert("이메일 양식을 다시 확인해주세요.");
             return false;
         }
         return true;
-    }
-
-    /*이메일 중복체크*/
-    function emailCheck() {
-        const email = document.getElementById("c_email").value;
-        const checkResult = document.getElementById("check-result");
-
-
-        if (!email.trim()) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일을 입력해주세요.";
-            return; // 함수 종료
-        }
-
-        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        if (!emailPattern.test(email)) {
-            checkResult.style.color = "red";
-            checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
-            return; // 함수 종료
-        }
-
-        console.log("입력한 이메일", email);
-        $.ajax({
-            type: "post",
-            url: "/register/email-check",
-            data: {
-                "c_email": email
-            },
-            success: function (res) {
-                console.log("요청성공", res);
-                if (res == "ok") {
-                    console.log("사용 가능한 이메일입니다.");
-                    checkResult.style.color = "green";
-                    checkResult.innerHTML = "사용 가능한 이메일입니다.";
-                } else {
-                    console.log("이미 사용중인 이메일");
-                    checkResult.style.color = "red";
-                    checkResult.innerHTML = "이미 사용중인 이메일입니다.";
-                    return false;
-                }
-            },
-            error: function (err) {
-                console.log("에러발생", err);
-            }
-        });
     }
 
     /*3-2 비밀번호 유효성 검사*/
 
     function pwdCheck(frm) {
         var pwd = frm.c_pwd.value;
-        // var pwd2 = frm.c_pwd2.value;
-        // var pwdResult = document.getElementById("check-pwd")
-        //
-
-        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,15}$/;
+        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$/;
         if (!pwdPattern.test(pwd)) {
             return false;
         }
@@ -805,6 +736,100 @@
             return false;
         }
     }
+
+    var modalSeen = false;
+    var modalSeen2 = false;
+
+
+    function enableTouBox() {
+        var touBox = document.getElementById("touBox");
+        touBox.disabled = false;
+    }
+
+    function enablePiiBox() {
+        var piiBox = document.getElementById("piiBox");
+        piiBox.disabled = false;
+    }
+
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        var touBox = document.getElementById('touBox');
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        modalSeen = true; // 모달을 본 것으로 표시
+        enableTouBox(); // touBox 활성화
+        touBox.checked = true;
+    }
+
+    function openModal2(){
+        var modal = document.getElementById("myModal2");
+        var piiBox = document.getElementById('piiBox');
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        modalSeen2 = true;
+        enablePiiBox();
+        piiBox.checked = true;
+    }
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    function closeModal2() {
+        var modal = document.getElementById("myModal2");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal2();
+        }
+    });
+
+    /*페이지 로드시 이벤트 리스너 등록*/
+    document.addEventListener('DOMContentLoaded', function () {
+        var touModal = document.getElementById("touModal");
+
+        /*touModal을 클릭했을 때 모달 열기*/
+        touModal.addEventListener('click', openModal);
+
+        /*touBox를 클릭했을 때*/
+        document.getElementById('touBox').addEventListener('click', function () {
+            /*모달을 아직 보지 않았다면*/
+            if (!modalSeen) {
+                alert("이용약관을 먼저 확인해주세요.");
+                /*체크박스 다시 체크 해제*/
+                this.checked = false;
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var piiModal = document.getElementById("piiModal");
+
+        /*touModal을 클릭했을 때 모달 열기*/
+        piiModal.addEventListener('click', openModal2);
+
+        /*touBox를 클릭했을 때*/
+        document.getElementById('piiBox').addEventListener('click', function () {
+            /*모달을 아직 보지 않았다면*/
+            if (!modalSeen2) {
+                alert("개인정보 약관을 먼저 확인해주세요.");
+                /*체크박스 다시 체크 해제*/
+                this.checked = false;
+            }
+        });
+    });
+
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
