@@ -165,3 +165,11 @@ h2 {
 .col-sm-3 {
     padding: 0 20px;
 }
+
+.star-rating {
+    text-align: center;
+}
+
+.star-rating ul{
+    display: block;
+}
