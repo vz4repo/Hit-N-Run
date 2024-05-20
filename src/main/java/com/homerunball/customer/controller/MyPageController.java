@@ -38,6 +38,7 @@ public class MyPageController {
         /*변수를 통해 db에 접근 후 dto에 저장*/
         CustDto custDto = custDao.grdNameJoin(c_id);
 
+        /*세션 속성 설정*/
         if(custDto != null){
             session.setAttribute("c_name", custDto.getC_name());
             session.setAttribute("grd_name", custDto.getGrd_name());

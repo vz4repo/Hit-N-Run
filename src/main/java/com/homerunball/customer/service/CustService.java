@@ -14,7 +14,7 @@ public interface CustService {
     String pwdEncrypt(String c_pwd);
 
 
-//    String joinEmail(String c_email);
+    String joinEmail(String c_email);
 }
 
 

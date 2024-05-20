@@ -52,7 +52,7 @@
     }
 
     #myform {
-      max-width: 1130px;
+      max-width: 700px;
       text-align: center;
       border: 3px solid #f1f1f1;
       border-radius: 50px;
@@ -106,11 +106,11 @@
     var curPwd = document.getElementById("curPwd").value;
     var newPwd = document.getElementById("newPwd").value;
     var newPwd2 = document.getElementById("newPwd2").value;
-    var newPwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,15}$/;
+    var newPwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$/;
 
 
     if(!newPwdPattern.test(newPwd)) {
-      alert("비밀번호는 영어/숫자/특수문자 포함 8자이상을 작성하셔야합니다.")
+      alert("비밀번호는 영어/숫자/ 포함 4자이상을 작성하셔야합니다.")
       return false;
     }
 

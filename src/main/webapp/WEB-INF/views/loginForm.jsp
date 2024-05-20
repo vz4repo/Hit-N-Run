@@ -15,16 +15,16 @@
         }
 
         #loginform {
-            max-width: 1130px;
+            max-width: 700px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding-top: 7%;
-            padding-bottom: 10%; /* 세로 방향의 패딩만 설정 */
+            padding-top: 5%;
+            padding-bottom: 5%;
             margin: 0 auto;
-            margin-top: 200px;
-            margin-bottom: 150px;
+            margin-top: 100px;
+            margin-bottom: 50px;
         }
 
         .container {
@@ -92,8 +92,9 @@
             align-items: center;
             justify-content: center;
             background-color: #ffd400;
-            color: saddlebrown;
-            font-weight: bold;
+            color: #2c0b0e;
+            /*color: saddlebrown;*/
+            /*font-weight: bold;*/
         }
 
 
@@ -103,7 +104,6 @@
             justify-content: center;
             background-color: gainsboro;
             color: black;
-            /*color: saddlebrown;*/
             /*font-weight: bold;*/
         }
 
@@ -112,8 +112,6 @@
             align-items: center;
             justify-content: center;
             background-color: green;
-            /*color: black;*/
-            /*color: saddlebrown;*/
             /*font-weight: bold;*/
         }
 
