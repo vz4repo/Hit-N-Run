@@ -5,23 +5,22 @@
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <style>
     :root {
-        --btn-width : 100%;
-        --btn-min-width : 10px;
+        --btn-width : 90%;
+        --btn-min-width : 90%;
         --btn-height : 5vh;
         --btn-min-height : 5px;
         --menu-height : calc(var(--btn-height) * 8);
         --menu-min-height : calc(var(--btn-min-height) * 2);
-        --border-rad : 5px;
         --font-size : 2vw;
     }
-    .container {
+    .prdContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: var(--btn-width);
     }
-    .label {
-        width: 100%;
+    .prdLabel {
+        width: 90%;
         height: var(--btn-height);
         min-height: var(--btn-min-height);
         display: flex;
@@ -35,15 +34,15 @@
         height: calc(var(--btn-height) * 0.4);
         transition: 0.5s ease-in-out;
     }
-    .menu {
+    .prdMenu {
         width: var(--btn-width);
         min-width: var(--btn-min-width);
         height: 0;
         overflow: hidden;
         display: flex;
         flex-flow: column;
-        justify-content: space-evenly;
-        align-items: center;
+        justify-content: flex-start;
+        align-items: flex-start;
         opacity: 0;
         transition: 0.3s ease-in-out;
         list-style: none;
@@ -52,13 +51,13 @@
         box-sizing: border-box;
         border-bottom: 0.5px solid black;
     }
-    .toggle:checked ~ .menu{
+    .toggle:checked ~ .prdMenu{
         height: var(--menu-height);
         min-height: var(--menu-min-height);
         opacity: 1;
         display: block;
     }
-    .toggle:checked ~ .label > .ball{
+    .toggle:checked ~ .prdLabel > .ball{
         transform: rotate(540deg);
     }
     .productMainContainer{
@@ -67,23 +66,35 @@
     .productItem{
         flex: 1;
     }
+    .detailProductContents{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 </style>
 <head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>홈런볼 제품 상세페이지</title>
 </head>
 <body>
-<%--제품 상세 정보 표기--%>
-<%--선택된 옵션으로 제품을 넘겨주기--%>
-
+<jsp:include page="header.jsp"/>
 <%--넘겨줄 정보를 담는다--%>
 <form id="purchaseInfo" method="post">
     <div class="productMainContainer">
 <%--    상단 왼쪽에 위치한 대표이미지--%>
         <div class="productItem">
             <p>
-                <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}"
+                <img src="/img/product/${prd.pd_type_cd}/main/${prd.mn_img_fn}"
                      alt="이미지 준비 중 입니다"
-                     onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
+                     onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}';">
             </p>
         </div>
         <div class="productItem">
@@ -93,7 +104,7 @@
             <p>소비자가격:${stkInfo.rtl_prc}</p>
             <p>배송:무료배송</p>
             <p>구매 주의사항</p>
-
+            <%--선택된 옵션으로 제품을 넘겨주기--%>
             <p>옵션:
                 <select id="mySelect" name="selectedOption">
 <%--                   서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
@@ -109,22 +120,21 @@
                 <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
             </p>
 
-            <div class="container">
+            <div class="prdContainer">
                 <input type="checkbox" id="toggle1" class="toggle" hidden>
-                <label for="toggle1" class="label">
+                <label for="toggle1" class="prdLabel">
                     제품 상세 설명 <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
-                <ul class="menu">
+                <ul class="prdMenu">
                     <li>${prd.pd_det_dsc}</li>
                 </ul>
             </div>
-
-            <div class="container">
+            <div class="prdContainer">
                 <input type="checkbox" id="toggle2" class="toggle" hidden>
-                <label for="toggle2" class="label">
+                <label for="toggle2" class="prdLabel">
                     제품 특징 <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
-                <ul class="menu">
+                <ul class="prdMenu">
                     <li>제품 상태:${prd.qlt_cd}</li>
                     <li>제조 국가:${prd.origin}</li>
                     <li>브랜드:${prd.brd_cd}</li>
@@ -146,9 +156,9 @@
 <%--제품 상세 내용--%>
 <div class="detailProductContents">
     <p>
-        <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.det_img_fn}"
+        <img src="/img/product/${prd.pd_type_cd}/main/${prd.det_img_fn}"
              alt="이미지 준비 중 입니다"
-             onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
+             onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.det_img_fn}';">
     </p>
     <p>${prd.pd_smr_dsc}</p>
 </div>
@@ -156,6 +166,7 @@
 <div class="review"></div>
 <%--제품 문의(구현 안함 3차때 추후 개발예정)--%>
 <div class="productQnA"></div>
+<jsp:include page="footer.jsp" flush="false" />
 </body>
 <script>
     /*버튼별 이동 페이지 설정*/
@@ -173,7 +184,7 @@
         }
         else if (action === 'wish'){
             alert("개발예정입니다.")
-            // form.action = '/product/test'; //찜하기
+            form.action = '/product/test'; //찜하기
         }
         else if (action === 'directOrder'){
             form.action = '/cart/insert'; //바로구매
