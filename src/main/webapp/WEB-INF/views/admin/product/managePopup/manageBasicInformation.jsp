@@ -100,13 +100,15 @@
                 <tr>
                     <th><input type="checkbox" name="selectedContent" id="origin" value="origin"><label for="origin">제조국</label></th>
                     <td>
-                        <input type="text" name="origin" >
+                        <input type="text" name="origin" maxlength="10" class="originCnt" required>
+                        <span id="originCnt">[0 / 10]</span>
                     </td>
                 </tr>
                 <tr>
                     <th><input type="checkbox" name="selectedContent" id="manufacturer" value="mfr"><label for="manufacturer">제조사</label></th>
                     <td>
-                        <input type="text" name="mfr" >
+                        <input type="text" name="mfr" maxlength="10" class="mfrCnt" required>
+                        <span id="mfrCnt">[0 / 10]</span>
                     </td>
                 </tr>
                 <tr>
@@ -128,7 +130,8 @@
                 <tr>
                     <th><input type="checkbox" name="selectedContent" id="playerName" value="player_name"><label for="playerName">사용 선수명</label></th>
                     <td>
-                        <input type="text" name="player_name" maxlength="50" />
+                        <input type="text" name="player_name" class="playerNameCnt" maxlength="50" />
+                        <span id="playerNameCnt">[0 / 50]</span>
                     </td>
                 </tr>
                 <tr>
@@ -247,6 +250,39 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
     $(document).ready(function() {
+        /*제조국 글자 수 세기*/
+        $(".originCnt").keyup(function() {
+            let content = $(this).val();
+            $("#originCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#originCnt').text("[10 / 10]");
+            }
+        });
+
+        /*제조사 글자 수 세기*/
+        $(".mfrCnt").keyup(function() {
+            let content = $(this).val();
+            $("#mfrCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#mfrCnt').text("[10 / 10]");
+            }
+        });
+
+        /*사용 선수명 세기*/
+        $(".playerNameCnt").keyup(function() {
+            let content = $(this).val();
+            $("#playerNameCnt").text("[" + content.length + " / 50]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 50) {
+                alert("최대 50자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 50));
+                $('#playerNameCnt').text("[50 / 50]");
+            }
+        });
+
         /*제품명 글자 수 세기*/
         $(".pdNameCnt").keyup(function() {
             let content = $(this).val();
