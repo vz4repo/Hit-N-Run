@@ -155,8 +155,8 @@
 <body>
 
 <div id="myform">
-        <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
-            <h1 id="loginTitle">Sign Up</h1>
+    <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
+        <h1 id="loginTitle">Sign Up</h1>
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
@@ -183,10 +183,10 @@
             <label>휴대폰</label>
             <input class="special-class" type="text" name="c_phn" placeholder="-제외">
             <label>성별</label>
-                <input type="radio" id="female" name="c_gnd" value="여"> 여성
-                <input type="radio" id="male" name="c_gnd" value="남"> 남성<br><br>
+            <input type="radio" id="female" name="c_gnd" value="여"> 여성
+            <input type="radio" id="male" name="c_gnd" value="남"> 남성<br><br>
 
-                <label>생년월일</label>
+            <label>생년월일</label>
             <input type="date" id="birth" name="c_birth"><br><br>
 
             <input type="checkbox" id="touBox" name="touBox" value="Y">
@@ -201,7 +201,7 @@
 
             <button>가입하기</button><br><br>
         </div>
-</form>
+    </form>
 </div>
 
 <div id="myModal" class="modal">
@@ -479,18 +479,21 @@
             }
         });
     }
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
     $('#verify').click(function() {
-        const email = $('#c_email').val(); // 이메일 주소값 얻어오기!
+        const email = $('#c_email').val(); // 이메일 주소값 얻어오기
         console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
         const checkInput = $('#c_email2') // 인증번호 입력하는곳
+        const url = '/register/mailCheck?email=' + email;
         $.ajax({
             type : 'get',
-            url : '<c:url value ="/register/mailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
+            <%--url : '<c:url value ="/register/mailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.--%>
+            url: url,
             success : function (data) {
                 console.log("data : " +  data);
                 checkInput.attr('disabled',false);
-                code =data;
+                code = data;
                 alert('인증번호가 전송되었습니다.')
             }
         });
@@ -514,6 +517,8 @@
             return false;
         }
     }
+
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
