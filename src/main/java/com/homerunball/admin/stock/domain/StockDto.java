@@ -239,7 +239,21 @@ public class StockDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StockDto stockDto = (StockDto) o;
-        return Objects.equals(pd_id, stockDto.pd_id) && Objects.equals(pd_clsf_cd, stockDto.pd_clsf_cd) && Objects.equals(pd_name, stockDto.pd_name) && Objects.equals(nml_stk_qty, stockDto.nml_stk_qty) && Objects.equals(rt_stk_qty, stockDto.rt_stk_qty) && Objects.equals(rgn_stk_qty, stockDto.rgn_stk_qty) && Objects.equals(urgn_stk_qty, stockDto.urgn_stk_qty) && Objects.equals(sfty_stk_qty, stockDto.sfty_stk_qty) && Objects.equals(odpmt_stk, stockDto.odpmt_stk) && Objects.equals(pur_dt, stockDto.pur_dt) && Objects.equals(rcpt_dt, stockDto.rcpt_dt) && Objects.equals(rcpt_cp, stockDto.rcpt_cp) && Objects.equals(rcpt_prc, stockDto.rcpt_prc) && Objects.equals(rtl_prc, stockDto.rtl_prc) && Objects.equals(sls_prc, stockDto.sls_prc) && Objects.equals(stk_plc_cd, stockDto.stk_plc_cd) && Objects.equals(stk_stat_cd, stockDto.stk_stat_cd) && Objects.equals(frst_reg_dt, stockDto.frst_reg_dt) && Objects.equals(frst_reg_id, stockDto.frst_reg_id) && Objects.equals(last_mod_dt, stockDto.last_mod_dt) && Objects.equals(last_mod_id, stockDto.last_mod_id);
+        return Objects.equals(pd_id, stockDto.pd_id) &&
+               Objects.equals(pd_clsf_cd, stockDto.pd_clsf_cd) &&
+                Objects.equals(pd_name, stockDto.pd_name) &&
+                Objects.equals(nml_stk_qty, stockDto.nml_stk_qty) &&
+                Objects.equals(rt_stk_qty, stockDto.rt_stk_qty) &&
+                Objects.equals(rgn_stk_qty, stockDto.rgn_stk_qty) &&
+                Objects.equals(urgn_stk_qty, stockDto.urgn_stk_qty) &&
+                Objects.equals(sfty_stk_qty, stockDto.sfty_stk_qty) &&
+                Objects.equals(pur_dt, stockDto.pur_dt) &&
+                Objects.equals(rcpt_dt, stockDto.rcpt_dt) &&
+                Objects.equals(rcpt_cp, stockDto.rcpt_cp) &&
+                Objects.equals(rcpt_prc, stockDto.rcpt_prc) &&
+                Objects.equals(rtl_prc, stockDto.rtl_prc) &&
+                Objects.equals(sls_prc, stockDto.sls_prc) &&
+                Objects.equals(stk_plc_cd, stockDto.stk_plc_cd);
     }
 
     @Override

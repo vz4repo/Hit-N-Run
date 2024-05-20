@@ -39,6 +39,11 @@ public class DeliveryDaoImpl implements DeliveryDao {
         return session.selectOne(namespace + "select", map);
     }
 
+    @Override
+    public DeliveryDto selecteDefault(int c_id) throws Exception {
+        return session.selectOne(namespace + "selectDefault", c_id);
+    }
+
     /* 새로운 배송지 입력 */
     @Override
     public int insert(DeliveryDto deliveryDto) throws Exception {

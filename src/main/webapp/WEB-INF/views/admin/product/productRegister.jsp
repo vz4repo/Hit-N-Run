@@ -26,6 +26,7 @@
 
         .buttons {
             margin-top: 30pt;
+            text-align: center;
         }
 
         .registerBtn {
@@ -52,6 +53,11 @@
         .cancelBtn:hover {
             background: #2196F3;
             color: white;
+        }
+
+        .clickButton {
+            display: inline-block;
+            height: 50px;
         }
     </style>
     <title>제품 등록 화면</title>
@@ -177,9 +183,11 @@
                             <input type="checkbox" id="npd" name="pd_chr_cd" value="N">
                             <label for="npd">신상품</label><br>
                             <input type="checkbox" id="hpd" name="pd_chr_cd" value="H">
-                            <label for="hpd">HOT</label><br>
+                            <label for="hpd">인기 제품</label><br>
                             <input type="checkbox" id="spd" name="pd_chr_cd" value="S">
                             <label for="spd">스테디 셀러</label><br>
+                            <input type="checkbox" id="rpd" name="pd_chr_cd" value="R">
+                            <label for="rpd">추천 제품</label><br>
                             <input type="hidden" name="pd_chr_cd" value="">
                         </td>
                     </tr>
@@ -442,8 +450,8 @@
             </div>
         </div>
         <div class="buttons">
-            <button type="submit" class="registerBtn" id="registerBtn">제품 등록</button>
-            <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
+            <button type="submit" class="registerBtn clickButton" id="registerBtn">제품 등록</button>
+            <button type="button" class="cancelBtn clickButton" id="cancelBtn">취소</button>
         </div>
     </form>
 </div>

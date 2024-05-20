@@ -21,7 +21,6 @@ import javax.validation.Valid;
 public class MyPageController {
     @Autowired
     CustDao custDao;
-
     @Autowired
     CustService custService;
 

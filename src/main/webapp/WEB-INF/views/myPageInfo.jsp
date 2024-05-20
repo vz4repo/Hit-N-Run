@@ -55,6 +55,8 @@
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding-top: 5px;
+            padding-bottom: 5px;
             margin: 0 auto;
             margin-top: 100px;
             margin-bottom: 150px;
