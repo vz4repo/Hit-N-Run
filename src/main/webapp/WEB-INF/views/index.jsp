@@ -6,8 +6,15 @@
     <meta charset="UTF-8">
     <%--제품 진열--%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/resources/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -16,170 +23,11 @@
 
     <link rel="icon" type="image/x-icon" href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
     <style>
-        li {
-            list-style: none;
-        }
+<%--        <%@include file="/resources/css/header.css"%>--%>
+<%--        <%@include file="/resources/css/nav.css"%>--%>
 
-        body {
-            font-family: "Open Sans", sans-serif;
-        }
-        h2 {
-            color: #000;
-            font-size: 26px;
-            font-weight: 300;
-            text-align: center;
-            text-transform: uppercase;
-            position: relative;
-            margin: 30px 0 60px;
-        }
-
-        .productName {
-            height: 40px;
-        }
-
-        .carousel {
-            margin: 50px auto;
-            padding: 0 70px;
-            /*width: 1040px;*/
-        }
-
-        .carousel .item {
-            color: #747d89;
-            min-height: 325px;
-            text-align: center;
-            overflow: hidden;
-        }
-        .carousel .thumb-wrapper {
-            padding: 25px 15px;
-            background: #d7e9de;
-            border-radius: 6px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
-        }
-        .carousel .item .img-box {
-            height: 120px;
-            margin-bottom: 20px;
-            width: 100%;
-            position: relative;
-        }
-        .carousel .item img {
-            max-width: 100%;
-            max-height: 100%;
-            display: inline-block;
-            position: absolute;
-            bottom: 0;
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-        }
-        .carousel .item h4 {
-            font-size: 18px;
-        }
-        .carousel .item h4, .carousel .item p, .carousel .item ul {
-            margin-bottom: 5px;
-        }
-        .carousel .thumb-content .btn {
-            color: #7ac400;
-            font-size: 11px;
-            text-transform: uppercase;
-            font-weight: bold;
-            background: none;
-            border: 1px solid #7ac400;
-            padding: 6px 14px;
-            margin-top: 5px;
-            line-height: 16px;
-            border-radius: 20px;
-        }
-        .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
-            color: #fff;
-            background: #7ac400;
-            box-shadow: none;
-        }
-        .carousel .thumb-content .btn i {
-            font-size: 14px;
-            font-weight: bold;
-            margin-left: 5px;
-        }
-        .carousel .carousel-control {
-            height: 44px;
-            width: 40px;
-            background: #7ac400;
-            margin: auto 0;
-            border-radius: 4px;
-            opacity: 0.8;
-        }
-        .carousel .carousel-control:hover {
-            background: #78bf00;
-            opacity: 1;
-        }
-        .carousel .carousel-control i {
-            font-size: 36px;
-            position: absolute;
-            top: 50%;
-            display: inline-block;
-            margin: -19px 0 0 0;
-            z-index: 5;
-            left: 0;
-            right: 0;
-            color: #fff;
-            text-shadow: none;
-            font-weight: bold;
-        }
-        .carousel .item-price {
-            font-size: 13px;
-            padding: 2px 0;
-        }
-        .carousel .item-price strike {
-            opacity: 0.7;
-            margin-right: 5px;
-        }
-        .carousel .carousel-control.left i {
-            margin-left: -2px;
-        }
-
-        .carousel .carousel-control.right i {
-            margin-right: -4px;
-        }
-
-        .carousel-control .right {
-            right: 20px;
-        }
-        .carousel .carousel-indicators {
-            bottom: -50px;
-        }
-        .carousel-indicators li, .carousel-indicators li.active {
-            width: 10px;
-            height: 10px;
-            margin: 4px;
-            border-radius: 50%;
-            border: none;
-        }
-        .carousel-indicators li {
-            background: rgba(0, 0, 0, 0.2);
-        }
-        .carousel-indicators li.active {
-            background: rgba(0, 0, 0, 0.6);
-        }
-        .carousel .wish-icon {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            z-index: 99;
-            cursor: pointer;
-            font-size: 16px;
-            color: #abb0b8;
-        }
-        .carousel .wish-icon .fa-heart {
-            color: #ff6161;
-        }
-        .star-rating li {
-            padding: 0;
-        }
-        .star-rating i {
-            font-size: 14px;
-            color: #ffc000;
-        }
+        /*캐러셀에 필요한 css*/
+        <%@include file="/resources/css/carousel.css"%>
 
         /*mainCategory에 필요한 css include*/
         <%@include file="/resources/css/mainCategory.css"%>
@@ -187,6 +35,7 @@
     <title>Home-Run</title>
 </head>
 <body>
+    <jsp:include page="header.jsp"/>
     <div class="index">
         <h2>Hello! Home run()</h2>
         <h2> D - <span id="dDay">남은시간!</span></h2>
@@ -241,7 +90,7 @@
                                 <div class="row">
                                     </c:if>
                                     <div class="col-sm-3">
-                                        <div class="thumb-wrapper">
+                                        <div class="thumb-wrapper border-4 border-success">
                                             <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                             <div class="img-box">
                                                 <a href="/product/detail?pd_id=${product.pd_id}">
@@ -544,34 +393,11 @@
             </div>
         </div>
 
-        <%--안 된다--%>
-        <%--https://youtu.be/nS_Ht0lT-uQ?si=8ucZnwSst4IOJccY--%>
-        <%--<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="d-block w-100" src="/img/product/player/acuna.jpeg" alt="First slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="/img/product/player/arenado.png" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="/img/product/player/correa.png" alt="Third slide">
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>--%>
-
         <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
         <jsp:include page="mainCategory.jsp" flush="false" />
     </div>
     </div>
+        <jsp:include page="footer.jsp" flush="false" />
     <script>
         window.onload = function() {
             if("${sessionScope.c_id}" !== "") {
