@@ -8,8 +8,30 @@
         FROM stk
     </select>
 
-    <!--재고 1개 조회-->
+    <!--재고 1개 조회(size all일 때 조회할 시 사용)-->
     <select id="selectStk" parameterType="map" resultType="StockDto">
+        SELECT
+        pd_id,
+        SUM(nml_stk_qty) AS nml_stk_qty,
+        SUM(rt_stk_qty) AS rt_stk_qty,
+        SUM(rgn_stk_qty) AS rgn_stk_qty,
+        SUM(urgn_stk_qty) AS urgn_stk_qty,
+        SUM(sfty_stk_qty) AS sfty_stk_qty,
+        SUM(nml_stk_qty) + SUM(rt_stk_qty) + SUM(rgn_stk_qty) AS odpmt_stk
+        FROM stk
+        WHERE pd_id = #{pd_id}
+        <choose>
+            <when test="pd_clsf_cd != null">
+                AND pd_clsf_cd = #{pd_clsf_cd}
+            </when>
+            <otherwise>
+                AND pd_clsf_cd IN (SELECT pd_clsf_cd FROM size_list WHERE pd_type_cd = LEFT(#{pd_id}, 3))
+            </otherwise>
+        </choose>
+    </select>
+
+    <!--재고 1개 조회-->
+    <select id="selectOneStk" parameterType="map" resultType="StockDto">
         SELECT *
         FROM stk
         WHERE pd_id = #{pd_id}
@@ -31,8 +53,9 @@
         #{rt_stk_qty}
         +
         #{rgn_stk_qty}
+
     </sql>
-    <insert id="insertStk" parameterType="StockDto">
+<!--    <insert id="insertStk" parameterType="StockDto">
         INSERT INTO stk
         (pd_id, pd_clsf_cd, pd_name, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty, odpmt_stk, pur_dt,
         rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd)
@@ -40,6 +63,21 @@
         (#{pd_id}, #{pd_clsf_cd}, #{pd_name}, #{nml_stk_qty}, #{rt_stk_qty}, #{rgn_stk_qty}, #{urgn_stk_qty}, #{sfty_stk_qty},
         <include refid="calcOdpmtStk"/>
         , #{pur_dt}, #{rcpt_dt}, #{rcpt_cp}, #{rcpt_prc}, #{rtl_prc}, #{sls_prc}, #{stk_plc_cd}, #{stk_stat_cd})
+    </insert>-->
+    <insert id="insertStk" parameterType="StockDto">
+        INSERT INTO stk
+        (pd_id, pd_clsf_cd, pd_name, nml_stk_qty, rt_stk_qty, rgn_stk_qty, urgn_stk_qty, sfty_stk_qty,
+         odpmt_stk, pur_dt, rcpt_dt, rcpt_cp, rcpt_prc, rtl_prc, sls_prc, stk_plc_cd, stk_stat_cd)
+
+        SELECT p.pd_id, s.pd_clsf_cd, p.pd_name, #{nml_stk_qty}, #{rt_stk_qty}, #{rgn_stk_qty}, #{urgn_stk_qty}, #{sfty_stk_qty},
+               <include refid="calcOdpmtStk"/>, #{pur_dt}, #{rcpt_dt}, #{rcpt_cp}, #{rcpt_prc}, #{rtl_prc}, #{sls_prc}, #{stk_plc_cd}, #{stk_stat_cd}
+        FROM prd AS p
+        LEFT OUTER JOIN size_list AS s
+        ON p.pd_type_cd = s.pd_type_cd
+        WHERE 1=1 AND pd_id = #{pd_id}
+        <if test="pd_clsf_cd != null">
+            AND pd_clsf_cd = #{pd_clsf_cd}
+        </if>
     </insert>
 
     <!--재고 전체 삭제하기-->
