@@ -72,12 +72,6 @@ public class ProductController {
         String category = productDto.getPd_type_cd() + productDto.getPd_type_det_cd() + productDto.getBrd_cd();
         productDto.setCtg(category);
 
-        /* 이미지의 경우 경로를 지정해준다. */
-//        System.out.println("productDto.getMn_img_fn() = " + productDto.getMn_img_fn());
-//        String fileRoot = "/Users/ikjuncho/Desktop/Homerunball/img/" + productDto.getPd_type_cd();
-//        productDto.setMn_img_fn(fileRoot + "main/" + productDto.getMn_img_fn());
-//        productDto.setDet_img_fn(fileRoot + "detail/" + productDto.getDet_img_fn());
-
         try {
             /*
             pd_type_cd에 해당하는 로우 수가 0개라면
@@ -146,7 +140,7 @@ public class ProductController {
 
     /*선택된 제품에 대한 수정사항을 반영한다.*/
     @PostMapping("/manage")
-    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m) {
+    public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd) {
         /*이전 페이지의 url을 referer에 저장한다.*/
         /*String referer = request.getHeader("Referer");*/
         try {
@@ -189,12 +183,24 @@ public class ProductController {
             while (iterator.hasNext()) {
                 /*변경할 항목을 changeContent에 저장한다.*/
                 String changeContent = iterator.next().trim();
-                /*productExposureManage페이지에서 changeContent를 name으로 갖는 파라미터를 changeValue에 저장한다.*/
-                String changeValue = request.getParameter(changeContent);
-                /*만약 changeValue가 null이라면 에러 발생*/
-                if (changeValue == null || changeValue == "") throw new IllegalArgumentException();
-                /*productMap에 key는 changeContent, value는 changeValue에 저장한다.*/
-                productMap.put(changeContent, changeValue);
+                String changeStringValue = "";
+
+                /*만약 changeContent가 pd_chr_cd라면*/
+                if (changeContent.equals("pd_chr_cd")) {
+                    /* 제품 특성에 포함된 ","를 ""로 교체한다. */
+                    changeStringValue = pd_chr_cd.replace(",","");
+                    /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+                    productMap.put(changeContent, changeStringValue);
+                } else { /*만약 changeContent가 pd_chr_cd, min_od_qty, max_od_qty, wgh가 아니라면*/
+                    /*productExposureManage페이지에서 changeContent를 name으로 갖는 파라미터를 changeStringValue에 저장한다.*/
+                    changeStringValue = request.getParameter(changeContent);
+                    /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+                    productMap.put(changeContent, changeStringValue);
+                }
+                /*만약 changeStringValue가 null이라면 에러 발생*/
+                if (changeStringValue == null || changeStringValue.equals("")) throw new IllegalArgumentException();
+//                /*productMap에 key는 changeContent, value는 changeStringValue에 저장한다.*/
+//                productMap.put(changeContent, changeStringValue);
             }
 
             /*제품의 카테고리를 변경해준다.*/
@@ -209,7 +215,6 @@ public class ProductController {
             while (iteratorMap.hasNext()) {
                 Map.Entry entry = (Map.Entry) iteratorMap.next();
                 System.out.println(entry.getKey() + " = " + entry.getValue());
-                /*만약 key에 제품유형이 있다면 카테고리를 수정한다.*/
             }
             productService.modifyContent(productMap);
             rattr.addFlashAttribute("msg", "제품의 내용을 성공적으로 수정하였습니다.");
@@ -464,8 +469,6 @@ public class ProductController {
         try {
             /*pdIds: 선택된 제품ID(pd_id)들을 문자열로 저장하기 위한 변수*/
             String pdIds = productDto.getPd_id();
-            System.out.println("pdIds = " + pdIds);
-            System.out.println("pdIds.length() = " + pdIds.length());
 
             /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
             if(pdIds == "") {
@@ -475,8 +478,6 @@ public class ProductController {
 
             /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
             List<String> selectedProduct = List.of(pdIds.split(","));
-            System.out.println("selectedProduct = " + selectedProduct);
-            System.out.println("selectedProduct.size() = " + selectedProduct.size());
 
             /*선택된 제품들을 다시 진열한다.*/
             productService.showProduct(selectedProduct);
