@@ -330,7 +330,7 @@
                 <th colspan="12">제품목록/재고등록</th>
             </tr>
             <tr>
-                <th class="select_checkbox">전체선택<input type="checkbox" id="selectAll"></th>
+                <th class="select_checkbox">전체<input type="checkbox" id="selectAll"></th>
                 <th class="pd_id">제품ID</th>
                 <th class="pd_name">제품명</th>
                 <th class="frst_reg_dt">상품 등록일</th>
@@ -356,19 +356,13 @@
                         <fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd"/>
                     </td>
                     <td id="pd_clsf_cd_${status.index}" class="pd_clsf_cd">
-                        <select class="search-option clsfCd" name="pd_clsf_cd"
-                                onchange="getStockSize(${status.index},this.value)">
+                        <select class="search-option clsfCd" name="pd_clsf_cd" onchange="getStockSize(${status.index},this.value)">
                             <option value="ALL" selected="selected">모든사이즈</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="2XL">2XL</option>
-                            <option value="3XL">3XL</option>
-                            <option value="LH">좌투</option>
-                            <option value="RH">우투</option>
-                            <option value="FREE">프리사이즈</option>
+                            <c:forEach var="sizeDto" items="${sizeList}">
+                                <c:if test="${productDto.pd_id eq sizeDto.pd_id}">
+                                    <option value="${sizeDto.pd_clsf_cd}">${sizeDto.pd_clsf_cd}</option>
+                                </c:if>
+                            </c:forEach>
                         </select>
                     </td>
                     <td id="nmlQty_${status.index}" class="nml_stk_qty"></td>
@@ -384,15 +378,9 @@
                         </select>
                     </td>
                     <td class="createStock">
-                        <button type="button" class="sendBtnSmall createStockBtn" data-bs-toggle="modal"
-                                data-bs-target="#createModal"
-                                onclick="registModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">
-                            재고등록
-                        </button>
-                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal"
-                                data-bs-target="#modifyModal"
-                                onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정
-                        </button>
+                        <button type="button" class="sendBtnSmall createStockBtn" data-bs-toggle="modal" data-bs-target="#createModal" onclick="registModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">재고등록</button>
+                        <%--<button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>--%>
+                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -462,17 +450,22 @@
             return;
         }
 
-        $('#createModal').modal("show");
+        $('#createModal').modal('show');
         openRegisterModal(pdId, pdName, pdClsfCd);
     }
 
     function updateModal(index, pdId) {
+        if ($('#modifyModal').is(':visible')) {
+            return;
+        }
+
         let pdClsfCd = $('#pd_clsf_cd_' + index + ' select').val();
-        if (pdClsfCd == null) {
+        if (pdClsfCd == null || pdClsfCd == 'ALL') {
             alert("사이즈를 골라주세요");
             return;
         }
 
+        $('#modifyModal').modal('show');
         openModifyModal(pdId, pdClsfCd);
     }
 
@@ -497,6 +490,10 @@
             > 해당 index에 해당하는 row에 데이터를 채워준다.
             > 재고가 이미 등록되어 있으면 등록 버튼 비활성화 */
         /* 제품의 id와 사이즈 정보 저장 */
+        if (item.length < 1 || item =="ALL") {
+            item = null;
+        }
+
         let pdId = $('#pd_id_' + index).text();
         let clsfCd = item;
 

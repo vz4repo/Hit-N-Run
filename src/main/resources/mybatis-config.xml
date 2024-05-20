@@ -21,5 +21,6 @@
     <typeAlias alias="stkViewDto" type="com.homerunball.product.customer.domain.StockViewDto"/>
     <typeAlias alias="prdDetViewDto" type="com.homerunball.product.customer.domain.PrdDetViewDto"/>
     <typeAlias alias="deliveryDto" type="com.homerunball.delivery.domain.DeliveryDto"/>
+    <typeAlias alias="SizeDto" type="com.homerunball.admin.stock.domain.SizeDto"/>
   </typeAliases>
 </configuration>

@@ -8,8 +8,11 @@ public interface StockDao {
     /*모든 재고 선택*/
     List<StockDto> selectStkAll() throws Exception;
 
-    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
+    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택) -- size별 수량조회에 사용*/
     StockDto selectStk(String pd_id, String pd_clsf_cd) throws Exception;
+
+    /*재고 1개 선택(지정된 제품ID, 사이즈코드 선택)*/
+    StockDto selectOneStk(String pd_id, String pd_clsf_cd) throws Exception;
 
     /*재고 전체 수량 카운트*/
     int count() throws Exception;
