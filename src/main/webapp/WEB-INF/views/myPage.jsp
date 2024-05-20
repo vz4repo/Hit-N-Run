@@ -1,41 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<html lang="en">
-
-
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
         }
 
-        #sidebar {
-            margin-top: 200px;
+        #myPage {
+            margin: auto;
+            width: 350px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
 
-        #sidebar li a {
+        #myPage li a {
             text-decoration: none;
             color: black;
         }
 
-        #sidebar li a:hover {
+        #myPage li a:hover {
             background-color: #ddd;
         }
 
-        h1 {
-            font-size: 20px;
-        }
-
-        h2 {
-            color: #333;
-            font-size: 15px;
+        p {
+            font-size: 13px;
         }
 
         ul {
@@ -45,39 +37,51 @@
 
         li {
             margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        #myPage h5 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
         }
     </style>
 </head>
 
 <body>
-<div id="sidebar">
-    <h1>
-        <%= session.getAttribute("c_name") %>님의 회원등급은 <%=session.getAttribute("grd_name")%>입니다.
-    </h1>
-    <h5>
-        총 누적 금액: <%=session.getAttribute("tot_amt")%>원<br>
-        홈런볼 가입날짜: <%= session.getAttribute("reg_dt")%><br>
-        홈런볼 최근 로그인:  <%= session.getAttribute("login_dt")%>
-    </h5><br>
-    <h2>My Info</h2>
+<div id="myPage">
+    <p>
+        <%= session.getAttribute("c_name") %>님의 MY PAGE
+    </p>
+    <p>
+        <span style="float: left;">등급:</span>
+        <span style="float: right;"><%=session.getAttribute("grd_name")%></span><br>
+        <span style="float: left;">누적 금액:</span>
+        <span style="float: right;"><%=session.getAttribute("tot_amt")%>원(test)</span><br>
+        <span style="float: left;">가입 날짜:</span>
+        <span style="float: right;"><%= session.getAttribute("reg_dt")%></span><br>
+        <span style="float: left;">최근 로그인:</span>
+        <span style="float: right;"><%= session.getAttribute("login_dt")%></span><br>
+    </p>
+    <h5>INFO</h5>
     <ul>
-        <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
         <li><a href="/mypage/info">개인정보 관리</a></li>
+        <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
         <li><a href="#">배송지 관리</a></li>
-        <li><a href="#">회원탈퇴</a></li>
+        <li><a onclick="test()">회원탈퇴</a></li>
     </ul>
 
-    <h2>My Shopping</h2>
+    <h5>ORDER</h5>
     <ul>
-        <li><a href="/mypage/pay">주문/배송조회</a></li>
+        <li><a href="#">주문/배송조회</a></li>
     </ul>
 
-    <h2>My Activity</h2>
+    <h5>ACTIVITY</h5>
 
     <ul>
-        <li><a href="#">리뷰 내역</a></li>
-        <li><a href="#">1:1 문의내역</a></li>
-        <li><a href="#">제품 문의내역</a></li>
+        <li><a onclick="test()">리뷰 내역</a></li>
+        <li><a onclick="test()">1:1 문의내역</a></li>
+        <li><a onclick="test()">제품 문의내역</a></li>
     </ul>
 </div>
 
@@ -85,6 +89,10 @@
     let pwdClear = "${pwdClear}"
     if(pwdClear==="pwdMsg2") {
         alert("비밀번호 변경에 성공했습니다.")
+    }
+
+    function test(){
+        alert("아직 테스트중입니다!")
     }
 </script>
 
