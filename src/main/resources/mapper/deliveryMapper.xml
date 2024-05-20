@@ -23,6 +23,15 @@
         /* -> 같이 있는게 맞다. */
     </select>
 
+    <!-- 기본배송지 호출 -->
+    <select id="selectDefault" parameterType="int" resultType="DeliveryDto">
+        SELECT list.c_id, list.c_adr_list_id, list.rcver, list.adr_name, list.rcver_zip, list.rcver_phn, list.rcver_adr
+        FROM cust_adr_list list, cust c
+        WHERE list.c_id = c.c_id
+          and c.c_adr_list_id =list.c_adr_list_id
+          AND list.c_id =#{c_id};
+    </select>
+
     <!-- 51p. 신규 배송지 입력 -->
     <insert id="insert" parameterType="DeliveryDto">
         INSERT INTO cust_adr_list
@@ -59,7 +68,6 @@
 
 
 
-    <!--⭐⭐⭐⭐⭐⭐ 요기서부터는 테스트 안해봄 ⭐⭐⭐⭐⭐⭐-->
     <!-- ⭐⭐ 기본배송지 TDD는 나중에 고객테이블 추가하고 해야해서 맨마지막에 하기 ⭐⭐-->
     <!-- 51p. 기본 배송지 설정 // 고객 테이블에서 변경-->
     <update id="updateDefaultDlv" parameterType="deliveryDto">
