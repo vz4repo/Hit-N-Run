@@ -1,5 +1,7 @@
 package com.homerunball.order.domain;
 
+import com.homerunball.cart.domain.CartDto;
+
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,7 +14,6 @@ public class OrdDto {
     private String od_stat_cd; /*주문상태코드*/
     private Integer od_pd_qty; /*제품가지수*/
     private  Integer od_tot_qty; /*주문총수량*/
-
 
     private Integer rtl_prc; /*소비자가격*/
     private  Integer od_pay_amt; /*주문결제금액*/
@@ -40,6 +41,8 @@ pd_name, sls_prc
         this.rtl_prc = rtl_prc;
         this.od_pay_amt = od_pay_amt;
     }
+
+
 
     public BigInteger getOd_id() {
         return od_id;
