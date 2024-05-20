@@ -2,6 +2,9 @@ package com.homerunball.order.controller;
 
 import com.homerunball.cart.dao.CartDao;
 import com.homerunball.cart.domain.CartDto;
+import com.homerunball.delivery.dao.DeliveryDao;
+import com.homerunball.delivery.domain.DeliveryDto;
+import com.homerunball.delivery.service.DeliveryService;
 import com.homerunball.order.dao.OrdDao;
 import com.homerunball.order.dao.OrderAndStkDao;
 import com.homerunball.order.dao.OrderDetDao;
@@ -16,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,26 +43,33 @@ public class OrdController {
     @Autowired
     OrderAndStkDao orderAndStkDao;
 
+    /* 김수연 시작 */
+    @Autowired /* 의존성 주입 */
+            DeliveryDao deliveryDao;
+    @Autowired
+    DeliveryService deliveryService;
+    /* 김수연 끝 */
+
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request){
+    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
         try {
 //            List<CartDto> list = cartDao.selectUser(c_id);
-            List<CartDto> list =cartDao.getStk(c_id);
+            List<CartDto> list = cartDao.getStk(c_id);
            /* List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);*/
 
-            System.out.println("list = " +list);
+          /*  System.out.println("list = " +list);*/
 
             OrderDetDto ord_det = new OrderDetDto();
             OrdDto ord = new OrdDto();
 
-            System.out.println(ord_det);
+            /*System.out.println(ord_det);
 
             System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
-
+*/
 
 
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
@@ -72,7 +83,7 @@ public class OrdController {
 
                 orderdetDao.insert(ord_det);
             }
-            System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());
+           /* System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());*/
 
             int totalpd_qty = 0;
             int totalqty = 0;
@@ -109,11 +120,20 @@ public class OrdController {
 
             ordDao.insert(ord);
 
-            System.out.println("ord_det.getC_id()" +ord_det.getC_id());
-            System.out.println(list+"===========================");
+            /*System.out.println("ord_det.getC_id()" +ord_det.getC_id());*/
+
 
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/
+
+            /* 김수연 시작 */
+            DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);
+            model.addAttribute("selectedDto", deliveryDto);
+
+            System.out.println("deliveryDto = " + deliveryDto);
+
+            System.out.println("[DeliveryController]deliveryDto = " + deliveryDto);
+            /* 김수연 끝 */
 
         } catch (Exception e) {
             e.printStackTrace();

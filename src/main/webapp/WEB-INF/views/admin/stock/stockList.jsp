@@ -6,77 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <%@include file="/resources/css/stockAdminMenu.css" %>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        <%@include file="/resources/css/adminMenu.css" %>
+
         input[type="date"]::-webkit-calendar-picker-indicator {
             display: none;
             -webkit-appearance: none;
             appearance: none;
         }
 
-        .main {
-            text-align: center;
-        }
-
-        .search-container, .product-container, .stock-container {
+        .search-container, .product-container {
             width: 100%;
             margin: 20px 0px;
             display: inline-block;
             text-align: center;
         }
 
-        .tableLeft > tr > td {
-            text-align: left;
+        .header-container {
+            display: flex;
+            align-items: center;
+            position: relative; /* 중앙 정렬을 위한 상대적 위치 설정 */
+        }
+        .header-title {
+            position: absolute; /* 절대 위치를 사용하여 중앙에 배치 */
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 25px;
+        }
+        .header-button {
+            flex: none; /* 버튼 크기 고정 */
         }
 
         table {
+            border-collapse: collapse;
             width: 100%;
+            border: 1px solid #ddd;
+            font-size: 12px;
+        }
+
+        .search-container tbody tr:nth-of-type(3) select {
+            margin-right: 30px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f3f3f3;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .search-container td {
+            text-align: left;
+            padding-left: 20px;
+        }
+        .product-container tbody td:nth-of-type(1),
+        .product-container tbody td:nth-of-type(6),
+        .product-container tbody td:nth-of-type(7),
+        .product-container tbody td:nth-of-type(8),
+        .product-container tbody td:nth-of-type(9),
+        .product-container tbody td:nth-of-type(10),
+        .product-container tbody td:nth-of-type(11),
+        .product-container tbody td:nth-of-type(12),
+        .product-container tbody td:nth-of-type(13){
             text-align: center;
         }
-
-        table, th, tr, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 5px;
-        }
-
-        /*
-                tr { text-align: center; }
-                td { text-align: left; }
-        */
-
         .search-option {
             outline: none;
-            margin: 0 5px;
             border: 1px solid #ccc;
             padding: 5px;
+            font-size: 12px;
         }
 
         .search-option > option {
             text-align: center;
         }
 
-        .search-input {
+        .search-input, .search-inputDate{
             color: gray;
             background-color: white;
             border: 1px solid #ccc;
             height: 100%;
-            width: 300px;
-            font-size: 15px;
+            font-size: 12px;
             padding: 5px;
         }
 
+        .search-input {
+            width: 300px;
+        }
+
         .search-inputDate {
-            color: gray;
-            background-color: white;
-            border: 1px solid #ccc;
-            height: 100%;
             width: 100px;
-            font-size: 15px;
-            padding: 5px;
+            text-align: center;
         }
 
         .search-input::placeholder {
@@ -100,12 +127,12 @@
             font-size: 15px;
         }
 
-        .sendBtnSmall, .cancelBtnSmall {
+        .sendBtnSmall {
             padding: 5px 10px;
             font-size: 10px;
         }
 
-        .cancelBtn, .cancelBtnSmall {
+        .cancelBtn {
             border-radius: 4px;
             border: 1px solid #000000;
             background-color: white;
@@ -113,7 +140,7 @@
             color: #000000;
         }
 
-        .cancelBtn:hover, .cancelBtnSmall:hover {
+        .cancelBtn:hover {
             background: #0b7dda;
             color: white;
         }
@@ -132,15 +159,21 @@
     <title>재고 목록</title>
 </head>
 <body>
-<jsp:include page="../adminMenu.jsp" flush="false"/>
-<div class="main">
-    <h1>재고: 상품검색 > 상품조회 > 재고 개별 등록 화면</h1>
+<jsp:include page="stockAdminMenu.jsp"/>
+<div id="main">
+    <div class="w3-dark-grey header-container">
+        <div class="w3-dark-grey header-button">
+            <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
+        </div>
+        <div id="headline" class="header-title">재고 등록/수정</div>
+    </div>
     <%-- 재고관리를 위한 제품 검색 --%>
-    <div class="search-container">
+    <div class="w3-container search-container">
         <form action="<c:url value="/admin/stock/searchList"/>" class="search-form" method="get">
-            <table class="tableLeft">
+            <table>
                 <tr>
-                    <th colspan="2">제품 검색(아직 기능구현 못했어요..ㅠㅠ)</th>
+                    <th colspan="2">제품 검색</th>
                 </tr>
                 <%--검색 분류: 상품ID, 상품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
                 <tr>
@@ -156,7 +189,8 @@
                             <option value="player_name">사용 선수명</option>
                             <option value="season">시즌</option>
                         </select>
-                        <input type="text" name="keyword" class="search-input" type="text" value="${keyword}" placeholder="검색어를 입력해주세요">
+                        <input type="text" name="keyword" class="search-input" type="text" value="${keyword}"
+                               placeholder="검색어를 입력해주세요">
                     </td>
                 </tr>
                 <%--상품 분류: 대(제품 유형), 중(제품 상세 유형), 소(브랜드)--%>
@@ -286,15 +320,17 @@
     <%-- 재고관리를 위한 제품 목록 조회 및 재고등록/수정/일괄설정 --%>
     <jsp:include page="modal/stockRegisterModal.jsp"/>
     <jsp:include page="modal/stockModifyModal.jsp"/>
-    <div class="product-container">
+    <div class="w3-container product-container" style="overflow-x:auto;">
         <table>
             <tr>
-                <th><button type="button" class="sendBtnSmall" id="stockCreateManage">재고 일괄등록</button></th>
-                <th><button type="button" class="sendBtnSmall" id="stockModifyManage">재고 일괄수정</button></th>
-                <th colspan="12">제품목록(재고 등록할 제품 선택)</th>
+                <th colspan="2">
+                    <button type="button" class="sendBtnSmall" id="stockCreateManage">재고 일괄등록</button>
+                    <button type="button" class="sendBtnSmall" id="stockModifyManage">재고 일괄수정</button>
+                </th>
+                <th colspan="12">제품목록/재고등록</th>
             </tr>
             <tr>
-                <th class="select_checkbox">전체선택<input type="checkbox" id="selectAll"></th>
+                <th class="select_checkbox">전체<input type="checkbox" id="selectAll"></th>
                 <th class="pd_id">제품ID</th>
                 <th class="pd_name">제품명</th>
                 <th class="frst_reg_dt">상품 등록일</th>
@@ -320,16 +356,13 @@
                         <fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd"/>
                     </td>
                     <td id="pd_clsf_cd_${status.index}" class="pd_clsf_cd">
-                        <select class="search-option clsfCd" name="pd_clsf_cd"
-                                onchange="getStockSize(${status.index},this.value)">
+                        <select class="search-option clsfCd" name="pd_clsf_cd" onchange="getStockSize(${status.index},this.value)">
                             <option value="ALL" selected="selected">모든사이즈</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="2XL">2XL</option>
-                            <option value="3XL">3XL</option>
+                            <c:forEach var="sizeDto" items="${sizeList}">
+                                <c:if test="${productDto.pd_id eq sizeDto.pd_id}">
+                                    <option value="${sizeDto.pd_clsf_cd}">${sizeDto.pd_clsf_cd}</option>
+                                </c:if>
+                            </c:forEach>
                         </select>
                     </td>
                     <td id="nmlQty_${status.index}" class="nml_stk_qty"></td>
@@ -346,13 +379,13 @@
                     </td>
                     <td class="createStock">
                         <button type="button" class="sendBtnSmall createStockBtn" data-bs-toggle="modal" data-bs-target="#createModal" onclick="registModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">재고등록</button>
-                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>
+                        <%--<button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>--%>
+                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>
                     </td>
                 </tr>
             </c:forEach>
         </table>
     </div>
-    <%-- 재고수정 버튼 클릭 시 노출되는 화면 --%>
 </div>
 </body>
 <script>
@@ -394,13 +427,13 @@
 
     function initializeDatepicker() {
         $('#sdate').datepicker({
-            onSelect: function(selectedDate) {
+            onSelect: function (selectedDate) {
                 $('#edate').datapicker("option", "minDate", selectedDate);
             }
         });
 
         $('#edate').datepicker({
-            onSelect: function(selectedDate) {
+            onSelect: function (selectedDate) {
                 $('#sdate').datepicker('option', 'maxDate', selectedDate);
             }
         });
@@ -410,41 +443,41 @@
         $('#sdate, #edate, .dateForm').datepicker('setDate', today);
     }
 
-    function registModal(index, pdId, pdName){
-        let pdClsfCd = $('#pd_clsf_cd_'+index+' select').val();
-        if(pdClsfCd == null) {
+    function registModal(index, pdId, pdName) {
+        let pdClsfCd = $('#pd_clsf_cd_' + index + ' select').val();
+        if (pdClsfCd == null) {
             alert("사이즈를 골라주세요");
             return;
         }
 
-        $('#createModal').modal("show");
+        $('#createModal').modal('show');
         openRegisterModal(pdId, pdName, pdClsfCd);
     }
 
     function updateModal(index, pdId) {
-/*
-        e.preventDefault();
-*/
+        if ($('#modifyModal').is(':visible')) {
+            return;
+        }
 
-        let pdClsfCd = $('#pd_clsf_cd_'+index+' select').val();
-        if(pdClsfCd == null) {
+        let pdClsfCd = $('#pd_clsf_cd_' + index + ' select').val();
+        if (pdClsfCd == null || pdClsfCd == 'ALL') {
             alert("사이즈를 골라주세요");
             return;
         }
 
+        $('#modifyModal').modal('show');
         openModifyModal(pdId, pdClsfCd);
     }
 
     /* 재고사용 여부 변화에 따라 이벤트 처리 > used일 경우 재고등록 버튼 활성화 > unUsed일 경우 재고등록 버튼 비활성화 */
     function getStockUse(index, item) {
-        console.log(index, item);
         if (item === 'used') {
-            $('#createStockBtn_' + index).prop('disabled', false);
-            $('#modifyStockBtn_' + index).prop('disabled', false);
+            $('.createStockBtn').eq(index).prop('disabled', false);
+            $('.modifyStockBtn').eq(index).prop('disabled', false);
 
         } else {
-            $('#createStockBtn_' + index).prop('disabled', true);
-            $('#modifyStockBtn_' + index).prop('disabled', true);
+            $('.createStockBtn').eq(index).prop('disabled', true);
+            $('.modifyStockBtn').eq(index).prop('disabled', true);
         }
     }
 
@@ -457,6 +490,10 @@
             > 해당 index에 해당하는 row에 데이터를 채워준다.
             > 재고가 이미 등록되어 있으면 등록 버튼 비활성화 */
         /* 제품의 id와 사이즈 정보 저장 */
+        if (item.length < 1 || item =="ALL") {
+            item = null;
+        }
+
         let pdId = $('#pd_id_' + index).text();
         let clsfCd = item;
 
@@ -484,13 +521,17 @@
                 $('#sftyQty_' + index).text(result.sfty_stk_qty);
                 $('#odpmtQty_' + index).text(result.odpmt_stk);
 
-                /* 원장님 코드 중 글쓰기 기능 변경되는 것 차용 해오기 */
-                if (isStockAvailable) {
-                    $('#createStockBtn_' + index).prop('disabled', true);
-                    $('#modifyStockBtn_' + index).prop('disabled', false);
-                } else {
-                    $('#createStockBtn_' + index).prop('disabled', false);
-                    $('#modifyStockBtn_' + index).prop('disabled', true);
+                /* 원장님 코드 중 글쓰기 기능 변경되는 것 차용 해오기
+                    attr로 시도 해보기 / 클릭 안되면 이벤트 끊기
+                 */
+                if ($('.stockUse').eq(index).val() === "used") {
+                    if (isStockAvailable) {
+                        $('.createStockBtn').eq(index).prop('disabled', true);
+                        $('.modifyStockBtn').eq(index).prop('disabled', false);
+                    } else {
+                        $('.createStockBtn').eq(index).prop('disabled', false);
+                        $('.modifyStockBtn').eq(index).prop('disabled', true);
+                    }
                 }
             },
             error: function (request, status, error) {

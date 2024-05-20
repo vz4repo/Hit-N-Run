@@ -49,7 +49,8 @@
 
     <insert id="insert" parameterType="OrdDto" >
         <selectKey keyProperty="od_id" order="BEFORE" resultType="biginteger">
-            SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(IFNULL(max(substr(od_id, 9)),0)+1, 4, '0')) AS od_id from ord
+#             SELECT CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(IFNULL(max(substr(od_id, 9)),0)+1, 4, '0')) AS od_id from ord
+              select LPAD(IFNULL(max(o.od_id),0)+1, 12, '0') from ord o
         </selectKey>
         insert into ord
         (c_id, od_id, od_dt, od_pd_qty, od_tot_qty, rtl_prc, od_pay_amt)
@@ -59,7 +60,7 @@
 
     <update id="update" parameterType="OrdDto">
         update ord
-        set od_dt         = #{od_dt}
+        set   od_dt       = #{od_dt}
           ,   od_pd_qty   = #{od_pd_qty}
           ,   od_tot_qty  = #{od_tot_qty}
           ,   rtl_prc     = #{rtl_prc}

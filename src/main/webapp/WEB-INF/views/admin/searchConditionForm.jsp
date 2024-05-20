@@ -140,7 +140,8 @@
         </tr>
     </table>
     <div class="buttons">
-        <button type="submit" class="sendBtn clickButton" id="searchBtn">검색</button>
+<%--        <button type="submit" class="sendBtn clickButton" id="searchBtn">검색</button>--%>
+        <button type="button" class="sendBtn clickButton" id="searchBtn">검색</button>
         <button type="button" class="cancelBtn clickButton" id="cancelBtn">초기화</button>
     </div>
 </form>

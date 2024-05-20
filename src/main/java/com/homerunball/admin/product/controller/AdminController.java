@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-
     /*관리자 메인페이지로 이동한다.*/
     @RequestMapping("/main")
     public String main(Model model) {

@@ -1,5 +1,7 @@
 package com.homerunball.order.domain;
 
+import com.homerunball.cart.domain.CartDto;
+
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Objects;
@@ -47,6 +49,22 @@ public class OrderDetDto {
         this.last_mod_dt = last_mod_dt;
         this.last_mod_id = last_mod_id;
     }
+
+
+
+    private CartDto cartDto; // CartDto 필드 추가
+
+    // Getter and Setter for cartDto
+    public CartDto getCartDto() {
+        return cartDto;
+    }
+
+    public void setCartDto(CartDto cartDto) {
+        this.cartDto = cartDto;
+    }
+
+
+
 
 
     @Override

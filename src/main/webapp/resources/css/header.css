@@ -1,6 +1,6 @@
 body{
     height: 100vh;
-    padding-top: 50px;
+    padding-top: 200px;
 }
 
 a {
@@ -28,11 +28,12 @@ header {
 .top_header_ul,
 .main_header_ul{
     list-style: none;
-    display: flex;
+    /*display: flex;*/
 }
 
 .top_header ul {
     margin-right: 60px;
+    display: flex;
 }
 
 .top_header li {
@@ -64,8 +65,8 @@ header {
     font-weight: bold;
 }
 
-.bottom_header{
-    margin-left: 7%;
+.main_header_ul {
+    display: flex;
 }
 
 

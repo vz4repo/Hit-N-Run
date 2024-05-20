@@ -3,13 +3,10 @@ package com.homerunball.customer.controller;
 
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
-//import com.homerunball.customer.domain.CustHistDto;
 import com.homerunball.customer.service.CustService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/mypage")
@@ -42,6 +37,7 @@ public class MyPageController {
         /*변수를 통해 db에 접근 후 dto에 저장*/
         CustDto custDto = custDao.grdNameJoin(c_id);
 
+        /*세션 속성 설정*/
         if(custDto != null){
             session.setAttribute("c_name", custDto.getC_name());
             session.setAttribute("grd_name", custDto.getGrd_name());
@@ -75,11 +71,6 @@ public class MyPageController {
             session.setAttribute("email_agr", custDto.getEmail_agr());
         }
         return "myPageInfo";
-    }
-
-    @GetMapping(value = "pay")
-    public String myPayInfo() {
-        return "payList";
     }
 
     @InitBinder
@@ -125,18 +116,18 @@ public class MyPageController {
         HttpSession session = request.getSession();
         int c_id = (int) session.getAttribute("c_id");
 
-        // 현재 로그인한 사용자의 실제 비밀번호 가져오기
+         /*현재 로그인한 사용자의 실제 비밀번호 가져오기*/
         CustDto custDto = custDao.selectID(c_id);
         String actualPwd = custDto.getC_pwd();
 
-        // 입력한 현재 비밀번호와 실제 비밀번호가 일치하는지 확인
+        /* 입력한 현재 비밀번호와 실제 비밀번호가 일치하는지 확인*/
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (!encoder.matches(curPwd, actualPwd)) {
             msg.addFlashAttribute("pwdFail", "pwdMsg");
             return "redirect:/mypage/pwdEdit";
         }
 
-        // 현재 비밀번호가 일치하면 새로운 비밀번호로 업데이트
+        /* 현재 비밀번호가 일치하면 새로운 비밀번호로 업데이트*/
         custDto.setC_id(c_id);
         custDto.setC_pwd(custService.pwdEncrypt(c_pwd));
         custDao.updatePwd(custDto);
@@ -144,4 +135,3 @@ public class MyPageController {
         return "redirect:/mypage/list";
     }
 }
-

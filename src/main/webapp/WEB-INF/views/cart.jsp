@@ -25,11 +25,11 @@
     <div class="title__cart">장바구니</div>
     <table class="cart_tale">
         <colgroup>
+            <col width="5%" />
+            <col width="15%" />
+            <col width="30%" />
             <col width="10%" />
             <col width="20%" />
-            <col width="25%" />
-            <col width="10%" />
-            <col width="15%" />
             <col width="10%" />
             <col width="10%" />
         </colgroup>
@@ -76,9 +76,9 @@
                                 </form>
                             </div>
                         </td>
-<%--                        <td>--%>
-<%--                            <span>무료배송</span>--%>
-<%--                        </td>--%>
+                       <td>
+                            <span>무료배송</span>
+                        </td>
                         <td>
                                 <%-- c_id 고객번호, pd_id 제품코드, pd_clsf_code 사이즈 가 일치하는것을 선택해서 삭제 --%>
                             <button type="button" class="deleteBtn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">삭제</button>
