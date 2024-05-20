@@ -10,17 +10,21 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <style>
 
+        body{
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
         #loginform {
-            max-width: 1130px;
+            max-width: 700px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding-top: 7%;
-            padding-bottom: 10%; /* 세로 방향의 패딩만 설정 */
+            padding-top: 5%;
+            padding-bottom: 5%;
             margin: 0 auto;
-            margin-top: 200px;
-            margin-bottom: 150px;
+            margin-top: 100px;
+            margin-bottom: 50px;
         }
 
         .container {
@@ -78,15 +82,49 @@
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        /*#error-message {*/
-        /*    position: absolute;*/
-        /*    color: gray;*/
-        /*    top: 26%;*/
-        /*    left: 50%;*/
-        /*    transform: translate(-50%, -50%);*/
-        /*}*/
         label{
             font-size: 13px;
+        }
+
+
+        #kakaoBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffd400;
+            color: #2c0b0e;
+            /*color: saddlebrown;*/
+            /*font-weight: bold;*/
+        }
+
+
+        #googleBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: gainsboro;
+            color: black;
+            /*font-weight: bold;*/
+        }
+
+        #naverBtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: green;
+            /*font-weight: bold;*/
+        }
+
+        #kakao {
+            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
+        }
+
+        #google {
+            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
+        }
+
+        #naver {
+            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
         }
     </style>
 </head>
@@ -108,9 +146,25 @@
             <input type="checkbox" id="remember" name="rememberEmail" ${empty cookie.c_email.value ? "":"checked"}> Remember Email
         </div>
         <button type="submit">Continue</button>
-        <button type="button" class="subBtn">Forgot Email</button>
-        <button type="button" class="subBtn">Forgot pwd</button>
+        <button type="button" class="subBtn" onclick="test()">Forgot Email</button>
+        <button type="button" class="subBtn" onclick="test()">Forgot pwd</button>
         <a href="/register/add"> <button type="button" id="signUpButton">Sign Up</button> </a>
+
+        <button id="googleBtn" type="button" onclick="test()">
+            <img id="google" src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="30" height="30">
+            구글 로그인
+        </button>
+
+        <button id="naverBtn" type="button" onclick="test()">
+            <img id="naver" src="https://cdn-icons-png.flaticon.com/128/11423/11423248.png" width="30" height="30">
+            네이버 로그인
+        </button>
+
+        <button id="kakaoBtn" type="button" onclick="test()">
+            <img id="kakao" src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png" width="30" height="30">
+            카카오톡 로그인
+        </button>
+
     </div>
     </form>
 </div>
@@ -131,6 +185,10 @@
         alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
     }
 
+
+    function test(){
+            alert("아직 테스트중입니다!")
+    }
 </script>
 
 </body>

@@ -26,6 +26,9 @@ public class RegisterController {
     @Autowired
     CustService custService;
 
+//    @Autowired
+//    private MailSendService mailService;
+
 
     /*겟맵핑 /add 경로일시 회원가입 폼으로 이동*/
     @GetMapping("/add")
@@ -83,4 +86,18 @@ public class RegisterController {
         String checkResult = custService.emailCheck(c_email);
         return checkResult;
     }
+
+    //이메일 인증
+    @GetMapping("/mailCheck")
+    @ResponseBody
+    public String mailCheck(String email) {
+        System.out.println("이메일 인증 요청이 들어옴!");
+        System.out.println("이메일 인증 이메일 : " + email);
+
+        return custService.joinEmail(email);
+
+//        return email;
+    }
 }
+
+//        return custService.joinEmail(email);

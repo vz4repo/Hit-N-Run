@@ -47,7 +47,7 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
 <%-- 김수연 끝 --%>
 <body>
 <%--<jsp:include page="template/header.jsp"/>--%>
-<%@include file="header.jsp"%>
+<jsp:include page="header.jsp"/>
     <div class="order__header">
         <a href="#" class="head_main">Homerun() > 주문서</a>
         <hr class="first__under" />
@@ -62,8 +62,6 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
         <hr />
         <section class="order__delivery">
             <%-- 김수연 시작 --%>
-
-
                 <%-- 고객이 선택한 배송지 뜨는 페이지 _ order.jsp --%>
                 <div>
                     <div id = "delivery_left" class="head_order">
@@ -152,12 +150,12 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="70" />
-                    <col width="*" />
-                    <col width="150" />
-                    <col width="150" />
-                    <col width="150" />
-                    <col width="150" />
+                    <col width="20%" />
+                    <col width="30%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    <col width="10%" />
+                    <col width="10%" />
                 </colgroup>
                 <thead>
                 <tr>
@@ -190,7 +188,7 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                             </a>
                         </td>
                         <td>
-                            <a href="#">${cartDto.pd_name}</a>
+                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
