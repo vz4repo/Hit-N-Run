@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
-    <link href="<c:url value='/resources/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -402,7 +402,7 @@
                                             <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                             <div class="img-box">
                                                 <a href="/product/detail?pd_id=${product.pd_id}">
-                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                    <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                                 </a>
                                             </div>
                                             <div class="thumb-content">
@@ -486,7 +486,7 @@
                                             <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                             <div class="img-box">
                                                 <a href="/product/detail?pd_id=${product.pd_id}">
-                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                    <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                                 </a>
                                             </div>
                                             <div class="thumb-content">
@@ -570,7 +570,7 @@
                                             <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                             <div class="img-box">
                                                 <a href="/product/detail?pd_id=${product.pd_id}">
-                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                    <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                                 </a>
                                             </div>
                                             <div class="thumb-content">
@@ -654,7 +654,7 @@
                                             <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                             <div class="img-box">
                                                 <a href="/product/detail?pd_id=${product.pd_id}">
-                                                    <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                    <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                                 </a>
                                             </div>
                                             <div class="thumb-content">

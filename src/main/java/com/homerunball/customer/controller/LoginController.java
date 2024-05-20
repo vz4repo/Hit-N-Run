@@ -80,7 +80,6 @@ public class LoginController {
             CustDto custDto = custDao.selectEmail(c_email);
             /*dto가 가져온 비밀번호와 내가 입력한 비밀번호와 같지 않다면 로그인 실패*/
 
-
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             if (!encoder.matches(c_pwd, custDto.getC_pwd())) {
                 return false;
