@@ -23,7 +23,7 @@
 <main>
     <hr class="first__under" />
     <div class="title__cart">장바구니</div>
-    <table>
+    <table class="cart_tale">
         <colgroup>
             <col width="10%" />
             <col width="20%" />

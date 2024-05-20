@@ -10,7 +10,6 @@ body {
     background-color: white;
 }
 
-/* 지울예정 */
 .navbar a {
     float: left;
     font-size: 16px;
@@ -51,7 +50,7 @@ body {
     z-index: 1;
     white-space: nowrap;
     background-color: white;
-    margin-left: 7%;
+    padding-left: 7%;
     padding-bottom: 55px;
     border-bottom: 2px solid rgba(223,4,29,0.5);
 }
