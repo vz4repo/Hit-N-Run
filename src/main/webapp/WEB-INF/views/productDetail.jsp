@@ -9,50 +9,55 @@
 <%--선택된 옵션으로 제품을 넘겨주기--%>
 
 <%--넘겨줄 정보를 담는다--%>
-<div class="productMain">
+<div class="productMainContainer">
     <form id="purchaseInfo" method="post">
-        <h1 id="result"></h1>
-        <p>
-            <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}"
-                 alt="이미지 준비 중 입니다"
-                 onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
-        </p>
-        <p>${prd.pd_name}</p>
-        <p>${prd.pd_ad_cmt}</p>
+<%--    상단 왼쪽에 위치한 대표이미지--%>
+        <div class="productItem">
+            <p>
+                <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
+            </p>
+        </div>
+        <div class="productItem">
+            <p>${prd.pd_name}</p>
+            <p>${prd.pd_ad_cmt}</p>
 
-        <p>옵션:
-            <select id="mySelect" name="selectedOption">
-<%--                서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
-<%--                listStkOpt는 재고테이블을 리스트로 읽어옵니다--%>
-                <c:forEach var="option" items="${listStkOpt}">
-                    <option value="${option.pd_clsf_cd}">${option.pd_clsf_cd}</option>
-                </c:forEach>
-            </select>
+            <p>옵션:
+                <select id="mySelect" name="selectedOption">
+<%--                   서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
+<%--                   listStkOpt는 재고테이블을 리스트로 읽어옵니다--%>
+                   <c:forEach var="option" items="${listStkOpt}">
+                       <option value="${option.pd_clsf_cd}">${option.pd_clsf_cd}</option>
+                   </c:forEach>
+                </select>
 <%--            input으로 필요한 정보 pd_id, pd_clsf_cd를 넘겨준다.--%>
-            <input id="pd_id" name="pd_id" value="${stkInfo.pd_id}" style="display: none">
-            <input id="pd_clsf_cd" name="pd_clsf_cd" style="display: none">
-            <input id="mn_img_fn" name="mn_img_fn" value="${prd.mn_img_fn}" style="display: none">
-            <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
-        </p>
+                <input id="pd_id" name="pd_id" value="${stkInfo.pd_id}" style="display: none">
+                <input id="pd_clsf_cd" name="pd_clsf_cd" style="display: none">
+                <input id="mn_img_fn" name="mn_img_fn" value="${prd.mn_img_fn}" style="display: none">
+                <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
+            </p>
 
-        <p>판매가격:${stkInfo.sls_prc}</p>
-        <p>소비자가격:${stkInfo.rtl_prc}</p>
-        <p>제품 상세 설명(제품post연결후 토글로)</p>
-        <p>${prd.pd_det_dsc}</p>
-        <p>제품 특징(제품post연결후 토글로)</p>
-        <p>제품 상태:${prd.qlt_cd}</p>
-        <p>제조 국가:${prd.origin}</p>
-        <p>브랜드:${prd.brd_cd}</p>
-        <p>제품 제조일자:${prd.pd_mnf_date}</p>
-        <p>재질:${prd.mtrl}</p>
-        <p>제품 무게:${prd.wgh}</p>
-        <p>제조사:${prd.mfr}</p>
-        <p>배송:무료배송</p>
-        <p>구매 주의사항</p>
-        <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
-        <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
-<%--        찜하기 3차 개발예정--%>
-        <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
+            <p>판매가격:${stkInfo.sls_prc}</p>
+            <p>소비자가격:${stkInfo.rtl_prc}</p>
+            <p>제품 상세 설명(제품post연결후 토글로)</p>
+            <p>${prd.pd_det_dsc}</p>
+            <p>제품 특징(제품post연결후 토글로)</p>
+            <p>제품 상태:${prd.qlt_cd}</p>
+            <p>제조 국가:${prd.origin}</p>
+            <p>브랜드:${prd.brd_cd}</p>
+            <p>제품 제조일자:${prd.pd_mnf_date}</p>
+            <p>재질:${prd.mtrl}</p>
+            <p>제품 무게:${prd.wgh}</p>
+            <p>제조사:${prd.mfr}</p>
+            <p>배송:무료배송</p>
+            <p>구매 주의사항</p>
+            <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
+            <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
+    <%--            찜하기 3차 개발예정--%>
+            <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
+
+        </div>
     </form>
 </div>
 <%--연관 제품 (구현 안함 발표전에 시간이 가능하면 개발)--%>
