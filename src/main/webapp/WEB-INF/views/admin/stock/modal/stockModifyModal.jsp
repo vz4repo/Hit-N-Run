@@ -102,7 +102,7 @@
             $('#modify_pd_clsf_cd').prop('disabled', true);
             $.ajax({
                 type: 'GET',       // 요청 메서드
-                url: '/admin/stock/selectOne',  // 요청 URI
+                url: '/admin/stock/selectOneModify',  // 요청 URI
                 headers: {"Content-Type": "application/json"}, // 요청 헤더
                 dataType: 'json', // json 객체형으로 응답
                 data: {
@@ -111,30 +111,46 @@
                 },  // 서버로 전송할 데이터. stringify()로 직렬화 필요. JSON.stringify()
                 success: function (result) {
                     function formatDate(dateStr) {
-
-                        return dateStr.slice(0, 4) + '-' + dateStr.slice(4, 6) + '-' + dateStr.slice(6, 8);
+                        if (dateStr !== null && dateStr !== undefined){
+                            return dateStr.slice(0, 4) + '-' + dateStr.slice(4, 6) + '-' + dateStr.slice(6, 8);
+                        } else {
+                            alert("날짜 데이터가 없어요! 확인 해주세요!");
+                            return '';
+                        }
                     }
 
-                    console.log("통신성공!"+result);
-                    $('#modify_pd_id').val(result.pd_id);
-                    $('#modify_pd_name').val(result.pd_name);
-                    $('#modify_pd_clsf_cd').val(result.pd_clsf_cd);
-                    $('#modify_nml_stk_qty').val(result.nml_stk_qty);
-                    $('#modify_rt_stk_qty').val(result.rt_stk_qty);
-                    $('#modify_rgn_stk_qty').val(result.rgn_stk_qty);
-                    $('#modify_urgn_stk_qty').val(result.urgn_stk_qty);
-                    $('#modify_sfty_stk_qty').val(result.sfty_stk_qty);
-                    $('#modify_pur_dt').val(formatDate(result.pur_dt));
-                    $('#modify_rcpt_dt').val(formatDate(result.rcpt_dt));
-                    $('#modify_rcpt_cp').val(result.rcpt_cp);
-                    $('#modify_rcpt_prc').val(result.rcpt_prc);
-                    $('#modify_rtl_prc').val(result.rtl_prc);
-                    $('#modify_sls_prc').val(result.sls_prc);
-                    $('#modify_stk_plc_cd').val(result.stk_plc_cd);
-                    $('#modifyModal').modal("show");
+                    console.log("통신성공!" + JSON.stringify(result));
+                    if(result) {
+                        $('#modify_pd_id').val(result.pd_id);
+                        $('#modify_pd_name').val(result.pd_name);
+                        $('#modify_pd_clsf_cd').val(result.pd_clsf_cd);
+                        $('#modify_nml_stk_qty').val(result.nml_stk_qty);
+                        $('#modify_rt_stk_qty').val(result.rt_stk_qty);
+                        $('#modify_rgn_stk_qty').val(result.rgn_stk_qty);
+                        $('#modify_urgn_stk_qty').val(result.urgn_stk_qty);
+                        $('#modify_sfty_stk_qty').val(result.sfty_stk_qty);
+                        $('#modify_pur_dt').val(formatDate(result.pur_dt));
+                        $('#modify_rcpt_dt').val(formatDate(result.rcpt_dt));
+                        $('#modify_rcpt_cp').val(result.rcpt_cp);
+                        $('#modify_rcpt_prc').val(result.rcpt_prc);
+                        $('#modify_rtl_prc').val(result.rtl_prc);
+                        $('#modify_sls_prc').val(result.sls_prc);
+                        $('#modify_stk_plc_cd').val(result.stk_plc_cd);
+                        $('#modifyModal').modal("show");
+                    } else {
+                        alert("받은 데이터가 없습니다. 다시 시도해주세요.");
+                        return;
+                    }
                 },
                 error: function (request, status, error) {
-                    alert("error");
+                    if(request.responseText === "size is All") {
+                        alert("사이즈를 선택해 주세요.");
+                    } else if(request.responseText === "stock is null") {
+                        alert("재고가 없습니다. 다시 확인 해주세요.");
+                    } else {
+                        alert("error: " + request.responseText);
+                    }
+
                     $('#modifyModal').modal("hide");
                     console.log("code: " + request.status)
                     console.log("message: " + request.responseText)
@@ -166,8 +182,10 @@
                         window.location.href = "/admin/stock/list";
                     } else if(result == "Same Data"){
                         alert("동일한 데이터 입니다. 내용을 수정해주세요.");
+                        return;
                     } else {
                         alert("등록에 실패했습니다.");
+                        return;
                     }
                 },
                 error: function (request, status, error) {

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.homerunball.admin.stock.dao.sizeMapper">
+    <!--제품에서 pd_type_cd에 따라 정의한 size를 select해오기-->
+    <select id="selectPdTypeSize" resultType="SizeDto">
+        SELECT
+            p.pd_id, s.pd_clsf_cd
+        FROM size_list AS s
+        INNER JOIN prd AS p
+        ON s.pd_type_cd = p.pd_type_cd
+        ORDER BY pd_id, display_order
+    </select>
+</mapper>
