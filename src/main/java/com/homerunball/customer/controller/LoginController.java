@@ -80,12 +80,12 @@ public class LoginController {
             CustDto custDto = custDao.selectEmail(c_email);
             /*dto가 가져온 비밀번호와 내가 입력한 비밀번호와 같지 않다면 로그인 실패*/
 
-/*            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+           BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             if (!encoder.matches(c_pwd, custDto.getC_pwd())) {
                 return false;
-            }*/
+            }
 
-            if (!(custDto.getC_pwd().equals(c_pwd))) { return false; }
+//            if (!(custDto.getC_pwd().equals(c_pwd))) { return false; }
 
             /*로그인 성공시 updateLoginDate 메서드 실행*/
             custDao.updateLoginDt(c_email);
