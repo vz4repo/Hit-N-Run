@@ -222,12 +222,7 @@
 <div id="modal">
     <div id="modalContent">
         <div class="header">
-            <input
-                    type="text"
-                    id="productName"
-                    placeholder="상품명/판매자명 입력"
-                    aria-label="Product Name or Seller Name"
-            />
+            <input type="text" id="productName" placeholder="상품명/판매자명 입력" aria-label="Product Name or Seller Name"/>
             <button id="searchIcon" aria-label="Search">
                 <img src="search-icon.png" alt="검색 아이콘"/>
             </button>
@@ -354,7 +349,7 @@
         throw new Error('Network response was not ok');
       }
       const orders = await response.json();
-      console.log("[orders] : "+orders);
+      console.log("[orders] : " + orders);
       return orders;
     }
 
