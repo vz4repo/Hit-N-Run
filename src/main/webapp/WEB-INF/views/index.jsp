@@ -207,7 +207,7 @@
         <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
         <%--<div><a href="/payment">결제 이동</a></div>--%>
         <div><a href="/product/detail">제품 상세 이동</a></div>
-        <div><a href="/delivery/deliveryList">배송지 이동</a></div>
+        <div><a href="/delivery/">배송지 이동</a></div>
     </div>
 
     <%--상품 진열 시작--%>
@@ -219,7 +219,7 @@
                     <!-- Carousel indicators -->
                     <ol class="carousel-indicators">
                         <c:set var="num" value="${mainProductNumber % 4 == 0 ? mainProductNumber / 4 : mainProductNumber / 4 + 1}" />
-                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                        <c:forEach var="i" begin="0" end="${num-1<0?num:num-1}" step="1">
                             <c:choose>
                                 <c:when test="${i == 0}">
                                     <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>

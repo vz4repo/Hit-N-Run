@@ -77,7 +77,7 @@
 
     <!-- cart와 재고 join-->
     <select id="getStk" resultType="CartDto" parameterType="int">
-        select c.c_id, c.pd_id,c.pd_clsf_code,c.cart_cnt, p.mn_img_fn, s.pd_name,s.sls_prc,s.rtl_prc
+        select c.c_id, c.pd_id,c.pd_clsf_code,c.cart_cnt, p.mn_img_fn, p.pd_type_cd, s.pd_name,s.sls_prc,s.rtl_prc
         from cart c
         join stk s on c.pd_id=s.pd_id and c.pd_clsf_code=s.pd_clsf_cd
         join prd p on c.pd_id=p.pd_id
