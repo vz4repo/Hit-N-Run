@@ -139,34 +139,34 @@
         })
 
         /* 선택주문하기 버튼을 누를경우 주문으로 넘기기 */
-        $('#order_Select_Btn').on("click", function (){
-            let selectedItems = [];
-            let orderForm = $('#orderForm');
+        <%--$('#order_Select_Btn').on("click", function (){--%>
+        <%--    let selectedItems = [];--%>
+        <%--    let orderForm = $('#orderForm');--%>
 
-            // 선택된 각 체크박스의 부모 요소인 <tr>을 찾아 그 안의 데이터를 가져옴
-            $('input:checkbox[name=checkboxlength]:checked').each(function(){
-                let c_id = $(this).closest('tr').find('.deleteBtn').data("cid");
-                let pd_id = $(this).closest('tr').find('.deleteBtn').data("pdid");
-                let pd_clsf_code = $(this).closest('tr').find('.deleteBtn').data("sizecd");
-                selectedItems.push({
-                    c_id: c_id,
-                    pd_id: pd_id,
-                    pd_clsf_code: pd_clsf_code
-                });
-            });
+        <%--    // 선택된 각 체크박스의 부모 요소인 <tr>을 찾아 그 안의 데이터를 가져옴--%>
+        <%--    $('input:checkbox[name=checkboxlength]:checked').each(function(){--%>
+        <%--        let c_id = $(this).closest('tr').find('.deleteBtn').data("cid");--%>
+        <%--        let pd_id = $(this).closest('tr').find('.deleteBtn').data("pdid");--%>
+        <%--        let pd_clsf_code = $(this).closest('tr').find('.deleteBtn').data("sizecd");--%>
+        <%--        selectedItems.push({--%>
+        <%--            c_id: c_id,--%>
+        <%--            pd_id: pd_id,--%>
+        <%--            pd_clsf_code: pd_clsf_code--%>
+        <%--        });--%>
+        <%--    });--%>
 
-            selectedItems.forEach(function(item) {
-                $('<input>').attr({
-                    type: 'hidden',
-                    name: 'selectedItems',
-                    value: JSON.stringify(item)
-                }).appendTo(orderForm);
-            });
+        <%--    selectedItems.forEach(function(item) {--%>
+        <%--        $('<input>').attr({--%>
+        <%--            type: 'hidden',--%>
+        <%--            name: 'selectedItems',--%>
+        <%--            value: JSON.stringify(item)--%>
+        <%--        }).appendTo(orderForm);--%>
+        <%--    });--%>
 
-            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
-            orderForm.attr("method", "post");
-            orderForm.submit();
-        })
+        <%--    orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");--%>
+        <%--    orderForm.attr("method", "post");--%>
+        <%--    orderForm.submit();--%>
+        <%--})--%>
 
         /* 주문하기버튼을 누를경우 주문으로 넘기기 */
         $('#order_All_Btn').on("click", function (){
