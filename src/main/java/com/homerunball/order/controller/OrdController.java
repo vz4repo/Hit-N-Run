@@ -61,12 +61,12 @@ public class OrdController {
             List<CartDto> list = cartDao.getStk(c_id);
            /* List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);*/
 
-            System.out.println("list = " +list);
+          /*  System.out.println("list = " +list);*/
 
             OrderDetDto ord_det = new OrderDetDto();
             OrdDto ord = new OrdDto();
 
-            System.out.println(ord_det);
+            /*System.out.println(ord_det);
 
             System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
 
@@ -83,7 +83,7 @@ public class OrdController {
 
                 orderdetDao.insert(ord_det);
             }
-            System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());
+           /* System.out.println("od_stat_cd" + ord_det.getOd_stat_cd());*/
 
             int totalpd_qty = 0;
             int totalqty = 0;
@@ -120,8 +120,8 @@ public class OrdController {
 
             ordDao.insert(ord);
 
-            System.out.println("ord_det.getC_id()" +ord_det.getC_id());
-            System.out.println(list+"===========================");
+            /*System.out.println("ord_det.getC_id()" +ord_det.getC_id());*/
+
 
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/
