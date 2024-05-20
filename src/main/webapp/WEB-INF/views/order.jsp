@@ -194,7 +194,7 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>

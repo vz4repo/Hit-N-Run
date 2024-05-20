@@ -6,9 +6,8 @@
     <meta charset="UTF-8">
     <%--제품 진열--%>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -200,31 +199,31 @@
                                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                         <div class="text">2024 Wilson Glove Day - Pittsburgh</div>
                     </div>
-
-                    <a class="prev2" onclick="plusSlides2(-1)">❮</a>
-                    <a class="next2" onclick="plusSlides2(1)">❯</a>
-
-                    <div style="text-align:center" class="videoDot">
-                        <span class="dot" onclick="currentSlide2(1)"></span>
-                        <span class="dot" onclick="currentSlide2(2)"></span>
-                        <span class="dot" onclick="currentSlide2(3)"></span>
-                        <span class="dot" onclick="currentSlide2(4)"></span>
-                        <span class="dot" onclick="currentSlide2(5)"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <h2><b>신제품</b></h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                    <c:set var="num"
-                           value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
-                    <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                </div><br><br>
+            </section>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2><b>신제품</b></h2>
+                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}" />
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
                         <c:choose>
                             <c:when test="${i == 0}">
                                 <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
@@ -567,8 +566,24 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
+        <jsp:include page="mainCategory.jsp" flush="false" />
+
     </div>
 
+    <jsp:include page="footer.jsp" flush="false"/>
+    <script>
+        window.onload = function() {
+            if("${sessionScope.c_id}" !== "") {
+                document.getElementById('logoutLink').addEventListener('click', function(event) {
+                    event.preventDefault();
+                    if (confirm('정말로 로그아웃을 하시겠습니까?')) {
+                        window.location.href = event.target.href;
+                        alert('로그아웃이 되셨습니다.');
+                    }
+                });
+            }
+        };
     <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
     <jsp:include page="mainCategory.jsp" flush="false"/>
 </div>
