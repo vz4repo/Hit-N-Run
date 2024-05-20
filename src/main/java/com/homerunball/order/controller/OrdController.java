@@ -52,7 +52,7 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
+    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId){
         if(!loginCheck(request))
             return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
@@ -128,11 +128,9 @@ public class OrdController {
 
             /* 김수연 시작 */
             DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);
-            model.addAttribute("selectedDto", deliveryDto);
+            m.addAttribute("selectedDto", deliveryDto);
 
-            System.out.println("deliveryDto = " + deliveryDto);
-
-            System.out.println("[DeliveryController]deliveryDto = " + deliveryDto);
+            System.out.println("[DeliveryController]selectedDto = " + deliveryDto);
             /* 김수연 끝 */
 
         } catch (Exception e) {
