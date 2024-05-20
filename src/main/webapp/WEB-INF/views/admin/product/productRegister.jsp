@@ -260,13 +260,15 @@
                     <tr>
                         <th>제조국</th>
                         <td>
-                            <input type="text" name="origin" required>
+                            <input type="text" name="origin" maxlength="10" class="originCnt" required>
+                            <span id="originCnt">[0 / 10]</span>
                         </td>
                     </tr>
                     <tr>
                         <th>제조사</th>
                         <td>
-                            <input type="text" name="mfr" required>
+                            <input type="text" name="mfr" maxlength="10" class="mfrCnt" required>
+                            <span id="mfrCnt">[0 / 10]</span>
                         </td>
                     </tr>
                     <tr>
@@ -288,7 +290,8 @@
                     <tr>
                         <th>사용 선수명</th>
                         <td>
-                            <input type="text" name="player_name" maxlength="50" />
+                            <input type="text" name="player_name" class="playerNameCnt" maxlength="50" />
+                            <span id="playerNameCnt">[0 / 50]</span>
                         </td>
                     </tr>
                     <tr>
@@ -459,6 +462,28 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function() {
+            /*제조국 글자 수 세기*/
+            $(".originCnt").keyup(function() {
+                let content = $(this).val();
+                $("#originCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 10) {
+                    alert("최대 10자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 10));
+                    $('#originCnt').text("[10 / 10]");
+                }
+            });
+
+            /*제조사 글자 수 세기*/
+            $(".mfrCnt").keyup(function() {
+                let content = $(this).val();
+                $("#mfrCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 10) {
+                    alert("최대 10자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 10));
+                    $('#mfrCnt').text("[10 / 10]");
+                }
+            });
+
             /*제품명 글자 수 세기*/
             $(".pdNameCnt").keyup(function() {
                 let content = $(this).val();
@@ -533,6 +558,17 @@
                     alert("최대 100자까지 입력 가능합니다.");
                     $(this).val(content.substring(0, 100));
                     $('#weighCnt').text("[100 / 100]");
+                }
+            });
+
+            /*사용 선수명 세기*/
+            $(".playerNameCnt").keyup(function() {
+                let content = $(this).val();
+                $("#playerNameCnt").text("[" + content.length + " / 50]"); /* 실시간 글자수 카운팅 */
+                if (content.length > 50) {
+                    alert("최대 50자까지 입력 가능합니다.");
+                    $(this).val(content.substring(0, 50));
+                    $('#playerNameCnt').text("[50 / 50]");
                 }
             });
 
