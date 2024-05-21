@@ -301,6 +301,7 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
@@ -389,6 +390,7 @@
             <a class="carousel-control right" href="#myCarousel1" data-slide="next">
                 <i class="fa fa-angle-right"></i>
             </a>
+        </div>
         </div>
     </div>
 
@@ -479,6 +481,7 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
@@ -567,6 +570,7 @@
             <a class="carousel-control right" href="#myCarousel3" data-slide="next">
                 <i class="fa fa-angle-right"></i>
             </a>
+        </div>
         </div>
     </div>
 
