@@ -15,9 +15,10 @@ h2 {
     margin: 30px 0 60px;
 }
 
-.productName a {
+.productName > a {
     height: 40px;
-    font-size: 1vw;
+    font-size: 1.3vw;
+    display: block;
 }
 
 .carousel {

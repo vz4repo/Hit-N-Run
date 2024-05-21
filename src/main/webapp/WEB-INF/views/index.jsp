@@ -33,6 +33,10 @@
 
         /*mainVideo에 필요한 css include*/
         <%@include file="/resources/css/mainVideo.css"%>
+
+        main {
+            overflow: hidden;
+        }
     </style>
     <title>Home-Run</title>
 </head>
@@ -55,7 +59,8 @@
 </div>--%>
 
 <%--상품 진열 시작--%>
-<div class="container">
+<%--<div class="container">--%>
+<main>
     <div id="content">
         <section id="main_section">
             <div id="king">
@@ -219,7 +224,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2><b>신제품</b></h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -301,12 +306,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>인기 제품</b></h2>
-            <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -390,12 +396,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>스테디 셀러 제품</b></h2>
-            <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -479,12 +486,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>추천 제품</b></h2>
-            <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -568,11 +576,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
     <jsp:include page="mainCategory.jsp" flush="false"/>
-</div>
+<%--</div> &lt;%&ndash;end of container class&ndash;%&gt;--%>
+</main>
 
 <jsp:include page="footer.jsp" flush="false"/>
 <script>
