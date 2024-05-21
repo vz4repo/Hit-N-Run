@@ -9,7 +9,7 @@
             <a href="#"><li>고객센터</li></a>
             <a href="#"><li>관심</li></a>
             <a href="#"><li>알림</li></a>
-                    <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
+            <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
         </ul>
     </div>
     <div class="main_header">

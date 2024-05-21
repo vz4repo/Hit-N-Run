@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%--가격 형식 지정 태그--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +51,8 @@
     <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
     &lt;%&ndash;<div><a href="/payment">결제 이동</a></div>&ndash;%&gt;
     <div><a href="/product/detail">제품 상세 이동</a></div>
-    <div><a href="/delivery/">배송지 이동</a></div>
-</div>
+    <div><a href="/delivery/deliveryList">배송지 이동</a></div>
+</div>--%>
 
 <%--상품 진열 시작--%>
 <div class="container">
@@ -253,7 +254,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
