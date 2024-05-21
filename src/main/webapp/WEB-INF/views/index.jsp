@@ -255,7 +255,7 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
@@ -343,7 +343,7 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
@@ -433,7 +433,7 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
@@ -523,7 +523,7 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
