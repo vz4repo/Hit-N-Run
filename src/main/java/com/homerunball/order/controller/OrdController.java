@@ -52,9 +52,8 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId){
-        if(!loginCheck(request))
-            return "redirect:/login?toURL="+request.getRequestURI();
+    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
+
         int c_id = (int)session.getAttribute("c_id");
         try {
 //            List<CartDto> list = cartDao.selectUser(c_id);
@@ -72,7 +71,7 @@ public class OrdController {
             /*System.out.println(ord_det);
 
             System.out.println("od_stat_cd=" + ord_det.getOd_stat_cd());
-
+*/
 
 
             /*장바구니에서 data 가져와서 order_det 테이블에 insert */
@@ -131,9 +130,11 @@ public class OrdController {
 
             /* 김수연 시작 */
             DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);
-            m.addAttribute("selectedDto", deliveryDto);
+            model.addAttribute("selectedDto", deliveryDto);
 
-            System.out.println("[DeliveryController]selectedDto = " + deliveryDto);
+            System.out.println("deliveryDto = " + deliveryDto);
+
+            System.out.println("[DeliveryController]deliveryDto = " + deliveryDto);
             /* 김수연 끝 */
 
         } catch (Exception e) {
@@ -141,10 +142,4 @@ public class OrdController {
         }
         return "order";
     }
-
-    private boolean loginCheck(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        return session.getAttribute("c_id") != null;
-    }
-
 }

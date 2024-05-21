@@ -147,7 +147,7 @@ public class PaymentController {
     @ResponseBody
     public List<PaymentDto> getPaymentList( @SessionAttribute(name = "c_id") int c_id
         , @RequestParam("fromDate") String fromDate
-        , @RequestParam("toDate") String toDate) {
+        , @RequestParam("toDate") String toDate) throws Exception {
         logger.info("[paymentController] :: /pay/list ");
         System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
 
