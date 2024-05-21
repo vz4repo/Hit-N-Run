@@ -21,7 +21,7 @@ public class PaymentServiceImplTest {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
   @Test
-  public void 결제내역_날짜범위로_조회() {
+  public void 결제내역_날짜범위로_조회() throws Exception {
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 

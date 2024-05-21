@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PaymentDao {
     /* 인증 성공 후, Response Body 정보 저장 */
-    int insertPaymentSuccess(PaymentDto paymentDto);
+    int insertPaymentSuccess(PaymentDto paymentDto) throws Exception;
 
     /* 인증 실패 후, Response Body 정보 저장 */
-    int insertPaymentFailure(PaymentFailDto paymentFailDto);
+    int insertPaymentFailure(PaymentFailDto paymentFailDto) throws Exception;
 
-    List<PaymentDto> selectPaymentHistoryWithDateRange(Map<String,Object> localDateMap);
+    List<PaymentDto> selectPaymentHistoryWithDateRange(Map<String,Object> localDateMap) throws Exception;
 }
