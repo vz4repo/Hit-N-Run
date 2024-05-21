@@ -6,5 +6,5 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 public interface PaymentService {
-  List<PaymentDto> selectPaymentHistoryWithDateRange(int c_id, String fromDate, String toDate);
+  List<PaymentDto> selectPaymentHistoryWithDateRange(int c_id, String fromDate, String toDate) throws Exception;
 }

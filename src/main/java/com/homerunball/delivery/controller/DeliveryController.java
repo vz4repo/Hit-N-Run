@@ -115,15 +115,4 @@ public class DeliveryController {
 //        return "deliveryAddrInput";
 //    }
 
-
-
-
-
-
-    /* 로그인 되어있는지 확인하는 메서드  */
-    private boolean loginChecked(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        return session.getAttribute("c_email") != null;
-
-    }
 }
