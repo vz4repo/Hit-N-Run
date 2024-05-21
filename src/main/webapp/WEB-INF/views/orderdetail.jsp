@@ -52,8 +52,8 @@
 
         .orders th,
         .orders td {
-            padding: 10px;
-            text-align: left;
+            padding: 26px;
+            text-align: center;
         }
 
         .orders th {
@@ -116,7 +116,7 @@
         }
 
         .order-status {
-            display: flex;
+            /*display: flex;*/
             flex-direction: column;
             align-items: center;
         }
@@ -891,15 +891,30 @@
                     priceElement.textContent = formatPrice(price);
                 });
 
-                $(document).ready(function () {
+                /*$(document).ready(function () {
                     $('.od_dt').each(function () {
-                        let oddt = $(this).data("oddt"); /* od_dt 데이터 가져오기 */
+                        let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
                         let today = new Date();
                         let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
                         $(this).text(dateFormat);
                     })
-                })
+                })*/
 
+                $(document).ready(function () {
+                    $('.od_dt').each(function () {
+                        let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
+
+                        // Date 객체로 변환하기 위해 oddt를 파싱
+                        let year = parseInt(oddt.substring(0, 4));
+                        let month = parseInt(oddt.substring(5, 7)) - 1; // JavaScript에서 월은 0부터 시작합니다.
+                        let day = parseInt(oddt.substring(8, 10));
+                        let date = new Date(year, month, day);
+
+                        // Date 객체를 원하는 형식으로 변환
+                        let dateFormat = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.' + date.getDate().toString().padStart(2, '0');
+                        $(this).text(dateFormat);
+                    });
+                });
 
             </script>
 </main>

@@ -190,7 +190,8 @@
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
-                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+<%--                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>--%>
+                        <td><span class="price payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                         <td><span>무료배송</span></td>
                     </tr>
                 </c:forEach>
@@ -225,7 +226,7 @@
 <script>
     $(document).ready(function () {
         // 가격 포맷팅
-        $('.priceFormat').each(function () {
+        $('.price').each(function () {
             let value = $(this).text();
             value = value.replace(/,/g, '');
             const numericValue = Number(value);
@@ -233,14 +234,16 @@
             $(this).text(formatValue + '원');
         });
 
-    })
+        // 테이블의 행 수를 동적으로 계산
+        let totalSum = 0;
+        $('body > section.order__items > div.tb__order > form > table > tbody > tr').each(function () {
+            const payAmt = $(this).find('.payAmt').text();
+            const price = Number(payAmt.replace(/[^\d]/g, ''));
+            totalSum += price;
+        });
 
-    /*테이블의 행 수를 동적으로 계산*/
-    let totalSum = 0;
-    $('body > section.order__items > div.tb__order > form > table > tbody > tr').each(function () {
-        const payAmt = $(this).find('#payAmt').text();
-        const price = Number(payAmt.replace(/[^\d]/g, ''));
-        totalSum += price;
+        // 총합을 표시할 위치에 설정
+        $('#totalSum').text(totalSum.toLocaleString('ko-KR') + '원');
     });
 
 </script>
