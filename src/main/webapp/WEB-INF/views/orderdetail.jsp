@@ -22,14 +22,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
       /* 공통 스타일 */
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
-      }
+      /*body {*/
+      /*  font-family: Arial, sans-serif;*/
+      /*  margin: 0;*/
+      /*  padding: 0;*/
+      /*  background-color: #f4f4f4;*/
+      /*}*/
 
-      .container {
+      .order-container {
         width: 80%;
         margin: 0 auto;
         padding: 20px;
@@ -287,7 +287,7 @@
       /* 영수증 modal */
       /* 영수증 modal */
       /* modal 에 쓰일 회색 배경 */
-      #receiptModal .container {
+      #receiptModal .order-container {
         background-color: #f4f4f4;
       }
 
@@ -421,7 +421,7 @@
 
 <main>
     <!-- 주문 목록 섹션 -->
-    <div class="container">
+    <div class="order-container">
         <div class="orders">
             <table>
                 <thead>

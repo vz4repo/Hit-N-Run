@@ -195,11 +195,11 @@
             <a href="#"> > 주문완료</a>
         </div>
     </div>
-    <hr/>
+ <%--   <hr/>
     <section class="order__delivery">
-        <%-- 김수연 시작 --%>
-        <%-- 고객이 선택한 배송지 뜨는 페이지 _ order.jsp --%>
-        <div>
+        &lt;%&ndash; 김수연 시작 &ndash;%&gt;
+        &lt;%&ndash; 고객이 선택한 배송지 뜨는 페이지 _ order.jsp &ndash;%&gt;
+       <div>
             <div id="delivery_left" class="head_order">
                 Delivery
             </div>
@@ -211,67 +211,69 @@
         <div id="selectedDLV" class="center-table">
             <table>
                 <tr>
-                    <%-- c_id : 고객 번호--%>
+                    &lt;%&ndash; c_id : 고객 번호&ndash;%&gt;
                     <td>고객 C_ID</td>
                     <td>${sessionScope.c_id}</td>
                 </tr>
                 <tr>
-                    <%-- rcver : 고객명 / --%>
+                    &lt;%&ndash; rcver : 고객명 / &ndash;%&gt;
                     <td>이름(장소명)</td>
                     <td>${selectedDto.rcver}(${selectedDto.adr_name})</td>
                 </tr>
                 <tr>
-                    <%-- rcver_phn : 고객 연락처 --%>
+                    &lt;%&ndash; rcver_phn : 고객 연락처 &ndash;%&gt;
                     <td>연락처</td>
                     <td>${selectedDto.rcver_phn}</td>
                 </tr>
                 <tr>
-                    <%-- rcver_adr : 고객 주소--%>
+                    &lt;%&ndash; rcver_adr : 고객 주소&ndash;%&gt;
                     <td>주소</td>
                     <td>${selectedDto.rcver_adr}</td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <%-- 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. --%>
-                        <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
-                        <%--                                <button id="selectAllBtn">배송지 전체 조회</button>--%>
+                        &lt;%&ndash; 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. &ndash;%&gt;
+                        &lt;%&ndash;<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>&ndash;%&gt;
+                        &lt;%&ndash;                                <button id="selectAllBtn">배송지 전체 조회</button>&ndash;%&gt;
                     </td>
                 </tr>
             </table>
         </div>
         <hr/>
-        <%--            <%@include file="deliveryList.jsp"%>--%>
-        <%--            <% String rcver = request.getParameter("rcver"); %>--%>
-        <%--            <div>--%>
-        <%--                --%>
-        <%--            </div>--%>
 
-        <%--                <div id="deliveryForm">--%>
-        <%--                    &lt;%&ndash; 여기에 배송지 목록이 동적으로 채워질 것입니다. &ndash;%&gt;--%>
-        <%--                </div>--%>
+        &lt;%&ndash;            <%@include file="deliveryList.jsp"%>&ndash;%&gt;
+        &lt;%&ndash;            <% String rcver = request.getParameter("rcver"); %>&ndash;%&gt;
+        &lt;%&ndash;            <div>&ndash;%&gt;
+        &lt;%&ndash;                &ndash;%&gt;
+        &lt;%&ndash;            </div>&ndash;%&gt;
+
+        &lt;%&ndash;                <div id="deliveryForm">&ndash;%&gt;
+        &lt;%&ndash;                    &lt;%&ndash; 여기에 배송지 목록이 동적으로 채워질 것입니다. &ndash;%&gt;&ndash;%&gt;
+        &lt;%&ndash;                </div>&ndash;%&gt;
 
 
-        <%--                <c:import url="<%= request.getContextPath() %>/delivery/" />--%>
-        <%--                <h1><c:out value="웅냥냥"/></h1>--%>
-        <%--                <script>--%>
-        <%--                    var contextPath = "${pageContext.request.contextPath}";--%>
-        <%--                    console.log("Context Path: " + contextPath);--%>
+        &lt;%&ndash;                <c:import url="<%= request.getContextPath() %>/delivery/" />&ndash;%&gt;
+        &lt;%&ndash;                <h1><c:out value="웅냥냥"/></h1>&ndash;%&gt;
+        &lt;%&ndash;                <script>&ndash;%&gt;
+        &lt;%&ndash;                    var contextPath = "${pageContext.request.contextPath}";&ndash;%&gt;
+        &lt;%&ndash;                    console.log("Context Path: " + contextPath);&ndash;%&gt;
 
-        <%--                    // 예를 들어, id가 "contextPathDisplay"인 요소에 contextPath를 추가하는 경우--%>
-        <%--                    document.getElementById("contextPathDisplay").innerText = "Context Path: " + contextPath;--%>
+        &lt;%&ndash;                    // 예를 들어, id가 "contextPathDisplay"인 요소에 contextPath를 추가하는 경우&ndash;%&gt;
+        &lt;%&ndash;                    document.getElementById("contextPathDisplay").innerText = "Context Path: " + contextPath;&ndash;%&gt;
 
-        <%--                </script>--%>
-        <%--                <h1><c:out value="${request.getContextPath()}"/></h1>--%>
-        <%--                <h1><c:out value="${pageContext.request.contextPath}"/></h1>--%>
+        &lt;%&ndash;                </script>&ndash;%&gt;
+        &lt;%&ndash;                <h1><c:out value="${request.getContextPath()}"/></h1>&ndash;%&gt;
+        &lt;%&ndash;                <h1><c:out value="${pageContext.request.contextPath}"/></h1>&ndash;%&gt;
 
-        <%--                <c:import url="${pageContext.request.contextPath}/delivery/" />--%>
+        &lt;%&ndash;                <c:import url="${pageContext.request.contextPath}/delivery/" />&ndash;%&gt;
 
     </section>
-
+--%>
     <section id="dlv-container">
         <!-- 배송 정보 헤더 -->
         <div class="dlv-header">배송 정보</div>
-        <ul>
+        <%-- TODO: display:block 강제 적용 중. 수정 필요--%>
+        <ul style="display: block">
             <!-- 배송지 선택 -->
             <li>
                 <span class="label">배송지</span>
