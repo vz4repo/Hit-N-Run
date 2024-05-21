@@ -33,6 +33,10 @@
 
         /*mainVideo에 필요한 css include*/
         <%@include file="/resources/css/mainVideo.css"%>
+
+        main {
+            overflow: hidden;
+        }
     </style>
     <title>Home-Run</title>
 </head>
@@ -55,7 +59,8 @@
 </div>--%>
 
 <%--상품 진열 시작--%>
-<div class="container">
+<%--<div class="container">--%>
+<main>
     <div id="content">
         <section id="main_section">
             <div id="king">
@@ -219,7 +224,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2><b>신제품</b></h2>
-            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -250,7 +255,7 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
@@ -301,12 +306,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>인기 제품</b></h2>
-            <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -337,12 +343,12 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -390,12 +396,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>스테디 셀러 제품</b></h2>
-            <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -426,12 +433,12 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -479,12 +486,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
             <h2><b>추천 제품</b></h2>
-            <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
+            <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
                 <!-- Carousel indicators -->
                 <ol class="carousel-indicators">
                     <c:set var="num"
@@ -515,12 +523,12 @@
                             <div class="row">
                                 </c:if>
                                 <div class="col-sm-3">
-                                    <div class="thumb-wrapper">
+                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
-                                                     class="img-responsive" alt="">
+                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -568,11 +576,13 @@
                 <i class="fa fa-angle-right"></i>
             </a>
         </div>
+        </div>
     </div>
 
     <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
     <jsp:include page="mainCategory.jsp" flush="false"/>
-</div>
+<%--</div> &lt;%&ndash;end of container class&ndash;%&gt;--%>
+</main>
 
 <jsp:include page="footer.jsp" flush="false"/>
 <script>
