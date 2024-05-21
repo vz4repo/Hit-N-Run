@@ -46,4 +46,8 @@
                 x.previousElementSibling.className.replace(" w3-black", "");
         }
     }
+
+    window.onload = function() {
+        w3_open();
+    }
 </script>
