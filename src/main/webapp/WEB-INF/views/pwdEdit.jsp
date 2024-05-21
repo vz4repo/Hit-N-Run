@@ -84,7 +84,7 @@
         <input id="curPwd" class="special-class" type="password" name="curPwd">
 
       <label>신규 비밀번호</label>
-      <input id="newPwd" class="special-class" type="password" name="c_pwd" oninput="newPwdCheck(this.form)">
+      <input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="newPwdCheck(this.form)">
       <p id="check-newPwd"></p>
 
       <label>신규 비밀번호 확인</label>

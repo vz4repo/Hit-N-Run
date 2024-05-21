@@ -155,53 +155,49 @@
 <body>
 
 <div id="myform">
-        <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
-            <h1 id="loginTitle">Sign Up</h1>
+    <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
+        <h1 id="loginTitle">Sign Up</h1>
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
-            <input id="verify" type="button" onclick="" value="인증번호 받기" readonly><br>
+<%--            <input id="verify" type="button" onclick="verifyEmail()" value="인증번호 받기" readonly><br>--%>
+            <input id="verify" type="button" value="인증번호 받기" readonly><br>
             <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com">
             <p id="mail-check-warn"></p>
             <label>인증번호</label>
-            <input class="special-class" type="text" id="c_email2" name="c_email2">
+            <input class="special-class" type="text" id="c_email2" name="c_email2" disabled>
             <label>비밀번호</label>
-            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="pwd2Check(this.form)">
+            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="pwd2Check(this.form)" disabled>
             <p id="check-pwd"></p>
             <label id="pwdCheck">비밀번호 확인</label>
-            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." oninput="pwd2Check(this.form)">
+            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." oninput="pwd2Check(this.form)" disabled>
             <label>이름</label>
-            <input class="special-class" type="text" name="c_name">
+            <input class="special-class" type="text" id="c_name" name="c_name" disabled>
             <label>주소</label>
-            <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly>
-            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly>
-            <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly>
-            <%--지번이 공백이어도 오류 안뜨는 이유: 값이 없을시 카카오 api가 자동으로 ''을 추가하게 만듬--%>
-            <input type="text" id="jibunAddress" name ="c_jibun_a" placeholder="지번주소" readonly>
+            <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly disabled>
+            <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly disabled>
+            <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly disabled>
+            <input type="text" id="jibunAddress" name="c_jibun_a" placeholder="지번주소" readonly disabled>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" name="c_det_a" placeholder="건물명+상세주소"><br><br>
+            <input type="text" id="detailAddress" name="c_det_a" placeholder="건물명+상세주소" disabled><br><br>
             <label>휴대폰</label>
-            <input class="special-class" type="text" name="c_phn" placeholder="-제외">
+            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="-제외" disabled>
             <label>성별</label>
-                <input type="radio" id="female" name="c_gnd" value="여"> 여성
-                <input type="radio" id="male" name="c_gnd" value="남"> 남성<br><br>
-
-                <label>생년월일</label>
-            <input type="date" id="birth" name="c_birth"><br><br>
-
-            <input type="checkbox" id="touBox" name="touBox" value="Y">
-            <p id="touModal" onclick="openModal()" >[필수] 이용약관</p>
-
+            <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
+            <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
+            <label>생년월일</label>
+            <input type="date" id="birth" name="c_birth" disabled><br><br>
+            <input type="checkbox" id="touBox" name="touBox" value="Y" disabled>
+            <p id="touModal" onclick="openModal()">[필수] 이용약관</p>
             <br>
-            <input type="checkbox" id="piiBox" name ="piiBox" value="Y">
+            <input type="checkbox" id="piiBox" name="piiBox" value="Y" disabled>
             <p id="piiModal" onclick="openModal2()">[필수] 개인정보 수집 및 이용</p><br>
-
-            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>
-            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
-
-            <button>가입하기</button><br><br>
+            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y" disabled> <a>[선택] 쇼핑정보 SMS 수신</a><br>
+            <input type="checkbox" id="email_agr" name="email_agr" value="Y" disabled> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
+            <button id="rBtn" disabled>가입하기</button>
+            <button type="button" onclick="window.history.back()">나가기</button><br><br>
         </div>
-</form>
+    </form>
 </div>
 
 <div id="myModal" class="modal">
@@ -480,21 +476,52 @@
         });
     }
 
+    function verifyEmail() {
+
+        document.getElementById('c_email2').disabled = false;
+        document.getElementById('c_pwd').disabled = false;
+        document.getElementById('c_pwd2').disabled = false;
+        document.getElementById('c_name').disabled = false;
+        document.getElementById('zip').disabled = false;
+        document.querySelector('[onclick="sample4_execDaumPostcode()"]').disabled = false;
+        document.getElementById('roadAddress').disabled = false;
+        document.getElementById('jibunAddress').disabled = false;
+        document.getElementById('detailAddress').disabled = false;
+        document.getElementById('c_phn').disabled = false;
+        document.querySelectorAll('input[name="c_gnd"]').forEach(el => el.disabled = false);
+        document.getElementById('birth').disabled = false;
+        document.getElementById('touBox').disabled = false;
+        document.getElementById('piiBox').disabled = false;
+        document.getElementById('sms_agr').disabled = false;
+        document.getElementById('email_agr').disabled = false;
+        document.getElementById('rBtn').disabled = false;
+    }
+
     $('#verify').click(function() {
-        const email = $('#c_email').val(); // 이메일 주소값 얻어오기!
+        const $this = $(this); // 클릭된 버튼을 jQuery 객체로 저장
+        $this.prop('disabled', true); // 버튼을 비활성화
+
+        alert('인증번호가 전송되었습니다.'); // 인증번호 전송 알림
+
+        const email = $('#c_email').val(); // 이메일 주소값 얻어오기
         console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
         const checkInput = $('#c_email2') // 인증번호 입력하는곳
+        const url = '/register/mailCheck?email=' + email; // URL 생성
         $.ajax({
-            type : 'get',
-            url : '<c:url value ="/register/mailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 뭍힐수있다.
-            success : function (data) {
-                console.log("data : " +  data);
-                checkInput.attr('disabled',false);
-                code =data;
-                alert('인증번호가 전송되었습니다.')
+            type: 'GET',
+            url: url, // 생성한 URL 사용
+            success: function(data) {
+                console.log("data : " + data);
+                checkInput.attr('disabled', false);
+                code = data;
+                verifyEmail();
+                setTimeout(function() {
+                    $this.prop('disabled', false);
+                }, 3000); // 5초 후에 버튼 활성화
             }
         });
     });
+
 
     function verifyNumber() {
         const inputCode = $('#c_email2').val();
@@ -517,7 +544,6 @@
 
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
-        // var isEmail = emailTrimCheck(frm);
         var isEmailFormat = emailFormatCheck(frm);
         var isPwd = pwdCheck(frm);
         var isPwd2 = pwd2Check(frm);
@@ -527,8 +553,7 @@
         var isGen = genCheck(frm);
         var isTou = touCheck(frm)
         var isPii = piiCheck(frm)
-        var isCodeVerified = verifyNumber(frm);
-
+        var isCodeVerified = vNum(frm);
 
         var pwd = frm.c_pwd.value;
         var pwd2 = frm.c_pwd2.value;
@@ -542,7 +567,6 @@
         if (!isEmailFormat) {
             return false;
         } else if (!isCodeVerified) {
-            alert('인증번호가 맞지 않아 회원가입에 실패합니다.');
             return false;
         } else if (!pwd) {
             alert('비밀번호를 입력해주세요.');
@@ -594,11 +618,6 @@
             return false;
         }
 
-        // if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
-        //     alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
-        //     return false;
-        // }
-
         if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
             alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
             return false;
@@ -619,6 +638,19 @@
             return false;
         } else if (!emailPattern.test(email)) {
             alert("이메일 양식을 다시 확인해주세요.");
+            return false;
+        }
+        return true;
+    }
+
+    function vNum(frm){
+        var vNum = frm.c_email2.value.trim();
+        if(!vNum){
+            alert("이메일 인증을 진행해주세요.")
+            return false;
+        }
+        if (document.getElementById("mail-check-warn").innerText.includes("인증번호를 다시 확인해주세요")) {
+            alert("인증번호가 틀렸습니다. 다시 확인해주세요.");
             return false;
         }
         return true;
