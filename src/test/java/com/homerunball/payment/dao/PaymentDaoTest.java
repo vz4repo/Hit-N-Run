@@ -29,7 +29,7 @@ public class PaymentDaoTest {
 
   /* 1개 값 저장 후 결과==1 확인 */
   @Test
-  public void 저장하면_결과는_1() {
+  public void 저장하면_결과는_1() throws Exception {
     /* Dto에 값 직접 대입 생성 */
     PaymentDto paymentDto = new PaymentDto("tgen_20250509375A8517OXo2",2 ,100000111 ,240502101 ,"1aB90E5F4F763DDCD54A704CC28D1CFB",32021 ,32021 ,"05",ldt,"토스페이","DONE","00000000",ldt,"200","32테스트","31","31","개인신용",0 ,"91005000****750*", "주문명");
     logger.debug(String.valueOf(paymentDto));

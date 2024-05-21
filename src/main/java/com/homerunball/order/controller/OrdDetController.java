@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
 public class OrdDetController {
     @Autowired
     OrderDetDao orderdetDao;
@@ -27,11 +26,8 @@ public class OrdDetController {
     CartDao cartDao;
     @GetMapping("/orderDetail")
     public String orderDetail(Model m, HttpSession session, HttpServletRequest request) {
-        if(!loginCheck(request))
-            return "redirect:/login?toURL="+request.getRequestURI();
         int c_id = (int)session.getAttribute("c_id");
         try {
-
             List<OrderDetDto> list = orderdetDao.select(c_id);
             List<CartDto> imglist = cartDao.getStk(c_id);
 
@@ -73,9 +69,5 @@ public class OrdDetController {
             e.printStackTrace();
         }
         return "orderdetail";
-    }
-    private boolean loginCheck(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        return session.getAttribute("c_id") != null;
     }
 }
