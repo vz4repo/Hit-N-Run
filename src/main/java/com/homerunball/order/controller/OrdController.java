@@ -53,8 +53,7 @@ public class OrdController {
 
     @PostMapping("/order")
     public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
-        if(!loginCheck(request))
-            return "redirect:/login?toURL="+request.getRequestURI();
+
         int c_id = (int)session.getAttribute("c_id");
         try {
 //            List<CartDto> list = cartDao.selectUser(c_id);
@@ -140,10 +139,4 @@ public class OrdController {
         }
         return "order";
     }
-
-    private boolean loginCheck(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        return session.getAttribute("c_id") != null;
-    }
-
 }

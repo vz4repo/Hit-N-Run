@@ -51,7 +51,14 @@
       .orders th,
       .orders td {
         padding: 10px;
-        text-align: left;
+        text-align: center;
+        height: 70px;
+        box-sizing: border-box;
+        vertical-align: middle;
+        word-break: break-all;
+        border-spacing: 0;
+        margin: 0;
+        outline: none;
       }
 
       .orders th {
@@ -71,7 +78,6 @@
 
       .product-info {
         display: flex;
-        align-items: center;
       }
 
       ul {
