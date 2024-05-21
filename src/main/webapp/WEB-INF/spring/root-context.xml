@@ -40,10 +40,20 @@
 		<property name="password" value="tawqdzjrpvdhxgkn"/>
 		<property name="javaMailProperties">
 			<props>
+<!--				<prop key="mail.transport.protocol">smtp</prop>-->
+<!--				<prop key="mail.smtp.auth">true</prop>-->
+<!--				<prop key="mail.smtp.starttls.enable">true</prop>-->
+<!--				<prop key="mail.debug">true</prop>-->
 				<prop key="mail.transport.protocol">smtp</prop>
 				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.port">587</prop>
 				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.smtp.ssl.enable">false</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory</prop>
 			</props>
 		</property>
 	</bean>
