@@ -6,7 +6,8 @@
 
 
 table {
-    width: 85%;
+    /* 2024.05.21 [혁락] 85% -> 55%*/
+    width: 55%;
     margin: 0 auto;
     text-align: left;
     font-size: 13px;
