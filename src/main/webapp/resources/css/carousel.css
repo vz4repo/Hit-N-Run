@@ -15,8 +15,9 @@ h2 {
     margin: 30px 0 60px;
 }
 
-.productName {
+.productName a {
     height: 40px;
+    font-size: 1vw;
 }
 
 .carousel {
@@ -37,6 +38,7 @@ h2 {
     text-align: center;
     position: relative;
     box-shadow: 2px 4px 6px #d7e9de;
+    max-height: 322.57px;
 }
 .carousel .item .img-box {
     height: 120px;
@@ -55,7 +57,7 @@ h2 {
     right: 0;
 }
 .carousel .item h4 {
-    font-size: 18px;
+    /*font-size: 18px;*/
 }
 .carousel .item h4, .carousel .item p, .carousel .item ul {
     margin-bottom: 5px;
