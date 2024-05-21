@@ -48,8 +48,7 @@ public class CustServiceImpl implements CustService {
         System.out.println("인증번호 : " + checkNum);
         authNumber = checkNum;
     }
-//
-//
+
 //    //이메일 보낼 양식!
     public String joinEmail(String c_email) {
         makeRandomNumber();
@@ -66,7 +65,6 @@ public class CustServiceImpl implements CustService {
         return Integer.toString(authNumber);
     }
 
-    //이메일 전송 메소드
     public void mailSend(String setFrom, String toMail, String title, String content) {
         MimeMessage message = mailSender.createMimeMessage();
         // true 매개값을 전달하면 multipart 형식의 메세지 전달이 가능.문자 인코딩 설정도 가능하다.
@@ -82,5 +80,4 @@ public class CustServiceImpl implements CustService {
             e.printStackTrace();
         }
     }
-
 }

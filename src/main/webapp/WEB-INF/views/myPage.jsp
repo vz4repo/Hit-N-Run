@@ -73,7 +73,7 @@
 
     <h5>ORDER</h5>
     <ul>
-        <li><a href="#">주문/배송조회</a></li>
+        <li><a href="/orderDetail">주문/배송조회</a></li>
     </ul>
 
     <h5>ACTIVITY</h5>
