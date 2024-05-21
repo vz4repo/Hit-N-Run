@@ -38,7 +38,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<div class="index">
+<%--<div class="index">
     <nav id="loginbtn">
         <ul>
             <li><a id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>
@@ -46,13 +46,13 @@
     </nav>
     <div><a href="/mypage/list">마이페이지 이동</a></div>
     <div><a href="/cart/list">장바구니 이동</a></div>
-    <%--<div><a href="/order">주문 이동</a></div>--%>
+    &lt;%&ndash;<div><a href="/order">주문 이동</a></div>&ndash;%&gt;
     <div><a href="/admin/main">제품 이동</a></div>
     <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
-    <%--<div><a href="/payment">결제 이동</a></div>--%>
+    &lt;%&ndash;<div><a href="/payment">결제 이동</a></div>&ndash;%&gt;
     <div><a href="/product/detail">제품 상세 이동</a></div>
     <div><a href="/delivery/deliveryList">배송지 이동</a></div>
-</div>
+</div>--%>
 
 <%--상품 진열 시작--%>
 <div class="container">
@@ -341,8 +341,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
-                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
+                                                     class="img-responsive" alt="">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -430,8 +430,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
-                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
+                                                     class="img-responsive" alt="">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
@@ -519,8 +519,8 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
-                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
+                                                     class="img-responsive" alt="">
                                             </a>
                                         </div>
                                         <div class="thumb-content">
