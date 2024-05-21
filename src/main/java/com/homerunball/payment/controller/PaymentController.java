@@ -143,6 +143,7 @@ public class PaymentController {
         return ResponseEntity.status(code).body(jsonObject);
     }
 
+    /* 날짜 범위에 따른 결제내역 조회 */
     @GetMapping(value = "/pay/list")
     @ResponseBody
     public List<PaymentDto> getPaymentList( @SessionAttribute(name = "c_id") int c_id
@@ -154,6 +155,7 @@ public class PaymentController {
         return paymentService.selectPaymentHistoryWithDateRange(c_id, fromDate, toDate);
     }
 
+    /* 영수증 (미사용) */
     @GetMapping(value = "/receipt")
     public String getReceipt() {
         return "payReceipt";
