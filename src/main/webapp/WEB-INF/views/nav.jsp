@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<nav class="navbar">
+<nav class="navibar">
     <!-- 대분류 글러브-->
     <!-- 중분류 포지션 -->
     <div class="subnav">

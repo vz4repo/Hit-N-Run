@@ -36,7 +36,6 @@ public class RegisterController {
         return "registerForm";
     }
 
-
     /*유효성 검사를 하기 위한 어노테이션*/
     /*새로 작성한 Validator를 사용하기 위해서 InitBinder 어노테이션 사용*/
     @InitBinder
@@ -87,7 +86,7 @@ public class RegisterController {
         return checkResult;
     }
 
-    //이메일 인증
+    /*이메일 인증번호*/
     @GetMapping("/mailCheck")
     @ResponseBody
     public String mailCheck(String email) {
@@ -95,9 +94,5 @@ public class RegisterController {
         System.out.println("이메일 인증 이메일 : " + email);
 
         return custService.joinEmail(email);
-
-//        return email;
     }
 }
-
-//        return custService.joinEmail(email);
