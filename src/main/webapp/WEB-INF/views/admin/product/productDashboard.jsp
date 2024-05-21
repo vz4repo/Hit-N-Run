@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>제품 대시보드</title>
     <style>
-        <%@include file="/resources/css/stockAdminMenu.css" %>
+        <%@include file="/resources/css/adminMenu.css" %>
+        <%@include file="/resources/css/adminDefaultTable.css" %>
         td {
             text-align: center;
         }
@@ -17,7 +18,7 @@
     </style>
 </head>
 <body>
-<jsp:include page="../stockAdminMenu.jsp"/>
+<jsp:include page="../adminMenu.jsp" flush="false"/>
 <div id="main">
     <div class="w3-dark-grey header-container">
         <div class="w3-dark-grey header-button">
