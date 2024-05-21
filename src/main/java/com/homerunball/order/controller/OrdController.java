@@ -58,6 +58,9 @@ public class OrdController {
         try {
 //            List<CartDto> list = cartDao.selectUser(c_id);
             List<CartDto> list = cartDao.getStk(c_id);
+            if(list.isEmpty()){
+                return "redirect:/cart/list";
+            }
            /* List<OrdAndStkDto> stkList = orderAndStkDao.getcartItem(c_id);*/
 
           /*  System.out.println("list = " +list);*/
