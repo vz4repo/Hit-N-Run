@@ -17,7 +17,8 @@ public class PaymentServiceImpl implements PaymentService {
   PaymentDao paymentDao;
 
   @Override
-  public List<PaymentDto> selectPaymentHistoryWithDateRange(@SessionAttribute(name = "c_id")int c_id, String fromDate, String toDate) {
+  public List<PaymentDto> selectPaymentHistoryWithDateRange(@SessionAttribute(name = "c_id")int c_id, String fromDate, String toDate)
+      throws Exception {
     /* 날짜포맷으로 String -> LocalDate Casting */
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
