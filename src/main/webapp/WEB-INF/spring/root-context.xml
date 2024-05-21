@@ -1,31 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:mvc="http://www.springframework.org/schema/mvc"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:context="http://www.springframework.org/schema/context"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
-	   xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
+<!--	confidential properties -->
+	<util:properties id="properties" location="classpath:confidential.properties"/>
 <!--	1. Datasource -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-		<property name="url" value="jdbc:mysql://localhost:3306/homerunball?useUnicode=true&amp;characterEncoding=utf8"/>
-		<property name="username" value="root"/>
-			<property name="password" value="12341234"/>
+		<property name="driverClassName" value="#{properties['datasource.driver']}"/>
+		<property name="url" value="#{properties['datasource.url']}"/>
+		<property name="username" value="#{properties['datasource.username']}"/>
+		<property name="password" value="#{properties['datasource.password']}"/>
 	</bean>
 <!--	2. Sql Session Factory -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-		<property name="configLocation" value="classpath:mybatis-config.xml"/>
-<!--		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>-->
-	</bean>
+		<property name="configLocation"  value="classpath:mybatis-config.xml"/>
+		<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
+		</bean>
 <!--	3. Sql Session -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory"/>
 	</bean>
+
+	<!-- 메일링 -->
+	<context:component-scan base-package="com.homerunball.customer.service" />
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="username" value="homerunball46g"/>
+		<property name="password" value="tawqdzjrpvdhxgkn"/>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.port">587</prop>
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+				<prop key="mail.smtp.ssl.protocols">TLSv1.2</prop>
+				<prop key="mail.smtp.ssl.enable">false</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.socketFactory.class">
+					javax.net.ssl.SSLSocketFactory</prop>
+			</props>
+		</property>
+	</bean>
+
+
 
 	<context:component-scan base-package="com.homerunball">
 <!--		<context:exclude-filter type="regex" expression="com.homerunball.*"/>-->
@@ -34,8 +63,5 @@
 	<!--	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
 <!--		<property name="dataSource" ref="dataSource"/>-->
 <!--	</bean>-->
-<!--	<tx:annotation-driven/>-->
-<!--	<context:component-scan base-package="com.fastcampus">-->
-<!--		<context:exclude-filter type="regex" expression="com.fastcampus.ch3.diCopy*.*"/>-->
-<!--	</context:component-scan>-->
+	<tx:annotation-driven/>
 </beans>

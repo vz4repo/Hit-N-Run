@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.homerunball.customer.dao.CustDao">
+
+
+<!-- 회원가입   -->
+    <insert id="insert" parameterType="CustDto">
+        insert into cust(c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, sms_agr, email_agr)
+        values (#{c_email}, #{c_pwd}, #{c_name}, #{c_birth}, #{c_gnd}, #{c_phn}, #{c_zip}, #{c_road_a}, #{c_jibun_a}, #{c_det_a}, #{sms_agr}, #{email_agr})
+
+    </insert>
+
+<!-- 총 고객명수 조회-->
+    <select id="count" resultType="int">
+        select count(*) from cust
+    </select>
+
+<!-- 이메일로 고객 조회-->
+    <select id="selectEmail" resultType="CustDto" parameterType="String">
+        select * from cust where c_email = #{c_email}
+    </select>
+
+<!-- 고객번호로 고객 조회-->
+<!--    <select id="selectID" resultType="CustDto" parameterType="int">-->
+<!--        select * -->
+<!--        from cust -->
+<!--        where c_id= #{c_id}-->
+<!--    </select>-->
+
+        <select id="selectID" resultType="CustDto" parameterType="int">
+            select cust.c_email, cust.c_pwd, cust.c_name, cust.c_zip, cust.c_road_a, cust.c_jibun_a, cust.c_det_a, cust.c_phn, cust.c_gnd, cust.c_birth, cust.sms_agr, cust.email_agr
+            from cust
+            where c_id= #{c_id}
+        </select>
+
+<!--고객 정보 변경-->
+    <update id="updateAll" parameterType="CustDto">
+        update cust
+        set  c_phn = #{c_phn}, c_zip = #{c_zip}, c_road_a = #{c_road_a}, c_jibun_a = #{c_jibun_a}, c_det_a = #{c_det_a}, sms_agr = #{sms_agr}, email_agr = #{email_agr}
+        where c_id = #{c_id}
+    </update>
+
+<!--    고객 비밀번호 변경-->
+    <update id="updatePwd" parameterType="CustDto">
+        update cust
+        set  c_pwd = #{c_pwd}
+        where c_id = #{c_id}
+    </update>
+
+<!--고객 삭제-->
+    <delete id="delete">
+        delete from cust where c_email = #{c_email}
+    </delete>
+
+<!--고객 전체 삭제-->
+    <delete id="deleteAll">
+        delete from cust
+    </delete>
+
+<!--로그인 시간 업데이트-->
+    <update id="updateLoginDt">
+        UPDATE cust
+        SET login_dt = now()
+        WHERE c_email = #{c_email}
+    </update>
+
+    <!--고객과 등급을 조인해서 고객의 등급 이름을 찾기-->
+    <select id="grdNameJoin" resultType="CustDto" parameterType="int">
+        SELECT c.c_name, CUST_GRD.grd_name, c.tot_amt ,c.login_dt, c.reg_dt
+        FROM CUST c
+        JOIN CUST_GRD ON c.c_grd_cd = CUST_GRD.c_grd_cd
+        WHERE c.c_id = #{c_id}
+    </select>
+
+</mapper>
