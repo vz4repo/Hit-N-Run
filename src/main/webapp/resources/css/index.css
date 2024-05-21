@@ -8,9 +8,9 @@ li {
     list-style: none;
 }
 
-body {
-    font-family: "Open Sans", sans-serif;
-}
+/*body {*/
+/*    font-family: "Open Sans", sans-serif;*/
+/*}*/
 h2 {
     color: #000;
     font-size: 26px;
@@ -30,12 +30,7 @@ h2 {
     padding: 0 70px;
     /*width: 1040px;*/
 }
-/*.carousel-inner {*/
-/*    width: 1000px;*/
-/*}*/
-/*.carousel-control .left {*/
-/*    width: 40px;*/
-/*}*/
+
 .carousel .item {
     color: #747d89;
     min-height: 325px;

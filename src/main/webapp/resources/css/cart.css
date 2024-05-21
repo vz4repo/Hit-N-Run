@@ -6,7 +6,7 @@
 
 
 
-table {
+.cart_tale {
     width: 85%;
     margin: 0 auto;
     text-align: left;
@@ -36,7 +36,7 @@ hr {
 }
 
 .quantity_control input {
-    width: 23px;
+    width: 30px;
     height: 23px;
     padding: 5px;
     border: 1px solid #acacac;
@@ -63,7 +63,6 @@ thead th {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 130px;
     text-align: center;
     color: rgb(51, 51, 51);
     font-size: 13px;
