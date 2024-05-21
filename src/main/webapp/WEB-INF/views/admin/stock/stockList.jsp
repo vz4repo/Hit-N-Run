@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <%@include file="/resources/css/stockAdminMenu.css" %>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-
+        <%@include file="/resources/css/stockAdminMenu.css" %>
         input[type="date"]::-webkit-calendar-picker-indicator {
             display: none;
             -webkit-appearance: none;
@@ -25,41 +26,8 @@
             text-align: center;
         }
 
-        .header-container {
-            display: flex;
-            align-items: center;
-            position: relative; /* 중앙 정렬을 위한 상대적 위치 설정 */
-        }
-        .header-title {
-            position: absolute; /* 절대 위치를 사용하여 중앙에 배치 */
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 25px;
-        }
-        .header-button {
-            flex: none; /* 버튼 크기 고정 */
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            border: 1px solid #ddd;
-            font-size: 12px;
-        }
-
         .search-container tbody tr:nth-of-type(3) select {
             margin-right: 30px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f3f3f3;
-            text-align: center;
-            font-size: 14px;
         }
 
         .search-container td {
@@ -159,7 +127,7 @@
     <title>재고 목록</title>
 </head>
 <body>
-<jsp:include page="stockAdminMenu.jsp"/>
+<jsp:include page="../stockAdminMenu.jsp"/>
 <div id="main">
     <div class="w3-dark-grey header-container">
         <div class="w3-dark-grey header-button">
