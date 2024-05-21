@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
 <!DOCTYPE html>
@@ -26,50 +26,50 @@
 </head>
 <%-- 김수연 시작 --%>
 <style>
-#deliveryForm {
-display: flex;
-justify-content: center;
-flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있도록 설정 */
-}
+    #deliveryForm {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있도록 설정 */
+    }
 
-#delivery_left {
-    text-align: center;
-    width: 20%;
-    height: 100%;
-}
+    #delivery_left {
+        text-align: center;
+        width: 20%;
+        height: 100%;
+    }
 
-#delivery_right {
-    width: 80%;
-    height: 100%;
-}
+    #delivery_right {
+        width: 80%;
+        height: 100%;
+    }
 </style>
 
 <%-- 김수연 끝 --%>
 <body>
 <%--<jsp:include page="template/header.jsp"/>--%>
 <jsp:include page="header.jsp"/>
-    <div class="order__header">
-        <a href="#" class="head_main">Homerun() > 주문서</a>
-        <hr class="first__under" />
-        <div class="order__title">
-            <div class="head_order">Order / Payment</div>
-            <div class="order__title__detail">
-                <a href="#">장바구니 > </a>
-                <a href="#">주문서</a>
-                <a href="#"> > 주문완료</a>
+<div class="order__header">
+    <a href="#" class="head_main">Homerun() > 주문서</a>
+    <hr class="first__under"/>
+    <div class="order__title">
+        <div class="head_order">Order / Payment</div>
+        <div class="order__title__detail">
+            <a href="#">장바구니 > </a>
+            <a href="#">주문서</a>
+            <a href="#"> > 주문완료</a>
+        </div>
+    </div>
+    <hr/>
+    <section class="order__delivery">
+        <%-- 김수연 시작 --%>
+        <%-- 고객이 선택한 배송지 뜨는 페이지 _ order.jsp --%>
+        <div>
+            <div id="delivery_left" class="head_order">
+                Delivery
+            </div>
+            <div id="delivery_right">
             </div>
         </div>
-        <hr />
-        <section class="order__delivery">
-            <%-- 김수연 시작 --%>
-                <%-- 고객이 선택한 배송지 뜨는 페이지 _ order.jsp --%>
-                <div>
-                    <div id = "delivery_left" class="head_order">
-                        Delivery
-                    </div>
-                    <div id = "delivery_right">
-                    </div>
-                </div>
 
                 <hr class="first__under" />
                 <div id="selectedDLV" class="center-table">
@@ -106,7 +106,7 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                 <hr />
 
 
-<%-- 김수연 끝 --%>
+        <%-- 김수연 끝 --%>
 
 
 
@@ -141,21 +141,21 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
 <%--                <c:import url="${pageContext.request.contextPath}/delivery/" />--%>
 
 
-        </section>
-    </div>
-    <section class="order__items">
-    <hr class="first__under" />
+    </section>
+</div>
+<section class="order__items">
+    <hr class="first__under"/>
     <div class="title__order">상품정보</div>
     <div class="tb__order">
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="20%" />
-                    <col width="30%" />
-                    <col width="15%" />
-                    <col width="15%" />
-                    <col width="10%" />
-                    <col width="10%" />
+                    <col width="20%"/>
+                    <col width="44%"/>
+                    <col width="8%"/>
+                    <col width="8%"/>
+                    <col width="10%"/>
+                    <col width="10%"/>
                 </colgroup>
                 <thead>
                 <tr>
@@ -172,10 +172,10 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                         <div>수량</div>
                     </th>
                     <th scope="col">
-                        <div>배송구분</div>
+                        <div>주문금액</div>
                     </th>
                     <th scope="col">
-                        <div>주문금액</div>
+                        <div>배송구분</div>
                     </th>
                 </tr>
                 </thead>
@@ -183,8 +183,9 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}" alt="썸네일" name="thumbnail" />
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}"
+                                     alt="썸네일" name="thumbnail"/>
                             </a>
                         </td>
                         <td>
@@ -193,8 +194,9 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
+<%--                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>--%>
+                        <td><span class="price payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -219,36 +221,34 @@ flex-wrap: wrap; /* 요소가 너무 많을 때 다음 줄로 넘어갈 수 있�
             </table>
         </form>
     </div>
-    </section>
-<section class="order__payment">
-    <%@include file="payCheckout.jsp"%>
+    </div>
 </section>
-<%@include file="footer.jsp"%>
+<section class="order__payment">
+    <%@include file="payCheckout.jsp" %>
+</section>
+<%@include file="footer.jsp" %>
 <script>
-    $(document).ready(function(){
-        $('.priceFormat').each(function (){
+    $(document).ready(function () {
+        // 가격 포맷팅
+        $('.price').each(function () {
             let value = $(this).text();
             value = value.replace(/,/g, '');
-            const numbericValue = parseInt(value);
-            const formatValue = numbericValue.toLocaleString('ko-KR');
-            $(this).text(formatValue+'원');
-        })
-
-    })
-
-    /*테이블의 행 수를 동적으로 계산*/
-    window.onload = function() {
-        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
-        let totalSum = 0;
-
-        rows.forEach(function(row) {
-            /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
-            const price = row.cells[5].innerText;
-            totalSum += parseInt(price.replace(/[^\d]/g, ''));
+            const numericValue = Number(value);
+            const formatValue = numericValue.toLocaleString('ko-KR');
+            $(this).text(formatValue + '원');
         });
-        <%--/*총합을 나타낼 위치*/--%>
-        document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
-    }
+
+        // 테이블의 행 수를 동적으로 계산
+        let totalSum = 0;
+        $('body > section.order__items > div.tb__order > form > table > tbody > tr').each(function () {
+            const payAmt = $(this).find('.payAmt').text();
+            const price = Number(payAmt.replace(/[^\d]/g, ''));
+            totalSum += price;
+        });
+
+        // 총합을 표시할 위치에 설정
+        $('#totalSum').text(totalSum.toLocaleString('ko-KR') + '원');
+    });
 
 </script>
 </body>

@@ -16,12 +16,14 @@ ul {
 .footer_wrapper {
     min-height: 100%;
     position: relative;
+    white-space: nowrap;
 }
 
 footer {
     width: 100%;
     bottom: 0;
-    position: absolute;
+    /*position: absolute;*/
+    padding-top: 100px;
 }
 
 hr {
@@ -33,7 +35,6 @@ hr {
 .top_footer,
 .main_footer {
     display: grid;
-    justify-content: space-between;
 }
 
 .top_footer {
@@ -75,7 +76,6 @@ hr {
 
 .main_footer {
     grid-template-columns: repeat(4, 25%);
-    margin-left: 5%;
 }
 
 .footer {
