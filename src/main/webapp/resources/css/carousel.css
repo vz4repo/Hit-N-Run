@@ -110,7 +110,7 @@ h2 {
     font-weight: bold;
 }
 .carousel .item-price {
-    font-size: 13px;
+    font-size: 1vw;
     padding: 2px 0;
 }
 .carousel .item-price strike {
