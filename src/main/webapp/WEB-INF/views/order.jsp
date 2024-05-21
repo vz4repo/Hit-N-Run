@@ -410,8 +410,8 @@
                     <tr>
                         <td>
                             <a href="/product/detail?pd_id = ${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}"
-                                     alt="썸네일" name="thumbnail"/>
+                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
                             </a>
                         </td>
                         <td>

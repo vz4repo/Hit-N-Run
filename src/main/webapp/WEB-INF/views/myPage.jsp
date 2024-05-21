@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
     <title>My Page</title>
     <style>
         body {
             font-family: 'IBM Plex Sans', sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
+            /*display: flex;*/
         }
 
         #myPage {
@@ -45,10 +49,19 @@
             border-bottom: 1px solid #ccc;
             padding-bottom: 5px;
         }
+
+        #myPage ul {
+            display: block;
+        }
     </style>
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+
 </head>
 
 <body>
+<jsp:include page="header.jsp"/>
 <div id="myPage">
     <p>
         <%= session.getAttribute("c_name") %>님의 MY PAGE
@@ -84,6 +97,7 @@
         <li><a onclick="test()">제품 문의내역</a></li>
     </ul>
 </div>
+<jsp:include page="footer.jsp" flush="false" />
 
 <script>
     let pwdClear = "${pwdClear}"
