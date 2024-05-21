@@ -4,18 +4,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"/>
-    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/payStyle.css'/>" type="text/css"  rel="stylesheet" />
 
     <%--   다니님 header, footer --%>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
-    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -72,69 +71,74 @@
             </div>
         </div>
 
-        <hr class="first__under"/>
-        <div id="selectedDLV" class="center-table">
-            <table>
-                <tr>
-                    <%-- c_id : 고객 번호--%>
-                    <td>고객 C_ID</td>
-                    <td>${sessionScope.c_id}</td>
-                </tr>
-                <tr>
-                    <%-- rcver : 고객명 / --%>
-                    <td>이름(장소명)</td>
-                    <td>${selectedDto.rcver}(${selectedDto.adr_name})</td>
-                </tr>
-                <tr>
-                    <%-- rcver_phn : 고객 연락처 --%>
-                    <td>연락처</td>
-                    <td>${selectedDto.rcver_phn}</td>
-                </tr>
-                <tr>
-                    <%-- rcver_adr : 고객 주소--%>
-                    <td>주소</td>
-                    <td>${selectedDto.rcver_adr}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <%-- 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. --%>
-                        <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
-                        <%--                                <button id="selectAllBtn">배송지 전체 조회</button>--%>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <hr/>
+                <hr class="first__under" />
+                <div id="selectedDLV" class="center-table">
+                    <table>
+                        <tr>
+                            <%-- c_id : 고객 번호--%>
+                            <td>고객 C_ID</td>
+                            <td>${sessionScope.c_id}</td>
+                        </tr>
+                        <tr>
+                            <%-- rcver : 고객명 / --%>
+                            <td>이름(장소명)</td>
+                            <td>${selectedDto.rcver}(${selectedDto.adr_name})</td>
+                        </tr>
+                        <tr>
+                            <%-- rcver_phn : 고객 연락처 --%>
+                            <td>연락처</td>
+                            <td>${selectedDto.rcver_phn}</td>
+                        </tr>
+                        <tr>
+                            <%-- rcver_adr : 고객 주소--%>
+                            <td>주소</td>
+                            <td>${selectedDto.rcver_adr}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <%-- 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. --%>
+                                <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
+<%--                                <button id="selectAllBtn">배송지 전체 조회</button>--%>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
 
 
         <%-- 김수연 끝 --%>
 
 
-        <%--            <%@include file="deliveryList.jsp"%>--%>
-        <%--            <% String rcver = request.getParameter("rcver"); %>--%>
-        <%--            <div>--%>
-        <%--                --%>
-        <%--            </div>--%>
-
-        <%--                <div id="deliveryForm">--%>
-        <%--                    &lt;%&ndash; 여기에 배송지 목록이 동적으로 채워질 것입니다. &ndash;%&gt;--%>
-        <%--                </div>--%>
 
 
-        <%--                <c:import url="<%= request.getContextPath() %>/delivery/" />--%>
-        <%--                <h1><c:out value="웅냥냥"/></h1>--%>
-        <%--                <script>--%>
-        <%--                    var contextPath = "${pageContext.request.contextPath}";--%>
-        <%--                    console.log("Context Path: " + contextPath);--%>
 
-        <%--                    // 예를 들어, id가 "contextPathDisplay"인 요소에 contextPath를 추가하는 경우--%>
-        <%--                    document.getElementById("contextPathDisplay").innerText = "Context Path: " + contextPath;--%>
 
-        <%--                </script>--%>
-        <%--                <h1><c:out value="${request.getContextPath()}"/></h1>--%>
-        <%--                <h1><c:out value="${pageContext.request.contextPath}"/></h1>--%>
 
-        <%--                <c:import url="${pageContext.request.contextPath}/delivery/" />--%>
+            <%--            <%@include file="deliveryList.jsp"%>--%>
+<%--            <% String rcver = request.getParameter("rcver"); %>--%>
+<%--            <div>--%>
+<%--                --%>
+<%--            </div>--%>
+
+<%--                <div id="deliveryForm">--%>
+<%--                    &lt;%&ndash; 여기에 배송지 목록이 동적으로 채워질 것입니다. &ndash;%&gt;--%>
+<%--                </div>--%>
+
+
+<%--                <c:import url="<%= request.getContextPath() %>/delivery/" />--%>
+<%--                <h1><c:out value="웅냥냥"/></h1>--%>
+<%--                <script>--%>
+<%--                    var contextPath = "${pageContext.request.contextPath}";--%>
+<%--                    console.log("Context Path: " + contextPath);--%>
+
+<%--                    // 예를 들어, id가 "contextPathDisplay"인 요소에 contextPath를 추가하는 경우--%>
+<%--                    document.getElementById("contextPathDisplay").innerText = "Context Path: " + contextPath;--%>
+
+<%--                </script>--%>
+<%--                <h1><c:out value="${request.getContextPath()}"/></h1>--%>
+<%--                <h1><c:out value="${pageContext.request.contextPath}"/></h1>--%>
+
+<%--                <c:import url="${pageContext.request.contextPath}/delivery/" />--%>
 
 
     </section>
