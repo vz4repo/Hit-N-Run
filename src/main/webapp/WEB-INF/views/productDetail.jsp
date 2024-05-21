@@ -85,6 +85,17 @@
         flex-direction: column;
         align-items: center;
     }
+
+    /*상세 이미지 가운데 정렬 코드*/
+    .image-container {
+        text-align: center;
+    }
+
+    .image-container img {
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+    }
 </style>
 <head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
@@ -169,12 +180,12 @@
 <div class="relatedProduct"></div>
 <%--제품 상세 내용--%>
 <div class="detailProductContents">
-    <p>
-        <img src="/img/product/${prd.pd_type_cd}/main/${prd.det_img_fn}"
-             alt="이미지 준비 중 입니다"
-             onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.det_img_fn}';">
-    </p>
     <p>${prd.pd_smr_dsc}</p>
+    <p class="image-container">
+        <img src="/img/product/${prd.pd_type_cd}/detail/${prd.det_img_fn}"
+             alt="이미지 준비 중 입니다"
+             onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/detail/${prd.det_img_fn}';" >
+    </p>
 </div>
 <%--제품 리뷰(구현 안함 3차때 추후 개발예정)--%>
 <div class="review"></div>
