@@ -78,14 +78,13 @@
 <%--넘겨줄 정보를 담는다--%>
 <form id="purchaseInfo" method="post">
     <div class="productMainContainer">
-<%--    상단 왼쪽에 위치한 대표이미지--%>
-        <div class="productItem">
-            <p>
-                <img src="/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}"
-                     alt="이미지 준비 중 입니다"
-                     onerror="this.onerror=null; this.src='/img/product/altImg.jpg';">
-            </p>
-        </div>
+<%--    상단 왼쪽에 위치한 대표이미지--%><div class="productItem">
+        <p>
+            <img src="/img/product/${prd.pd_type_cd}/main/${prd.mn_img_fn}"
+                 alt="이미지 준비 중 입니다"
+                 onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}';">
+        </p>
+    </div>
         <div class="productItem">
             <p>${prd.pd_name}</p>
             <p>${prd.pd_ad_cmt}</p>

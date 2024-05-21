@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -25,163 +25,6 @@
     <link rel="icon" type="image/x-icon"
           href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
     <style>
-
-        * {
-            margin: 0;
-        }
-
-        #content {
-            display: flex;
-            justify-content: space-between;
-            text-align: center;
-        }
-
-        .interview {
-            position: relative;
-            margin-right: 30px;
-        }
-
-        .mySlides {
-            display: none;
-        }
-
-        .cursor {
-            cursor: pointer;
-        }
-
-        .cc {
-            text-align: center;
-            background-color: #222;
-            padding: 5px;
-            color: silver;
-        }
-
-        .cc p {
-            margin: 0;
-        }
-
-        .column {
-            float: left;
-            width: 16.66%;
-        }
-
-        .demo {
-            opacity: 0.6;
-        }
-
-        .active,
-        .demo:hover {
-            opacity: 1;
-        }
-
-        .video {
-            position: relative;
-        }
-
-
-        .prev2,
-        .next2 {
-            cursor: pointer;
-            position: absolute;
-            top: 90%;
-            width: auto;
-            padding: 3px;
-            margin-top: 8px;
-            color: silver;
-            font-weight: bold;
-            font-size: 16px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-        }
-        .prev2 {
-            left: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        .next2 {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        .dot {
-            position: relative;
-            top: 5px;
-            left: 0;
-            cursor: pointer;
-            height: 15px;
-            width: 15px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-
-        }
-        .active,
-        .dot:hover {
-            background-color: #717171;
-        }
-
-
-        #king {
-            display: flex;
-            width: 1130px;
-            margin: 0;
-        }
-
-        .interview,
-        .video {
-            width: 50%;
-            box-sizing: border-box;
-        }
-
-        .three>p {
-            font-size: 12px;
-            margin-top: 10px;
-        }
-
-        .title {
-            color: dimgrey;
-            display: flex;
-            font-size: 14px;
-            margin-bottom: -5px;
-        }
-
-        .mySlides2 img {
-            margin-bottom: 10px;
-        }
-
-        .mySlides2>.text {
-            margin-bottom: 10px;
-        }
-
-        .text {
-            position: relative;
-            margin-top: 7px;
-            font-size: 14px;
-            color: dimgray;
-        }
-
-        li {
-            list-style: none;
-        }
-
-        body {
-            font-family: "Open Sans", sans-serif;
-        }
-
-        h2 {
-            color: #000;
-            font-size: 26px;
-            font-weight: 300;
-            text-align: center;
-            text-transform: uppercase;
-            position: relative;
-            margin: 30px 0 60px;
-        }
-
-        .productName {
-            height: 40px;
-        }
-
         /*캐러셀에 필요한 css*/
         <%@include file="/resources/css/carousel.css"%>
 
@@ -208,7 +51,7 @@
     <div><a href="/product/detail?pd_id=APP000003-04">제품상세 이동</a></div>
     <%--<div><a href="/payment">결제 이동</a></div>--%>
     <div><a href="/product/detail">제품 상세 이동</a></div>
-    <div><a href="/delivery/deliveryList">배송지 이동</a></div>
+    <div><a href="/delivery/">배송지 이동</a></div>
 </div>
 
 <%--상품 진열 시작--%>
@@ -411,7 +254,7 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" class="img-responsive" alt="">
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}" class="img-responsive" alt="">
                                             </a>
                                         </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
@@ -497,7 +340,7 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
                                                      class="img-responsive" alt="">
                                             </a>
                                         </div>
@@ -586,7 +429,7 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
                                                      class="img-responsive" alt="">
                                             </a>
                                         </div>
@@ -675,7 +518,7 @@
                                         <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
                                         <div class="img-box">
                                             <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="img/product/${product.pd_type_cd}/main/${product.mn_img_fn}"
+                                                <img src="img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}"
                                                      class="img-responsive" alt="">
                                             </a>
                                         </div>
