@@ -13,7 +13,8 @@
         </ul>
     </div>
     <div class="main_header">
-        <a class="cart_link" href="/"><h1>HOME RUN</h1></a>
+<%--        <a class="cart_link" href="/"><h1>HOME RUN</h1></a>--%>
+        <a href="/"><img src="/img/homerunball_logo.png" style="width:200px"></a>
         <div>
             <ul class="main_header_ul">
                 <a class="cart_link" href="/"><li>HOME</li></a>
