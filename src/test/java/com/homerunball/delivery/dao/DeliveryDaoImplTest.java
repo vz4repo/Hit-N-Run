@@ -260,43 +260,18 @@ public class DeliveryDaoImplTest {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        DeliveryDto deliveryDto1 = new DeliveryDto(1001, 1, "집1", "포차코", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-//        DeliveryDto deliveryDto2 = new DeliveryDto(1001, 2, "집2", "품품이", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-//        DeliveryDto deliveryDto3 = new DeliveryDto(1001, 3, "집3", "퐁퐁이", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-//        DeliveryDto deliveryDto4 = new DeliveryDto(1001, 4, "집4", "파파고", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-//        DeliveryDto deliveryDto5 = new DeliveryDto(1002, 1, "회사1", "웅냥냥", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-//        DeliveryDto deliveryDto6 = new DeliveryDto(1002, 2, "회사2", "양양이", "01012312344", "12345", "부산광역시 남구 수영로 36-9 201호");
-
-
-
-
-
     /* TODO : ⭐⭐⭐⭐⭐⭐ updateDefaultDlvTest1() 는 고객테이블 건드려야해서 나중에 하기 ⭐⭐⭐⭐⭐⭐*/
     @Test
     public void updateDefaultDlvTest() throws Exception {
         try {
             /* DB 초기화 */
-         deliveryDao.deleteAll();
-         assertTrue(deliveryDao.countAll() == 0);
+            deliveryDao.deleteAll();
+            assertTrue(deliveryDao.countAll() == 0);
 
-         /*테스트 중복방지*/
-         custDao.deleteAll();
+            /*테스트 중복방지*/
+            custDao.deleteAll();
 
-         /*고객 정보 추가*/
+            /*고객 정보 추가*/
             CustDto custDto = new CustDto("pompom@naver.com", "1234", "퐁퐁이", "9203012", "F", "01012345678", "01234", "서울시 강서구 까치산로", "12", "1011", "N", "N");
             /*추가된 고객을 DB에 저장*/
             assertTrue(custDao.insert(custDto) == 1);
@@ -306,71 +281,23 @@ public class DeliveryDaoImplTest {
 
             /* custDto에 연결된 cust_adr_list 5개 추가*/
             DeliveryDto deliveryDto = new DeliveryDto();
-
-            int cust_num = custDao.selectEmail("pompom@naver.com").getC_id();
-            System.out.println("cust_num = " + cust_num);
-
             for(int i=1; i<6; i++) {
-//                deliveryDto = new DeliveryDto(cust_num, "초갓집", "남궁푸린", "01012341234", "성남시 정자동 어쩌구 저쩌구 12");
-// 0521 김수연 여기까지 하다 끝.
-
+                deliveryDto = new DeliveryDto(custDao.selectEmail("pompom@naver.com").getC_id(), i, "초갓집"+i, "남궁푸린", "01012341234", "12345", "성남시 정자동 어쩌구 저쩌구 12");
+                assertTrue(deliveryDao.insert(deliveryDto) == 1);
             }
 
+//            int adrId = deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 3).getC_adr_list_id();
 
+            /* cust 테이블의 c_adr_list_id 를 update */
+            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 3).getC_adr_list_id());
+            System.out.println("고객 번호 = " + custDto.getC_adr_list_id());
 
-
-//            /* love@naver.com 고객의 배송지 3개 추가 */
-//            for(int i = 1; i < 4; i++) {
-//                deliveryDto = new DeliveryDto(Integer.parseInt(custId), i, "초갓집", "독수리", "01011112222", "12345", "성남시 정자동 어쩌구 저쩌구 14-15");
-//                assertTrue(deliveryDao.insert(deliveryDto) == 1);
-//            } assertTrue(deliveryDao.countAdrList(Integer.parseInt(custId)) == 3);
-
-
-//         CustDto toUpdateDfltAddr =
-
-
-
-//            int rowCnt = custDao.insertCust(custdto);
-//            /*저장 성공*/
-//            assertTrue(rowCnt == 1);
-//            /* 고객의 DEFAULT c_adr_list_id 를 확인 = null */
-//            String custId = custDao.selectEmail("love@naver.com").getC_id();
-//            System.out.println("custId = " + custId);
-//            System.out.println("custDao.selectID(100006).getC_dlv_adr() = " + custDao.selectID(Integer.parseInt(custId)).getC_dlv_adr());
-//
-//            /* love@naver.com 고객의 배송지 3개 추가 */
-//            for(int i = 1; i < 4; i++) {
-//                deliveryDto = new DeliveryDto(Integer.parseInt(custId), i, "초갓집", "독수리", "01011112222", "12345", "성남시 정자동 어쩌구 저쩌구 14-15");
-//                assertTrue(deliveryDao.insert(deliveryDto) == 1);
-//            } assertTrue(deliveryDao.countAdrList(Integer.parseInt(custId)) == 3);
-//
-//            /* love@naver.com 고객의 배송지 리스트가 1,2,3이 맞는지 확인 */
-//            for(int i = 1; i < 4; i++) {
-//                assertTrue(deliveryDao.select(Integer.parseInt(custId), i).getC_adr_list_id() == i);
-//            }
-//
-            /* love@naver.com 고객의 배송지 리스트 2를 cust테이블의 c_adr_list_id 로 업데이트 */
-//            String default_c_adr_list_id = String.valueOf(deliveryDao.select(100012, 2).getC_adr_list_id());
-//            System.out.println("default_c_adr_list_id = " + default_c_adr_list_id);
-//            custdto.setC_dlv_adr(default_c_adr_list_id);
-//
-//            assertTrue(custDao.update(custdto));
-//
+            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 5).getC_adr_list_id());
+            System.out.println("고객 번호222 = " + custDto.getC_adr_list_id());
         } catch (MyBatisSystemException e) {
             System.out.println("MySql Server Stopped");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

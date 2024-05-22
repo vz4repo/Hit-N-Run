@@ -10,21 +10,6 @@
     <script src="https://kit.fontawesome.com/f0e73cfa04.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    /*.modal{*/
-    /*    position:absolute;*/
-    /*    top:50%;*/
-    /*    width:400px;*/
-    /*    height:600px;*/
-    /*    padding:40px;*/
-    /*    text-align: center;*/
-    /*    background-color: rgb(255,255,255);*/
-    /*    border-radius:10px;*/
-    /*    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);*/
-    /*    transform:translateY(-50%);*/
-    /*}*/
-
-
-    /* 배송창에 맞게 여기서부터 고치기*/
 
     #deliveryForm {
         display: flex;
@@ -115,9 +100,6 @@
 
 
 
-<%--<div class="modal" style="display: none">--%>
-<%--    <div>--%>
-<h2>전체 배송지 목록</h2>
 <div id="deliveryForm">
     <c:forEach var="list" items="${list}">
         <div class="dlvAddrList">
@@ -139,51 +121,41 @@
                     <td>${list.rcver_zip}</td>
 
                     <td><button class="selectDLV" data-c_adr_list_id="${list.c_adr_list_id}">변경</button></td>
+                    <td><button id="defaultDLV" class="defaultDLV" onclick="defaultDLV()" data-c_adr_list_id="${list.c_adr_list_id}">기본 배송지로 설정</button></td>
                         <%--                            <td><button id="selectDLV" onclick="setSelectedDLV(${list.c_adr_list_id})">변경</button></td>--%>
                 </tr>
             </table>
         </div>
     </c:forEach>
 </div>
-<%--    </div>--%>
-<%--</div>--%>
 
+</body>
 <script>
     // window.onload = function(){
     $(document).ready(function(){
 
         var dlvId = <%= request.getParameter("dlvId") %>;
 
-        /* selectAll 버튼 누르자마자 바로 setAllList 호출되게 변경해서 일단 삭제 */
-        // "selectAll" 버튼 클릭 시 데이터 요청
-        // $('#selectAllBtn').click(function(event) {
-        //     // event.preventDefault(); // 버튼의 기본 동작 막기
-        //     // setAllList 함수 호출
-        //     setAllList();
-        // })
+    });
 
-        $('#selectAllBtn').one("click", (function(event) {
-            // event.preventDefault(); // 버튼의 기본 동작 막기
-            // setAllList 함수 호출
-            setAllList();
-        }));
+    // "selectAll" 버튼 클릭 시 데이터 요청
+    $('#selectAllBtn').click(function(event) {
+        event.preventDefault(); // 버튼의 기본 동작 막기
+        // setAllList 함수 호출
+        setAllList();
+    })
 
-
-        // "selectDLV" 버튼 클릭시 데이터 전송
-        $('.selectDLV').click(function(event) {
-            // event.preventDefault(); // 버튼의 기본 동작 막기
-            // 클릭된 버튼의 data-c_adr_list_id 속성값 가져오기
-            var c_adr_list_id = $(this).data('c_adr_list_id');
-            setSelectedDLV(c_adr_list_id);
-        });
-
+    // "selectDLV" 버튼 클릭시 데이터 전송
+    $('.selectDLV').click(function(event) {
+        event.preventDefault(); // 버튼의 기본 동작 막기
+        // 클릭된 버튼의 data-c_adr_list_id 속성값 가져오기
+        var c_adr_list_id = $(this).data('c_adr_list_id');
+        setSelectedDLV(c_adr_list_id);
     });
 
 
     // setAllList 함수 정의
     function setAllList() {
-
-
         // AJAX를 사용하여 서버로 데이터 요청
         $.ajax({
             type: "GET",
@@ -194,7 +166,7 @@
             success: function(response) {
                 // 받아온 데이터를 deliveryForm 의 HTML에 채워 넣음
                 $("#deliveryForm").html(response);
-                // alert(response);
+                alert(response);
                 // $(".modal").attr("style", "display:flex");
             },
             error: function(xhr, status, error) {
@@ -226,6 +198,14 @@
             }
 
         });
+    }
+
+
+    /* 기본 배송지로 설정하는 function */
+    function defaultDLV(c_adr_list_id) {
+        alert(c_adr_list_id + "을 기본배송지로 설정.");
+        /* 0521 여기까지.. */
+        /* fucntion에 ajax로 하던가 어떻게 해서 cust 테이블의 data를 변경해주면 될듯 ... */
     }
 
 </script>

@@ -20,7 +20,7 @@ public class CustDto {
     private String c_jibun_a;
     private String c_det_a;
 //    private String c_ext_a;
-    private String c_adr_list_id;
+    private int c_adr_list_id;
     private String sms_agr;
     private String email_agr;
     private String reg_dt;
@@ -233,11 +233,11 @@ public class CustDto {
 //        this.c_ext_a = c_ext_a;
 //    }
 
-    public String getC_adr_list_id() {
+    public int getC_adr_list_id() {
         return c_adr_list_id;
     }
 
-    public void setC_adr_list_id(String c_adr_list_id) {
+    public void setC_adr_list_id(int c_adr_list_id) {
         this.c_adr_list_id = c_adr_list_id;
     }
 
