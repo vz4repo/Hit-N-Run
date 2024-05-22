@@ -477,7 +477,7 @@
                         <td>
                             <div class="order-amount" data-order-id="20231208212440001">
                                 <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
-                                <span>(${orderdetDto.od_qty}개)</span>
+                                <span>${orderdetDto.od_qty}개</span>
                             </div>
                         </td>
 

@@ -461,18 +461,17 @@
       $(this).text(formatValue + '원');
     })
   })
-
-  /*테이블의 행 수를 동적으로 계산*/
+  /*테이블의 행 수를 계산*/
   window.onload = function () {
     const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
     let totalSum = 0;
 
     rows.forEach(function (row) {
-      /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
+      /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
       const price = row.cells[5].innerText;
       totalSum += parseInt(price.replace(/[^\d]/g, ''));
     });
-    <%--/*총합을 나타낼 위치*/--%>
+    /*총합을 나타낼 위치*/
     document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
   }
 
