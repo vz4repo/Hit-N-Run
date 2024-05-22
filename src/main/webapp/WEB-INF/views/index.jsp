@@ -576,17 +576,17 @@
 
 <jsp:include page="footer.jsp" flush="false"/>
 <script>
-    window.onload = function () {
-        if ("${sessionScope.c_id}" !== "") {
-            document.getElementById('logoutLink').addEventListener('click', function (event) {
-                event.preventDefault();
-                if (confirm('정말로 로그아웃을 하시겠습니까?')) {
-                    window.location.href = event.target.href;
-                    alert('로그아웃이 되셨습니다.');
-                }
-            });
-        }
-    };
+    <%--window.onload = function () {--%>
+    <%--    if ("${sessionScope.c_id}" !== "") {--%>
+    <%--        document.getElementById('logoutLink').addEventListener('click', function (event) {--%>
+    <%--            event.preventDefault();--%>
+    <%--            if (confirm('정말로 로그아웃을 하시겠습니까?')) {--%>
+    <%--                window.location.href = event.target.href;--%>
+    <%--                alert('로그아웃이 되셨습니다.');--%>
+    <%--            }--%>
+    <%--        });--%>
+    <%--    }--%>
+    <%--};--%>
 
     const dDay = document.querySelector("#dDay");
 

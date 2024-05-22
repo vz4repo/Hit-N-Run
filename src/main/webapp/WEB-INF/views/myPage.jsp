@@ -106,7 +106,7 @@
     }
 
     function test(){
-        alert("아직 테스트중입니다!")
+        alert("테스트중입니다!")
     }
 </script>
 
