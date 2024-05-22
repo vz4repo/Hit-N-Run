@@ -770,7 +770,6 @@
                             <%@include file="payCheckout.jsp" %>
                         </section>
             --%>
-            <%@include file="footer.jsp" %>
 
             <script>
               document.addEventListener('DOMContentLoaded', () => {
