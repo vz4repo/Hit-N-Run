@@ -199,7 +199,8 @@
             form.action = '/product/test'; //찜하기
         }
         else if (action === 'directOrder'){
-            form.action = '/cart/insert'; //바로구매
+            alert("개발예정입니다.")
+            form.action = '/cart/test'; //바로구매
         }
 
         /*폼 제출*/
