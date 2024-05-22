@@ -28,17 +28,27 @@
 <%-- 김수연 시작 --%>
 <style>
   #dlv-container {
-    width: 700px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-top: 1px solid #ddd;
+      padding: 20px 0;
   }
 
-  #dlv-container .dlv-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  .dlv-header {
+      margin-top: 50px;
+      margin-left: 8%;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+  }
+
+  .dlv-header__info {
+      width: 85%;
+      border: 1px solid #ddd;
+      padding: 15px;
+      border-radius: 5px;
+      margin: 1% 8%;
   }
 
   #dlv-container ul {
@@ -58,11 +68,7 @@
     font-weight: bold;
   }
 
-  #dlv-container .dlv-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
+
 
   #dlv-container .btn-change-address {
     padding: 5px 10px;
@@ -269,11 +275,12 @@
 
        </section>
    --%>
+    <div class="dlv-header">배송정보</div>
     <section id="dlv-container">
         <!-- 배송 정보 헤더 -->
-        <div class="dlv-header">배송 정보</div>
+
         <%-- TODO: display:block 강제 적용 중. 수정 필요--%>
-        <ul style="display: block">
+        <ul class="dlv-header__info">
             <!-- 배송지 선택 -->
             <li>
                 <span class="label">배송지</span>
@@ -284,12 +291,9 @@
                             <label><input type="radio" name="delivery_address" checked/>
                                 ${selectedDto.adr_name}
                             </label>
-                            <label><input type="radio" name="delivery_address"/>
+                            <label>
                                 배송지2
                             </label>
-                        </li>
-                        <!-- 배송지 변경 버튼 -->
-                        <li>
                             <button class="btn-change-address">배송지 변경</button>
                         </li>
                     </ul>

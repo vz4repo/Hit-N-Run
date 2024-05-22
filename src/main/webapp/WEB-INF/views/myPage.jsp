@@ -54,6 +54,7 @@
             display: block;
         }
     </style>
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
