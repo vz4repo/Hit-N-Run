@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.homerunball.customer.service.CustService;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -26,13 +28,9 @@ public class RegisterController {
     @Autowired
     CustService custService;
 
-//    @Autowired
-//    private MailSendService mailService;
-
-
     /*겟맵핑 /add 경로일시 회원가입 폼으로 이동*/
     @GetMapping("/add")
-    public String register(){
+    public String register() {
         return "registerForm";
     }
 
@@ -40,43 +38,66 @@ public class RegisterController {
     /*새로 작성한 Validator를 사용하기 위해서 InitBinder 어노테이션 사용*/
     @InitBinder
     /*유효성 검사를 위해 WebDataBinder클래스의 객체를 사용*/
-    public void custValid(WebDataBinder binder){
+    public void custValid(WebDataBinder binder) {
         /*객체를 통해 새로운 Validator인 CustValidator를 등록*/
         binder.setValidator(new CustValidator());
     }
 
+    @GetMapping("/mailCheck")
+    @ResponseBody
+    public String mailCheck(String email, HttpServletRequest request) {
+        System.out.println("이메일 인증 요청이 들어옴!");
+        System.out.println("이메일 인증 이메일 : " + email);
+
+        String verificationCode = custService.joinEmail(email); // 이메일로 인증번호 발송
+        System.out.println("자바에서 받아온 인증번호:  " + verificationCode);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("verificationCode", verificationCode); // 세션에 인증번호 저장
+        System.out.println("세션에 저장된 인증번호: " + session.getAttribute("verificationCode"));
+
+        return verificationCode;
+    }
+
     @PostMapping("/add")
-    /*유효성 검사가 필요한 객체 앞에 @Valid 어노테이션을 작성하면 등록한 CustValidator 사용가능*/
-    public String save(@Valid CustDto custDto, BindingResult result, RedirectAttributes Successful) {
-        /*Validator에서 걸린게 있으면 그 오류가 result에 저장됨*/
-        System.out.println("자스를 통과한 에러가 있나요?! = " + result);
+    public String save(@Valid CustDto custDto, BindingResult result, RedirectAttributes Successful, @RequestParam("c_email2") String userInputCode, HttpServletRequest request) {
+        System.out.println("자스를 통과한 이메일, 비밀번호, 핸드폰 번호 에러가 있나요? = " + result);
         try {
-            /*hasErrors 메서드를 통해서 result에 오류가 있다면 회원가입 폼으로 이동*/
             if (result.hasErrors()) {
                 return "registerForm";
             }
-            /*선택 약관을 체크 안했을시 N값으로 저장*/
-            if (custDto.getSms_agr() == null) {
-                custDto.setSms_agr("N");
+            HttpSession session = request.getSession();
+            String savedVerificationCode = (String) session.getAttribute("verificationCode");
+
+            System.out.println("넘어와라: " + savedVerificationCode);
+            System.out.println("입력 값: " + userInputCode);
+
+            if (savedVerificationCode != null && savedVerificationCode.equals(userInputCode)) {
+                // 인증번호 일치 시 회원가입 진행
+                if (custDto.getSms_agr() == null) {
+                    custDto.setSms_agr("N");
+                }
+                if (custDto.getEmail_agr() == null) {
+                    custDto.setEmail_agr("N");
+                }
+                System.out.println("회원가입 정보 = " + custDto);
+                Successful.addFlashAttribute("signUpClear", "msg");
+
+                custDto.setC_pwd(custService.pwdEncrypt(custDto.getC_pwd()));
+
+                /*회원가입시 적었던 정보를 Dto를 이용하여 Dao에 인서트하여 DB 저장*/
+                custDao.insert(custDto);
+
+                return "redirect:/login";
+            } else {
+                // 인증번호 불일치 시 회원가입 폼으로 이동
+                System.out.println("인증번호 잘못 입력하셨다구요");
+                return "registerForm";
             }
-            if (custDto.getEmail_agr() == null) {
-                custDto.setEmail_agr("N");
-            }
-            System.out.println("회원가입 정보 = " + custDto);
-            Successful.addFlashAttribute("signUpClear", "msg");
-
-            custDto.setC_pwd(custService.pwdEncrypt(custDto.getC_pwd()));
-
-            /*회원가입시 적었던 정보를 Dto를 이용하여 Dao에 인서트하여 DB 저장*/
-            custDao.insert(custDto);
-
-        /*예외 발생시 로그에서 예외 정보 출력해주고 회원가입 폼으로 이동*/
         } catch (Exception e) {
             e.printStackTrace();
             return "registerForm";
         }
-        /*예외 발생 없을시 로그인 화면으로 이동*/
-        return "redirect:/login";
     }
 
     /*이메일 중복 체크*/
@@ -84,15 +105,5 @@ public class RegisterController {
     public @ResponseBody String emailCheck(@RequestParam("c_email") String c_email) {
         String checkResult = custService.emailCheck(c_email);
         return checkResult;
-    }
-
-    /*이메일 인증번호*/
-    @GetMapping("/mailCheck")
-    @ResponseBody
-    public String mailCheck(String email) {
-        System.out.println("이메일 인증 요청이 들어옴!");
-        System.out.println("이메일 인증 이메일 : " + email);
-
-        return custService.joinEmail(email);
     }
 }

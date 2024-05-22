@@ -168,66 +168,6 @@
         }).open();
     }
 
-    // function pwdEdit() {
-    //     window.location.href = "/mypage/pwdEdit";
-    // }
-
-    // function showPasswordForm() {
-    //     var form = document.getElementById("passwordForm");
-    //     var previousPassword = document.getElementById("pwdLabel");
-    //     var pwdChd = document.getElementById("pwdChange");
-    //     var pwdInput = document.getElementById("pwd")
-    //     var editButton = document.getElementById("edit")
-    //
-    //
-    //     /*히든 폼을 보이도록 설정*/
-    //     form.style.display = "inline-block";
-    //     /*이전 비밀번호 라벨을 숨김*/
-    //     previousPassword.style.display = "none";
-    //     /*비밀번호 변경 버튼을 숨김*/
-    //     pwdChd.style.display = "none";
-    //     /*이전 비밀번호 입력 필드를 숨김*/
-    //     pwdInput.style.display = "none";
-    //     editButton.disabled = true;
-    // }
-    //
-    // function hidePasswordForm() {
-    //     var form = document.getElementById("passwordForm");
-    //     var previousPassword = document.getElementById("pwdLabel");
-    //     var pwdChd = document.getElementById("pwdChange");
-    //     var pwdInput = document.getElementById("pwd")
-    //     var editButton = document.getElementById("edit")
-    //
-    //     /*히든 폼을 숨김*/
-    //     form.style.display = "none";
-    //     /*이전 비밀번호 라벨을 보임*/
-    //     previousPassword.style.display = "inline-block";
-    //     /*비밀번호 변경 버튼을 보임*/
-    //     pwdChd.style.display = "inline-block";
-    //     /*이전 비밀번호 입력 필드를 보임*/
-    //     pwdInput.style.display = "inline-block";
-    //     editButton.disabled = false;
-    // }
-
-     /*회원가입 유효성 자스도 이런식으로 바꿔보기*/
-    function updatePassword() {
-        var newPwd = document.getElementById("newPwd").value;
-        var newPwd2 = document.getElementById("newPwd2").value;
-        var newPwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{3,15}$/;
-
-        if(!newPwdPattern.test(newPwd)) {
-            alert("비밀번호는 영어/숫자 포함 4자이상을 작성하셔야합니다.")
-            return false;
-        }
-
-        if(newPwd !== newPwd2){
-            return false;
-        } else if(newPwd===newPwd2){
-                hidePasswordForm();
-                return true;
-        }
-    }
-
     function formCheck(){
         var isPhn = newPhnCheck();
         if(!isPhn){
@@ -235,29 +175,6 @@
         }
         return confirm("변경사항을 마무리하시고 적용하시겠습니까?")
     }
-
-    // function newPwdCheck() {
-    //     var newPwdResult = document.getElementById("check-newPwd");
-    //     var newPwd = document.getElementById("newPwd").value
-    //     var newPwd2 = document.getElementById("newPwd2").value
-    //
-    //     if(!newPwd){
-    //         newPwdResult.style.color = "red";
-    //         newPwdResult.innerHTML = "비밀번호를 입력해주세요.";
-    //         return false;
-    //     }else if(!newPwd2){
-    //         newPwdResult.style.color = "red";
-    //         newPwdResult.innerHTML = "비밀번호 확인을 입력해주세요.";
-    //         return false;
-    //     } else if ((newPwd !== newPwd2) || (newPwd2 !== newPwd)) {
-    //         newPwdResult.style.color = "red";
-    //         newPwdResult.innerHTML = "입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
-    //         return false;
-    //     }else
-    //         newPwdResult.style.color = "green";
-    //     newPwdResult.innerHTML = "비밀번호가 동일합니다.";
-    //     return true;
-    // }
 
     function newPhnCheck(){
         var newPhn = document.getElementById("c_phn").value;
