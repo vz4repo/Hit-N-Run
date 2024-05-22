@@ -4,8 +4,9 @@
 
 #content {
     display: flex;
-    justify-content: space-between;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .interview {
@@ -76,11 +77,11 @@
 }
 .dot {
     position: relative;
-    top: 5px;
+    top: 30px;
     left: 0;
     cursor: pointer;
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
@@ -93,7 +94,7 @@
 
 #king {
     display: flex;
-    width: 1130px;
+    width: 1600px;
     margin: 0;
 }
 
