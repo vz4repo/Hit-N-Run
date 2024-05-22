@@ -13,7 +13,7 @@
         </ul>
     </div>
     <div class="main_header">
-        <a href="/"><h1>HOME RUN</h1></a>
+        <a href="/"><img src="/img/homerunball_logo.png" style="width:200px"></a>
         <div>
             <ul class="main_header_ul">
                 <a href="/"><li>HOME</li></a>
