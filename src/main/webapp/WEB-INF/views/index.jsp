@@ -67,7 +67,7 @@
                 <img src="/img/advertisement/adimg2.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
                 <div class="carousel-caption top-1 advertiseCommentLeft">
                     <p class="fs-3 text-uppercase advertiseComment">CLOUT AI BATS</p>
-                    <p class="display-1 fw-bolder text-capitalize">가장 유명한 알루미늄 배트</p>
+                    <p class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</p>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -80,11 +80,11 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
+        <button class="carousel-control-prev main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
+        <button class="carousel-control-next main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -457,7 +457,7 @@
                     <div class="mySlides">
                         <a href="https://www.mlb.com/news/max-scherzer-nerve-injury" target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/v1715469645/mlb/aythmzxp4a85cmoofdcu"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
@@ -465,7 +465,7 @@
                         <a href="https://www.mlb.com/news/justin-verlander-throws-seven-scoreless-innings-to-beat-tigers"
                            target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/edvtcyf3r7vj5tw0cfgm"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
@@ -473,14 +473,14 @@
                         <a href="https://www.mlb.com/news/aaron-judge-homers-3-doubles-yankees-beat-pablo-lopez"
                            target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/uqd0yhdexfb64ktw2gez"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
                     <div class="mySlides">
                         <a href="https://www.mlb.com/news/jacob-degrom-injury-hopeful-august-return" target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/ugooaw5iuhp2vtiwatsy"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
@@ -488,14 +488,14 @@
                         <a href="https://www.mlb.com/news/yankees-ace-gerrit-cole-throws-off-mound-for-first-time"
                            target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/k48suv94gttm3lex2zo1"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
                     <div class="mySlides">
                         <a href="https://www.mlb.com/news/mike-trout-updates-knee-surgery-recovery" target="_blank">
                             <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/utosn1lnf6oerckjukln"
-                                 style="width:100%" height="325">
+                                 style="width:100%" height="400">
                         </a>
                     </div>
 
@@ -507,34 +507,34 @@
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/v1715469645/mlb/aythmzxp4a85cmoofdcu"
-                                 width="100" height="60" onclick="currentSlide(1)" alt="Max Scherzer">
+                                 width="100%" height="100" onclick="currentSlide(1)" alt="Max Scherzer">
                         </div>
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/edvtcyf3r7vj5tw0cfgm"
-                                 style="width:100%" height="60" onclick="currentSlide(2)" alt="Justin Verlander">
+                                 style="width:100%" height="100" onclick="currentSlide(2)" alt="Justin Verlander">
                         </div>
 
 
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/uqd0yhdexfb64ktw2gez"
-                                 style="width: 100%" height="60" onclick="currentSlide(3)" alt="Aaron Judge">
+                                 style="width: 100%" height="100" onclick="currentSlide(3)" alt="Aaron Judge">
                         </div>
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/ugooaw5iuhp2vtiwatsy"
-                                 style="width:100%" height="60" onclick="currentSlide(4)" alt="Jacob deGrom">
+                                 style="width:100%" height="100" onclick="currentSlide(4)" alt="Jacob deGrom">
                         </div>
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/k48suv94gttm3lex2zo1"
-                                 style="width:100%" height="60" onclick="currentSlide(5)" alt="Gerrit Cole">
+                                 style="width:100%" height="100" onclick="currentSlide(5)" alt="Gerrit Cole">
                         </div>
                         <div class="column">
                             <img class="demo cursor"
                                  src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/utosn1lnf6oerckjukln"
-                                 style="width:100%" height="60" onclick="currentSlide(6)" alt="Mike Trout">
+                                 style="width:100%" height="100" onclick="currentSlide(6)" alt="Mike Trout">
                         </div>
                     </div>
                 </div>
@@ -543,7 +543,7 @@
                     <h1 class="title">Video</h1><br>
 
                     <div class="mySlides2">
-                        <iframe width="100%" height="350"
+                        <iframe width="100%" height="440"
                                 src="https://www.youtube.com/embed/EbOpepcbSio?si=v2Fp3Cp0efiPX7eL"
                                 title="YouTube video player"
                                 frameborder="0"
@@ -553,7 +553,7 @@
                     </div>
 
                     <div class="mySlides2">
-                        <iframe width="100%" height="350"
+                        <iframe width="100%" height="440"
                                 src="https://www.youtube.com/embed/17skxnSQGYQ?si=IQkqj-MhtcLG6jAA"
                                 title="YouTube video player"
                                 frameborder="0"
@@ -563,7 +563,7 @@
                     </div>
 
                     <div class="mySlides2">
-                        <iframe width="100%" height="350"
+                        <iframe width="100%" height="440"
                                 src="https://www.youtube.com/embed/y2Yu7pwrrI0?si=9Tp_72UhlIZdxJaw"
                                 title="YouTube video player"
                                 frameborder="0"
@@ -574,7 +574,7 @@
 
 
                     <div class="mySlides2">
-                        <iframe width="100%" height="350"
+                        <iframe width="100%" height="440"
                                 src="https://www.youtube.com/embed/fFxGI9yIso0?si=rH8ayHVSuMvp32zZ"
                                 title="YouTube video player"
                                 frameborder="0"
@@ -584,7 +584,7 @@
                     </div>
 
                     <div class="mySlides2">
-                        <iframe width="100%" height="350"
+                        <iframe width="100%" height="440"
                                 src="https://www.youtube.com/embed/KBMG5okesuA?si=Pg-Rp1Z0kS8JEL88"
                                 title="YouTube video player"
                                 frameborder="0"
@@ -616,17 +616,17 @@
 <jsp:include page="footer.jsp" flush="false"/>
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script>
-    window.onload = function () {
-        if ("${sessionScope.c_id}" !== "") {
-            document.getElementById('logoutLink').addEventListener('click', function (event) {
-                event.preventDefault();
-                if (confirm('정말로 로그아웃을 하시겠습니까?')) {
-                    window.location.href = event.target.href;
-                    alert('로그아웃이 되셨습니다.');
-                }
-            });
-        }
-    };
+    <%--window.onload = function () {--%>
+    <%--    if ("${sessionScope.c_id}" !== "") {--%>
+    <%--        document.getElementById('logoutLink').addEventListener('click', function (event) {--%>
+    <%--            event.preventDefault();--%>
+    <%--            if (confirm('정말로 로그아웃을 하시겠습니까?')) {--%>
+    <%--                window.location.href = event.target.href;--%>
+    <%--                alert('로그아웃이 되셨습니다.');--%>
+    <%--            }--%>
+    <%--        });--%>
+    <%--    }--%>
+    <%--};--%>
 
     const dDay = document.querySelector("#dDay");
 

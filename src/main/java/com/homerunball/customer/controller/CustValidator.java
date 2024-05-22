@@ -23,20 +23,19 @@ public class CustValidator implements Validator {
         System.out.println("서버에서 검사할게요!");
         /*처음 설정이 오브젝트 타겟으로 되있어서 CustDto로 변경해줘야함*/
         CustDto custDto = (CustDto)target;
-
         String c_email = custDto.getC_email();
         String c_pwd = custDto.getC_pwd();
         String c_phn = custDto.getC_phn();
 
 
         if (c_email == null || !c_email.matches("^((?![가-힣]).)*([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$")) {
-            errors.rejectValue("c_email", "invalidCredentials", "이메일 뚫을려고?");
+            errors.rejectValue("c_email", "invalidCredentials", "이메일 뚫림?");
         }
         if (c_pwd == null || !c_pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$")) {
-            errors.rejectValue("c_pwd", "invalidLength", "비밀번호 뚫을려고?" );
+            errors.rejectValue("c_pwd", "invalidLength", "비밀번호 뚫림" );
         }
         if (c_phn == null || !c_phn.matches("^[0-9]{1,12}$")) {
-            errors.rejectValue("c_phn", "invalidLength", "핸드폰 뚫을려고?" );
+            errors.rejectValue("c_phn", "invalidLength", "핸드폰 뚫림?" );
     }
     }}
 
