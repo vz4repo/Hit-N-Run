@@ -67,7 +67,7 @@
                 <img src="/img/advertisement/adimg2.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
                 <div class="carousel-caption top-1 advertiseCommentLeft">
                     <p class="fs-3 text-uppercase advertiseComment">CLOUT AI BATS</p>
-                    <p class="display-1 fw-bolder text-capitalize">가장 유명한 알루미늄 배트</p>
+                    <p class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</p>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -80,11 +80,11 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
+        <button class="carousel-control-prev main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
+        <button class="carousel-control-next main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>

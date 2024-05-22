@@ -35,6 +35,11 @@ main {
 
 .advertiseComment {
     color: #ffd400;
+    margin: 0;
+}
+
+.advertiseCommentLeft h1, .advertiseCommentRight h1 {
+    margin: 0;
 }
 
 .advertiseCommentLeft {
@@ -46,6 +51,27 @@ main {
     text-align: right;
     right: 10px;
 }
+
+.carousel-item {
+    position: relative;
+    /*display: flex;*/
+}
+
+.carousel-item .carousel-caption a {
+    z-index: 9999;
+}
+
+.carousel-caption {
+    position: absolute;
+    top:45%;
+    padding: 0;
+}
+
+/*
+.main-banner-carousel {
+    z-index: 9999;
+}
+*/
 
 /*제품 캐러셀 css*/
 li {
