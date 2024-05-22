@@ -1,6 +1,4 @@
 package com.homerunball.customer.controller;
-
-
 import com.homerunball.customer.dao.CustDao;
 import com.homerunball.customer.domain.CustDto;
 import com.homerunball.customer.service.CustService;
@@ -9,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,6 +36,7 @@ public class MyPageController {
 
         /*변수를 통해 db에 접근 후 dto에 저장*/
         CustDto custDto = custDao.grdNameJoin(c_id);
+
 
         /*세션 속성 설정*/
         if(custDto != null){
@@ -74,15 +74,15 @@ public class MyPageController {
         return "myPageInfo";
     }
 
-/*    @InitBinder
-    *//*유효성 검사를 위해 WebDataBinder클래스의 객체를 사용*//*
+    @InitBinder("myPageInfoValidator")
+    //*유효성 검사를 위해 WebDataBinder클래스의 객체를 사용*//*
     public void custValid(WebDataBinder binder){
-        *//*객체를 통해 새로운 Validator인 CustValidator를 등록*//*
+        //*객체를 통해 새로운 Validator인 CustValidator를 등록*//*
         binder.setValidator(new MyPageInfoValidator());
-    }*/
+    }
 
-    /*@PostMapping("/info")
-    public String modify(@Valid CustDto custDto, BindingResult result, HttpServletRequest request, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_phn, String sms_agr, String email_agr) {
+    @PostMapping("/info")
+    public String modify(@Validated @ModelAttribute("myPageInfoValidator") CustDto custDto, BindingResult result, HttpServletRequest request, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_phn, String sms_agr, String email_agr) {
         System.out.println("자스를 통과한 에러가 있나요?! = " + result);
         if(result.hasErrors()){
             return "myPageInfo";
@@ -104,36 +104,14 @@ public class MyPageController {
         System.out.println(custDto.toStringV1());
 
         return "redirect:/mypage/list";
-    }*/
-
-    @PostMapping("/info")
-    public String modify(CustDto custDto, HttpServletRequest request, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_phn, String sms_agr, String email_agr) {
-        HttpSession session = request.getSession();
-        int c_id = (int) session.getAttribute("c_id");
-
-        custDto.setC_id(c_id);
-        custDto.setC_zip(c_zip);
-        custDto.setC_road_a(c_road_a);
-        custDto.setC_jibun_a(c_jibun_a);
-        custDto.setC_det_a(c_det_a);
-        custDto.setC_phn(c_phn);
-        custDto.setSms_agr(sms_agr);
-        custDto.setEmail_agr(email_agr);
-
-        custDao.updateAll(custDto);
-
-        System.out.println(custDto.toStringV1());
-
-        return "redirect:/mypage/list";
     }
-
 
     @GetMapping("/pwdEdit")
         public String pwdEdit() {
         return "pwdEdit";
     }
 
-    @InitBinder
+    @InitBinder("PwdChangeValidator")
     /*유효성 검사를 위해 WebDataBinder클래스의 객체를 사용*/
     public void pwdValid(WebDataBinder binder){
         /*객체를 통해 새로운 Validator인 CustValidator를 등록*/
@@ -141,7 +119,7 @@ public class MyPageController {
     }
 
     @PostMapping("/pwdEdit")
-    public String pwdModify(@Valid CustDto custDto, BindingResult result, HttpServletRequest request, String c_pwd, String curPwd, RedirectAttributes msg){
+    public String pwdModify(@Validated @ModelAttribute("PwdChangeValidator") CustDto custDto, BindingResult result, HttpServletRequest request, String c_pwd, String curPwd, RedirectAttributes msg){
         System.out.println("자스를 통과한 에러가 있나요?! = " + result);
         if(result.hasErrors()){
             return "pwdEdit";

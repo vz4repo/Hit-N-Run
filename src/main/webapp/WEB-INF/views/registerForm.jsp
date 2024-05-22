@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%--<%@ page session="false" %>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -149,6 +149,29 @@
             margin-bottom: 5px;
         }
 
+        #sms_agr, #smsLabel{
+            display: inline;
+        }
+
+        #email_agr, #emailLabel{
+            display: inline;
+        }
+
+        #touBox, #touLabel{
+            display: inline;
+        }
+
+        #piiBox, #piiLabel{
+            display: inline;
+        }
+
+        #smsLabel, #emailLabel, #touLabel, #piiLabel{
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+
+
     </style>
 
 </head>
@@ -160,8 +183,7 @@
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
-<%--            <input id="verify" type="button" onclick="verifyEmail()" value="인증번호 받기" readonly><br>--%>
-            <input id="verify" type="button" value="인증번호 받기" readonly><br>
+            <input id="verify" type="button" value="인증번호 받기" disabled><br>
             <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com">
             <p id="mail-check-warn"></p>
             <label>인증번호</label>
@@ -186,14 +208,20 @@
             <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
             <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
             <label>생년월일</label>
-            <input type="date" id="birth" name="c_birth" disabled><br><br>
-            <input type="checkbox" id="touBox" name="touBox" value="Y" disabled>
-            <p id="touModal" onclick="openModal()">[필수] 이용약관</p>
-            <br>
-            <input type="checkbox" id="piiBox" name="piiBox" value="Y" disabled>
-            <p id="piiModal" onclick="openModal2()">[필수] 개인정보 수집 및 이용</p><br>
-            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y" disabled> <a>[선택] 쇼핑정보 SMS 수신</a><br>
-            <input type="checkbox" id="email_agr" name="email_agr" value="Y" disabled> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
+            <input type="date" id="birth" name="c_birth" min="1950-01-01" max="2023-12-31" disabled><br><br>
+
+            <input type="checkbox" id="touBox" onclick="openModal()" name="touBox" value="Y" disabled>
+            <label for="touBox" id="touLabel">[필수] 이용약관</label><br>
+
+            <input type="checkbox" id="piiBox" onclick="openModal2()" name="piiBox" value="Y" disabled>
+            <label for="piiBox" id="piiLabel">[필수] 개인정보 및 이용</label><br>
+
+            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y" disabled>
+            <label for="sms_agr" id="smsLabel">[선택] 쇼핑정보 SMS 수신</label><br>
+
+            <input type="checkbox" id="email_agr" name="email_agr" value="Y" disabled>
+            <label for="email_agr" id="emailLabel">[선택] 쇼핑정보 이메일 수신</label><br><br><br>
+
             <button id="rBtn" disabled>가입하기</button>
             <button type="button" onclick="window.history.back()">나가기</button><br><br>
         </div>
@@ -459,12 +487,12 @@
             success: function (emailGood) {
                 console.log("요청성공", emailGood);
                 if (emailGood == "ok") {
-                    console.log("적합한 이메일 양식입니다.");
+                    // console.log("적합한 이메일 양식입니다.");
                     checkResult.style.color = "green";
-                    checkResult.innerHTML = "적합한 이메일 양식입니다.";
+                    checkResult.innerHTML = "인증번호를 받기를 진행해주세요.";
                     verifyButton.prop('disabled', false); // 버튼 활성화
                 } else {
-                    console.log("이미 사용중인 이메일");
+                    // console.log("이미 사용중인 이메일");
                     checkResult.style.color = "red";
                     checkResult.innerHTML = "이미 사용중인 이메일입니다.";
                     verifyButton.prop('disabled', true); // 버튼 비활성화
@@ -477,7 +505,6 @@
     }
 
     function verifyEmail() {
-
         document.getElementById('c_email2').disabled = false;
         document.getElementById('c_pwd').disabled = false;
         document.getElementById('c_pwd2').disabled = false;
@@ -496,6 +523,7 @@
         document.getElementById('email_agr').disabled = false;
         document.getElementById('rBtn').disabled = false;
     }
+
 
     $('#verify').click(function() {
         const $this = $(this); // 클릭된 버튼을 jQuery 객체로 저장
@@ -522,7 +550,6 @@
         });
     });
 
-
     function verifyNumber() {
         const inputCode = $('#c_email2').val();
         const $resultMsg = $('#mail-check-warn');
@@ -541,6 +568,8 @@
             return false;
         }
     }
+
+
 
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
@@ -751,57 +780,100 @@
     }
 
 
-    function touCheck(frm) {
-        var tou = frm.querySelector('input[name="touBox"]').checked;
-        if (tou) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function piiCheck(frm) {
-        var pii = frm.querySelector('input[name="piiBox"]').checked;
-        if (pii) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // function touCheck(frm) {
+    //     var tou = frm.querySelector('input[name="touBox"]').checked;
+    //     if (tou) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    //
+    // function piiCheck(frm) {
+    //     var pii = frm.querySelector('input[name="piiBox"]').checked;
+    //     if (pii) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     var modalSeen = false;
     var modalSeen2 = false;
 
 
+    // function enableTouBox() {
+    //     var touBox = document.getElementById("touBox");
+    //     touBox.disabled = false;
+    // }
+    //
+    // function openModal() {
+    //     var modal = document.getElementById("myModal");
+    //     var touBox = document.getElementById('touBox');
+    //     modal.style.display = "block";
+    //     document.body.style.overflow = "hidden";
+    //     modalSeen = true; // 모달을 본 것으로 표시
+    //     enableTouBox(); // touBox 활성화
+    //     touBox.checked = true;
+    // }
+
     function enableTouBox() {
         var touBox = document.getElementById("touBox");
         touBox.disabled = false;
-    }
-
-    function enablePiiBox() {
-        var piiBox = document.getElementById("piiBox");
-        piiBox.disabled = false;
+        // 체크박스를 체크하고 다시 체크되지 않도록 합니다.
+        touBox.checked = true;
+        // 체크박스의 onchange 이벤트에 함수를 연결하여 체크박스가 변경되지 않도록 합니다.
+        touBox.onchange = function() {
+            // 체크박스가 항상 체크된 상태로 유지됩니다.
+            touBox.checked = true;
+        };
     }
 
     function openModal() {
         var modal = document.getElementById("myModal");
-        var touBox = document.getElementById('touBox');
+        // var touBox = document.getElementById('touBox');
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
         modalSeen = true; // 모달을 본 것으로 표시
         enableTouBox(); // touBox 활성화
-        touBox.checked = true;
+    }
+
+    // function enablePiiBox() {
+    //     var piiBox = document.getElementById("piiBox");
+    //     piiBox.disabled = false;
+    // }
+    //
+    // function openModal2(){
+    //     var modal = document.getElementById("myModal2");
+    //     var piiBox = document.getElementById('piiBox');
+    //     modal.style.display = "block";
+    //     document.body.style.overflow = "hidden";
+    //     modalSeen2 = true;
+    //     enablePiiBox();
+    //     piiBox.checked = true;
+    // }
+
+    function enablePiiBox() {
+        var piiBox = document.getElementById("piiBox");
+        piiBox.disabled = false;
+        // 체크박스를 체크하고 다시 체크되지 않도록 합니다.
+        piiBox.checked = true;
+        // 체크박스의 onchange 이벤트에 함수를 연결하여 체크박스가 변경되지 않도록 합니다.
+        piiBox.onchange = function() {
+            // 체크박스가 항상 체크된 상태로 유지됩니다.
+            piiBox.checked = true;
+        };
     }
 
     function openModal2(){
         var modal = document.getElementById("myModal2");
-        var piiBox = document.getElementById('piiBox');
+        // var touBox = document.getElementById('touBox');
         modal.style.display = "block";
         document.body.style.overflow = "hidden";
-        modalSeen2 = true;
-        enablePiiBox();
-        piiBox.checked = true;
+        modalSeen2 = true; // 모달을 본 것으로 표시
+        enablePiiBox(); // touBox 활성화
     }
+
 
     function closeModal() {
         var modal = document.getElementById("myModal");
@@ -840,7 +912,7 @@
             if (!modalSeen) {
                 alert("이용약관을 먼저 확인해주세요.");
                 /*체크박스 다시 체크 해제*/
-                this.checked = false;
+                this.checked = true;
             }
         });
     });
