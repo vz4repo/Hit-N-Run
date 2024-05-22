@@ -579,12 +579,23 @@
             }
         });
 
-        /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 무게(wgh)에 입력된 값이 숫자인지 1이상의 정수인지 확인한다. */
         $('#wgh').on('blur', function () {
             let weightInput = $(this).val();
             if (isNaN(weightInput) || weightInput.trim() === '') {
                 alert("무게는 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            weightInput = parseFloat(weightInput);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(weightInput);
+
+            /*무게가 1보다 작거나 실수면 경고창이 뜬다.*/
+            if (weightInput < 1 || weightInput !== integerInput) {
+                alert("무게는 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
             }
         });
     });
