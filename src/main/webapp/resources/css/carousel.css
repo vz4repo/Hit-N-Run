@@ -1,3 +1,53 @@
+main {
+    overflow: hidden;
+}
+
+/*광고 배너 캐러셀 css*/
+
+.c-item {
+    height: 480px;
+}
+
+.c-img {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+#advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn-primary {
+    color: #7ac400;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #7ac400;
+    padding: 12px 28px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+}
+
+#advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:hover, #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:focus {
+    color: #fff;
+    background: #7ac400;
+    box-shadow: none;
+}
+
+.advertiseComment {
+    color: #ffd400;
+}
+
+.advertiseCommentLeft {
+    text-align: left;
+    left: 10px;
+}
+
+.advertiseCommentRight {
+    text-align: right;
+    right: 10px;
+}
+
+/*제품 캐러셀 css*/
 li {
     list-style: none;
 }
