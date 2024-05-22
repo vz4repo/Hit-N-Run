@@ -71,7 +71,7 @@
                                     <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
                                     <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
                                     <button class="quantity_btn minus_btn"><i class="fas fa-caret-left"></i></button>
-                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" /> <%--readonly 주기--%>
+                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" readonly/> <%--readonly 주기--%>
                                     <button class="quantity_btn plus_btn"><i class="fas fa-caret-right"></i></button>
                                     <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
                                 </form>
