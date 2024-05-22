@@ -1,25 +1,15 @@
-body{
-    height: 80vh;
-    margin-top: 10%;
-}
 
-a {
-    text-decoration: none;
-    color: black;
-}
-
-ul {
-    list-style: none;
-    display: flex;
-}
 
 .footer_wrapper {
-    min-height: 100%;
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 400;
+    font-style: normal;
     position: relative;
     white-space: nowrap;
 }
 
-footer {
+
+.footer_wrapper > footer {
     width: 100%;
     bottom: 0;
     /*position: absolute;*/
@@ -35,6 +25,7 @@ hr {
 .top_footer,
 .main_footer {
     display: grid;
+    text-align: center;
 }
 
 .top_footer {
@@ -75,23 +66,24 @@ hr {
 }
 
 .main_footer {
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(4, 24%);
 }
 
-.footer {
+.cart_footer {
+    list-style: none;
     display: flex;
     flex-direction: column;
     margin: 40px;
 }
 
-.footer > h4 {
+.cart_footer > h4 {
     font-size: 17px;
     font-weight: 900;
     color: #404040;
     margin-bottom: 10px;
 }
 
-.footer li {
+.cart_footer li {
     font-size: 12px;
     margin-top: 10px;
     color: #a6a6a6;
