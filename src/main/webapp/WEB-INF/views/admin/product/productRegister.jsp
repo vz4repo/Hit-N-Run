@@ -466,13 +466,13 @@
                     <tr>
                         <th>최소 주문 수량</th>
                         <td>
-                            <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" required>개 이상
+                            <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" required maxlength="4">개 이상
                         </td>
                     </tr>
                     <tr>
                         <th>최대 주문 수량</th>
                         <td>
-                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
+                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999" maxlength="4">개 이하
                         </td>
                     </tr>
                     <tr>

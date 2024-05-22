@@ -207,7 +207,7 @@
                     <th style="width:200px;">
                         <label for="origin">제조국</label></th>
                     <td>
-                        <input type="text" name="origin" maxlength="10" class="originCnt" required>
+                        <input type="text" name="origin" maxlength="10" class="originCnt" >
                         <span id="originCnt">[0 / 10]</span>
                     </td>
                 </tr>
@@ -218,7 +218,7 @@
                     <th style="width:200px;">
                         <label for="manufacturer">제조사</label></th>
                     <td>
-                        <input type="text" name="mfr" maxlength="10" class="mfrCnt" required>
+                        <input type="text" name="mfr" maxlength="10" class="mfrCnt" >
                         <span id="mfrCnt">[0 / 10]</span>
                     </td>
                 </tr>
