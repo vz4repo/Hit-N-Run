@@ -16,7 +16,6 @@ main {
 
 #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn-primary {
     color: #fff;
-    /*width: fit-content;*/
     font-size: 1vw;
     text-transform: uppercase;
     font-weight: bold;
@@ -68,8 +67,8 @@ main {
     top: 40%;
     padding: 0;
     height: max-content;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
 }
 
 .carousel-caption h1 {
