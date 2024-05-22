@@ -16,7 +16,8 @@ main {
 
 #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn-primary {
     color: #fff;
-    font-size: 11px;
+    /*width: fit-content;*/
+    font-size: 1vw;
     text-transform: uppercase;
     font-weight: bold;
     background: none;
@@ -36,6 +37,7 @@ main {
 .advertiseComment {
     color: #ffd400;
     margin: 0;
+    font-size: 2vw;
 }
 
 .advertiseCommentLeft h1, .advertiseCommentRight h1 {
@@ -54,7 +56,7 @@ main {
 
 .carousel-item {
     position: relative;
-    /*display: flex;*/
+    height: fit-content;
 }
 
 .carousel-item .carousel-caption a {
@@ -63,8 +65,19 @@ main {
 
 .carousel-caption {
     position: absolute;
-    top:45%;
+    top: 40%;
     padding: 0;
+    height: max-content;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.carousel-caption h1 {
+    font-size: 4vw;
+}
+
+.carousel-caption a {
+    font-size: 2vw;
 }
 
 /*제품 캐러셀 css*/
@@ -141,7 +154,7 @@ h2 {
     background: none;
     border: 1px solid #073713;
     padding: 6px 14px;
-    margin-top: 5px;
+    margin-top: 15px;
     line-height: 16px;
     border-radius: 20px;
 }

@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
     <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
@@ -58,16 +59,16 @@
             <div class="carousel-item active c-item">
                 <img src="/img/advertisement/adimg1.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 1">
                 <div class="carousel-caption advertiseCommentLeft">
-                    <p class="fs-3 text-uppercase advertiseComment">최상급 글러브</p>
+                    <p class="text-uppercase advertiseComment">최상급 글러브</p>
                     <h1 class="display-1 fw-bolder text-capitalize">타티스 주니어 글러브 구매하기</h1>
-                    <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                    <a href="/cart/list" class="btn btn-primary cartBtn">Add to Cart</a>
                 </div>
             </div>
             <div class="carousel-item c-item">
                 <img src="/img/advertisement/adimg2.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
                 <div class="carousel-caption top-1 advertiseCommentLeft">
                     <p class="fs-3 text-uppercase advertiseComment">CLOUT AI BATS</p>
-                    <p class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</p>
+                    <h1 class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -75,7 +76,7 @@
                 <img src="/img/advertisement/adimg3.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 3">
                 <div class="carousel-caption top-1 advertiseCommentRight">
                     <p class="fs-3 text-uppercase advertiseComment">Be Iconic</p>
-                    <p class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</p>
+                    <h1 class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>

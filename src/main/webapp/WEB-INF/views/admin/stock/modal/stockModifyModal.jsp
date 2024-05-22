@@ -189,7 +189,7 @@
                     }
                 },
                 error: function (request, status, error) {
-                    alert("error");
+                    alert("올바른 값을 입력 해주세요.");
                     console.log("code: " + request.status)
                     console.log("message: " + request.responseText)
                     console.log("error: " + error);
