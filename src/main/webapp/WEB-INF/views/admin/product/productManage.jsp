@@ -1,30 +1,36 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        <%@include file="/resources/css/adminMenu.css"%>
+        <%@include file="/resources/css/adminMenu.css" %>
+        <%@include file="/resources/css/adminDefaultTable.css" %>
         <%@include file="/resources/css/searchConditionForm.css"%>
-        table, tr, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
 
-        th {
+        .productList-container tbody td:nth-of-type(1),
+        .productList-container tbody td:nth-of-type(2),
+        .productList-container tbody td:nth-of-type(5),
+        .productList-container tbody td:nth-of-type(6),
+        .productList-container tbody td:nth-of-type(7),
+        .productList-container tbody td:nth-of-type(8),
+        .productList-container tbody td:nth-of-type(9),
+        .productList-container tbody td:nth-of-type(10),
+        .productList-container tbody td:nth-of-type(11),
+        .productList-container tbody td:nth-of-type(12){
             text-align: center;
         }
-
-        table {
-            width: 100%;
-            text-align: left;
-        }
-
         strong {
             font-weight: bold;
             color: #1b64da;
+        }
+
+        .sendBtnSmall:hover {
+            background: #0b7dda;
         }
     </style>
     <title>제품 관리 페이지</title>
@@ -36,24 +42,31 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="../adminMenu.jsp" flush="false" />
-<div class="main">
-    <h1>제품 정보 일괄 변경</h1>
-
+<jsp:include page="../adminMenu.jsp" flush="false"/>
+<div id="main">
+    <div class="w3-dark-grey header-container">
+        <div class="w3-dark-grey header-button">
+            <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
+        </div>
+        <div id="headline" class="header-title">제품 정보 일괄 변경</div>
+    </div>
     <jsp:include page="../searchConditionForm.jsp" flush="false" />
 
-    <h1>제품 목록</h1>
+    <div class="w3-container productList-container">
+    <%--<h1 style="text-align: center">제품 목록</h1>--%>
         <table>
+            <thead>
             <tr>
                 <td colspan="12">[총 <strong>${productCount}</strong>개]</td>
             </tr>
             <tr>
                 <td colspan="12">
-                    <select id="productNumber" name="productNumber">
+                    <select class="search-option" id="productNumber" name="productNumber">
                         <option value="selectedProduct">선택한 제품의</option>
                         <option value="allProduct">검색 결과 전체 제품의</option>
                     </select>
-                    <select id="changeContent" name="changeContent">
+                    <select class="search-option" id="changeContent" name="changeContent">
                         <option value="option">- 구분 -</option>
                         <option value="exposureSetting">표시 설정</option>
                         <option value="basicInformation">기본 정보</option>
@@ -61,7 +74,7 @@
                         <option value="imageRegistration">이미지 등록</option>
                     </select>
                     을
-                    <button type="button" onclick="openPopup()">일괄 변경</button>
+                    <button type="button" class="sendBtnSmall" onclick="openPopup()">일괄 변경</button>
                 </td>
             </tr>
             <tr>
@@ -78,6 +91,8 @@
                 <th class="pd_stat_hist_cd">제품 상태 이력</th>
                 <th class="frst_reg_dt">제품 최초 등록일</th>
             </tr>
+            </thead>
+            <tbody>
             <c:forEach var="productDto" items="${productList}">
                 <tr>
                     <td><input type="checkbox" name="selectedProduct"></td>
@@ -91,11 +106,13 @@
                     <td class="qlt_cd">${productDto.qlt_cd}</td>
                     <td class="pd_is_show">${productDto.pd_is_show}</td>
                     <td class="pd_stat_hist_cd">${productDto.pd_stat_hist_cd}</td>
-                    <td class="frst_reg_dt">${productDto.frst_reg_dt}</td>
+                    <td class="frst_reg_dt"><fmt:formatDate value="${productDto.frst_reg_dt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
         <input type="hidden" id="popupInput" name="popupInput">
+    </div>
     <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
     <script>
         function openPopup() {

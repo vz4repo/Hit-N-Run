@@ -19,8 +19,7 @@ public class CustDto {
     private String c_road_a;
     private String c_jibun_a;
     private String c_det_a;
-//    private String c_ext_a;
-    private String c_dlv_adr;
+    private int c_adr_list_id;
     private String sms_agr;
     private String email_agr;
     private String reg_dt;
@@ -86,8 +85,7 @@ public class CustDto {
                 ", c_road_a='" + c_road_a + '\'' +
                 ", c_jibun_a='" + c_jibun_a + '\'' +
                 ", c_det_a='" + c_det_a + '\'' +
-//                ", c_ext_a='" + c_ext_a + '\'' +
-                ", c_dlv_adr='" + c_dlv_adr + '\'' +
+                ", c_adr_list_id='" + c_adr_list_id + '\'' +
                 ", sms_agr='" + sms_agr + '\'' +
                 ", email_agr='" + email_agr + '\'' +
                 ", reg_dt=" + reg_dt +
@@ -225,20 +223,12 @@ public class CustDto {
         this.c_det_a = c_det_a;
     }
 
-//    public String getC_ext_a() {
-//        return c_ext_a;
-//    }
-//
-//    public void setC_ext_a(String c_ext_a) {
-//        this.c_ext_a = c_ext_a;
-//    }
-
-    public String getC_dlv_adr() {
-        return c_dlv_adr;
+    public int getC_adr_list_id() {
+        return c_adr_list_id;
     }
 
-    public void setC_dlv_adr(String c_dlv_adr) {
-        this.c_dlv_adr = c_dlv_adr;
+    public void setC_adr_list_id(int c_adr_list_id) {
+        this.c_adr_list_id = c_adr_list_id;
     }
 
     public String getSms_agr() {

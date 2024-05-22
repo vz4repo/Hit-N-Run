@@ -5,12 +5,44 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        <%@include file="/resources/css/adminMenu.css"%>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
+        <%@include file="/resources/css/adminMenu.css" %>
+        <%@include file="/resources/css/adminDefaultTable.css" %>
+        .productManageSalesInformation-container {
+            width: 100%;
+            margin: 20px 0px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .productManageSalesInformation-container td {
             text-align: left;
+            padding-left: 20px;
+        }
+
+        .productManageSalesInformation-container input[type="text"],
+        .productManageSalesInformation-container input[type="date"] {
+            color: gray;
+            background-color: white;
+            border: 1px solid #ccc;
+            height: 100%;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        #min_od_qty, #max_od_qty{
+            width: 80px;
+        }
+
+        .productManageSalesInformation-container input[type="date"] {
+            width: 100px;
+            text-align: center;
+        }
+
+        .productManageSalesInformation-container input[type="text"]::placeholder {
+            color: gray;
         }
 
         strong {
@@ -22,6 +54,38 @@
             width: 100%;
             height: 200px;
         }
+
+
+        .buttons {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .registerBtn, .cancelBtn {
+            padding: 10px;
+            font-size: 13px;
+            border-radius: 4px;
+            border: 1px solid #000000;
+            cursor: pointer;
+        }
+        .registerBtn {
+            color: white;
+            background-color: #585858;
+        }
+
+        .cancelBtn {
+            color: #000000;
+            background-color: white;
+        }
+
+        .cancelBtn:hover {
+            background: #0b7dda;
+            color: white;
+        }
+
+        .registerBtn:hover {
+            background: #0b7dda;
+        }
     </style>
     <title>SalesInformation</title>
     <% String msg = (String) request.getAttribute("msg"); %>
@@ -32,42 +96,71 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="../../adminMenu.jsp" flush="false" />
-<div class="main">
-    <h1>판매 정보 일괄변경</h1>
+<jsp:include page="../../adminMenu.jsp" flush="false"/>
+<div id="main">
+    <div class="w3-dark-grey header-container">
+        <div class="w3-dark-grey header-button">
+            <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
+        </div>
+        <div id="headline" class="header-title">판매 정보 일괄변경</div>
+    </div>
+
+    <div class="w3-container productManageSalesInformation-container">
+
     <form id="registerForm" action="<c:url value='/admin/product/manage'/>" method="post">
         <div class="product_content">
-            <table style="width:100%">
+            <table>
                 <tr>
-                    <th colspan="2">
+                    <td colspan="3">
                         총 <strong>${selectedProductCount}</strong>개 제품의 판매 정보를 일괄 변경합니다.
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="2">
+                    <td colspan="3">
                         <input type="checkbox" id="selectAll"><label for="selectAll">전체 선택</label>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="minOrderQuantity" value="min_od_qty"><label for="minOrderQuantity">최소 주문 수량</label></th>
+                    <th style="width:50px;">
+                        <input type="checkbox" name="selectedContent" id="minOrderQuantity" value="min_od_qty">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="minOrderQuantity">최소 주문 수량</label>
+                    </th>
                     <td>
                         <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" >개 이상
                     </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="maxOrderQuantity" value="max_od_qty"><label for="maxOrderQuantity">최대 주문 수량</label></th>
+                    <th style="width: 50px;">
+                        <input type="checkbox" name="selectedContent" id="maxOrderQuantity" value="max_od_qty">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="maxOrderQuantity">최대 주문 수량</label>
+                    </th>
                     <td>
                         <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
                     </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="salesStartDate" value="sls_strt_dt"><label for="salesStartDate">판매 예정일</label></th>
+                    <th style="width: 50px;">
+                        <input type="checkbox" name="selectedContent" id="salesStartDate" value="sls_strt_dt">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="salesStartDate">판매 예정일</label>
+                    </th>
                     <td>
                         <input type='date' id="sls_strt_dt" name='sls_strt_dt' />
                     </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="productManufactureDate" value="pd_mnf_date"><label for="productManufactureDate">제품 제조년월</label></th>
+                    <th style="width: 50px;">
+                        <input type="checkbox" name="selectedContent" id="productManufactureDate" value="pd_mnf_date">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="productManufactureDate">제품 제조년월</label>
+                    </th>
                     <td>
                         <input type='date' id="pd_mnf_date" name='pd_mnf_date' />
                     </td>
@@ -81,6 +174,7 @@
             <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
         </div>
     </form>
+    </div>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
