@@ -8,11 +8,11 @@
     <title>테스트 페이지</title>
 </head>
 <body>
-<jsp:include page="header.jsp"/>
+<%--<jsp:include page="header.jsp"/>--%>
 <p>제품 테스트페이지입니다.</p>
-<p>바로구매와 찜하기는 3차 개발예정입니다.</p>
-<%--<p>${stkOptInfo.pd_id}</p>--%>
-<%--<p>${stkOptInfo.pd_clsf_cd}</p>--%>
-<jsp:include page="footer.jsp"/>
+<%--<p>바로구매와 찜하기는 3차 개발예정입니다.</p>--%>
+<p>${stkOptInfo.pd_id}</p>
+<p>${stkOptInfo.pd_clsf_cd}</p>
+<%--<jsp:include page="footer.jsp"/>--%>
 </body>
 </html>
