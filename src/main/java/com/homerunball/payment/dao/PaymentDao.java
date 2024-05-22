@@ -8,9 +8,6 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 
-/**================================
- *
- */
 @Repository
 public interface PaymentDao {
     /* 인증 성공 후, Response Body 정보 저장 */
