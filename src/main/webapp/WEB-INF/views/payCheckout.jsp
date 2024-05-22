@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
 
+<div class="title__pay">결제정보</div>
+  <div class="wrapper__parent">
 
-  <div>
     <%-- 테스트값 입력 영역(dev) --%>
     <div class="wrapper">
+
       <div class="box_section">
-        <div style="display:flex ;justify-content: space-between">
+
+        <div class="pay_col">
           <div class="test">
-            <label for="testAmount">금액
+            <label for="testAmount">금&nbsp;&nbsp;&nbsp;액
               <input id="testAmount" class="test" type="text" name="testAmount" value="" placeholder="테스트 금액">
             </label>
           </div>
           <div class="test">
-            <label for="testCoupon">쿠폰
+            <label for="testCoupon">쿠&nbsp;&nbsp;&nbsp;폰
               <input id="testCoupon" class="test" type="text" name="testCoupon" value="" placeholder="테스트 쿠폰">
             </label>
           </div>
@@ -23,7 +26,7 @@
             </label>
           </div>
         </div>
-        <div style="display: flex; justify-content: space-between">
+        <div class="pay_col">
           <div class="test">
             <label for="customerEmail">이메일
               <input id="customerEmail" class="test" type="text" name="customerEmail" value="" placeholder="테스트 이메일">
@@ -44,7 +47,7 @@
     </div>
     <!-- 주문서 영역 -->
     <div class="wrapper">
-      <div class="box_section" style="padding: 40px 30px 50px 30px; margin-top: 30px; margin-bottom: 50px">
+      <div class="box_section" style="padding: 40px 30px 50px 30px; margin-top: 30px;">
         <!-- 결제 UI -->
         <div id="payment-method"></div>
         <!-- 이용약관 UI -->

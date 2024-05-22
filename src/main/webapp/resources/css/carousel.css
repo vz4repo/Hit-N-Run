@@ -15,12 +15,13 @@ main {
 }
 
 #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn-primary {
-    color: #7ac400;
-    font-size: 11px;
+    color: #fff;
+    /*width: fit-content;*/
+    font-size: 1vw;
     text-transform: uppercase;
     font-weight: bold;
     background: none;
-    border: 1px solid #7ac400;
+    border: 1px solid #fff;
     padding: 12px 28px;
     margin-top: 5px;
     line-height: 16px;
@@ -28,14 +29,15 @@ main {
 }
 
 #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:hover, #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:focus {
-    color: #fff;
-    background: #7ac400;
+    color: #073713;
+    background: #fff;
     box-shadow: none;
 }
 
 .advertiseComment {
     color: #ffd400;
     margin: 0;
+    font-size: 2vw;
 }
 
 .advertiseCommentLeft h1, .advertiseCommentRight h1 {
@@ -54,7 +56,7 @@ main {
 
 .carousel-item {
     position: relative;
-    /*display: flex;*/
+    height: fit-content;
 }
 
 .carousel-item .carousel-caption a {
@@ -63,15 +65,20 @@ main {
 
 .carousel-caption {
     position: absolute;
-    top:45%;
+    top: 40%;
     padding: 0;
+    height: max-content;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
-/*
-.main-banner-carousel {
-    z-index: 9999;
+.carousel-caption h1 {
+    font-size: 4vw;
 }
-*/
+
+.carousel-caption a {
+    font-size: 2vw;
+}
 
 /*제품 캐러셀 css*/
 li {
@@ -114,7 +121,7 @@ h2 {
     border-radius: 6px;
     text-align: center;
     position: relative;
-    box-shadow: 2px 4px 6px #d7e9de;
+    box-shadow: 2px 4px 6px #073713;
     max-height: 322.57px;
 }
 .carousel .item .img-box {
@@ -140,20 +147,20 @@ h2 {
     margin-bottom: 5px;
 }
 .carousel .thumb-content .btn {
-    color: #7ac400;
+    color: #073713;
     font-size: 11px;
     text-transform: uppercase;
     font-weight: bold;
     background: none;
-    border: 1px solid #7ac400;
+    border: 1px solid #073713;
     padding: 6px 14px;
-    margin-top: 5px;
+    margin-top: 15px;
     line-height: 16px;
     border-radius: 20px;
 }
 .carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
     color: #fff;
-    background: #7ac400;
+    background: #073713;
     box-shadow: none;
 }
 .carousel .thumb-content .btn i {
@@ -164,13 +171,13 @@ h2 {
 .carousel .carousel-control {
     height: 44px;
     width: 40px;
-    background: #7ac400;
+    background: #073713;
     margin: auto 0;
     border-radius: 4px;
     opacity: 0.8;
 }
 .carousel .carousel-control:hover {
-    background: #78bf00;
+    background: #073713;
     opacity: 1;
 }
 .carousel .carousel-control i {
@@ -219,7 +226,7 @@ h2 {
     background: rgba(0, 0, 0, 0.2);
 }
 .carousel-indicators li.active {
-    background: rgba(0, 0, 0, 0.6);
+    background: #073713;
 }
 .carousel .wish-icon {
     position: absolute;

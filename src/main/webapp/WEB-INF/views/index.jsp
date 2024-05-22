@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
     <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
@@ -58,16 +59,16 @@
             <div class="carousel-item active c-item">
                 <img src="/img/advertisement/adimg1.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 1">
                 <div class="carousel-caption advertiseCommentLeft">
-                    <p class="fs-3 text-uppercase advertiseComment">최상급 글러브</p>
+                    <p class="text-uppercase advertiseComment">최상급 글러브</p>
                     <h1 class="display-1 fw-bolder text-capitalize">타티스 주니어 글러브 구매하기</h1>
-                    <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                    <a href="/cart/list" class="btn btn-primary cartBtn">Add to Cart</a>
                 </div>
             </div>
             <div class="carousel-item c-item">
                 <img src="/img/advertisement/adimg2.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
                 <div class="carousel-caption top-1 advertiseCommentLeft">
                     <p class="fs-3 text-uppercase advertiseComment">CLOUT AI BATS</p>
-                    <p class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</p>
+                    <h1 class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -75,7 +76,7 @@
                 <img src="/img/advertisement/adimg3.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 3">
                 <div class="carousel-caption top-1 advertiseCommentRight">
                     <p class="fs-3 text-uppercase advertiseComment">Be Iconic</p>
-                    <p class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</p>
+                    <h1 class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
@@ -94,79 +95,88 @@
         <div class="col-md-12">
             <h2><b>신제품</b></h2>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                    <c:set var="num"
-                           value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
-                    <c:forEach var="i" begin="0" end="${num-1}" step="1">
+            <%--만약 newProductNumber의 수가 0이라면 상품 준비중입니다라는 이미지를 보여준다.--%>
+            <c:choose>
+                <c:when test="${newProductNumber!=0}">
+                    <!-- Carousel indicators -->
+                    <ol class="carousel-indicators">
+                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
+                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
+                            <c:choose>
+                                <c:when test="${i == 0}">
+                                    <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </ol>
+
+                    <!-- Wrapper for carousel items -->
+                    <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                        <c:if test="${status.index % 4 == 0}">
                         <c:choose>
-                            <c:when test="${i == 0}">
-                                <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
+                        <c:when test="${status.index == 0}">
+                        <div class="item active">
                             </c:when>
                             <c:otherwise>
-                                <li data-target="#myCarousel" data-slide-to="${i}"></li>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-                    <c:forEach var="product" items="${newProductList}" varStatus="status">
-                    <c:if test="${status.index % 4 == 0}">
-                    <c:choose>
-                    <c:when test="${status.index == 0}">
-                    <div class="item active">
-                        </c:when>
-                        <c:otherwise>
-                        <div class="item">
-                            </c:otherwise>
-                            </c:choose>
-                            <div class="row">
-                                </c:if>
-                                <div class="col-sm-3">
-                                    <div class="thumb-wrapper" style="margin-bottom: 5px;">
-                                        <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                        <div class="img-box">
-                                            <a href="/product/detail?pd_id=${product.pd_id}">
-                                                <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
-                                                     onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
-                                            </a>
-                                        </div> <%--end of class img-box--%>
-                                        <div class="thumb-content">
-                                            <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
-                                            <div class="star-rating">
-                                                <ul class="list-inline">
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
-                                                    <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                            </div> <%--end of star-rating class--%>
-                                            <c:choose>
-                                                <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                    <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
-                                                        <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
-                                                </c:otherwise>
-                                            </c:choose>
-                                            <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
-                                        </div> <%--end of thumb-content class--%>
-                                    </div> <%--end of class thumb-wrapper--%>
-                                </div>
-                                <c:if test="${status.index % 4 == 3}">
-                            </div> <!-- row 닫기 -->
-                        </div> <!-- item 닫기 -->
-                        </c:if>
-                        </c:forEach>
-                        <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
-                        <c:if test="${newProductNumber % 4 != 0}">
-                    </div> <!-- row 닫기 -->
-                </div> <!-- item 닫기 -->
-                </c:if>
-            </div>
+                            <div class="item">
+                                </c:otherwise>
+                                </c:choose>
+                                <div class="row">
+                                    </c:if>
+                                    <div class="col-sm-3">
+                                        <div class="thumb-wrapper" style="margin-bottom: 5px;">
+                                            <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                            <div class="img-box">
+                                                <a href="/product/detail?pd_id=${product.pd_id}">
+                                                    <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                         onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
+                                                </a>
+                                            </div> <%--end of class img-box--%>
+                                            <div class="thumb-content">
+                                                <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                                <div class="star-rating">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
+                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div> <%--end of star-rating class--%>
+                                                <c:choose>
+                                                    <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                                        <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                            <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                                            </div> <%--end of thumb-content class--%>
+                                        </div> <%--end of class thumb-wrapper--%>
+                                    </div>
+                                    <c:if test="${status.index % 4 == 3}">
+                                </div> <!-- row 닫기 -->
+                            </div> <!-- item 닫기 -->
+                            </c:if>
+                            </c:forEach>
+                            <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
+                            <c:if test="${newProductNumber % 4 != 0}">
+                        </div> <!-- end of item -->
+                    </div> <!-- end of carousel-inner -->
+                    </c:if>
+                </div>
+                </c:when>
+<%--                <c:otherwise>--%>
+
+<%--                </c:otherwise>--%>
+            </c:choose> <%--end of c:choose--%>
+
             <!-- Carousel controls -->
             <a class="carousel-control left" href="#myCarousel" data-slide="prev">
                 <i class="fa fa-angle-left"></i>
