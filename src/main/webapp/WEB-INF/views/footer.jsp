@@ -19,13 +19,13 @@
         </div>
         <hr/>
         <div class="main_footer">
-            <ul class="info footer">
+            <ul class="info cart_footer">
                 <h4>INFO</h4>
                 <li>이용약관</li>
                 <li>개인정보처리방침</li>
                 <li>사업자정보확인</li>
             </ul>
-            <ul class="board footer">
+            <ul class="board cart_footer">
                 <h4>게시판</h4>
                 <li>공지사항</li>
                 <li>상품문의</li>
@@ -34,13 +34,13 @@
                 <li>상품후기</li>
                 <li>미확인입금자명단</li>
             </ul>
-            <ul class="account footer">
+            <ul class="account cart_footer">
                 <h4>계좌정보</h4>
                 <li>신한 110-555-5455554 </li>
                 <li>하나 120-795-876542</li>
                 <li>예금주: (주)HomeRun</li>
             </ul>
-            <ul class="company_info footer">
+            <ul class="company_info cart_footer">
                 <h4>ABOUT COMPANY</h4>
                 <li>(주)HomeRun</li>
                 <li>전화 1544-1544 | 팩스 02-1544-1544</li>
