@@ -197,89 +197,23 @@
             <a href="#"> > 주문완료</a>
         </div>
     </div>
+    <%-- 김수연 시작 --%>
+    <%-- 배송지 정보 section --%>
     <section id="dlv-container">
-        <!-- 배송 정보 헤더 -->
         <div class="dlv-header">배송 정보</div>
-        <%-- TODO: display:block 강제 적용 중. 수정 필요--%>
+        <%-- 기본/선택 배송지 내용 출력 --%>
         <div class="dlv-header-content">
-            <ul style="display: block">
-                <!-- 선택된 배송지 / 대표배송지  -->
-                <!-- 배송지 변경 버튼 -->
-                <%-- 배송지 내용 출력 --%>
-                <li>
-                    <span class="label">배송지</span>
-                    <div class="dlv-content">
-                        ${defaultDto.adr_name}
-                        <%--<button class="btn-change-address">배송지 변경</button>--%>
-                    </div>
-                </li>
-                <!-- 이름/연락처 정보 -->
-                <li>
-                    <span class="label">이름/연락처</span>
-                    <div class="dlv-content">
-                        <ul>
-                            <!-- 이름 -->
-                            <li>${defaultDto.rcver}</li>
-                            <!-- 전화번호 -->
-                            <li>${defaultDto.rcver_phn}</li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- 주소 정보 -->
-                <li>
-                    <span class="label">주소</span>
-                    <div class="dlv-content">
-                        <ul>
-                            <!-- 우편번호 -->
-                            <li>
-                                ${defaultDto.rcver_zip}
-                            </li>
-                            <!-- 주소 -->
-                            <li>
-                                ${defaultDto.rcver_adr}
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- 배송 요청사항 선택 -->
-                <li>
-                    <span class="label">배송 요청사항</span>
-                    <div class="dlv-content">
-                        <!-- 배송 요청사항 드롭다운 -->
-                        <select class="select-request" name="delivery_request" id="delivery_request"
-                                onchange="showEtc(this.value);">
-                            <option value="" selected="selected">
-                                배송 시 요청사항을 선택해주세요
-                            </option>
-                            <option value="부재 시 경비실에 맡겨주세요">
-                                부재 시 경비실에 맡겨주세요
-                            </option>
-                            <option value="부재 시 택배함에 넣어주세요">
-                                부재 시 택배함에 넣어주세요
-                            </option>
-                            <option value="부재 시 집 앞에 놔주세요">
-                                부재 시 집 앞에 놔주세요
-                            </option>
-                            <option value="배송 전 연락 바랍니다">
-                                배송 전 연락 바랍니다
-                            </option>
-                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">
-                                파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.
-                            </option>
-                            <option value="etc">직접 입력</option>
-                        </select>
-                    </div>
-                </li>
-            </ul>
+            <%-- TODO : 기본배송지 --%>
         </div>
+        <!-- 배송지 변경 버튼 -->
         <button class="btn-change-address">배송지 변경</button>
     </section>
 
-    <!-- DLV List Modal -->
+    <!-- 배송지 목록 Modal -->
     <div id="addressModal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
-            <h2>배송지 변경</h2>
+            <h1>배송지 변경</h1>
             <div class="dlv-modal-container">
                 <%-- ajax를 통해서 내용이 채워지는 부분 --%>
             </div>
@@ -367,11 +301,12 @@
         </form>
     </div>
 </section>
+<%-- 결제 위젯 호출 --%>
 <section class="order__payment">
     <%@include file="payCheckout.jsp" %>
 </section>
+<%-- footer --%>
 <%@include file="footer.jsp" %>
-0
 <script>
   $(document).ready(function () {
     $('.priceFormat').each(function () {
@@ -393,7 +328,7 @@
       const price = row.cells[5].innerText;
       totalSum += parseInt(price.replace(/[^\d]/g, ''));
     });
-    <%--/*총합을 나타낼 위치*/--%>
+    /*총합을 나타낼 위치*/
     document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
   }
 
@@ -511,8 +446,7 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
                                         <li>
                                             <span class="label">배송 요청사항</span>
                                             <div class="dlv-content">
-                                                <select class="select-request" name="delivery_request" id="delivery_request"
-                                                        onchange="showEtc(this.value);">
+                                                <select class="select-request" name="delivery_request" id="delivery_request">
                                                     <option value="" selected="selected"> 배송 시 요청사항을 선택해주세요</option>
                                                     <option value="부재 시 경비실에 맡겨주세요"> 부재 시 경비실에 맡겨주세요</option>
                                                     <option value="부재 시 택배함에 넣어주세요"> 부재 시 택배함에 넣어주세요</option>
@@ -527,7 +461,6 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
               $(".dlv-header-content").html(htmlContent);
               addressModal.style.display = 'none';
             }
-
           },
           error: function (xhr, status, error) {
             console.error('Error fetching selected delivery:', error);
