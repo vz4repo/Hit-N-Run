@@ -4,52 +4,100 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        <%@include file="/resources/css/adminMenu.css"%>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
+        <%@include file="/resources/css/adminMenu.css" %>
+        <%@include file="/resources/css/adminDefaultTable.css" %>
+        .productRegister-container {
+            width: 100%;
+            margin: 20px 0px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .productRegister-container td {
             text-align: left;
+            padding-left: 20px;
         }
+        .productRegister-container select {
+            outline: none;
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 12px;
+        }
+        .productRegister-container select > option {
+            text-align: center;
+        }
+
+        .productRegister-container input[type="text"],
+        .productRegister-container input[type="date"] {
+            color: gray;
+            background-color: white;
+            border: 1px solid #ccc;
+            height: 100%;
+            font-size: 12px;
+            padding: 5px;
+        }
+
+        .productRegister-container input[type="text"] {
+            width: 300px;
+        }
+        #min_od_qty, #max_od_qty{
+            width: 80px;
+        }
+
+        .productRegister-container input[type="date"] {
+            width: 100px;
+            text-align: center;
+        }
+
+        .productRegister-container input[type="text"]::placeholder {
+            color: gray;
+        }
+
         .product_register {
-            border: 0.5rem outset cornflowerblue;
-            box-shadow: 0 0 0 1rem lightgrey;
-            margin-top: 50px;
+            border: 3px solid #a9a9a9;
+            height: 80vh;
         }
+
         .product_content {
             margin: 20px;
         }
+
         textarea {
             width: 100%;
             height: 200px;
         }
 
         .buttons {
-            margin-top: 30pt;
+            margin: 20px;
             text-align: center;
         }
 
-        .registerBtn {
+        .registerBtn, .cancelBtn {
             border-radius: 4px;
-            border: none;
-            color: white;
-            padding: 14px 28px;
-            font-size: 16px;
+            width: 100px;
+            padding: 10px;
+            font-size: 13px;
             cursor: pointer;
+        }
+
+        .registerBtn {
+            border: 2px solid #2196F3;
+            color: white;
             background-color: #2196F3;
         }
-        .registerBtn:hover {background: #0b7dda;}
 
         .cancelBtn {
-            border-radius: 4px;
             border: 2px solid #2196F3;
-            background-color: white;
-            padding: 14px 28px;
-            font-size: 16px;
-            cursor: pointer;
             color: dodgerblue;
+            background-color: white;
         }
 
+        .registerBtn:hover {
+            background: #0b7dda;
+        }
         .cancelBtn:hover {
             background: #2196F3;
             color: white;
@@ -58,6 +106,9 @@
         .clickButton {
             display: inline-block;
             height: 50px;
+        }
+        span{
+            color: #7e7e87;
         }
     </style>
     <title>제품 등록 화면</title>
@@ -69,11 +120,18 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="../adminMenu.jsp" flush="false" />
-<div class="main">
-    <h1>제품 등록 화면</h1>
+<jsp:include page="../adminMenu.jsp" flush="false"/>
+<div id="main">
+    <div class="w3-dark-grey header-container">
+        <div class="w3-dark-grey header-button">
+            <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
+        </div>
+        <div id="headline" class="header-title">제품 등록 화면</div>
+    </div>
+    <div class="w3-container productRegister-container">
     <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
-        <div class="product_register">
+        <div class="product_register" style="overflow-y:auto;">
             <div class="product_content">
                 <table style="width:100%">
                     <tr>
@@ -457,186 +515,187 @@
             <button type="button" class="cancelBtn clickButton" id="cancelBtn">취소</button>
         </div>
     </form>
+    </div>
 </div>
-    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            /*제조국 글자 수 세기*/
-            $(".originCnt").keyup(function() {
-                let content = $(this).val();
-                $("#originCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 10) {
-                    alert("최대 10자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 10));
-                    $('#originCnt').text("[10 / 10]");
-                }
-            });
-
-            /*제조사 글자 수 세기*/
-            $(".mfrCnt").keyup(function() {
-                let content = $(this).val();
-                $("#mfrCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 10) {
-                    alert("최대 10자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 10));
-                    $('#mfrCnt').text("[10 / 10]");
-                }
-            });
-
-            /*제품명 글자 수 세기*/
-            $(".pdNameCnt").keyup(function() {
-                let content = $(this).val();
-                $("#pdNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#pdNameCnt').text("[100 / 100]");
-                }
-            });
-
-            /*모델명 글자 수 세기*/
-            $(".modelNameCnt").keyup(function() {
-                let content = $(this).val();
-                $("#modelNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#modelNameCnt').text("[100 / 100]");
-                }
-            });
-
-            /*자체 제품 코드 글자 수 세기*/
-            $(".originProductNum").keyup(function() {
-                let content = $(this).val();
-                $("#originProductNum").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#originProductNum').text("[100 / 100]");
-                }
-            });
-
-            /*제품 홍보문구 글자 수 세기*/
-            $(".productAdCommentCnt").keyup(function() {
-                let content = $(this).val();
-                $("#productAdCommentCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#productAdCommentCnt').text("[100 / 100]");
-                }
-            });
-
-            /*시리즈 글자 수 세기*/
-            $(".seriesIdCnt").keyup(function() {
-                let content = $(this).val();
-                $("#seriesIdCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#seriesIdCnt').text("[100 / 100]");
-                }
-            });
-
-            /*제품 소재 글자 수 세기*/
-            $(".materialCnt").keyup(function() {
-                let content = $(this).val();
-                $("#materialCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#materialCnt').text("[100 / 100]");
-                }
-            });
-
-            /*무게 글자 수 세기*/
-            $(".weighCnt").keyup(function() {
-                let content = $(this).val();
-                $("#weighCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#weighCnt').text("[100 / 100]");
-                }
-            });
-
-            /*사용 선수명 세기*/
-            $(".playerNameCnt").keyup(function() {
-                let content = $(this).val();
-                $("#playerNameCnt").text("[" + content.length + " / 50]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 50) {
-                    alert("최대 50자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 50));
-                    $('#playerNameCnt').text("[50 / 50]");
-                }
-            });
-
-            /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
-            $("#adComment").keyup(function() {
-                let content = $(this).val();
-                $("#adLengthCheck").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 100) {
-                    alert("최대 100자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 100));
-                    $('#adLengthCheck').text("[100 / 100]");
-                }
-            });
-
-            /*제품 요약의 텍스트 길이가 200자가 넘지 않도록 하는 함수*/
-            $("#textSummary").keyup(function() {
-                let content = $(this).val();
-                $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 200) {
-                    alert("최대 200자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 200));
-                    $('#summaryLengthCheck').text("[200 / 200]");
-                }
-            });
-
-            /*제품 상세 설명의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
-            $("#textDescription").keyup(function() {
-                let content = $(this).val();
-                $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
-                if (content.length > 5000) {
-                    alert("최대 5000자까지 입력 가능합니다.");
-                    $(this).val(content.substring(0, 5000));
-                    $('#descriptionLengthCheck').text("[0 / 5000]");
-                }
-            });
-
-            /* cancelBtn을 클릭하면 admin/main으로 이동한다. */
-            $("#cancelBtn").on("click", function(){
-                location.href="<c:url value='/admin/main/'/>";
-            });
-
-            /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
-            $('#wgh').on('blur', function () {
-                let weightInput = $(this).val();
-                if (isNaN(weightInput) || weightInput.trim() === '') {
-                    alert("무게는 숫자만 입력할 수 있습니다.");
-                    $(this).val('');
-                }
-            });
-
-            /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $('#min_od_qty').on('blur', function () {
-                let minQty = $(this).val();
-                if (isNaN(minQty) || minQty.trim() === '') {
-                    alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
-                    $(this).val('');
-                }
-            });
-
-            /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
-            $('#max_od_qty').on('blur', function () {
-                let maxQty = $(this).val();
-                if (isNaN(maxQty) || maxQty.trim() === '') {
-                    alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
-                    $(this).val('');
-                }
-            });
+<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    $(document).ready(function() {
+        /*제조국 글자 수 세기*/
+        $(".originCnt").keyup(function() {
+            let content = $(this).val();
+            $("#originCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#originCnt').text("[10 / 10]");
+            }
         });
-    </script>
+
+        /*제조사 글자 수 세기*/
+        $(".mfrCnt").keyup(function() {
+            let content = $(this).val();
+            $("#mfrCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#mfrCnt').text("[10 / 10]");
+            }
+        });
+
+        /*제품명 글자 수 세기*/
+        $(".pdNameCnt").keyup(function() {
+            let content = $(this).val();
+            $("#pdNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#pdNameCnt').text("[100 / 100]");
+            }
+        });
+
+        /*모델명 글자 수 세기*/
+        $(".modelNameCnt").keyup(function() {
+            let content = $(this).val();
+            $("#modelNameCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#modelNameCnt').text("[100 / 100]");
+            }
+        });
+
+        /*자체 제품 코드 글자 수 세기*/
+        $(".originProductNum").keyup(function() {
+            let content = $(this).val();
+            $("#originProductNum").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#originProductNum').text("[100 / 100]");
+            }
+        });
+
+        /*제품 홍보문구 글자 수 세기*/
+        $(".productAdCommentCnt").keyup(function() {
+            let content = $(this).val();
+            $("#productAdCommentCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#productAdCommentCnt').text("[100 / 100]");
+            }
+        });
+
+        /*시리즈 글자 수 세기*/
+        $(".seriesIdCnt").keyup(function() {
+            let content = $(this).val();
+            $("#seriesIdCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#seriesIdCnt').text("[100 / 100]");
+            }
+        });
+
+        /*제품 소재 글자 수 세기*/
+        $(".materialCnt").keyup(function() {
+            let content = $(this).val();
+            $("#materialCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#materialCnt').text("[100 / 100]");
+            }
+        });
+
+        /*무게 글자 수 세기*/
+        $(".weighCnt").keyup(function() {
+            let content = $(this).val();
+            $("#weighCnt").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#weighCnt').text("[100 / 100]");
+            }
+        });
+
+        /*사용 선수명 세기*/
+        $(".playerNameCnt").keyup(function() {
+            let content = $(this).val();
+            $("#playerNameCnt").text("[" + content.length + " / 50]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 50) {
+                alert("최대 50자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 50));
+                $('#playerNameCnt').text("[50 / 50]");
+            }
+        });
+
+        /*홍보 문구의 길이가 100자가 넘지 않도록 제한하는 함수*/
+        $("#adComment").keyup(function() {
+            let content = $(this).val();
+            $("#adLengthCheck").text("[" + content.length + " / 100]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 100) {
+                alert("최대 100자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 100));
+                $('#adLengthCheck').text("[100 / 100]");
+            }
+        });
+
+        /*제품 요약의 텍스트 길이가 200자가 넘지 않도록 하는 함수*/
+        $("#textSummary").keyup(function() {
+            let content = $(this).val();
+            $("#summaryLengthCheck").text("[" + content.length + " / 200]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 200) {
+                alert("최대 200자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 200));
+                $('#summaryLengthCheck').text("[200 / 200]");
+            }
+        });
+
+        /*제품 상세 설명의 텍스트 길이가 5000자가 되지 않도록 제한하는 함수*/
+        $("#textDescription").keyup(function() {
+            let content = $(this).val();
+            $("#descriptionLengthCheck").text("[" + content.length + " / 5000]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 5000) {
+                alert("최대 5000자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 5000));
+                $('#descriptionLengthCheck').text("[0 / 5000]");
+            }
+        });
+
+        /* cancelBtn을 클릭하면 admin/main으로 이동한다. */
+        $("#cancelBtn").on("click", function(){
+            location.href="<c:url value='/admin/main/'/>";
+        });
+
+        /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#wgh').on('blur', function () {
+            let weightInput = $(this).val();
+            if (isNaN(weightInput) || weightInput.trim() === '') {
+                alert("무게는 숫자만 입력할 수 있습니다.");
+                $(this).val('');
+            }
+        });
+
+        /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#min_od_qty').on('blur', function () {
+            let minQty = $(this).val();
+            if (isNaN(minQty) || minQty.trim() === '') {
+                alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
+                $(this).val('');
+            }
+        });
+
+        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        $('#max_od_qty').on('blur', function () {
+            let maxQty = $(this).val();
+            if (isNaN(maxQty) || maxQty.trim() === '') {
+                alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
+                $(this).val('');
+            }
+        });
+    });
+</script>
 </body>
 </html>
