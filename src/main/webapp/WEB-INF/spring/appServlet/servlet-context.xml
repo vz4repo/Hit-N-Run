@@ -41,7 +41,8 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/mypage/list"/>
+<!--			<mapping path="/mypage/list"/>-->
+			<mapping path="/mypage/**"/>
 			<mapping path="/cart/list"/>
 			<mapping path="/payment"/>
 			<mapping path="/orderDetail"/>
