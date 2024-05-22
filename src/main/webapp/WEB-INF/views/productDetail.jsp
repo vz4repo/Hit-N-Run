@@ -6,18 +6,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
-    <title>홈런볼 제품 상세페이지</title>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <title>홈런볼 제품 상세페이지</title>
 </head>
 <style>
-
     :root {
         --btn-width : 90%;
         --btn-min-width : 90%;
@@ -27,12 +25,14 @@
         --menu-min-height : calc(var(--btn-min-height) * 2);
         --font-size : 2vw;
     }
+    /*화면 상단부*/
     .prdContainer {
         display: flex;
         flex-direction: column;
         align-items: center;
         width: var(--btn-width);
     }
+    /*화면 상단 토글 메뉴*/
     .prdLabel {
         width: 90%;
         height: var(--btn-height);
@@ -74,30 +74,20 @@
     .toggle:checked ~ .prdLabel > .ball{
         transform: rotate(540deg);
     }
+    /*화면 상단 나누기*/
     .productMainContainer{
         display: flex;
     }
     .productItem{
         flex: 1;
     }
+    /*화면 중단 상세 사진*/
     .detailProductContents{
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 </style>
-<head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
-    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
-    <title>홈런볼 제품 상세페이지</title>
-</head>
 <body>
 <jsp:include page="header.jsp"/>
 <%--넘겨줄 정보를 담는다--%>
@@ -105,14 +95,12 @@
     <div class="productMainContainer">
 <%--    상단 왼쪽에 위치한 대표이미지--%>
         <div class="productItem">
-            <p>
                 <img src="/img/product/${prd.pd_type_cd}/main/${prd.mn_img_fn}"
                      alt="이미지 준비 중 입니다"
                      onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}';">
-            </p>
         </div>
         <div class="productItem">
-            <p>${prd.pd_name}</p>
+            <h3>${prd.pd_name}</h3>
             <p>${prd.pd_ad_cmt}</p>
             <p>판매가격:${stkInfo.sls_prc}</p>
             <p>소비자가격:${stkInfo.rtl_prc}</p>
