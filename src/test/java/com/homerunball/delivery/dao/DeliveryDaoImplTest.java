@@ -288,11 +288,14 @@ public class DeliveryDaoImplTest {
 
 //            int adrId = deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 3).getC_adr_list_id();
 
-            /* cust 테이블의 c_adr_list_id 를 update */
-            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 3).getC_adr_list_id());
-            System.out.println("고객 번호 = " + custDto.getC_adr_list_id());
 
-            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 5).getC_adr_list_id());
+
+
+            /* cust 테이블의 c_adr_list_id 를 update */
+//            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 3).getC_adr_list_id());
+//            System.out.println("고객 번호 = " + custDto.getC_adr_list_id());
+//
+//            custDto.setC_adr_list_id(deliveryDao.select(custDao.selectEmail("pompom@naver.com").getC_id(), 5).getC_adr_list_id());
             System.out.println("고객 번호222 = " + custDto.getC_adr_list_id());
         } catch (MyBatisSystemException e) {
             System.out.println("MySql Server Stopped");
