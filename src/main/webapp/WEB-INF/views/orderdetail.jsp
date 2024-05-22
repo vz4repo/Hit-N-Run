@@ -24,9 +24,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
       .order-container {
-        width: 80%;
+        width: 85%;
         margin: 0 auto;
-        padding: 20px;
       }
 
       .orders {
@@ -40,13 +39,14 @@
       .orders table {
         width: 100%;
         border-collapse: collapse;
+        font-size: 13px;
       }
 
       .orders th,
       .orders td {
         padding: 10px;
         text-align: center;
-        height: 70px;
+        /*height: 70px;*/
         box-sizing: border-box;
         vertical-align: middle;
         word-break: break-all;
@@ -70,10 +70,6 @@
         background-color: #f9f9f9;
       }
 
-      .product-info {
-        display: flex;
-      }
-
       ul {
         display: block;
       }
@@ -82,7 +78,6 @@
         width: 100px;
         height: 100px;
         object-fit: cover;
-        margin-right: 10px;
       }
 
       .info {
@@ -418,6 +413,14 @@
     <div class="order-container">
         <div class="orders">
             <table>
+                <colgroup>
+                    <col width="30%"/>
+                    <col width="30%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                </colgroup>
+
                 <thead>
                 <tr>
                     <th>상품정보</th>
@@ -474,7 +477,7 @@
                         <td>
                             <div class="order-amount" data-order-id="20231208212440001">
                                 <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
-                                <span>${orderdetDto.od_qty} 개</span>
+                                <span>(${orderdetDto.od_qty}개)</span>
                             </div>
                         </td>
 

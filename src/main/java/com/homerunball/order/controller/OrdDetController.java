@@ -26,7 +26,11 @@ public class OrdDetController {
     CartDao cartDao;
     @GetMapping("/orderDetail")
     public String orderDetail(Model m, HttpSession session, HttpServletRequest request) {
-        int c_id = (int)session.getAttribute("c_id");
+        /*세션에서 c_id를 가져옴*/
+        Integer cIdObject = (Integer) session.getAttribute("c_id");
+         /*c_id가 null이 아니면 값을 사용하고, null이면 기본값 -1을 사용*/
+        int c_id = (cIdObject != null) ? cIdObject : -1;
+
         try {
             List<OrderDetDto> list = orderdetDao.select(c_id);
             List<CartDto> imglist = cartDao.getStk(c_id);
