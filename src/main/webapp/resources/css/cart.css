@@ -1,4 +1,4 @@
-* {
+.cart * {
     font-family: "IBM Plex Sans KR", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -17,21 +17,22 @@
     text-decoration: none;
     color: black;
 }
-img {
+.cart_tale img {
     height: 80px;
     width: 80px;
 }
 
-th, td {
+.cart_tale th,
+.cart_tale td {
     text-align: center;
 }
 
-td {
+.cart_tale td {
     padding: 10px 0;
     vertical-align: middle;
 }
 
-hr {
+.cart_tale hr {
     width: 80%;
     height: 1px;
     border: 0;
@@ -53,7 +54,7 @@ hr {
     margin-bottom: 40px;
 }
 
-thead th {
+.cart_tale thead th {
     padding: 7px 0 6px;
     background-color: #fff;
     border-top: 2px solid #ddd;

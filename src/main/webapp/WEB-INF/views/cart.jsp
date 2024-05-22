@@ -17,7 +17,7 @@
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
 </head>
-<body>
+<body class="cart">
 <jsp:include page="header.jsp"/>
 <div class="head_cart">SHOPPING CART</div>
 <main>
@@ -71,7 +71,7 @@
                                     <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
                                     <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
                                     <button class="quantity_btn minus_btn"><i class="fas fa-caret-left"></i></button>
-                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
+                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" /> <%--readonly 주기--%>
                                     <button class="quantity_btn plus_btn"><i class="fas fa-caret-right"></i></button>
                                     <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
                                 </form>
@@ -172,7 +172,7 @@
         /* 주문하기버튼을 누를경우 주문으로 넘기기 */
         $('#order_All_Btn').on("click", function (){
             let orderForm = $('#orderForm');
-            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
+            orderForm.attr("action", "<c:url value='/order'/>");
             orderForm.attr("method", "post");
             orderForm.submit();
         })

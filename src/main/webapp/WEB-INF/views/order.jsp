@@ -31,26 +31,16 @@
 <style>
   #dlv-container {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      border-top: 1px solid #ddd;
+      justify-content: start;
       padding: 20px 0;
+      margin: 20px 0;
   }
 
   .dlv-header {
-      margin-top: 50px;
       margin-left: 8%;
       font-size: 15px;
       font-weight: 600;
-      margin-bottom: 10px;
-  }
-
-  .dlv-header__info {
-      width: 85%;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 5px;
-      margin: 1% 8%;
   }
 
   #dlv-container ul {
@@ -65,21 +55,18 @@
     padding: 10px 0;
   }
 
-  #dlv-container .label {
-    width: 150px;
-    font-weight: bold;
-  }
-
 
 
   #dlv-container .btn-change-address {
     padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    border: 1px solid #333;
+    color: #fff;
+    background-color: #333;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+
+
   }
 
   #dlv-container .select-request {
@@ -193,7 +180,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">Homerun() > 주문서</a>
+    <a href="#" class="head_main">Home-run() 주 문 서</a>
     <hr class="first__under"/>
     <div class="order__title">
         <div class="head_order">Order / Payment</div>
@@ -277,7 +264,6 @@
 
        </section>
    --%>
-    <div class="dlv-header">배송정보</div>
     <%-- 김수연 시작 --%>
     <%-- 배송지 정보 section --%>
     <section id="dlv-container">

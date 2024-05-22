@@ -122,7 +122,7 @@ public class CartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/cart/list?c_id=" + c_id;
+        return "redirect:/cart/list";
     }
 
     /*고객 장바구니 load*/
