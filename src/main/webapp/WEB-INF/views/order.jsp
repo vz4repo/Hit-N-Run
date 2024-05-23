@@ -143,6 +143,7 @@
 
   #addressModal .address-card .title {
     font-weight: bold;
+    font-size: 20px; /* 13 -> 18 -> 20 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -150,6 +151,7 @@
 
   #addressModal .address-card .title .default {
     color: #007bff;
+      /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
     border: 1px solid #007bff;
     padding: 2px 5px;
     border-radius: 5px;
@@ -182,6 +184,37 @@
     color: #007bff;
     cursor: pointer;
   }
+
+
+  /*.close {*/
+  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
+  /*}*/
+
+
+
+  .header-container {
+      display: flex;
+      align-items: center; /* 수직 가운데 정렬 */
+      justify-content: space-between; /* 양쪽 끝에 배치 */
+      height: 50px; /* 높이 설정 (필요에 따라 조정) */
+      padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
+  }
+
+  .dlvN {
+      margin: 0; /* 기본 마진 제거 */
+      font-size: 20px; /* 폰트 크기 조정 */
+      line-height: 1; /* 줄 높이 조정 */
+      font-weight: bold; /* 글자를 두껍게 */
+      color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
+  }
+
+  .close {
+      cursor: pointer; /* 포인터 모양 */
+      font-size: 24px; /* 아이콘 크기 조정 */
+      line-height: 1; /* 줄 높이 조정 */
+      position: relative; /* 상대 위치 설정 */
+      top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
+  }
 </style>
 <%-- 김수연 끝 --%>
 <body>
@@ -212,8 +245,22 @@
     <!-- 배송지 목록 Modal -->
     <div id="addressModal">
         <div class="modal-content">
-            <span class="close" id="closeModal">&times;</span>
-            <h1>배송지 변경</h1>
+<%--            <div>                <div style="float: left; width: 95%;">--%>
+<%--                    배송지 변경--%>
+<%--                </div>--%>
+<%--                <div class="close" id="closeModal" style="float: right; width: 5%;">--%>
+<%--                    X--%>
+<%--                </div>--%>
+<%--                <h1 class="dlvN" id="dlvN">배송지 변경 </h1>--%>
+<%--                <div class="close" id="closeModal">&times;</div>--%>
+
+
+
+    <div class="header-container">
+        <h1 class="dlvN" id="dlvN">배송지 변경</h1>
+        <div class="close" id="closeModal">&times;</div>
+    </div>
+<%--            </div>--%>
             <div class="dlv-modal-container">
                 <%-- ajax를 통해서 내용이 채워지는 부분 --%>
             </div>

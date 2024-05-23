@@ -90,8 +90,8 @@
             <td colspan="2">
                 <button id="selectAllBtn">배송지 전체 조회</button>
                 <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
-<%--                    <button id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
-<%--                        <button type="submit" id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
+                <%--                    <button id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
+                <%--                        <button type="submit" id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
             </td>
         </tr>
     </table>
@@ -121,7 +121,7 @@
                     <td>${list.rcver_zip}</td>
 
                     <td><button class="selectDLV" data-c_adr_list_id="${list.c_adr_list_id}">변경</button></td>
-                    <td><button id="defaultDLV" class="defaultDLV" onclick="defaultDLV()" data-c_adr_list_id="${list.c_adr_list_id}">기본 배송지로 설정</button></td>
+                        <%--                    <td><button id="defaultDLV" class="defaultDLV" onclick="defaultDLV()" data-c_adr_list_id="${list.c_adr_list_id}">기본 배송지로 설정</button></td>--%>
                         <%--                            <td><button id="selectDLV" onclick="setSelectedDLV(${list.c_adr_list_id})">변경</button></td>--%>
                 </tr>
             </table>
@@ -140,14 +140,14 @@
 
     // "selectAll" 버튼 클릭 시 데이터 요청
     $('#selectAllBtn').click(function(event) {
-        event.preventDefault(); // 버튼의 기본 동작 막기
+        // event.preventDefault(); // 버튼의 기본 동작 막기
         // setAllList 함수 호출
         setAllList();
     })
 
     // "selectDLV" 버튼 클릭시 데이터 전송
     $('.selectDLV').click(function(event) {
-        event.preventDefault(); // 버튼의 기본 동작 막기
+        // event.preventDefault(); // 버튼의 기본 동작 막기
         // 클릭된 버튼의 data-c_adr_list_id 속성값 가져오기
         var c_adr_list_id = $(this).data('c_adr_list_id');
         setSelectedDLV(c_adr_list_id);
@@ -159,14 +159,14 @@
         // AJAX를 사용하여 서버로 데이터 요청
         $.ajax({
             type: "GET",
-            url: '<%= request.getContextPath() %>/delivery/deliveryList',
+            url: '<%= request.getContextPath() %>/delivery/_deliveryList',
             data: {
                 c_id: '<%= session.getAttribute("c_id") %>' // 세션에서 c_id 값을 가져옴
             },
             success: function(response) {
                 // 받아온 데이터를 deliveryForm 의 HTML에 채워 넣음
                 $("#deliveryForm").html(response);
-                alert(response);
+                // alert(response);
                 // $(".modal").attr("style", "display:flex");
             },
             error: function(xhr, status, error) {
@@ -187,8 +187,8 @@
             success: function(response) {
                 // 받아온 데이터를 selectedDLV 의 HTML에 채워 넣음
                 $("#selectedDLV").html(response);
-                alert(response);
-                console.log(response);
+                // alert(response);
+                // console.log(response);
                 console.log("호출이 안됨");
                 // 페이지 이동
                 <%--window.location.href = '<%= request.getContextPath() %>/delivery/deliveryList?dlvId=' + c_adr_list_id;--%>
@@ -202,11 +202,11 @@
 
 
     /* 기본 배송지로 설정하는 function */
-    function defaultDLV(c_adr_list_id) {
-        alert(c_adr_list_id + "을 기본배송지로 설정.");
-        /* 0521 여기까지.. */
-        /* fucntion에 ajax로 하던가 어떻게 해서 cust 테이블의 data를 변경해주면 될듯 ... */
-    }
+    // function defaultDLV(c_adr_list_id) {
+    //     // alert(c_adr_list_id + "을 기본배송지로 설정.");
+    //     /* 0521 여기까지.. */
+    //     /* fucntion에 ajax로 하던가 어떻게 해서 cust 테이블의 data를 변경해주면 될듯 ... */
+    // }
 
 </script>
 </body>
