@@ -398,6 +398,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
     $(document).ready(function() {
+        /*입력한 값의 앞, 뒤에 있는 공백 제거*/
+        $("input").on('blur', function () {
+            $(this).val($.trim($(this).val()));
+        });
+
         /*제조국 글자 수 세기*/
         $(".originCnt").keyup(function() {
             let content = $(this).val();
