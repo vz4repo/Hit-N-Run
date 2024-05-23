@@ -93,18 +93,6 @@
             box-sizing: border-box;
         }
 
-        /*#pwdLabel, #pwdChange{*/
-        /*    display: inline-block;*/
-        /*}*/
-
-        /*#pwdLabel{*/
-        /*    margin-right: 143px;*/
-        /*}*/
-
-        /*.hidden {*/
-        /*    display: none;*/
-        /*    width: 100%;*/
-        /*}*/
     </style>
 </head>
 
@@ -122,11 +110,11 @@
             <input type="text" id="zip" name="c_zip" value="<%= session.getAttribute("c_zip")%>" readonly>
             <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
             <input type="text" id="roadAddress" name="c_road_a" value="<%= session.getAttribute("c_road_a")%>" readonly>
-            <input type="text" id="jibunAddress" name="c_jibun_a" value="<%= session.getAttribute("c_jibun_a")%>" readonly>
+            <input type="text" id="jibunAddress" name="c_jibun_a" maxlength="30" value="<%= session.getAttribute("c_jibun_a")%>" readonly>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" name="c_det_a" value="<%= session.getAttribute("c_det_a")%>"><br><br>
+            <input type="text" id="detailAddress" name="c_det_a" maxlength="30" value="<%= session.getAttribute("c_det_a")%>"><br><br>
             <label>휴대폰</label>
-            <input class="special-class" type="text" id="c_phn" name="c_phn" value="<%= session.getAttribute("c_phn")%>">
+            <input class="special-class" type="text" id="c_phn" name="c_phn" maxlength="12" value="<%= session.getAttribute("c_phn")%>">
             <label>성별*</label>
             <input class="special-class" type="text" name="c_gnd" value="<%= session.getAttribute("c_gnd")%>"disabled>
             <label id="aa">생년월일*</label>
@@ -138,7 +126,8 @@
             <input type="radio" id="email_agr" name="email_agr" value="Y"<%= session.getAttribute("email_agr").equals("Y") ? "checked" : "" %>>수신함
             <input type="radio" id="email_no" name="email_agr" value="N"<%= session.getAttribute("email_agr").equals("N") ? "checked" : "" %>>수신안함<br><br>
             <button id="edit">수정</button><br>
-            <button type="button" onclick="window.history.back()">나가기</button><br><br>
+            <a href="/mypage/list"><button type="button">나가기</button></a><br><br>
+
         </div>
     </form>
 </div>
@@ -179,10 +168,10 @@
     function newPhnCheck(){
         var newPhn = document.getElementById("c_phn").value;
 
-        var newPhnPattern = /^[0-9]{1,12}$/;
+        var newPhnPattern = /^[0-9]{11,12}$/;
 
         if(!newPhnPattern.test(newPhn)){
-            alert("휴대폰 전화번호는 숫자 12자 이하로 작성해주세요")
+            alert("휴대폰 번호는 숫자 11~12자로 입력이 가능합니다.")
             return false;
     }
         return true;

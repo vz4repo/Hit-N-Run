@@ -25,7 +25,7 @@ public class PwdChangeValidator implements Validator{
                 String c_pwd = custDto.getC_pwd();
 
 
-        if (c_pwd == null || !c_pwd.matches("^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$")) {
+        if (c_pwd == null || !c_pwd.matches("^(?=.*\\d)(?=.*[a-z])[a-z0-9]{4,15}$")) {
             errors.rejectValue("c_pwd", "invalidLength", "비밀번호 뚫을려고?" );
         }
         }}
