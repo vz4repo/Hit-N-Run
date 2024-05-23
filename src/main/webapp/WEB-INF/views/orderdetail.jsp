@@ -439,21 +439,21 @@
                         <td class="product-info">
                             <div>
                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.cartDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.cartDto.mn_img_fn}"
+                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
                                          alt="썸네일" name="thumbnail"/>
                                 </a>
                             </div>
                             <ul class="info">
-                                <li class="brand">
-                                    브랜드 이름
-                                </li>
                                 <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                    <span>${orderdetDto.brd_name}</span>
+                                </li>
+                                    <!-- 상품 이름 -->
                                 <li class="name">
                                     <a href="#">${orderdetDto.pd_name}</a>
-                                    <!-- 상품 이름 -->
                                 </li>
-                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
                                 <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
                             </ul>
                         </td>
 
@@ -473,62 +473,19 @@
                         <!-- 주문금액 및 수량 -->
                         <td>
                             <div class="order-amount" data-order-id="20231208212440001">
-                                <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
+                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
                                 <span>${orderdetDto.od_qty} 개</span>
                             </div>
                         </td>
 
                         <td class="order-status">
-                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_cd}</a>
+                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
                             <!-- 구매상태 링크 -->
                             <button class="open-delivery-modal">배송조회</button>
                             <!-- 배송조회 버튼 -->
                         </td>
                     </tr>
                 </c:forEach>
-                <%----%>
-                <tr>
-                    <td class="product-info">
-                        <div>
-                            <a href="#"><img src="product1.jpg" alt="Product 1"/></a>
-                            <!-- 상품 이미지 -->
-                        </div>
-                        <ul class="info">
-                            <li class="brand">실바니안 패밀리</li>
-                            <!-- 브랜드 이름 -->
-                            <li class="name">
-                                <a href="#"
-                                >5385-불이 들어오는 빨간지붕 이층집 기프트세트</a
-                                >
-                                <!-- 상품 이름 -->
-                            </li>
-                            <li class="option">옵션: FREE</li>
-                            <!-- 상품 옵션 -->
-                        </ul>
-                    </td>
-                    <td>
-                        <div class="order-date">2023.12.08</div>
-                    </td>
-                    <!-- 주문일자 -->
-                    <td>
-                        <div class="order-number">
-                            <a href="#">20231208212440001</a>
-                            <!-- 주문번호 -->
-                        </div>
-                    </td>
-                    <td>
-                        <div class="order-amount" data-order-id="20231208212440001">
-                            <span>48,312원</span><span>1개</span>
-                            <!-- 주문금액 및 수량 -->
-                        </div>
-                    </td>
-                    <td class="order-status">
-                        <a href="#" class="open-order-step-modal">구매 확정</a>
-                        <!-- 구매확정 링크 -->
-                        <button class="open-delivery-modal">배송조회</button>
-                        <!-- 배송조회 버튼 -->
-                    </td>
-                </tr>
                 <!-- 추가 주문 행을 여기에 추가 -->
                 </tbody>
             </table>
