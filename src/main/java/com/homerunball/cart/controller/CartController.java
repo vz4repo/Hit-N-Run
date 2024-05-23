@@ -106,7 +106,6 @@ public class CartController {
 
             boolean exists = cartDao.exists(cartDto);
 
-
             if (exists) {
                 CartDto dao = cartDao.selectCart(c_id, pd_id, pd_clsf_cd);
                 int currentCart = dao.getCart_cnt();

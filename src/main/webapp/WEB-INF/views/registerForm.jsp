@@ -208,7 +208,7 @@
             <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
             <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
             <label>생년월일</label>
-            <input type="date" id="birth" name="c_birth" min="1950-01-01" max="2023-12-31" disabled><br><br>
+            <input type="date" id="birth" name="c_birth" min="1900-01-01" max="2023-12-31" disabled><br><br>
 
             <input type="checkbox" id="touBox" onclick="openModal()" name="touBox" value="Y" disabled>
             <label for="touBox" id="touLabel">[필수] 이용약관</label><br>
