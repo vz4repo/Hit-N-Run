@@ -22,66 +22,35 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Controller
 public class OrdDetController {
-    @Autowired
-    OrderDetService orderDetService;
-    @Autowired
-    OrderDetDao orderdetDao;
-    @Autowired
-    CartDao cartDao;
 
-    @GetMapping("/orderDetail")
-    public String orderDetail(Model m, HttpSession session, HttpServletRequest request) {
-        int c_id = (int)session.getAttribute("c_id");
-        try {
-            List<OrderDetDto> list = orderdetDao.select(c_id);
-            List<CartDto> imglist = cartDao.getStk(c_id);
+  @Autowired
+  OrderDetService orderDetService;
+  @Autowired
+  OrderDetDao orderdetDao;
+  @Autowired
+  CartDao cartDao;
 
-
-            // CartDto를 map에 넣어 줌
-            Map<String, CartDto> imgMap = new HashMap<>();
-            for (CartDto img : imglist) {
-                imgMap.put(img.getPd_id(), img);
-            }
-
-            // map에 넣어준걸 다시  orderdetDto에 넣어 줌
-            for (OrderDetDto order : list) {
-                CartDto matchedCart = imgMap.get(order.getPd_id());
-                if (matchedCart != null) {
-                    order.setCartDto(matchedCart);
-                }
-            }
-
-            System.out.println("aaa" + list);
-
-            m.addAttribute("list", list);
-
-
-
-          /*  List<OrderDetDto> list = orderdetDao.select(c_id);
-            List<CartDto> Imglist =cartDao.getStk(c_id);
-//            List<CartDto> list = cartDao.selectUser(c_id);
-            System.out.println("aaa=" + list);
-
-            m.addAttribute("list",list);
-            m.addAttribute("Imglist",Imglist);*/
-
-         /*   System.out.println();
-            System.out.println("bbb" + Imglist);*/
-            /*OrderDetDto ord_det = new OrderDetDto(c_id);
-            orderdetDao.insert(ord_det);*/
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "orderdetail";
+  /* 주문 상세 페이지 */
+  @GetMapping("/orderDetail")
+  public String orderDetail(Model m, HttpSession session, HttpServletRequest request) {
+    try {
+      int c_id = (int) session.getAttribute("c_id");
+      List<OrderDetDto> list = orderdetDao.select(c_id);
+      m.addAttribute("list", list);
+    } catch (Exception e) {
+      e.printStackTrace();
+      m.addAttribute("errorMessage", "[주문 상세 정보]");
+      return "errorPageCust"; // 에러 페이지로 이동
     }
+    return "orderdetail";
+  }
 
-    /* 날짜 범위에 따른 주문내역 조회 */
-    @GetMapping(value = "/order/list")
-    @ResponseBody
-    public List<OrderDetDto> getOrderList( @SessionAttribute(name = "c_id") int c_id
-        , @RequestParam("fromDate") String fromDate
-        , @RequestParam("toDate") String toDate) {
-        return orderDetService.selectOrderHistoryWithDateRange(c_id, fromDate, toDate);
-    }
+  /* 날짜 범위에 따른 주문내역 조회 */
+  @GetMapping(value = "/order/list")
+  @ResponseBody
+  public List<OrderDetDto> getOrderList(@SessionAttribute(name = "c_id") int c_id
+      , @RequestParam("fromDate") String fromDate
+      , @RequestParam("toDate") String toDate) {
+    return orderDetService.selectOrderHistoryWithDateRange(c_id, fromDate, toDate);
+  }
 }
