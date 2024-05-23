@@ -135,7 +135,7 @@ hr {
 }
 
 .main_footer {
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(4, 24%);
     margin-left: 5%;
 }
 

@@ -106,6 +106,7 @@ public class CartController {
 
             boolean exists = cartDao.exists(cartDto);
 
+
             if (exists) {
                 CartDto dao = cartDao.selectCart(c_id, pd_id, pd_clsf_cd);
                 int currentCart = dao.getCart_cnt();
@@ -121,7 +122,7 @@ public class CartController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/cart/list?c_id=" + c_id;
+        return "redirect:/cart/list";
     }
 
     /*고객 장바구니 load*/
