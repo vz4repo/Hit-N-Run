@@ -36,9 +36,9 @@
         WHERE  od.c_id = #{c_id}
           and cd1.cd = 510                  -- 510:주문상태
           and cd2.cd = 403                  -- 403:브랜드
+          and od.pd_id = pd.pd_id
           and od.od_stat_cd = cd1.cd_type_id
           and pd.brd_cd  = cd2.cd_type_id
-          and	 od.od_dt BETWEEN '2023-01-01 00:00:00' AND '2024-05-23 23:59:59'
         order by od.od_id desc, od.od_det_seqnum
     </select>
 
