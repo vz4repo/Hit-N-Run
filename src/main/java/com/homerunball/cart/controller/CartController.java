@@ -101,7 +101,7 @@ public class CartController {
             e.printStackTrace();
             rattr.addFlashAttribute("msg", "DEL_ERR");
         }
-        return "redirect:/cart/list?";
+        return "redirect:/cart/list";
     }
 
 
