@@ -78,9 +78,9 @@
   const testCouponElement = document.querySelector("#testCoupon");
 
   /* TODO: 수정 및 cors 이슈 해결 필요 */
-  let amount = 99999;
-  amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
-  document.querySelector("#totalSum")
+  let amount = 1920000;
+  // amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
+  // document.querySelector("#totalSum")
 
   /*
   * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
