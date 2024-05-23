@@ -3,6 +3,9 @@ main {
 }
 
 /*광고 배너 캐러셀 css*/
+.main-banner-item {
+    height: fit-content;
+}
 
 .c-item {
     height: 480px;
@@ -79,6 +82,12 @@ main {
     font-size: 2vw;
 }
 
+.main-banner-carousel-btn {
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
 /*제품 캐러셀 css*/
 li {
     list-style: none;
@@ -101,6 +110,12 @@ h2 {
     height: 40px;
     font-size: 1.3vw;
     display: block;
+    color: inherit;
+    text-decoration: none;
+}
+
+.productName > a:hover {
+    text-decoration: none;
 }
 
 .carousel {

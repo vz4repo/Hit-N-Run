@@ -22,6 +22,16 @@ public class HomeController {
             List<MainProductDto> newProductList = mainProductService.getAllNewSalesProduct();
             /*newProductNumber: 판매중인 신제품 수를 저장하는 변수.*/
             int newProductNumber = newProductList.size();
+            /*만약 newProductNumber가 0이라면 상품 준비중이라는 이미지를 보여줘야 한다.*/
+            if (newProductNumber == 0) {
+                /*뷰로 넘어간 제품의 수는 1 이상이어야 한다.*/
+                newProductNumber = 1;
+
+                /*newProductList에 새로운 MainProductDto를 생성해서 넘겨준다.*/
+                System.out.println("newProductList = " + newProductList);
+            }
+            /*만약 newProductNumber가 0보다 크다면*/
+            /*else {}*/
             /*모델에 newProductList를 담아서 index.jsp로 넘겨준다.*/
             m.addAttribute("newProductList", newProductList);
             /*모델에 newProductNumber를 담아서 index.jsp로 넘겨준다.*/
