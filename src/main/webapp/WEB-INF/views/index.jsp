@@ -616,17 +616,6 @@
 <jsp:include page="footer.jsp" flush="false"/>
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script>
-    <%--window.onload = function () {--%>
-    <%--    if ("${sessionScope.c_id}" !== "") {--%>
-    <%--        document.getElementById('logoutLink').addEventListener('click', function (event) {--%>
-    <%--            event.preventDefault();--%>
-    <%--            if (confirm('정말로 로그아웃을 하시겠습니까?')) {--%>
-    <%--                window.location.href = event.target.href;--%>
-    <%--                alert('로그아웃이 되셨습니다.');--%>
-    <%--            }--%>
-    <%--        });--%>
-    <%--    }--%>
-    <%--};--%>
 
     const dDay = document.querySelector("#dDay");
 

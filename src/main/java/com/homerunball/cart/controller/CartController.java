@@ -90,7 +90,6 @@ public class CartController {
         return "redirect:/cart/list?c_id="+c_id;
     }
 
-
     @PostMapping("/insert")
     public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session) {
         int c_id = 0;
@@ -114,7 +113,6 @@ public class CartController {
             } else {
                 cartDao.insert(cartDto);
             }
-
             System.out.println("insert:" + cartDto);
 
             m.addAttribute("cartDto", cartDto);
@@ -122,6 +120,7 @@ public class CartController {
             e.printStackTrace();
         }
         return "redirect:/cart/list?c_id=" + c_id;
+
     }
 
     /*고객 장바구니 load*/
