@@ -11,9 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
+
+    <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
 
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
@@ -185,7 +186,7 @@
     <div class="order__title">
         <div class="head_order">Order / Payment</div>
         <div class="order__title__detail">
-            <a href="#">장바구니 > </a>
+            <a href="/cart/list">장바구니 > </a>
             <a href="#">주문서</a>
             <a href="#"> > 주문완료</a>
         </div>
