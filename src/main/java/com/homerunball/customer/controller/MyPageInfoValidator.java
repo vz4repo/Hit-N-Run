@@ -24,7 +24,7 @@ public class MyPageInfoValidator implements Validator {
 
         String c_phn = custDto.getC_phn();
 
-            if (c_phn == null || !c_phn.matches("^[0-9]{1,12}$")) {
+            if (c_phn == null || !c_phn.matches("^[0-9]{11,12}$")) {
                 errors.rejectValue("c_phn", "invalidLength", "핸드폰 뚫을려고?" );
             }}
     }
