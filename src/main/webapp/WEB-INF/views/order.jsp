@@ -30,17 +30,17 @@
 <%-- 김수연 시작 --%>
 <style>
   #dlv-container {
-    width: 700px;
-    margin: 0 auto;
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding: 20px 0;
+      margin: 20px 0;
   }
 
-  #dlv-container .dlv-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  .dlv-header {
+      margin-left: 8%;
+      font-size: 15px;
+      font-weight: 600;
   }
 
   #dlv-container ul {
@@ -55,25 +55,18 @@
     padding: 10px 0;
   }
 
-  #dlv-container .label {
-    width: 150px;
-    font-weight: bold;
-  }
 
-  #dlv-container .dlv-content {
-    flex: 1;
-    display: flex;
-    align-items: center;
-  }
 
   #dlv-container .btn-change-address {
     padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    border: 1px solid #333;
+    color: #fff;
+    background-color: #333;
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
+
+
   }
 
   #dlv-container .select-request {
@@ -187,7 +180,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">Homerun() > 주문서</a>
+    <a href="#" class="head_main">Home-run() 주 문 서</a>
     <hr class="first__under"/>
     <div class="order__title">
         <div class="head_order">Order / Payment</div>
@@ -271,96 +264,23 @@
 
        </section>
    --%>
+    <%-- 김수연 시작 --%>
+    <%-- 배송지 정보 section --%>
     <section id="dlv-container">
-        <!-- 배송 정보 헤더 -->
         <div class="dlv-header">배송 정보</div>
-        <%-- TODO: display:block 강제 적용 중. 수정 필요--%>
-        <ul style="display: block">
-            <!-- 선택된 배송지 / 대표배송지  -->
-            <div id="selectedDLV">
-                <li>
-                    <span class="label">배송 정보</span>
-                    <div class="dlv-content">
-                        <ul>
-                            <li class="radio-group">
-                                <!-- 배송지 라디오 버튼 -->
-                                <label><input type="radio" name="delivery_address" checked/>
-                                    ${selectedDto.adr_name}
-                                </label>
-                            </li>
-                            <!-- 배송지 변경 버튼 -->
-                            <li>
-                                <button class="btn-change-address">배송지 변경</button>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- 이름/연락처 정보 -->
-                <li>
-                    <span class="label">이름/연락처</span>
-                    <div class="dlv-content">
-                        <ul>
-                            <!-- 이름 -->
-                            <li>${selectedDto.rcver}</li>
-                            <!-- 전화번호 -->
-                            <li>${selectedDto.rcver_phn}</li>
-                        </ul>
-                    </div>
-                </li>
-                <!-- 주소 정보 -->
-                <li>
-                    <span class="label">주소</span>
-                    <div class="dlv-content">
-                        <ul>
-                            <!-- 우편번호 -->
-                            <li>
-                                ${selectedDto.rcver_zip}
-                            </li>
-                            <!-- 주소 -->
-                            <li>
-                                ${selectedDto.rcver_adr}
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </div>
-            <!-- 배송 요청사항 선택 -->
-            <li>
-                <span class="label">배송 요청사항</span>
-                <div class="dlv-content">
-                    <!-- 배송 요청사항 드롭다운 -->
-                    <select class="select-request" name="delivery_request" id="delivery_request"
-                            onchange="showEtc(this.value);">
-                        <option value="" selected="selected">
-                            배송 시 요청사항을 선택해주세요
-                        </option>
-                        <option value="부재 시 경비실에 맡겨주세요">
-                            부재 시 경비실에 맡겨주세요
-                        </option>
-                        <option value="부재 시 택배함에 넣어주세요">
-                            부재 시 택배함에 넣어주세요
-                        </option>
-                        <option value="부재 시 집 앞에 놔주세요">
-                            부재 시 집 앞에 놔주세요
-                        </option>
-                        <option value="배송 전 연락 바랍니다">
-                            배송 전 연락 바랍니다
-                        </option>
-                        <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">
-                            파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.
-                        </option>
-                        <option value="etc">직접 입력</option>
-                    </select>
-                </div>
-            </li>
-        </ul>
+        <%-- 기본/선택 배송지 내용 출력 --%>
+        <div class="dlv-header-content">
+            <%-- TODO : 기본배송지 --%>
+        </div>
+        <!-- 배송지 변경 버튼 -->
+        <button class="btn-change-address">배송지 변경</button>
     </section>
 
-    <!-- DLV List Modal -->
+    <!-- 배송지 목록 Modal -->
     <div id="addressModal">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
-            <h2>배송지 변경</h2>
+            <h1>배송지 변경</h1>
             <div class="dlv-modal-container">
                 <%-- ajax를 통해서 내용이 채워지는 부분 --%>
             </div>
@@ -410,7 +330,8 @@
                     <tr>
                         <td>
                             <a href="/product/detail?pd_id = ${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
+                                     alt="이미지 준비 중 입니다"
                                      onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
                             </a>
                         </td>
@@ -421,7 +342,7 @@
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -447,10 +368,12 @@
         </form>
     </div>
 </section>
+<%-- 결제 위젯 호출 --%>
 <section class="order__payment">
     <%@include file="payCheckout.jsp" %>
 </section>
-<%@include file="footer.jsp" %>0
+<%-- footer --%>
+<%@include file="footer.jsp" %>
 <script>
   $(document).ready(function () {
     $('.priceFormat').each(function () {
@@ -472,7 +395,7 @@
       const price = row.cells[5].innerText;
       totalSum += parseInt(price.replace(/[^\d]/g, ''));
     });
-    <%--/*총합을 나타낼 위치*/--%>
+    /*총합을 나타낼 위치*/
     document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
   }
 
@@ -484,7 +407,6 @@
     const addressModal = document.querySelector('#addressModal');
     const btn = document.querySelector('.btn-change-address');
     const closeModal = document.querySelector('#closeModal');
-    const dlvSelect = document.querySelector('.dlv-select');
 
     btn.addEventListener('click', () => {
       addressModal.style.display = 'block';
@@ -498,7 +420,7 @@
             let htmlContent = '';
             response.list.forEach(listDto => {
               /*
-              이거 붙이려면 JOin 해야하는데,
+              기본배송지 붙일때 쓸 태그
               <span className="default">기본배송지</span>
               */
               htmlContent += `
@@ -511,7 +433,6 @@
                                     (${'${listDto.rcver_zip}'}) ${'${listDto.rcver_adr}'}
                                 </div>
                                 <div class="buttons">
-                                    <button>수정</button>
                                     <button class="dlv-select" addrId="${'${listDto.c_adr_list_id}'}">선택</button>
                                 </div>
                             </div>
@@ -537,71 +458,83 @@
       }
     });
 
-    dlvSelect.addEventListener('click', () => {
-      let c_adr_list_id = parseInt(this.getAttribute('addrId'));
-      $.ajax({
-        type: "GET",
-        url: `${contextPath}/delivery/deliverySelected`,
-        data: {dlvId: c_adr_list_id},
-        success: function (response) {
-          if (response.message) {
-            $("#selectedDLV").html(`<p>${'${response.message}'}</p>`);
-          } else {
-            const selectedDto = response.selectedDto;
-            const htmlContent = `
-<span class="label">배송 정보</span>
-        <div class="dlv-content">
-            <ul>
-                <li id="selectedDLV" class="radio-group">
-                    <!-- 배송지 라디오 버튼 -->
-                    <label><input type="radio" name="delivery_address" checked/>
-                        ${selectedDto.adr_name}
-                    </label>
-                </li>
-                <!-- 배송지 변경 버튼 -->
-                <li>
-                    <button class="btn-change-address">배송지 변경</button>
-                </li>
-            </ul>
-        </div>
-    </li>
-    <!-- 이름/연락처 정보 -->
-    <li>
-        <span class="label">이름/연락처</span>
-        <div class="dlv-content">
-            <ul>
-                <!-- 이름 -->
-                <li>${selectedDto.rcver}</li>
-                <!-- 전화번호 -->
-                <li>${selectedDto.rcver_phn}</li>
-            </ul>
-        </div>
-    </li>
-    <!-- 주소 정보 -->
-    <li>
-        <span class="label">주소</span>
-        <div class="dlv-content">
-            <ul>
-                <!-- 우편번호 -->
-                <li>
-                    ${selectedDto.rcver_zip}
-                </li>
-                <!-- 주소 -->
-                <li>
-                    ${selectedDto.rcver_adr}
-                </li>
-            </ul>
-        </div>
-    </li>
-                    `;
-            $("#selectedDLV").html(htmlContent);
+    /*
+# 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
+
+DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
+이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
+
+따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
+이벤트 위임을 사용해야 합니다.
+
+이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
+이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
+
+이벤트 위임을 사용하면
+이벤트 핸들러를 상위 요소에 등록하고,
+이벤트가 하위 요소로 위임되도록 합니다.
+    * */
+    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+      if (event.target.classList.contains('dlv-select')) {
+        const c_adr_list_id = event.target.getAttribute('addrId');
+        $.ajax({
+          type: "GET",
+          url: `${contextPath}/delivery/deliverySelected`,
+          data: {dlvId: c_adr_list_id},
+          success: function (response) {
+            if (response.message) {
+              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+            } else {
+              const selectedDto = response.selectedDto;
+              const htmlContent = `
+                                    <ul style="display: block">
+                                        <li>
+                                            <span class="label">배송지</span>
+                                            <div class="dlv-content"> ${'${selectedDto.adr_name}'} </div>
+                                        </li>
+                                        <li>
+                                            <span class="label">이름/연락처</span>
+                                            <div class="dlv-content">
+                                                <ul>
+                                                    <li>${'${selectedDto.rcver}'}</li>
+                                                    <li>${'${selectedDto.rcver_phn}'}</li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="label">주소</span>
+                                            <div class="dlv-content">
+                                                <ul>
+                                                    <li> ${'${selectedDto.rcver_zip}'} </li>
+                                                    <li> ${'${selectedDto.rcver_adr}'} </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <span class="label">배송 요청사항</span>
+                                            <div class="dlv-content">
+                                                <select class="select-request" name="delivery_request" id="delivery_request">
+                                                    <option value="" selected="selected"> 배송 시 요청사항을 선택해주세요</option>
+                                                    <option value="부재 시 경비실에 맡겨주세요"> 부재 시 경비실에 맡겨주세요</option>
+                                                    <option value="부재 시 택배함에 넣어주세요"> 부재 시 택배함에 넣어주세요</option>
+                                                    <option value="부재 시 집 앞에 놔주세요"> 부재 시 집 앞에 놔주세요</option>
+                                                    <option value="배송 전 연락 바랍니다"> 배송 전 연락 바랍니다</option>
+                                                    <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요."> 파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                                    <option value="etc">직접 입력</option>
+                                                </select></div>
+                                        </li>
+                                    </ul>
+                                  `;
+              $(".dlv-header-content").html(htmlContent);
+              addressModal.style.display = 'none';
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error('Error fetching selected delivery:', error);
+            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
           }
-        },
-        error: function (xhr, status, error) {
-          console.error('Error fetching selected delivery:', error);
-          alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-        }
-      });
+        });
+      }
     });
   })
 </script>

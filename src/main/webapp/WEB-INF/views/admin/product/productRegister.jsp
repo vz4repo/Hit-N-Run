@@ -48,7 +48,7 @@
         }
 
         .productRegister-container input[type="date"] {
-            width: 100px;
+            width: 120px;
             text-align: center;
         }
 
@@ -236,7 +236,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>제품 특성</th>
+                        <th>제품 특성(선택)</th>
                         <td>
                             <input type="checkbox" id="npd" name="pd_chr_cd" value="N">
                             <label for="npd">신상품</label><br>
@@ -346,7 +346,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>사용 선수명</th>
+                        <th>사용 선수명(선택)</th>
                         <td>
                             <input type="text" name="player_name" class="playerNameCnt" maxlength="50" />
                             <span id="playerNameCnt">[0 / 50]</span>
@@ -466,13 +466,13 @@
                     <tr>
                         <th>최소 주문 수량</th>
                         <td>
-                            <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" required>개 이상
+                            <input type="text" id="min_od_qty" name="min_od_qty" size="4" value="1" required maxlength="4">개 이상
                         </td>
                     </tr>
                     <tr>
                         <th>최대 주문 수량</th>
                         <td>
-                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999">개 이하
+                            <input type="text" id="max_od_qty" name="max_od_qty" size="4" value="9999" maxlength="4">개 이하
                         </td>
                     </tr>
                     <tr>
@@ -521,6 +521,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {
+        /*입력한 값의 앞, 뒤에 있는 공백 제거*/
+        $("input").on('blur', function () {
+            $(this).val($.trim($(this).val()));
+        });
+
         /*제조국 글자 수 세기*/
         $(".originCnt").keyup(function() {
             let content = $(this).val();
@@ -669,30 +674,95 @@
             location.href="<c:url value='/admin/main/'/>";
         });
 
-        /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 무게(wgh)에 입력된 값이 숫자인지 1이상의 정수인지 확인한다. */
         $('#wgh').on('blur', function () {
             let weightInput = $(this).val();
             if (isNaN(weightInput) || weightInput.trim() === '') {
                 alert("무게는 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            weightInput = parseFloat(weightInput);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(weightInput);
+
+            /*무게가 1보다 작거나 실수면 경고창이 뜬다.*/
+            if (weightInput < 1 || weightInput !== integerInput) {
+                alert("무게는 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
             }
         });
 
-        /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 최소 주문 수량(minQty)에 입력된 값이 숫자인지 1이상의 정수인지 확인한다. */
         $('#min_od_qty').on('blur', function () {
             let minQty = $(this).val();
             if (isNaN(minQty) || minQty.trim() === '') {
                 alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            minQty = parseFloat(minQty);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(minQty);
+
+            /*무게가 1보다 작거나 실수면 경고창이 뜬다.*/
+            if (minQty < 1 || minQty !== integerInput) {
+                alert("최소 주문 수량은 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
             }
         });
 
-        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 1이상의 양수인지 확인한다 */
         $('#max_od_qty').on('blur', function () {
             let maxQty = $(this).val();
             if (isNaN(maxQty) || maxQty.trim() === '') {
                 alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            maxQty = parseFloat(maxQty);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(maxQty);
+
+            if (maxQty < 1 || maxQty !== integerInput) {
+                alert("최대 주문 수량은 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
+            }
+        });
+
+        /*만약 최소 주문 수량이 최대 주문 수량보다 크다면 경고창이 뜬다.*/
+        $('#min_od_qty, #max_od_qty').on('blur', function() {
+            let minQty = $('#min_od_qty').val();
+            let maxQty = $('#max_od_qty').val();
+
+            if (minQty && maxQty) {
+                let minQtyInt = parseInt(minQty);
+                let maxQtyInt = new Number(maxQty);
+
+                /*만약 주문 최소 수량이 주문 최대 수량보다 크다면 경고창 발생하고 주문 최소 수량을 초기화한다.*/
+                if (maxQtyInt < minQtyInt) {
+                    alert("주문 최소 수량이 주문 최대 수량보다 많을 수 없습니다.");
+                    $('#min_od_qty').val('');
+                }
+            }
+        });
+
+        /*만약 판매 예정일이 제품 제조년월보다 과거면 에러가 발생한다.*/
+        $('#sls_strt_dt, #pd_mnf_date').on('blur', function() {
+            let saleStartDate = $('#sls_strt_dt').val();
+            let productManufactureDate = $('#pd_mnf_date').val();
+
+            if (saleStartDate && productManufactureDate) {
+                let saleStartDateObj = new Date(saleStartDate);
+                let productManufactureDateObj = new Date(productManufactureDate);
+
+                if (saleStartDateObj < productManufactureDateObj) {
+                    alert("판매 예정일은 제품 제조년월보다 이전일 수 없습니다.");
+                    $('#sls_strt_dt').val('');
+                }
             }
         });
     });

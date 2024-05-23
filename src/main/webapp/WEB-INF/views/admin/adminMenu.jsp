@@ -1,8 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="w3-sidebar w3-light-grey w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
+    <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button"><img src="/img/homerunball_logo.png" style="width:200px"></a>
     <%--<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>--%>
-    <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button">HOME</a>
+    <%--<a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button">HOME</a>--%>
     <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">제품 대시보드</a>
     <a href="<c:url value='/admin/product/list'/>" class="w3-bar-item w3-button">제품 목록</a>
     <a href="<c:url value='/admin/product/register'/>" class="w3-bar-item w3-button">제품 등록</a>

@@ -3,7 +3,9 @@ package com.homerunball.payment.service;
 import com.homerunball.payment.dao.PaymentDao;
 import com.homerunball.payment.domain.PaymentDto;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,8 +32,10 @@ public class PaymentServiceImpl implements PaymentService {
 
     Map<String, Object> localDateMap = new HashMap<>();
     localDateMap.put("c_id", c_id);
-    localDateMap.put("fromDate", parsedfromDate);
-    localDateMap.put("toDate", parsedtoDate);
+    localDateMap.put("fromDate", parsedfromDate.atTime(LocalTime.MIN));
+    localDateMap.put("toDate",     parsedtoDate.atTime(LocalTime.MAX));
+
+    System.out.println("localDateMap.toString() = " + localDateMap.toString());
 
     return paymentDao.selectPaymentHistoryWithDateRange(localDateMap);
   }
