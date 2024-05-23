@@ -208,3 +208,25 @@
 
 body{overflow-x: hidden}
 
+.prdWishBtn {
+    background: none;
+    border: 2.5px solid green;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px; /* Removes any extra space around the icon */
+}
+.prdWishBtn ion-icon {
+    --ionicon-stroke-width: 15; /* Adjust the stroke width as needed */
+    color: red;
+}
+.fillColor {
+    animation: fill 1s forwards;
+}
+@keyframes fill {
+    from {
+        color: white;
+    }
+    to {
+        color: red;
+    }
+}

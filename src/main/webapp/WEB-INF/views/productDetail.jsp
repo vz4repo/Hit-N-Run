@@ -53,10 +53,14 @@
             </p>
 <%--            바로구매 3차 개발 예정--%>
             <div class="prdSubmitBtn">
-                <button type="button" class="submitBtn" onclick="errorBtn()">바로구매</button>
-                <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니</button>
+                <button type="button" class="submitBtn">바로구매</button>
+                <button type="button" class="submitBtn" onclick="submitForm('cart')">
+                    <ion-icon name="bag-outline"></ion-icon>
+                </button>
 <%--            찜하기 3차 개발 예정--%>
-                <button type="button" class="submitBtn" onclick="errorBtn()">찜하기</button>
+                <button type="button" id="heartIconBtn" class="prdWishBtn">
+                    <ion-icon id="heartIcon" name="heart-outline"></ion-icon>
+                </button>
             </div>
 <%--            토글메뉴--%>
             <div class="prdContainer">
@@ -245,6 +249,20 @@
     //         })
     //     })
     // })
+    /* wish버튼 애니매이션 */
+    document.getElementById('heartIconBtn').addEventListener('click', function() {
+        const icon = document.getElementById('heartIcon');
+        const currentName = icon.getAttribute('name');
+        icon.setAttribute('name', currentName === 'heart-outline' ? 'heart' : 'heart-outline');
+        if(currentName !== 'heart'){
+            icon.classList.add('fillColor');
+            // Remove the animation class after it ends to allow re-triggering
+            setTimeout(() => {
+                icon.classList.remove('fillColor');
+            }, 1000); // Duration of the animation
+            // alert("3차 개발 예정입니다")
+        }
+    });
 </script>
 </body>
 </html>
