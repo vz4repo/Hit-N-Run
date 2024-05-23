@@ -40,7 +40,6 @@ public class ProductController {
             m.addAttribute("productList", productList);
             m.addAttribute("productCount", productCount);
         } catch (Exception e) {
-            e.printStackTrace();
             return "errorPage";
         }
         return "/admin/product/productList";
@@ -103,18 +102,19 @@ public class ProductController {
             String pdId = productDto.getPd_type_cd() + serialNumber + "-" + productDto.getClr_cd();
             productDto.setPd_id(pdId);
 
+            /*만약 판매 예정일이 제품 제조년월보다 과거면 에러가 발생한다.*/
+
+
             /* productRegister에서 입력받은 productDto를 사용해서 새로운 제품을 추가한다. */
             if (productService.create(productDto) != 1) throw new Exception("Register failed.");
 
             rattr.addFlashAttribute("msg", "제품이 정상적으로 등록되었습니다.");
             return "redirect:/admin/product/list";
         } catch (DuplicateKeyException e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품ID가 중복되었습니다.");
             return "/admin/product/productRegister";
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품이 정상적으로 등록되지 않았습니다.");
             return "/admin/product/productRegister";
@@ -132,7 +132,6 @@ public class ProductController {
             m.addAttribute("productList", productList);
             m.addAttribute("productCount", productCount);
         } catch (Exception e) {
-            e.printStackTrace();
             return "errorPage";
         }
         return "/admin/product/productManage";
@@ -142,7 +141,8 @@ public class ProductController {
     @PostMapping("/manage")
     public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd) {
         /*이전 페이지의 url을 referer에 저장한다.*/
-        /*String referer = request.getHeader("Referer");*/
+        String referer = request.getHeader("Referer");
+        System.out.println("referer = " + referer);
         try {
             /*
             productNumber가 selectedProduct라면
@@ -223,15 +223,14 @@ public class ProductController {
             rattr.addFlashAttribute("selectedContent", selectedContent);
             rattr.addFlashAttribute(productDto);
             rattr.addFlashAttribute("msg", "체크한 항목에 값을 입력해주세요.");
-            return "redirect:/admin/product/manage";
+            /*return "redirect:/admin/product/manage";*/
             /*이전 페이지로 이동한다.*/
-            /*return "redirect:"+referer;*/
+            return "redirect:"+referer;
         } catch (DataIntegrityViolationException e) {
             rattr.addFlashAttribute(productDto);
             rattr.addFlashAttribute("msg", "수정할 값을 잘못 입력하셨습니다.");
             return "redirect:/admin/product/manage";
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품의 내용을 수정하는 데 실패하였습니다.");
             return "errorPage";
@@ -285,7 +284,6 @@ public class ProductController {
             m.addAttribute("selectedProductCount", productList.size());
             m.addAttribute("productList", productListToString);
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
@@ -335,7 +333,6 @@ public class ProductController {
             m.addAttribute("selectedProductCount", productList.size());
             m.addAttribute("productList", productListToString);
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
@@ -385,7 +382,6 @@ public class ProductController {
             m.addAttribute("selectedProductCount", productList.size());
             m.addAttribute("productList", productListToString);
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
@@ -435,7 +431,6 @@ public class ProductController {
             m.addAttribute("selectedProductCount", productList.size());
             m.addAttribute("productList", productListToString);
         } catch (Exception e) {
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
@@ -457,7 +452,6 @@ public class ProductController {
             m.addAttribute("hiddenProductCount", hiddenProductCount);
         } catch (Exception e) {
             /*에러가 발생하면 에러 페이지로 이동한다.*/
-            e.printStackTrace();
             return "errorPage";
         }
         return "/admin/product/showHiddenProduct";
@@ -486,7 +480,6 @@ public class ProductController {
             rattr.addFlashAttribute("msg", "제품이 정상적으로 진열되었습니다.");
         } catch (Exception e) {
             /*에러가 발생하면 에러페이지로 이동한다.*/
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
@@ -516,7 +509,6 @@ public class ProductController {
             rattr.addFlashAttribute("msg", "제품이 정상적으로 제거되었습니다.");
         } catch (Exception e) {
             /*에러가 발생하면 에러페이지로 이동한다.*/
-            e.printStackTrace();
             m.addAttribute(productDto);
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";

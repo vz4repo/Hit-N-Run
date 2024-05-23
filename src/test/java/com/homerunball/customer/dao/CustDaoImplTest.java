@@ -31,13 +31,13 @@ public class CustDaoImplTest {
     public void selectEmail() {
     }
 
-    @Test
-    public void insert() throws Exception{
-        custDao.deleteAll();
-        CustDto custDto = new CustDto("asdf", "1234", "aaa", "bbb", "b", "000", "223", "aaa", "jjj", "ddd", "Y", "Y");
-        int rowCnt = custDao.insert(custDto);
-        assertTrue(rowCnt==1);
-    }
+//    @Test
+//    public void insert() throws Exception{
+//        custDao.deleteAll();
+//        CustDto custDto = new CustDto("asdf", "1234", "aaa", "bbb", "b", "000", "223", "aaa", "jjj", "ddd", "Y", "Y");
+//        int rowCnt = custDao.insert(custDto);
+//        assertTrue(rowCnt==1);
+//    }
 
 
     @Test

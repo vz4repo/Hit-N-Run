@@ -45,8 +45,8 @@
 <!--        <button class="button p-grid-col5" onclick="location.href='https://discord.gg/A4fRFXQhRu';" style="background-color: #e8f3ff; color: #1b64da">실시간 문의</button>-->
 <!--      </div>-->
       <div>
-        <button class="button" id="btnBackToHome">홈 화면</button>
-        <button class="button" id="btnGotoOrderDetail">주문상세</button>
+        <a href="/"><button class="button" id="btnBackToHome">홈 화면</button></a>
+        <a href="/orderDetail"><button class="button" id="btnGotoOrderDetail">주문상세</button></a>
       </div>
     </div>
 
@@ -60,9 +60,10 @@
       const orderNameElement = document.querySelector("#orderName");
       const methodElement = document.querySelector("#method");
       /* 리다이렉트 버튼 */
-      const btnBackToHome = document.querySelector("#btnBackToHome");
+/*      const btnBackToHome = document.querySelector("#btnBackToHome");
       const btnGotoOrderDetail = document.querySelector("#btnGotoOrderDetail");
       const BASE_URL = "http://127.0.0.1:9090/";
+*/
 
 
       /* TODO: 쿼리스트링 값, 결제 요청 보낸 데이터 정학성 체크로 결제금액 조작 여부 확인 */

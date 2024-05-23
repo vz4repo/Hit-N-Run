@@ -184,26 +184,26 @@
             <p id="check-result"></p>
             <label id="email">이메일</label>
             <input id="verify" type="button" value="인증번호 받기" disabled><br>
-            <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com">
+            <input class="special-class" type="text" id="c_email" name="c_email" maxlength="30" onblur="emailCheck()" placeholder="homerunball@run.com">
             <p id="mail-check-warn"></p>
             <label>인증번호</label>
-            <input class="special-class" type="text" id="c_email2" name="c_email2" disabled>
+            <input class="special-class" type="text" id="c_email2" name="c_email2" maxlength="10" disabled>
             <label>비밀번호</label>
-            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="pwd2Check(this.form)" disabled>
+            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="pwd2Check(this.form)" disabled>
             <p id="check-pwd"></p>
             <label id="pwdCheck">비밀번호 확인</label>
-            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." oninput="pwd2Check(this.form)" disabled>
+            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" oninput="pwd2Check(this.form)" disabled>
             <label>이름</label>
-            <input class="special-class" type="text" id="c_name" name="c_name" disabled>
+            <input class="special-class" type="text" id="c_name" name="c_name" maxlength="15" disabled>
             <label>주소</label>
-            <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly disabled>
+            <input type="text" id="zip" name="c_zip" placeholder="우편번호 찾기 클릭" readonly disabled>
             <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly disabled>
             <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly disabled>
-            <input type="text" id="jibunAddress" name="c_jibun_a" placeholder="지번주소" readonly disabled>
+            <input type="text" id="jibunAddress" name="c_jibun_a" maxlength="30" placeholder="지번주소는 선택사항입니다." disabled>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" name="c_det_a" placeholder="건물명+상세주소" disabled><br><br>
+            <input type="text" id="detailAddress" name="c_det_a" maxlength="30" placeholder="건물명+상세주소" disabled><br><br>
             <label>휴대폰</label>
-            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="-제외" disabled>
+            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="-제외" maxlength="12" disabled>
             <label>성별</label>
             <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
             <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
@@ -223,7 +223,8 @@
             <label for="email_agr" id="emailLabel">[선택] 쇼핑정보 이메일 수신</label><br><br><br>
 
             <button id="rBtn" disabled>가입하기</button>
-            <button type="button" onclick="window.history.back()">나가기</button><br><br>
+<%--            <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
+            <a href="/login"><button type="button">나가기</button></a><br><br>
         </div>
     </form>
 </div>
@@ -569,8 +570,6 @@
         }
     }
 
-
-
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
         // var isEmail = emailTrimCheck(frm);
@@ -578,7 +577,7 @@
         var isPwd = pwdCheck(frm);
         var isPwd2 = pwd2Check(frm);
         var isName = nameCheck(frm);
-        var isZip = zipCheck(frm);
+        /*var isZip = zipCheck(frm);*/
         var isPhn = phnCheck(frm);
         var isGen = genCheck(frm);
         var isTou = touCheck(frm)
@@ -602,7 +601,7 @@
             alert('비밀번호를 입력해주세요.');
             return false;
         } else if (!isPwd) {
-            alert('비밀번호는 영문/숫자 조합으로 4자 이상 15자 이하로 설정하셔야합니다.');
+            alert('비밀번호는 소문자 영문/숫자 조합으로 4자 이상 15자 이하로 설정하셔야합니다.');
             return false;
         } else if (!pwd2) {
             alert('비밀번호 확인을 입력해주세요');
@@ -619,9 +618,9 @@
         } else if (!zip) {
             alert('우편번호를 입력해주세요.');
             return false;
-        } else if (!isZip) {
+        /*} else if (!isZip) {
             alert("우편번호는 최대 6자 이하로 작성하셔야 합니다.");
-            return false;
+            return false;*/
         } else if (!road) {
             alert('도로명주소를 입력해주세요.');
             return false;
@@ -632,7 +631,7 @@
             alert('휴대폰 번호를 입력하세요.');
             return false;
         } else if (!isPhn) {
-            alert("휴대폰 번호는 최대 12자 이하로 입력이 가능합니다.");
+            alert("휴대폰 번호는 숫자 11~12자로 입력이 가능합니다.");
             return false;
         } else if (!isGen) {
             alert("성별을 선택해주세요.");
@@ -690,7 +689,7 @@
 
     function pwdCheck(frm) {
         var pwd = frm.c_pwd.value;
-        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$/;
+        var pwdPattern = /^(?=.*\d)(?=.*[a-z])[a-z0-9]{4,15}$/;
         if (!pwdPattern.test(pwd)) {
             return false;
         }
@@ -731,18 +730,18 @@
     }
 
     /*  우편번호 유효성 검사*/
-    function zipCheck(frm) {
+    /*function zipCheck(frm) {
         var zip = frm.c_zip.value;
         if (zip.length > 6) {
             return false;
         }
         return true;
-    }
+    }*/
 
     /*   휴대폰 유효성 검사*/
     function phnCheck(frm) {
         var phn = frm.c_phn.value;
-        var phnPattern = /^[0-9]{1,12}$/;
+        var phnPattern = /^[0-9]{11,12}$/;
         if (!phnPattern.test(phn)) {
             return false;
         }
@@ -780,43 +779,9 @@
         }
     }
 
-
-    // function touCheck(frm) {
-    //     var tou = frm.querySelector('input[name="touBox"]').checked;
-    //     if (tou) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    //
-    // function piiCheck(frm) {
-    //     var pii = frm.querySelector('input[name="piiBox"]').checked;
-    //     if (pii) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
     var modalSeen = false;
     var modalSeen2 = false;
 
-
-    // function enableTouBox() {
-    //     var touBox = document.getElementById("touBox");
-    //     touBox.disabled = false;
-    // }
-    //
-    // function openModal() {
-    //     var modal = document.getElementById("myModal");
-    //     var touBox = document.getElementById('touBox');
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    //     modalSeen = true; // 모달을 본 것으로 표시
-    //     enableTouBox(); // touBox 활성화
-    //     touBox.checked = true;
-    // }
 
     function enableTouBox() {
         var touBox = document.getElementById("touBox");
@@ -838,21 +803,6 @@
         modalSeen = true; // 모달을 본 것으로 표시
         enableTouBox(); // touBox 활성화
     }
-
-    // function enablePiiBox() {
-    //     var piiBox = document.getElementById("piiBox");
-    //     piiBox.disabled = false;
-    // }
-    //
-    // function openModal2(){
-    //     var modal = document.getElementById("myModal2");
-    //     var piiBox = document.getElementById('piiBox');
-    //     modal.style.display = "block";
-    //     document.body.style.overflow = "hidden";
-    //     modalSeen2 = true;
-    //     enablePiiBox();
-    //     piiBox.checked = true;
-    // }
 
     function enablePiiBox() {
         var piiBox = document.getElementById("piiBox");

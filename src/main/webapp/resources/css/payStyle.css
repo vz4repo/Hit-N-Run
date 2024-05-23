@@ -1,16 +1,24 @@
-.p {
-  padding: 0;
-  margin: 0;
-  font-family: Toss Product Sans, -apple-system, BlinkMacSystemFont, Bazier Square, Noto Sans KR, Segoe UI, Apple SD Gothic Neo, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-  color: #4e5968;
-  word-break: keep-all;
-  word-wrap: break-word;
-}
+/*.p {*/
+/*  padding: 0;*/
+/*  margin: 0;*/
+/*  font-family: Toss Product Sans, -apple-system, BlinkMacSystemFont, Bazier Square, Noto Sans KR, Segoe UI, Apple SD Gothic Neo, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,*/
+/*    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;*/
+/*  color: #4e5968;*/
+/*  word-break: keep-all;*/
+/*  word-wrap: break-word;*/
+/*}*/
+
 .wrapper {
-  max-width: 800px;
-  margin: 0 auto;
+  width: 85%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-weight: bold;
 }
+
+.wrapper:last-child {
+  margin-top: 5%;
+}
+
 .title {
   margin: 0 0 4px;
   font-size: 24px;
@@ -21,16 +29,34 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgb(0 0 0 / 1%), 0 6px 6px rgb(0 0 0 / 6%);
-  padding: 50px 50px 50px 50px;
-  margin-top: 30px;
-  margin-right: auto;
-  margin-left: auto;
-  color: #333d4b;
+  padding: 50px;
+  color: #777;
   align-items: center;
   text-align: center;
   overflow-x: auto; /* Add this property for horizontal scrolling */
   white-space: nowrap; /* Prevent text wrapping */
+}
 
+.text {
+  font-size: 17px;
+}
+
+.test > label > input {
+  margin-left: 12px;
+}
+
+.pay_col {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.wrapper__parent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 :root {
@@ -102,24 +128,34 @@ html {
   box-sizing: border-box;
 }
 
-.button {
-  color: #f9fafb;
-  background-color: #3182f6;
-  margin: 30px 15px 0px 15px;
+.wrapper__parent .button {
+  /*color: #f9fafb;*/
+  /*background-color: #3182f6;*/
+  /*margin: 30px 15px 0px 15px;*/
+  /*font-size: 15px;*/
+  /*font-weight: 600;*/
+  /*line-height: 18px;*/
+  /*white-space: nowrap;*/
+  /*text-align: center;*/
+  /*!* vertical-align: middle; *!*/
+  /*cursor: pointer;*/
+  /*border: 0 solid transparent;*/
+  /*user-select: none;*/
+  /*transition: background 0.2s ease, color 0.1s ease;*/
+  /*text-decoration: none;*/
+  /*border-radius: 7px;*/
+  /*padding: 11px 16px;*/
+  /*width: 250px;*/
+  display: inline;
+  width: 190px;
+  height: 48px;
+  line-height: 48px;
+  margin: 10px;
+  border: 1px solid #333;
+  color: #fff;
+  background-color: #333;
+  font-weight: bold;
   font-size: 15px;
-  font-weight: 600;
-  line-height: 18px;
-  white-space: nowrap;
-  text-align: center;
-  /* vertical-align: middle; */
-  cursor: pointer;
-  border: 0 solid transparent;
-  user-select: none;
-  transition: background 0.2s ease, color 0.1s ease;
-  text-decoration: none;
-  border-radius: 7px;
-  padding: 11px 16px;
-  width: 250px;
 }
 
 .button:hover {
@@ -127,15 +163,15 @@ html {
   background-color: #1b64da;
 }
 
-button:disabled,
-input:disabled {
+.wrapper__parent button:disabled,
+.wrapper__parent input:disabled {
   opacity: 80%;
   cursor: not-allowed;
 }
 
-button,
-input,
-textarea {
+.wrapper__parent button,
+.wrapper__parent input,
+.wrapper__parent textarea {
   font-family: Toss Product Sans, -apple-system, BlinkMacSystemFont, Bazier Square, Noto Sans KR, Segoe UI, Apple SD Gothic Neo, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
@@ -544,4 +580,12 @@ textarea {
 .p-grid-col5 {
   flex: 0 0 41.66667%;
   max-width: 41.66667%;
+}
+
+.title__pay {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  margin-top: 5%;
+  margin-left: 8%;
 }

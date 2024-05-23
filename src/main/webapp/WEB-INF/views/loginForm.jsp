@@ -130,15 +130,14 @@
 </head>
 
 <body>
-
 <div id="loginform">
     <form action="<c:url value='/login'/>" method="post" onsubmit="return">
         <h1 id="loginTitle">Home Run Ball</h1>
     <div class="container">
         <label>Email</label>
-        <input value="${cookie.c_email.value}" name="c_email" class="special-class" type="text" placeholder="Email" required>
+        <input value="${cookie.c_email.value}" name="c_email" class="special-class" type="text" maxlength="30" placeholder="Email" required>
         <label>Password</label>
-        <input class="special-class" type="password" name="c_pwd" placeholder="Password" required>
+        <input class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="Password" required>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
 
@@ -165,6 +164,10 @@
             카카오톡 로그인
         </button>
 
+<%--        <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
+
+        <a href="/"><button type="button">나가기</button></a><br><br>
+
     </div>
     </form>
 </div>
@@ -180,10 +183,20 @@
         alert("회원가입이 되셨습니다.");
     }
 
+
     let loginFail = "${loginFail}"
     if(loginFail==="msg") {
         alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
     }
+
+//    let urlParams = new URLSearchParams(window.location.search);
+//    let loginFail = urlParams.get('loginFail');
+//
+//    // loginFail 변수의 값이 "msg"인 경우에만 경고창을 띄움
+//    if(loginFail === "msg") {
+//        alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
+//    }
+
 
 
     function test(){
