@@ -55,7 +55,7 @@
             <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
 
-        <div class="carousel-inner">
+        <div class="carousel-inner main-banner-item">
             <div class="carousel-item active c-item">
                 <img src="/img/advertisement/adimg1.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 1">
                 <div class="carousel-caption advertiseCommentLeft">
@@ -81,11 +81,11 @@
                 </div>
             </div>
         </div>
-        <button class="carousel-control-prev main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next main-banner-carousel" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#advertisement-carousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -177,13 +177,16 @@
 <%--                </c:otherwise>--%>
             </c:choose> <%--end of c:choose--%>
 
-            <!-- Carousel controls -->
-            <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
+            <c:if test="${newProductNumber > 4}">
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </c:if>
         </div>
         </div>
     </div>
@@ -267,13 +270,16 @@
                 </div> <!-- item 닫기 -->
                 </c:if>
             </div>
-            <!-- Carousel controls -->
-            <a class="carousel-control left" href="#myCarousel1" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="carousel-control right" href="#myCarousel1" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
+            <c:if test="${newProductNumber > 4}">
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </c:if>
         </div>
         </div>
     </div>
@@ -357,13 +363,16 @@
                 </div> <!-- item 닫기 -->
                 </c:if>
             </div>
-            <!-- Carousel controls -->
-            <a class="carousel-control left" href="#myCarousel2" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="carousel-control right" href="#myCarousel2" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
+            <c:if test="${newProductNumber > 4}">
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </c:if>
         </div>
         </div>
     </div>
@@ -447,13 +456,16 @@
                 </div> <!-- item 닫기 -->
                 </c:if>
             </div>
-            <!-- Carousel controls -->
-            <a class="carousel-control left" href="#myCarousel3" data-slide="prev">
-                <i class="fa fa-angle-left"></i>
-            </a>
-            <a class="carousel-control right" href="#myCarousel3" data-slide="next">
-                <i class="fa fa-angle-right"></i>
-            </a>
+            <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
+            <c:if test="${newProductNumber > 4}">
+                <!-- Carousel controls -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </c:if>
         </div>
         </div>
     </div>
