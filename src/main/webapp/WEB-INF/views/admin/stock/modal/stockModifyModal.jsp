@@ -29,26 +29,26 @@
                         </tr>
                         <tr>
                             <td><label for="modify_nml_stk_qty">정상재고수량</label></td>
-                            <td><input type="text" id="modify_nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="modify_nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
                             <td><label for="modify_rt_stk_qty">반품재고수량</label></td>
-                            <td><input type="text" id="modify_rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="modify_rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_rgn_stk_qty">재생가능재고수량</label></td>
-                            <td><input type="text" id="modify_rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="modify_rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
                             <td><label for="modify_urgn_stk_qty">재생불가능재고수량</label></td>
-                            <td><input type="text" id="modify_urgn_stk_qty" name="urgn_stk_qty"
+                            <td><input type="text" class="validNumber" id="modify_urgn_stk_qty" name="urgn_stk_qty"
                                        placeholder="재생불가능재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_sfty_stk_qty">안전재고수량</label></td>
-                            <td><input type="text" id="modify_sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="modify_sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
@@ -61,23 +61,23 @@
                         </tr>
                         <tr>
                             <td><label for="modify_rcpt_cp">입고처</label></td>
-                            <td><input type="text" id="modify_rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
+                            <td><input type="text" class="validText" id="modify_rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_rcpt_prc">입고가격</label></td>
-                            <td><input type="text" id="modify_rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="modify_rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_rtl_prc">소비자가격</label></td>
-                            <td><input type="text" id="modify_rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="modify_rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_sls_prc">판매가격</label></td>
-                            <td><input type="text" id="modify_sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="modify_sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="modify_stk_plc_cd">재고위치코드</label></td>
-                            <td><input type="text" id="modify_stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
+                            <td><input type="text" class="validText" id="modify_stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
                         </tr>
                         </tbody>
                     </table>

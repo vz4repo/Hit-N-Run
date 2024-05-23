@@ -15,3 +15,11 @@
 .header-button {
     flex: none; /* 버튼 크기 고정 */
 }
+
+.w3-main, #main {
+    transition: margin-left .0s;
+}
+
+.w3-animate-left {
+    animation: none;
+}

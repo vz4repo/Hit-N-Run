@@ -148,6 +148,9 @@
         $('#selectAll').click(function () {
             $('input:checkbox').prop('checked', this.checked);
         });
+
+        idValidateNumber();
+        idValidateText();
     });
 
     function registModal(index, pdId, pdName) {
@@ -250,6 +253,26 @@
         });
     }
 
+    /* 숫자를 입력해야하는 곳에 음수 또는 특수문자가 들어가는지 체크 */
+    function idValidateNumber() {
+        $('.validNumber').on('input', function() {
+            const value = $(this).val().trim();
+            if(/[^0-9]/.test(value)) {
+                alert("숫자만 입력할 수 있습니다. 0이상의 숫자를 입력해주세요.");
+                $(this).val('');
+            }
+        });
+    }
+
+    function idValidateText() {
+        $('.validText').on('input', function() {
+            const value = $(this).val().trim();
+            if(/[ \{\}\[\]\/?.,;:|\)*~`!^\_+┼<>@\#$%&\'\"\\\(\=]/gi.test(value)) {
+                alert("특수문자는 입력할 수 없습니다. 다시입력해주세요.");
+                $(this).val('');
+            }
+        });
+    }
     /*
     1. 재고 일괄설정 버튼클릭
       1.1. checked가 0이면 제품을 선택해 달라는 알림 띄우기
