@@ -1,4 +1,4 @@
-.order__items * {
+* {
     font-family: "IBM Plex Sans KR", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -16,7 +16,8 @@
     color: #777;
 }
 
-.order__header a{
+.order__header a,
+.tb__order a{
     text-decoration: none;
     color: black;
 }
