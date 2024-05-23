@@ -442,21 +442,21 @@
                         <td class="product-info">
                             <div>
                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.cartDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.cartDto.mn_img_fn}"
+                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
                                          alt="썸네일" name="thumbnail"/>
                                 </a>
                             </div>
                             <ul class="info">
-                                <li class="brand">
-                                    브랜드 이름
-                                </li>
                                 <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                    <span>${orderdetDto.brd_name}</span>
+                                </li>
+                                    <!-- 상품 이름 -->
                                 <li class="name">
                                     <a href="#">${orderdetDto.pd_name}</a>
-                                    <!-- 상품 이름 -->
                                 </li>
-                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
                                 <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
                             </ul>
                         </td>
 
@@ -478,112 +478,21 @@
                         <!-- 주문금액 및 수량 -->
                         <td>
                             <div class="order-amount" data-order-id="20231208212440001">
-                                <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
-                                <span>${orderdetDto.od_qty}개</span>
+                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                <span>${orderdetDto.od_qty} 개</span>
                             </div>
                         </td>
 
                         <td class="order-status">
-                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_cd}</a>
+                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
                             <!-- 구매상태 링크 -->
                             <button class="open-delivery-modal">배송조회</button>
                             <!-- 배송조회 버튼 -->
                         </td>
                     </tr>
                 </c:forEach>
+                <!-- 추가 주문 행을 여기에 추가 -->
                 </tbody>
-            </table>
-        </div>
-    </div>
-
-
-    <!-- 주문상세내역 모달 -->
-    <div id="orderIdModal" class="modal">
-        <div class="modal-content">
-            <table>
-                <colgroup>
-                    <col width="30%"/>
-                    <col width="30%"/>
-                    <col width="15%"/>
-                    <col width="15%"/>
-                    <col width="10%"/>
-                </colgroup>
-
-                <div class="modal-header">
-                    <h2 class="order-id-header">
-                        <span class="">주문 상세 내역</span>
-                    </h2>
-                </div>
-                <div class="modal-body">
-                    <thead>
-                    <tr>
-                        <th>상품정보</th>
-                        <!-- 상품 정보 헤더 -->
-                        <th>주문일자</th>
-                        <!-- 주문일자 헤더 -->
-                        <th>주문번호</th>
-                        <!-- 주문번호 헤더 -->
-                        <th>주문금액(수량)</th>
-                        <!-- 주문금액(수량) 헤더 -->
-                        <th>주문 상태</th>
-                        <!-- 주문 상태 헤더 -->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="orderdetDto" items="${list}" varStatus="status">
-                        <tr class="order-item-hist">
-                            <td class="product-info">
-                                <div>
-                                    <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                        <img src="/img/product/${orderdetDto.cartDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.cartDto.mn_img_fn}"
-                                             alt="썸네일" name="thumbnail"/>
-                                    </a>
-                                </div>
-                                <ul class="info">
-                                    <li class="brand">
-                                        브랜드 이름
-                                    </li>
-                                    <!-- 브랜드 이름 -->
-                                    <li class="name">
-                                        < <a href="#">>${orderdetDto.pd_name}</a>
-                                        <!-- 상품 이름 -->
-                                    </li>
-                                    <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
-                                    <!-- 상품 옵션 -->
-                                </ul>
-                            </td>
-
-                            <!-- 주문일자 -->
-                            <td>
-                                <span data-oddt="${orderdetDto.od_dt}" class="od_dt">${orderdetDto.od_dt}</span>
-                            </td>
-
-                            <!-- 주문번호 -->
-                            <td>
-                                <div class="order-number">
-                                    <a href="#">${orderdetDto.od_id}</a>
-
-                                </div>
-                            </td>
-
-                            <!-- 주문금액 및 수량 -->
-                            <td>
-                                <div class="order-amount" data-order-id="20231208212440001">
-                                    <span>${orderdetDto.sls_prc * orderdetDto.cartDto.cart_cnt}</span>
-                                    <span>${orderdetDto.od_qty}개</span>
-                                </div>
-                            </td>
-
-                            <td class="order-status">
-                                <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_cd}</a>
-                                <!-- 구매상태 링크 -->
-                                <button class="open-delivery-modal">배송조회</button>
-                                <!-- 배송조회 버튼 -->
-                            </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </div>
             </table>
         </div>
     </div>
@@ -823,7 +732,7 @@
                             <%@include file="payCheckout.jsp" %>
                         </section>
             --%>
-            <%@include file="footer.jsp" %>
+
 
             <script>
 
