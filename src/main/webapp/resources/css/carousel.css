@@ -103,6 +103,10 @@ h2 {
     display: block;
 }
 
+.productName > a:hover {
+    text-decoration: none;
+}
+
 .carousel {
     margin: 50px auto;
     padding: 0 70px;
