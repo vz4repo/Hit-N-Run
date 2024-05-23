@@ -16,12 +16,17 @@ public class CustInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         HttpSession session = request.getSession();
+
+        String requestURL = request.getRequestURI();
+        session.setAttribute("toURL", requestURL);
+
         if(session.getAttribute("c_id") == null) {
-            response.sendRedirect("/login?toURL=" + request.getRequestURI());
+            response.sendRedirect("/login");
             return false;
         }
         return true;
     }
+
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,

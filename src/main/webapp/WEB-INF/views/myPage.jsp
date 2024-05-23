@@ -4,62 +4,59 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
-
-    <title>My Page</title>
-    <style>
-        body {
-            font-family: 'IBM Plex Sans', sans-serif;
-            margin: 0;
-            padding: 0;
-            /*display: flex;*/
-        }
-
-        #myPage {
-            margin: auto;
-            width: 350px;
-            padding: 20px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        #myPage li a {
-            text-decoration: none;
-            color: black;
-        }
-
-        #myPage li a:hover {
-            background-color: #ddd;
-        }
-
-        p {
-            font-size: 13px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        #myPage h5 {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-
-        #myPage ul {
-            display: block;
-        }
-    </style>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-
+    <title>My Page</title>
 </head>
+<style>
+    * {
+        font-family: "IBM Plex Sans KR", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    #myPage {
+        margin: auto;
+        width: 350px;
+        padding: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    #myPage li a {
+        text-decoration: none;
+        color: black;
+    }
+
+    #myPage li a:hover {
+        background-color: #ddd;
+    }
+
+    #myPage p {
+        font-size: 13px;
+    }
+
+    #myPage ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    #myPage li {
+        margin-bottom: 10px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    #myPage h5 {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 5px;
+    }
+
+    #myPage ul {
+        display: block;
+    }
+</style>
 
 <body>
 <jsp:include page="header.jsp"/>
