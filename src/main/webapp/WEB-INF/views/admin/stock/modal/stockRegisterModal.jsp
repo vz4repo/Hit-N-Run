@@ -29,26 +29,26 @@
                         </tr>
                         <tr>
                             <td><label for="nml_stk_qty">정상재고수량</label></td>
-                            <td><input type="text" id="nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="nml_stk_qty" name="nml_stk_qty" placeholder="정상재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
                             <td><label for="rt_stk_qty">반품재고수량</label></td>
-                            <td><input type="text" id="rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="rt_stk_qty" name="rt_stk_qty" placeholder="반품재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="rgn_stk_qty">재생가능재고수량</label></td>
-                            <td><input type="text" id="rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="rgn_stk_qty" name="rgn_stk_qty" placeholder="재생가능재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
                             <td><label for="urgn_stk_qty">재생불가능재고수량</label></td>
-                            <td><input type="text" id="urgn_stk_qty" name="urgn_stk_qty"
+                            <td><input type="text" class="validNumber" id="urgn_stk_qty" name="urgn_stk_qty"
                                        placeholder="재생불가능재고수량을 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="sfty_stk_qty">안전재고수량</label></td>
-                            <td><input type="text" id="sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
+                            <td><input type="text" class="validNumber" id="sfty_stk_qty" name="sfty_stk_qty" placeholder="안전재고수량을 입력하세요.">
                             </td>
                         </tr>
                         <tr>
@@ -61,23 +61,23 @@
                         </tr>
                         <tr>
                             <td><label for="rcpt_cp">입고처</label></td>
-                            <td><input type="text" id="rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
+                            <td><input type="text" class="validText"  id="rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="rcpt_prc">입고가격</label></td>
-                            <td><input type="text" id="rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="rtl_prc">소비자가격</label></td>
-                            <td><input type="text" id="rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="sls_prc">판매가격</label></td>
-                            <td><input type="text" id="sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
                         </tr>
                         <tr>
                             <td><label for="stk_plc_cd">재고위치코드</label></td>
-                            <td><input type="text" id="stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
+                            <td><input type="text" class="validText"  id="stk_plc_cd" name="stk_plc_cd" placeholder="재고위치코드를 입력하세요."></td>
                         </tr>
                         </tbody>
                     </table>
@@ -205,6 +205,7 @@
             };
         }
 
+        /* 등록하기 전 비어있는 값은 없는지 확인 */
         function idValidateRegisterParams() {
             if ($('#pd_id').val() == null || $('#pd_id').val().length < 1) {
                 alert('제품ID를 입력해주세요.');

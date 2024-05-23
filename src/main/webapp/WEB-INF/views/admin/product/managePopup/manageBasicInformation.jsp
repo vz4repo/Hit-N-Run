@@ -207,7 +207,7 @@
                     <th style="width:200px;">
                         <label for="origin">제조국</label></th>
                     <td>
-                        <input type="text" name="origin" maxlength="10" class="originCnt" required>
+                        <input type="text" name="origin" maxlength="10" class="originCnt" >
                         <span id="originCnt">[0 / 10]</span>
                     </td>
                 </tr>
@@ -218,7 +218,7 @@
                     <th style="width:200px;">
                         <label for="manufacturer">제조사</label></th>
                     <td>
-                        <input type="text" name="mfr" maxlength="10" class="mfrCnt" required>
+                        <input type="text" name="mfr" maxlength="10" class="mfrCnt" >
                         <span id="mfrCnt">[0 / 10]</span>
                     </td>
                 </tr>
@@ -398,6 +398,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
     $(document).ready(function() {
+        /*입력한 값의 앞, 뒤에 있는 공백 제거*/
+        $("input").on('blur', function () {
+            $(this).val($.trim($(this).val()));
+        });
+
         /*제조국 글자 수 세기*/
         $(".originCnt").keyup(function() {
             let content = $(this).val();
@@ -579,12 +584,23 @@
             }
         });
 
-        /* 무게(wgh)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 무게(wgh)에 입력된 값이 숫자인지 1이상의 정수인지 확인한다. */
         $('#wgh').on('blur', function () {
             let weightInput = $(this).val();
             if (isNaN(weightInput) || weightInput.trim() === '') {
                 alert("무게는 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            weightInput = parseFloat(weightInput);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(weightInput);
+
+            /*무게가 1보다 작거나 실수면 경고창이 뜬다.*/
+            if (weightInput < 1 || weightInput !== integerInput) {
+                alert("무게는 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
             }
         });
     });

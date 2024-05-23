@@ -46,6 +46,7 @@ public class RegisterController {
     @GetMapping("/mailCheck")
     @ResponseBody
     public String mailCheck(String email, HttpServletRequest request) {
+     try{
         System.out.println("이메일 인증 요청이 들어옴!");
         System.out.println("이메일 인증 이메일 : " + email);
 
@@ -57,6 +58,9 @@ public class RegisterController {
         System.out.println("세션에 저장된 인증번호: " + session.getAttribute("verificationCode"));
 
         return verificationCode;
+     } catch (Exception e) {
+         return "errorPageC";
+     }
     }
 
     @PostMapping("/add")
@@ -89,6 +93,7 @@ public class RegisterController {
                 custDao.insert(custDto);
 
                 return "redirect:/login";
+//                return "redirect:/";
             } else {
                 // 인증번호 불일치 시 회원가입 폼으로 이동
                 System.out.println("인증번호 잘못 입력하셨다구요");
@@ -96,14 +101,25 @@ public class RegisterController {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "registerForm";
+            return "errorPageC";
         }
     }
 
     /*이메일 중복 체크*/
+//    @PostMapping("/email-check")
+//    public @ResponseBody String emailCheck(@RequestParam("c_email") String c_email) {
+//        String checkResult = custService.emailCheck(c_email);
+//        return checkResult;
+//    }
+
     @PostMapping("/email-check")
     public @ResponseBody String emailCheck(@RequestParam("c_email") String c_email) {
-        String checkResult = custService.emailCheck(c_email);
-        return checkResult;
+        try {
+            String checkResult = custService.emailCheck(c_email);
+            return checkResult;
+        } catch (Exception e) {
+            // 예외 처리 로직
+            return "Invalid email address";
+        }
     }
 }

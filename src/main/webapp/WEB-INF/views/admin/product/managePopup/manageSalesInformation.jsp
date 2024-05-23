@@ -37,7 +37,7 @@
         }
 
         .productManageSalesInformation-container input[type="date"] {
-            width: 100px;
+            width: 120px;
             text-align: center;
         }
 
@@ -179,6 +179,11 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>
     $(document).ready(function() {
+        /*입력한 값의 앞, 뒤에 있는 공백 제거*/
+        $("input").on('blur', function () {
+            $(this).val($.trim($(this).val()));
+        });
+
         /*전체 선택을 클릭하는 경우 발생하는 함수*/
         $("#selectAll").click(function() {
             /*전체 선택이 체크되어 있다면 나머지 체크박스도 체크되게 한다.*/
@@ -217,21 +222,75 @@
             }
         });
 
-        /* 최소 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 최소 주문 수량(minQty)에 입력된 값이 숫자인지 1이상의 정수인지 확인한다. */
         $('#min_od_qty').on('blur', function () {
             let minQty = $(this).val();
             if (isNaN(minQty) || minQty.trim() === '') {
                 alert("최소 주문 수량은 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            minQty = parseFloat(minQty);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(minQty);
+
+            /*무게가 1보다 작거나 실수면 경고창이 뜬다.*/
+            if (minQty < 1 || minQty !== integerInput) {
+                alert("최소 주문 수량은 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
             }
         });
 
-        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 확인하는 함수 */
+        /* 최대 주문 수량(maxQty)에 입력된 값이 숫자인지 1이상의 양수인지 확인한다 */
         $('#max_od_qty').on('blur', function () {
             let maxQty = $(this).val();
             if (isNaN(maxQty) || maxQty.trim() === '') {
                 alert("최대 주문 수량은 숫자만 입력할 수 있습니다.");
-                $(this).val('');
+                return $(this).val('');
+            }
+
+            /*입력 받은 값을 실수로 변환한다.*/
+            maxQty = parseFloat(maxQty);
+            /*입력 받은 값을 정수로 변환한다.*/
+            let integerInput = parseInt(maxQty);
+
+            if (maxQty < 1 || maxQty !== integerInput) {
+                alert("최대 주문 수량은 1이상의 정수만 입력할 수 있습니다.")
+                return $(this).val('');
+            }
+        });
+
+        /*만약 최소 주문 수량이 최대 주문 수량보다 크다면 경고창이 뜬다.*/
+        $('#min_od_qty, #max_od_qty').on('blur', function() {
+            let minQty = $('#min_od_qty').val();
+            let maxQty = $('#max_od_qty').val();
+
+            if (minQty && maxQty) {
+                let minQtyInt = parseInt(minQty);
+                let maxQtyInt = new Number(maxQty);
+
+                /*만약 주문 최소 수량이 주문 최대 수량보다 크다면 경고창 발생하고 주문 최소 수량을 초기화한다.*/
+                if (maxQtyInt < minQtyInt) {
+                    alert("주문 최소 수량이 주문 최대 수량보다 많을 수 없습니다.");
+                    $('#min_od_qty').val('');
+                }
+            }
+        });
+
+        /*만약 판매 예정일이 제품 제조년월보다 과거면 에러가 발생한다.*/
+        $('#sls_strt_dt, #pd_mnf_date').on('blur', function() {
+            let saleStartDate = $('#sls_strt_dt').val();
+            let productManufactureDate = $('#pd_mnf_date').val();
+
+            if (saleStartDate && productManufactureDate) {
+                let saleStartDateObj = new Date(saleStartDate);
+                let productManufactureDateObj = new Date(productManufactureDate);
+
+                if (saleStartDateObj < productManufactureDateObj) {
+                    alert("판매 예정일은 제품 제조년월보다 이전일 수 없습니다.");
+                    $('#sls_strt_dt').val('');
+                }
             }
         });
     });
