@@ -36,16 +36,24 @@ public class CartController {
 
     /* pd_clsf_code 사이즈 , cart_cnt 제품개수 옵션변경할경우 update */
     @PostMapping("/update")
-    public String update(CartDto cartDto, int c_id, String pd_clsf_code, Integer cart_cnt, Model m) {
+    public String update(CartDto cartDto, Integer cart_cnt, RedirectAttributes rattr) {
         try {
             /* 제품 Count 변경한다 */
             cartDto.setCart_cnt(cart_cnt);
+            /* Cart에 담긴 수량이 100개 이상일경우 메세지를 던진다 */
+            if(cart_cnt >= 100){
+                rattr.addFlashAttribute("msg", "CART_CNT_OVER");
+                return "redirect:/cart/list";
+            }
             /* update 실행 */
-            System.out.println("cartDto: "+cartDto);
-            cartDao.update(cartDto);
-            m.addAttribute("c_id", c_id);
+            int rowCnt = cartDao.update(cartDto);
+            /* 업데이트 rowCnt가 1이 아닐경우 에러를던진다 */
+            if(rowCnt!=1){
+                throw new Exception();
+            }
         } catch (Exception e){
             e.printStackTrace();
+            rattr.addFlashAttribute("msg", "UPDATE_ERR");
         }
         return "redirect:/cart/list";
     }
@@ -63,20 +71,23 @@ public class CartController {
 
     /* 고객 한명의 장바구니 전체삭제 */
     @PostMapping("/removeAll")
-    public String removeAll(int c_id, Model m,HttpServletRequest request){
+    public String removeAll(int c_id, Model m, RedirectAttributes rattr){
         try{
             /* c_id 고객번호를 매개변수로 받아와서 장바구니 전체 삭제한다 */
             cartDao.cidDeleteAll(c_id);
             m.addAttribute("c_id", c_id);
+
         } catch (Exception e) {
+            /* 삭제에 실패할경우 메세지를 던진다 */
             e.printStackTrace();
+            rattr.addFlashAttribute("msg", "DEL_ERR");
         }
         return "redirect:/cart/list";
     }
 
     /*고객장바구니 선택삭제*/
     @PostMapping("/remove")
-    public String remove(int c_id, String pd_id, String pd_clsf_code, HttpServletRequest request){
+    public String remove(int c_id, String pd_id, String pd_clsf_code, RedirectAttributes rattr){
         try {
             /*고객의 장바구니를 삭제 (고객ID, 제품번호, 사이즈) 를 매개변수로 받아온다*/
             int rowcnt = cartDao.delete(c_id, pd_id, pd_clsf_code);
@@ -84,15 +95,20 @@ public class CartController {
             /* 1이 아닐경우 throw */
             if(rowcnt !=1)
                 throw new Exception("Cart remove err");
+
         } catch(Exception e){
+            /* 삭제에 실패할경우 메세지를 던진다 */
             e.printStackTrace();
+            rattr.addFlashAttribute("msg", "DEL_ERR");
         }
-        return "redirect:/cart/list?c_id="+c_id;
+        return "redirect:/cart/list";
     }
 
 
+
+
     @PostMapping("/insert")
-    public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session) {
+    public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session, RedirectAttributes rattr) {
         int c_id = 0;
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
@@ -104,25 +120,41 @@ public class CartController {
             cartDto.setMn_img_fn(mn_img_fn);
             cartDto.setPd_type_cd(pd_type_cd);
 
+            /* 장바구니에 담은 제품이 존재하는지 확인 */
             boolean exists = cartDao.exists(cartDto);
 
+            /* 존재할경우 */
             if (exists) {
+                /* cart에서 조회하고 select된 제품의 장바구니 개수를 읽어온다 */
                 CartDto dao = cartDao.selectCart(c_id, pd_id, pd_clsf_cd);
                 int currentCart = dao.getCart_cnt();
+
+                /* 장바구니의 개수가 100 이상일경우 메세지를 던지고 redirect */
+                if(currentCart >= 99){
+                    rattr.addFlashAttribute("msg", "CART_CNT_OVER");
+                    return "redirect:/cart/list";
+                }
+                /* 그렇지않을경우 현재 가져온 장바구니 개수에서 +1 설정해준다 */
+                /* update를 해준다 */
                 cartDto.setCart_cnt(currentCart+1);
                 cartDao.update(cartDto);
             } else {
+                /* 존재하지않을경우 장바구니에 insert 실행 */
                 cartDao.insert(cartDto);
             }
-
             System.out.println("insert:" + cartDto);
 
             m.addAttribute("cartDto", cartDto);
+            return "redirect:/cart/list";
         } catch (Exception e) {
+            /* Insert에 실패할경우 메세지를 던진다 */
             e.printStackTrace();
+            rattr.addFlashAttribute("msg", "INSERT_ERR");
+            return "errorPage";
         }
-        return "redirect:/cart/list";
     }
+
+
 
     /*고객 장바구니 load*/
     @GetMapping("/list")

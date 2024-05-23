@@ -7,35 +7,37 @@
 <html lang="en">
 <head>
     <title>Home Run Ball</title>
+    <%--폰트 정해지면 바꾸기--%>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
     <style>
-
         body{
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
         #loginform {
-            max-width: 700px;
+            max-width: 500px;
+            max-height: 500px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding-top: 5%;
-            padding-bottom: 5%;
+            padding-top: 2%;
+            padding-bottom: 2%;
             margin: 0 auto;
-            margin-top: 100px;
-            margin-bottom: 50px;
+            margin-top: 200px;
+            /*margin-bottom: 50px;*/
         }
 
         .container {
-            width: 300px;
+            width: 400px;
+            /*height: 400px;*/
             margin: 0 auto;
             text-align: left;
         }
 
 
         .special-class {
-            width: 100%;
+            width: 87%;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -45,6 +47,7 @@
 
         button {
             width: 100%;
+            height: 50px;
             padding: 10px;
             margin-bottom: 10px;
             border: none;
@@ -64,67 +67,85 @@
             margin-bottom: 15px;
             font-weight: bold;
             color: gray;
+            font-size: 13px;
         }
 
         #check {
             margin-bottom: 15px;
-            font-size: 12px;
+            font-size: 13px;
             display: flex;
+            /*margin-left: 30px;*/
         }
 
         #remember{
             margin-right: 5px;
+            /*font-size: 12px;*/
         }
 
-        #loginTitle {
-            font-size: 20px;
-            margin-bottom: 40px;
-            font-family: 'IBM Plex Sans', sans-serif;
+        #emailRemember{
+            font-size: 12px;
         }
 
-        label{
-            font-size: 13px;
-        }
-
-
-        #kakaoBtn {
+        .buttonContainer {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #ffd400;
-            color: #2c0b0e;
-            /*color: saddlebrown;*/
-            /*font-weight: bold;*/
+            justify-content: space-between;
+            max-width: 400px;
+            margin: auto;
         }
 
-
-        #googleBtn {
+        .subBtn {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: center; /* 텍스트와 이미지를 세로 중앙으로 정렬 */
+            justify-content: center; /* 텍스트와 이미지를 수평으로 정렬 */
             background-color: gainsboro;
             color: black;
-            /*font-weight: bold;*/
+            border: none; /* 버튼의 기본 테두리를 제거 */
+            cursor: pointer;
+            padding: 5px 10px; /* 버튼 내부 패딩을 추가하여 내용과 테두리 사이의 공간을 조절 */
         }
 
-        #naverBtn {
+        #googleBtn {
+            background-color: gainsboro;
+            color: #2c0b0e;
+        }
+
+        #kakaoBtn {
+            background-color: #ffd400;
+            color: #2c0b0e;
+        }
+
+        #appleBtn {
+            background-color: whitesmoke;
+            color: #2c0b0e;
+        }
+
+
+        #forgot{
+            cursor: pointer;
+        }
+
+        #regi{
+            cursor: pointer;
+            text-decoration: none; /* 밑줄 제거 */
+            color: #000; /* 링크 색상 */
+        }
+
+        #loginImg, #c_email{
+            display: inline;
+        }
+
+        #loginDiv {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: green;
-            /*font-weight: bold;*/
+            justify-content: space-between;
         }
 
-        #kakao {
-            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
+        #pwdImg, #c_pwd{
+            display: inline;
         }
 
-        #google {
-            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
-        }
-
-        #naver {
-            margin-right: 10px; /* 이미지와 텍스트 사이의 간격 조정 */
+        #pwdDiv{
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -132,50 +153,36 @@
 <body>
 <div id="loginform">
     <form action="<c:url value='/login'/>" method="post" onsubmit="return">
-        <h1 id="loginTitle">Home Run Ball</h1>
+
+    <a href="/"><img src="/img/homerunball_logo.png" style="width:200px"></a><br><br><br><br>
     <div class="container">
-        <label>Email</label>
-        <input value="${cookie.c_email.value}" name="c_email" class="special-class" type="text" maxlength="30" placeholder="Email" required>
-        <label>Password</label>
-        <input class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="Password" required>
+
+    <div id="loginDiv"><img id="loginImg" style="height: 30px" width="30px"
+                            src="https://cdn-icons-png.flaticon.com/128/1540/1540316.png"><input value="${cookie.c_email.value}"
+                                                                                                 id="c_email" name="c_email" class="special-class" type="text" maxlength="30" placeholder="Email" required></div>
+
+        <div id="pwdDiv"><img id="pwdImg" style="height: 30px" width="30px" src="https://cdn-icons-png.flaticon.com/128/14/14478.png"><input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="Password" required></div>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
 
+<%--        <div id="check">--%>
+        <div id="emailRemember">
+            <input type="checkbox" id="remember" name="rememberEmail" ${empty cookie.c_email.value ? "":"checked"}>이메일 저장</div><br><br>
+<%--        </div><br>--%>
+        <button type="submit">로그인</button>
+<%--        <a href="/register/add"> <button type="button" id="signUpButton">회원가입</button> </a>--%>
+
+        <div class="buttonContainer">
+        <button type="button" class="subBtn" id="googleBtn" onclick="test()"> <img id="google" src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="30" height="30"></button>
+        <button type="button" class="subBtn" id="kakaoBtn" onclick="test()"> <img id="kakao" src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png" width="30" height="30"></button>
+            <button type="button" class="subBtn" id="appleBtn" onclick="test()"> <img id="apple" src="https://cdn-icons-png.flaticon.com/128/0/747.png" width="30" height="30"></button></div>
         <div id="check">
-            <input type="checkbox" id="remember" name="rememberEmail" ${empty cookie.c_email.value ? "":"checked"}> Remember Email
+            <a id="forgot" onclick="test()" >아이디/비밀번호 찾기</a> <a id="regi" href="/register/add" style="margin-left: 220px">회원가입 </a>
         </div>
-        <button type="submit">Continue</button>
-        <button type="button" class="subBtn" onclick="test()">Forgot Email</button>
-        <button type="button" class="subBtn" onclick="test()">Forgot pwd</button>
-        <a href="/register/add"> <button type="button" id="signUpButton">Sign Up</button> </a>
-
-        <button id="googleBtn" type="button" onclick="test()">
-            <img id="google" src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="30" height="30">
-            구글 로그인
-        </button>
-
-        <button id="naverBtn" type="button" onclick="test()">
-            <img id="naver" src="https://cdn-icons-png.flaticon.com/128/11423/11423248.png" width="30" height="30">
-            네이버 로그인
-        </button>
-
-        <button id="kakaoBtn" type="button" onclick="test()">
-            <img id="kakao" src="https://cdn-icons-png.flaticon.com/512/2111/2111466.png" width="30" height="30">
-            카카오톡 로그인
-        </button>
-
-<%--        <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
-
-        <a href="/"><button type="button">나가기</button></a><br><br>
-
     </div>
+
     </form>
 </div>
-
-
-<footer>
-    </footer>
-
 
 <script>
     let signUpClear = "${signUpClear}"
@@ -188,16 +195,6 @@
     if(loginFail==="msg") {
         alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
     }
-
-//    let urlParams = new URLSearchParams(window.location.search);
-//    let loginFail = urlParams.get('loginFail');
-//
-//    // loginFail 변수의 값이 "msg"인 경우에만 경고창을 띄움
-//    if(loginFail === "msg") {
-//        alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
-//    }
-
-
 
     function test(){
             alert("테스트중입니다!")

@@ -11,9 +11,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
+
+    <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
 
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
@@ -185,7 +186,7 @@
     <div class="order__title">
         <div class="head_order">Order / Payment</div>
         <div class="order__title__detail">
-            <a href="#">장바구니 > </a>
+            <a href="/cart/list">장바구니 > </a>
             <a href="#">주문서</a>
             <a href="#"> > 주문완료</a>
         </div>
@@ -329,14 +330,14 @@
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
                                 <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
                                      alt="이미지 준비 중 입니다"
                                      onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
                             </a>
                         </td>
                         <td>
-                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
@@ -384,14 +385,13 @@
       $(this).text(formatValue + '원');
     })
   })
-
-  /*테이블의 행 수를 동적으로 계산*/
+  /*테이블의 행 수를 계산*/
   window.onload = function () {
     const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
     let totalSum = 0;
 
     rows.forEach(function (row) {
-      /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
+      /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
       const price = row.cells[5].innerText;
       totalSum += parseInt(price.replace(/[^\d]/g, ''));
     });
