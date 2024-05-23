@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
@@ -17,7 +16,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <h1>잘못된 접근입니다.</h1>
-<p>${errorMessage}</p>
+<%--<p>${errorMessage}</p>--%>
 <jsp:include page="footer.jsp" flush="false" />
 </body>
 </html>
