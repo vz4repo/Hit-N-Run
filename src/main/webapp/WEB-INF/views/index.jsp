@@ -67,7 +67,7 @@
             <div class="carousel-item c-item">
                 <img src="/img/advertisement/adimg2.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
                 <div class="carousel-caption top-1 advertiseCommentLeft">
-                    <p class="fs-3 text-uppercase advertiseComment">CLOUT AI BATS</p>
+                    <p class="text-uppercase advertiseComment">CLOUT AI BATS</p>
                     <h1 class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>
@@ -75,7 +75,7 @@
             <div class="carousel-item c-item">
                 <img src="/img/advertisement/adimg3.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 3">
                 <div class="carousel-caption top-1 advertiseCommentRight">
-                    <p class="fs-3 text-uppercase advertiseComment">Be Iconic</p>
+                    <p class="text-uppercase advertiseComment">Be Iconic</p>
                     <h1 class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</h1>
                     <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
                 </div>

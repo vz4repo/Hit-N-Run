@@ -33,7 +33,7 @@ main {
     box-shadow: none;
 }
 
-.advertiseComment {
+.carousel-caption > .advertiseComment {
     color: #ffd400;
     margin: 0;
     font-size: 2vw;
@@ -67,8 +67,8 @@ main {
     top: 40%;
     padding: 0;
     height: max-content;
-    padding-left: 4%;
-    padding-right: 4%;
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 .carousel-caption h1 {
