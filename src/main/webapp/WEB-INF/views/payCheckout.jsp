@@ -1,69 +1,72 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
 
 <div class="title__pay">결제정보</div>
-  <div class="wrapper__parent">
+<div class="wrapper__parent">
 
     <%-- 테스트값 입력 영역(dev) --%>
-    <div class="wrapper">
+    <div class="wrapper" style="display: none">
 
-      <div class="box_section">
+        <div class="box_section">
 
-        <div class="pay_col">
-          <div class="test">
-            <label for="testAmount">금&nbsp;&nbsp;&nbsp;액
-              <input id="testAmount" class="test" type="text" name="testAmount" value="" placeholder="테스트 금액">
-            </label>
-          </div>
-          <div class="test">
-            <label for="testCoupon">쿠&nbsp;&nbsp;&nbsp;폰
-              <input id="testCoupon" class="test" type="text" name="testCoupon" value="" placeholder="테스트 쿠폰">
-            </label>
-          </div>
-          <div class="test">
-            <label for="orderName">주문명
-              <input id="orderName" class="test" type="text" name="orderName" value="" placeholder="테스트 주문명">
-            </label>
-          </div>
+            <div class="pay_col">
+                <div class="test">
+                    <label for="testAmount">금&nbsp;&nbsp;&nbsp;액
+                        <input id="testAmount" class="test" type="text" name="testAmount" value="" placeholder="테스트 금액">
+                    </label>
+                </div>
+                <div class="test">
+                    <label for="testCoupon">쿠&nbsp;&nbsp;&nbsp;폰
+                        <input id="testCoupon" class="test" type="text" name="testCoupon" value="" placeholder="테스트 쿠폰">
+                    </label>
+                </div>
+                <div class="test">
+                    <label for="orderName">주문명
+                        <input id="orderName" class="test" type="text" name="orderName" value="" placeholder="테스트 주문명">
+                    </label>
+                </div>
+            </div>
+            <div class="pay_col">
+                <div class="test">
+                    <label for="customerEmail">이메일
+                        <input id="customerEmail" class="test" type="text" name="customerEmail" value=""
+                               placeholder="테스트 이메일">
+                    </label>
+                </div>
+                <div class="test">
+                    <label for="customerName">고객명
+                        <input id="customerName" class="test" type="text" name="customerName" value=""
+                               placeholder="테스트 고객명">
+                    </label>
+                </div>
+                <div class="test">
+                    <label for="customerMobilePhone">연락처
+                        <input id="customerMobilePhone" class="test" type="text" name="customerMobilePhone" value=""
+                               placeholder="테스트 연락처">
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="pay_col">
-          <div class="test">
-            <label for="customerEmail">이메일
-              <input id="customerEmail" class="test" type="text" name="customerEmail" value="" placeholder="테스트 이메일">
-            </label>
-          </div>
-          <div class="test">
-            <label for="customerName">고객명
-              <input id="customerName" class="test" type="text" name="customerName" value="" placeholder="테스트 고객명">
-            </label>
-          </div>
-          <div class="test">
-            <label for="customerMobilePhone">연락처
-              <input id="customerMobilePhone" class="test" type="text" name="customerMobilePhone" value="" placeholder="테스트 연락처">
-            </label>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- 주문서 영역 -->
     <div class="wrapper">
-      <div class="box_section" style="padding: 40px 30px 50px 30px; margin-top: 30px;">
-        <!-- 결제 UI -->
-        <div id="payment-method"></div>
-        <!-- 이용약관 UI -->
-        <div id="agreement"></div>
-        <!-- 쿠폰 체크박스 -->
-        <div class="checkable typography--p" style="padding-left: 25px">
-          <label for="coupon-box" class="checkable__label typography--regular">
-            <input id="coupon-box" class="checkable__input" type="checkbox" aria-checked="true" disabled />
-            <span class="checkable__label-text">0원 쿠폰 적용</span>
-          </label>
+        <div class="box_section" style="padding: 40px 30px 50px 30px; margin-top: 30px;">
+            <!-- 결제 UI -->
+            <div id="payment-method"></div>
+            <!-- 이용약관 UI -->
+            <div id="agreement"></div>
+            <!-- 쿠폰 체크박스 -->
+            <div class="checkable typography--p" style="padding-left: 25px">
+                <label for="coupon-box" class="checkable__label typography--regular">
+                    <input id="coupon-box" class="checkable__input" type="checkbox" aria-checked="true" disabled/>
+                    <span class="checkable__label-text">0원 쿠폰 적용</span>
+                </label>
+            </div>
+            <!-- 결제하기 버튼 -->
+            <button class="button" id="btnPayment" style="margin-top: 30px" disabled>결제하기</button>
         </div>
-        <!-- 결제하기 버튼 -->
-        <button class="button" id="btnPayment" style="margin-top: 30px" disabled>결제하기</button>
-      </div>
     </div>
-  </div>
+</div>
 <%--<script type="text/javascript" src="<c:url value='/javascript/checkout.js'/>"></script>--%>
 <script>
   const btnPayment = document.querySelector("#btnPayment");
@@ -77,7 +80,7 @@
   /* TODO: 수정 및 cors 이슈 해결 필요 */
   let amount = 99999;
   amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
-
+  document.querySelector("#totalSum")
 
   /*
   * @docs https://docs.tosspayments.com/reference/widget-sdk#sdk-설치-및-초기화
@@ -96,11 +99,11 @@
   /* ------  결제 UI 렌더링 ------ */
   /* @docs https://docs.tosspayments.com/reference/widget-sdk#renderpaymentmethods선택자-결제-금액-옵션 */
   paymentMethodWidget = paymentWidget.renderPaymentMethods(
-          "#payment-method",
-          {value: amount},
-          /* 렌더링하고 싶은 결제 UI의 variantKey */
-          /* @docs https://docs.tosspayments.com/guides/payment-widget/admin#멀티-결제-ui */
-          {variantKey: "DEFAULT"}
+      "#payment-method",
+      {value: amount},
+      /* 렌더링하고 싶은 결제 UI의 variantKey */
+      /* @docs https://docs.tosspayments.com/guides/payment-widget/admin#멀티-결제-ui */
+      {variantKey: "DEFAULT"}
   );
   /* ------  이용약관 UI 렌더링 ------ */
   /* @docs https://docs.tosspayments.com/reference/widget-sdk#renderagreement선택자-옵션 */
@@ -130,7 +133,7 @@
   });
   testCouponElement.addEventListener("change", function () {
     document.querySelector(
-            ".checkable__label-text").innerHTML = testCouponElement.value + "원 쿠폰 적용";
+        ".checkable__label-text").innerHTML = testCouponElement.value + "원 쿠폰 적용";
   });
 
   /* ------ '결제하기' 버튼 누르면 결제창 띄우기 ------ */
@@ -139,12 +142,12 @@
     /* 결제를 요청하기 전에 orderId, amount를 DB에 저장헤서 정합성 체크  */
     paymentWidget.requestPayment({
       orderId: generateRandomString(),
-      orderName: orderName.value,
+      orderName: document.querySelector("body > section.order__items > div.tb__order > form > table > tbody > tr:nth-child(1) > td:nth-child(2) > a").textContent,
       successUrl: window.location.origin + "/success",
       failUrl: window.location.origin + "/fail",
-      customerEmail: customerEmail.value,
-      customerName: customerName.value,
-      customerMobilePhone: customerMobilePhone.value
+      customerEmail: 'hrkwon82@gmail.com',
+      customerName: '홈런볼',
+      customerMobilePhone: '01012345678'
     });
   });
 
