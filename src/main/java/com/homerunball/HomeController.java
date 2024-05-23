@@ -28,7 +28,7 @@ public class HomeController {
                 newProductNumber = 1;
 
                 /*newProductList에 새로운 MainProductDto를 생성해서 넘겨준다.*/
-
+                System.out.println("newProductList = " + newProductList);
             }
             /*만약 newProductNumber가 0보다 크다면*/
             /*else {}*/
