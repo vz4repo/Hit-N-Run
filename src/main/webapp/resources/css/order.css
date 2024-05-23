@@ -16,7 +16,8 @@
     color: #777;
 }
 
-.order__header a{
+.order__header a,
+.order__items a{
     text-decoration: none;
     color: black;
 }

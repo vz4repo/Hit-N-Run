@@ -329,14 +329,14 @@
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
                                 <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
                                      alt="이미지 준비 중 입니다"
                                      onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
                             </a>
                         </td>
                         <td>
-                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>

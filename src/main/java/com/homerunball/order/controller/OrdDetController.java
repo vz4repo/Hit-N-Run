@@ -7,6 +7,8 @@ import com.homerunball.order.domain.OrderDetDto;
 
 import com.homerunball.order.service.OrderDetService;
 import com.homerunball.payment.domain.PaymentDto;
+
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,10 +37,13 @@ public class OrdDetController {
         Integer cIdObject = (Integer) session.getAttribute("c_id");
          /*c_id가 null이 아니면 값을 사용하고, null이면 기본값 -1을 사용*/
         int c_id = (cIdObject != null) ? cIdObject : -1;
-
+        BigInteger od_id = null;
         try {
             List<OrderDetDto> list = orderdetDao.select(c_id);
             List<CartDto> imglist = cartDao.getStk(c_id);
+
+
+
 
 
             // CartDto를 map에 넣어 줌
@@ -53,10 +58,13 @@ public class OrdDetController {
                 if (matchedCart != null) {
                     order.setCartDto(matchedCart);
                 }
+                od_id = order.getOd_id();
             }
 
-            System.out.println("aaa" + list);
+            List<OrderDetDto> od_idlist = orderdetDao.idselect(od_id);
 
+            System.out.println("aaa" + list);
+            System.out.println("od_idlist = " + od_idlist);
             m.addAttribute("list", list);
 
 
