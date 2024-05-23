@@ -62,7 +62,7 @@
     <%-- 재고관리를 위한 제품 목록 조회 및 재고등록/수정/일괄설정 --%>
     <jsp:include page="modal/stockRegisterModal.jsp" flush="false"/>
     <jsp:include page="modal/stockModifyModal.jsp" flush="false"/>
-    <div class="w3-container product-container" style="overflow-x:auto;">
+    <div class="w3-container product-container">
         <table>
             <thead>
                 <tr>
