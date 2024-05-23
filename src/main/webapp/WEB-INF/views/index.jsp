@@ -95,87 +95,88 @@
         <div class="col-md-12">
             <h2><b>신제품</b></h2>
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0" style="margin-right: 10px; margin-left: 10px;">
-            <%--만약 newProductNumber의 수가 0이라면 상품 준비중입니다라는 이미지를 보여준다.--%>
-            <c:choose>
-                <c:when test="${newProductNumber!=0}">
-                    <!-- Carousel indicators -->
-                    <ol class="carousel-indicators">
-                        <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
-                        <c:forEach var="i" begin="0" end="${num-1}" step="1">
-                            <c:choose>
-                                <c:when test="${i == 0}">
-                                    <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li data-target="#myCarousel" data-slide-to="${i}"></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </ol>
-
-                    <!-- Wrapper for carousel items -->
-                    <div class="carousel-inner">
-                        <c:forEach var="product" items="${newProductList}" varStatus="status">
-                        <c:if test="${status.index % 4 == 0}">
+                <!-- Carousel indicators -->
+                <ol class="carousel-indicators">
+                    <c:set var="num" value="${newProductNumber % 4 == 0 ? newProductNumber / 4 : newProductNumber / 4 + 1}"/>
+                    <c:forEach var="i" begin="0" end="${num-1}" step="1">
                         <c:choose>
-                        <c:when test="${status.index == 0}">
-                        <div class="item active">
+                            <c:when test="${i == 0}">
+                                <li data-target="#myCarousel" data-slide-to="${i}" class="active"></li>
                             </c:when>
                             <c:otherwise>
-                            <div class="item">
-                                </c:otherwise>
+                                <li data-target="#myCarousel" data-slide-to="${i}"></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </ol>
+
+                <%--만약 newProductList가 null이라면 제품 준비중이라는 텍스트가 출력된다.--%>
+                <c:choose>
+                    <c:when test="${newProductList == null || newProductList.size() == 0}">
+                        <h2><b>제품을 준비하고 있습니다.<br>조금만 더 기다려주시면 좋은 상품으로 찾아 뵙겠습니다.</b></h2>
+                    </c:when>
+                    <c:otherwise>
+
+                        <!-- Wrapper for carousel items -->
+                        <div class="carousel-inner">
+                        <c:forEach var="product" items="${newProductList}" varStatus="status">
+                            <c:if test="${status.index % 4 == 0}">
+                                <c:choose>
+                                    <c:when test="${status.index == 0}">
+                                        <div class="item active">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="item">
+                                    </c:otherwise>
                                 </c:choose>
                                 <div class="row">
-                                    </c:if>
-                                    <div class="col-sm-3">
-                                        <div class="thumb-wrapper" style="margin-bottom: 5px;">
-                                            <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-                                            <div class="img-box">
-                                                <a href="/product/detail?pd_id=${product.pd_id}">
-                                                    <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
-                                                         onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
-                                                </a>
-                                            </div> <%--end of class img-box--%>
-                                            <div class="thumb-content">
-                                                <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
-                                                <div class="star-rating">
-                                                    <ul class="list-inline">
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
-                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-                                                    </ul>
-                                                </div> <%--end of star-rating class--%>
-                                                <c:choose>
-                                                    <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
-                                                        <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
-                                                            <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
-                                            </div> <%--end of thumb-content class--%>
-                                        </div> <%--end of class thumb-wrapper--%>
-                                    </div>
-                                    <c:if test="${status.index % 4 == 3}">
-                                </div> <!-- row 닫기 -->
-                            </div> <!-- item 닫기 -->
                             </c:if>
+                            <div class="col-sm-3">
+                                <div class="thumb-wrapper" style="margin-bottom: 5px;">
+                                    <span class="wish-icon"><i class="fa fa-heart-o"></i></span>
+                                    <div class="img-box">
+                                        <a href="/product/detail?pd_id=${product.pd_id}">
+                                            <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                                 onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
+                                        </a>
+                                    </div> <%--end of class img-box--%>
+                                    <div class="thumb-content">
+                                        <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
+                                        <div class="star-rating">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
+                                                <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                            </ul>
+                                        </div> <%--end of star-rating class--%>
+                                        <c:choose>
+                                            <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
+                                                <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
+                                                    <span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p class="item-price"><span><fmt:formatNumber value="${product.max_sls_prc}" type="number" groupingUsed="true" />원</span></p>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                                        </div> <%--end of thumb-content class--%>
+                                    </div> <%--end of class thumb-wrapper--%>
+                                </div>
+                                <c:if test="${status.index % 4 == 3}">
+                                    </div> <!-- row 닫기 -->
+                                    </div> <!-- item 닫기 -->
+                                </c:if>
                             </c:forEach>
                             <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
                             <c:if test="${newProductNumber % 4 != 0}">
-                        </div> <!-- end of item -->
-                    </div> <!-- end of carousel-inner -->
-                    </c:if>
-                </div>
-                </c:when>
-<%--                <c:otherwise>--%>
-
-<%--                </c:otherwise>--%>
-            </c:choose> <%--end of c:choose--%>
+                                </div> <!-- end of item -->
+                                </div> <!-- end of carousel-inner -->
+                            </c:if>
+                    </div>
+                    </c:otherwise>
+                </c:choose>
 
             <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
             <c:if test="${newProductNumber > 4}">
@@ -210,6 +211,14 @@
                         </c:choose>
                     </c:forEach>
                 </ol>
+
+            <%--만약 newProductList가 null이라면 제품 준비중이라는 텍스트가 출력된다.--%>
+            <c:choose>
+            <c:when test="${newProductList == null || newProductList.size() == 0}">
+                <h2><b>제품을 준비하고 있습니다.<br>조금만 더 기다려주시면 좋은 상품으로 찾아 뵙겠습니다.</b></h2>
+            </c:when>
+            <c:otherwise>
+
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
                     <c:forEach var="product" items="${newProductList}" varStatus="status">
@@ -232,11 +241,9 @@
                                                 <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
                                                      onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
-                                        </div>
+                                        </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
-                                            <h4 class="productName"><a
-                                                    href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a>
-                                            </h4>
+                                            <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                             <div class="star-rating">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -245,7 +252,7 @@
                                                     <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
                                                     <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                 </ul>
-                                            </div>
+                                            </div> <%--end of star-rating class--%>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
                                                     <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
@@ -256,8 +263,8 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
+                                        </div> <%--end of thumb-content class--%>
+                                    </div> <%--end of class thumb-wrapper--%>
                                 </div>
                                 <c:if test="${status.index % 4 == 3}">
                             </div> <!-- row 닫기 -->
@@ -266,10 +273,13 @@
                         </c:forEach>
                         <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
                         <c:if test="${newProductNumber % 4 != 0}">
-                    </div> <!-- row 닫기 -->
-                </div> <!-- item 닫기 -->
+                    </div> <!-- end of item -->
+                </div> <!-- end of carousel-inner -->
                 </c:if>
             </div>
+            </c:otherwise>
+            </c:choose>
+
             <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
             <c:if test="${newProductNumber > 4}">
                 <!-- Carousel controls -->
@@ -303,6 +313,14 @@
                         </c:choose>
                     </c:forEach>
                 </ol>
+
+            <%--만약 newProductList가 null이라면 제품 준비중이라는 텍스트가 출력된다.--%>
+            <c:choose>
+            <c:when test="${newProductList == null || newProductList.size() == 0}">
+                <h2><b>제품을 준비하고 있습니다.<br>조금만 더 기다려주시면 좋은 상품으로 찾아 뵙겠습니다.</b></h2>
+            </c:when>
+            <c:otherwise>
+
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
                     <c:forEach var="product" items="${newProductList}" varStatus="status">
@@ -325,11 +343,9 @@
                                                 <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
                                                      onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
-                                        </div>
+                                        </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
-                                            <h4 class="productName"><a
-                                                    href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a>
-                                            </h4>
+                                            <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                             <div class="star-rating">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -338,7 +354,7 @@
                                                     <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
                                                     <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                 </ul>
-                                            </div>
+                                            </div> <%--end of star-rating class--%>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
                                                     <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
@@ -349,8 +365,8 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
+                                        </div> <%--end of thumb-content class--%>
+                                    </div> <%--end of class thumb-wrapper--%>
                                 </div>
                                 <c:if test="${status.index % 4 == 3}">
                             </div> <!-- row 닫기 -->
@@ -359,10 +375,13 @@
                         </c:forEach>
                         <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
                         <c:if test="${newProductNumber % 4 != 0}">
-                    </div> <!-- row 닫기 -->
-                </div> <!-- item 닫기 -->
+                    </div> <!-- end of item -->
+                </div> <!-- end of carousel-inner -->
                 </c:if>
             </div>
+            </c:otherwise>
+            </c:choose>
+
             <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
             <c:if test="${newProductNumber > 4}">
                 <!-- Carousel controls -->
@@ -396,6 +415,14 @@
                         </c:choose>
                     </c:forEach>
                 </ol>
+
+            <%--만약 newProductList가 null이라면 제품 준비중이라는 텍스트가 출력된다.--%>
+            <c:choose>
+            <c:when test="${newProductList == null || newProductList.size() == 0}">
+                <h2><b>제품을 준비하고 있습니다.<br>조금만 더 기다려주시면 좋은 상품으로 찾아 뵙겠습니다.</b></h2>
+            </c:when>
+            <c:otherwise>
+
                 <!-- Wrapper for carousel items -->
                 <div class="carousel-inner">
                     <c:forEach var="product" items="${newProductList}" varStatus="status">
@@ -418,11 +445,9 @@
                                                 <img src="/img/product/${product.pd_type_cd}/main/${product.mn_img_fn}" alt="이미지 준비 중 입니다"
                                                      onerror="this.onerror=null; this.src='/img/product/${product.pd_type_cd.toLowerCase()}/main/${product.mn_img_fn}';">
                                             </a>
-                                        </div>
+                                        </div> <%--end of class img-box--%>
                                         <div class="thumb-content">
-                                            <h4 class="productName"><a
-                                                    href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a>
-                                            </h4>
+                                            <h4 class="productName"><a href="/product/detail?pd_id=${product.pd_id}">${product.pd_name}</a></h4>
                                             <div class="star-rating">
                                                 <ul class="list-inline">
                                                     <li class="list-inline-item"><i class="fa fa-star"></i></li>
@@ -431,7 +456,7 @@
                                                     <li class="list-inline-item"><i class="fa fa-star-half"></i></li>
                                                     <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
                                                 </ul>
-                                            </div>
+                                            </div> <%--end of star-rating class--%>
                                             <c:choose>
                                                 <c:when test="${product.max_rtl_prc > product.max_sls_prc}">
                                                     <p class="item-price"><strike><fmt:formatNumber value="${product.max_rtl_prc}" type="number" groupingUsed="true" />원</strike>
@@ -442,8 +467,8 @@
                                                 </c:otherwise>
                                             </c:choose>
                                             <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
-                                        </div>
-                                    </div>
+                                        </div> <%--end of thumb-content class--%>
+                                    </div> <%--end of class thumb-wrapper--%>
                                 </div>
                                 <c:if test="${status.index % 4 == 3}">
                             </div> <!-- row 닫기 -->
@@ -452,10 +477,13 @@
                         </c:forEach>
                         <!-- newProductList의 인덱스를 4로 나눴을 때 3이 아닌 경우 닫아야 할 태그를 닫아줍니다. -->
                         <c:if test="${newProductNumber % 4 != 0}">
-                    </div> <!-- row 닫기 -->
-                </div> <!-- item 닫기 -->
+                    </div> <!-- end of item -->
+                </div> <!-- end of carousel-inner -->
                 </c:if>
             </div>
+            </c:otherwise>
+            </c:choose>
+
             <%--productNumber가 4 보다 큰 경우에만 보여주기--%>
             <c:if test="${newProductNumber > 4}">
                 <!-- Carousel controls -->
@@ -632,24 +660,11 @@
 
     <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
     <jsp:include page="mainCategory.jsp" flush="false"/>
-<%--</div> &lt;%&ndash;end of container class&ndash;%&gt;--%>
 </main>
 
 <jsp:include page="footer.jsp" flush="false"/>
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script>
-    <%--window.onload = function () {--%>
-    <%--    if ("${sessionScope.c_id}" !== "") {--%>
-    <%--        document.getElementById('logoutLink').addEventListener('click', function (event) {--%>
-    <%--            event.preventDefault();--%>
-    <%--            if (confirm('정말로 로그아웃을 하시겠습니까?')) {--%>
-    <%--                window.location.href = event.target.href;--%>
-    <%--                alert('로그아웃이 되셨습니다.');--%>
-    <%--            }--%>
-    <%--        });--%>
-    <%--    }--%>
-    <%--};--%>
-
     const dDay = document.querySelector("#dDay");
 
     $(document).ready(function () {
