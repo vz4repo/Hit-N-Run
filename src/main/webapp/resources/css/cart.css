@@ -1,7 +1,10 @@
 .cart * {
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
     font-style: normal;
+}
+
+.cart main {
+    padding-bottom: 150px;
 }
 
 .cart_tale {
@@ -18,8 +21,8 @@
     color: black;
 }
 .cart_tale img {
-    height: 80px;
-    width: 80px;
+    height: 110px;
+    width: 110px;
 }
 
 .cart_tale th,
@@ -28,8 +31,9 @@
 }
 
 .cart_tale td {
-    padding: 10px 0;
+    padding: 18px 0;
     vertical-align: middle;
+    font-size: 16px;
 }
 
 .cart_tale hr {
@@ -49,18 +53,15 @@
     text-align: center;
 }
 
-.first__under {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
 
 .cart_tale thead th {
-    padding: 7px 0 6px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
-    color: #4d4d59;
-    border-bottom: 1px solid #ddd;
+    padding: 11px 0;
+    background-color: #333;
+    color: white;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_cart {
@@ -69,9 +70,10 @@
     align-items: center;
     text-align: center;
     color: rgb(51, 51, 51);
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 800;
     letter-spacing: 1.4px;
+    margin-bottom: 40px;
 }
 
 .title__cart {
@@ -95,7 +97,6 @@
 }
 
 tfoot td, tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
     padding: 10px;
 }
 
@@ -106,7 +107,6 @@ tfoot td, tfoot tr{
 
 .nonCart {
     text-align: center;
-    margin-right: 120px;
     line-height: 1.35;
     color: black;
     padding: 20px;
@@ -159,4 +159,10 @@ button:hover {
     text-align: center;
     background-color: white;
     color: #333;
+}
+
+.priceFormat {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
 }

@@ -26,10 +26,9 @@
     if(msg=="INSERT_ERR") alert("장바구니 담기에 실패하였습니다.")
 </script>
 <jsp:include page="header.jsp"/>
-<div class="head_cart">SHOPPING CART</div>
+<div class="head_cart">장바구니</div>
 <main>
-    <hr class="first__under" />
-    <div class="title__cart">장바구니</div>
+
     <table class="cart_tale">
         <colgroup>
             <col width="5%" />
