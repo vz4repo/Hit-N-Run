@@ -68,6 +68,9 @@ ul {
 
 .bottom_header{
     margin-left: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bottom_header li {

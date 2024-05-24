@@ -10,34 +10,6 @@
     <script src="https://kit.fontawesome.com/f0e73cfa04.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    /*.dlvAddrList {*/
-    /*    border: 1px solid black;*/
-    /*    padding: 10px;*/
-    /*    margin-bottom: 10px;*/
-    /*    width: 50%; !* 50% width *!*/
-    /*}*/
-    /*.dlvAddrList table {*/
-    /*    margin: 0 auto; !* 테이블 가운데 정렬 *!*/
-    /*}*/
-    /*.dlvAddrList button {*/
-    /*    margin-left: 10px;*/
-    /*}*/
-
-    /*.modal{*/
-    /*    position:absolute;*/
-    /*    top:50%;*/
-    /*    width:400px;*/
-    /*    height:600px;*/
-    /*    padding:40px;*/
-    /*    text-align: center;*/
-    /*    background-color: rgb(255,255,255);*/
-    /*    border-radius:10px;*/
-    /*    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);*/
-    /*    transform:translateY(-50%);*/
-    /*}*/
-
-
-    /* 배송창에 맞게 여기서부터 고치기*/
 
     #deliveryForm {
         display: flex;
@@ -91,7 +63,7 @@
     </div>
 </div>
 
-<hr class="first__under" />
+<hr class="first__under" >
 <div id="selectedDLV" class="center-table">
     <table>
         <tr>
@@ -116,9 +88,10 @@
         </tr>
         <tr>
             <td colspan="2">
-                <%-- 여기서 배송지 변경 버튼 누르면, deliveryList.jsp 페이지로 이동해야한다. --%>
-                <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
                 <button id="selectAllBtn">배송지 전체 조회</button>
+                <%--<button id="changeAdrList" onclick="redirectToDeliveryList()">배송지 변경</button>--%>
+                <%--                    <button id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
+                <%--                        <button type="submit" id="selectAllBtn" onclick="setAllList()">배송지 전체 조회</button>--%>
             </td>
         </tr>
     </table>
@@ -127,9 +100,6 @@
 
 
 
-<%--<div class="modal" style="display: none">--%>
-<%--    <div>--%>
-<h2>모달창 제목</h2>
 <div id="deliveryForm">
     <c:forEach var="list" items="${list}">
         <div class="dlvAddrList">
@@ -140,7 +110,7 @@
                     <td>배송지주소 고유번호</td>
                     <td>${list.c_adr_list_id}</td>
                     <td>배송지명</td>
-                    <td name="rcver" value="${list.rcver}">${list.rcver}</td>
+                    <td>${list.rcver}</td>
                     <td>배송지명</td>
                     <td>${list.adr_name}</td>
                     <td>연락처</td>
@@ -151,14 +121,13 @@
                     <td>${list.rcver_zip}</td>
 
                     <td><button class="selectDLV" data-c_adr_list_id="${list.c_adr_list_id}">변경</button></td>
+                        <%--                    <td><button id="defaultDLV" class="defaultDLV" onclick="defaultDLV()" data-c_adr_list_id="${list.c_adr_list_id}">기본 배송지로 설정</button></td>--%>
                         <%--                            <td><button id="selectDLV" onclick="setSelectedDLV(${list.c_adr_list_id})">변경</button></td>--%>
                 </tr>
             </table>
         </div>
     </c:forEach>
 </div>
-<%--    </div>--%>
-<%--</div>--%>
 
 </body>
 <script>
@@ -190,13 +159,14 @@
         // AJAX를 사용하여 서버로 데이터 요청
         $.ajax({
             type: "GET",
-            url: '<%= request.getContextPath() %>/delivery/deliveryList',
+            url: '<%= request.getContextPath() %>/delivery/_deliveryList',
             data: {
                 c_id: '<%= session.getAttribute("c_id") %>' // 세션에서 c_id 값을 가져옴
             },
             success: function(response) {
                 // 받아온 데이터를 deliveryForm 의 HTML에 채워 넣음
                 $("#deliveryForm").html(response);
+                // alert(response);
                 // $(".modal").attr("style", "display:flex");
             },
             error: function(xhr, status, error) {
@@ -217,6 +187,8 @@
             success: function(response) {
                 // 받아온 데이터를 selectedDLV 의 HTML에 채워 넣음
                 $("#selectedDLV").html(response);
+                // alert(response);
+                // console.log(response);
                 console.log("호출이 안됨");
                 // 페이지 이동
                 <%--window.location.href = '<%= request.getContextPath() %>/delivery/deliveryList?dlvId=' + c_adr_list_id;--%>
@@ -228,5 +200,14 @@
         });
     }
 
+
+    /* 기본 배송지로 설정하는 function */
+    // function defaultDLV(c_adr_list_id) {
+    //     // alert(c_adr_list_id + "을 기본배송지로 설정.");
+    //     /* 0521 여기까지.. */
+    //     /* fucntion에 ajax로 하던가 어떻게 해서 cust 테이블의 data를 변경해주면 될듯 ... */
+    // }
+
 </script>
+</body>
 </html>

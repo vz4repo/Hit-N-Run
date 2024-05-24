@@ -44,6 +44,11 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
+    public  List<OrderDetDto> idselect(BigInteger od_id) throws Exception {
+        return session.selectList(NAMESPACE + "idselect", od_id);
+    }
+
+    @Override
     public List<OrderDetDto> selectAll() throws Exception {
         return session.selectList(NAMESPACE+"selectAll");
     }

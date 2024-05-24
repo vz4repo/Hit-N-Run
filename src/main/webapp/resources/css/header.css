@@ -1,5 +1,5 @@
-body {
-    padding-top: 200px !important;
+body:not(.index) {
+    padding-top: 150px;
 }
 
 .cart_link {
@@ -18,13 +18,13 @@ body {
     width: 100%;
     z-index: 100;
     background-color: white;
+    padding: 20px 0;
 }
 
 
 .top_header {
     display: grid;
     justify-content: end;
-    margin-right: 5%;
 }
 
 .top_header_ul,
@@ -40,15 +40,23 @@ body {
 
 .top_header li {
     margin: 10px;
-    font-size: 12px;
+    font-size: 15px;
     color: #4d4d59;
 }
 
+.top_header li:hover {
+    color: red;
+    font-weight: bold;
+}
+
 .main_header {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
+    display: flex;
     justify-content: space-between;
-    margin: 0 8%;
+    align-items: center;
+    max-width: 1920px;
+    min-width: 1280px;
+    width: 100%;
+    padding: 0 3%;
 }
 
 .main_header h1 {
@@ -70,4 +78,12 @@ body {
 
 .cart_link i {
     color: #4d4d59;
+}
+
+.bottom_header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: start;
+    width: 100%;
 }
