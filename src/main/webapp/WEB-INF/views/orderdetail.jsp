@@ -25,147 +25,147 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-        .order-container {
-            width: 85%;
-            margin: 0 auto;
-        }
+      .order-container {
+        width: 85%;
+        margin: 0 auto;
+      }
 
-        .orders {
-            width: 100%;
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
+      .orders {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-top: 20px;
+      }
 
-        .orders table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
+      .orders table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
 
-        .orders th,
-        .orders td {
-            padding: 10px;
-            text-align: center;
-            /*height: 70px;*/
-            box-sizing: border-box;
-            vertical-align: middle;
-            word-break: break-all;
-            border-spacing: 0;
-            margin: 0;
-            outline: none;
-        }
+      .orders th,
+      .orders td {
+        padding: 10px;
+        text-align: center;
+        /*height: 70px;*/
+        box-sizing: border-box;
+        vertical-align: middle;
+        word-break: break-all;
+        border-spacing: 0;
+        margin: 0;
+        outline: none;
+      }
 
-        .orders th {
-            background-color: #f4f4f4;
-            text-align: center;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-        }
+      .orders th {
+        background-color: #f4f4f4;
+        text-align: center;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+      }
 
-        .orders td {
-            border-bottom: 1px solid #ddd;
-        }
+      .orders td {
+        border-bottom: 1px solid #ddd;
+      }
 
-        .orders tr:hover {
-            background-color: #f9f9f9;
-        }
+      .orders tr:hover {
+        background-color: #f9f9f9;
+      }
 
-        ul {
-            display: block;
-        }
+      ul {
+        display: block;
+      }
 
-        .product-info img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
+      .product-info img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
 
-        .info {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
+      .info {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
 
-        .info .brand {
-            font-weight: bold;
-        }
+      .info .brand {
+        font-weight: bold;
+      }
 
-        .info .name {
-            font-size: 1.1em;
-        }
+      .info .name {
+        font-size: 1.1em;
+      }
 
-        .info .name a {
-            text-decoration: none;
-            color: black;
-        }
+      .info .name a {
+        text-decoration: none;
+        color: black;
+      }
 
-        .info .name a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
+      .info .name a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
 
-        .info .option {
-            color: gray;
-        }
+      .info .option {
+        color: gray;
+      }
 
-        .order-status {
-            /*display: flex;*/
-            flex-direction: column;
-            align-items: center;
-        }
+      .order-status {
+        /*display: flex;*/
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .order-status a {
-            color: #007bff;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
+      .order-status a {
+        color: #007bff;
+        text-decoration: none;
+        margin-bottom: 5px;
+      }
 
-        .order-status a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
+      .order-status a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
 
-        .order-status button {
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 5px;
-            cursor: pointer;
-        }
+      .order-status button {
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+        padding: 5px;
+        cursor: pointer;
+      }
 
-        .order-status button:hover {
-            background-color: #ddd;
-        }
+      .order-status button:hover {
+        background-color: #ddd;
+      }
 
-        .order-number a {
-            text-decoration: none;
-            color: black;
-        }
+      .order-number a {
+        text-decoration: none;
+        color: black;
+      }
 
-        .order-number a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
+      .order-number a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
 
-        .order-amount span {
-            display: block;
-        }
+      .order-amount span {
+        display: block;
+      }
 
-        /* 모달 스타일 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-            justify-content: center;
-            align-items: center;
-        }
+      /* 모달 스타일 */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: center;
+        align-items: center;
+      }
 
       .modal-content {
         background-color: #fff;
@@ -178,97 +178,97 @@
         position: relative;
       }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 10px;
-        }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
 
-        .modal-header h2 {
-            margin: 0;
-        }
+      .modal-header h2 {
+        margin: 0;
+      }
 
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+      .close {
+        color: #aaa;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-        }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+      }
 
-        .modal-body {
-            margin-top: 20px;
-        }
+      .modal-body {
+        margin-top: 20px;
+      }
 
-        .order-step-header {
-            font-size: 18px;
-            font-weight: bold;
-        }
+      .order-step-header {
+        font-size: 18px;
+        font-weight: bold;
+      }
 
-        .order-step-subheader {
-            color: gray;
-            margin-left: 10px;
-        }
+      .order-step-subheader {
+        color: gray;
+        margin-left: 10px;
+      }
 
-        .order-step-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+      .order-step-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
 
-        .order-step-table th,
-        .order-step-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
+      .order-step-table th,
+      .order-step-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
 
-        .order-step-table th {
-            background-color: #f4f4f4;
-            text-align: center;
-        }
+      .order-step-table th {
+        background-color: #f4f4f4;
+        text-align: center;
+      }
 
-        /* 배송 모달 스타일 */
-        .delivery-info {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
+      /* 배송 모달 스타일 */
+      .delivery-info {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
 
-        .delivery-info th,
-        .delivery-info td {
-            border: none;
-            padding: 10px;
-            text-align: left;
-        }
+      .delivery-info th,
+      .delivery-info td {
+        border: none;
+        padding: 10px;
+        text-align: left;
+      }
 
-        .delivery-info th {
-            width: 25%;
-            background-color: #f4f4f4;
-        }
+      .delivery-info th {
+        width: 25%;
+        background-color: #f4f4f4;
+      }
 
-        .delivery-info td {
-            width: 25%;
-        }
+      .delivery-info td {
+        width: 25%;
+      }
 
-        .delivery-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+      .delivery-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
 
-        .delivery-table th,
-        .delivery-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
+      .delivery-table th,
+      .delivery-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
 
       .delivery-table th {
         background-color: #f4f4f4;
@@ -322,7 +322,7 @@
                                 <li class="brand">
                                     <span>${orderdetDto.brd_name}</span>
                                 </li>
-                                    <!-- 상품 이름 -->
+                                <!-- 상품 이름 -->
                                 <li class="name">
                                     <a href="#">${orderdetDto.pd_name}</a>
                                 </li>
@@ -339,7 +339,7 @@
                         <!-- 주문번호 -->
                         <td>
                             <div class="order-number">
-                                <a href="#" class="open_od_id_modal" >${orderdetDto.od_id}</a>
+                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
                                 <form id="orderForm" action="/orderDetail" style="display: none;">
                                     <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                 </form>
@@ -607,87 +607,84 @@
 
             <script>
 
-                document.addEventListener('DOMContentLoaded', () => {
-                    const orderStepModal = document.getElementById('orderStepModal');
-                    const deliveryModal = document.getElementById('deliveryModal');
-                    const orderIdModal = document.getElementById('orderIdModal');
-                    const closeModalButtons = document.querySelectorAll('.close');
-                    const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
-                    const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
-                    const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+              document.addEventListener('DOMContentLoaded', () => {
+                const orderStepModal = document.querySelector('#orderStepModal');
+                const deliveryModal = document.querySelector('#deliveryModal');
+                const orderIdModal = document.querySelector('#orderIdModal');
+                const closeModalButtons = document.querySelectorAll('.close');
+                let modalContent = document.querySelectorAll('.modal-content');
+                const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
+                const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
+                const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
 
-                    /* 영수증 모달 */
-                    const receiptModal = document.getElementById('receiptModal');
-                    const orderAmounts = document.querySelectorAll('.order-amount');
+                /* 영수증 모달 */
+                const receiptModal = document.querySelector('#receiptModal');
+                const orderAmounts = document.querySelectorAll('.order-amount');
 
-                    //주문상세내역 모달 열기
-                    openOrderIdModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            orderIdModal.style.display = 'flex';
-                        })
-                    })
+                //주문상세내역 모달 열기
+                openOrderIdModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    orderIdModal.style.display = 'flex';
+                  })
+                })
 
-
-                    // 주문 단계 모달 열기
-                    openOrderStepModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            orderStepModal.style.display = 'flex';
-                          modalContent.style.maxWidth = '350px';
-
-                        });
-                    });
-
-                    // 배송 조회 모달 열기
-                    openDeliveryModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            deliveryModal.style.display = 'flex';
-                          modalContent.style.maxWidth = '1400px';
-
-                        });
-                    });
-
-                    // 영수증 모달 열기
-                    orderAmounts.forEach((orderAmount) => {
-                        orderAmount.addEventListener('click', async () => {
-                            const orderId = orderAmount.getAttribute('data-order-id');
-                            const receiptContent = document.getElementById('receiptContent');
-                            try {
-                                /* TODO: json 값 불러오기 */
-                                <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
-                                <%--const receiptHtml = await response.text();--%>
-                                <%--receiptContent.innerHTML = receiptHtml;--%>
-                                receiptModal.style.display = 'flex';
-                            } catch (error) {
-                                receiptContent.innerHTML = '영수증을 불러오는 데 실패했습니다.';
-                                receiptModal.style.display = 'flex';
-                            }
-                        });
-                    });
-
-                    // 모달 닫기
-                    closeModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            button.closest('.modal').style.display = 'none';
-                        });
-                    });
-
-                    // TODO: 모달 바깥 영역 클릭 시 닫기 :: 필요 여부 확인
-                    window.addEventListener('click', (event) => {
-                        if (event.target === orderStepModal || event.target === deliveryModal || event.target
-                            === receiptModal || event.target === orderIdModal) {
-                            event.target.style.display = 'none';
-                        }
-                    });
-
+                // 주문 단계 모달 열기
+                openOrderStepModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    orderStepModal.style.display = 'flex';
+                    modalContent.style.maxWidth = '350px';
+                  });
                 });
 
-                /* 영수증 링크 복사 */
-                const copyLink = () => {
-                    const url = window.location.href;
-                    navigator.clipboard.writeText(url)
-                        .then(() => alert("링크가 복사되었습니다!"))
-                        .catch(err => alert("링크 복사에 실패했습니다."));
-                };
+                // 배송 조회 모달 열기
+                openDeliveryModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    deliveryModal.style.display = 'flex';
+                    modalContent.style.maxWidth = '1400px';
+                  });
+                });
+
+                // 영수증 모달 열기
+                orderAmounts.forEach((orderAmount) => {
+                  orderAmount.addEventListener('click', async () => {
+                    const orderId = orderAmount.getAttribute('data-order-id');
+                    const receiptContent = document.querySelector('#receiptContent');
+                    try {
+                      /* TODO: json 값 불러오기 */
+                      <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
+                      <%--const receiptHtml = await response.text();--%>
+                      <%--receiptContent.innerHTML = receiptHtml;--%>
+                      receiptModal.style.display = 'flex';
+                    } catch (error) {
+                      receiptContent.innerHTML = '영수증을 불러오는 데 실패했습니다.';
+                      receiptModal.style.display = 'flex';
+                    }
+                  });
+                });
+
+                // 모달 닫기
+                closeModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    button.closest('.modal').style.display = 'none';
+                  });
+                });
+
+                window.addEventListener('click', (event) => {
+                  if (event.target === orderStepModal || event.target === deliveryModal ||
+                      event.target === receiptModal   || event.target === orderIdModal) {
+                    event.target.style.display = 'none';
+                  }
+                });
+
+              });
+
+              /* 영수증 링크 복사 */
+              const copyLink = () => {
+                const url = window.location.href;
+                navigator.clipboard.writeText(url)
+                .then(() => alert("링크가 복사되었습니다!"))
+                .catch(err => alert("링크 복사에 실패했습니다."));
+              };
 
               /* 영수증 프린트 */
               const printReceipt = () => {
@@ -697,8 +694,10 @@
                 /* 새로운 인쇄용 창 생성 */
                 const printWindow = window.open('', '_blank', 'width=800,height=800');
                 printWindow.document.write('<html><head><title>Print Receipt</title>');
-                printWindow.document.write('<link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
-                printWindow.document.write('<link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
                 printWindow.document.write('</head><body><div id="receiptModal" class="modal">');
                 printWindow.document.write(printContents);
                 printWindow.document.write('</div></body></html>');

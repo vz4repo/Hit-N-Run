@@ -107,7 +107,6 @@ public class CartController {
 
     @PostMapping("/insert")
     public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session, RedirectAttributes rattr) {
-//        int c_id = 0;
         try {
             /* 비로그인 고객이 장바구니에 제품을 담아서 생기는 오류 */
             /* 고객번호 c_id가 세션에 있는지 확인 */

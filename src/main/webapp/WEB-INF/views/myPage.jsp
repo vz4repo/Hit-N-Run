@@ -51,6 +51,7 @@
     #myPage h5 {
         border-bottom: 1px solid #ccc;
         padding-bottom: 5px;
+        font-weight: bold;
     }
 
     #myPage ul {

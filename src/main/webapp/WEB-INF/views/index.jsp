@@ -41,7 +41,7 @@
     </style>
     <title>Home-Run</title>
 </head>
-<body>
+<body class="index">
 <jsp:include page="header.jsp"/>
 
 <%--상품 진열 시작--%>
