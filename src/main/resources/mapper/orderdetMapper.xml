@@ -42,6 +42,26 @@
         order by od.od_id desc, od.od_det_seqnum
     </select>
 
+    <select id="idselect" parameterType="biginteger" resultType="OrderDetDto">
+        select od_det_seqnum
+             , od_id
+             , c_id
+             , pd_id
+             , pd_clsf_cd
+             , od_dt
+             , pd_name
+             , sls_prc
+             , od_qty
+             , od_stat_cd
+             , frst_reg_dt
+             , frst_reg_id
+             , last_mod_dt
+             , last_mod_id
+        from ord_det
+        where od_id = #{od_id}
+        order by frst_reg_dt desc, od_det_seqnum desc
+    </select>
+
     <select id="selectAll" resultType="OrderDetDto">
         select od_det_seqnum
              , od_id

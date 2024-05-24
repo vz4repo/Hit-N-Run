@@ -2,54 +2,85 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="footer_wrapper">
-    <footer>
-        <hr/>
-        <div class="top_footer">
-            <div class="service">
-                <h4>고객센터 | 1544-1544</h4>
-                <div class="service_time">
-                    <span>상담시간 10:00 ~ 17:00 / 점심시간 12:00 ~ 13:00</span>
-                    <span>주말 및 공휴일은 휴무이오니 문의 게시판을 이용해주세요</span>
-                </div>
+    <footer class="main_footer">
+        <div class="wrap_inner_left">
+            <div class="footerLogo">
+                <a href="/"><img src="/img/homerunball_logo.png" style="width:250px"></a>
+                <span>야구용품 전문점, 브랜드 고객충성도 야구용품 부문 대상 차지예정</span>
             </div>
-            <div class="return_addre">
-                <h4>교환/반송주소 |</h4>
-                <span>서울특별시 강남구 미왕빌딩 A조 권혁락 외 7명</span>
+            <div class="footerBottom">
+                <ul class="menu">
+                    <li><a href="#">브랜드스토리 |&nbsp</a></li>
+                    <li><a href="#">회사소개 |&nbsp</a></li>
+                    <li><a href="#">이용약관 |&nbsp</a></li>
+                    <li><a href="#">개인정보처리방침 |&nbsp</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+                <address class="info">
+                    <div>
+                        <span>사업자명 : HomeRun |&nbsp</span>
+                        <span>대표자명: 권혁락 외7인 |&nbsp</span>
+                        <span>팩스: 02-0000-0000</span>
+                    </div>
+                    <div>
+                        <span>주소: 서울특별시 강남구 미왕빌딩 10F 홈런볼 |&nbsp</span>
+                        <span>대표전화: 0000-0000</span>
+                    </div>
+                    <div>
+                        <span>반품주소지: 서울특별시 강남구 미왕빌딩 10F 홈런볼</span>
+                    </div>
+                    <div>
+                        <span>사업자등록번호: 000-00-00000 [사업자정보확인]</span>
+                    </div>
+                    <div>
+                        <span>통신판매업신고번호: 0000-서울xx-00000</span>
+                    </div>
+
+                </address>
             </div>
         </div>
-        <hr/>
-        <div class="main_footer">
-            <ul class="info cart_footer">
-                <h4>INFO</h4>
-                <li>이용약관</li>
-                <li>개인정보처리방침</li>
-                <li>사업자정보확인</li>
-            </ul>
-            <ul class="board cart_footer">
-                <h4>게시판</h4>
-                <li>공지사항</li>
-                <li>상품문의</li>
-                <li>취소/교환/반품</li>
-                <li>배송문의</li>
-                <li>상품후기</li>
-                <li>미확인입금자명단</li>
-            </ul>
-            <ul class="account cart_footer">
-                <h4>계좌정보</h4>
-                <li>신한 110-555-5455554 </li>
-                <li>하나 120-795-876542</li>
-                <li>예금주: (주)HomeRun</li>
-            </ul>
-            <ul class="company_info cart_footer">
-                <h4>ABOUT COMPANY</h4>
-                <li>(주)HomeRun</li>
-                <li>전화 1544-1544 | 팩스 02-1544-1544</li>
-                <li>서울특별시 강남구 미왕빌딩 A조</li>
-                <li>사업자등록번호: 168-77-77777</li>
-                <li>개인정보관리책임자 누구더라</li>
-                <li>통신판매업 제2024-서울강남-****호</li>
-                <li>제휴문의 거절합니다</li>
-            </ul>
+        <div class="wrap_inner_right">
+            <div class="cs">
+                <span class="tel">1544-0000</span>
+                <span>평일 &nbsp; 10:00 - 18:00</span>
+                <span>점심 &nbsp; 13:00 - 14:00</span>
+                <span>휴일 &nbsp; 토/일/공휴일</span>
+            </div>
+            <div class="bank">
+                <span class="bank_info">BANK INFO</span>
+                <span>우리은행 &nbsp; 1005-000-000000</span>
+                <span>국민은행 &nbsp; 413801-00-000000</span>
+                <span>농협 &nbsp; 301-0000-0000-00</span>
+                <span>(주)홈런볼</span>
+                <span>입금자명 불일치시 자동연동이 되지 않습니다</span>
+                <span>고객센터 또는 Q&A 문의주세요.</span>
+            </div>
+            <div class="community">
+                <span class="shopmenu">SHOP MENU</span>
+                <span><a>공지사항</a></span>
+                <span><a>회원정책</a></span>
+                <span><a>매장안내</a></span>
+                <span><a>단체구매문의</a></span>
+            </div>
+        </div>
+        <div class="wrap_inner_bottom">
+            <div>
+                <br>
+                <span>팀장: 권혁락 |&nbsp</span>
+                <span>부팀장: 조익준</span>
+            </div>
+            <div>
+                <span>회원등록: 김민욱 |&nbsp</span>
+                <span>제품상세: 김지훈 |&nbsp</span>
+                <span>장바구니: 김다니</span>
+                <span>주문: 안중섭 |&nbsp</span>
+                <span>배송: 김수연 |&nbsp</span>
+                <span>결제: 권혁락</span>
+            </div>
+            <div>
+                <span>제품등록: 조익준 |&nbsp</span>
+                <span>재고관리: 문현지</span>
+            </div>
         </div>
     </footer>
 </div>

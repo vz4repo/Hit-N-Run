@@ -2,8 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> <%--가격 형식 지정 태그--%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
 
     <meta charset="utf-8">
@@ -47,7 +46,15 @@
           href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
 
     <style>
+        /*캐러셀에 필요한 css*/
         <%@include file="/resources/css/carousel.css"%>
+
+        /*mainCategory에 필요한 css include*/
+        <%@include file="/resources/css/mainCategory.css"%>
+
+        /*mainVideo에 필요한 css include*/
+        <%@include file="/resources/css/mainVideo.css"%>
+
         body {
             padding-top: 0px !important;
         }
@@ -74,7 +81,7 @@
 <!-- ***** Header Area End ***** -->
 
 <!-- ***** Main Banner Area Start ***** -->
-<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel">
+<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel" style="padding-top: 95px">
     <div class="carousel-indicators visually-hidden">
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -300,6 +307,169 @@
 </div>
 <!-- ***** 추천 제품 끝 ***** -->
 
+<div id="content">
+    <section id="main_section">
+        <div id="king">
+            <div class="interview">
+                <h2 class="product-category">선수 인터뷰</h2>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/max-scherzer-nerve-injury" target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/v1715469645/mlb/aythmzxp4a85cmoofdcu"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/justin-verlander-throws-seven-scoreless-innings-to-beat-tigers"
+                       target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/edvtcyf3r7vj5tw0cfgm"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/aaron-judge-homers-3-doubles-yankees-beat-pablo-lopez"
+                       target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/uqd0yhdexfb64ktw2gez"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/jacob-degrom-injury-hopeful-august-return" target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/ugooaw5iuhp2vtiwatsy"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/yankees-ace-gerrit-cole-throws-off-mound-for-first-time"
+                       target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/k48suv94gttm3lex2zo1"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.mlb.com/news/mike-trout-updates-knee-surgery-recovery" target="_blank">
+                        <img src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/utosn1lnf6oerckjukln"
+                             style="width:100%" height="400">
+                    </a>
+                </div>
+
+                <div class="cc">
+                    <p id="caption"></p>
+                </div>
+
+                <div class="mini">
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/v1715469645/mlb/aythmzxp4a85cmoofdcu"
+                             width="100%" height="100" onclick="currentSlide(1)" alt="Max Scherzer">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/edvtcyf3r7vj5tw0cfgm"
+                             style="width:100%" height="100" onclick="currentSlide(2)" alt="Justin Verlander">
+                    </div>
+
+
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/uqd0yhdexfb64ktw2gez"
+                             style="width: 100%" height="100" onclick="currentSlide(3)" alt="Aaron Judge">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/ugooaw5iuhp2vtiwatsy"
+                             style="width:100%" height="100" onclick="currentSlide(4)" alt="Jacob deGrom">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/k48suv94gttm3lex2zo1"
+                             style="width:100%" height="100" onclick="currentSlide(5)" alt="Gerrit Cole">
+                    </div>
+                    <div class="column">
+                        <img class="demo cursor"
+                             src="https://img.mlbstatic.com/mlb-images/image/upload/t_16x9,w_640/mlb/utosn1lnf6oerckjukln"
+                             style="width:100%" height="100" onclick="currentSlide(6)" alt="Mike Trout">
+                    </div>
+                </div>
+            </div>
+
+            <div class="video">
+                <h2 class="product-category">글러브 착용 영상</h2>
+
+                <div class="mySlides2">
+                    <iframe width="100%" height="440"
+                            src="https://www.youtube.com/embed/EbOpepcbSio?si=v2Fp3Cp0efiPX7eL"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="text">2024 Wilson Glove Day - Atlanta</div>
+                </div>
+
+                <div class="mySlides2">
+                    <iframe width="100%" height="440"
+                            src="https://www.youtube.com/embed/17skxnSQGYQ?si=IQkqj-MhtcLG6jAA"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="text">2024 Wilson Glove Day - Boston</div>
+                </div>
+
+                <div class="mySlides2">
+                    <iframe width="100%" height="440"
+                            src="https://www.youtube.com/embed/y2Yu7pwrrI0?si=9Tp_72UhlIZdxJaw"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="text">2024 Wilson Glove Day - Baltimore</div>
+                </div>
+
+
+                <div class="mySlides2">
+                    <iframe width="100%" height="440"
+                            src="https://www.youtube.com/embed/fFxGI9yIso0?si=rH8ayHVSuMvp32zZ"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="text">2024 Wilson Glove Day - Tampa Bay</div>
+                </div>
+
+                <div class="mySlides2">
+                    <iframe width="100%" height="440"
+                            src="https://www.youtube.com/embed/KBMG5okesuA?si=Pg-Rp1Z0kS8JEL88"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <div class="text">2024 Wilson Glove Day - Pittsburgh</div>
+                </div>
+
+                <a class="prev2" onclick="plusSlides2(-1)">❮</a>
+                <a class="next2" onclick="plusSlides2(1)">❯</a>
+
+                <div style="text-align:center" class="videoDot">
+                    <span class="dot" onclick="currentSlide2(1)"></span>
+                    <span class="dot" onclick="currentSlide2(2)"></span>
+                    <span class="dot" onclick="currentSlide2(3)"></span>
+                    <span class="dot" onclick="currentSlide2(4)"></span>
+                    <span class="dot" onclick="currentSlide2(5)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<%--mainCategory에 필요한 페이지 include(css도 필요)--%>
+<jsp:include page="mainCategory.jsp" flush="false"/>
+
 <!-- ***** Subscribe Area Starts ***** -->
 <div class="subscribe">
     <div class="container">
@@ -334,7 +504,7 @@
 </div>
 <!-- ***** Subscribe Area Ends ***** -->
 </main>
-<!-- ***** Footer Start ***** -->
+
 <jsp:include page="footer.jsp" flush="false"/>
 <!-- ***** Footer Ends ***** -->
 

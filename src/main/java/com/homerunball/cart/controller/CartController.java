@@ -107,10 +107,9 @@ public class CartController {
 
     @PostMapping("/insert")
     public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session, RedirectAttributes rattr) {
-        int c_id = 0;
         try {
             /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            c_id = (int) session.getAttribute("c_id");
+            int c_id = (int) session.getAttribute("c_id");
 
             cartDto.setC_id(c_id);
             cartDto.setPd_id(pd_id);
@@ -160,6 +159,7 @@ public class CartController {
             /* 로그인한 고객의 c_id가 세션에있는지 확인한다 */
             int c_id = (int)session.getAttribute("c_id");
 
+
             /* cart에있는 c_id를가진 고객의 장바구니를 list에 담는다 */
             List<CartDto> list = cartDao.getStk(c_id);
 
@@ -179,4 +179,5 @@ public class CartController {
         }
         return "cart";
     }
+
 }
