@@ -76,8 +76,8 @@
         }
 
         .product-info img {
-            width: 100px;
-            height: 100px;
+            width: 110px;
+            height: 110px;
             object-fit: cover;
         }
 
@@ -85,6 +85,10 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            display: grid;
+            grid-template-columns: 120px 310px;
+            justify-content: center;
+            align-items: center;
         }
 
         .info .brand {
@@ -93,6 +97,7 @@
 
         .info .name {
             font-size: 1.1em;
+            text-align: start;
         }
 
         .info .name a {
@@ -107,6 +112,7 @@
 
         .info .option {
             color: gray;
+            text-align: start;
         }
 
         .order-status {
@@ -415,8 +421,8 @@
         <div class="orders">
             <table>
                 <colgroup>
-                    <col width="30%"/>
-                    <col width="30%"/>
+                    <col width="45%"/>
+                    <col width="15%"/>
                     <col width="15%"/>
                     <col width="15%"/>
                     <col width="10%"/>
@@ -440,23 +446,25 @@
                 <c:forEach var="orderdetDto" items="${list}" varStatus="status">
                     <tr class="order-item-hist">
                         <td class="product-info">
-                            <div>
+                            <ul class="info">
                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
+                                        <%-- <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
+                                              alt="썸네일" name="thumbnail"/>--%>
+                                    <img src="/img/product/${orderdetDto.cartDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.cartDto.mn_img_fn}"
                                          alt="썸네일" name="thumbnail"/>
                                 </a>
-                            </div>
-                            <ul class="info">
-                                <!-- 브랜드 이름 -->
-                                <li class="brand">
-                                    <span>${orderdetDto.brd_name}</span>
-                                </li>
+                                <div>
+                                    <!-- 브랜드 이름 -->
+                                    <li class="brand">
+                                        <span>${orderdetDto.brd_name}</span>
+                                    </li>
                                     <!-- 상품 이름 -->
-                                <li class="name">
-                                    <a href="#">${orderdetDto.pd_name}</a>
-                                </li>
-                                <!-- 상품 옵션 -->
-                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
+                                    <li class="name">
+                                        <a href="#">${orderdetDto.pd_name}</a>
+                                    </li>
+                                    <!-- 상품 옵션 -->
+                                    <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
+                                </div>
                             </ul>
                         </td>
 
@@ -468,7 +476,7 @@
                         <!-- 주문번호 -->
                         <td>
                             <div class="order-number">
-                                <a href="#" class="open_od_id_modal" >${orderdetDto.od_id}</a>
+                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
                                 <form id="orderForm" action="/orderDetail" style="display: none;">
                                     <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                 </form>
@@ -739,23 +747,23 @@
                 document.addEventListener('DOMContentLoaded', () => {
                     const orderStepModal = document.getElementById('orderStepModal');
                     const deliveryModal = document.getElementById('deliveryModal');
-                    const orderIdModal = document.getElementById('orderIdModal');
+                    /*const orderIdModal = document.getElementById('orderIdModal');*/
                     const closeModalButtons = document.querySelectorAll('.close');
                     const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
                     const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
-                    const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+                    /*const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')*/
 
                     /* 영수증 모달 */
                     const receiptModal = document.getElementById('receiptModal');
                     const orderAmounts = document.querySelectorAll('.order-amount');
 
-                    //주문상세내역 모달 열기
-                    openOrderIdModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            orderIdModal.style.display = 'flex';
-                        })
-                    })
-
+                    /* //주문상세내역 모달 열기
+                     openOrderIdModalButtons.forEach((button) => {
+                         button.addEventListener('click', () => {
+                             orderIdModal.style.display = 'flex';
+                         })
+                     })
+ */
 
                     // 주문 단계 모달 열기
                     openOrderStepModalButtons.forEach((button) => {

@@ -124,9 +124,9 @@ public class OrdController {
 
             /*System.out.println("ord_det.getC_id()" +ord_det.getC_id());*/
 
-
             m.addAttribute("list", list);
             /*m.addAttribute("stkList", stkList);*/
+
 
             /* 김수연 시작 */
             DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);

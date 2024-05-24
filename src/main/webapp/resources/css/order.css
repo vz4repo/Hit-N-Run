@@ -1,9 +1,8 @@
-* {
+.order__items * {
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-style: normal;
 }
-
 
 .tb__order table {
     /* 2024.05.21 [혁락] 85% -> 55%*/
@@ -31,6 +30,11 @@
     vertical-align: middle;
 }
 
+.tb__order td a {
+    color: black;
+    text-decoration: none;
+}
+
 .tb__order hr {
     width: 85%;
     height: 1px;
@@ -39,15 +43,15 @@
 }
 
 .first__under {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .tb__order thead th {
     padding: 7px 0 6px;
-    background-color: #fff;
+    background-color: #0a4216;
     border-top: 2px solid #ddd;
     font-weight: normal;
-    color: #4d4d59;
+    color: white;
     border-bottom: 1px solid #ddd;
 }
 
@@ -118,16 +122,43 @@
 
 
 .tb__right {
-    display: grid;
-    grid-template-columns: repeat(4, 33%);
+    display: flex;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: end;
+    padding: 1.5%;
+}
+.tb__right div {
+    border: 1px solid black;
+    padding: 10px;
+    width: 300px;
+}
+.totalSum,
+.odpayamt,
+.cupon,
+.point{
+    display: flex;
+    justify-content: space-between;
+}
+
+/*.tb__right {
+    !*display: block;*!
+    text-align: right   ;
+    justify-content: space-evenly;
     place-items: center center;
     font-weight: bold;
     font-size: 14px;
-}
+}*/
+/*.tb__right > div {
+    text-align: left; !* 각 div 내부의 텍스트를 왼쪽 정렬 *!
+    width: 100%; !* 각 div가 전체 너비를 차지하도록 설정 *!
+}*/
 
 .tb__order tfoot td,
 .tb__order tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
+    /*border-bottom: 1px solid #a3a3a3;*/
     padding: 10px;
 }
 
