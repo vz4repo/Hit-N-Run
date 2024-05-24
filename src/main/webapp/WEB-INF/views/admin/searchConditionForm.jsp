@@ -107,7 +107,6 @@
                     - 검색 시작일자 기준 1개월, 3개월, 6개월
                 --%>
                 <td>
-                    기간선택 :
                     <label for="sdate">시작일</label>
                     <input class="search-inputDate" type="date" id="sdate">
                     ~
