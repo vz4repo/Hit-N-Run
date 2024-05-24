@@ -16,8 +16,7 @@
     color: #777;
 }
 
-.order__header a,
-.tb__order a{
+.order__header a{
     text-decoration: none;
     color: black;
 }
