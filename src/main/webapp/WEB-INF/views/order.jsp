@@ -34,12 +34,12 @@
       display: flex;
       align-items: center;
       justify-content: start;
-      padding: 20px 0;
-      margin: 20px 0;
+      padding-top: 1.35%;
   }
 
   .dlv-header {
       margin-left: 8%;
+      margin-right: 3%;
       font-size: 15px;
       font-weight: 600;
   }
@@ -65,9 +65,6 @@
     background-color: #333;
     border-radius: 5px;
     cursor: pointer;
-    margin-left: 10px;
-
-
   }
 
   #dlv-container .select-request {
@@ -226,6 +223,15 @@
       position: relative; /* 상대 위치 설정 */
       top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
   }
+
+
+  #dlv-header-content label {
+      width: 500px; /* 원하는 너비로 설정하세요 */
+  }
+
+  .dlv-header-content tr  {
+      height: 30px;
+  }
 </style>
 <%-- 김수연 끝 --%>
 <body>
@@ -246,11 +252,52 @@
     <section id="dlv-container">
         <div class="dlv-header">배송 정보</div>
         <%-- 기본/선택 배송지 내용 출력 --%>
+
+<%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
+        <%-- 김수연 0524 기본배송지 form 시작 --%>
         <div class="dlv-header-content">
             <%-- TODO : 기본배송지 --%>
+                <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content">${defaultDto.adr_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
         </div>
+
+        <%-- 김수연 0524 기본배송지 form 끝 --%>
         <!-- 배송지 변경 버튼 -->
-        <button class="btn-change-address">배송지 변경</button>
+                <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -360,15 +407,18 @@
       const formatValue = numbericValue.toLocaleString('ko-KR');
       $(this).text(formatValue + '원');
     })
+
+
+
+
+      /* 김수연 추가 0524 시작 */
+      // document.getElementsByClassName("dlv-header-content").innerHTML = showDefaultDLV();
+      /* 김수연 추가 0524 끝 */
   })
   /*테이블의 행 수를 계산*/
   window.onload = function () {
     const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
     let totalSum = 0;
-
-    /* 김수연 추가 0524 시작 */
-      showDefaultDLV();
-    /* 김수연 추가 0524 끝 */
 
     rows.forEach(function (row) {
       /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
@@ -467,44 +517,43 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
             } else {
               const selectedDto = response.selectedDto;
               const htmlContent = `
-                                    <ul style="display: block">
-                                        <li>
-                                            <span class="label">배송지</span>
-                                            <div class="dlv-content"> ${'${selectedDto.adr_name}'} </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">이름/연락처</span>
-                                            <div class="dlv-content">
-                                                <ul>
-                                                    <li>${'${selectedDto.rcver}'}</li>
-                                                    <li>${'${selectedDto.rcver_phn}'}</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">주소</span>
-                                            <div class="dlv-content">
-                                                <ul>
-                                                    <li> ${'${selectedDto.rcver_zip}'} </li>
-                                                    <li> ${'${selectedDto.rcver_adr}'} </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">배송 요청사항</span>
-                                            <div class="dlv-content">
-                                                <select class="select-request" name="delivery_request" id="delivery_request">
-                                                    <option value="" selected="selected"> 배송 시 요청사항을 선택해주세요</option>
-                                                    <option value="부재 시 경비실에 맡겨주세요"> 부재 시 경비실에 맡겨주세요</option>
-                                                    <option value="부재 시 택배함에 넣어주세요"> 부재 시 택배함에 넣어주세요</option>
-                                                    <option value="부재 시 집 앞에 놔주세요"> 부재 시 집 앞에 놔주세요</option>
-                                                    <option value="배송 전 연락 바랍니다"> 배송 전 연락 바랍니다</option>
-                                                    <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요."> 파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                                                    <option value="etc">직접 입력</option>
-                                                </select></div>
-                                        </li>
-                                    </ul>
-                                  `;
+                 <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content"> ${'${selectedDto.adr_name}'}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${'${selectedDto.rcver}'} / ${'${selectedDto.rcver_phn}'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${'${selectedDto.rcver_zip}'}) ${'${selectedDto.rcver_adr}'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                `;
               $(".dlv-header-content").html(htmlContent);
               addressModal.style.display = 'none';
             }
@@ -518,9 +567,14 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
     });
   })
 
-  function showDefaultDLV() {
-      alert("고객번호 : " +"${defaultDto.c_adr_list_id}" +  "\n고객명: " + "${defaultDto.rcver}");
-  }
+
+  /* 김수연 추가 0524 시작 */
+  // function showDefaultDLV() {
+  //     return `
+  //           <dlv>안녕하세용</dlv>
+  //           `;
+  // }
+  /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>
