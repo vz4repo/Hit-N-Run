@@ -47,12 +47,13 @@
 }
 
 .tb__order thead th {
-    padding: 7px 0 6px;
-    background-color: #0a4216;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
+    padding: 11px 0;
+    background-color: #183c21;
     color: white;
-    border-bottom: 1px solid #ddd;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_main {
@@ -99,7 +100,7 @@
 
 
 .order__title__detail {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .order__title__detail a:first-child {
@@ -150,15 +151,11 @@
     place-items: center center;
     font-weight: bold;
     font-size: 14px;
-}*/
-/*.tb__right > div {
-    text-align: left; !* 각 div 내부의 텍스트를 왼쪽 정렬 *!
-    width: 100%; !* 각 div가 전체 너비를 차지하도록 설정 *!
-}*/
+}
 
 .tb__order tfoot td,
 .tb__order tfoot tr{
-    /*border-bottom: 1px solid #a3a3a3;*/
+    border-bottom: 1px solid #a3a3a3;
     padding: 10px;
 }
 

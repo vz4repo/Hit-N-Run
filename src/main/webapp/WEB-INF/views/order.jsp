@@ -30,152 +30,210 @@
 </head>
 <%-- 김수연 시작 --%>
 <style>
-    #dlv-container {
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        padding: 20px 0;
-        margin: 20px 0;
-    }
+  #dlv-container {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      padding-top: 1.35%;
+  }
 
-    .dlv-header {
-        margin-left: 8%;
-        font-size: 15px;
-        font-weight: 600;
-    }
+  .dlv-header {
+      margin-left: 8%;
+      margin-right: 3%;
+      font-size: 15px;
+      font-weight: 600;
+  }
 
-    #dlv-container ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+  #dlv-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-    #dlv-container li {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-    }
-
-
-    #dlv-container .btn-change-address {
-        padding: 5px 10px;
-        border: 1px solid #333;
-        color: #fff;
-        background-color: #333;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-left: 10px;
+  #dlv-container li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+  }
 
 
-    }
 
-    #dlv-container .select-request {
-        width: auto;
-        padding: 5px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
+  #dlv-container .btn-change-address {
+    padding: 5px 10px;
+    border: 1px solid #333;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    #dlv-container .radio-group label {
-        margin-right: 10px;
-    }
+  #dlv-container .select-request {
+    width: auto;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
 
-    #dlv-container .dlv-content ul {
-        display: block;
-    }
+  #dlv-container .radio-group label {
+    margin-right: 10px;
+  }
 
-    #dlv-container .dlv-content li {
-        padding: 4px;
-    }
+  #dlv-container .dlv-content ul {
+    display: block;
+  }
 
-    /* Modal styles */
-    #addressModal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
+  #dlv-container .dlv-content li {
+    padding: 4px;
+  }
 
-    #addressModal .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 600px;
-        border-radius: 10px;
-    }
+  /* Modal styles */
+  #addressModal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+  }
 
-    #addressModal .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
+  #addressModal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+  }
 
-    #addressModal .close:hover,
-    #addressModal .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
+  #addressModal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
 
-    #addressModal .address-card {
-        border: 1px solid #ddd;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-    }
+  #addressModal .close:hover,
+  #addressModal .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
 
-    #addressModal .address-card .title {
-        font-weight: bold;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+  #addressModal .address-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
 
-    #addressModal .address-card .title .default {
-        color: #007bff;
-        border: 1px solid #007bff;
-        padding: 2px 5px;
-        border-radius: 5px;
-    }
+  #addressModal .address-card .title {
+    font-weight: bold;
+    font-size: 20px; /* 13 -> 18 -> 20 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-    #addressModal .address-card .details {
-        margin: 10px 0;
-    }
+  #addressModal .address-card .title .default {
+    color: #007bff;
+      /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
+    border: 1px solid #007bff;
+    padding: 2px 5px;
+    border-radius: 5px;
+  }
 
-    #addressModal .address-card .buttons {
-        display: flex;
-        justify-content: space-between;
-    }
+  #addressModal .address-card .details {
+    font-size: 20px; /* 13 -> 18 -> 20 */
+    margin: 10px 0;
+  }
 
-    #addressModal .address-card .buttons button {
-        padding: 5px 10px;
-        border: 1px solid #ddd;
-        background-color: #f0f0f0;
-        cursor: pointer;
-    }
+  #addressModal .address-card .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 
-    #addressModal .address-card .buttons button.select {
-        background-color: #000;
-        color: #fff;
-    }
+  #addressModal .address-card .buttons button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
 
-    #addressModal .add-new-address {
-        text-align: right;
-        margin: 10px 0;
-        color: #007bff;
-        cursor: pointer;
-    }
+  #addressModal .address-card .buttons button {
+      padding: 5px 10px;
+      border: 1px solid #333;
+      color: #fff;
+      background-color: #333;
+      cursor: pointer;
+      margin-left: 0px;
+  }
+
+  #addressModal .add-new-address {
+    text-align: right;
+    margin: 10px 0;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+
+
+  #addressModal .dlv-select {
+      padding: 5px 10px;
+      border: 1px solid #333;
+      color: #fff;
+      background-color: #333;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+  }
+
+
+  /*.close {*/
+  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
+  /*}*/
+
+
+
+  .header-container {
+      display: flex;
+      align-items: center; /* 수직 가운데 정렬 */
+      justify-content: space-between; /* 양쪽 끝에 배치 */
+      height: 50px; /* 높이 설정 (필요에 따라 조정) */
+      padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
+  }
+
+  .dlvN {
+      margin: 0; /* 기본 마진 제거 */
+      font-size: 20px; /* 폰트 크기 조정 */
+      line-height: 1; /* 줄 높이 조정 */
+      font-weight: bold; /* 글자를 두껍게 */
+      color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
+  }
+
+  .close {
+      cursor: pointer; /* 포인터 모양 */
+      font-size: 24px; /* 아이콘 크기 조정 */
+      line-height: 1; /* 줄 높이 조정 */
+      position: relative; /* 상대 위치 설정 */
+      top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
+  }
+
+
+  #dlv-header-content label {
+      width: 500px; /* 원하는 너비로 설정하세요 */
+  }
+
+  .dlv-header-content tr  {
+      height: 30px;
+  }
 </style>
+<%-- 김수연 끝 --%>
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
@@ -188,15 +246,57 @@
             <a href="#"> > 주문완료</a>
         </div>
     </div>
-    <hr class="first__under"/>
+    <%-- 김수연 시작 --%>
+    <%-- 배송지 정보 section --%>
     <section id="dlv-container">
         <div class="dlv-header">배송 정보</div>
         <%-- 기본/선택 배송지 내용 출력 --%>
+
+<%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
+        <%-- 김수연 0524 기본배송지 form 시작 --%>
         <div class="dlv-header-content">
             <%-- TODO : 기본배송지 --%>
+                <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content">${defaultDto.adr_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
         </div>
+
+        <%-- 김수연 0524 기본배송지 form 끝 --%>
         <!-- 배송지 변경 버튼 -->
-        <button class="btn-change-address">배송지 변경</button>
+                <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -299,7 +399,6 @@
         </form>
     </div>
 </section>
-
 <%-- 결제 위젯 호출 --%>
 <section class="order__payment">
     <%@include file="payCheckout.jsp" %>
@@ -307,19 +406,26 @@
 <%-- footer --%>
 <%@include file="footer.jsp" %>
 <script>
-    $(document).ready(function () {
-        $('.priceFormat').each(function () {
-            let value = $(this).text();
-            value = value.replace(/,/g, '');
-            const numbericValue = parseInt(value);
-            const formatValue = numbericValue.toLocaleString('ko-KR');
-            $(this).text(formatValue + '원');
-        })
+  $(document).ready(function () {
+    $('.priceFormat').each(function () {
+      let value = $(this).text();
+      value = value.replace(/,/g, '');
+      const numbericValue = parseInt(value);
+      const formatValue = numbericValue.toLocaleString('ko-KR');
+      $(this).text(formatValue + '원');
     })
-    /*테이블의 행 수를 계산*/
-    window.onload = function () {
-        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
-        let totalSum = 0;
+
+
+
+
+      /* 김수연 추가 0524 시작 */
+      // document.getElementsByClassName("dlv-header-content").innerHTML = showDefaultDLV();
+      /* 김수연 추가 0524 끝 */
+  })
+  /*테이블의 행 수를 계산*/
+  window.onload = function () {
+    const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+    let totalSum = 0;
 
         rows.forEach(function (row) {
             /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
@@ -401,73 +507,81 @@
     이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
     이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
 
-    이벤트 위임을 사용하면
-    이벤트 핸들러를 상위 요소에 등록하고,
-    이벤트가 하위 요소로 위임되도록 합니다.
-        * */
-        document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
-            if (event.target.classList.contains('dlv-select')) {
-                const c_adr_list_id = event.target.getAttribute('addrId');
-                $.ajax({
-                    type: "GET",
-                    url: `${contextPath}/delivery/deliverySelected`,
-                    data: {dlvId: c_adr_list_id},
-                    success: function (response) {
-                        if (response.message) {
-                            $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
-                        } else {
-                            const selectedDto = response.selectedDto;
-                            const htmlContent = `
-                                    <ul style="display: block">
-                                        <li>
-                                            <span class="label">배송지</span>
-                                            <div class="dlv-content"> ${'${selectedDto.adr_name}'} </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">이름/연락처</span>
-                                            <div class="dlv-content">
-                                                <ul>
-                                                    <li>${'${selectedDto.rcver}'}</li>
-                                                    <li>${'${selectedDto.rcver_phn}'}</li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">주소</span>
-                                            <div class="dlv-content">
-                                                <ul>
-                                                    <li> ${'${selectedDto.rcver_zip}'} </li>
-                                                    <li> ${'${selectedDto.rcver_adr}'} </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <span class="label">배송 요청사항</span>
-                                            <div class="dlv-content">
-                                                <select class="select-request" name="delivery_request" id="delivery_request">
-                                                    <option value="" selected="selected"> 배송 시 요청사항을 선택해주세요</option>
-                                                    <option value="부재 시 경비실에 맡겨주세요"> 부재 시 경비실에 맡겨주세요</option>
-                                                    <option value="부재 시 택배함에 넣어주세요"> 부재 시 택배함에 넣어주세요</option>
-                                                    <option value="부재 시 집 앞에 놔주세요"> 부재 시 집 앞에 놔주세요</option>
-                                                    <option value="배송 전 연락 바랍니다"> 배송 전 연락 바랍니다</option>
-                                                    <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요."> 파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                                                    <option value="etc">직접 입력</option>
-                                                </select></div>
-                                        </li>
-                                    </ul>
-                                  `;
-                            $(".dlv-header-content").html(htmlContent);
-                            addressModal.style.display = 'none';
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching selected delivery:', error);
-                        alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-                    }
-                });
+이벤트 위임을 사용하면
+이벤트 핸들러를 상위 요소에 등록하고,
+이벤트가 하위 요소로 위임되도록 합니다.
+    * */
+    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+      if (event.target.classList.contains('dlv-select')) {
+        const c_adr_list_id = event.target.getAttribute('addrId');
+        $.ajax({
+          type: "GET",
+          url: `${contextPath}/delivery/deliverySelected`,
+          data: {dlvId: c_adr_list_id},
+          success: function (response) {
+            if (response.message) {
+              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+            } else {
+              const selectedDto = response.selectedDto;
+              const htmlContent = `
+                 <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content"> ${'${selectedDto.adr_name}'}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${'${selectedDto.rcver}'} / ${'${selectedDto.rcver_phn}'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${'${selectedDto.rcver_zip}'}) ${'${selectedDto.rcver_adr}'}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                `;
+              $(".dlv-header-content").html(htmlContent);
+              addressModal.style.display = 'none';
             }
+          },
+          error: function (xhr, status, error) {
+            console.error('Error fetching selected delivery:', error);
+            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+          }
         });
-    })
+      }
+    });
+  })
+
+
+  /* 김수연 추가 0524 시작 */
+  // function showDefaultDLV() {
+  //     return `
+  //           <dlv>안녕하세용</dlv>
+  //           `;
+  // }
+  /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>

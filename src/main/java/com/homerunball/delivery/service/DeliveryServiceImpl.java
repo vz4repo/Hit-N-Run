@@ -38,7 +38,7 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     /* 기본 배송지 설정 // 고객 테이블에서 변경 */
     @Override
-    public int updateDefaultDlv(DeliveryDto deliveryDto) throws Exception {
+    public int updatToSetDft(DeliveryDto deliveryDto) throws Exception {
         return deliveryDao.update(deliveryDto);
     }
 

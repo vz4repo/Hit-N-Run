@@ -476,7 +476,7 @@
                         <!-- 주문번호 -->
                         <td>
                             <div class="order-number">
-                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                <a href="#" class="open_od_id_modal" >${orderdetDto.od_id}</a>
                                 <form id="orderForm" action="/orderDetail" style="display: none;">
                                     <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                 </form>
@@ -870,19 +870,20 @@
                     priceElement.textContent = formatPrice(price);
                 });
 
-                /*
-                $(document).ready(function () {
-                    $('.od_dt').each(function () {
-                        let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
-                        let today = new Date();
-                        let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
-                        $(this).text(dateFormat);
-                    })
-                })
-                */
-                $(document).ready(function () {
-                    $('.od_dt').each(function () {
-                        let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
+              /*
+              $(document).ready(function () {
+                  $('.od_dt').each(function () {
+                      let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
+                      let today = new Date();
+                      let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
+                      $(this).text(dateFormat);
+                  })
+              })
+              */
+
+              $(document).ready(function () {
+                $('.od_dt').each(function () {
+                  let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
 
                         // Date 객체로 변환하기 위해 oddt를 파싱
                         let year = parseInt(oddt.substring(0, 4));
