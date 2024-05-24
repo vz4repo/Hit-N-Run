@@ -3,7 +3,7 @@
 
 <div class="main-category">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 main-category-container">
             <h2 class="product-category">대표 카테고리</h2>
             <div class="col-md-3 category">
                 <a href="#">
