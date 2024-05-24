@@ -16,7 +16,7 @@
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
 
-    <%-- 다니님 header, footer --%>
+    <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
@@ -66,8 +66,9 @@
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
-  }
 
+
+  }
 
   #dlv-container .select-request {
     width: auto;
@@ -242,14 +243,11 @@
     </div>
     <%-- 김수연 시작 --%>
     <%-- 배송지 정보 section --%>
-    <%-- 김수연 0524 이부분 style 태그 구분하려고 추가. 삭제예정 --%>
-    <section style="background-color: powderblue;" id="dlv-container">
+    <section id="dlv-container">
         <div class="dlv-header">배송 정보</div>
         <%-- 기본/선택 배송지 내용 출력 --%>
         <div class="dlv-header-content">
-            <%-- 김수연 0524 삭제예정 --%>
-<%--            <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
-        <%-- TODO : 기본배송지 --%>
+            <%-- TODO : 기본배송지 --%>
         </div>
         <!-- 배송지 변경 버튼 -->
         <button class="btn-change-address">배송지 변경</button>
@@ -258,22 +256,8 @@
     <!-- 배송지 목록 Modal -->
     <div id="addressModal">
         <div class="modal-content">
-<%--            <div>                <div style="float: left; width: 95%;">--%>
-<%--                    배송지 변경--%>
-<%--                </div>--%>
-<%--                <div class="close" id="closeModal" style="float: right; width: 5%;">--%>
-<%--                    X--%>
-<%--                </div>--%>
-<%--                <h1 class="dlvN" id="dlvN">배송지 변경 </h1>--%>
-<%--                <div class="close" id="closeModal">&times;</div>--%>
-
-
-
-    <div class="header-container">
-        <h1 class="dlvN" id="dlvN">배송지 변경</h1>
-        <div class="close" id="closeModal">&times;</div>
-    </div>
-<%--            </div>--%>
+            <span class="close" id="closeModal">&times;</span>
+            <h1>배송지 변경</h1>
             <div class="dlv-modal-container">
                 <%-- ajax를 통해서 내용이 채워지는 부분 --%>
             </div>
@@ -322,14 +306,14 @@
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
                     <tr>
                         <td>
-                            <a href="/product/detail?pd_id = ${cartDto.pd_id}">
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
                                 <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
                                      alt="이미지 준비 중 입니다"
                                      onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
                             </a>
                         </td>
                         <td>
-                            <a href="/product/item?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
                             <span>${cartDto.pd_clsf_code}</span>
                         </td>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
@@ -377,10 +361,7 @@
       $(this).text(formatValue + '원');
     })
   })
-
-
-
-  /*테이블의 행 수를 동적으로 계산*/
+  /*테이블의 행 수를 계산*/
   window.onload = function () {
     const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
     let totalSum = 0;
@@ -390,7 +371,7 @@
     /* 김수연 추가 0524 끝 */
 
     rows.forEach(function (row) {
-      /* 각 행의 6번째 셀(td)에서 판매가를 가져와서 총합구하기 */
+      /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
       const price = row.cells[5].innerText;
       totalSum += parseInt(price.replace(/[^\d]/g, ''));
     });
