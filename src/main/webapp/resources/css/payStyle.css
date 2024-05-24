@@ -57,6 +57,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 150px;
 }
 
 :root {
