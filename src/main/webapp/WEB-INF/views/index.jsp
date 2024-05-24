@@ -476,7 +476,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="section-heading">
-                    <h2>홈런 소식을 구독하고 10% 할인을 받으세요</h2>
+                    <h2>홈런 소식을 구독하고 10% 할인 쿠폰을 받으세요</h2>
                     <span>홈런 소식지에 깜짝 할인 쿠폰도 숨어 있습니다.</span>
                 </div>
                 <form id="subscribe" action="" method="get">
