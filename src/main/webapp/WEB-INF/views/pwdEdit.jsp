@@ -81,16 +81,18 @@
       <h1 id="loginTitle">비밀번호 변경</h1><br><br>
 
         <label>현재 비밀번호</label>
-        <input id="curPwd" class="special-class" type="password" name="curPwd">
+        <input id="curPwd" class="special-class" type="password" name="curPwd" maxlength="15">
 
       <label>신규 비밀번호</label>
-      <input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" oninput="newPwdCheck(this.form)">
+      <input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="newPwdCheck(this.form)">
       <p id="check-newPwd"></p>
 
       <label>신규 비밀번호 확인</label>
-      <input id="newPwd2" class="special-class" type="password" oninput="newPwdCheck(this.form)"><br><br>
+      <input id="newPwd2" class="special-class" type="password" maxlength="15" oninput="newPwdCheck(this.form)"><br><br>
       <button>확인</button>
-      <button type="button" onclick="window.history.back()">나가기</button><br><br>
+<%--      <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
+      <a href="/mypage/list"><button type="button">나가기</button></a><br><br>
+
     </div>
   </form>
 </div>
@@ -106,11 +108,11 @@
     var curPwd = document.getElementById("curPwd").value;
     var newPwd = document.getElementById("newPwd").value;
     var newPwd2 = document.getElementById("newPwd2").value;
-    var newPwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z]).{4,15}$/;
+    var newPwdPattern = /^(?=.*\d)(?=.*[a-z])[a-z0-9]{4,15}$/;
 
 
     if(!newPwdPattern.test(newPwd)) {
-      alert("비밀번호는 영어/숫자/ 포함 4자이상을 작성하셔야합니다.")
+      alert("비밀번호는 소문자 영문/숫자 조합으로 4자 이상 15자 이하로 작성하셔야합니다.")
       return false;
     }
 
