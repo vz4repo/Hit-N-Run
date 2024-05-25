@@ -5,7 +5,6 @@
     font-style: normal;
 }
 
-
 .tb__order table {
     /* 2024.05.21 [혁락] 85% -> 55%*/
     /* 2024.05.22 [다니] 55% -> 85%*/
@@ -93,6 +92,7 @@
     height: 80px;
     width: 80px;
 }
+
 
 .order__title__detail {
     font-size: 15px;
