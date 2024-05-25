@@ -7,11 +7,13 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>
 
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
@@ -24,9 +26,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
       .order-container {
-        width: 80%;
+        width: 85%;
         margin: 0 auto;
-        padding: 20px;
       }
 
       .orders {
@@ -40,13 +41,14 @@
       .orders table {
         width: 100%;
         border-collapse: collapse;
+        font-size: 13px;
       }
 
       .orders th,
       .orders td {
         padding: 10px;
         text-align: center;
-        height: 70px;
+        /*height: 70px;*/
         box-sizing: border-box;
         vertical-align: middle;
         word-break: break-all;
@@ -70,10 +72,6 @@
         background-color: #f9f9f9;
       }
 
-      .product-info {
-        display: flex;
-      }
-
       ul {
         display: block;
       }
@@ -82,7 +80,6 @@
         width: 100px;
         height: 100px;
         object-fit: cover;
-        margin-right: 10px;
       }
 
       .info {
@@ -175,7 +172,7 @@
         margin: auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
+        width: 100%;
         max-width: 600px;
         border-radius: 8px;
         position: relative;
@@ -277,140 +274,10 @@
         background-color: #f4f4f4;
         text-align: center;
       }
-
-      /* 영수증 modal */
-      /* 영수증 modal */
-      /* modal 에 쓰일 회색 배경 */
-      #receiptModal .order-container {
-        background-color: #f4f4f4;
-      }
-
-      /* modal */
-      #receiptModal .modal {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 20px;
-      }
-
-      #receiptModal .modal-content {
-        background-color: #fff;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 100%;
-        max-width: 400px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      }
-
-      #receiptModal .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      #receiptModal .modal-header h2 {
-        margin: 0;
-        font-size: 24px;
-      }
-
-      #receiptModal .modal-header .icons {
-        display: flex;
-        gap: 10px;
-      }
-
-      #receiptModal .modal-body {
-        padding-top: 10px;
-        font-size: 14px;
-        line-height: 1.6;
-      }
-
-      #receiptModal .modal-body .info {
-        display: flex;
-        flex-direction: column;
-      }
-
-      #receiptModal .modal-body .info div {
-        display: flex;
-        justify-content: space-between;
-        margin: 5px 0;
-      }
-
-      #receiptModal .modal-body hr {
-        border: none;
-        border-top: 1px solid #ddd;
-        margin: 10px 0;
-      }
-
-      #receiptModal .modal-footer {
-        padding-top: 10px;
-        border-top: 1px solid #ddd;
-        font-size: 12px;
-        color: #8b95a1;
-      }
-
-      #receiptModal .modal-footer p {
-        margin: 5px 0;
-      }
-
-      #receiptModal .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      #receiptModal .close:hover,
-      #receiptModal .close:focus {
-        color: black;
-        text-decoration: none;
-      }
-
-      #receiptModal .icon {
-        cursor: pointer;
-        font-size: 20px;
-        color: #555;
-      }
-
-      #receiptModal .icon:hover {
-        color: #000;
-      }
-
-      #receiptModal .highlight .align-left {
-        color: #ff0000;
-      }
-
-      #receiptModal .total-amount .align-left {
-        color: #0000ff;
-        font-weight: bold;
-      }
-
-      #receiptModal .align-left {
-        color: #8b95a1;
-        text-align: left;
-      }
-
-      #receiptModal .align-right {
-        color: #4e5968;
-        font-weight: 600;
-        text-align: right;
-      }
     </style>
     <%-- [혁락] css 수정 끝 --%>
 </head>
 <body>
-<%-- 잠깐 테스트 때문에 include 주석처리 --%>
 <jsp:include page="header.jsp"/>
 
 <main>
@@ -418,6 +285,14 @@
     <div class="order-container">
         <div class="orders">
             <table>
+                <colgroup>
+                    <col width="30%"/>
+                    <col width="30%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
+                    <col width="10%"/>
+                </colgroup>
+
                 <thead>
                 <tr>
                     <th>상품정보</th>
@@ -433,7 +308,6 @@
                 </tr>
                 </thead>
                 <tbody>
-                <%----%>
                 <c:forEach var="orderdetDto" items="${list}" varStatus="status">
                     <tr class="order-item-hist">
                         <td class="product-info">
@@ -448,7 +322,7 @@
                                 <li class="brand">
                                     <span>${orderdetDto.brd_name}</span>
                                 </li>
-                                    <!-- 상품 이름 -->
+                                <!-- 상품 이름 -->
                                 <li class="name">
                                     <a href="#">${orderdetDto.pd_name}</a>
                                 </li>
@@ -465,8 +339,10 @@
                         <!-- 주문번호 -->
                         <td>
                             <div class="order-number">
-                                <a href="#">${orderdetDto.od_id}</a>
-
+                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                <form id="orderForm" action="/orderDetail" style="display: none;">
+                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
+                                </form>
                             </div>
                         </td>
 
@@ -728,22 +604,35 @@
                         </section>
             --%>
 
+
             <script>
+
               document.addEventListener('DOMContentLoaded', () => {
-                const orderStepModal = document.getElementById('orderStepModal');
-                const deliveryModal = document.getElementById('deliveryModal');
+                const orderStepModal = document.querySelector('#orderStepModal');
+                const deliveryModal = document.querySelector('#deliveryModal');
+                const orderIdModal = document.querySelector('#orderIdModal');
                 const closeModalButtons = document.querySelectorAll('.close');
+                let modalContent = document.querySelectorAll('.modal-content');
                 const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
                 const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
+                const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
 
                 /* 영수증 모달 */
-                const receiptModal = document.getElementById('receiptModal');
+                const receiptModal = document.querySelector('#receiptModal');
                 const orderAmounts = document.querySelectorAll('.order-amount');
+
+                //주문상세내역 모달 열기
+                openOrderIdModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    orderIdModal.style.display = 'flex';
+                  })
+                })
 
                 // 주문 단계 모달 열기
                 openOrderStepModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     orderStepModal.style.display = 'flex';
+                    modalContent.style.maxWidth = '350px';
                   });
                 });
 
@@ -751,6 +640,7 @@
                 openDeliveryModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     deliveryModal.style.display = 'flex';
+                    modalContent.style.maxWidth = '1400px';
                   });
                 });
 
@@ -758,7 +648,7 @@
                 orderAmounts.forEach((orderAmount) => {
                   orderAmount.addEventListener('click', async () => {
                     const orderId = orderAmount.getAttribute('data-order-id');
-                    const receiptContent = document.getElementById('receiptContent');
+                    const receiptContent = document.querySelector('#receiptContent');
                     try {
                       /* TODO: json 값 불러오기 */
                       <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
@@ -779,10 +669,9 @@
                   });
                 });
 
-                // TODO: 모달 바깥 영역 클릭 시 닫기 :: 필요 여부 확인
                 window.addEventListener('click', (event) => {
-                  if (event.target === orderStepModal || event.target === deliveryModal || event.target
-                      === receiptModal) {
+                  if (event.target === orderStepModal || event.target === deliveryModal ||
+                      event.target === receiptModal   || event.target === orderIdModal) {
                     event.target.style.display = 'none';
                   }
                 });
@@ -799,80 +688,92 @@
 
               /* 영수증 프린트 */
               const printReceipt = () => {
-                const printContents = document.querySelector('#receiptModal .modal-content').innerHTML;
+                const printContents = document.querySelector('#receiptModal').innerHTML;
                 const originalContents = document.body.innerHTML;
 
-                document.body.innerHTML = printContents;
-                window.print();
-                document.body.innerHTML = originalContents;
-                location.reload();
-              };
+                /* 새로운 인쇄용 창 생성 */
+                const printWindow = window.open('', '_blank', 'width=800,height=800');
+                printWindow.document.write('<html><head><title>Print Receipt</title>');
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write('</head><body><div id="receiptModal" class="modal">');
+                printWindow.document.write(printContents);
+                printWindow.document.write('</div></body></html>');
+                printWindow.document.close();
 
-              /* 원 표시*/
-              // Function to format the date
-              const formatDate = (isoDateString) => {
-                const date = new Date(isoDateString);
+                /* 인쇄 완료 후 창 닫기 */
+                printWindow.onload = () => {
+                  printWindow.print();
+                  printWindow.close();
+                };
 
-                // Format the date as yyyy.mm.dd
-                const formattedDate = date.toLocaleDateString('ko-KR', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit'
-                }).replace(/\. /g, '.');
+                /* 원 표시*/
+                // Function to format the date
+                const formatDate = (isoDateString) => {
+                  const date = new Date(isoDateString);
 
-                // Format the time as HH:MM
-                const formattedTime = date.toLocaleTimeString('ko-KR', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: false
+                  // Format the date as yyyy.mm.dd
+                  const formattedDate = date.toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit'
+                  }).replace(/\. /g, '.');
+
+                  // Format the time as HH:MM
+                  const formattedTime = date.toLocaleTimeString('ko-KR', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: false
+                  });
+
+                  return `${'${formattedDate}'} ${'${formattedTime}'}`;
+                };
+
+                // Function to format the price
+                const formatPrice = (price) => `${'${price.toLocaleString("ko-KR")}'} 원`;
+
+                // Apply formatting to each transaction
+                document.querySelectorAll('.order-item-hist').forEach(transaction => {
+                  const dateElement = transaction.querySelector('.order-date');
+                  const priceElement = transaction.querySelector('.sls_prc');
+
+                  const isoDateString = new Date(dateElement.textContent).toISOString();
+                  const price = parseInt(priceElement.textContent, 10);
+
+                  dateElement.textContent = formatDate(isoDateString);
+                  priceElement.textContent = formatPrice(price);
                 });
 
-                return `${'${formattedDate}'} ${'${formattedTime}'}`;
-              };
+                /* TODO: od_dt 데이터 가져오기
+                $(document).ready(function () {
+                    $('.od_dt').each(function () {
+                        let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
+                        let today = new Date();
+                        let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
+                        $(this).text(dateFormat);
+                    })
+                })
+                */
 
-              // Function to format the price
-              const formatPrice = (price) => `${'${price.toLocaleString("ko-KR")}'} 원`;
-
-              // Apply formatting to each transaction
-              document.querySelectorAll('.order-item-hist').forEach(transaction => {
-                const dateElement = transaction.querySelector('.order-date');
-                const priceElement = transaction.querySelector('.sls_prc');
-
-                const isoDateString = new Date(dateElement.textContent).toISOString();
-                const price = parseInt(priceElement.textContent, 10);
-
-                dateElement.textContent = formatDate(isoDateString);
-                priceElement.textContent = formatPrice(price);
-              });
-
-              /*
-              $(document).ready(function () {
+                $(document).ready(function () {
                   $('.od_dt').each(function () {
-                      let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
-                      let today = new Date();
-                      let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
-                      $(this).text(dateFormat);
-                  })
-              })
-              */
+                    let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
 
-              $(document).ready(function () {
-                $('.od_dt').each(function () {
-                  let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
+                    // Date 객체로 변환하기 위해 oddt를 파싱
+                    let year = parseInt(oddt.substring(0, 4));
+                    let month = parseInt(oddt.substring(5, 7)) - 1; // JavaScript에서 월은 0부터 시작합니다.
+                    let day = parseInt(oddt.substring(8, 10));
+                    let date = new Date(year, month, day);
 
-                  // Date 객체로 변환하기 위해 oddt를 파싱
-                  let year = parseInt(oddt.substring(0, 4));
-                  let month = parseInt(oddt.substring(5, 7)) - 1; // JavaScript에서 월은 0부터 시작합니다.
-                  let day = parseInt(oddt.substring(8, 10));
-                  let date = new Date(year, month, day);
-
-                  // Date 객체를 원하는 형식으로 변환
-                  let dateFormat = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.'
-                      + date.getDate().toString().padStart(2, '0');
-                  $(this).text(dateFormat);
+                    // Date 객체를 원하는 형식으로 변환
+                    let dateFormat = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.'
+                        + date.getDate().toString().padStart(2, '0');
+                    $(this).text(dateFormat);
+                  });
                 });
-              });
-
+              }
             </script>
 </main>
 <jsp:include page="footer.jsp"/>

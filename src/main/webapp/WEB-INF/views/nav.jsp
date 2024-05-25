@@ -17,7 +17,7 @@
                     <a href="#">포수 미트</a>
                 </div>
                 <div class="mid">
-                    <a href="#">스포츠 유형<i class="fas fa-chevron-right"></i></a>
+                    <a href="#">스포츠 유형 <i class="fas fa-chevron-right"></i></a>
                     <a href="#">경식</a>
                     <a href="#">연식</a>
                     <a href="#">트레이닝</a>
@@ -216,5 +216,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="subnav">
+        <button class="sub__navBtn">유소년</button>
+    </div>
+    <div class="subnav">
+        <button class="sub__navBtn">SALE</button>
     </div>
 </nav>
