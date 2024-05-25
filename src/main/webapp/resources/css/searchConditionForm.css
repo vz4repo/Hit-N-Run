@@ -1,0 +1,89 @@
+.search-container {
+    width: 100%;
+    margin: 20px 0px;
+    display: inline-block;
+    text-align: center;
+}
+
+.search-container tbody tr:nth-of-type(3) select {
+    margin-right: 30px;
+}
+
+.search-container td {
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 검색에서 SELECT 옵션, input 설정 */
+.search-option {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.search-option > option {
+    text-align: center;
+}
+
+.search-input, .search-inputDate{
+    color: gray;
+    background-color: white;
+    border: 1px solid #ccc;
+    height: 100%;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.search-input {
+    width: 300px;
+}
+
+.search-inputDate {
+    width: 120px;
+    text-align: center;
+}
+
+.search-input::placeholder {
+    color: gray;
+}
+
+.buttons {
+    margin: 20px;
+}
+
+.sendBtn, .sendBtnSmall {
+    border-radius: 4px;
+    border: 1px solid #000000;
+    color: white;
+    cursor: pointer;
+    background-color: #585858;
+}
+
+.sendBtn, .cancelBtn {
+    width: 90px;
+    padding: 10px 20px;
+    font-size: 13px;
+}
+
+.sendBtnSmall {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.cancelBtn {
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background-color: white;
+    cursor: pointer;
+    color: #000000;
+}
+
+.cancelBtn:hover {
+    background: #0b7dda;
+    color: white;
+}
+
+.sendBtn:hover {
+    background: #0b7dda;
+}

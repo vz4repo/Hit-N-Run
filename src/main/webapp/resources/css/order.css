@@ -4,83 +4,99 @@
     font-style: normal;
 }
 
-body {
-    height: 100vh;
-    margin-top: 10%;
-}
 
-table {
-    width: 90%;
+.tb__order table {
+    /* 2024.05.21 [혁락] 85% -> 55%*/
+    /* 2024.05.22 [다니] 55% -> 85%*/
+    width: 85%;
     margin: 0 auto;
     text-align: left;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.35;
     color: #777;
 }
 
-a {
+.order__header a{
     text-decoration: none;
     color: black;
 }
 
-th, td {
+.tb__order th,
+.tb__order td {
     text-align: center;
 }
 
-td {
+.tb__order td {
     padding: 15px 0;
+    vertical-align: middle;
 }
 
-hr {
-    width: 90%;
+.tb__order hr {
+    width: 85%;
     height: 1px;
     border: 0;
     background-color: #cecece;
 }
 
 .first__under {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 40px;
 }
 
-thead th {
-    padding: 7px 0 6px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
-    color: #9b9a9a;
-    border-bottom: 1px solid #ddd;
+.tb__order thead th {
+    padding: 11px 0;
+    background-color: #183c21;
+    color: white;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_main {
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
-    font-size: 12px;
-    line-height: 1.35;
-    color: #777;
-    margin-left: 100px;
-}
-
-.head_order {
-    padding-bottom: 10px;
     text-align: center;
-    color: #333;
-    font-size: 15px;
-    font-weight: 600;
+    color: rgb(51, 51, 51);
+    font-size: 20px;
+    font-weight: 800;
     letter-spacing: 1.4px;
 }
 
+.head_order {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
 .order__title {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
     align-items: center;
-    margin: 15px 100px;
+    margin: 1% 8%;
+    color: rgb(51, 51, 51);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    justify-content: space-between;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.label {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+
+.tb__order img {
+    height: 80px;
+    width: 80px;
 }
 
 
 .order__title__detail {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .order__title__detail a:first-child {
@@ -91,16 +107,14 @@ thead th {
     color: #8d8d8d;
 }
 
-.order__delivery{
-
-}
 
 
 .title__order {
-    margin-left: 100px;
-    margin-bottom: 10px;
-    font-size: 12px;
+    margin-left: 8%;
+    font-size: 15px;
     font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 5%;
 }
 
 
@@ -112,7 +126,8 @@ thead th {
     font-size: 14px;
 }
 
-tfoot td, tfoot tr{
+.tb__order tfoot td,
+.tb__order tfoot tr{
     border-bottom: 1px solid #a3a3a3;
     padding: 10px;
 }

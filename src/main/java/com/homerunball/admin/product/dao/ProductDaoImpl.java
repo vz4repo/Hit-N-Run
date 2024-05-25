@@ -56,6 +56,18 @@ public class ProductDaoImpl implements ProductDao {
         return session.selectList(NAMESPACE + "selectAllOutProduct");
     }
 
+//    /*판매 중인 모든 제품을 선택한다.*/
+//    @Override
+//    public List<ProductDto> selectAllSalesProduct() throws Exception {
+//        return session.selectList(NAMESPACE + "selectAllSalesProduct");
+//    }
+//
+//    /*판매 중인 모든 신제품을 선택한다.*/
+//    @Override
+//    public List<ProductDto> selectAllNewSalesProduct() throws Exception {
+//        return session.selectList(NAMESPACE + "selectAllNewSalesProduct");
+//    }
+
     /* 지정된 제품 하나만을 선택한다. */
     @Override
     public ProductDto selectPrd(String pd_id) throws Exception {

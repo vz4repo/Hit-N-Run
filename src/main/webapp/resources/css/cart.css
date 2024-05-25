@@ -1,30 +1,42 @@
-
-* {
-    box-sizing: border-box;
+.cart * {
+    font-family: "IBM Plex Sans KR", sans-serif;
+    font-style: normal;
 }
 
-body {
-    height: 100vh;
+.cart main {
+    padding-bottom: 150px;
 }
 
-table {
+.cart_tale {
     width: 85%;
     margin: 0 auto;
     text-align: left;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.35;
     color: #777;
 }
 
-th, td {
+.cart_tale a {
+    text-decoration: none;
+    color: black;
+}
+.cart_tale img {
+    height: 110px;
+    width: 110px;
+}
+
+.cart_tale th,
+.cart_tale td {
     text-align: center;
 }
 
-td {
-    padding: 10px 0;
+.cart_tale td {
+    padding: 18px 0;
+    vertical-align: middle;
+    font-size: 16px;
 }
 
-hr {
+.cart_tale hr {
     width: 80%;
     height: 1px;
     border: 0;
@@ -32,7 +44,7 @@ hr {
 }
 
 .quantity_control input {
-    width: 23px;
+    width: 30px;
     height: 23px;
     padding: 5px;
     border: 1px solid #acacac;
@@ -41,31 +53,27 @@ hr {
     text-align: center;
 }
 
-.first__under {
-    margin-top: 40px;
-    margin-bottom: 40px;
-}
 
-thead th {
-    padding: 7px 0 6px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
-    color: #9b9a9a;
-    border-bottom: 1px solid #ddd;
+.cart_tale thead th {
+    padding: 11px 0;
+    background-color: #333;
+    color: white;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_cart {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
-    margin-bottom: 40px;
     text-align: center;
     color: rgb(51, 51, 51);
-    font-size: 13px;
+    font-size: 30px;
     font-weight: 800;
     letter-spacing: 1.4px;
+    margin-bottom: 40px;
 }
 
 .title__cart {
@@ -81,14 +89,14 @@ thead th {
 
 .tb__right {
     display: grid;
-    grid-template-columns: repeat(4, 33%);
-    place-items: center center;
+    /*justify-content: center;*/
+    place-items: end;
     font-weight: bold;
     font-size: 14px;
+    margin-right: 1%;
 }
 
 tfoot td, tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
     padding: 10px;
 }
 
@@ -99,7 +107,6 @@ tfoot td, tfoot tr{
 
 .nonCart {
     text-align: center;
-    margin-right: 120px;
     line-height: 1.35;
     color: black;
     padding: 20px;
@@ -152,4 +159,10 @@ button:hover {
     text-align: center;
     background-color: white;
     color: #333;
+}
+
+.priceFormat {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
 }

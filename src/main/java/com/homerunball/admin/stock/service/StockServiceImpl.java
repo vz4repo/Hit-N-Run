@@ -21,10 +21,17 @@ public class StockServiceImpl implements StockService {
         return stockDao.selectStkAll();
     }
 
-    /*선택한 재고 상품 상세 보여주기*/
+    /*선택한 재고 상품 상세 보여주기 -- size별 수량조회에 사용*/
     @Override
     public StockDto getOneStock(String pd_id, String pd_clsf_cd) throws Exception {
         StockDto stockDto = stockDao.selectStk(pd_id, pd_clsf_cd);
+        return stockDto;
+    }
+
+    /*선택한 재고 상품 상세 보여주기*/
+    @Override
+    public StockDto getStockInfo(String pd_id, String pd_clsf_cd) throws Exception {
+        StockDto stockDto = stockDao.selectOneStk(pd_id, pd_clsf_cd);
         return stockDto;
     }
 
@@ -59,7 +66,7 @@ public class StockServiceImpl implements StockService {
         }
 
         if(stockDto.getPd_id() == null ||
-           stockDto.getPd_clsf_cd() == null ||
+           //stockDto.getPd_clsf_cd() == null ||
            stockDto.getNml_stk_qty() == null ||
            stockDto.getRt_stk_qty() == null ||
            stockDto.getRgn_stk_qty() == null ||

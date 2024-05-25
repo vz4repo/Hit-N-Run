@@ -1,104 +1,79 @@
-* {
-    font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+
+.main_footer {
+    display: grid;
+    grid-template-columns: repeat(2, 45%);
+    grid-template-rows: repeat(2, 45%);
+    width: 100%;
+    justify-content: center;
+    align-items: start;
+    padding-top: 40px;
+    background-color: darkolivegreen;
 }
 
-body{
-    height: 80vh;
-    margin-top: 10%;
-}
-
-a {
-    text-decoration: none;
-    color: black;
-}
-
-ul {
-    list-style: none;
+.wrap_inner_left {
+    float: left;
     display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 8%;
+
+}
+
+.footerBottom .menu {
+    display: flex;
+    margin: 20px 0;
 }
 
 .footer_wrapper {
-    min-height: 100%;
+    border-top: 1px solid #a3a3a3;
+    margin-top: 100px;
+}
+
+.footer_wrapper a {
+    color: #dbdbdb;
+    font-size: 12px;
+    text-decoration: none;
+    line-height: 2;
+}
+
+.footer_wrapper span {
+    color: #dbdbdb;
+    font-size: 12px;
     position: relative;
+    vertical-align: top;
+    line-height: 2;
 }
 
-footer {
-    width: 100%;
-    bottom: 0;
-    position: absolute;
-}
-
-hr {
-    height: 1px;
-    border: 0;
-    background-color: #cecece;
-}
-
-.top_footer,
-.main_footer {
+.wrap_inner_right {
     display: grid;
-    justify-content: space-between;
+    grid-template-columns: 200px 280px 140px;
+    place-items: start end;
+    text-align: start;
 }
 
-.top_footer {
-    grid-template-columns: repeat(2, 50%);
-}
-
-.service,
-.return_addre {
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0px;
-}
-
-.service {
-    margin-left: 15%;
-}
-
-.service > h4,
-.return_addre > h4 {
-    font-size: 22px;
-    font-weight: 900;
-    color: #404040;
-}
-
-
-.service_time {
+.cs, .bank, .community {
     display: flex;
     flex-direction: column;
 }
 
-.service span,
-.return_addre span {
-    font-size: 12px;
-    margin: 5px 20px;
-    color: #a6a6a6;
+.footerLogo > span,
+.info > span {
+    padding-left: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #dbdbdb !important;
+}
+.tel,
+.bank_info,
+.shopmenu {
+    font-size: 18px !important;
+    font-weight: bold;
+    color: #dbdbdb !important;
 }
 
-.main_footer {
-    grid-template-columns: repeat(4, 25%);
-    margin-left: 5%;
-}
-
-.footer {
-    display: flex;
-    flex-direction: column;
-    margin: 40px;
-}
-
-.footer > h4 {
-    font-size: 17px;
-    font-weight: 900;
-    color: #404040;
-    margin-bottom: 10px;
-}
-
-.footer li {
-    font-size: 12px;
-    margin-top: 10px;
-    color: #a6a6a6;
+.wrap_inner_bottom {
+    grid-column-start: -2;
+    grid-column-end: -1;
+    margin-top: 3.5%;
+    margin-left: 12.5%;
 }

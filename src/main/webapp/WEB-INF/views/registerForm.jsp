@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>--%>
-<%@ page session="false" %>
+<%--<%@ page session="false" %>--%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +13,6 @@
             width: 300px;
             margin: 0 auto;
             text-align: left;
-            /*padding: 30px;*/
         }
 
         .special-class {
@@ -53,17 +51,17 @@
         }
 
         #myform {
-            max-width: 1130px;
+            max-width: 700px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-             /*padding: 30%;*/
+            padding-top: 3%;
+            padding-bottom: 3%;
             margin: 0 auto;
             margin-top: 50px;
-            margin-bottom: 150px;
+            margin-bottom: 50px;
         }
-
 
         span {
             color: gray;
@@ -94,17 +92,13 @@
             width: 70%;
         }
 
-        .modal-open {
-            overflow: hidden;
-        }
-
-        #tou {
+        #touModal {
             color: black;
             text-decoration: underline;
             cursor: pointer;
         }
 
-        #pii {
+        #piiModal {
             color: black;
             text-decoration: underline;
             cursor: pointer;
@@ -117,13 +111,11 @@
             cursor: pointer;
         }
 
-        /*#toubox,*/
-        #tou {
+        #touBox, #touModal {
             display: inline;
         }
 
-        /*#piibox,*/
-        #pii {
+        #piiBox, #piiModal {
             display: inline;
         }
 
@@ -139,12 +131,6 @@
             width: 265.5px;
         }
 
-        #check-result {
-            height: 20px; /* 고정 높이 설정 */
-            /*margin-bottom: 20px;*/
-            /*overflow: hidden; !* 오버플로우 내용 숨김 *!*/
-        }
-
         #birth {
             padding: 8px;
             border: 1px solid #ccc;
@@ -154,89 +140,110 @@
             box-sizing: border-box;
             font-family: 'IBM Plex Sans', sans-serif;
         }
+
+        #email, #verify{
+            display: inline;
+        }
+        #verify{
+            margin-left: 158px;
+            margin-bottom: 5px;
+        }
+
+        #sms_agr, #smsLabel{
+            display: inline;
+        }
+
+        #email_agr, #emailLabel{
+            display: inline;
+        }
+
+        #touBox, #touLabel{
+            display: inline;
+        }
+
+        #piiBox, #piiLabel{
+            display: inline;
+        }
+
+        #smsLabel, #emailLabel, #touLabel, #piiLabel{
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+
+
     </style>
 
 </head>
 <body>
+
 <div id="myform">
-<%--    <form action ="" method="POST" onsubmit="return formCheck(this)"/>--%>
-    <form action ="<c:url value="/register/add"/>" method="POST" onsubmit="return formCheck(this)"/>
-    <h1 id="loginTitle">Sign Up</h1>
+    <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
+        <h1 id="loginTitle">Sign Up</h1>
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
-            <input class="special-class" type="text" id="c_email" name="c_email" onblur="emailCheck()" placeholder="homerunball@run.com" autofocus>
-            <label>인증번호(예정)</label>
-            <input class="special-class" type="text" name="c_email2" placeholder="test" value="test">
+            <input id="verify" type="button" value="인증번호 받기" disabled><br>
+            <input class="special-class" type="text" id="c_email" name="c_email" maxlength="30" onblur="emailCheck()" placeholder="homerunball@run.com">
+            <p id="mail-check-warn"></p>
+            <label>인증번호</label>
+            <input class="special-class" type="text" id="c_email2" name="c_email2" maxlength="10" disabled>
             <label>비밀번호</label>
-            <input class="special-class" type="password" name="c_pwd" placeholder="영문/숫자/특수문자 조합 (8자 이상 15자 이하)">
-            <label>비밀번호 확인</label>
-            <input class="special-class" type="password" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요.">
+            <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="pwd2Check(this.form)" disabled>
+            <p id="check-pwd"></p>
+            <label id="pwdCheck">비밀번호 확인</label>
+            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" oninput="pwd2Check(this.form)" disabled>
             <label>이름</label>
-            <input class="special-class" type="text" name="c_name">
+            <input class="special-class" type="text" id="c_name" name="c_name" maxlength="15" disabled>
             <label>주소</label>
-            <input type="text" id="zip" name="c_zip" placeholder="우편번호">
-            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
-            <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소">
-            <input type="text" id="jibunAddress" name ="c_jibun_a" placeholder="지번주소">
+            <input type="text" id="zip" name="c_zip" placeholder="우편번호 찾기 클릭" readonly disabled>
+            <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly disabled>
+            <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly disabled>
+            <input type="text" id="jibunAddress" name="c_jibun_a" maxlength="30" placeholder="지번주소는 선택사항입니다." disabled>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" name="c_det_a" placeholder="상세주소">
-            <input type="text" id="extraAddress" name ="c_ext_a" placeholder="참고항목"><br><br>
-
+            <input type="text" id="detailAddress" name="c_det_a" maxlength="30" placeholder="건물명+상세주소" disabled><br><br>
             <label>휴대폰</label>
-            <input class="special-class" type="text" name="c_phn" placeholder="-제외">
-
+            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="-제외" maxlength="12" disabled>
             <label>성별</label>
-                <input type="radio" id="female" name="c_gnd" value="여"> 여성
-                <input type="radio" id="male" name="c_gnd" value="남"> 남성<br><br>
+            <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
+            <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
+            <label>생년월일</label>
+            <input type="date" id="birth" name="c_birth" min="1950-01-01" max="2023-12-31" disabled><br><br>
 
-                <label>생년월일</label>
-            <input type="date" id="birth" name="c_birth"><br><br>
-<%--                <select class="box" id="birth-year" name="birth-year">--%>
-<%--                    <option disabled selected>출생 연도</option>--%>
-<%--                </select>--%>
-<%--                <select class="box" id="birth-month" name="birth-month">--%>
-<%--                    <option disabled selected>월 선택</option>--%>
-<%--                </select>--%>
-<%--                <select class="box" id="birth-day" name="birth-day">--%>
-<%--                    <option disabled selected>일 선택</option>--%>
-<%--                </select><br><br>--%>
-<%--            <input type="hidden" id="birth" name="c_birth">--%>
+            <input type="checkbox" id="touBox" onclick="openModal()" name="touBox" value="Y" disabled>
+            <label for="touBox" id="touLabel">[필수] 이용약관</label><br>
 
-            <input type="checkbox" id="touBox" name="touBox" value="Y">
-            <p id="tou">[필수] 이용약관</p>
+            <input type="checkbox" id="piiBox" onclick="openModal2()" name="piiBox" value="Y" disabled>
+            <label for="piiBox" id="piiLabel">[필수] 개인정보 및 이용</label><br>
 
-            <br>
-            <input type="checkbox" id="piiBox" name ="piiBox" value="Y">
-            <p id="pii">[필수] 개인정보 수집 및 이용</p><br>
+            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y" disabled>
+            <label for="sms_agr" id="smsLabel">[선택] 쇼핑정보 SMS 수신</label><br>
 
-            <input type="checkbox" id="sms_agr" name="sms_agr" value="Y"><a>[선택] 쇼핑정보 SMS 수신</a><br>
-            <input type="checkbox" id="email_agr" name="email_agr" value="Y"> <a>[선택] 쇼핑정보 이메일 수신</a><br><br><br>
+            <input type="checkbox" id="email_agr" name="email_agr" value="Y" disabled>
+            <label for="email_agr" id="emailLabel">[선택] 쇼핑정보 이메일 수신</label><br><br><br>
 
-            <button>가입하기</button><br><br>
+            <button id="rBtn" disabled>가입하기</button>
+<%--            <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
+            <a href="/login"><button type="button">나가기</button></a><br><br>
         </div>
-<%--            </form:form>--%>
-</form>
+    </form>
 </div>
-
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span id="close">&times;</span>
+        <span id="close" onclick="closeModal()" >&times;</span>
         <h3>홈런볼 이용약관</h3><br>
         <p>제1조(목적)</p>
         <p>이 약관은 홈런볼 회사(전자상거래 사업자)가 운영하는 홈런볼 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어
-            사이버 몰과 이용자의 권리.의무 및 책임사항을 규정함을 목적으로 합니다.</p>
-        <p>※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다.」</p><br>
+            사이버 몰과 이용자의 권리.의무 및 책임사항을 규정함을 목적으로 합니다.</p><br>
 
         <p>제2조(정의)</p>
 
         <p>① “몰”이란 홈런볼 회사가 재화 또는 용역(이하 “재화 등”이라 함)을 이용자에게 제공하기 위하여 컴퓨터 등 정보통신설비를 이용하여 재화 등을 거래할 수 있도록 설정한
             가상의 영업장을 말하며,
             아울러 사이버몰을 운영하는 사업자의 의미로도 사용합니다.</p>
-        <p>② “이용자”란 “몰”에 접속하여 이 약관에 따라 “몰”이 제공하는 서비스를 받는 회원 및 비회원을 말합니다.
-            ③ ‘회원’이라 함은 “몰”에 회원등록을 한 자로서, 계속적으로 “몰”이 제공하는 서비스를 이용할 수 있는 자를 말합니다.
-            ④ ‘비회원’이라 함은 회원에 가입하지 않고 “몰”이 제공하는 서비스를 이용하는 자를 말합니다.</p><br>
+        <p>② “이용자”란 “몰”에 접속하여 이 약관에 따라 “몰”이 제공하는 서비스를 받는 회원을 말합니다.
+            ③ ‘회원’이라 함은 “몰”에 회원등록을 한 자로서, 계속적으로 “몰”이 제공하는 서비스를 이용할 수 있는 자를 말합니다.</p><br>
 
         <p>제3조 (약관 등의 명시와 설명 및 개정)</p>
 
@@ -294,8 +301,6 @@
         <p>2. “몰”을 이용하여 구입한 재화 등의 대금, 기타 “몰”이용에 관련하여 회원이 부담하는 채무를 기일에 지급하지 않는 경우</p>
         <p>3. 다른 사람의 “몰” 이용을 방해하거나 그 정보를 도용하는 등 전자상거래 질서를 위협하는 경우</p>
         <p>4. “몰”을 이용하여 법령 또는 이 약관이 금지하거나 공서양속에 반하는 행위를 하는 경우</p>
-        <p>③ “몰”이 회원 자격을 제한.정지 시킨 후, 동일한 행위가 2회 이상 반복되거나 30일 이내에 그 사유가 시정되지 아니하는 경우 “몰”은 회원자격을 상실시킬 수 있습니다.</p>
-        <p>④ “몰”이 회원자격을 상실시키는 경우에는 회원등록을 말소합니다. 이 경우 회원에게 이를 통지하고, 회원등록 말소 전에 최소한 30일 이상의 기간을 정하여 소명할 기회를 부여합니다.</p>
         <br>
 
         <p>제8조(회원에 대한 통지)</p>
@@ -366,10 +371,8 @@
             이용자가 오류의 정정을 요구한 경우에는 “몰”은 그 오류를 정정할 때까지 당해 개인정보를 이용하지 않습니다.</p>
         <p>⑦ “몰”은 개인정보 보호를 위하여 이용자의 개인정보를 처리하는 자를 최소한으로 제한하여야 하며 신용카드, 은행계좌 등을 포함한 이용자의 개인정보의 분실, 도난, 유출, 동의 없는
             제3자 제공, 변조 등으로 인한 이용자의 손해에 대하여 모든 책임을 집니다.</p>
-        <p>⑧ “몰” 또는 그로부터 개인정보를 제공받은 제3자는 개인정보의 수집목적 또는 제공받은 목적을 달성한 때에는 당해 개인정보를 지체 없이 파기합니다.</p>
-        <p>⑨ “몰”은 개인정보의 수집·이용·제공에 관한 동의란을 미리 선택한 것으로 설정해두지 않습니다.</p>
-        <p>또한 개인정보의 수집·이용·제공에 관한 이용자의 동의거절시 제한되는 서비스를 구체적으로 명시하고, 필수수집항목이 아닌</p>
-        <p>개인정보의 수집·이용·제공에 관한 이용자의 동의 거절을 이유로 회원가입 등 서비스 제공을 제한하거나 거절하지 않습니다.</p><br>
+        <p>또한 선택약관에 관하여 수집·이용·제공에 관한 이용자의 동의거절시 제한되는 서비스를 구체적으로 명시하고, 필수항목이 아닌
+            선택약관 이용·제공에 관한 이용자의 동의 거절을 이유로 회원가입 등 서비스 제공을 제한하거나 거절하지 않습니다.</p><br>
 
         <p>제16조(“몰“의 의무)</p>
         <p>① “몰”은 법령과 이 약관이 금지하거나 공서양속에 반하는 행위를 하지 않으며 이 약관이 정하는 바에 따라 지속적이고, 안정적으로 재화.용역을 제공하는데 최선을 다하여야 합니다.</p>
@@ -386,11 +389,7 @@
         <p>이용자는 다음 행위를 하여서는 안 됩니다.</p>
         <p>1. 신청 또는 변경시 허위 내용의 등록</p>
         <p>2. 타인의 정보 도용</p>
-        <p>3. “몰”에 게시된 정보의 변경</p>
-        <p>4. “몰”이 정한 정보 이외의 정보(컴퓨터 프로그램 등) 등의 송신 또는 게시</p>
-        <p>5. “몰” 기타 제3자의 저작권 등 지적재산권에 대한 침해</p>
-        <p>6. “몰” 기타 제3자의 명예를 손상시키거나 업무를 방해하는 행위</p>
-        <p>7. 외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는 행위</p><br>
+        <p>3. 외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는 행위</p><br>
 
         <p>(부칙) 2024년 04월 22일부터 시행합니다. (2024.04.22 개정)</p>
     </div>
@@ -398,7 +397,7 @@
 
 <div id="myModal2" class="modal">
     <div class="modal-content">
-        <span id="close2">&times;</span>
+        <span id="close2" onclick="closeModal2()">&times;</span>
         <h3>홈런볼 개인정보 수집 및 이용</h3><br>
 
         <p>(주)홈런볼은 고객님의 개인정보를 중요시하며, “정보통신망 이용촉진 및 정보보호” 에 관한 법률을 준수하고 있습니다.</p>
@@ -407,8 +406,7 @@
         <p>제 1조 수집하는 개인정보 항목</p>
 
         <p>* 회사는 회원가입, 상담, 서비스 신청 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.</p>
-
-        <p>회원가입시 : 이름, 이메일(로그인 ID), 비밀번호, 휴대전화번호(개인인증)</p>
+        <p>회원가입시 : 이름, 이메일(로그인 ID), 비밀번호</p>
         <p>서비스 신청시 : 주소, 전화번호, 결제정보</p>
 
         <p>* 서비스 이용 과정이나 사업처리 과정에서 서비스이용기록, 접속로그, 쿠키, 접속IP, 결제기록이 생성되어 수집될 수 있습니다.</p><br>
@@ -417,32 +415,23 @@
         <p>제 2조 개인정보의 수집 및 이용목적</p>
 
         <p>회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.</p>
-
-        <p>* 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산</p>
-
+        <p>수신 동의한 SMS 혹은 이메일로 알림 발송</p>
         <p>콘텐츠 제공, 구매 및 요금결제, 물품배송 청구지 등 발송, 금융거래 본인인증 및 금융서비스</p>
 
         <p>* 회원관리</p>
         <p>회원제 서비스 이용에 따른 본인확인, 개인식별, 불량회원의 부정이용 방지와 비인가 사용방지</p>
-        <p>가입의사 확인, 연령확인, 만14세 미만 아동 개인정보 수집 시 법정대리인 동의여부 확인</p>
         <p>불만처리 등 민원처리, 고지사항 전달</p>
         <p>* 마케팅 및 광고에 활용</p>
         <p>이벤트 등 광고성 정보전달, 접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계</p><br>
 
-        <p>제 3조 개인정보의 보유 및 이용기간</p>
-        <p>원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당정보를 지체없이 파기합니다.</p>
-        <p>제 3조 개인정보의 파기절차 및 방법</p>
-        <p>회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.</p>
-        <p>* 파기절차</p>
-        <p>회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 DB로 옮겨져 내부 방침 및 기타관련 법령에 의한 정보보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장 된
-            후 파기되어 집니다.</p>
-        <p>* 파기방법</p>
-        <p>전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제</p><br>
+        <p>제 3조 개인정보의 보유 및 방법</p>
+        <p>회원님이 회원가입에서 입력하신 비밀번호는 암호화 처리된 후 DB에서 관리하고 있습니다.</p><br>
 
         <p>제 4조 개인정보 제공</p>
         <p>회사는 이용자의 개인정보를 원칙적으로 외부에 지공하지 않습니다. 다만, 아래의 경우 예외로 합니다.</p>
         <p>* 이용자들이 사전에 동의한 경우</p>
         <p>* 법령의 규정에 의거하거나, 수사목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</p><br>
+
         <p>제 5조 수집한 개인정보의 위탁</p>
         <p>회사는 서비스 이행을 위해 아래와 같이 외부 전문업체에 위탁하여 운영하고 있습니다.</p>
         <p>* 위탁대상자: 택배사</p>
@@ -452,217 +441,41 @@
         <p> * 위탁대상자: PG사</p>
         <p> * 위탁업무 내용: PG사 위탁내용</p><br>
 
-
-        <p> 제 6조 이용자 및 법정대리인의 권리와 그 행사방법</p>
-        <p> * 이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며,가입해지를 요청할 수도 있습니다.</p>
+        <p> 제 6조 이용자의 권리</p>
+        <p> * 이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며, 탈퇴를 요청할 수도 있습니다.</p>
         <p> * 이용자들의 개인정보 조회, 수정을 위해서는 “개인정보변경”(또는 “회원정보수정” 등)을 가입해지(동의철회)를 위해서는 “회원탈퇴”를 클릭하여 본인 확인절차를 거치신 후 직접 열람,
-            정정 또는 탈퇴가 가능합니다.</p>
-        <p> * 혹은 개인정보관리책임자에게 서면, 전화 또는 이메일로 연락을 통한 조치</p>
-        <p>* 귀하가 개인정보의 오류에 대한 정정을 요청하신 경우 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우 정정
-            처리결과를 제3자에게 지체없이 통지하여 정정이 이루어지도록 합니다.</p>
-        <p>* 회사는 이용자의 요청에 의해 해지 또는 삭제된 개인정보는 “회사가 수집하는 개인정보의 보유 및 이용기간”에 명시된 바에 따라 처리하고 그 외의 용도로 열람 또는 이용할 수 없도록
-            처리하고 있습니다.</p><br>
-
-        <p>제 7조 개인정보의 안전성 확보조치에 관한 사항</p>
-        <p>1. 내부관리계획의 수립 및 시행</p>
-        <p>회사의 내부관리계획 수립 및 시행은 방송통신위원회 고시를 준수하여 시행합니다.</p>
-        <p>2. 개인정보취급자의 최소화 및 교육</p>
-        <p>개인정보를 취급하는 담당자를 최소화하며 담당자에 대한 수시 교육을 통해 개인정보를 안전하게 관리하고 있습니다.</p>
-        <p>3. 개인정보에 대한 접근제한</p>
-        <p>개인정보를 처리하는 데이터베이스시스템에 대한 접근권한의 부여, 변경, 말소를 통하여 개인정보에 대한 접근통제에 필요한 조치를 하고 있습니다.</p>
-        <p>4. 개인정보의 암호화</p>
-        <p>이용자의 중요 개인정보는 암호화 되어 저장 및 관리되고 있으며, 중요한 데이터는 저장 및 전송 시 암호화하여 사용하는 등의 별도 보안기능을 사용하고 있습니다.</p>
+            정정 또는 탈퇴가 가능합니다.</p><br>
     </div>
 </div>
 
-
 <script>
-   document.getElementById("tou").addEventListener("click", function () {
-        document.getElementById("myModal").style.display = "block";
-        /*모달이 나타날 때 스크롤바 숨김*/
-        document.body.classList.add("modal-open");
+    $('#c_email').on('input', function() {
+        emailCheck();
     });
 
-    document.getElementById("pii").addEventListener("click", function () {
-        document.getElementById("myModal2").style.display = "block";
-        /*모달이 나타날 때 스크롤바 숨김*/
-        document.body.classList.add("modal-open");
+    $('#c_email2').on('input', function() {
+        verifyNumber();
     });
-
-    /*모달 창 닫기*/
-    document.getElementById("close").addEventListener("click", function () {
-        document.getElementById("myModal").style.display = "none";
-        /*모달이 사라질 때 스크롤바 다시 보이게 함*/
-        document.body.classList.remove("modal-open");
-    });
-
-    /*모달 창 닫기*/
-    document.getElementById("close2").addEventListener("click", function () {
-        document.getElementById("myModal2").style.display = "none";
-        /*모달이 사라질 때 스크롤바 다시 보이게 함*/
-        document.body.classList.remove("modal-open");
-    });
-
-    // /*생년월일*/
-    // function birthUpdate() {
-    //     var birthYearSelect = document.getElementById('birth-year');
-    //     var birthMonthSelect = document.getElementById('birth-month');
-    //     var birthDaySelect = document.getElementById('birth-day');
-    //
-    //     var birthYear = birthYearSelect.value;
-    //     var birthMonth = birthMonthSelect.value;
-    //     var birthDay = birthDaySelect.value;
-    //
-    //     var birth = birthYear + '-' + birthMonth + '-' + birthDay;
-    //     /*var birth = birthYear + birthMonth + birthDay;*/
-    //
-    //     /*hidden input 요소에 값 설정*/
-    //     document.getElementById('birth').value = birth;
-    // }
-    //
-    // function xxxx(selectElement, start, end) {
-    //     for (var i = start; i <= end; i++) {
-    //         var option = document.createElement('option');
-    //         option.value = i;
-    //         option.textContent = i;
-    //         selectElement.appendChild(option);
-    //     }
-    // }
-    //
-    // xxxx(document.getElementById('birth-year'), 1950, 2024);
-    // xxxx(document.getElementById('birth-month'), 1, 12);
-    // xxxx(document.getElementById('birth-day'), 1, 31);
-    //
-    // document.getElementById('birth-year').addEventListener('change', birthUpdate);
-    // document.getElementById('birth-month').addEventListener('change', birthUpdate);
-    // document.getElementById('birth-day').addEventListener('change', birthUpdate);
-    // /*페이지 로드 후 초기 값 설정*/
-    // birthUpdate();
-
-
-    /*3. 회원가입 유효성 검사*/
-
-    function formCheck(frm) {
-        var isEmail = emailFormatCheck(frm);
-        var isPwd = pwdCheck(frm);
-        var isPwd2 = pwd2Check(frm);
-        var isNm = nmCheck(frm);
-        var isZip = zipCheck(frm);
-        var isPhn = phnCheck(frm);
-        var isGen = genCheck(frm);
-        // var isBirth = birthCheck(frm)
-        var isTou = touCheck(frm)
-        var isPii = piiCheck(frm)
-
-        var email = frm.c_email.value.trim();
-        var pwd = frm.c_pwd.value.trim();
-        var pwd2 = frm.c_pwd2.value.trim();
-        var nm = frm.c_name.value.trim();
-        var zip = frm.c_zip.value.trim();
-        var road = frm.c_road_a.value.trim();
-        var jibun = frm.c_jibun_a.value.trim();
-        var det = frm.c_det_a.value.trim();
-        var phn = frm.c_phn.value.trim();
-        var birth = frm.c_birth.value.trim();
-
-        if (!email) {
-            alert('이메일을 입력해주세요.');
-            return false;
-        }
-        else if (!isEmail) {
-            alert('이메일 형식을 다시 확인해주세요.');
-            return false;
-        } else if (!pwd) {
-            alert('비밀번호를 입력해주세요.');
-            return false;
-        } else if (!isPwd) {
-            alert('비밀번호는 영문/숫자/특수문자 조합으로 8자 이상 15자 이하로 설정하셔야합니다.');
-            return false;
-        } else if (!pwd2) {
-            alert('비밀번호 확인을 입력해주세요');
-            return false;
-        } else if (!isPwd2) {
-            alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
-            return false;
-        } else if (!nm) {
-            alert('이름을 입력해주세요.');
-            return false;
-        } else if (!isNm) {
-            alert("이름은 최대 15자 이하로 작성하셔야 합니다.");
-            return false;
-        } else if (!zip) {
-            alert('우편번호를 입력해주세요.');
-            return false;
-        } else if (!isZip) {
-            alert("우편번호는 최대 6자 이하로 작성하셔야 합니다.");
-            return false;
-        } else if (!road) {
-            alert('도로명주소를 입력해주세요.');
-            return false;
-        } else if (!jibun) {
-            alert('지번주소를 입력해주세요.');
-            return false;
-        } else if (!det) {
-            alert('상세주소를 입력해주세요.');
-            return false;
-        } else if (!phn) {
-            alert('휴대폰 번호를 입력하세요.');
-            return false;
-        } else if (!isPhn) {
-            alert("휴대폰 번호는 최대 12자 이하로 입력이 가능합니다.");
-            return false;
-        } else if (!isGen) {
-            alert("성별을 선택해주세요.");
-            return false;
-        } else if (!birth) {
-            alert("생년월일을 선택해주세요.");
-            return false;
-        }   else if (!isTou) {
-            alert("회원가입을 하실려면 이용약관 동의를 하셔야합니다.");
-            return false;
-        }   else if (!isPii) {
-            alert("회원가입을 하실려면 개인정보 동의를 하셔야합니다.");
-            return false;
-        }
-
-
-        if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
-            alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
-            return false;
-        }
-
-    /*모든 유효성 검사를 통과한 경우*/
-        return true;
-    }
-
-    /*3-1 이메일 형식 유효성 검사*/
-    function emailFormatCheck(frm) {
-        var email = frm.c_email.value;
-        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-
-        if (!emailPattern.test(email)) {
-            return false;
-        }
-        return true;
-    }
-
     /*이메일 중복체크*/
+
     function emailCheck() {
         const email = document.getElementById("c_email").value;
         const checkResult = document.getElementById("check-result");
-
+        const verifyButton = $('#verify');
 
         if (!email.trim()) {
             checkResult.style.color = "red";
             checkResult.innerHTML = "이메일을 입력해주세요.";
-            return; // 함수 종료
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
         }
 
         var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
         if (!emailPattern.test(email)) {
             checkResult.style.color = "red";
             checkResult.innerHTML = "이메일 형식을 다시 확인해주세요.";
-            return; // 함수 종료
+            verifyButton.prop('disabled', true); // 버튼 비활성화
+            return;
         }
 
         console.log("입력한 이메일", email);
@@ -672,32 +485,211 @@
             data: {
                 "c_email": email
             },
-            success: function(res) {
-                console.log("요청성공", res);
-                if (res == "ok") {
-                    console.log( "사용 가능한 이메일입니다.");
+            success: function (emailGood) {
+                console.log("요청성공", emailGood);
+                if (emailGood == "ok") {
+                    // console.log("적합한 이메일 양식입니다.");
                     checkResult.style.color = "green";
-                    checkResult.innerHTML = "사용 가능한 이메일입니다.";
+                    checkResult.innerHTML = "인증번호를 받기를 진행해주세요.";
+                    verifyButton.prop('disabled', false); // 버튼 활성화
                 } else {
-                    console.log("이미 사용중인 이메일");
-                    // alert("이미 사용중인 이메일입니다.");
+                    // console.log("이미 사용중인 이메일");
                     checkResult.style.color = "red";
                     checkResult.innerHTML = "이미 사용중인 이메일입니다.";
-                    return false;
+                    verifyButton.prop('disabled', true); // 버튼 비활성화
                 }
             },
-            error: function(err) {
+            error: function (err) {
                 console.log("에러발생", err);
             }
         });
+    }
+
+    function verifyEmail() {
+        document.getElementById('c_email2').disabled = false;
+        document.getElementById('c_pwd').disabled = false;
+        document.getElementById('c_pwd2').disabled = false;
+        document.getElementById('c_name').disabled = false;
+        document.getElementById('zip').disabled = false;
+        document.querySelector('[onclick="sample4_execDaumPostcode()"]').disabled = false;
+        document.getElementById('roadAddress').disabled = false;
+        document.getElementById('jibunAddress').disabled = false;
+        document.getElementById('detailAddress').disabled = false;
+        document.getElementById('c_phn').disabled = false;
+        document.querySelectorAll('input[name="c_gnd"]').forEach(el => el.disabled = false);
+        document.getElementById('birth').disabled = false;
+        document.getElementById('touBox').disabled = false;
+        document.getElementById('piiBox').disabled = false;
+        document.getElementById('sms_agr').disabled = false;
+        document.getElementById('email_agr').disabled = false;
+        document.getElementById('rBtn').disabled = false;
+    }
+
+
+    $('#verify').click(function() {
+        const $this = $(this); // 클릭된 버튼을 jQuery 객체로 저장
+        $this.prop('disabled', true); // 버튼을 비활성화
+
+        alert('인증번호가 전송되었습니다.'); // 인증번호 전송 알림
+
+        const email = $('#c_email').val(); // 이메일 주소값 얻어오기
+        console.log('완성된 이메일 : ' + email); // 이메일 오는지 확인
+        const checkInput = $('#c_email2') // 인증번호 입력하는곳
+        const url = '/register/mailCheck?email=' + email; // URL 생성
+        $.ajax({
+            type: 'GET',
+            url: url, // 생성한 URL 사용
+            success: function(data) {
+                console.log("data : " + data);
+                checkInput.attr('disabled', false);
+                code = data;
+                verifyEmail();
+                setTimeout(function() {
+                    $this.prop('disabled', false);
+                }, 3000); // 5초 후에 버튼 활성화
+            }
+        });
+    });
+
+    function verifyNumber() {
+        const inputCode = $('#c_email2').val();
+        const $resultMsg = $('#mail-check-warn');
+
+        if (inputCode === code) {
+            $resultMsg.html('인증번호가 일치합니다.');
+            $resultMsg.css('color', 'green');
+            $('#verify').attr('disabled', true);
+            $('#c_email').attr('readonly', true);
+            $('#c_email').attr('onFocus', 'this.initialSelect = this.selectedIndex');
+            $('#c_email').attr('onChange', 'this.selectedIndex = this.initialSelect');
+            return true;
+        } else {
+            $resultMsg.html('인증번호를 다시 확인해주세요');
+            $resultMsg.css('color', 'red');
+            return false;
+        }
+    }
+
+    /*3. 회원가입 유효성 검사*/
+    function formCheck(frm) {
+        // var isEmail = emailTrimCheck(frm);
+        var isEmailFormat = emailFormatCheck(frm);
+        var isPwd = pwdCheck(frm);
+        var isPwd2 = pwd2Check(frm);
+        var isName = nameCheck(frm);
+        /*var isZip = zipCheck(frm);*/
+        var isPhn = phnCheck(frm);
+        var isGen = genCheck(frm);
+        var isTou = touCheck(frm)
+        var isPii = piiCheck(frm)
+        var isCodeVerified = vNum(frm);
+
+        var pwd = frm.c_pwd.value;
+        var pwd2 = frm.c_pwd2.value;
+        var name = frm.c_name.value;
+        var zip = frm.c_zip.value;
+        var road = frm.c_road_a.value;
+        var det = frm.c_det_a.value;
+        var phn = frm.c_phn.value;
+        var birth = frm.c_birth.value;
+
+        if (!isEmailFormat) {
+            return false;
+        } else if (!isCodeVerified) {
+            return false;
+        } else if (!pwd) {
+            alert('비밀번호를 입력해주세요.');
+            return false;
+        } else if (!isPwd) {
+            alert('비밀번호는 소문자 영문/숫자 조합으로 4자 이상 15자 이하로 설정하셔야합니다.');
+            return false;
+        } else if (!pwd2) {
+            alert('비밀번호 확인을 입력해주세요');
+            return false;
+        } else if (!isPwd2) {
+            alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+            return false;
+        } else if (!name) {
+            alert('이름을 입력해주세요.');
+            return false;
+        } else if (!isName) {
+            alert("이름은 최대 15자 이하로 작성하셔야 합니다.");
+            return false;
+        } else if (!zip) {
+            alert('우편번호를 입력해주세요.');
+            return false;
+        /*} else if (!isZip) {
+            alert("우편번호는 최대 6자 이하로 작성하셔야 합니다.");
+            return false;*/
+        } else if (!road) {
+            alert('도로명주소를 입력해주세요.');
+            return false;
+        } else if (!det) {
+            alert('상세주소를 입력해주세요.');
+            return false;
+        } else if (!phn) {
+            alert('휴대폰 번호를 입력하세요.');
+            return false;
+        } else if (!isPhn) {
+            alert("휴대폰 번호는 숫자 11~12자로 입력이 가능합니다.");
+            return false;
+        } else if (!isGen) {
+            alert("성별을 선택해주세요.");
+            return false;
+        } else if (!birth) {
+            alert("생년월일을 선택해주세요.");
+            return false;
+        } else if (!isTou) {
+            alert("회원가입을 하실려면 이용약관 동의를 하셔야합니다.");
+            return false;
+        } else if (!isPii) {
+            alert("회원가입을 하실려면 개인정보 동의를 하셔야합니다.");
+            return false;
+        }
+
+        if (document.getElementById("check-result").innerText.includes("이미 사용중인 이메일입니다.")) {
+            alert("중복된 이메일 주소입니다. 다른 이메일 주소를 입력하세요.");
+            return false;
+        }
+
+        /*모든 유효성 검사를 통과한 경우*/
+        return true;
+    }
+
+    /*3-1 이메일 형식 유효성 검사*/
+
+    function emailFormatCheck(frm) {
+        var email = frm.c_email.value.trim(); // 공백 제거한 이메일
+        var emailPattern = /^((?![가-힣]).)*([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+
+        if (!email) {
+            alert("이메일을 입력해주세요.");
+            return false;
+        } else if (!emailPattern.test(email)) {
+            alert("이메일 양식을 다시 확인해주세요.");
+            return false;
+        }
+        return true;
+    }
+
+    function vNum(frm){
+        var vNum = frm.c_email2.value.trim();
+        if(!vNum){
+            alert("이메일 인증을 진행해주세요.")
+            return false;
+        }
+        if (document.getElementById("mail-check-warn").innerText.includes("인증번호를 다시 확인해주세요")) {
+            alert("인증번호가 틀렸습니다. 다시 확인해주세요.");
+            return false;
+        }
+        return true;
     }
 
     /*3-2 비밀번호 유효성 검사*/
 
     function pwdCheck(frm) {
         var pwd = frm.c_pwd.value;
-
-        var pwdPattern = /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,15}$/;
+        var pwdPattern = /^(?=.*\d)(?=.*[a-z])[a-z0-9]{4,15}$/;
         if (!pwdPattern.test(pwd)) {
             return false;
         }
@@ -708,35 +700,48 @@
     function pwd2Check(frm) {
         var pwd = frm.c_pwd.value;
         var pwd2 = frm.c_pwd2.value;
+        var pwdResult = document.getElementById("check-pwd")
 
-        if (pwd !== pwd2) {
+        if(!pwd){
+            pwdResult.style.color = "red";
+            pwdResult.innerHTML = "비밀번호를 입력해주세요.";
             return false;
-        }
+        }else if(!pwd2){
+            pwdResult.style.color = "red";
+            pwdResult.innerHTML = "비밀번호 확인을 입력해주세요.";
+            return false;
+        } else if ((pwd !== pwd2) || (pwd2 !== pwd)) {
+            pwdResult.style.color = "red";
+            pwdResult.innerHTML = "입력하신 비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+            return false;
+        }else
+            pwdResult.style.color = "green";
+        pwdResult.innerHTML = "비밀번호가 동일합니다.";
         return true;
     }
 
     /*  이름 유효성 검사*/
-    function nmCheck(frm) {
-        var nm = frm.c_name.value;
-        if (nm.length >= 15) {
+    function nameCheck(frm) {
+        var name = frm.c_name.value;
+        if (name.length >= 15) {
             return false;
         }
         return true;
     }
 
     /*  우편번호 유효성 검사*/
-    function zipCheck(frm) {
+    /*function zipCheck(frm) {
         var zip = frm.c_zip.value;
         if (zip.length > 6) {
             return false;
         }
         return true;
-    }
+    }*/
 
     /*   휴대폰 유효성 검사*/
     function phnCheck(frm) {
         var phn = frm.c_phn.value;
-        var phnPattern = /^[0-9]{1,12}$/;
+        var phnPattern = /^[0-9]{11,12}$/;
         if (!phnPattern.test(phn)) {
             return false;
         }
@@ -744,7 +749,7 @@
     }
 
     /*  성별 유효성 검사*/
-    function genCheck(frm){
+    function genCheck(frm) {
         var female = frm.querySelector('input[name="c_gnd"][value="여"]').checked;
         var male = frm.querySelector('input[name="c_gnd"][value="남"]').checked;
         if (female || male) {
@@ -753,56 +758,132 @@
             return false;
         }
     }
-    /* 생년월일 유효성 검사*/
-    // function birthCheck(frm) {
-    //     var year = frm['birth-year'].value;
-    //     var month = frm['birth-month'].value;
-    //     var day = frm['birth-day'].value;
-    //
-    //     if (year === '출생 연도' || month === '월 선택' || day === '일 선택') {
-    //         return false;
-    //     }
-    //     return true;
-    // }
 
     /* 필수 이용약관 유효성 검사*/
-    function touCheck(frm){
+    function touCheck(frm) {
         var tou = frm.querySelector('input[name="touBox"]').checked;
-        if(tou){
+        if (tou) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
     /* 필수 개인정보 유효성 검사*/
-    function piiCheck(frm){
+    function piiCheck(frm) {
         var pii = frm.querySelector('input[name="piiBox"]').checked;
-        if(pii){
+        if (pii) {
             return true;
-        } else{
+        } else {
             return false;
         }
     }
 
+    var modalSeen = false;
+    var modalSeen2 = false;
 
-    function touCheck(frm){
-        var tou = frm.querySelector('input[name="touBox"]').checked;
-        if(tou){
-            return true;
-        } else{
-            return false;
-        }
+
+    function enableTouBox() {
+        var touBox = document.getElementById("touBox");
+        touBox.disabled = false;
+        // 체크박스를 체크하고 다시 체크되지 않도록 합니다.
+        touBox.checked = true;
+        // 체크박스의 onchange 이벤트에 함수를 연결하여 체크박스가 변경되지 않도록 합니다.
+        touBox.onchange = function() {
+            // 체크박스가 항상 체크된 상태로 유지됩니다.
+            touBox.checked = true;
+        };
     }
 
-    function piiCheck(frm){
-        var pii = frm.querySelector('input[name="piiBox"]').checked;
-        if(pii){
-            return true;
-        } else{
-            return false;
-        }
+    function openModal() {
+        var modal = document.getElementById("myModal");
+        // var touBox = document.getElementById('touBox');
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        modalSeen = true; // 모달을 본 것으로 표시
+        enableTouBox(); // touBox 활성화
     }
+
+    function enablePiiBox() {
+        var piiBox = document.getElementById("piiBox");
+        piiBox.disabled = false;
+        // 체크박스를 체크하고 다시 체크되지 않도록 합니다.
+        piiBox.checked = true;
+        // 체크박스의 onchange 이벤트에 함수를 연결하여 체크박스가 변경되지 않도록 합니다.
+        piiBox.onchange = function() {
+            // 체크박스가 항상 체크된 상태로 유지됩니다.
+            piiBox.checked = true;
+        };
+    }
+
+    function openModal2(){
+        var modal = document.getElementById("myModal2");
+        // var touBox = document.getElementById('touBox');
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden";
+        modalSeen2 = true; // 모달을 본 것으로 표시
+        enablePiiBox(); // touBox 활성화
+    }
+
+
+    function closeModal() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    function closeModal2() {
+        var modal = document.getElementById("myModal2");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+    }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal2();
+        }
+    });
+
+    /*페이지 로드시 이벤트 리스너 등록*/
+    document.addEventListener('DOMContentLoaded', function () {
+        var touModal = document.getElementById("touModal");
+
+        /*touModal을 클릭했을 때 모달 열기*/
+        touModal.addEventListener('click', openModal);
+
+        /*touBox를 클릭했을 때*/
+        document.getElementById('touBox').addEventListener('click', function () {
+            /*모달을 아직 보지 않았다면*/
+            if (!modalSeen) {
+                alert("이용약관을 먼저 확인해주세요.");
+                /*체크박스 다시 체크 해제*/
+                this.checked = true;
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var piiModal = document.getElementById("piiModal");
+
+        /*touModal을 클릭했을 때 모달 열기*/
+        piiModal.addEventListener('click', openModal2);
+
+        /*touBox를 클릭했을 때*/
+        document.getElementById('piiBox').addEventListener('click', function () {
+            /*모달을 아직 보지 않았다면*/
+            if (!modalSeen2) {
+                alert("개인정보 약관을 먼저 확인해주세요.");
+                /*체크박스 다시 체크 해제*/
+                this.checked = false;
+            }
+        });
+    });
 
 </script>
 
@@ -829,40 +910,11 @@
                 if (data.buildingName !== '' && data.apartment === 'Y') {
                     extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                 }
-                /*표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.*/
-                if (extraRoadAddr !== '') {
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-
-                /*우편번호와 주소 정보를 해당 필드에 넣는다.*/
                 document.getElementById('zip').value = data.zonecode;
 
 
                 document.getElementById("roadAddress").value = roadAddr;
                 document.getElementById("jibunAddress").value = data.jibunAddress;
-
-                /*참고항목 문자열이 있을 경우 해당 필드에 넣는다.*/
-                if (roadAddr !== '') {
-                    document.getElementById("extraAddress").value = extraRoadAddr;
-                } else {
-                    document.getElementById("extraAddress").value = '';
-                }
-
-                var guideTextBox = document.getElementById("guide");
-                /*사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.*/
-                if (data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-
-                } else if (data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
             }
         }).open();
     }

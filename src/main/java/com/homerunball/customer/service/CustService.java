@@ -6,14 +6,15 @@ import java.util.Map;
 
 public interface CustService {
 
-    String emailCheck(String c_email);
-
-//    String emailCheck(int c_id);
-
+    /*이메일 중복체크*/
+    String emailCheck(String c_email) throws Exception;
 
 
-//    String getCustomerWithGrade(HttpServletRequest request) throws Exception;
+    /*비밀번호 암호화*/
+    String pwdEncrypt(String c_pwd) throws Exception;
 
+
+String joinEmail(String c_email) throws Exception;
 
 }
 

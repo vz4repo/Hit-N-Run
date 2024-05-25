@@ -1,0 +1,19 @@
+.main-category {
+    padding-bottom: 30px;
+    border-bottom: 3px dotted #eee;
+}
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+/* Bottom right text */
+.text-block {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}

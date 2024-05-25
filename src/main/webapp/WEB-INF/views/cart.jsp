@@ -8,24 +8,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/reset.css'/>" />
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/cart.css'/>"   rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" />
+    <%--   다니님 header, footer --%>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
 </head>
-<body>
-<jsp:include page="/WEB-INF/views/header.jsp"/>
-<div class="head_cart">SHOPPING CART</div>
+<body class="cart">
+<script>
+    let msg = "${msg}";
+    if(msg=="CART_CNT_OVER") alert("대량주문은 전화문의 부탁드립니다.")
+    if(msg=="UPDATE_ERR") alert("수량변경에 실패하였습니다.")
+    if(msg=="DEL_ERR") alert("삭제에 실패하였습니다.")
+    if(msg=="INSERT_ERR") alert("장바구니 담기에 실패하였습니다.")
+</script>
+<jsp:include page="header.jsp"/>
+<div class="head_cart">장바구니</div>
 <main>
-    <hr class="first__under" />
-    <div class="title__cart">장바구니</div>
-    <table>
+
+    <table class="cart_tale">
         <colgroup>
+            <col width="5%" />
+            <col width="15%" />
+            <col width="30%" />
             <col width="10%" />
             <col width="20%" />
-            <col width="25%" />
-            <col width="10%" />
-            <col width="15%" />
             <col width="10%" />
             <col width="10%" />
         </colgroup>
@@ -50,27 +60,31 @@
                     <tr>
                         <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength" /></td>
                         <td>
-                            <a href="#"><img src="#" alt="썸네일" name="thumbnail" /></a>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}" alt="이미지 준비 중 입니다"
+                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
+                            </a>
                         </td>
                         <td>
-                            <a href="#">${cartDto.pd_id}</a>
-                            <span name="size">사이즈: ${cartDto.pd_clsf_code} </span>
+                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                            <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
                         </td>
-                        <td><span name="price"></span>판매가 원</td>
+                        <td><span name="price" class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td>
                             <div class="quantity_control">
                                 <form action="/cart/update" method="post" id="update_form">
-                                    <input type="hidden" name="c_id" id="update_c_id" value="${cartDto.c_id}"/>
-                                    <input type="hidden" name="pd_id" id="update_pd_id" value="${cartDto.pd_id}"/>
-                                    <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" value="${cartDto.pd_clsf_code}"/>
+                                    <input type="hidden" name="c_id" id="update_c_id" data-cid="${cartDto.c_id}" value="${cartDto.c_id}"/>
+                                    <input type="hidden" name="pd_id" id="update_pd_id" data-pdid="${cartDto.pd_id}"  value="${cartDto.pd_id}"/>
+                                    <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" data-sizecd="${cartDto.pd_clsf_code}" value="${cartDto.pd_clsf_code}"/>
                                     <button class="quantity_btn minus_btn"><i class="fas fa-caret-left"></i></button>
-                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"/>
+                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" readonly/>
                                     <button class="quantity_btn plus_btn"><i class="fas fa-caret-right"></i></button>
-                                    <button class="quantity_modify_btn" data-cid="${cartDto.c_id}" data-pdid="${cartDto.pd_id}" data-sizecd="${cartDto.pd_clsf_code}">변경</button>
+
+<%--                                    <button class="quantity_modify_btn"  >변경</button>--%>
                                 </form>
                             </div>
                         </td>
-                        <td>
+                       <td>
                             <span>무료배송</span>
                         </td>
                         <td>
@@ -92,22 +106,20 @@
         </tbody>
         <tfoot>
         <tr class="tb__left">
-            <td colspan="1">
-                <div><span>[기본배송]</span></div>
-            </td>
+<%--            <td colspan="1">--%>
+<%--                <div><span>[기본배송]</span></div>--%>
+<%--            </td>--%>
             <td colspan="7">
                 <c:if test="${msg == 'CART_EMPTY'}"><h1 class="nonCart">장바구니에 담긴 상품이 없습니다.</h1></c:if>
             </td>
         </tr>
-        <tr>
-            <td colspan="7">
-                <div class="tb__right">
-                    <span>상품구매금액</span>
-                    <span>배송비 무료</span>
-                    <span>합계:원</span>
-                </div>
-            </td>
-        </tr>
+<%--        <tr>--%>
+<%--            <td colspan="7">--%>
+<%--                <div class="tb__right">--%>
+<%--                    <span>배송비 무료</span>--%>
+<%--                </div>--%>
+<%--            </td>--%>
+<%--        </tr>--%>
         <tr>
             <td colspan="7" class="btnStyle">
                 <form action=""  id="removeAllForm">
@@ -122,21 +134,52 @@
         </tfoot>
     </table>
 </main>
-<jsp:include page="/WEB-INF/views/footer.jsp"/>
+<jsp:include page="footer.jsp"/>
 <script>
     $(document).ready(function (){
-        /* 선택주문하기 버튼을 누를경우 주문으로 넘기기 */
-        $('#order_Select_Btn').on("click", function (){
-            let orderForm = $('#orderForm');
-            let cnt = $('input:checkbox[name=checkboxlength]:checked');
-            console.log(cnt);
-
+        /* 각 단가의금액의 Format형식 #,##0 */
+        $('.priceFormat').each(function (){
+            let value = $(this).text();
+            value = value.replace(/,/g, '');
+            const numbericValue = parseInt(value);
+            const formatValue = numbericValue.toLocaleString('ko-KR');
+            $(this).text(formatValue+'원');
         })
+
+        /* 선택주문하기 버튼을 누를경우 주문으로 넘기기 */
+        <%--$('#order_Select_Btn').on("click", function (){--%>
+        <%--    let selectedItems = [];--%>
+        <%--    let orderForm = $('#orderForm');--%>
+
+        <%--    // 선택된 각 체크박스의 부모 요소인 <tr>을 찾아 그 안의 데이터를 가져옴--%>
+        <%--    $('input:checkbox[name=checkboxlength]:checked').each(function(){--%>
+        <%--        let c_id = $(this).closest('tr').find('.deleteBtn').data("cid");--%>
+        <%--        let pd_id = $(this).closest('tr').find('.deleteBtn').data("pdid");--%>
+        <%--        let pd_clsf_code = $(this).closest('tr').find('.deleteBtn').data("sizecd");--%>
+        <%--        selectedItems.push({--%>
+        <%--            c_id: c_id,--%>
+        <%--            pd_id: pd_id,--%>
+        <%--            pd_clsf_code: pd_clsf_code--%>
+        <%--        });--%>
+        <%--    });--%>
+
+        <%--    selectedItems.forEach(function(item) {--%>
+        <%--        $('<input>').attr({--%>
+        <%--            type: 'hidden',--%>
+        <%--            name: 'selectedItems',--%>
+        <%--            value: JSON.stringify(item)--%>
+        <%--        }).appendTo(orderForm);--%>
+        <%--    });--%>
+
+        <%--    orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");--%>
+        <%--    orderForm.attr("method", "post");--%>
+        <%--    orderForm.submit();--%>
+        <%--})--%>
 
         /* 주문하기버튼을 누를경우 주문으로 넘기기 */
         $('#order_All_Btn').on("click", function (){
             let orderForm = $('#orderForm');
-            orderForm.attr("action", "<c:url value='/order'/>?c_id=${c_id}");
+            orderForm.attr("action", "<c:url value='/order'/>");
             orderForm.attr("method", "post");
             orderForm.submit();
         })
@@ -183,44 +226,58 @@
             removeAllForm.submit();
         });
 
+
+        /* 장바구니 수량 변경 동작 CartController로 보내는 함수를 작성한다 */
+        let cartCntChangeFunc =
+            function (){
+                $(document).on('click', function(){
+                    let form = $(this).closest('#update_form');
+                    let c_id = $(this).data("cid");
+                    let pd_id = $(this).data("pdid");
+                    let pd_clsf_code = $(this).data("sizecd");
+                    let cart_cnt = form.find('input[name="cart_cnt"]').val();
+                    form.find('input[name="c_id"]').val(c_id);
+                    form.find('input[name="pd_id"]').val(pd_id);
+                    form.find('input[name="pd_clsf_code"]').val(pd_clsf_code);
+                    form.find('input[name="cart_cnt"]').val(cart_cnt);
+                    form.attr("action", "<c:url value='/cart/update'/>");
+                    form.submit();
+                })
+            }
+
         /* plus 수량변경 */
-        $('.plus_btn').on('click', function() {
+        $('.plus_btn').on('click change', function() {
             /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
-            let quantityInput = $(this).siblings('input[name="cart_cnt"]');
-            /* 수량의 value를 parseInt해준다 */
-            let quantity = parseInt(quantityInput.val());
-            quantity++;
-            /* 증가된 수량을 input 태그에 설정한다.*/
-            quantityInput.val(quantity);
-            /* form에 제출되지 않도록 false로 둔다 */
-            return false;
-        });
+                let quantityInput = $(this).siblings('input[name="cart_cnt"]');
+                /* 수량의 value를 parseInt해준다 */
+                let quantity = parseInt(quantityInput.val());
+                if (quantity <=100){
+                    quantity++;
+                    /* 증가된 수량을 input 태그에 설정한다.*/
+                    quantityInput.val(quantity);
+                    cartCntChangeFunc();
+                }
+                /* form에 제출되지 않도록 false로 둔다 */
+                // return false;
+            }
+        );
 
         /* minus 수량변경 */
-        $('.minus_btn').on('click', function (){
-            let quantityInput = $(this).siblings('input[name="cart_cnt"]');
-            let quantity = parseInt(quantityInput.val());
-            if(quantity > 1) {
-                quantity--;
-                quantityInput.val(quantity);
+        $('.minus_btn').on(
+            'click', function () {
+                let quantityInput = $(this).siblings('input[name="cart_cnt"]');
+                let quantity = parseInt(quantityInput.val());
+                if (quantity > 1) {
+                    quantity--;
+                    quantityInput.val(quantity);
+                    cartCntChangeFunc();
+                }
             }
-            return false;
-        })
+        )
 
-        /* 장바구니 수량 변경버튼 동작 구현 */
-        $(document).on('click', '.quantity_modify_btn', function(){
-            let form = $(this).closest('#update_form');
-            let c_id = $(this).data("cid");
-            let pd_id = $(this).data("pdid");
-            let pd_clsf_code = $(this).data("sizecd");
-            let cart_cnt = form.find('input[name="cart_cnt"]').val();
-            form.find('input[name="c_id"]').val(c_id);
-            form.find('input[name="pd_id"]').val(pd_id);
-            form.find('input[name="pd_clsf_code"]').val(pd_clsf_code);
-            form.find('input[name="cart_cnt"]').val(cart_cnt);
-            form.attr("action", "<c:url value='/cart/update'/>");
-            form.submit();
-        })
+
+
+
     })
 </script>
 </body>

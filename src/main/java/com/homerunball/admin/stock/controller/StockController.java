@@ -2,14 +2,20 @@ package com.homerunball.admin.stock.controller;
 
 import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
+import com.homerunball.admin.stock.domain.SizeDto;
 import com.homerunball.admin.stock.domain.StockDto;
+import com.homerunball.admin.stock.service.SizeService;
 import com.homerunball.admin.stock.service.StockService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +27,30 @@ public class StockController {
     private StockService stockService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private SizeService sizeService;
 
-    /*재고관리 페이지에서 등록된 제품을 조회할 때 사용하는 메서드*/
+    /* 제품을 검색하여 제품목록 조회 */
+    @GetMapping("/searchList")
+    public String searchList(Model model,
+                             @RequestParam(value="keywordSelect", required=false) String keywordSelect,
+                             @RequestParam(value="keyword", required=false) String keyword,
+                             @RequestParam(required = false, defaultValue="1") int num) throws Exception {
+
+        return "/admin/stock/stockList";
+    }
+
+    /*재고관리 페이지에서 등록된 제품을 전체 조회할 때 사용하는 메서드*/
     @GetMapping("/list")
     public String list(Model model) {
         try {
             /* 등록된 제품의 리스트를 전체 보여준다. */
             List<ProductDto> productList = productService.getAllProducts();
             model.addAttribute("productList", productList);
+
+            /* 전제제품리스트의 pd_type_cd를 확인하고 size_list의 pd_clsf_cd를 받아온다. */
+            List<SizeDto> sizeList = sizeService.getSizeList();
+            model.addAttribute("sizeList", sizeList);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,10 +63,18 @@ public class StockController {
     /* 제품의 재고 사이즈를 조회하여 재고 수량을 조회하는 메서드 */
     @PostMapping("/count")
     @ResponseBody
-    public StockDto stockCount(@RequestBody Map getStockSize, Model model) throws Exception {
-        /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다. */
-        String pdId = getStockSize.get("pd_id").toString();
-        String pdClsfCd = getStockSize.get("pd_clsf_cd").toString();
+    public Map<String, Object> stockCount(@RequestBody Map<String, String> getStockSize, Model model) throws Exception {
+        /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다.
+               재고정보가 이미 있으면 재고 등록버튼 비활성화
+                > 제품id와 사이즈 정보가 데이터베이스에 있는지 확인
+                > 재고정보가 있으면 재고등록 버튼을 비활성화
+                > 재고정보가 없으면 재고등록 버튼을 활성화 */
+
+        Map<String, Object> response = new HashMap<>();
+        String pdId = getStockSize.get("pd_id");
+        String pdClsfCd = getStockSize.get("pd_clsf_cd");
+
+        boolean isStockAvailable = false;
         StockDto stockDto = new StockDto();
         stockDto.setNml_stk_qty(0);
         stockDto.setRt_stk_qty(0);
@@ -53,61 +83,42 @@ public class StockController {
         stockDto.setSfty_stk_qty(0);
 
         try {
-            /* 사이즈가 ALL이면 모든 사이즈의 재고수량을 더한다. */
-            if (pdClsfCd.equals("ALL")) {
-                String[] sizes = {"XS", "S", "M", "L", "XL", "2XL", "3XL"};
-                for (String size : sizes) {
-                    StockDto tempStockDto = stockService.getOneStock(pdId, size);
-                    /* 재고가 null이 아닐 때만 재고 수량을 더한다. */
-                    if (tempStockDto != null) {
-                        stockDto.setNml_stk_qty(stockDto.getNml_stk_qty() + tempStockDto.getNml_stk_qty());
-                        stockDto.setRt_stk_qty(stockDto.getRt_stk_qty() + tempStockDto.getRt_stk_qty());
-                        stockDto.setRgn_stk_qty(stockDto.getRgn_stk_qty() + tempStockDto.getRgn_stk_qty());
-                        stockDto.setUrgn_stk_qty(stockDto.getUrgn_stk_qty() + tempStockDto.getUrgn_stk_qty());
-                        stockDto.setSfty_stk_qty(stockDto.getSfty_stk_qty() + tempStockDto.getSfty_stk_qty());
-                    }
-                }
-            } else { /* 개별 사이즈로 값이 넘어올 때 */
-                stockDto = stockService.getOneStock(pdId, pdClsfCd);
-                /* 등록된 재고를 찾을 수 없으면 재고값을 0으로 반환 */
-                if (stockDto == null) {
-                    stockDto = new StockDto();
-                    stockDto.setNml_stk_qty(0);
-                    stockDto.setRt_stk_qty(0);
-                    stockDto.setRgn_stk_qty(0);
-                    stockDto.setUrgn_stk_qty(0);
-                    stockDto.setSfty_stk_qty(0);
-                }
+            stockDto = stockService.getOneStock(pdId, pdClsfCd);
+            isStockAvailable = true;
+            /* 등록된 재고를 찾을 수 없으면 재고값을 0으로 반환 */
+            if (stockDto == null) {
+                stockDto = new StockDto();
+                stockDto.setNml_stk_qty(0);
+                stockDto.setRt_stk_qty(0);
+                stockDto.setRgn_stk_qty(0);
+                stockDto.setUrgn_stk_qty(0);
+                stockDto.setSfty_stk_qty(0);
+                isStockAvailable = false;
             }
+
+            response.put("isStockAvailable", isStockAvailable);
+            response.put("stockDto", stockDto);
+
         } catch (NullPointerException e) {
             e.printStackTrace();
             model.addAttribute("msg", "NullPointException");
         }
-        return stockDto;
+        return response;
     }
 
-    /* 재고 일괄설정 버튼클릭 > 재고 수정 ajax 구동 */
-    @PostMapping("/modify")
-    @ResponseBody                               //비동기 통신
-    public String modify(Model model, HttpServletRequest request) {
-
-        return "/admin/stock/stockModify";
-    }
-
+    /* 재고 등록하는 메서드 */
     @PostMapping("/register")
-    @ResponseBody                               //비동기 통신
-    public String register(@RequestBody StockDto stockDto, Model model) {
-
-        /* odpmt_stk(가용재고)는 (nml_stk_qty(정상재고) + rt_stk_qty(반품재고), rgn_stk_qty(재생가능재고)) 수량임 */
-
-        /* 입력한 pur_dt(매입일), rcpt_dt(입고일)의 "-"를 공백으로 교체하고 varChar에 맞춰 String으로 변환 */
-        stockDto.setPur_dt(stockDto.getPur_dt().replace("-", ""));
-        stockDto.setRcpt_dt(stockDto.getRcpt_dt().replace("-", ""));
-
-        /*System.out.println(stockDto);*/
+    @ResponseBody
+    public String register(@RequestBody StockDto stockDto, Model model) throws Exception {
         try {
+            stockService.validateDuplicateStock(stockDto);
+
+            /* 입력한 pur_dt(매입일), rcpt_dt(입고일)의 "-"를 공백으로 교체하고 varChar에 맞춰 String으로 변환 */
+            stockDto.setPur_dt(stockDto.getPur_dt().replace("-", ""));
+            stockDto.setRcpt_dt(stockDto.getRcpt_dt().replace("-", ""));
+
             /* pd_clsf_cd(제품사이즈)가 ALL 일 때 모든 사이즈를 insert 해야함..  */
-            if (stockDto.getPd_clsf_cd().equals("ALL")) {
+            /*if (stockDto.getPd_clsf_cd().equals("ALL")) {
                 String[] sizes = {"XS", "S", "M", "L", "XL", "2XL", "3XL"};
                 for (String size : sizes) {
                     StockDto newStock = new StockDto();
@@ -133,14 +144,15 @@ public class StockController {
                     if (stockService.create(newStock) != 1) {
                         throw new Exception("등록에 실패했습니다.");
                     }
-
-                    System.out.println("register success");
                 }
-            } else {
+            } else {*/
                 StockDto newStock = new StockDto();
                 newStock.setPd_id(stockDto.getPd_id());
                 newStock.setPd_name(stockDto.getPd_name());
-                newStock.setPd_clsf_cd(stockDto.getPd_clsf_cd());
+
+                if (!stockDto.getPd_clsf_cd().equals("ALL")) {
+                    newStock.setPd_clsf_cd(stockDto.getPd_clsf_cd());
+                }
                 newStock.setNml_stk_qty(stockDto.getNml_stk_qty());
                 newStock.setRt_stk_qty(stockDto.getRt_stk_qty());
                 newStock.setRgn_stk_qty(stockDto.getRgn_stk_qty());
@@ -161,26 +173,98 @@ public class StockController {
                     throw new Exception("등록에 실패했습니다.");
                 }
 
-                System.out.println("register success");
-            }
+            //}
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("msg", e.getMessage());
+            return "duplicate";
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/admin/product/list";
         }
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-        /*  */
-
-        return "redirect:/admin/stock/stockList";
+        return "register success";
     }
 
+    @GetMapping("/selectOneModify")
+    @ResponseBody   // String code, String message, Map<String, Object> data or Object data
+    public ResponseEntity<?> selectOne(@RequestParam("pdId") String pdId,
+                              @RequestParam("pdClsfCd") String pdClsfCd) throws Exception {
 
+        /* 재고 코드가 ALL 일 때 > 개별 사이즈를 선택하라는 문구 안내
+           재고가 없으면 재고를 등록하라는 안내
+            */
 
+        try{
+            StockDto stockDto = stockService.getStockInfo(pdId, pdClsfCd);
+            // 재고 사이즈 코드가 ALL 일 때 > 개별 사이즈를 선택하라는 에러로 빠지기
+            if(pdClsfCd.equals("ALL")){
+                throw new IllegalArgumentException("size is All");
+            }
+
+            if(stockDto == null){
+                throw new IllegalArgumentException("stock is null");
+            }
+
+            return ResponseEntity.ok(stockDto);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
+        }
+    }
+
+    /* 재고 수정하는 메서드 ------작성해야해 */
+    @PostMapping("/modify")
+    @ResponseBody
+    public String modify(@RequestBody StockDto stockDto, Model model) throws Exception {
+        /* jsp로부터 전달받은 제품 id와 사이즈를 이용하여 DB조회 후 객체에 정보를 담는다.
+            > 제품id와 사이즈 정보가 데이터베이스에 있는지 확인
+              > 재고정보가 있으면 객체를 전달한다.
+              > 재고 정보가 없으면 "재고가 없습니다. 재고를 등록 해주세요." 문구를 alert한다. */
+
+        String pdId = stockDto.getPd_id();
+        String pdClsfCd = stockDto.getPd_clsf_cd();
+        stockDto.setPur_dt(stockDto.getPur_dt().replace("-", ""));
+        stockDto.setRcpt_dt(stockDto.getRcpt_dt().replace("-", ""));
+        try{
+            /* 사이즈가 ALL이면 모든 사이즈의 재고수량을 수정한다. 배열을 순회하며 list를 조회하고 화면에 뿌려준다.
+           if (pdClsfCd.equals("ALL")) {
+//                isStockAvailable = false;
+                String[] sizes = {"XS", "S", "M", "L", "XL", "2XL", "3XL"};
+                for (String size : sizes) {
+                    StockDto tempStockDto = stockService.getOneStock(pdId, size);
+//                     재고가 null이 아닐 때만 재고 정보를 넘겨준다.
+                    if (tempStockDto != null) {
+                        stockDto.setNml_stk_qty(stockDto.getNml_stk_qty() + tempStockDto.getNml_stk_qty());
+                        stockDto.setRt_stk_qty(stockDto.getRt_stk_qty() + tempStockDto.getRt_stk_qty());
+                        stockDto.setRgn_stk_qty(stockDto.getRgn_stk_qty() + tempStockDto.getRgn_stk_qty());
+                        stockDto.setUrgn_stk_qty(stockDto.getUrgn_stk_qty() + tempStockDto.getUrgn_stk_qty());
+                        stockDto.setSfty_stk_qty(stockDto.getSfty_stk_qty() + tempStockDto.getSfty_stk_qty());
+                    }
+                }
+            } else {*/
+            //개별 사이즈로 값이 넘어올 때
+            //jsp로부터 넘겨받은 stockDto와 selectModifyStock의 값을 비교
+            StockDto selectModifyStock = stockService.getStockInfo(pdId, pdClsfCd);
+            // 재고에 있는 값과 모두 일치하면? > 동일한 데이터 입니다. 수정해주세요.
+            if(selectModifyStock.equals(stockDto)){
+                throw new IllegalArgumentException("Same Data");
+            }
+            if (stockService.modify(stockDto) != 1) {
+                throw new Exception("modify fail");
+            }
+
+            model.addAttribute("msg", "modify success");
+
+        } catch(IllegalArgumentException e) {
+            model.addAttribute("msg", e.getMessage());
+            return (String) model.getAttribute("msg");
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("msg", e.getMessage());
+            return (String) model.getAttribute("msg");
+        }
+        return (String) model.getAttribute("msg");
+    }
     /*상품목록 검색하는 기능 -> 검색해서 내가 원하는 상품 목록 조회 -> 선택한 상품 재고 등록 or 수정*/
 }

@@ -1,0 +1,319 @@
+main {
+    overflow: hidden;
+}
+
+/*광고 배너 캐러셀 css*/
+.main-banner-item {
+    height: fit-content;
+}
+
+.c-item {
+    height: 480px;
+}
+
+.c-img {
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+#advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn-primary {
+    color: #fff;
+    font-size: 1vw;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #fff;
+    padding: 12px 28px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+}
+
+#advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:hover, #advertisement-carousel .carousel-inner .carousel-item .carousel-caption .btn:focus {
+    color: #073713;
+    background: #fff;
+    box-shadow: none;
+}
+
+.carousel-caption > .advertiseComment {
+    color: #ffd400;
+    margin: 0;
+    font-size: 2vw;
+}
+
+.advertiseCommentLeft h1, .advertiseCommentRight h1 {
+    margin: 0;
+}
+
+.advertiseCommentLeft {
+    text-align: left;
+    left: 10px;
+}
+
+.advertiseCommentRight {
+    text-align: right;
+    right: 10px;
+}
+
+.carousel-item {
+    position: relative;
+    height: fit-content;
+}
+
+.carousel-item .carousel-caption a {
+    z-index: 9999;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 40%;
+    padding: 0;
+    height: max-content;
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+.carousel-caption h1 {
+    font-size: 4vw;
+}
+
+.carousel-caption a {
+    font-size: 2vw;
+}
+
+.main-banner-carousel-btn {
+    height: 100%;
+    top: 0;
+    bottom: 0;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    width: 3%;
+}
+
+/*제품 캐러셀 css*/
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.product-category {
+    color: #000;
+    font-size: 4vw;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    margin: 15px auto;
+}
+
+.productName {
+    overflow: hidden;
+}
+
+.productName > a {
+    height: fit-content;
+    font-size: 1.3vw;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.productName > a:hover {
+    text-decoration: none;
+}
+
+.carousel .item {
+    color: #747d89;
+    min-height: 325px;
+    text-align: center;
+    overflow: hidden;
+}
+.carousel .thumb-wrapper {
+    padding: 25px 15px;
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    box-shadow: 2px 4px 6px #073713;
+    max-height: 322.57px;
+}
+.carousel .item .img-box {
+    height: 120px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+.carousel .item img {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+}
+
+.carousel .item h4, .carousel .item p, .carousel .item ul {
+    margin-bottom: 5px;
+}
+
+.carousel .thumb-content .btn {
+    color: #073713;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #073713;
+    padding: 6px 14px;
+    margin-top: 15px;
+    line-height: 16px;
+    border-radius: 20px;
+}
+.carousel .thumb-content .btn:hover, .carousel .thumb-content .btn:focus {
+    color: #fff;
+    background: #073713;
+    box-shadow: none;
+}
+.carousel .thumb-content .btn i {
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.carousel .carousel-control {
+    height: 44px;
+    width: 40px;
+    background: #073713;
+    margin: auto 0;
+    border-radius: 4px;
+    opacity: 0.8;
+}
+.carousel .carousel-control:hover {
+    background: #073713;
+    opacity: 1;
+}
+.carousel .carousel-control i {
+    font-size: 36px;
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    margin: -19px 0 0 0;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: #fff;
+    text-shadow: none;
+    font-weight: bold;
+}
+.carousel .item-price {
+    font-size: 1vw;
+    padding: 2px 0;
+}
+.carousel .item-price strike {
+    opacity: 0.7;
+    margin-right: 5px;
+}
+.carousel .carousel-control.left i {
+    margin-left: -2px;
+}
+
+.carousel .carousel-control.right i {
+    margin-right: -4px;
+}
+
+.carousel-control .right {
+    right: 20px;
+}
+.carousel .carousel-indicators {
+    bottom: -50px;
+}
+.carousel-indicators li, .carousel-indicators li.active {
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    border-radius: 50%;
+    border: none;
+}
+.carousel-indicators li {
+    background: rgba(0, 0, 0, 0.2);
+}
+.carousel-indicators li.active {
+    background: #073713;
+}
+.carousel .wish-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+    cursor: pointer;
+    font-size: 16px;
+    color: #abb0b8;
+}
+.carousel .wish-icon .fa-heart {
+    color: #ff6161;
+}
+.star-rating li {
+    padding: 0;
+}
+.star-rating i {
+    font-size: 14px;
+    color: #ffc000;
+}
+
+.col-sm-3 {
+    padding: 0 20px;
+}
+
+.star-rating {
+    text-align: center;
+}
+
+.star-rating ul{
+    display: block;
+}
+
+price {
+    font-size: 18px;
+    font-weight: bolder;
+    color: grey;
+}
+
+sale-price {
+    font-size: 18px;
+    font-weight: bolder;
+    color: red;
+}
+
+/*이미지 정사각형으로 만들기*/
+.product-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: inherit;
+    background-color: rgb(235, 235, 235);
+}
+.product-image-box::after {
+    display: block;
+    content: "";
+    padding-bottom: 100%;
+}
+.product-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
