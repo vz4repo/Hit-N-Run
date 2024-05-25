@@ -1,0 +1,232 @@
+:root {
+    --btn-width : 90%;
+    --btn-min-width : 90%;
+    --btn-height : 5vh;
+    --btn-min-height : 5px;
+    --menu-height : calc(var(--btn-height) * 8);
+    --menu-min-height : calc(var(--btn-min-height) * 2);
+    --font-size : 2vw;
+}
+/*화면 상단부*/
+.prdContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: var(--btn-width);
+}
+/*화면 상단 토글 메뉴*/
+.prdLabel {
+    width: 90%;
+    height: var(--btn-height);
+    min-height: var(--btn-min-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border-top: 0.5px solid black
+}
+.ball{
+    width: calc(var(--btn-height) * 0.4);
+    height: calc(var(--btn-height) * 0.4);
+    transition: 0.5s ease-in-out;
+}
+.prdMenu {
+    width: var(--btn-width);
+    min-width: var(--btn-min-width);
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 0;
+    transition: 0.3s ease-in-out;
+    list-style: none;
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+    border-bottom: 0.5px solid black;
+}
+.prdMenu li{
+    padding-top: 10px;
+}
+.toggle:checked ~ .prdMenu{
+    height: var(--menu-height);
+    min-height: var(--menu-min-height);
+    opacity: 1;
+    display: block;
+}
+.toggle:checked ~ .prdLabel > .ball{
+    transform: rotate(540deg);
+}
+/*화면 상단 나누기*/
+.productMainContainer{
+    display: flex;
+    padding-bottom: 30px;
+}
+.productItem{
+    flex: 1;
+}
+/*화면 중단 상세 사진*/
+.detailProductContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/*제품 상세 사진*/
+.image-container {
+    text-align: center;
+}
+
+.image-container img {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+/*제품 대표이미지*/
+#mnImg{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+}
+/* 상세페이지 뷰 스크롤 바 */
+.prdList{
+    display: flex;
+    border-bottom:2px solid grey; border-top:2px solid grey;
+    justify-content: center;
+    padding-top: 5px;
+    padding-bottom: 5px;}
+.prdList li{margin-right: 5%; }
+.prdList ul, .prdList ol, .prdList li{list-style-type:none;}
+.prdList li a{color: black; text-decoration: none;}
+/* 리뷰작성 버튼 */
+.reviewContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+       /*border: 1px solid black;*/
+    width: 100%;
+    position: relative;
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+.reviewContainer .writeReviewBtn{
+    width: 5%;
+    font-size: 8%;
+    right: 0%;
+    position: absolute;
+    right: 5%;
+    top: 80%;
+}
+/* 리뷰테이블 */
+.reviewTable {
+    width: 90%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.reviewTable th, .reviewTable td {
+    text-align: center;
+    /*   border: 1px solid #000;  */
+    border-bottom: 0.5px solid grey;
+    padding: 0px;
+}
+.reviewTable th:nth-child(2), .reviewTable td:nth-child(2) {
+    width: 70%;
+}
+.reviewTable td:nth-child(2){
+    text-align:left;
+}
+
+/* 제품문의작성 버튼 */
+.QnAContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+       /*border: 1px solid black;*/
+    width: 100%;
+    position: relative;
+    padding-bottom: 40px;
+    padding-top: 20px;
+}
+.QnAContainer .writeQnABtn{
+    width: 7%;
+    font-size: 8%;
+    right: 0%;
+    position: absolute;
+    right: 5%;
+    top: 80%;
+}
+
+/* 제품문의테이블 */
+.QnATable {
+    width: 90%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.QnATable th, .QnATable td {
+    text-align: center;
+       /*border: 1px solid #000;  */
+    border-bottom: 0.5px solid grey;
+    padding: 0px;
+}
+.QnATable th:nth-child(2), .QnATable td:nth-child(2) {
+    width: 70%;
+}
+.QnATable td:nth-child(2){
+    text-align:left;
+}
+#toggle1{
+    padding-top: 30px;
+}
+.prdSubmitBtn{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.productMainContainer h2{
+    font-size: 1.5em;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.productMainContainer h6{
+    font-size: 0.67em;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.productMainContainer h5{
+    font-size: 0.83em;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.productMainContainer b{font-weight: bold}
+
+.productMainContainer p{padding-bottom: 10px;}
+
+.detailProductContainer p{padding-top: 20px}
+
+body{overflow-x: hidden}
+
+.prdWishBtn {
+    background: none;
+    border: 2.5px solid green;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px; /* Removes any extra space around the icon */
+}
+.prdWishBtn ion-icon {
+    --ionicon-stroke-width: 15; /* Adjust the stroke width as needed */
+    color: red;
+}
+.fillColor {
+    animation: fill 1s forwards;
+}
+@keyframes fill {
+    from {
+        color: white;
+    }
+    to {
+        color: red;
+    }
+}
