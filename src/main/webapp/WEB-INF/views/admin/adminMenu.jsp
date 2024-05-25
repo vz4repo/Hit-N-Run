@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="w3-sidebar w3-light-grey w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
-    <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button"><img src="/img/homerunball_logo.png" style="width:200px"></a>
-    <%--<button class="w3-bar-item w3-button w3-large" onclick="w3_close()">Close &times;</button>--%>
-    <%--<a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button">HOME</a>--%>
+    <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button no-event"><img src="/img/homerunball_logo.png" style="width:200px"></a>
     <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">제품 대시보드</a>
     <a href="<c:url value='/admin/product/list'/>" class="w3-bar-item w3-button">제품 목록</a>
     <a href="<c:url value='/admin/product/register'/>" class="w3-bar-item w3-button">제품 등록</a>
@@ -40,13 +38,47 @@
         var x = document.getElementById(id);
         if (x.className.indexOf("w3-show") == -1) {
             x.className += " w3-show";
-            x.previousElementSibling.className += " w3-black";
+            x.previousElementSibling.style.backgroundColor = "#ccc";
         } else {
             x.className = x.className.replace(" w3-show", "");
             x.previousElementSibling.className =
-                x.previousElementSibling.className.replace(" w3-black", "");
+                x.previousElementSibling.style.backgroundColor = "";
         }
     }
+    document.addEventListener('DOMContentLoaded', function() {
+        // 로컬 스토리지에서 활성화된 항목을 가져오기
+        let activeItem = localStorage.getItem('activeMenuItem');
+        let activeAcc = localStorage.getItem('activeMenuAcc');
+
+        if (activeItem || activeAcc) {
+            // 저장된 항목이 있으면 해당 항목에 'active' 클래스 추가
+            let activeElement = document.querySelector('a[href="' + activeItem + '"]');
+            if (activeElement) {
+                activeElement.classList.add('active');
+            }
+        }
+
+        // 메뉴 항목 클릭 이벤트 리스너 추가
+        var menuItems = document.querySelectorAll('.w3-sidebar .w3-bar-item');
+        menuItems.forEach(function(item) {
+            item.addEventListener('click', function () {
+                    // 모든 항목에서 'active' 클래스 제거
+                    menuItems.forEach(function (menuItem) {
+                        menuItem.classList.remove('active');
+                    });
+                if (!item.classList.contains('no-event')) {
+                    // 클릭한 항목에 'active' 클래스 추가
+                    item.classList.add('active');
+
+                    // 로컬 스토리지에 클릭한 항목 저장
+                    localStorage.setItem('activeMenuItem', item.getAttribute('href'));
+                } else {
+                    // 'no-event' 클래스가 있는 요소를 클릭하면 로컬 스토리지에서 항목 제거
+                    localStorage.removeItem('activeMenuItem');
+                }
+            });
+        });
+    });
 
     window.onload = function() {
         w3_open();
