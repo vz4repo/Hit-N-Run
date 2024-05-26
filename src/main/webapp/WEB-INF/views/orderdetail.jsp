@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/order_det.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -25,255 +25,7 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-      .order-container {
-        width: 85%;
-        margin: 0 auto;
-      }
 
-      .orders {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-top: 20px;
-      }
-
-      .orders table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-      }
-
-      .orders th,
-      .orders td {
-        padding: 10px;
-        text-align: center;
-        /*height: 70px;*/
-        box-sizing: border-box;
-        vertical-align: middle;
-        word-break: break-all;
-        border-spacing: 0;
-        margin: 0;
-        outline: none;
-      }
-
-      .orders th {
-        background-color: #f4f4f4;
-        text-align: center;
-        border-top: 2px solid #000;
-        border-bottom: 2px solid #000;
-      }
-
-      .orders td {
-        border-bottom: 1px solid #ddd;
-      }
-
-      .orders tr:hover {
-        background-color: #f9f9f9;
-      }
-
-      ul {
-        display: block;
-      }
-
-      .product-info img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-      }
-
-      .info {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .info .brand {
-        font-weight: bold;
-      }
-
-      .info .name {
-        font-size: 1.1em;
-      }
-
-      .info .name a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .info .name a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .info .option {
-        color: gray;
-      }
-
-      .order-status {
-        /*display: flex;*/
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .order-status a {
-        color: #007bff;
-        text-decoration: none;
-        margin-bottom: 5px;
-      }
-
-      .order-status a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-status button {
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        padding: 5px;
-        cursor: pointer;
-      }
-
-      .order-status button:hover {
-        background-color: #ddd;
-      }
-
-      .order-number a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .order-number a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-amount span {
-        display: block;
-      }
-
-      /* 모달 스타일 */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: #fff;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 100%;
-        max-width: 600px;
-        border-radius: 8px;
-        position: relative;
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-      }
-
-      .modal-header h2 {
-        margin: 0;
-      }
-
-      .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-      }
-
-      .modal-body {
-        margin-top: 20px;
-      }
-
-      .order-step-header {
-        font-size: 18px;
-        font-weight: bold;
-      }
-
-      .order-step-subheader {
-        color: gray;
-        margin-left: 10px;
-      }
-
-      .order-step-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
-
-      .order-step-table th,
-      .order-step-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .order-step-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
-
-      /* 배송 모달 스타일 */
-      .delivery-info {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-
-      .delivery-info th,
-      .delivery-info td {
-        border: none;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-info th {
-        width: 25%;
-        background-color: #f4f4f4;
-      }
-
-      .delivery-info td {
-        width: 25%;
-      }
-
-      .delivery-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .delivery-table th,
-      .delivery-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
     </style>
     <%-- [혁락] css 수정 끝 --%>
 </head>
@@ -372,12 +124,12 @@
     <div id="orderStepModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
+                    <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
-                    Step<span class="order-step-subheader">주문단계</span>
-                    <!-- 주문단계 헤더 -->
+                    <span class="order-step-subheader">주문상태</span>
                 </h2>
-                <span class="close">&times;</span>
                 <!-- 모달 닫기 버튼 -->
+                <span class="close">&times;</span>
             </div>
             <div class="modal-body">
                 <table class="order-step-table">
@@ -632,7 +384,9 @@
                 openOrderStepModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     orderStepModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '350px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '350px';
+                    })
                   });
                 });
 
@@ -640,13 +394,18 @@
                 openDeliveryModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     deliveryModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '1400px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '1400px';
+                    })
                   });
                 });
 
                 // 영수증 모달 열기
                 orderAmounts.forEach((orderAmount) => {
                   orderAmount.addEventListener('click', async () => {
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '400px';
+                    });
                     const orderId = orderAmount.getAttribute('data-order-id');
                     const receiptContent = document.querySelector('#receiptContent');
                     try {
