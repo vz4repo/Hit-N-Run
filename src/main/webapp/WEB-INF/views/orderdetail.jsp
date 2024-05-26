@@ -65,7 +65,7 @@
                         <td class="product-info">
                             <div>
                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
+                                    <img src="/img/product/${orderdetDto.pd_type_cd}/main/${orderdetDto.mn_img_fn}"
                                          alt="썸네일" name="thumbnail"/>
                                 </a>
                             </div>
