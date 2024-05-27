@@ -78,7 +78,7 @@
   const testCouponElement = document.querySelector("#testCoupon");
 
   /* TODO: 수정 및 cors 이슈 해결 필요 */
-  let amount = 1920000;
+  let amount = 19200;
   // amount = totalSum.textContent.replace(/,/g, '').replace(/원/g, '');
   // document.querySelector("#totalSum")
 

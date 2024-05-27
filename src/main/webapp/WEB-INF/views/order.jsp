@@ -192,9 +192,9 @@
     }
 
 
-    /*.close {*/
-    /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
-    /*}*/
+  /*.close {*/
+  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
+  /*}*/
 
 
     .header-container {
@@ -253,47 +253,47 @@
         <%-- 김수연 0524 기본배송지 form 시작 --%>
         <div class="dlv-header-content">
             <%-- TODO : 기본배송지 --%>
-            <table>
-                <colgroup>
-                    <col style="width: 150px">
-                    <col style="width: 400px">
-                </colgroup>
-                <tr>
-                    <td class="label">배송지</td>
-                    <td class="dlv-content">${defaultDto.adr_name}</td>
-                </tr>
-                <tr>
-                    <td class="label">이름/연락처</td>
-                    <td class="dlv-content">
-                        ${defaultDto.rcver} / ${defaultDto.rcver_phn}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">주소</td>
-                    <td class="dlv-content">
-                        (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">배송 요청사항</td>
-                    <td class="dlv-content">
-                        <select class="select-request" name="delivery_request" id="delivery_request">
-                            <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
-                            <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
-                            <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
-                            <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
-                            <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
-                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                            <option value="etc">직접 입력</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+                <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content">${defaultDto.adr_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
         <!-- 배송지 변경 버튼 -->
-        <button class="btn-change-address">배송지 변경</button>
+                <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -421,6 +421,7 @@
             $(this).text(formatValue + '원');
         })
     })
+
 
     /*테이블의 행 수를 계산*/
     window.onload = function () {
