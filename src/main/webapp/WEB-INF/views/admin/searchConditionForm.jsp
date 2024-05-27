@@ -6,13 +6,13 @@
             <tr>
                 <th colspan="2">제품 검색</th>
             </tr>
-            <%--검색 분류: 상품ID, 상품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
+            <%--검색 분류: 제품ID, 제품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
             <tr>
                 <th>검색 분류</th>
                 <td>
                     <select class="search-option" name="keywordSelect">
-                        <option value="pd_id">상품ID</option>
-                        <option value="pd_name">상품명</option>
+                        <option value="pd_id">제품ID</option>
+                        <option value="pd_name">제품명</option>
                         <option value="mdl_name">모델명</option>
                         <option value="sprt_type_cd">스포츠 유형</option>
                         <option value="mfr">제조사</option>
@@ -20,16 +20,15 @@
                         <option value="player_name">사용 선수명</option>
                         <option value="season">시즌</option>
                     </select>
-                    <input type="text" name="keyword" class="search-input" type="text" value="${keyword}"
-                           placeholder="검색어를 입력해주세요">
+                    <input type="text" name="keyword" class="search-input" value="" placeholder="검색어를 입력해주세요">
                 </td>
             </tr>
-            <%--상품 분류: 대(제품 유형), 중(제품 상세 유형), 소(브랜드)--%>
+            <%--제품 분류: 대(제품 유형), 중(제품 상세 유형), 소(브랜드)--%>
             <tr>
-                <th>상품 분류</th>
+                <th>제품 분류</th>
                 <td>
-                    <label for="pd_type_cd">제품 유형</label>
                     <select class="search-option" id="pd_type_cd" name="pd_type_cd">
+                        <option disabled="" hidden="" selected="">제품 유형</option>
                         <option value="GLV">글러브</option>
                         <option value="PRO">보호장비</option>
                         <option value="OGL">장갑</option>
@@ -40,8 +39,8 @@
                         <option value="SHO">야구화</option>
                     </select>
 
-                    <label for="pd_type_det_cd">제품 상세 유형</label>
                     <select class="search-option" id="pd_type_det_cd" name="pd_type_det_cd">
+                        <option disabled="" hidden="" selected="">제품 상세 유형</option>
                         <option value="CAT">포수</option>
                         <option value="INF">내야수</option>
                         <option value="FIR">1루수</option>
@@ -65,8 +64,8 @@
                         <option value="TRF">인조잔디_야구화</option>
                     </select>
 
-                    <label for="brd_cd">브랜드</label>
                     <select class="search-option" id="brd_cd" name="brd_cd">
+                        <option disabled="" hidden="" selected="">브랜드</option>
                         <option value="GLD">골드</option>
                         <option value="KBT">구보타슬러거</option>
                         <option value="NB">뉴발란스</option>
@@ -99,17 +98,13 @@
                     </select>
                 </td>
             </tr>
-            <%--상품 등록일: 검색시작날짜 - 검색마지막날짜--%>
+            <%--제품 등록일: 검색시작날짜 - 검색마지막날짜--%>
             <tr>
-                <th>상품 등록일</th>
-                <%--
-                    - 미선택 시 후 (1개월, 3개월, 6개월)버튼 클릭 시 오늘날짜 기준으로 조회
-                    - 검색 시작일자 기준 1개월, 3개월, 6개월
-                --%>
+                <th>제품 등록일</th>
                 <td>
                     <label for="sdate">시작일</label>
                     <input class="search-inputDate" type="date" id="sdate">
-                    ~
+                    <p style="display: inline-block; margin: 0px 20px">~</p>
                     <label for="edate">종료일</label>
                     <input class="search-inputDate" type="date" id="edate">
                 </td>
@@ -118,26 +113,45 @@
             <tr>
                 <th>진열 상태</th>
                 <td>
-                    <input type='radio' id="displayAll" name='pd_is_show'/>
-                    <label for="displayAll">전체</label>
-                    <input type='radio' id="displayOn" name='pd_is_show' value='Y'/>
-                    <label for="displayOn">진열하기</label>
-                    <input type='radio' id="displayNo" name='pd_is_show' value='N'/>
-                    <label for="displayNo">진열제외</label>
+                    <label class="radio-container" for="displayAll">전체
+                        <input type="radio" id="displayAll" name="pd_is_show">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container" for="displayOn">진열하기
+                        <input type="radio" id="displayOn" name="pd_is_show" value="Y">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container" for="displayNo">진열제외
+                        <input type="radio" id="displayNo" name="pd_is_show" value="N">
+                        <span class="checkmark"></span>
+                    </label>
                 </td>
             </tr>
             <%--판매 상태: 전체, 판매중, 판매 안함--%>
             <tr>
                 <th>판매 상태</th>
                 <td>
-                    <input type='radio' id="allSale" name='pd_stat_hist_cd'/>
-                    <label for="allSale">전체</label>
-                    <input type='radio' id="planSale" name='pd_stat_hist_cd' value='planSale'/>
-                    <label for="planSale">판매 예정</label>
-                    <input type='radio' id="onSale" name='pd_stat_hist_cd' value='onSale'/>
-                    <label for="onSale">판매 중</label>
-                    <input type='radio' id="notSale" name='pd_stat_hist_cd' value='notSale'/>
-                    <label for="notSale">판매 안 함</label>
+                    <label class="radio-container" for="allSale">전체
+                        <input type="radio" checked="checked" id="allSale" name="pd_stat_hist_cd">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container" for="planSale">판매 예정
+                        <input type="radio" id="planSale" name="pd_stat_hist_cd" value="planSale">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container" for="onSale">판매 중
+                        <input type="radio" id="onSale" name="pd_stat_hist_cd" value="onSale">
+                        <span class="checkmark"></span>
+                    </label>
+
+                    <label class="radio-container" for="notSale">판매 안 함
+                        <input type="radio" id="notSale" name="pd_stat_hist_cd" value="notSale">
+                        <span class="checkmark"></span>
+                    </label>
                 </td>
             </tr>
         </table>
