@@ -1,0 +1,14 @@
+.datepicker.datepicker-inline .datepicker-days table.table-condensed tbody td.day {
+    font-size: 0.9375rem;
+    padding: 0.5rem 0;
+    /* color: #434a54; */
+}
+.datepicker table tr td.new {
+    color: #d9dde3 !important;
+}
+.main-panel {
+    width: 100% !important;
+}
+.content-wrapper {
+    background: #edf3ee !important;
+}
