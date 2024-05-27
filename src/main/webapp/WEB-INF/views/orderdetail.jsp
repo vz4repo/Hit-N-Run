@@ -35,7 +35,7 @@
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
-        <div class="orders">
+        <div class="orders tb__order">
             <table>
                 <colgroup>
                     <col width="30%"/>
@@ -452,7 +452,7 @@
 
                 window.addEventListener('click', (event) => {
                   if (event.target === orderStepModal || event.target === deliveryModal ||
-                      event.target === receiptModal || event.target === orderIdModal) {
+                      event.target === receiptModal   || event.target === orderIdModal) {
                     event.target.style.display = 'none';
                   }
                 });

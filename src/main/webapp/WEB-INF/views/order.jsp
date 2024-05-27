@@ -237,7 +237,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">Home-run() 주 문 서</a>
+    <a href="#" class="head_main">주문서</a>
     <hr class="first__under"/>
     <div class="order__title">
         <div class="head_order">Order / Payment</div>
