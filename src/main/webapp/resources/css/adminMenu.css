@@ -25,5 +25,10 @@
 }
 
 .w3-container {
-    overflow-x:auto;
+    overflow-x: auto;
 }
+
+.w3-sidebar .w3-bar-item.active {
+    background-color: #073713;
+    color: white;
+} /* 활성화된 항목에 대한 스타일 */

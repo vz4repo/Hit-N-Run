@@ -41,7 +41,7 @@
         </div>
         <div class="wrap_inner_right">
             <div class="cs">
-                <span class="tel">1544-0000</span>
+                <span class="tel">1540-0000</span>
                 <span>평일 &nbsp; 10:00 - 18:00</span>
                 <span>점심 &nbsp; 13:00 - 14:00</span>
                 <span>휴일 &nbsp; 토/일/공휴일</span>
@@ -73,6 +73,8 @@
                 <span>회원등록: 김민욱 |&nbsp</span>
                 <span>제품상세: 김지훈 |&nbsp</span>
                 <span>장바구니: 김다니</span>
+            </div>
+            <div>
                 <span>주문: 안중섭 |&nbsp</span>
                 <span>배송: 김수연 |&nbsp</span>
                 <span>결제: 권혁락</span>
