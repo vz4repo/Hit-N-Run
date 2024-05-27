@@ -7,6 +7,12 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-bottom: 30px;
+    border-bottom: 3px dotted #eee;
+}
+
+#caption {
+    color: white;
 }
 
 .interview {
@@ -94,7 +100,6 @@
 
 #king {
     display: flex;
-    width: 1600px;
     margin: 0;
 }
 
