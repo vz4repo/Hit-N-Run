@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,17 +8,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 
   <style>
     .container {
-      width: 300px;
-      margin: 0 auto;
+      width: 600px;
+      /*margin: 0 auto;*/
       text-align: left;
-      padding: 100px;
+      margin-left: 430px;
     }
 
     .special-class {
-      width: 100%;
+      width: 400px;
       padding: 10px;
       margin-bottom: 7px;
       border: 1px solid #ccc;
@@ -25,18 +28,7 @@
       box-sizing: border-box;
     }
 
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      background-color: darkgreen;
-      color: whitesmoke;
-    }
-
-    label {
+    .pwdLabel {
       display: block;
       margin-bottom: 5px;
       font-weight: bold;
@@ -44,22 +36,10 @@
       color: gray;
     }
 
-    #loginTitle {
-      text-align: center;
+    #pwdTitle {
       font-size: 20px;
       margin-bottom: 40px;
-      font-family: 'IBM Plex Sans', sans-serif;
-    }
-
-    #myform {
-      max-width: 700px;
-      text-align: center;
-      border: 3px solid #f1f1f1;
-      border-radius: 50px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-      margin: 0 auto;
-      margin-top: 150px;
-      margin-bottom: 150px;
+      margin-top: 40px;
     }
 
     span {
@@ -68,34 +48,66 @@
 
     body {
       font-size: 11px;
-      font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    #continue {
+      border: none;
+      cursor: pointer;
+      background-color: white;
+      color: black;
+      outline: none;
+      font-size: 12px;
+      font-weight: bold;
+      width: 500px;
+      margin-left: 160px;
+    }
+
+    #oneLine{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #pp{
+      font-size: 11px;
+      margin-top: 15px;
+    }
+    #check-newPwd{
+      font-size: 11px;
+      height: 20px;
     }
 
   </style>
+
+  <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
+  <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+  <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
+  <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
-<div id="myform">
+<jsp:include page="header.jsp"/>
+<jsp:include page="myPageHeader.jsp"/>
+<%--<div id="myform">--%>
     <form action="/mypage/pwdEdit" method="POST" onsubmit="return pwdEditCheck()">
     <div class="container">
-      <h1 id="loginTitle">비밀번호 변경</h1><br><br>
+      <h1 id="pwdTitle">Change Pwd</h1><br><br>
 
-        <label>현재 비밀번호</label>
+        <label class="pwdLabel">현재 비밀번호</label>
         <input id="curPwd" class="special-class" type="password" name="curPwd" maxlength="15">
 
-      <label>신규 비밀번호</label>
-      <input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="newPwdCheck(this.form)">
+      <label class="pwdLabel">신규 비밀번호</label>
+      <div id="oneLine"><input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="newPwdCheck(this.form)"><p id="pp">영문/숫자 조합 (4자 이상 15자 이하)</p></div>
       <p id="check-newPwd"></p>
 
-      <label>신규 비밀번호 확인</label>
-      <input id="newPwd2" class="special-class" type="password" maxlength="15" oninput="newPwdCheck(this.form)"><br><br>
-      <button>확인</button>
-<%--      <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
-      <a href="/mypage/list"><button type="button">나가기</button></a><br><br>
+      <label class="pwdLabel">신규 비밀번호 확인</label>
+      <input id="newPwd2" class="special-class" type="password" maxlength="15" oninput="newPwdCheck(this.form)"><br><br><br><br><br>
+      <button id="continue">변경</button>
+<%--      <a href="/mypage/info"><button type="button">취소</button></a><br><br>--%>
 
     </div>
   </form>
-</div>
+<%--</div>--%>
+<jsp:include page="footer.jsp" flush="false" />
 
 <script>
 
