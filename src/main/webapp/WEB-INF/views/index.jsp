@@ -742,8 +742,6 @@
     function stop() {
         event.preventDefault();
     }
-
-
 </script>
 </body>
 </html>

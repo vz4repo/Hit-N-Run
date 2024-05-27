@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ page session="false" %>--%>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+<%--    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">--%>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
         .container {
@@ -51,13 +51,13 @@
         }
 
         #myform {
-            max-width: 700px;
+            max-width: 420px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding-top: 3%;
-            padding-bottom: 3%;
+            padding-top: 1%;
+            padding-bottom: 1%;
             margin: 0 auto;
             margin-top: 50px;
             margin-bottom: 50px;
@@ -89,7 +89,7 @@
             margin: 5% auto 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 70%;
+            width: 50%;
         }
 
         #touModal {
@@ -119,20 +119,30 @@
             display: inline;
         }
 
-        #roadAddress{
-            width: 265.5px;
+        #roadAddress,
+        #jibunAddress,
+        #detailAddress {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
-        #jibunAddress{
-            width: 265.5px;
+        #zip {
+            width: 75px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
 
-        #detailAddress{
-            width: 265.5px;
+        #zipBtn {
+            float: right;
         }
 
         #birth {
-            padding: 8px;
+            padding: 9px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1em;
@@ -170,6 +180,10 @@
             cursor: pointer;
         }
 
+        #ad {
+            display: flex;
+            justify-content: space-between;
+        }
 
 
     </style>
@@ -179,12 +193,12 @@
 
 <div id="myform">
     <form action="/register/add" method="POST" onsubmit="return formCheck(this)">
-        <h1 id="loginTitle">Sign Up</h1>
+        <h1 id="loginTitle">회원가입</h1>
         <div class="container">
             <p id="check-result"></p>
             <label id="email">이메일</label>
             <input id="verify" type="button" value="인증번호 받기" disabled><br>
-            <input class="special-class" type="text" id="c_email" name="c_email" maxlength="30" onblur="emailCheck()" placeholder="homerunball@run.com">
+            <input class="special-class" type="text" id="c_email" name="c_email" maxlength="30" onblur="emailCheck()" placeholder="homerun@ball.com">
             <p id="mail-check-warn"></p>
             <label>인증번호</label>
             <input class="special-class" type="text" id="c_email2" name="c_email2" maxlength="10" disabled>
@@ -192,18 +206,19 @@
             <input class="special-class" type="password" id="c_pwd" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="pwd2Check(this.form)" disabled>
             <p id="check-pwd"></p>
             <label id="pwdCheck">비밀번호 확인</label>
-            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" oninput="pwd2Check(this.form)" disabled>
+            <input class="special-class" type="password" id="c_pwd2" name="c_pwd2" placeholder="비밀번호를 다시 한번 입력해주세요." maxlength="15" oninput="pwd2Check(this.form)" disabled><br>
             <label>이름</label>
             <input class="special-class" type="text" id="c_name" name="c_name" maxlength="15" disabled>
             <label>주소</label>
-            <input type="text" id="zip" name="c_zip" placeholder="우편번호 찾기 클릭" readonly disabled>
-            <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly disabled>
+            <div id="ad">
+            <input type="text" id="zip" name="c_zip" placeholder="우편번호" readonly disabled>
+            <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" readonly disabled></div>
             <input type="text" id="roadAddress" name="c_road_a" placeholder="도로명주소" readonly disabled>
             <input type="text" id="jibunAddress" name="c_jibun_a" maxlength="30" placeholder="지번주소는 선택사항입니다." disabled>
             <span id="guide" style="color:#999;display:none"></span>
             <input type="text" id="detailAddress" name="c_det_a" maxlength="30" placeholder="건물명+상세주소" disabled><br><br>
             <label>휴대폰</label>
-            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="-제외" maxlength="12" disabled>
+            <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="&nbsp;-제외" maxlength="12" disabled>
             <label>성별</label>
             <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
             <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
@@ -223,8 +238,6 @@
             <label for="email_agr" id="emailLabel">[선택] 쇼핑정보 이메일 수신</label><br><br><br>
 
             <button id="rBtn" disabled>가입하기</button>
-<%--            <button type="button" onclick="window.history.back()">나가기</button><br><br>--%>
-            <a href="/login"><button type="button">나가기</button></a><br><br>
         </div>
     </form>
 </div>
