@@ -33,7 +33,7 @@
             background-color: white;
             outline: none;
             font-size: 12px;
-            margin-right: 305px;
+            margin-right: 295px;
             font-weight: bold;
         }
 
