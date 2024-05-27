@@ -302,6 +302,8 @@ sale-price {
     position: relative;
     width: inherit;
     background-color: rgb(235, 235, 235);
+    max-width: 445px;
+    max-height: 445px;
 }
 .product-image-box::after {
     display: block;
@@ -313,7 +315,9 @@ sale-price {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    max-width: 445px;
+    max-height: 445px;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /*object-fit: cover;*/
 }
