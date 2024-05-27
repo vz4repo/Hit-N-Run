@@ -35,40 +35,49 @@
     }
 
     function myAccFunc(id) {
-        var x = document.getElementById(id);
+        let x = document.getElementById(id);
         if (x.className.indexOf("w3-show") == -1) {
             x.className += " w3-show";
-            x.previousElementSibling.style.backgroundColor = "#ccc";
+            x.previousElementSibling.style.backgroundColor = "#dcdcdc";
         } else {
             x.className = x.className.replace(" w3-show", "");
-            x.previousElementSibling.className =
-                x.previousElementSibling.style.backgroundColor = "";
+            x.previousElementSibling.style.backgroundColor = "";
         }
     }
+
     document.addEventListener('DOMContentLoaded', function() {
         // 로컬 스토리지에서 활성화된 항목을 가져오기
         let activeItem = localStorage.getItem('activeMenuItem');
-        let activeAcc = localStorage.getItem('activeMenuAcc');
 
-        if (activeItem || activeAcc) {
-            // 저장된 항목이 있으면 해당 항목에 'active' 클래스 추가
-            let activeElement = document.querySelector('a[href="' + activeItem + '"]');
-            if (activeElement) {
-                activeElement.classList.add('active');
+        // 페이지가 로드될 때 현재 URL 확인하여 해당하는 메뉴 아이템에 대해 이벤트 발생
+        /*let currentUrl = window.location.href;*/
+        let currentUrl = window.location.pathname;
+        let menuItems = document.querySelectorAll('.w3-sidebar .w3-bar-item');
+        menuItems.forEach(function(item) {
+            if (item.getAttribute('href') === currentUrl) {
+                if (!item.classList.contains('no-event')) {
+                    item.classList.add('active');
+                    item.parentElement.classList.add('w3-show');
+                }
             }
-        }
-
+        });
         // 메뉴 항목 클릭 이벤트 리스너 추가
-        var menuItems = document.querySelectorAll('.w3-sidebar .w3-bar-item');
         menuItems.forEach(function(item) {
             item.addEventListener('click', function () {
-                    // 모든 항목에서 'active' 클래스 제거
-                    menuItems.forEach(function (menuItem) {
-                        menuItem.classList.remove('active');
-                    });
+                // 모든 항목에서 'active' 클래스 제거
+                menuItems.forEach(function (menuItem) {
+                    menuItem.classList.remove('active');
+                    menuItem.parentElement.classList.remove('w3-show');
+                });
+
                 if (!item.classList.contains('no-event')) {
                     // 클릭한 항목에 'active' 클래스 추가
                     item.classList.add('active');
+
+                    // 클릭한 항목이 아코디언 항목이면 w3-show 정보 추가
+                    if (item.nextElementSibling) {
+                        item.parentElement.classList.add('w3-show');
+                    }
 
                     // 로컬 스토리지에 클릭한 항목 저장
                     localStorage.setItem('activeMenuItem', item.getAttribute('href'));
@@ -77,6 +86,7 @@
                     localStorage.removeItem('activeMenuItem');
                 }
             });
+
         });
     });
 

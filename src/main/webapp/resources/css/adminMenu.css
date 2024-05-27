@@ -28,10 +28,6 @@
     overflow-x: auto;
 }
 
-.w3-black{
-    background-color: #ccc;
-}
-
 .w3-sidebar .w3-bar-item.active {
     background-color: #073713;
     color: white;
