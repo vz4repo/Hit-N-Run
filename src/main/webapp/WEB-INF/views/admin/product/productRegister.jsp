@@ -208,7 +208,7 @@
         <div id="headline" class="header-title">제품 등록 화면</div>
     </div>
     <div class="w3-container productRegister-container">
-        <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post">
+        <form id="registerForm" action="<c:url value='/admin/product/register'/>" method="post" enctype="multipart/form-data">
             <div class="grid-container">
                 <div class="product_content grid-item">
                     <table style="width:100%">
