@@ -59,17 +59,22 @@
                     <!-- 주문 상태 헤더 -->
                 </tr>
                 </thead>
-                <tbody>
+
                 <c:choose>
                     <c:when test="${list == null}"> <%-- 결과값 확인이 필요한 경우 --%>
-                        <p> 잠시 후 다시 요청해주세요. 같은 메세지가 반복되는 경우 고객센터로 연락바랍니다.(1544-1544) </p>
+                        <tr><td  class="product-msg" colspan="5" >
+                        <div>잠시 후 다시 요청해주세요. 같은 메세지가 반복되는 경우 고객센터로 연락바랍니다.(1540-0000)</div>
+                        </td></tr>
                     </c:when>
                     <c:otherwise>
                         <c:choose>
                             <c:when test="${list.isEmpty()}"> <%-- 결과값이 없는 경우 --%>
-                                <p> 조회 결과가 없습니다.</p>
+                                <tr><td  class="product-msg" colspan="5">
+                                <div>조회 결과가 없습니다.</div>
+                                </td></tr>
                             </c:when>
                             <c:otherwise>
+                                <tbody>
                                 <c:forEach var="orderdetDto" items="${list}" varStatus="status">
                                     <tr class="order-item-hist">
                                         <td class="product-info">
@@ -126,13 +131,13 @@
                                             <!-- 배송조회 버튼 -->
                                         </td>
                                     </tr>
+                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                    </tbody>
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
                     </c:otherwise>
                 </c:choose>
-                <!-- 추가 주문 행을 여기에 추가 -->
-                </tbody>
             </table>
         </div>
     </div>
