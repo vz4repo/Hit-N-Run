@@ -1,9 +1,6 @@
 package com.homerunball.customer.domain;
 
-import com.homerunball.customer.service.CustService;
-
 import java.util.Date;
-import java.util.Objects;
 
 public class CustDto {
     private int c_id;
@@ -22,8 +19,8 @@ public class CustDto {
     private int c_adr_list_id;
     private String sms_agr;
     private String email_agr;
-    private String reg_dt;
-    private String login_dt;
+    private Date reg_dt;
+    private Date login_dt;
     private String tot_amt;
     private Date frst_reg_dt;
     private String frst_reg_id;
@@ -48,7 +45,7 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    public CustDto(String c_name, String grd_name, String tot_amt, String login_dt, String reg_dt){
+    public CustDto(String c_name, String grd_name, String tot_amt, Date login_dt, Date reg_dt){
         this.c_name = c_name;
         this.grd_name = grd_name;
         this.tot_amt = tot_amt;
@@ -107,6 +104,7 @@ public class CustDto {
                 ", c_road_a='" + c_road_a + '\'' +
                 ", c_jibun_a='" + c_jibun_a + '\'' +
                 ", c_det_a='" + c_det_a + '\'' +
+                ", c_birth='" + c_birth + '\'' +
                 ", sms_agr='" + sms_agr + '\'' +
                 ", email_agr='" + email_agr + '\'' +
                 '}';
@@ -247,19 +245,19 @@ public class CustDto {
         this.email_agr = email_agr;
     }
 
-    public String getReg_dt() {
+    public Date getReg_dt() {
         return reg_dt;
     }
 
-    public void setReg_dt(String reg_dt) {
+    public void setReg_dt(Date reg_dt) {
         this.reg_dt = reg_dt;
     }
 
-    public String getLogin_dt() {
+    public Date getLogin_dt() {
         return login_dt;
     }
 
-    public void setLogin_dt(String login_dt) {
+    public void setLogin_dt(Date login_dt) {
         this.login_dt = login_dt;
     }
 

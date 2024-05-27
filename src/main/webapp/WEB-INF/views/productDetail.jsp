@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -6,108 +7,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/productDetail.css'/>" type="text/css" rel="stylesheet"/>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <title>홈런볼 제품 상세페이지</title>
-</head>
-<style>
-
-    :root {
-        --btn-width : 90%;
-        --btn-min-width : 90%;
-        --btn-height : 5vh;
-        --btn-min-height : 5px;
-        --menu-height : calc(var(--btn-height) * 8);
-        --menu-min-height : calc(var(--btn-min-height) * 2);
-        --font-size : 2vw;
-    }
-    /*화면 상단부*/
-    .prdContainer {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        width: var(--btn-width);
-    }
-    /*화면 상단 토글 메뉴*/
-    .prdLabel {
-        width: 90%;
-        height: var(--btn-height);
-        min-height: var(--btn-min-height);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        border-top: 0.5px solid black
-    }
-    .ball{
-        width: calc(var(--btn-height) * 0.4);
-        height: calc(var(--btn-height) * 0.4);
-        transition: 0.5s ease-in-out;
-    }
-    .prdMenu {
-        width: var(--btn-width);
-        min-width: var(--btn-min-width);
-        height: 0;
-        overflow: hidden;
-        display: flex;
-        flex-flow: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        opacity: 0;
-        transition: 0.3s ease-in-out;
-        list-style: none;
-        margin: 0px;
-        padding: 0;
-        box-sizing: border-box;
-        border-bottom: 0.5px solid black;
-    }
-    .toggle:checked ~ .prdMenu{
-        height: var(--menu-height);
-        min-height: var(--menu-min-height);
-        opacity: 1;
-        display: block;
-    }
-    .toggle:checked ~ .prdLabel > .ball{
-        transform: rotate(540deg);
-    }
-    .productMainContainer{
-        display: flex;
-    }
-    .productItem{
-        flex: 1;
-    }
-    .detailProductContents{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-     .image-container {
-         text-align: center;
-     }
-
-    .image-container img {
-        display: block;
-        margin: 0 auto;
-        width: 80%;
-    }
-</style>
-<head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
-    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>홈런볼 제품 상세페이지</title>
 </head>
 <body>
@@ -116,22 +25,20 @@
 <form id="purchaseInfo" method="post">
     <div class="productMainContainer">
 <%--    상단 왼쪽에 위치한 대표이미지--%>
-        <div class="productItem">
-            <p>
+        <div class="productItemMnImg" id="mnImg">
                 <img src="/img/product/${prd.pd_type_cd}/main/${prd.mn_img_fn}"
                      alt="이미지 준비 중 입니다"
                      onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}';">
-            </p>
         </div>
-        <div class="productItem">
-            <p>${prd.pd_name}</p>
+        <div class="productItemDsc">
+            <h2>${prd.pd_name}</h2>
             <p>${prd.pd_ad_cmt}</p>
-            <p>판매가격:${stkInfo.sls_prc}</p>
-            <p>소비자가격:${stkInfo.rtl_prc}</p>
-            <p>배송:무료배송</p>
-            <p>구매 주의사항</p>
+            <p id="sale-price"><b>판매가격: </b><span id="sls_prc">${stkInfo.sls_prc}</span>원</p>
+            <p id="retail-price"><b>소비자가격: </b><span id="rtl_prc">${stkInfo.rtl_prc}</span>원</p>
+            <p><b>배송:</b> 무료배송</p>
+            <p><b>구매 주의사항</b></p>
             <%--선택된 옵션으로 제품을 넘겨주기--%>
-            <p>옵션:
+            <p><b>옵션:</b>
                 <select id="mySelect" name="selectedOption">
 <%--                   서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
 <%--                   listStkOpt는 재고테이블을 리스트로 읽어옵니다--%>
@@ -145,11 +52,22 @@
                 <input id="mn_img_fn" name="mn_img_fn" value="${prd.mn_img_fn}" style="display: none">
                 <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
             </p>
-
+<%--            바로구매 3차 개발 예정--%>
+            <div class="prdSubmitBtn">
+                <button type="button" class="submitBtn">바로구매</button>
+                <button type="button" class="submitBtn" onclick="submitForm('cart')">
+                    <ion-icon name="bag-outline"></ion-icon>
+                </button>
+<%--            찜하기 3차 개발 예정--%>
+                <button type="button" id="heartIconBtn" class="prdWishBtn">
+                    <ion-icon id="heartIcon" name="heart-outline"></ion-icon>
+                </button>
+            </div>
+<%--            토글메뉴--%>
             <div class="prdContainer">
                 <input type="checkbox" id="toggle1" class="toggle" hidden>
                 <label for="toggle1" class="prdLabel">
-                    제품 상세 설명 <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                    <p><b>제품 상세 설명</b></p> <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
                 <ul class="prdMenu">
                     <li>${prd.pd_det_dsc}</li>
@@ -158,43 +76,150 @@
             <div class="prdContainer">
                 <input type="checkbox" id="toggle2" class="toggle" hidden>
                 <label for="toggle2" class="prdLabel">
-                    제품 특징 <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                    <p><b>제품 특징</b></p> <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
                 <ul class="prdMenu">
-                    <li>제품 상태:${prd.qlt_cd}</li>
-                    <li>제조 국가:${prd.origin}</li>
-                    <li>브랜드:${prd.brd_cd}</li>
-                    <li>제품 제조일자:${prd.pd_mnf_date}</li>
-                    <li>재질:${prd.mtrl}</li>
-                    <li>제품 무게:${prd.wgh}</li>
-                    <li>제조사:${prd.mfr}</li>
+                    <li><b>제품 상태: </b>${prd.qlt_cd}</li>
+                    <li><b>제조 국가: </b>${prd.origin}</li>
+                    <li><b>브랜드: </b>${prd.brd_cd}</li>
+                    <li><b>제품 제조일자: </b>${prd.pd_mnf_date}</li>
+                    <li><b>재질: </b>${prd.mtrl}</li>
+                    <li><b>제품 무게: </b>${prd.wgh}</li>
+                    <li><b>제조사: </b>${prd.mfr}</li>
                 </ul>
             </div>
-            <button type="button" class="submitBtn" onclick="submitForm('directOrder')">바로구매</button>
-            <button type="button" class="submitBtn" onclick="submitForm('cart')">장바구니추가</button>
-    <%--            찜하기 3차 개발예정--%>
-            <button type="button" class="submitBtn" onclick="submitForm('wish')">찜하기</button>
         </div>
     </div>
 </form>
-<%--연관 제품 (구현 안함 발표전에 시간이 가능하면 개발)--%>
-<div class="relatedProduct"></div>
+<%--이전에 작성한 네비게이션 바--%>
+<%--<div class="prdScroll">--%>
+<%--    <ul class="prdList">--%>
+<%--&lt;%&ndash;        <li><a href="#relatedProductContainer" class="scroll_move" onclick="scrollToSection(event, 'relatedProductContainer')">연관제품</a></li>&ndash;%&gt;--%>
+<%--        <li><a href="#detailProductContainer" class="scroll_move" onclick="scrollToSection(event, 'detailProductContainer')">제품상세</a></li>--%>
+<%--        <li><a href="#reviewContainer" class="scroll_move" onclick="scrollToSection(event, 'reviewContainer')">리뷰</a></li>--%>
+<%--        <li><a href="#QnAContainer" class="scroll_move" onclick="scrollToSection(event, 'QnAContainer')">제품문의</a></li>--%>
+<%--    </ul>--%>
+<%--</div>--%>
+<!--   Sticky Nav 부분 -->
+<div class="prdNavbar" id="prdNavbar">
+    <ul>
+        <li><a class="prdActive" href="#relatedProductContainer" id="relatedNav">연관제품</a></li>
+        <li><a href="#detailProductContainer" id="detailNav">제품상세</a></li>
+        <li><a href="#reviewContainer" id="reviewNav">리뷰</a></li>
+        <li><a href="#QnAContainer" id="QnANav">제품문의</a></li>
+    </ul>
+</div>
+<%--연관 제품 (3차 개발 예정)--%>
+<div class="relatedProductContainer" id="relatedProductContainer">
+    <div class="prdRltdTitle"><h2><b>고객들이 많이 조회한 연관 제품</b></h2></div>
+    <div class="prdRltdContainer">
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-04">
+                <img src="/img/product/APP/main/APP000003-04.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-04.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (레드)</div>
+            </a>
+        </div>
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-08">
+                <img src="/img/product/APP/main/APP000003-08.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-08.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (블루)</div>
+            </a>
+        </div>
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-30">
+                <img src="/img/product/APP/main/APP000003-30.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-30.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (핑크)</div>
+            </a>
+        </div>
+    </div>
+</div>
 <%--제품 상세 내용--%>
-<div class="detailProductContents">
-    <p>${prd.pd_smr_dsc}</p>
+<div class="detailProductContainer" id="detailProductContainer">
     <p class="image-container">
         <img src="/img/product/${prd.pd_type_cd}/detail/${prd.det_img_fn}"
              alt="이미지 준비 중 입니다"
              onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/detail/${prd.det_img_fn}';" >
     </p>
+    <p>${prd.pd_smr_dsc}</p>
 </div>
-<%--제품 리뷰(구현 안함 3차때 추후 개발예정)--%>
-<div class="review"></div>
+<div class="reviewContainer" id="reviewContainer">
+    <h2>리뷰</h2>
+    <table class="reviewTable">
+        <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>평점</th></tr>
+        <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.28</td><td>★★★★★</td></tr>
+        <tr><td>9</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>★★</td></tr>
+        <tr><td>8</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>★★★★</td></tr>
+        <tr><td>7</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>★★★</td></tr>
+        <tr><td>6</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
+        <tr><td>5</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
+        <tr><td>4</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.24</td><td>★★</td></tr>
+        <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>★</td></tr>
+        <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>★★★</td></tr>
+        <tr><td>1</td><td>리뷰입니다.</td><td>김지훈</td><td>2024.05.21</td><td>★★★★★</td></tr>
+    </table>
+    <p> <a href="">&lt</a>
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+        <a href="">7</a>
+        <a href="">8</a>
+        <a href="">9</a>
+        <a href="">10</a>
+        <a href="">&gt</a></p>
+    <button class="writeReviewBtn" onclick="writeReviewBtn()">리뷰작성</button>
+</div>
+
 <%--제품 문의(구현 안함 3차때 추후 개발예정)--%>
-<div class="productQnA"></div>
+<div class="QnAContainer" id="QnAContainer">
+    <h2>제품문의</h2>
+    <table class="QnATable">
+        <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>답변여부</th></tr>
+        <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
+        <tr><td>9</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
+        <tr><td>8</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>7</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>6</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>5</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>답변완료✔</td></tr>
+        <tr><td>4</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.24</td><td>답변완료✔</td></tr>
+        <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>답변완료✔</td></tr>
+        <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>답변대기중</td></tr>
+        <tr><td>1</td><td>제품문의입니다.</td><td>김지훈</td><td>2024.05.21</td><td>답변완료✔</td></tr>
+    </table>
+    <p> <a href="">&lt</a>
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+        <a href="">7</a>
+        <a href="">8</a>
+        <a href="">9</a>
+        <a href="">10</a>
+        <a href="">&gt</a></p>
+    <button class="writeQnABtn" onclick="writeQnABtn()">리뷰작성</button>
+</div>
 <jsp:include page="footer.jsp" flush="false" />
 </body>
 <script>
+    function errorBtn(){
+        alert("3차 개발 예정입니다")
+    }
+    function writeReviewBtn(){
+        alert("3차 개발 예정입니다")
+    }
+    function writeQnABtn(){
+        alert("3차 개발 예정입니다")
+    }
     /*버튼별 이동 페이지 설정*/
     function submitForm(action){
         var form = document.getElementById('purchaseInfo');
@@ -208,19 +233,20 @@
         if(action === 'cart'){
             form.action = '/cart/insert'; //장바구니
         }
-        else if (action === 'wish'){
-            alert("개발예정입니다.")
-            form.action = '/product/test'; //찜하기
-        }
-        else if (action === 'directOrder'){
-            form.action = '/cart/insert'; //바로구매
-        }
+        // else if (action === 'wish'){
+        //     alert("개발예정입니다.");
+        //     form.action = '/product/test'; //찜하기
+        // }
+        // else if (action === 'directOrder'){
+        //     alert("개발예정입니다.");
+        //     form.action = '/product/test'; //바로구매
+        // }
 
         /*폼 제출*/
         form.method = 'post'; //method 속성을 POST로 설정
         form.submit();
     }
-    // 각 토글 체크박스에 이벤트 리스너 추가
+    /* 각 토글 체크박스에 이벤트 리스너 추가 */
     document.querySelectorAll('.toggle').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             document.querySelectorAll('.toggle').forEach(function(otherCheckbox) {
@@ -230,7 +256,108 @@
             });
         });
     });
+    /*스크롤 바 위치 조정(기존에는 헤더와 겹쳤다)*/
+    // function scrollToSection(event, sectionId) {
+    //     event.preventDefault();
+    //     const headerOffset = document.querySelector('header').offsetHeight;
+    //     const element = document.getElementById(sectionId);
+    //     const elementPosition = element.getBoundingClientRect().top;
+    //     const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    //
+    //     window.scrollTo({
+    //         top: offsetPosition,
+    //         behavior: 'smooth'
+    //     });
+    // }
+    // 스크롤 내려갈 시 고정될 nav
+    var navbar = document.getElementById("prdNavbar");
+    var sticky = navbar.offsetTop;
+    var navbarHeight = navbar.offsetHeight; // 네비게이션 바의 높이를 가져옵니다.
 
+    function getHeaderHeight() {
+        var header = document.querySelector("header");
+        return header ? header.offsetHeight : 0;
+    }
+
+    // 각 섹션의 위치를 가져옵니다.
+    function getSectionOffsets() {
+        return {
+            relatedProduct: document.getElementById("relatedProductContainer").offsetTop,
+            detailProductContainer: document.getElementById("detailProductContainer").offsetTop,
+            reviewContainer: document.getElementById("reviewContainer").offsetTop,
+            QnAContainer: document.getElementById("QnAContainer").offsetTop
+        };
+    }
+
+    // 해당 네비게이션 링크를 가져옵니다.
+    var navLinks = {
+        relatedProduct: document.getElementById("relatedNav"),
+        detailProductContainer: document.getElementById("detailNav"),
+        reviewContainer: document.getElementById("reviewNav"),
+        QnAContainer: document.getElementById("QnANav")
+    };
+
+    // 스크롤 이벤트가 발생할 때마다 실행됩니다.
+    window.onscroll = function() {
+        var headerHeight = getHeaderHeight(); // 동적으로 헤더 높이를 가져옵니다.
+        var sections = getSectionOffsets();
+
+        // Sticky nav
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+
+            // 현재 스크롤 위치를 기준으로 active 클래스를 설정합니다.
+            var currentSection = null;
+            for (var section in sections) {
+                if (window.pageYOffset >= sections[section] - headerHeight - navbarHeight) {
+                    currentSection = section;
+                }
+            }
+
+            // 모든 네비게이션 링크에서 prdActive 클래스를 제거하고, 현재 섹션에만 추가합니다.
+            for (var section in navLinks) {
+                if (section === currentSection) {
+                    navLinks[section].classList.add("prdActive");
+                } else {
+                    navLinks[section].classList.remove("prdActive");
+                }
+            }
+        } else {
+            navbar.classList.remove("sticky");
+
+            // sticky 되기 전에는 항상 relatedPrd에 prdActive를 줍니다.
+            navLinks.relatedProduct.classList.add("prdActive");
+            for (var section in navLinks) {
+                if (section !== "relatedProduct") {
+                    navLinks[section].classList.remove("prdActive");
+                }
+            }
+        }
+    };
+
+    // 네비게이션 링크 클릭 시 스크롤 이동
+    for (var section in navLinks) {
+        navLinks[section].onclick = function(event) {
+            event.preventDefault();
+            var targetId = this.getAttribute("href").substring(1);
+            var targetElement = document.getElementById(targetId);
+            var headerHeight = getHeaderHeight();
+            window.scrollTo({
+                top: targetElement.offsetTop - headerHeight - navbarHeight,
+                behavior: "smooth"
+            });
+        };
+    }
+
+    // /* 가로 스크롤 생성 */
+    // window.addEventListener('resize', function() {
+    //     const bodyWidth = document.body.clientWidth;
+    //     if (bodyWidth < 1120) {
+    //         document.body.style.overflowX = 'auto'; // 바디의 폭이 1120보다 작을 때 가로 스크롤 생성
+    //     } else {
+    //         document.body.style.overflowX = 'hidden'; // 그 외에는 가로 스크롤 숨기기
+    //     }
+    // });
     /* 장바구니에 담을때, 제품상세 또는 장바구니 페이지로 이동할지 선택*/
     // 1. 장바구니 버튼을 누를시 장바구니에 제품상세의 정보를 넘겨야한다.
     // 2. 페이지 이동을 할지 묻는 버튼
@@ -263,6 +390,43 @@
     //         })
     //     })
     // })
+    /* wish버튼 애니매이션 */
+    document.getElementById('heartIconBtn').addEventListener('click', function() {
+        const icon = document.getElementById('heartIcon');
+        const currentName = icon.getAttribute('name');
+        icon.setAttribute('name', currentName === 'heart-outline' ? 'heart' : 'heart-outline');
+        if(currentName !== 'heart'){
+            icon.classList.add('fillColor');
+            // Remove the animation class after it ends to allow re-triggering
+            setTimeout(() => {
+                icon.classList.remove('fillColor');
+            }, 1000); // Duration of the animation
+            // alert("3차 개발 예정입니다")
+        }
+    });
+    // 가격 정의
+    function formatPrice(price) {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // 가격 값을 포맷하여 업데이트하는 함수
+    function updatePrices() {
+        const salePriceElement = document.getElementById('sls_prc');
+        const retailPriceElement = document.getElementById('rtl_prc');
+
+        // 원래 텍스트를 가져옴
+        const salePrice = salePriceElement.innerText;
+        const retailPrice = retailPriceElement.innerText;
+
+        // 포맷된 가격을 설정
+        salePriceElement.innerText = formatPrice(salePrice);
+        retailPriceElement.innerText = formatPrice(retailPrice);
+    }
+
+    // DOMContentLoaded 이벤트를 사용하여 DOM이 완전히 로드된 후 실행
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updatePrices();
+    });
 </script>
 </body>
 </html>
