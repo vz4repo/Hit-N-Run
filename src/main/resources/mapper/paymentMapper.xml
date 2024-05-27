@@ -27,26 +27,26 @@
           , card_num           /* 카드번호     */
           , pay_od_name  )     /* 주문명       */
    values ( #{pay_id}          /*  body.paymentKey                               */
-          , #{pay_seqnum}      /*  테이블 자체 생성                              */
-          , #{c_id}            /*  cust.c_id                                     */
+          , #{pay_seqnum}      /*  paymentKey 별 seq                             */
+          , #{c_id}            /*  session.c_id                                  */
           , #{od_id}           /*  ord.od_id                                     */
-          , #{trace_id}        /*  header.X-TossPayments-Trace-Id                */
-          , #{od_pay_amt}      /*  주문결제금액                                  */
-          , #{pay_final_amt}   /*  최종결제금액. 후에 queryString.amount 비교    */
-          , #{pay_stat_cd}     /*  자체 코드값                                   */
+          , #{trace_id}        /*  header.X-TossPayments-Trace-Id / orderId      */
+          , #{od_pay_amt}      /*  body.totalAmount                              */
+          , #{pay_final_amt}   /*  body.totalAmount , queryString.amount 비교    */
+          , #{pay_stat_cd}     /*  body.status                                   */
           , #{pay_dt}          /*  body.requestedAt                              */
           , #{pay_meth_cd}     /*  body.method:간편결제->body.easyPay.provider   */
-          , #{pay_aprv_stat}   /*  body.status                                   */
+          , #{pay_aprv_stat}   /*  body.card.acquireStatus, null이면 "REQUESTED" */
           , #{pay_aprv_num}    /*  body.card.approveNo                           */
           , #{pay_aprv_dt}     /*  body.approvedAt                               */
-          , #{pay_resp_cd}     /*  요청 응답상태                                 */
+          , #{pay_resp_cd}     /*  기본값:200, 성공의 경우 무조건 200이라 수정 필요 !!!! */
           , #{c_name}          /*  주문자명, 고객명                              */
           , #{issuer_cd}       /*  body.card.issuerCode                          */
           , #{acquier_cd}      /*  body.card.acquierCode                         */
-          , #{trans_type}      /*  body.card.ownerType+cardType                  */
+          , #{trans_type}      /*  body.card.{ownerType+cardType}                */
           , #{mth_instlmt}     /*  body.card.installmentPlanMonths               */
           , #{card_num}        /*  body.card.number                              */
-          , #{pay_od_name}  )  /*  */
+          , #{pay_od_name}  )  /*  body.orderName , 주문상세에서 생성            */
 
     </insert>
 
@@ -59,12 +59,13 @@
           , pay_err_cd          /* 결제에러코드 */
           , err_msg_ko)         /* 에러국문     */
     values( #{pay_id}           /* 값이 없으면 '-' */
-          , #{od_id}            /* request.orderId */
-          , #{trace_id}         /* header.X-TossPayments-Trace-Id */
+          , #{od_id}            /* ord.od_id */
+          , #{trace_id}         /* header.X-TossPayments-Trace-Id / orderId*/
           , #{pay_err_cd}       /* body.code */
           , #{err_msg_ko} )     /* body.message */
   </insert>
 
+  <!-- 미사용 -->
   <select id="selectPaymentHistoryWithDateRange" parameterType="map" resultType="PaymentDto">
     select
       pay_od_name     /* 상품명   */
