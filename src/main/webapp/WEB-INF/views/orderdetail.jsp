@@ -25,217 +25,7 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-      .orders td {
-        border-bottom: 1px solid #ddd;
-      }
 
-      .orders tr:hover {
-        background-color: #f9f9f9;
-      }
-
-      ul {
-        display: block;
-      }
-
-
-        .info {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            grid-template-columns: 120px 310px;
-            justify-content: center;
-            align-items: center;
-        }
-
-      .info .brand {
-        font-weight: bold;
-      }
-
-        .info .name {
-            font-size: 1.1em;
-            text-align: start;
-        }
-
-      .info .name a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .info .name a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-        .info .option {
-            color: gray;
-            text-align: start;
-        }
-
-      .order-status {
-        /*display: flex;*/
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .order-status a {
-        color: #007bff;
-        text-decoration: none;
-        margin-bottom: 5px;
-      }
-
-      .order-status a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-status button {
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        padding: 5px;
-        cursor: pointer;
-      }
-
-      .order-status button:hover {
-        background-color: #ddd;
-      }
-
-      .order-number a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .order-number a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-amount span {
-        display: block;
-      }
-
-      /* 모달 스타일 */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: #fff;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 100%;
-        max-width: 600px;
-        border-radius: 8px;
-        position: relative;
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-      }
-
-      .modal-header h2 {
-        margin: 0;
-      }
-
-      .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-      }
-
-      .modal-body {
-        margin-top: 20px;
-      }
-
-      .order-step-header {
-        font-size: 18px;
-        font-weight: bold;
-      }
-
-      .order-step-subheader {
-        color: gray;
-        margin-left: 10px;
-      }
-
-      .order-step-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
-
-      .order-step-table th,
-      .order-step-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .order-step-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
-
-      /* 배송 모달 스타일 */
-      .delivery-info {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-
-      .delivery-info th,
-      .delivery-info td {
-        border: none;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-info th {
-        width: 25%;
-        background-color: #f4f4f4;
-      }
-
-      .delivery-info td {
-        width: 25%;
-      }
-
-      .delivery-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .delivery-table th,
-      .delivery-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
     </style>
     <%-- [혁락] css 수정 끝 --%>
 </head>
@@ -245,7 +35,7 @@
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
-        <div class="orders">
+        <div class="orders tb__order">
             <table class="order_det_table">
                 <colgroup>
                     <col width="30%"/>
@@ -269,62 +59,85 @@
                     <!-- 주문 상태 헤더 -->
                 </tr>
                 </thead>
-                <tbody>
-                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
-                    <tr class="order-item-hist">
-                        <td class="product-info">
-                            <ul class="info">
-                                <a><img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
-                                     alt="썸네일" />
-                                </a>
-                                <div>
-                                    <!-- 브랜드 이름 -->
-                                    <li class="brand">
-                                        <span>${orderdetDto.brd_name}</span>
-                                    </li>
-                                    <!-- 상품 이름 -->
-                                    <li class="name">
-                                        <a href="#">${orderdetDto.pd_name}</a>
-                                    </li>
-                                    <!-- 상품 옵션 -->
-                                    <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
-                                </div>
-                            </ul>
-                        </td>
 
-                        <!-- 주문일자 -->
-                        <td>
-                            <span data-oddt="${orderdetDto.od_dt}" class="od_dt">${orderdetDto.od_dt}</span>
-                        </td>
+                <c:choose>
+                    <c:when test="${list == null}"> <%-- 결과값 확인이 필요한 경우 --%>
+                        <tr><td  class="product-msg" colspan="5" >
+                        <div>잠시 후 다시 요청해주세요. 같은 메세지가 반복되는 경우 고객센터로 연락바랍니다.(1540-0000)</div>
+                        </td></tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${list.isEmpty()}"> <%-- 결과값이 없는 경우 --%>
+                                <tr><td  class="product-msg" colspan="5">
+                                <div>조회 결과가 없습니다.</div>
+                                </td></tr>
+                            </c:when>
+                            <c:otherwise>
+                                <tbody>
+                                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
+                                    <tr class="order-item-hist">
+                                        <td class="product-info">
+                                            <div>
+                                                <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
+                                                    <img src="/img/product/${orderdetDto.pd_type_cd}/main/${orderdetDto.mn_img_fn}"
+                                                         alt="썸네일" name="thumbnail"
+                                                         onerror="this.onerror=null; this.src='/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}';"/>
+                                                </a>
+                                            </div>
+                                            <ul class="info">
+                                                <!-- 브랜드 이름 -->
+                                                <li class="brand">
+                                                    <span>${orderdetDto.brd_name}</span>
+                                                </li>
+                                                <!-- 상품 이름 -->
+                                                <li class="name">
+                                                    <a href="#">${orderdetDto.pd_name}</a>
+                                                </li>
+                                                <!-- 상품 옵션 -->
+                                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
+                                            </ul>
+                                        </td>
 
-                        <!-- 주문번호 -->
-                        <td>
-                            <div class="order-number">
-                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
-                                <form id="orderForm" action="/orderDetail" style="display: none;">
-                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
-                                </form>
-                            </div>
-                        </td>
+                                        <!-- 주문일자 -->
+                                        <td>
+                                            <span data-oddt="${orderdetDto.od_dt}"
+                                                  class="od_dt">${orderdetDto.od_dt}</span>
+                                        </td>
 
-                        <!-- 주문금액 및 수량 -->
-                        <td>
-                            <div class="order-amount" data-order-id="20231208212440001">
-                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
-                                <span>${orderdetDto.od_qty} 개</span>
-                            </div>
-                        </td>
+                                        <!-- 주문번호 -->
+                                        <td>
+                                            <div class="order-number">
+                                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                                <form id="orderForm" action="/orderDetail" style="display: none;">
+                                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId"
+                                                           id="orderId">
+                                                </form>
+                                            </div>
+                                        </td>
 
-                        <td class="order-status">
-                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
-                            <!-- 구매상태 링크 -->
-                            <button class="open-delivery-modal">배송조회</button>
-                            <!-- 배송조회 버튼 -->
-                        </td>
-                    </tr>
-                </c:forEach>
-                <!-- 추가 주문 행을 여기에 추가 -->
-                </tbody>
+                                        <!-- 주문금액 및 수량 -->
+                                        <td>
+                                            <div class="order-amount" data-order-id="20231208212440001">
+                                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                                <span>${orderdetDto.od_qty} 개</span>
+                                            </div>
+                                        </td>
+
+                                        <td class="order-status">
+                                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
+                                            <!-- 구매상태 링크 -->
+                                            <button class="open-delivery-modal">배송조회</button>
+                                            <!-- 배송조회 버튼 -->
+                                        </td>
+                                    </tr>
+                                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                </tbody>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
     </div>
@@ -333,10 +146,12 @@
     <div id="orderStepModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
+                <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
                     Step<span class="order-step-subheader">주문단계</span>
                     <!-- 주문단계 헤더 -->
                 </h2>
+                <!-- 모달 닫기 버튼 -->
                 <span class="close">&times;</span>
                 <!-- 모달 닫기 버튼 -->
             </div>
@@ -593,7 +408,9 @@
                 openOrderStepModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     orderStepModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '350px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '350px';
+                    })
                   });
                 });
 
@@ -601,13 +418,18 @@
                 openDeliveryModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     deliveryModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '1400px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '1400px';
+                    })
                   });
                 });
 
                 // 영수증 모달 열기
                 orderAmounts.forEach((orderAmount) => {
                   orderAmount.addEventListener('click', async () => {
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '400px';
+                    });
                     const orderId = orderAmount.getAttribute('data-order-id');
                     const receiptContent = document.querySelector('#receiptContent');
                     try {

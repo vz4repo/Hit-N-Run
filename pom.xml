@@ -247,6 +247,12 @@
       <version>5.3.9</version>
     </dependency>
 
+    <!-- Multipart Resolver -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>1.5</version>
+    </dependency>
   </dependencies>
 
 

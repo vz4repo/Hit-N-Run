@@ -362,7 +362,7 @@
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -373,12 +373,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <div>
-                            <%-- 결제 위젯 호출 --%>
-                            <section class="order__payment">
-                                <%@include file="payCheckout.jsp" %>
-                            </section>
+                    <td colspan="7">
                             <div class="tb__right">
                                 <div class="totalSum">상품구매금액
                                     <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
@@ -400,13 +395,16 @@
                                     <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
                                 </div>
                             </div>
-                        </div>
                     </td>
                 </tr>
                 </tfoot>
             </table>
         </form>
     </div>
+</section>
+<%-- 결제 위젯 호출 --%>
+<section class="order__payment">
+    <%@include file="payCheckout.jsp" %>
 </section>
 
 <%-- footer --%>
@@ -446,22 +444,22 @@
         const btn = document.querySelector('.btn-change-address');
         const closeModal = document.querySelector('#closeModal');
 
-        btn.addEventListener('click', () => {
-            addressModal.style.display = 'block';
-            $.ajax({
-                type: "GET",
-                url: `${contextPath}/delivery/deliveryList`,
-                success: function (response) {
-                    if (response.message) {
-                        $(".dlv-modal-container").html(`<p>${response.message}</p>`);
-                    } else {
-                        let htmlContent = '';
-                        response.list.forEach(listDto => {
-                            /*
-                            기본배송지 붙일때 쓸 태그
-                            <span className="default">기본배송지</span>
-                            */
-                            htmlContent += `
+    btn.addEventListener('click', () => {
+      addressModal.style.display = 'block';
+      $.ajax({
+        type: "GET",
+        url: `${contextPath}/delivery/deliveryList`,
+        success: function (response) {
+          if (response.message) {
+            $(".dlv-modal-container").html(`<p>${response.message}</p>`);
+          } else {
+            let htmlContent = '';
+            response.list.forEach(listDto => {
+              /*
+              기본배송지 붙일때 쓸 태그
+              <span className="default">기본배송지</span>
+              */
+              htmlContent += `
                             <div class="address-card">
                                 <div class="title">
                                     (${'${listDto.rcver}'}) ${'${listDto.adr_name}'}
@@ -475,56 +473,56 @@
                                 </div>
                             </div>
                         `;
-                        });
-                        $(".dlv-modal-container").html(htmlContent);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching delivery list:', error);
-                    alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-                }
             });
-        });
+            $(".dlv-modal-container").html(htmlContent);
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching delivery list:', error);
+          alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+      });
+    });
 
-        closeModal.addEventListener('click', () => {
-            addressModal.style.display = 'none';
-        });
+    closeModal.addEventListener('click', () => {
+      addressModal.style.display = 'none';
+    });
 
-        window.addEventListener('click', (event) => {
-            if (event.target === addressModal) {
-                addressModal.style.display = 'none';
-            }
-        });
+    window.addEventListener('click', (event) => {
+      if (event.target === addressModal) {
+        addressModal.style.display = 'none';
+      }
+    });
 
-        /*
-    # 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
+    /*
+# 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
 
-    DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
-    이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
+DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
+이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
 
-    따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
-    이벤트 위임을 사용해야 합니다.
+따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
+이벤트 위임을 사용해야 합니다.
 
-    이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
-    이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
+이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
+이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
 
 이벤트 위임을 사용하면
 이벤트 핸들러를 상위 요소에 등록하고,
 이벤트가 하위 요소로 위임되도록 합니다.
     * */
-        document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
-            if (event.target.classList.contains('dlv-select')) {
-                const c_adr_list_id = event.target.getAttribute('addrId');
-                $.ajax({
-                    type: "GET",
-                    url: `${contextPath}/delivery/deliverySelected`,
-                    data: {dlvId: c_adr_list_id},
-                    success: function (response) {
-                        if (response.message) {
-                            $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
-                        } else {
-                            const selectedDto = response.selectedDto;
-                            const htmlContent = `
+    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+      if (event.target.classList.contains('dlv-select')) {
+        const c_adr_list_id = event.target.getAttribute('addrId');
+        $.ajax({
+          type: "GET",
+          url: `${contextPath}/delivery/deliverySelected`,
+          data: {dlvId: c_adr_list_id},
+          success: function (response) {
+            if (response.message) {
+              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+            } else {
+              const selectedDto = response.selectedDto;
+              const htmlContent = `
                  <table>
                     <colgroup>
                         <col style="width: 150px">
@@ -562,19 +560,27 @@
                     </tr>
                 </table>
                 `;
-                            $(".dlv-header-content").html(htmlContent);
-                            addressModal.style.display = 'none';
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching selected delivery:', error);
-                        alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-                    }
-                });
+              $(".dlv-header-content").html(htmlContent);
+              addressModal.style.display = 'none';
             }
+          },
+          error: function (xhr, status, error) {
+            console.error('Error fetching selected delivery:', error);
+            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+          }
         });
-    })
+      }
+    });
+  })
 
+
+  /* 김수연 추가 0524 시작 */
+  // function showDefaultDLV() {
+  //     return `
+  //           <dlv>안녕하세용</dlv>
+  //           `;
+  // }
+  /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>
