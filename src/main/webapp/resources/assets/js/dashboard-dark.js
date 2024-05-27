@@ -6,7 +6,6 @@
     var graphGradient1 = document.getElementById('visit-sale-chart').getContext("2d");
     var graphGradient2 = document.getElementById('visit-sale-chart').getContext("2d");
     var graphGradient3 = document.getElementById('visit-sale-chart').getContext("2d");
-    var graphGradient4 = document.getElementById('visit-sale-chart').getContext("2d");
 
     var gradientStrokeViolet = graphGradient1.createLinearGradient(0, 0, 0, 181);
     gradientStrokeViolet.addColorStop(0, 'rgba(218, 140, 255, 1)');
@@ -22,23 +21,16 @@
     gradientStrokeRed.addColorStop(0, 'rgba(255, 191, 150, 1)');
     gradientStrokeRed.addColorStop(1, 'rgba(254, 112, 150, 1)');
     var gradientLegendRed = 'linear-gradient(to right, rgba(255, 191, 150, 1), rgba(254, 112, 150, 1))';
-
-    var gradientStrokeGreen = graphGradient4.createLinearGradient(0, 0, 0, 240);
-    gradientStrokeGreen.addColorStop(0, 'rgba(0, 192, 133, 1)');
-    gradientStrokeGreen.addColorStop(1, 'rgba(0, 192, 133, 1)');
-    var gradientLegendGreen = 'linear-gradient(to right, rgba(0, 192, 133, 1), rgba(0, 192, 133, 1))';
-
     const bgColor1 = ["rgba(218, 140, 255, 1)"];
     const bgColor2 = ["rgba(54, 215, 232, 1"];
     const bgColor3 = ["rgba(255, 191, 150, 1)"];
-    const bgColor4 = ["rgba(0, 192, 133, 1)"];
 
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+        labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
         datasets: [{
-          label: "글러브",
+          label: "CHN",
           borderColor: gradientStrokeViolet,
           backgroundColor: gradientStrokeViolet,
           fillColor: bgColor1,
@@ -47,49 +39,35 @@
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [10000000, 14000000, 7150000, 13500000, 12500000],
+          data: [20, 40, 15, 35, 25, 50, 30, 20],
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         },
         {
-          label: "배트",
-          borderColor: gradientStrokeBlue,
-          backgroundColor: gradientStrokeBlue,
-          hoverBackgroundColor: gradientStrokeBlue,
+          label: "USA",
+          borderColor: gradientStrokeRed,
+          backgroundColor: gradientStrokeRed,
+          hoverBackgroundColor: gradientStrokeRed,
           fillColor: bgColor2,
           pointRadius: 0,
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [4000000, 3000000, 2000000, 1000000, 5000000],
+          data: [40, 30, 20, 10, 50, 15, 35, 40],
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         },
         {
-          label: "보호장비",
-          borderColor: gradientStrokeRed,
-          backgroundColor: gradientStrokeRed,
-          hoverBackgroundColor: gradientStrokeRed,
+          label: "UK",
+          borderColor: gradientStrokeBlue,
+          backgroundColor: gradientStrokeBlue,
+          hoverBackgroundColor: gradientStrokeBlue,
           fillColor: bgColor3,
           pointRadius: 0,
           fill: false,
           borderWidth: 1,
           fill: 'origin',
-          data: [7000000, 1000000, 3000000, 4000000, 2500000],
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
-        },
-        {
-          label: "액세서리",
-          borderColor: gradientStrokeGreen,
-          backgroundColor: gradientStrokeGreen,
-          hoverBackgroundColor: gradientStrokeGreen,
-          fillColor: bgColor4,
-          pointRadius: 0,
-          fill: false,
-          borderWidth: 1,
-          fill: 'origin',
-          data: [3000000, 1500000, 1500000, 3700000, 3500000],
+          data: [70, 10, 30, 40, 25, 50, 15, 30],
           barPercentage: 0.5,
           categoryPercentage: 0.5,
         }
