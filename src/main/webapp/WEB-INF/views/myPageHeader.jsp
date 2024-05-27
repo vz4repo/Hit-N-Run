@@ -23,17 +23,6 @@
             color: dimgray;
             font-weight: bold;
         }
-
-        .myPageH {
-            border-bottom: 1px solid #ccc;
-            font-size: 13px;
-            margin-top: 40px;
-            margin-bottom: 60px;
-            text-align: center;
-            color: dimgray;
-            font-weight: bold;
-        }
-
         .sp {
             font-size: 15px;
             margin: 40px;
@@ -54,25 +43,9 @@
             justify-content: center;
         }
 
-        .ma {
-            margin-bottom: 11px;
-        }
-
         .ma2 {
             font-size: 10px;
-            /* color: gray; */
-
-        }
-
-        #oneMonth {
-            font-size: 11px;
-            display: flex;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        #tong {
-            margin-top: 50px;
+            color: black;
         }
 
         .date {
@@ -81,15 +54,12 @@
             color: gray;
         }
 
+
         #title1 {
             /*font-size: 13px;*/
             text-align: center;
             /*color: dimgray;*/
             font-weight: bold;
-            /*cursor: pointer;*/
-            /*text-decoration: none;*/
-            /*color: dimgray;*/
-            /*color: #000;*/
         }
 
         #title2{
@@ -101,15 +71,9 @@
 
     </style>
 
-    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
-    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
-    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
 <div id="myPage">
     <p id="title1"><a id="title2" href="/mypage/list"><%=session.getAttribute("c_name")%>님의 MY PAGE</a></p>
     <div class="one1">
@@ -159,38 +123,7 @@
             <span><a class="none" href="/mypage/pwdEdit">Change Pwd</a></span>
         </div>
     </div>
-
-    <p class="myPageH">ACCOUNT<br><br><br></p>
-    <div id="tong">
-        <p id="oneMonth">나의 주문처리 현황 (최근 1개월 기준)</p>
-
-        <div class="one">
-            <div class="sp">
-                <span class="ma">입금전</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">결제 완료</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">배송 준비중</span>
-                <span class="ma2">0</span>
-            </div>
-
-            <div class="sp">
-                <span class="ma">배송중</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">배송완료</span>
-                <span class="ma2">0</span>
-            </div>
-        </div>
-    </div>
-
 </div>
-<jsp:include page="footer.jsp" flush="false" />
 
 <script>
 

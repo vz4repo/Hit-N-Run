@@ -31,12 +31,12 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<div class="head_order_det">주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
         <div class="orders tb__order">
-            <table>
+            <table class="order_det_table">
                 <colgroup>
                     <col width="30%"/>
                     <col width="30%"/>
@@ -131,8 +131,8 @@
                                             <!-- 배송조회 버튼 -->
                                         </td>
                                     </tr>
-                                    <!-- 추가 주문 행을 여기에 추가 -->
-                                    </tbody>
+                                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                </tbody>
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
@@ -148,10 +148,12 @@
             <div class="modal-header">
                 <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
-                    <span class="order-step-subheader">주문상태</span>
+                    Step<span class="order-step-subheader">주문단계</span>
+                    <!-- 주문단계 헤더 -->
                 </h2>
                 <!-- 모달 닫기 버튼 -->
                 <span class="close">&times;</span>
+                <!-- 모달 닫기 버튼 -->
             </div>
             <div class="modal-body">
                 <table class="order-step-table">
