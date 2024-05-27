@@ -19,6 +19,8 @@ body:not(.index) {
     z-index: 100;
     background-color: white;
     transition: top 0.5s;
+    max-width: 1920px;
+    min-width: 1280px;
 }
 
 
