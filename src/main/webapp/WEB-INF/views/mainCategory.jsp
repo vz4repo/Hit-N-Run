@@ -9,7 +9,7 @@
                 <a href="#">
                     <img src="/img/product/category/gloves.jpg" class="img-fluid">
                     <div class="text-block">
-                        <h4><b>글러브 쇼핑하러 가기</b></h4>
+                        <h4><b class="main-category-text">글러브 쇼핑하러 가기</b></h4>
                     </div>
                 </a>
             </div> <%--col-md-3 클래스 닫기--%>
@@ -17,7 +17,7 @@
                 <a href="#">
                     <img src="/img/product/category/bats.jpg" class="img-fluid">
                     <div class="text-block">
-                        <h4><b>배트 쇼핑하러 가기</b></h4>
+                        <h4><b class="main-category-text">배트 쇼핑하러 가기</b></h4>
                     </div>
                 </a>
             </div> <%--col-md-3 클래스 닫기--%>
@@ -25,7 +25,7 @@
                 <a href="#">
                     <img src="/img/product/category/helmets.jpg" class="img-fluid">
                     <div class="text-block">
-                        <h4><b>헬멧 쇼핑하러 가기</b></h4>
+                        <h4><b class="main-category-text">보호장비 쇼핑하러 가기</b></h4>
                     </div>
                 </a>
             </div> <%--col-md-3 클래스 닫기--%>
@@ -33,7 +33,7 @@
                 <a href="#">
                     <img src="/img/product/category/accessories.jpg" class="img-fluid">
                     <div class="text-block">
-                        <h4><b>액세서리 쇼핑하러 가기</b></h4>
+                        <h4><b class="main-category-text">액세서리 쇼핑하러 가기</b></h4>
                     </div>
                 </a>
             </div> <%--col-md-3 클래스 닫기--%>
