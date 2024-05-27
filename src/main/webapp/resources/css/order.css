@@ -1,9 +1,8 @@
-* {
+.order__items * {
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
+    /*font-weight: 400;*/
     font-style: normal;
 }
-
 
 .tb__order table {
     /* 2024.05.21 [혁락] 85% -> 55%*/
@@ -16,9 +15,30 @@
     color: #777;
 }
 
-.order__header a{
+.order__title__detail a,
+.tb__order a{
     text-decoration: none;
     color: black;
+}
+
+.priceFormat {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.head_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 9px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    cursor: auto;
 }
 
 .tb__order th,
@@ -27,8 +47,14 @@
 }
 
 .tb__order td {
-    padding: 15px 0;
+    padding: 18px 0;
     vertical-align: middle;
+    font-size: 16px;
+}
+
+.tb__order td a {
+    color: black;
+    text-decoration: none;
 }
 
 .tb__order hr {
@@ -39,27 +65,17 @@
 }
 
 .first__under {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .tb__order thead th {
-    padding: 7px 0 6px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
-    color: #4d4d59;
-    border-bottom: 1px solid #ddd;
-}
-
-.head_main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgb(51, 51, 51);
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
+    padding: 11px 0;
+    background-color: #333;
+    color: white;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_order {
@@ -69,16 +85,16 @@
 }
 
 .order__title {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
+   /* display: grid;*/
+    /*grid-template-columns: repeat(2, auto);*/
     align-items: center;
     margin: 1% 8%;
     color: rgb(51, 51, 51);
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 1.4px;
-    justify-content: space-between;
-    text-align: center;
+   /* justify-content: space-between;*/
+    text-align: right;
     white-space: nowrap;
 }
 
@@ -89,13 +105,13 @@
 
 
 .tb__order img {
-    height: 80px;
-    width: 80px;
+    height: 110px;
+    width: 110px;
 }
 
 
 .order__title__detail {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .order__title__detail a:first-child {
@@ -118,8 +134,37 @@
 
 
 .tb__right {
-    display: grid;
-    grid-template-columns: repeat(4, 33%);
+    display: flex;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    flex-direction: column;
+    align-items: end;
+    padding: 1.5%;
+}
+.tb__right div {
+    border: 1px solid black;
+    padding: 15px;
+    width: 250px;
+}
+.totalSum,
+.odpayamt,
+.cupon,
+.grade,
+.card,
+.point{
+    display: flex;
+    justify-content: space-between;
+}
+
+#odpayamt {
+    font-weight: bold;
+}
+
+/*.tb__right {
+    !*display: block;*!
+    text-align: right   ;
+    justify-content: space-evenly;
     place-items: center center;
     font-weight: bold;
     font-size: 14px;
@@ -127,7 +172,7 @@
 
 .tb__order tfoot td,
 .tb__order tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
+    border-bottom: 1px solid black;
     padding: 10px;
 }
 

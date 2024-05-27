@@ -1,12 +1,22 @@
-/* * {
-    margin: 0;
-} */
+
+/*#content {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    !* align-items: center; *!*/
+/*    flex-direction: column;*/
+/*}*/
 
 #content {
     display: flex;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     flex-direction: column;
+    padding-bottom: 30px;
+    border-bottom: 3px dotted #eee;
+}
+
+#caption {
+    color: white;
 }
 
 .interview {

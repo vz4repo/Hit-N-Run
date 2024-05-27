@@ -585,6 +585,7 @@
 
     /*3. 회원가입 유효성 검사*/
     function formCheck(frm) {
+        // var isEmail = emailTrimCheck(frm);
         var isEmailFormat = emailFormatCheck(frm);
         var isPwd = pwdCheck(frm);
         var isPwd2 = pwd2Check(frm);

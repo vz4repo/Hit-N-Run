@@ -52,7 +52,7 @@ public class OrdController {
 
 
     @PostMapping("/order")
-    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId, Model model){
+    public String order(Model m, HttpSession session, HttpServletRequest request, @SessionAttribute(name = "c_id")int sessionId){
 
         int c_id = (int)session.getAttribute("c_id");
         try {
@@ -113,7 +113,6 @@ public class OrdController {
             /*상품 id를 담은 set(od_pd_qtyid)의 사이즈를 담아줌*/
             totalpd_qty = od_pd_qtyid.size();
 
-
             ord.setC_id(ord_det.getC_id());
             ord.setOd_pd_qty(totalpd_qty);
             ord.setOd_tot_qty(totalqty);
@@ -124,17 +123,16 @@ public class OrdController {
 
             /*System.out.println("ord_det.getC_id()" +ord_det.getC_id());*/
 
-
             m.addAttribute("list", list);
+            m.addAttribute("ord", ord);
             /*m.addAttribute("stkList", stkList);*/
+            System.out.println("ordDao" + ord);
 
             /* 김수연 시작 */
-            DeliveryDto deliveryDto = deliveryDao.selecteDefault(sessionId);
-            model.addAttribute("selectedDto", deliveryDto);
+            DeliveryDto defaultDto = deliveryDao.selecteDefault(sessionId);
+            m.addAttribute("defaultDto", defaultDto);
 
-            System.out.println("deliveryDto = " + deliveryDto);
-
-            System.out.println("[DeliveryController]deliveryDto = " + deliveryDto);
+            System.out.println("******* 기본배송지 ****** defaultDto = " + defaultDto);
             /* 김수연 끝 */
 
         } catch (Exception e) {

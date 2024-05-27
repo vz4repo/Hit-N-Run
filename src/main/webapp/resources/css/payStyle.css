@@ -55,7 +55,6 @@
 .wrapper__parent {
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
 }
 
@@ -112,8 +111,7 @@
   --blue900: #194aa6;
 }
 
-body,
-html {
+.order__payment{
   font-family: Toss Product Sans, Tossface, -apple-system, BlinkMacSystemFont, Bazier Square, Noto Sans KR, Segoe UI, Apple SD Gothic Neo, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   -moz-osx-font-smoothing: grayscale;
@@ -122,11 +120,14 @@ html {
   word-wrap: break-word;
 }
 
+
+/*
 *,
 :after,
 :before {
   box-sizing: border-box;
 }
+*/
 
 .wrapper__parent .button {
   /*color: #f9fafb;*/
