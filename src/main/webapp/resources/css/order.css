@@ -133,15 +133,21 @@
 }
 .tb__right div {
     border: 1px solid black;
-    padding: 10px;
-    width: 300px;
+    padding: 15px;
+    width: 250px;
 }
 .totalSum,
 .odpayamt,
 .cupon,
+.grade,
+.card,
 .point{
     display: flex;
     justify-content: space-between;
+}
+
+#odpayamt {
+    font-weight: bold;
 }
 
 /*.tb__right {

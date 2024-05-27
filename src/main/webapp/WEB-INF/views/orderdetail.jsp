@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/order_det.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -25,45 +25,6 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-      .order-container {
-        width: 85%;
-        margin: 0 auto;
-      }
-
-      .orders {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-top: 20px;
-      }
-
-      .orders table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-      }
-
-      .orders th,
-      .orders td {
-        padding: 10px;
-        text-align: center;
-        /*height: 70px;*/
-        box-sizing: border-box;
-        vertical-align: middle;
-        word-break: break-all;
-        border-spacing: 0;
-        margin: 0;
-        outline: none;
-      }
-
-      .orders th {
-        background-color: #f4f4f4;
-        text-align: center;
-        border-top: 2px solid #000;
-        border-bottom: 2px solid #000;
-      }
-
       .orders td {
         border-bottom: 1px solid #ddd;
       }
@@ -76,11 +37,6 @@
         display: block;
       }
 
-        .product-info img {
-            width: 110px;
-            height: 110px;
-            object-fit: cover;
-        }
 
         .info {
             list-style-type: none;
@@ -285,15 +241,15 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<div class="head_order_det">주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
         <div class="orders">
-            <table>
+            <table class="order_det_table">
                 <colgroup>
-                    <col width="45%"/>
-                    <col width="15%"/>
+                    <col width="30%"/>
+                    <col width="30%"/>
                     <col width="15%"/>
                     <col width="15%"/>
                     <col width="10%"/>
