@@ -88,7 +88,17 @@ main {
     bottom: 0;
 }
 
+.carousel-control-next, .carousel-control-prev {
+    width: 3%;
+}
+
 /*제품 캐러셀 css*/
+
+.img-fluid {
+    width: 100%;
+    height: auto;
+}
+
 li {
     list-style: none;
 }
@@ -96,32 +106,31 @@ li {
 body {
     font-family: "Open Sans", sans-serif;
 }
-h2 {
+
+.product-category {
     color: #000;
-    font-size: 26px;
-    font-weight: 300;
+    font-size: 4vw;
+    font-weight: bold;
     text-align: center;
     text-transform: uppercase;
     position: relative;
-    margin: 30px 0 60px;
+    margin: 15px auto;
+}
+
+.productName {
+    overflow: hidden;
 }
 
 .productName > a {
-    height: 40px;
+    height: fit-content;
     font-size: 1.3vw;
     display: block;
-    color: inherit;
+    color: black;
     text-decoration: none;
 }
 
 .productName > a:hover {
     text-decoration: none;
-}
-
-.carousel {
-    margin: 50px auto;
-    padding: 0 70px;
-    /*width: 1040px;*/
 }
 
 .carousel .item {
@@ -154,12 +163,11 @@ h2 {
     left: 0;
     right: 0;
 }
-.carousel .item h4 {
-    /*font-size: 18px;*/
-}
+
 .carousel .item h4, .carousel .item p, .carousel .item ul {
     margin-bottom: 5px;
 }
+
 .carousel .thumb-content .btn {
     color: #073713;
     font-size: 11px;
@@ -272,4 +280,40 @@ h2 {
 
 .star-rating ul{
     display: block;
+}
+
+price {
+    font-size: 18px;
+    font-weight: bolder;
+    color: grey;
+}
+
+sale-price {
+    font-size: 18px;
+    font-weight: bolder;
+    color: red;
+}
+
+/*이미지 정사각형으로 만들기*/
+.product-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: inherit;
+    background-color: rgb(235, 235, 235);
+}
+.product-image-box::after {
+    display: block;
+    content: "";
+    padding-bottom: 100%;
+}
+.product-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

@@ -1,21 +1,13 @@
-.order-container {
+/* 2024.05.25[혁락] css 이동 - order.css */
+* {
     font-family: "IBM Plex Sans KR", sans-serif;
+    font-weight: 400;
     font-style: normal;
 }
 
-.head_order_det {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgb(51, 51, 51);
-    font-size: 30px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
-    margin-bottom: 40px;
-}
-
-.order_det_table {
+.tb__order table {
+    /* 2024.05.21 [혁락] 85% -> 55%*/
+    /* 2024.05.22 [다니] 55% -> 85%*/
     width: 85%;
     margin: 0 auto;
     text-align: left;
@@ -24,14 +16,35 @@
     color: #777;
 }
 
-.order_det_table a {
+.order__header a{
     text-decoration: none;
     color: black;
 }
 
-.order_det_table thead th {
+.tb__order th,
+.tb__order td {
+    text-align: center;
+}
+
+.tb__order td {
+    padding: 15px 0;
+    vertical-align: middle;
+}
+
+.tb__order hr {
+    width: 85%;
+    height: 1px;
+    border: 0;
+    background-color: #cecece;
+}
+
+.first__under {
+    margin-top: 40px;
+}
+
+.tb__order thead th {
     padding: 11px 0;
-    background-color: #333;
+    background-color: #183c21;
     color: white;
     border-top: 2px solid #000;
     border-bottom: 1px solid #e5e5e5;
@@ -39,34 +52,331 @@
     font-weight: bold;
 }
 
-.order_det_table td{
-    padding: 10px 0;
-    vertical-align: middle;
-    font-size: 16px;
+.head_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
 }
 
-.order_det_table td,
-.order_det_table th {
+.head_order {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.order__title {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+    margin: 1% 8%;
+    color: rgb(51, 51, 51);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    justify-content: space-between;
     text-align: center;
+    white-space: nowrap;
+}
+
+.label {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.tb__order img {
+    height: 80px;
+    width: 80px;
+}
+
+
+.order__title__detail {
+    font-size: 15px;
+}
+
+.order__title__detail a:first-child {
+    color: #8d8d8d;
+}
+
+.order__title__detail a:last-child {
+    color: #8d8d8d;
+}
+
+.title__order {
+    margin-left: 8%;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 5%;
+}
+
+.tb__right {
+    display: grid;
+    grid-template-columns: repeat(4, 33%);
+    place-items: center center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.tb__order tfoot td,
+.tb__order tfoot tr{
+    border-bottom: 1px solid #a3a3a3;
+    padding: 10px;
+}
+/* end 2024.05.25[혁락] css 이동 - order.css */
+
+/* 2024.05.25[혁락] css 이동 - <style> embedded */
+.order-container {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.orders {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.orders table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.orders th,
+.orders td {
+    padding: 10px;
+    text-align: center;
+    /*height: 70px;*/
+    box-sizing: border-box;
+    vertical-align: middle;
+    word-break: break-all;
+    border-spacing: 0;
+    margin: 0;
+    outline: none;
+}
+
+.orders th {
+    background-color: #f4f4f4;
+    text-align: center;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.orders td {
+    border-bottom: 1px solid #ddd;
+}
+
+.orders tr:hover {
+    background-color: #f9f9f9;
+}
+
+ul {
+    display: block;
 }
 
 .product-info img {
-    height: 110px;
-    width: 110px;
-}
-hr {
-    width: 80%;
-    height: 1px;
-    border: 0;
-    background-color: #cecece;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
 
-.product-info {
-    display: flex;
+.info {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info .brand {
+    font-weight: bold;
+}
+
+.info .name {
+    font-size: 1.1em;
+}
+
+.info .name a {
+    text-decoration: none;
+    color: black;
+}
+
+.info .name a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.info .option {
+    color: gray;
+}
+
+.order-status {
+    /*display: flex;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-status a {
+    color: #007bff;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.order-status a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.order-status button {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.order-status button:hover {
+    background-color: #ddd;
+}
+
+.order-number a {
+    text-decoration: none;
+    color: black;
+}
+
+.order-number a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.order-amount span {
+    display: block;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
     justify-content: center;
     align-items: center;
 }
 
-.info {
-    margin-left: 5%;
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
 }
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.close {
+    color: #474747;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-body {
+    margin-top: 20px;
+}
+
+.order-step-header {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.order-step-subheader {
+    color: gray;
+    margin-left: 10px;
+}
+
+.order-step-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.order-step-table th,
+.order-step-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.order-step-table th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+/* 배송 모달 스타일 */
+.delivery-info {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.delivery-info th,
+.delivery-info td {
+    border: none;
+    padding: 10px;
+    text-align: left;
+}
+
+.delivery-info th {
+    width: 25%;
+    background-color: #f4f4f4;
+}
+
+.delivery-info td {
+    width: 25%;
+}
+
+.delivery-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.delivery-table th,
+.delivery-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.delivery-table th {
+    background-color: #f4f4f4;
+    text-align: center;
+}
+/* end 2024.05.25[혁락] css 이동 - <style> embedded */

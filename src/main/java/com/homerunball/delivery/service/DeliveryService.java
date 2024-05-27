@@ -18,7 +18,7 @@ public interface DeliveryService {
     int update(DeliveryDto deliveryDto) throws Exception;
 
     /* 기본 배송지 설정 // 고객 테이블에서 변경 */
-    int updateDefaultDlv(DeliveryDto deliveryDto) throws Exception;
+    int updatToSetDft(DeliveryDto deliveryDto) throws Exception;
 
     /* 배송지 리스트 중 하나 삭제 */
     int removeAllOfOneCust(int c_id) throws Exception;
