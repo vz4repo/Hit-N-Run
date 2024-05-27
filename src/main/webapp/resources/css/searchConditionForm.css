@@ -19,7 +19,7 @@
     outline: none;
     border: 1px solid #ccc;
     padding: 5px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .search-option > option {
@@ -31,7 +31,7 @@
     background-color: white;
     border: 1px solid #ccc;
     height: 100%;
-    font-size: 12px;
+    font-size: 13px;
     padding: 5px;
 }
 
@@ -68,7 +68,7 @@
 
 .sendBtnSmall {
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .cancelBtn {
@@ -93,7 +93,7 @@
     position: relative;
     padding: 2px 30px 2px 25px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -112,7 +112,7 @@
 /* Create a custom radio button */
 .checkmark {
     position: absolute;
-    top: 7px;
+    top: 5px;
     left: 0px;
     height: 15px;
     width: 15px;
@@ -127,7 +127,7 @@
 
 /* When the radio button is checked, add a blue background */
 .radio-container input:checked ~ .checkmark {
-    background-color: #073713;
+    background-color: #2196F3;
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -144,8 +144,8 @@
 
 /* Style the indicator (dot/circle) */
 .radio-container .checkmark:after {
-    top: 3.4px;
-    left: 3.4px;
+    top: 3.5px;
+    left: 3.5px;
     width: 8px;
     height: 8px;
     border-radius: 50%;

@@ -3,12 +3,11 @@ table {
     border-collapse: collapse;
     width: 100%;
     border: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 th, td {
-    padding: 10px;
-
+    padding: 10px 4px;
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
 }
@@ -17,5 +16,17 @@ th {
     border: 1px solid #ddd;
     background-color: #f3f3f3;
     text-align: center;
-    font-size: 16px;
+    font-size: 15px;
+}
+td {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    word-wrap: break-word; /* IE 5.5+ */
+    overflow-wrap: break-word; /* CSS3 표준 속성 */
+    white-space: normal; /* 텍스트를 여러 줄로 표시 */
+    word-break: break-all;
+}
+
+.product_register th {
+    width: 200px;
 }

@@ -6,13 +6,13 @@
             <tr>
                 <th colspan="2">제품 검색</th>
             </tr>
-            <%--검색 분류: 상품ID, 상품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
+            <%--검색 분류: 제품ID, 제품명, 모델명, 스포츠 유형, 제조자, 시리즈, 사용 선수명, 시즌--%>
             <tr>
                 <th>검색 분류</th>
                 <td>
                     <select class="search-option" name="keywordSelect">
-                        <option value="pd_id">상품ID</option>
-                        <option value="pd_name">상품명</option>
+                        <option value="pd_id">제품ID</option>
+                        <option value="pd_name">제품명</option>
                         <option value="mdl_name">모델명</option>
                         <option value="sprt_type_cd">스포츠 유형</option>
                         <option value="mfr">제조사</option>
@@ -23,9 +23,9 @@
                     <input type="text" name="keyword" class="search-input" value="" placeholder="검색어를 입력해주세요">
                 </td>
             </tr>
-            <%--상품 분류: 대(제품 유형), 중(제품 상세 유형), 소(브랜드)--%>
+            <%--제품 분류: 대(제품 유형), 중(제품 상세 유형), 소(브랜드)--%>
             <tr>
-                <th>상품 분류</th>
+                <th>제품 분류</th>
                 <td>
                     <select class="search-option" id="pd_type_cd" name="pd_type_cd">
                         <option disabled="" hidden="" selected="">제품 유형</option>
@@ -98,9 +98,9 @@
                     </select>
                 </td>
             </tr>
-            <%--상품 등록일: 검색시작날짜 - 검색마지막날짜--%>
+            <%--제품 등록일: 검색시작날짜 - 검색마지막날짜--%>
             <tr>
-                <th>상품 등록일</th>
+                <th>제품 등록일</th>
                 <td>
                     <label for="sdate">시작일</label>
                     <input class="search-inputDate" type="date" id="sdate">
