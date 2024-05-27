@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/order_det.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
 
     <%--   다니님 header, footer --%>
@@ -24,132 +24,6 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-        .order-container {
-            width: 85%;
-            margin: 0 auto;
-        }
-
-        .orders {
-            width: 100%;
-            background-color: #fff;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .orders table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .orders th,
-        .orders td {
-            padding: 10px;
-            text-align: center;
-            /*height: 70px;*/
-            box-sizing: border-box;
-            vertical-align: middle;
-            word-break: break-all;
-            border-spacing: 0;
-            margin: 0;
-            outline: none;
-        }
-
-        .orders th {
-            background-color: #f4f4f4;
-            text-align: center;
-            border-top: 2px solid #000;
-            border-bottom: 2px solid #000;
-        }
-
-        .orders td {
-            border-bottom: 1px solid #ddd;
-        }
-
-        .orders tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        ul {
-            display: block;
-        }
-
-        .product-info img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-
-        .info {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .info .brand {
-            font-weight: bold;
-        }
-
-        .info .name {
-            font-size: 1.1em;
-        }
-
-        .info .name a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .info .name a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .info .option {
-            color: gray;
-        }
-
-        .order-status {
-            /*display: flex;*/
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .order-status a {
-            color: #007bff;
-            text-decoration: none;
-            margin-bottom: 5px;
-        }
-
-        .order-status a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .order-status button {
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        .order-status button:hover {
-            background-color: #ddd;
-        }
-
-        .order-number a {
-            text-decoration: none;
-            color: black;
-        }
-
-        .order-number a:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .order-amount span {
-            display: block;
-        }
 
         /* 모달 스타일 */
         .modal {
@@ -408,12 +282,12 @@
 <body>
 <%-- 잠깐 테스트 때문에 include 주석처리 --%>
 <jsp:include page="header.jsp"/>
-
+<div class="head_order_det">주문상세내역</div>
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
         <div class="orders">
-            <table>
+            <table class="order_det_table">
                 <colgroup>
                     <col width="30%"/>
                     <col width="30%"/>
@@ -423,18 +297,18 @@
                 </colgroup>
 
                 <thead>
-                <tr>
-                    <th>상품정보</th>
-                    <!-- 상품 정보 헤더 -->
-                    <th>주문일자</th>
-                    <!-- 주문일자 헤더 -->
-                    <th>주문번호</th>
-                    <!-- 주문번호 헤더 -->
-                    <th>주문금액(수량)</th>
-                    <!-- 주문금액(수량) 헤더 -->
-                    <th>주문 상태</th>
-                    <!-- 주문 상태 헤더 -->
-                </tr>
+                    <tr>
+                        <th>상품정보</th>
+                        <!-- 상품 정보 헤더 -->
+                        <th>주문일자</th>
+                        <!-- 주문일자 헤더 -->
+                        <th>주문번호</th>
+                        <!-- 주문번호 헤더 -->
+                        <th>주문금액(수량)</th>
+                        <!-- 주문금액(수량) 헤더 -->
+                        <th>주문 상태</th>
+                        <!-- 주문 상태 헤더 -->
+                    </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="orderdetDto" items="${list}" varStatus="status">

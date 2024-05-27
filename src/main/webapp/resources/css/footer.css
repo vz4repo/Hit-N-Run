@@ -8,6 +8,8 @@
     align-items: start;
     padding-top: 40px;
     background-color: darkolivegreen;
+    max-width: 1700px;
+    min-width: 1280px;
 }
 
 .wrap_inner_left {
@@ -15,8 +17,6 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    margin-left: 8%;
-
 }
 
 .footerBottom .menu {
@@ -45,9 +45,10 @@
 
 .wrap_inner_right {
     display: grid;
-    grid-template-columns: 200px 280px 140px;
-    place-items: start end;
-    text-align: start;
+    grid-template-columns: 30% 40% 30%;
+    place-items: start start;
+    text-align: left;
+    margin-left: 8%;
 }
 
 .cs, .bank, .community {
@@ -74,5 +75,5 @@
     grid-column-start: -2;
     grid-column-end: -1;
     margin-top: 3.5%;
-    margin-left: 12.5%;
+    margin-left: 8%;
 }

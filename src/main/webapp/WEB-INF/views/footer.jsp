@@ -73,6 +73,8 @@
                 <span>회원등록: 김민욱 |&nbsp</span>
                 <span>제품상세: 김지훈 |&nbsp</span>
                 <span>장바구니: 김다니</span>
+            </div>
+            <div>
                 <span>주문: 안중섭 |&nbsp</span>
                 <span>배송: 김수연 |&nbsp</span>
                 <span>결제: 권혁락</span>
