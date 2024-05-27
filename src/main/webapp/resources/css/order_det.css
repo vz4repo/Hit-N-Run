@@ -1,8 +1,20 @@
-/* 2024.05.25[혁락] css 이동 - order.css */
-* {
+.order-container {
     font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
     font-style: normal;
+}
+
+.head_order_det {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 9px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    cursor: auto;
 }
 
 .tb__order table {
@@ -172,23 +184,16 @@
     outline: none;
 }
 
-.orders th {
-    background-color: #f4f4f4;
+.order_det_table td,
+.order_det_table th {
     text-align: center;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
 }
 
-.orders td {
-    border-bottom: 1px solid #ddd;
-}
-
-.orders tr:hover {
-    background-color: #f9f9f9;
-}
-
-ul {
-    display: block;
+.product-info {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left !important;
 }
 
 .product-info img {
@@ -201,6 +206,7 @@ ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+    margin-left: 40px;
 }
 
 .info .brand {
@@ -296,7 +302,7 @@ ul {
 
 .modal-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
