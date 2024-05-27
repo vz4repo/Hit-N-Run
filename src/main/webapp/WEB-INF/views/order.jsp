@@ -572,15 +572,6 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
       }
     });
   })
-
-
-  /* 김수연 추가 0524 시작 */
-  // function showDefaultDLV() {
-  //     return `
-  //           <dlv>안녕하세용</dlv>
-  //           `;
-  // }
-  /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>
