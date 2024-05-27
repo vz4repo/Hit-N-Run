@@ -62,8 +62,8 @@
             </tr>
             <tr>
                 <td colspan="16">
-                    <button type="button" id="restoreProduct">상품 복구</button>
-                    <button type="button" id="deleteProduct">상품 삭제</button>
+                    <button type="button" class="sendBtnSmall" id="restoreProduct">상품 복구</button>
+                    <button type="button" class="sendBtnSmall" id="deleteProduct">상품 삭제</button>
                 </td>
             </tr>
             <tr>

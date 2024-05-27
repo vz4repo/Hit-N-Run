@@ -78,7 +78,7 @@
     <div style="display: flex; flex-direction: column; align-items: flex-start;">
         <h1>잘못된 접근입니다. </h1>
         <p>${errorMessage}</p>
-        <h1>문제가 지속되는 경우 고객센터로 연락바랍니다. (1544-1544) </h1>
+        <h1>문제가 지속되는 경우 고객센터로 연락바랍니다. (1540-0000) </h1>
         <a href="/"> Go back to Home</a>
     </div>
 </section>

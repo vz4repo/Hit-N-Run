@@ -16,9 +16,30 @@
     color: #777;
 }
 
-.order__header a{
+.order__title__detail a,
+.tb__order a{
     text-decoration: none;
     color: black;
+}
+
+.priceFormat {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.head_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 9px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    cursor: auto;
 }
 
 .tb__order th,
@@ -27,8 +48,9 @@
 }
 
 .tb__order td {
-    padding: 15px 0;
+    padding: 18px 0;
     vertical-align: middle;
+    font-size: 16px;
 }
 
 .tb__order hr {
@@ -44,23 +66,12 @@
 
 .tb__order thead th {
     padding: 11px 0;
-    background-color: #183c21;
+    background-color: #333;
     color: white;
     border-top: 2px solid #000;
     border-bottom: 1px solid #e5e5e5;
     font-size: 15px;
     font-weight: bold;
-}
-
-.head_main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: rgb(51, 51, 51);
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
 }
 
 .head_order {
@@ -90,8 +101,8 @@
 
 
 .tb__order img {
-    height: 80px;
-    width: 80px;
+    height: 110px;
+    width: 110px;
 }
 
 
@@ -128,7 +139,7 @@
 
 .tb__order tfoot td,
 .tb__order tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
+    border-bottom: 1px solid black;
     padding: 10px;
 }
 

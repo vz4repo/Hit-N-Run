@@ -26,8 +26,6 @@
     <title>제품 대시보드</title>
 
     <style>
-
-
         <%@include file="/resources/css/adminMenu.css" %>
         <%@include file="/resources/css/adminDefaultTable.css" %>
         td {

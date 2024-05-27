@@ -64,7 +64,7 @@
     </style>
 </head>
 
-<body>
+<body class="index">
 <!-- ***** Preloader Start ***** -->
 <div id="preloader">
     <div class="jumper">
@@ -81,7 +81,7 @@
 <!-- ***** Header Area End ***** -->
 
 <!-- ***** Main Banner Area Start ***** -->
-<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel" style="padding-top: 95px">
+<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators visually-hidden">
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
