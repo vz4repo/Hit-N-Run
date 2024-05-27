@@ -36,10 +36,10 @@
                 <th>진열 제외 제품</th>
             </tr>
             <tr>
-                <td>통계통계</td>
-                <td>통계통계</td>
-                <td>통계통계</td>
-                <td>통계통계</td>
+                <td>10</td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
             </tr>
         </table>
     </div>

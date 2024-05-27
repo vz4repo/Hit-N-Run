@@ -35,7 +35,7 @@
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
-        <div class="orders">
+        <div class="orders tb__order">
             <table>
                 <colgroup>
                     <col width="30%"/>
@@ -59,63 +59,85 @@
                     <!-- 주문 상태 헤더 -->
                 </tr>
                 </thead>
-                <tbody>
-                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
-                    <tr class="order-item-hist">
-                        <td class="product-info">
-                            <div>
-                                <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
-                                         alt="썸네일" name="thumbnail"/>
-                                </a>
-                            </div>
-                            <ul class="info">
-                                <!-- 브랜드 이름 -->
-                                <li class="brand">
-                                    <span>${orderdetDto.brd_name}</span>
-                                </li>
-                                <!-- 상품 이름 -->
-                                <li class="name">
-                                    <a href="#">${orderdetDto.pd_name}</a>
-                                </li>
-                                <!-- 상품 옵션 -->
-                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
-                            </ul>
-                        </td>
 
-                        <!-- 주문일자 -->
-                        <td>
-                            <span data-oddt="${orderdetDto.od_dt}" class="od_dt">${orderdetDto.od_dt}</span>
-                        </td>
+                <c:choose>
+                    <c:when test="${list == null}"> <%-- 결과값 확인이 필요한 경우 --%>
+                        <tr><td  class="product-msg" colspan="5" >
+                        <div>잠시 후 다시 요청해주세요. 같은 메세지가 반복되는 경우 고객센터로 연락바랍니다.(1540-0000)</div>
+                        </td></tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${list.isEmpty()}"> <%-- 결과값이 없는 경우 --%>
+                                <tr><td  class="product-msg" colspan="5">
+                                <div>조회 결과가 없습니다.</div>
+                                </td></tr>
+                            </c:when>
+                            <c:otherwise>
+                                <tbody>
+                                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
+                                    <tr class="order-item-hist">
+                                        <td class="product-info">
+                                            <div>
+                                                <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
+                                                    <img src="/img/product/${orderdetDto.pd_type_cd}/main/${orderdetDto.mn_img_fn}"
+                                                         alt="썸네일" name="thumbnail"
+                                                         onerror="this.onerror=null; this.src='/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}';"/>
+                                                </a>
+                                            </div>
+                                            <ul class="info">
+                                                <!-- 브랜드 이름 -->
+                                                <li class="brand">
+                                                    <span>${orderdetDto.brd_name}</span>
+                                                </li>
+                                                <!-- 상품 이름 -->
+                                                <li class="name">
+                                                    <a href="#">${orderdetDto.pd_name}</a>
+                                                </li>
+                                                <!-- 상품 옵션 -->
+                                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
+                                            </ul>
+                                        </td>
 
-                        <!-- 주문번호 -->
-                        <td>
-                            <div class="order-number">
-                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
-                                <form id="orderForm" action="/orderDetail" style="display: none;">
-                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
-                                </form>
-                            </div>
-                        </td>
+                                        <!-- 주문일자 -->
+                                        <td>
+                                            <span data-oddt="${orderdetDto.od_dt}"
+                                                  class="od_dt">${orderdetDto.od_dt}</span>
+                                        </td>
 
-                        <!-- 주문금액 및 수량 -->
-                        <td>
-                            <div class="order-amount" data-order-id="20231208212440001">
-                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
-                                <span>${orderdetDto.od_qty} 개</span>
-                            </div>
-                        </td>
+                                        <!-- 주문번호 -->
+                                        <td>
+                                            <div class="order-number">
+                                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                                <form id="orderForm" action="/orderDetail" style="display: none;">
+                                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId"
+                                                           id="orderId">
+                                                </form>
+                                            </div>
+                                        </td>
 
-                        <td class="order-status">
-                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
-                            <!-- 구매상태 링크 -->
-                            <button class="open-delivery-modal">배송조회</button>
-                            <!-- 배송조회 버튼 -->
-                        </td>
-                    </tr>
-                </c:forEach>
-                <!-- 추가 주문 행을 여기에 추가 -->
-                </tbody>
+                                        <!-- 주문금액 및 수량 -->
+                                        <td>
+                                            <div class="order-amount" data-order-id="20231208212440001">
+                                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                                <span>${orderdetDto.od_qty} 개</span>
+                                            </div>
+                                        </td>
+
+                                        <td class="order-status">
+                                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
+                                            <!-- 구매상태 링크 -->
+                                            <button class="open-delivery-modal">배송조회</button>
+                                            <!-- 배송조회 버튼 -->
+                                        </td>
+                                    </tr>
+                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                    </tbody>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
     </div>
@@ -124,7 +146,7 @@
     <div id="orderStepModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                    <!-- 주문상태 헤더 -->
+                <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
                     <span class="order-step-subheader">주문상태</span>
                 </h2>
