@@ -6,7 +6,7 @@
   <groupId>com.jungseok</groupId>
   <artifactId>homerunball-web</artifactId>
   <packaging>war</packaging>
-  <version>v0.1</version>
+  <version>v0.6</version>
   <name>homerunball-web Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
@@ -286,6 +286,11 @@
         <configuration>
           <mainClass>org.test.int1.Main</mainClass>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.2</version>
       </plugin>
     </plugins>
   </build>
