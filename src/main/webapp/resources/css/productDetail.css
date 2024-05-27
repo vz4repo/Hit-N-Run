@@ -155,7 +155,7 @@
 
 .sticky {
     position: fixed;
-    top: 94px;
+    top: 57px;
     width: 100%;
     z-index: 98;
     height: 50px;
@@ -171,20 +171,17 @@
     /*border: 1px solid black;*/
     width: 100%;
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     padding-top: 20px;
 }
-.reviewContainer .writeReviewBtn{
-    width: 5%;
-    font-size: 8%;
-    right: 0%;
+.writeReviewBtn{
     position: absolute;
-    right: 5%;
-    top: 80%;
+    right: 1%;
+    top: 10%;
 }
 /* 리뷰테이블 */
 .reviewTable {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
@@ -192,13 +189,30 @@
     text-align: center;
     /*   border: 1px solid #000;  */
     border-bottom: 0.5px solid grey;
-    padding: 0px;
+    padding: 10px;
 }
 .reviewTable th:nth-child(2), .reviewTable td:nth-child(2) {
     width: 70%;
 }
 .reviewTable td:nth-child(2), .reviewTable td:nth-child(5){
     text-align:left;
+}
+.reviewTable th{
+    background-color: whitesmoke;
+}
+.reviewContainer a{
+    color: black;
+    text-decoration: none;
+}
+.reviewContainer h2{
+    text-align: left;
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px;
+}
+.reviewContainer p{
+    padding: 20px;
 }
 
 /* 제품문의작성 버튼 */
@@ -210,36 +224,51 @@
     /*border: 1px solid black;*/
     width: 100%;
     position: relative;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     padding-top: 20px;
 }
-.QnAContainer .writeQnABtn{
-    width: 7%;
-    font-size: 8%;
-    right: 0%;
+.writeQnABtn{
     position: absolute;
-    right: 5%;
-    top: 80%;
+    right: 1%;
+    top: 10%;
 }
 
 /* 제품문의테이블 */
 .QnATable {
-    width: 90%;
+    width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 .QnATable th, .QnATable td {
     text-align: center;
-    /*border: 1px solid #000;  */
+    /*   border: 1px solid #000;  */
     border-bottom: 0.5px solid grey;
-    padding: 0px;
+    padding: 10px;
 }
 .QnATable th:nth-child(2), .QnATable td:nth-child(2) {
     width: 70%;
 }
-.QnATable td:nth-child(2){
+.QnATable td:nth-child(2), .QnATable td:nth-child(5) {
     text-align:left;
 }
+.QnATable th{
+    background-color: whitesmoke;
+}
+.QnAContainer a{
+    color: black;
+    text-decoration: none;
+}
+.QnAContainer h2{
+    text-align: left;
+    width: 100%;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 20px;
+}
+.QnAContainer p{
+    padding: 20px;
+}
+
 #toggle1{
     padding-top: 30px;
 }
@@ -249,16 +278,6 @@
 }
 .productMainContainer h2{
     font-size: 1.5em;
-    font-weight: bold;
-    padding-bottom: 10px;
-}
-.productMainContainer h6{
-    font-size: 0.67em;
-    font-weight: bold;
-    padding-bottom: 10px;
-}
-.productMainContainer h5{
-    font-size: 0.83em;
     font-weight: bold;
     padding-bottom: 10px;
 }
@@ -291,4 +310,45 @@ body{overflow-x: hidden}
     to {
         color: red;
     }
+}
+.prdRltdContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px; /* 이미지 간격 조정 */
+}
+.prdRltd {
+    text-align: center; /* 이미지와 제품명을 중앙 정렬 */
+}
+.prdRltd a {
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+.prdRltd img {
+    width: 500px; /* 이미지 너비 조정 */
+    height: auto; /* 비율에 맞게 높이 자동 조정 */
+    cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
+    border: 2px solid #ddd; /* 이미지 테두리 */
+    border-radius: 5px; /* 테두리 둥글게 */
+}
+.prdRltd img:hover {
+    border-color: darkgreen; /* 호버 시 테두리 색상 변경 */
+}
+.prdRltdName {
+    margin-top: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.prdRltdTitle{
+    position: static;
+    padding: 20px;
+}
+.prdRltdTitle b{
+    font-weight: bold;
+}
+.prdRltdTitle h2{
+    font-size: 1.5em;
+    text-align: center;
 }

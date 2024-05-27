@@ -31,7 +31,7 @@
         </div>
         <div class="productItemDsc">
             <h2>${prd.pd_name}</h2>
-            <h6>${prd.pd_ad_cmt}</h6>
+            <p>${prd.pd_ad_cmt}</p>
             <p id="sale-price"><b>판매가격: </b><span id="sls_prc">${stkInfo.sls_prc}</span>원</p>
             <p id="retail-price"><b>소비자가격: </b><span id="rtl_prc">${stkInfo.rtl_prc}</span>원</p>
             <p><b>배송:</b> 무료배송</p>
@@ -66,7 +66,7 @@
             <div class="prdContainer">
                 <input type="checkbox" id="toggle1" class="toggle" hidden>
                 <label for="toggle1" class="prdLabel">
-                    <h5>제품 상세 설명</h5> <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                    <p><b>제품 상세 설명</b></p> <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
                 <ul class="prdMenu">
                     <li>${prd.pd_det_dsc}</li>
@@ -75,7 +75,7 @@
             <div class="prdContainer">
                 <input type="checkbox" id="toggle2" class="toggle" hidden>
                 <label for="toggle2" class="prdLabel">
-                    <h5>제품 특징</h5> <ion-icon name="baseball-outline" class="ball"></ion-icon>
+                    <p><b>제품 특징</b></p> <ion-icon name="baseball-outline" class="ball"></ion-icon>
                 </label>
                 <ul class="prdMenu">
                     <li><b>제품 상태: </b>${prd.qlt_cd}</li>
@@ -110,20 +110,45 @@
 </div>
 <%--연관 제품 (3차 개발 예정)--%>
 <div class="relatedProductContainer" id="relatedProductContainer">
-    <p>연관 제품이 들어갈 곳</p>
+    <div class="prdRltdTitle"><h2><b>고객들이 많이 조회한 연관 제품</b></h2></div>
+    <div class="prdRltdContainer">
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-04">
+                <img src="/img/product/APP/main/APP000003-04.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-04.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (레드)</div>
+            </a>
+        </div>
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-08">
+                <img src="/img/product/APP/main/APP000003-08.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-08.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (블루)</div>
+            </a>
+        </div>
+        <div class="prdRltd">
+            <a href="http://localhost:9090/product/detail?pd_id=APP000003-30">
+                <img src="/img/product/APP/main/APP000003-30.jpg"
+                     alt="이미지 준비 중 입니다"
+                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-30.jpg';">
+                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (핑크)</div>
+            </a>
+        </div>
+    </div>
 </div>
 <%--제품 상세 내용--%>
 <div class="detailProductContainer" id="detailProductContainer">
-    <p>${prd.pd_smr_dsc}</p>
     <p class="image-container">
         <img src="/img/product/${prd.pd_type_cd}/detail/${prd.det_img_fn}"
              alt="이미지 준비 중 입니다"
              onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/detail/${prd.det_img_fn}';" >
     </p>
+    <p>${prd.pd_smr_dsc}</p>
 </div>
-<%--제품 리뷰(구현 안함 3차때 추후 개발예정)--%>
 <div class="reviewContainer" id="reviewContainer">
-    <h1>리뷰</h1>
+    <h2>리뷰</h2>
     <table class="reviewTable">
         <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>평점</th></tr>
         <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.28</td><td>★★★★★</td></tr>
@@ -136,11 +161,25 @@
         <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>★</td></tr>
         <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>★★★</td></tr>
         <tr><td>1</td><td>리뷰입니다.</td><td>김지훈</td><td>2024.05.21</td><td>★★★★★</td></tr>
-    </table><button class="writeReviewBtn" onclick="writeReviewBtn()">리뷰작성</button>
+    </table>
+    <p> <a href="">&lt</a>
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+        <a href="">7</a>
+        <a href="">8</a>
+        <a href="">9</a>
+        <a href="">10</a>
+        <a href="">&gt</a></p>
+    <button class="writeReviewBtn" onclick="writeReviewBtn()">리뷰작성</button>
 </div>
+
 <%--제품 문의(구현 안함 3차때 추후 개발예정)--%>
 <div class="QnAContainer" id="QnAContainer">
-    <h1>제품문의</h1>
+    <h2>제품문의</h2>
     <table class="QnATable">
         <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>답변여부</th></tr>
         <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
@@ -153,8 +192,20 @@
         <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>답변완료✔</td></tr>
         <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>답변대기중</td></tr>
         <tr><td>1</td><td>제품문의입니다.</td><td>김지훈</td><td>2024.05.21</td><td>답변완료✔</td></tr>
-        <br>
-    </table><button class="writeQnABtn" onclick="writeQnABtn()">상품문의작성</button>
+    </table>
+    <p> <a href="">&lt</a>
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <a href="">6</a>
+        <a href="">7</a>
+        <a href="">8</a>
+        <a href="">9</a>
+        <a href="">10</a>
+        <a href="">&gt</a></p>
+    <button class="writeQnABtn" onclick="writeQnABtn()">리뷰작성</button>
 </div>
 <jsp:include page="footer.jsp" flush="false" />
 </body>
