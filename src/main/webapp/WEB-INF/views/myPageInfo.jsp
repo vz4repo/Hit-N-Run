@@ -8,13 +8,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
 
 
     <style>
+
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-size: 11px;
+        }
+
+        /*.container {*/
+        /*    width: 515px;*/
+        /*    margin-left: 430px;*/
+        /*    text-align: left;*/
+        /*}*/
         .container {
             width: 515px;
-            margin-left: 430px;
+            margin: auto;
             text-align: left;
+            position: relative;
+            left: -130px;
         }
 
         .special-class {
@@ -53,10 +68,6 @@
 
         span {
             color: gray;
-        }
-
-        body {
-            font-size: 11px;
         }
 
         #roadAddress,
@@ -106,13 +117,6 @@
             font-weight: bold;
         }
 
-        /*#pwdC {*/
-        /*    cursor: pointer;*/
-        /*    text-decoration: none;*/
-        /*    color: #000;*/
-        /*    margin-right: 145px;*/
-        /*}*/
-
         #delete {
             cursor: pointer;
         }
@@ -133,10 +137,6 @@
         #det, #phn{
             font-size: 11px;
             margin-top: 15px;
-        }
-
-        #det{
-            /*margin-left: 5px;*/
         }
 
         #phn{
@@ -193,8 +193,7 @@
 
 
             <div id="check">
-<%--                <button id="edit">수정</button><a id="pwdC" href="/mypage/pwdEdit">비밀번호 변경</a> <a id="delete" onclick="test()">회원탈퇴</a>--%>
-                <button id="edit">수정</button> <a id="delete" onclick="test()">회원탈퇴</a>
+     <button id="edit">수정</button> <a id="delete" onclick="test()">회원탈퇴</a>
             </div>
       </div>
     </form>
