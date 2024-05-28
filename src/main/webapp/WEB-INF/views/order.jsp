@@ -70,6 +70,11 @@
         margin-left: 360px;
     }
 
+    .btn-change-address :hover {
+      color: #fff;
+      background-color: #1b64da;
+    }
+
     #dlv-container .select-request {
         width: auto;
         padding: 5px;
@@ -156,10 +161,10 @@
         margin: 10px 0;
     }
 
-    #addressModal .address-card .buttons {
+    /*#addressModal .address-card .buttons {*/
         /*display: flex;*/
         /*justify-content: space-between;*/
-    }
+    /*}*/
 
     #addressModal .address-card .buttons button {
         padding: 5px 10px;
@@ -260,7 +265,7 @@
             <a href="#"> > 주문완료</a>
         </div>
     </div>
-    <%-- 김수연 0524 기본배송지 form 시작 --%>
+    <%-- 김수연 시작 --%>
     <%-- 배송지 정보 section --%>
     <section id="dlv-container">
 
@@ -279,8 +284,6 @@
                         <col style="width: 150px">
                         <col style="width: 400px">
                     </colgroup>
-
-
                     <tr>
                         <td class="label">배송지</td>
                         <td class="dlv-content">${defaultDto.adr_name}</td>
