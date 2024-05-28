@@ -366,7 +366,7 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-                <tfoot>
+<%--                <tfoot>
                 <tr>
                     <td colspan="1">
                         <div class="tb__left"><span>[기본배송]</span></div>
@@ -397,14 +397,50 @@
                             </div>
                     </td>
                 </tr>
-                </tfoot>
+                </tfoot>--%>
             </table>
         </form>
     </div>
 </section>
 <%-- 결제 위젯 호출 --%>
 <section class="order__payment">
+    <div class="order__payment__wrapper">
     <%@include file="payCheckout.jsp" %>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
+    <div class="tb__right">
+        <div class="totalSum tb__right-item">
+            상품구매금액
+            <span class="priceFormat" id="totalSum"
+            >${cartDto.sls_prc * cartDto.cart_cnt}</span
+            >
+        </div>
+        <div class="grade tb__right-item">
+            등급 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="coupon tb__right-item">
+            쿠폰 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="point tb__right-item">
+            적립금 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="card tb__right-item">
+            카드사 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="dlv-fare tb__right-item">
+            배송비
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="odpayamt tb__right-item">
+            최종 결제 금액
+            <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+        </div>
+    </div>
+    </div>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
 </section>
 
 <%-- footer --%>
@@ -413,10 +449,15 @@
     $(document).ready(function () {
         $('.priceFormat').each(function () {
             let value = $(this).text();
-            value = value.replace(/,/g, '');
-            const numbericValue = parseInt(value);
-            const formatValue = numbericValue.toLocaleString('ko-KR');
-            $(this).text(formatValue + '원');
+            if(value === '없음'){
+              $(this).text('0원');
+              $(this).css('color', '#777');
+            }else {
+              value = value.replace(/,/g, '');
+              const numbericValue = parseInt(value);
+              const formatValue = numbericValue.toLocaleString('ko-KR');
+              $(this).text(formatValue + '원');
+            }
         })
     })
 
