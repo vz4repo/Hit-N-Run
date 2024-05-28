@@ -1,6 +1,10 @@
-* {
-    margin: 0;
-}
+
+/*#content {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    !* align-items: center; *!*/
+/*    flex-direction: column;*/
+/*}*/
 
 #content {
     display: flex;
@@ -22,17 +26,21 @@
 
 .mySlides {
     display: none;
+    /* background-color: #222; */
+    margin-bottom: -4px;
+    /* margin-top: 5px; */
 }
 
-.cursor {
+/* .cursor {
     cursor: pointer;
-}
+} */
 
 .cc {
     text-align: center;
     background-color: #222;
     padding: 5px;
     color: silver;
+    /* margin-bottom: 5px; */
 }
 
 .cc p {
@@ -42,6 +50,7 @@
 .column {
     float: left;
     width: 16.66%;
+    /* width: 17%; */
 }
 
 .demo {
@@ -72,6 +81,7 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
+
 .prev2 {
     left: 0;
     border-radius: 3px 0 0 3px;
@@ -81,6 +91,7 @@
     right: 0;
     border-radius: 3px 0 0 3px;
 }
+
 .dot {
     position: relative;
     top: 20px;
@@ -93,19 +104,21 @@
     display: inline-block;
 
 }
-.videoDot > .active,
+
+.videoDot>.active,
 .dot:hover {
     background-color: #717171;
 }
 
 #king {
     display: flex;
-    margin: 0;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .interview,
 .video {
-    width: 50%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -137,6 +150,6 @@
     text-align: center;
 }
 
-.videoDot{
+.videoDot {
     top: 30px;
 }

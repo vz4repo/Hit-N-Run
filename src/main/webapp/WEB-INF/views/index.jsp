@@ -94,7 +94,7 @@
             <div class="carousel-caption advertiseCommentLeft">
                 <p class="text-uppercase advertiseComment">최상급 글러브</p>
                 <h1 class="display-1 fw-bolder text-capitalize">타티스 주니어 글러브 구매하기</h1>
-                <a href="/cart/list" class="btn btn-primary cartBtn">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary cartBtn">장바구니 담기</a>
             </div>
         </div>
         <div class="carousel-item c-item">
@@ -102,7 +102,7 @@
             <div class="carousel-caption top-1 advertiseCommentLeft">
                 <p class="text-uppercase advertiseComment">CLOUT AI BATS</p>
                 <h1 class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</h1>
-                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary">장바구니 담기</a>
             </div>
         </div>
         <div class="carousel-item c-item">
@@ -110,7 +110,7 @@
             <div class="carousel-caption top-1 advertiseCommentRight">
                 <p class="text-uppercase advertiseComment">Be Iconic</p>
                 <h1 class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</h1>
-                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary">장바구니 담기</a>
             </div>
         </div>
     </div>
@@ -476,7 +476,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="section-heading">
-                    <h2>홈런 소식을 구독하고 10% 할인을 받으세요</h2>
+                    <h2>홈런 소식을 구독하고 10% 할인 쿠폰을 받으세요</h2>
                     <span>홈런 소식지에 깜짝 할인 쿠폰도 숨어 있습니다.</span>
                 </div>
                 <form id="subscribe" action="" method="get">
