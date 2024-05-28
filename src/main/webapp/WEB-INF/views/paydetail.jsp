@@ -19,6 +19,7 @@
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -34,7 +35,7 @@
 <jsp:include page="header.jsp"/>
 <jsp:include page="myPageHeader.jsp"/>
 <br><br>
-<div class="head_order_det">주문내역조회</div>
+<div class="head_order_det">단일 주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">

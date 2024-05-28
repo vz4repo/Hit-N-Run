@@ -116,7 +116,7 @@
                                         <!-- 주문번호 -->
                                         <td>
                                             <div class="order-number">
-                                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                                <a href='<c:url value="/orderDetail?od_id=${orderdetDto.od_id}"/>' class="open_od_id_modal">${orderdetDto.od_id}</a>
                                                 <form id="orderForm" action="/orderDetail" style="display: none;">
                                                     <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                                 </form>

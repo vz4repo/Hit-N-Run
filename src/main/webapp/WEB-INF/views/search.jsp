@@ -16,40 +16,40 @@
         <dl class="word">
             <dt>인기검색어</dt>
             <dd>
-                <a href="">야구화</a>
-                <a href="">배팅장갑</a>
-                <a href="">유니폼</a>
-                <a href="">아우터</a>
-                <a href="">가방</a>
-                <a href="">양말</a>
-                <a href="">타자헬멧</a>
-                <a href="">포수장비</a>
-                <a href="">시합용</a>
-                <a href="">보호장비</a>
-                <a href="">배트</a>
-                <a href="">외야수</a>
-                <a href="">모자</a>
-                <a href="">선글라스</a>
-                <a href="">유아용</a>
+                <a href="javascript:void(0);">야구화</a>
+                <a href="javascript:void(0);">배팅장갑</a>
+                <a href="javascript:void(0);">유니폼</a>
+                <a href="javascript:void(0);">아우터</a>
+                <a href="javascript:void(0);">가방</a>
+                <a href="javascript:void(0);">양말</a>
+                <a href="javascript:void(0);">타자헬멧</a>
+                <a href="javascript:void(0);">포수장비</a>
+                <a href="javascript:void(0);">시합용</a>
+                <a href="javascript:void(0);">보호장비</a>
+                <a href="javascript:void(0);">배트</a>
+                <a href="javascript:void(0);">외야수</a>
+                <a href="javascript:void(0);">모자</a>
+                <a href="javascript:void(0);">선글라스</a>
+                <a href="javascript:void(0);">유아용</a>
             </dd>
         </dl>
         <div class="color">
             <p>인기컬러</p>
             <ul>
-                <li><a href=""><span style="background-color: #000000;"></span>블랙</a></li>
-                <li><a href=""><span style="background-color: #ffffff;"></span>화이트</a></li>
-                <li><a href=""><span style="background-color: #7f7f7f;"></span>그레이</a></li>
-                <li><a href=""><span style="background-color: #002060;"></span>네이비</a></li>
-                <li><a href=""><span style="background-color: #ff6699;"></span>핑크</a></li>
-                <li><a href=""><span style="background-color: #ffff00;"></span>옐로우</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #000000;"></span>블랙</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #ffffff;"></span>화이트</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #7f7f7f;"></span>그레이</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #002060;"></span>네이비</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #ff6699;"></span>핑크</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #ffff00;"></span>옐로우</a></li>
             </ul>
             <ul>
-                <li><a href=""><span style="background-color: #00b0f0;"></span>블루</a></li>
-                <li><a href=""><span style="background-color: #92d050;"></span>그린</a></li>
-                <li><a href=""><span style="background-color: #fff2cc;"></span>베이지</a></li>
-                <li><a href=""><span style="background-color: #ff0000;"></span>레드</a></li>
-                <li><a href=""><span style="background-color: #ffc000;"></span>오렌지</a></li>
-                <li><a href=""><span style="background-color: #8a3cc4;"></span>퍼플</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #00b0f0;"></span>블루</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #92d050;"></span>그린</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #fff2cc;"></span>베이지</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #ff0000;"></span>레드</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #ffc000;"></span>오렌지</a></li>
+                <li><a href="javascript:void(0);"><span style="background-color: #8a3cc4;"></span>퍼플</a></li>
             </ul>
         </div>
         <div class="searchClose"><i class="fas fa-times"></i></div>
