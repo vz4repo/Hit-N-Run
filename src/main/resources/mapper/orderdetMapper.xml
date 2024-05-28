@@ -113,7 +113,6 @@
   <!--(#{od_det_seqnum},#{od_id}, #{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{sls_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})-->
   <!--    </insert>-->
 
-
   <update id="update" parameterType="OrderDetDto">
     update ord_det
     set od_id       = #{od_id}
@@ -138,6 +137,16 @@
     FROM ord_det
     WHERE od_id = #{od_Id}
   </select>
+
+  <update id="updateOrderStatus" parameterType="OrderDetDto">
+    update ord_det
+    set od_stat_cd = '04'           -- 주문취소신청
+    where od_id         = #{od_id}
+      and pd_id         = #{pd_id}
+      and pd_clsf_cd    = #{pd_clsf_cd}
+      and c_id          = #{c_id}
+    -- 1건 나와야 성공, 그 외에 뭐지?
+  </update>
 
   <select id="selectPaymentHistoryWithDateRange" parameterType="map" resultType="OrderDetDto">
     select od.od_id                   -- 주문id
