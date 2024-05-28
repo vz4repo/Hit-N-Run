@@ -2,7 +2,7 @@
 table {
     border-collapse: collapse;
     width: 100%;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
     font-size: 13px;
 }
 
@@ -14,6 +14,9 @@ th, td {
 
 th {
     border: 1px solid #ddd;
+}
+
+th {
     background-color: #f3f3f3;
     text-align: center;
     font-size: 15px;

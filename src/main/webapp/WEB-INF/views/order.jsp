@@ -30,168 +30,166 @@
 </head>
 <%-- 김수연 시작 --%>
 <style>
-  #dlv-container {
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding-top: 1.35%;
-  }
+    #dlv-container {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        padding-top: 1.35%;
+    }
 
-  .dlv-header {
-      margin-left: 8%;
-      margin-right: 3%;
-      font-size: 15px;
-      font-weight: 600;
-  }
+    .dlv-header {
+        margin-left: 8%;
+        margin-right: 3%;
+        font-size: 15px;
+        font-weight: 600;
+    }
 
-  #dlv-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+    #dlv-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-  #dlv-container li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-  }
-
-
-
-  #dlv-container .btn-change-address {
-    padding: 5px 10px;
-    border: 1px solid #333;
-    color: #fff;
-    background-color: #333;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  #dlv-container .select-request {
-    width: auto;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-
-  #dlv-container .radio-group label {
-    margin-right: 10px;
-  }
-
-  #dlv-container .dlv-content ul {
-    display: block;
-  }
-
-  #dlv-container .dlv-content li {
-    padding: 4px;
-  }
-
-  /* Modal styles */
-  #addressModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-
-  #addressModal .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-  }
-
-  #addressModal .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  #addressModal .close:hover,
-  #addressModal .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  #addressModal .address-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-
-  #addressModal .address-card .title {
-    font-weight: bold;
-    font-size: 20px; /* 13 -> 18 -> 20 */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  #addressModal .address-card .title .default {
-    color: #007bff;
-      /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
-    border: 1px solid #007bff;
-    padding: 2px 5px;
-    border-radius: 5px;
-  }
-
-  #addressModal .address-card .details {
-    font-size: 20px; /* 13 -> 18 -> 20 */
-    margin: 10px 0;
-  }
-
-  #addressModal .address-card .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #addressModal .address-card .buttons button {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
-
-  #addressModal .address-card .buttons button {
-      padding: 5px 10px;
-      border: 1px solid #333;
-      color: #fff;
-      background-color: #333;
-      cursor: pointer;
-      margin-left: 0px;
-  }
-
-  #addressModal .add-new-address {
-    text-align: right;
-    margin: 10px 0;
-    color: #007bff;
-    cursor: pointer;
-  }
+    #dlv-container li {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
 
 
+    #dlv-container .btn-change-address {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 
-  #addressModal .dlv-select {
-      padding: 5px 10px;
-      border: 1px solid #333;
-      color: #fff;
-      background-color: #333;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 10px;
-  }
+    #dlv-container .select-request {
+        width: auto;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    #dlv-container .radio-group label {
+        margin-right: 10px;
+    }
+
+    #dlv-container .dlv-content ul {
+        display: block;
+    }
+
+    #dlv-container .dlv-content li {
+        padding: 4px;
+    }
+
+    /* Modal styles */
+    #addressModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    #addressModal .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+
+    #addressModal .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    #addressModal .close:hover,
+    #addressModal .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #addressModal .address-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    #addressModal .address-card .title {
+        font-weight: bold;
+        font-size: 20px; /* 13 -> 18 -> 20 */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #addressModal .address-card .title .default {
+        color: #007bff;
+        /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
+        border: 1px solid #007bff;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+
+    #addressModal .address-card .details {
+        font-size: 20px; /* 13 -> 18 -> 20 */
+        margin: 10px 0;
+    }
+
+    #addressModal .address-card .buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #addressModal .address-card .buttons button {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    #addressModal .address-card .buttons button {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        cursor: pointer;
+        margin-left: 0px;
+    }
+
+    #addressModal .add-new-address {
+        text-align: right;
+        margin: 10px 0;
+        color: #007bff;
+        cursor: pointer;
+    }
+
+
+    #addressModal .dlv-select {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
 
   /*.close {*/
@@ -199,48 +197,46 @@
   /*}*/
 
 
+    .header-container {
+        display: flex;
+        align-items: center; /* 수직 가운데 정렬 */
+        justify-content: space-between; /* 양쪽 끝에 배치 */
+        height: 50px; /* 높이 설정 (필요에 따라 조정) */
+        padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
+    }
 
-  .header-container {
-      display: flex;
-      align-items: center; /* 수직 가운데 정렬 */
-      justify-content: space-between; /* 양쪽 끝에 배치 */
-      height: 50px; /* 높이 설정 (필요에 따라 조정) */
-      padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
-  }
+    .dlvN {
+        margin: 0; /* 기본 마진 제거 */
+        font-size: 20px; /* 폰트 크기 조정 */
+        line-height: 1; /* 줄 높이 조정 */
+        font-weight: bold; /* 글자를 두껍게 */
+        color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
+    }
 
-  .dlvN {
-      margin: 0; /* 기본 마진 제거 */
-      font-size: 20px; /* 폰트 크기 조정 */
-      line-height: 1; /* 줄 높이 조정 */
-      font-weight: bold; /* 글자를 두껍게 */
-      color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
-  }
-
-  .close {
-      cursor: pointer; /* 포인터 모양 */
-      font-size: 24px; /* 아이콘 크기 조정 */
-      line-height: 1; /* 줄 높이 조정 */
-      position: relative; /* 상대 위치 설정 */
-      top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
-  }
+    .close {
+        cursor: pointer; /* 포인터 모양 */
+        font-size: 24px; /* 아이콘 크기 조정 */
+        line-height: 1; /* 줄 높이 조정 */
+        position: relative; /* 상대 위치 설정 */
+        top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
+    }
 
 
-  #dlv-header-content label {
-      width: 500px; /* 원하는 너비로 설정하세요 */
-  }
+    #dlv-header-content label {
+        width: 500px; /* 원하는 너비로 설정하세요 */
+    }
 
-  .dlv-header-content tr  {
-      height: 30px;
-  }
+    .dlv-header-content tr {
+        height: 30px;
+    }
 </style>
 <%-- 김수연 끝 --%>
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">주문서</a>
-    <hr class="first__under"/>
+    <a href="#" class="head_main">주 문/결 제</a>
     <div class="order__title">
-        <div class="head_order">Order / Payment</div>
+        <%--<div class="head_order">Order / Payment</div>--%>
         <div class="order__title__detail">
             <a href="/cart/list">장바구니 > </a>
             <a href="#">주문서</a>
@@ -253,7 +249,7 @@
         <div class="dlv-header">배송 정보</div>
         <%-- 기본/선택 배송지 내용 출력 --%>
 
-<%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
+        <%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
         <%-- 김수연 0524 기본배송지 form 시작 --%>
         <div class="dlv-header-content">
             <%-- TODO : 기본배송지 --%>
@@ -378,13 +374,27 @@
                 </tr>
                 <tr>
                     <td colspan="7">
-                        <div class="tb__right">
-                            <span>상품구매금액</span>
-                            <span>배송비 무료</span>
-                            <div>최종 결제 금액
-                                <span class="" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                            <div class="tb__right">
+                                <div class="totalSum">상품구매금액
+                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                                </div>
+                                <div class="grade">등급 할인
+                                    <span>없음</span>
+                                </div>
+                                <div class="cupon">쿠폰 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="point">적립금 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="card">카드사 할인
+                                    <span>없음</span>
+                                </div>
+                                <div>배송비 무료</div>
+                                <div class="odpayamt">최종 결제 금액
+                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                                </div>
                             </div>
-                        </div>
                     </td>
                 </tr>
                 </tfoot>
@@ -396,47 +406,43 @@
 <section class="order__payment">
     <%@include file="payCheckout.jsp" %>
 </section>
+
 <%-- footer --%>
 <%@include file="footer.jsp" %>
 <script>
-  $(document).ready(function () {
-    $('.priceFormat').each(function () {
-      let value = $(this).text();
-      value = value.replace(/,/g, '');
-      const numbericValue = parseInt(value);
-      const formatValue = numbericValue.toLocaleString('ko-KR');
-      $(this).text(formatValue + '원');
+    $(document).ready(function () {
+        $('.priceFormat').each(function () {
+            let value = $(this).text();
+            value = value.replace(/,/g, '');
+            const numbericValue = parseInt(value);
+            const formatValue = numbericValue.toLocaleString('ko-KR');
+            $(this).text(formatValue + '원');
+        })
     })
 
 
+    /*테이블의 행 수를 계산*/
+    window.onload = function () {
+        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        let totalSum = 0;
 
+        rows.forEach(function (row) {
+            /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
+            const price = row.cells[5].innerText;
+            totalSum += parseInt(price.replace(/[^\d]/g, ''));
+        });
+        /*총합을 나타낼 위치*/
+        document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
+    }
 
-      /* 김수연 추가 0524 시작 */
-      // document.getElementsByClassName("dlv-header-content").innerHTML = showDefaultDLV();
-      /* 김수연 추가 0524 끝 */
-  })
-  /*테이블의 행 수를 계산*/
-  window.onload = function () {
-    const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
-    let totalSum = 0;
+    /* 배송지 요청 */
+    /* 배송지 modal */
+    document.addEventListener('DOMContentLoaded', () => {
+        const contextPath = '<%= request.getContextPath() %>';
 
-    rows.forEach(function (row) {
-      /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
-      const price = row.cells[5].innerText;
-      totalSum += parseInt(price.replace(/[^\d]/g, ''));
-    });
-    /*총합을 나타낼 위치*/
-    document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
-  }
-
-  /* 배송지 요청 */
-  /* 배송지 modal */
-  document.addEventListener('DOMContentLoaded', () => {
-    const contextPath = '<%= request.getContextPath() %>';
-
-    const addressModal = document.querySelector('#addressModal');
-    const btn = document.querySelector('.btn-change-address');
-    const closeModal = document.querySelector('#closeModal');
+        const addressModal = document.querySelector('#addressModal');
+        const btn = document.querySelector('.btn-change-address');
+        const closeModal = document.querySelector('#closeModal');
 
     btn.addEventListener('click', () => {
       addressModal.style.display = 'block';

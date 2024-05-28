@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
 
     <style>
         .container {
-            width: 300px;
-            margin: 0 auto;
+            width: 515px;
+            margin-left: 430px;
             text-align: left;
         }
 
         .special-class {
-            width: 100%;
+            width: 400px;
             padding: 10px;
             margin-bottom: 7px;
             border: 1px solid #ccc;
@@ -23,18 +26,18 @@
             box-sizing: border-box;
         }
 
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
+        #edit {
+            margin-top: -1px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
-            background-color: darkgreen;
-            color: whitesmoke;
+            background-color: white;
+            outline: none;
+            font-size: 12px;
+            margin-right: 295px;
+            font-weight: bold;
         }
 
-        label {
+        .infoLabel {
             display: block;
             margin-bottom: 5px;
             font-weight: bold;
@@ -43,25 +46,10 @@
         }
 
         #loginTitle {
-            text-align: center;
             font-size: 20px;
             margin-bottom: 40px;
-            font-family: 'IBM Plex Sans', sans-serif;
+            margin-top: 40px;
         }
-
-        #myform {
-            max-width: 700px;
-            text-align: center;
-            border: 3px solid #f1f1f1;
-            border-radius: 50px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            padding-top: 5px;
-            padding-bottom: 5px;
-            margin: 0 auto;
-            margin-top: 100px;
-            margin-bottom: 150px;
-        }
-
 
         span {
             color: gray;
@@ -69,68 +57,149 @@
 
         body {
             font-size: 11px;
-            font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        #roadAddress {
-            width: 265.5px;
-        }
-
-        #jibunAddress {
-            width: 265.5px;
-        }
-
+        #roadAddress,
+        #jibunAddress,
         #detailAddress {
-            width: 265.5px;
-        }
-
-        #birth {
-            padding: 8px;
+            width: 400px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1em;
-            width: 100%;
             box-sizing: border-box;
         }
 
+        #zip {
+            width: 75px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #zipBtn {
+            float: right;
+            margin-right: 115px;
+        }
+
+        #c_birth {
+            padding: 9px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+            width: 400px;
+            box-sizing: border-box;
+        }
+
+
+        #ad {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #check {
+            margin-bottom: 15px;
+            font-size: 12px;
+            margin-left: 390px;
+            width: 500px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        /*#pwdC {*/
+        /*    cursor: pointer;*/
+        /*    text-decoration: none;*/
+        /*    color: #000;*/
+        /*    margin-right: 145px;*/
+        /*}*/
+
+        #delete {
+            cursor: pointer;
+        }
+
+        #choice{
+            font-size: 11px;
+        }
+
+        .choiceLabel {
+            cursor: pointer;
+        }
+
+        .oneLine{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #det, #phn{
+            font-size: 11px;
+            margin-top: 15px;
+        }
+
+        #det{
+            /*margin-left: 5px;*/
+        }
+
+        #phn{
+            margin-right: 37px;
+        }
+
     </style>
+
+    <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
+<jsp:include page="header.jsp"/>
+<jsp:include page="myPageHeader.jsp"/>
 <div id="myform">
     <form action="/mypage/info" method="POST" onsubmit="return formCheck()">
-        <h1 id="loginTitle">개인정보 관리</h1>
         <div class="container">
+            <h1 id="loginTitle">Edit Profile</h1>
             <p id="check-result"></p>
-            <label id="email">이메일*</label>
+            <label class="infoLabel">이메일*</label>
             <input class="special-class" type="text" id="c_email" name="c_email" value="<%= session.getAttribute("c_email")%>" disabled>
-            <label>이름*</label>
+            <label class="infoLabel">이름*</label>
             <input class="special-class" type="text" name="c_name" value="<%= session.getAttribute("c_name")%>"disabled>
-            <label>주소</label>
-            <input type="text" id="zip" name="c_zip" value="<%= session.getAttribute("c_zip")%>" readonly>
-            <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">
+            <label class="infoLabel">주소</label>
+            <div id="ad">
+                <input type="text" id="zip" name="c_zip" value="<%= session.getAttribute("c_zip")%>" readonly>
+                <input type="button" id="zipBtn" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" ></div>
             <input type="text" id="roadAddress" name="c_road_a" value="<%= session.getAttribute("c_road_a")%>" readonly>
             <input type="text" id="jibunAddress" name="c_jibun_a" maxlength="30" value="<%= session.getAttribute("c_jibun_a")%>" readonly>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" name="c_det_a" maxlength="30" value="<%= session.getAttribute("c_det_a")%>"><br><br>
-            <label>휴대폰</label>
-            <input class="special-class" type="text" id="c_phn" name="c_phn" maxlength="12" value="<%= session.getAttribute("c_phn")%>">
-            <label>성별*</label>
+            <div class="oneLine"><input type="text" id="detailAddress" name="c_det_a" maxlength="30" value="<%= session.getAttribute("c_det_a")%>"><p id="det">건물명 + 상세주소</p></div><br>
+            <label class="infoLabel">휴대폰</label>
+            <div class="oneLine"><input class="special-class" type="text" id="c_phn" name="c_phn" maxlength="12" value="<%= session.getAttribute("c_phn")%>"><p id="phn">-제외</p></div>
+            <label class="infoLabel">성별*</label>
             <input class="special-class" type="text" name="c_gnd" value="<%= session.getAttribute("c_gnd")%>"disabled>
-            <label id="aa">생년월일*</label>
-            <input class="special-class"  id="birth" name="c_birth" value="<%= session.getAttribute("c_birth")%>"disabled><br><br>
+            <label class="infoLabel" id="aa">생년월일</label>
+            <input type="date" id="c_birth" name="c_birth" min="1900-01-01" max="2023-12-31" value="<%= session.getAttribute("c_birth")%>" ><br><br>
+          <div id="choice">
             <a>SMS 수신</a><br>
-            <input type="radio" id="sms_agr" name="sms_agr" value="Y" <%= session.getAttribute("sms_agr").equals("Y") ? "checked" : "" %>>수신함
-             <input type="radio" id="sms_no" name="sms_agr" value="N" <%= session.getAttribute("sms_agr").equals("N") ? "checked" : "" %>>수신안함<br><br>
-            <a>이메일 수신</a><br>
-            <input type="radio" id="email_agr" name="email_agr" value="Y"<%= session.getAttribute("email_agr").equals("Y") ? "checked" : "" %>>수신함
-            <input type="radio" id="email_no" name="email_agr" value="N"<%= session.getAttribute("email_agr").equals("N") ? "checked" : "" %>>수신안함<br><br>
-            <button id="edit">수정</button><br>
-            <a href="/mypage/list"><button type="button">나가기</button></a><br><br>
+            <input type="radio" id="sms_agr" name="sms_agr" value="Y" <%= session.getAttribute("sms_agr").equals("Y") ? "checked" : "" %>>
+            <label for="sms_agr" class="choiceLabel">수신함</label>
+            <input type="radio" id="sms_no" name="sms_agr" value="N" <%= session.getAttribute("sms_agr").equals("N") ? "checked" : "" %>>
+            <label for="sms_no" class="choiceLabel">수신 안함</label><br><br>
 
-        </div>
+            <a>이메일 수신</a><br>
+            <input type="radio" id="email_agr" name="email_agr" value="Y" <%= session.getAttribute("email_agr").equals("Y") ? "checked" : "" %>>
+            <label for="email_agr" class="choiceLabel">수신함</label>
+            <input type="radio" id="email_no" name="email_agr" value="N" <%= session.getAttribute("email_agr").equals("N") ? "checked" : "" %>>
+            <label for="email_no" class="choiceLabel">수신 안함</label>
+          </div><br><br><br><br><br>
+
+
+            <div id="check">
+<%--                <button id="edit">수정</button><a id="pwdC" href="/mypage/pwdEdit">비밀번호 변경</a> <a id="delete" onclick="test()">회원탈퇴</a>--%>
+                <button id="edit">수정</button> <a id="delete" onclick="test()">회원탈퇴</a>
+            </div>
+      </div>
     </form>
 </div>
+<jsp:include page="footer.jsp" flush="false" />
 
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -157,26 +226,30 @@
         }).open();
     }
 
-    function formCheck(){
+    function formCheck() {
         var isPhn = newPhnCheck();
-        if(!isPhn){
+        if (!isPhn) {
             return false;
         }
         return confirm("변경사항을 마무리하시고 적용하시겠습니까?")
     }
 
-    function newPhnCheck(){
+    function newPhnCheck() {
         var newPhn = document.getElementById("c_phn").value;
 
         var newPhnPattern = /^[0-9]{11,12}$/;
 
-        if(!newPhnPattern.test(newPhn)){
+        if (!newPhnPattern.test(newPhn)) {
             alert("휴대폰 번호는 숫자 11~12자로 입력이 가능합니다.")
             return false;
-    }
+        }
         return true;
     }
 
+
+function test(){
+alert("테스트중입니다!")
+}
 
 </script>
 </body>
