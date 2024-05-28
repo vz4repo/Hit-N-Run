@@ -376,11 +376,6 @@
                     </div>
                 </div>
             </div>
-            <%--            <section class="order__payment">
-                            <%@include file="payCheckout.jsp" %>
-                        </section>
-            --%>
-
 
             <script>
 

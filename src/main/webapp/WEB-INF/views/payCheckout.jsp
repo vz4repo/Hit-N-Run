@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%--<% response.setHeader("Access-Control-Allow-Origin", "*"); %>--%>
 
-<div class="title__pay">결제정보</div>
+<%--<div class="title__pay">결제정보</div>--%>
 <div class="wrapper__parent">
-
     <%-- 테스트값 입력 영역(dev) --%>
     <div class="wrapper" style="display: none">
 
