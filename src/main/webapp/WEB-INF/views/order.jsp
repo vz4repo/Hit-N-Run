@@ -192,9 +192,9 @@
     }
 
 
-  /*.close {*/
-  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
-  /*}*/
+    /*.close {*/
+    /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
+    /*}*/
 
 
     .header-container {
@@ -253,47 +253,47 @@
         <%-- 김수연 0524 기본배송지 form 시작 --%>
         <div class="dlv-header-content">
             <%-- TODO : 기본배송지 --%>
-                <table>
-                    <colgroup>
-                        <col style="width: 150px">
-                        <col style="width: 400px">
-                    </colgroup>
-                    <tr>
-                        <td class="label">배송지</td>
-                        <td class="dlv-content">${defaultDto.adr_name}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">이름/연락처</td>
-                        <td class="dlv-content">
-                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">주소</td>
-                        <td class="dlv-content">
-                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">배송 요청사항</td>
-                        <td class="dlv-content">
-                            <select class="select-request" name="delivery_request" id="delivery_request">
-                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
-                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
-                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
-                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
-                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
-                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                                <option value="etc">직접 입력</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
+            <table>
+                <colgroup>
+                    <col style="width: 150px">
+                    <col style="width: 400px">
+                </colgroup>
+                <tr>
+                    <td class="label">배송지</td>
+                    <td class="dlv-content">${defaultDto.adr_name}</td>
+                </tr>
+                <tr>
+                    <td class="label">이름/연락처</td>
+                    <td class="dlv-content">
+                        ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">주소</td>
+                    <td class="dlv-content">
+                        (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">배송 요청사항</td>
+                    <td class="dlv-content">
+                        <select class="select-request" name="delivery_request" id="delivery_request">
+                            <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                            <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                            <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                            <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                            <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                            <option value="etc">직접 입력</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
         <!-- 배송지 변경 버튼 -->
-                <button class="btn-change-address">배송지 변경</button>
+        <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -311,25 +311,21 @@
 </div>
 <section class="order__items">
     <hr class="first__under"/>
-    <div class="title__order">상품정보</div>
+    <div class="title__order">제품정보</div>
     <div class="tb__order">
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="20%"/>
                     <col width="50%"/>
                     <col width="10%"/>
-                    <col width="5%"/>
-                    <col width="5%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
                     <col width="10%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th scope="col">
-                        <div>이미지</div>
-                    </th>
-                    <th scope="col">
-                        <div>상품정보</div>
+                        <div>제품정보</div>
                     </th>
                     <th scope="col">
                         <div>판매가</div>
@@ -347,23 +343,40 @@
                 </thead>
                 <tbody>
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
-                    <tr>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
-                                     alt="이미지 준비 중 입니다"
-                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
-                            </a>
+                    <tr class="product-row">
+                        <td class="product-info">
+                            <div>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                    <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
+                                         alt="이미지 준비 중 입니다"
+                                         onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
+                                </a>
+                            </div>
+                            <ul class="info">
+                                <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                        <%--<span>${cartDto.brd_name}</span>--%>
+                                </li>
+                                <!-- 상품 이름 -->
+                                <li class="name">
+                                    <a href="#">${cartDto.pd_name}</a>
+                                </li>
+                                <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${cartDto.pd_clsf_code}</li>
+                            </ul>
                         </td>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
-                            <span>${cartDto.pd_clsf_code}</span>
-                        </td>
+                            <%--<td>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                                <span></span>
+                            </td>--%>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
+                    <%--<c:if test="${!status.last}">
+                        <tr><td colspan="5"><hr></td></tr>
+                    </c:if>--%>
                 </c:forEach>
                 </tbody>
                 <tfoot>
@@ -374,27 +387,27 @@
                 </tr>
                 <tr>
                     <td colspan="7">
-                            <div class="tb__right">
-                                <div class="totalSum">상품구매금액
-                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
-                                </div>
-                                <div class="grade">등급 할인
-                                    <span>없음</span>
-                                </div>
-                                <div class="cupon">쿠폰 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="point">적립금 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="card">카드사 할인
-                                    <span>없음</span>
-                                </div>
-                                <div>배송비 무료</div>
-                                <div class="odpayamt">최종 결제 금액
-                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-                                </div>
+                        <div class="tb__right">
+                            <div class="totalSum">상품구매금액
+                                <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
                             </div>
+                            <div class="grade">등급 할인
+                                <span>없음</span>
+                            </div>
+                            <div class="cupon">쿠폰 사용
+                                <span>없음</span>
+                            </div>
+                            <div class="point">적립금 사용
+                                <span>없음</span>
+                            </div>
+                            <div class="card">카드사 할인
+                                <span>없음</span>
+                            </div>
+                            <div>배송비 무료</div>
+                            <div class="odpayamt">최종 결제 금액
+                                <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                            </div>
+                        </div>
                     </td>
                 </tr>
                 </tfoot>
@@ -428,7 +441,7 @@
 
         rows.forEach(function (row) {
             /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
-            const price = row.cells[5].innerText;
+            const price = row.cells[4].innerText;
             totalSum += parseInt(price.replace(/[^\d]/g, ''));
         });
         /*총합을 나타낼 위치*/
@@ -444,22 +457,22 @@
         const btn = document.querySelector('.btn-change-address');
         const closeModal = document.querySelector('#closeModal');
 
-    btn.addEventListener('click', () => {
-      addressModal.style.display = 'block';
-      $.ajax({
-        type: "GET",
-        url: `${contextPath}/delivery/deliveryList`,
-        success: function (response) {
-          if (response.message) {
-            $(".dlv-modal-container").html(`<p>${response.message}</p>`);
-          } else {
-            let htmlContent = '';
-            response.list.forEach(listDto => {
-              /*
-              기본배송지 붙일때 쓸 태그
-              <span className="default">기본배송지</span>
-              */
-              htmlContent += `
+        btn.addEventListener('click', () => {
+            addressModal.style.display = 'block';
+            $.ajax({
+                type: "GET",
+                url: `${contextPath}/delivery/deliveryList`,
+                success: function (response) {
+                    if (response.message) {
+                        $(".dlv-modal-container").html(`<p>${response.message}</p>`);
+                    } else {
+                        let htmlContent = '';
+                        response.list.forEach(listDto => {
+                            /*
+                            기본배송지 붙일때 쓸 태그
+                            <span className="default">기본배송지</span>
+                            */
+                            htmlContent += `
                             <div class="address-card">
                                 <div class="title">
                                     (${'${listDto.rcver}'}) ${'${listDto.adr_name}'}
@@ -473,56 +486,56 @@
                                 </div>
                             </div>
                         `;
+                        });
+                        $(".dlv-modal-container").html(htmlContent);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching delivery list:', error);
+                    alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
             });
-            $(".dlv-modal-container").html(htmlContent);
-          }
-        },
-        error: function (xhr, status, error) {
-          console.error('Error fetching delivery list:', error);
-          alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-        }
-      });
-    });
+        });
 
-    closeModal.addEventListener('click', () => {
-      addressModal.style.display = 'none';
-    });
+        closeModal.addEventListener('click', () => {
+            addressModal.style.display = 'none';
+        });
 
-    window.addEventListener('click', (event) => {
-      if (event.target === addressModal) {
-        addressModal.style.display = 'none';
-      }
-    });
+        window.addEventListener('click', (event) => {
+            if (event.target === addressModal) {
+                addressModal.style.display = 'none';
+            }
+        });
 
-    /*
-# 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
+        /*
+    # 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
 
-DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
-이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
+    DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
+    이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
 
-따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
-이벤트 위임을 사용해야 합니다.
+    따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
+    이벤트 위임을 사용해야 합니다.
 
-이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
-이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
+    이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
+    이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
 
-이벤트 위임을 사용하면
-이벤트 핸들러를 상위 요소에 등록하고,
-이벤트가 하위 요소로 위임되도록 합니다.
-    * */
-    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
-      if (event.target.classList.contains('dlv-select')) {
-        const c_adr_list_id = event.target.getAttribute('addrId');
-        $.ajax({
-          type: "GET",
-          url: `${contextPath}/delivery/deliverySelected`,
-          data: {dlvId: c_adr_list_id},
-          success: function (response) {
-            if (response.message) {
-              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
-            } else {
-              const selectedDto = response.selectedDto;
-              const htmlContent = `
+    이벤트 위임을 사용하면
+    이벤트 핸들러를 상위 요소에 등록하고,
+    이벤트가 하위 요소로 위임되도록 합니다.
+        * */
+        document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+            if (event.target.classList.contains('dlv-select')) {
+                const c_adr_list_id = event.target.getAttribute('addrId');
+                $.ajax({
+                    type: "GET",
+                    url: `${contextPath}/delivery/deliverySelected`,
+                    data: {dlvId: c_adr_list_id},
+                    success: function (response) {
+                        if (response.message) {
+                            $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+                        } else {
+                            const selectedDto = response.selectedDto;
+                            const htmlContent = `
                  <table>
                     <colgroup>
                         <col style="width: 150px">
@@ -560,27 +573,27 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
                     </tr>
                 </table>
                 `;
-              $(".dlv-header-content").html(htmlContent);
-              addressModal.style.display = 'none';
+                            $(".dlv-header-content").html(htmlContent);
+                            addressModal.style.display = 'none';
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching selected delivery:', error);
+                        alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+                    }
+                });
             }
-          },
-          error: function (xhr, status, error) {
-            console.error('Error fetching selected delivery:', error);
-            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-          }
         });
-      }
-    });
-  })
+    })
 
 
-  /* 김수연 추가 0524 시작 */
-  // function showDefaultDLV() {
-  //     return `
-  //           <dlv>안녕하세용</dlv>
-  //           `;
-  // }
-  /* 김수연 추가 0524 끝 */
+    /* 김수연 추가 0524 시작 */
+    // function showDefaultDLV() {
+    //     return `
+    //           <dlv>안녕하세용</dlv>
+    //           `;
+    // }
+    /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>

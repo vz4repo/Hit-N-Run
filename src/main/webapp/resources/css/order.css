@@ -1,4 +1,4 @@
-.order__items * {
+* {
     font-family: "IBM Plex Sans KR", sans-serif;
     /*font-weight: 400;*/
     font-style: normal;
@@ -13,6 +13,25 @@
     font-size: 13px;
     line-height: 1.35;
     color: #777;
+}
+
+.product-info {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left !important;
+}
+
+.product-info img {
+    width: 100px;
+    height: 110px;
+    object-fit: scale-down;
+    background-color: #ebebeb;
+}
+
+.info {
+    margin-left: 50px;
 }
 
 .order__title__detail a,
@@ -103,13 +122,6 @@
     font-size: 14px;
 }
 
-
-.tb__order img {
-    height: 110px;
-    width: auto;
-}
-
-
 .order__title__detail {
     font-size: 15px;
 }
@@ -122,14 +134,12 @@
     color: #8d8d8d;
 }
 
-
-
 .title__order {
     margin-left: 8%;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: 600;
     margin-bottom: 10px;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 
@@ -159,6 +169,14 @@
 
 #odpayamt {
     font-weight: bold;
+}
+
+.product-row {
+    border-top: 1px solid #ccc;
+}
+
+.product-row:first-child {
+    border-top: none;
 }
 
 /*.tb__right {

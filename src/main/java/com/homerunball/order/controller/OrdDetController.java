@@ -39,22 +39,6 @@ public class OrdDetController {
       List<OrderDetDto> list = orderdetDao.select(c_id);
 
 
-
-
-      /*재고테이블이랑 조인해서 삭제될것*/
-//      List<CartDto> imglist = cartDao.getStk(c_id);
-//// CartDto를 map에 넣어 줌
-//      Map<String, CartDto> imgMap = new HashMap<>();
-//      for (CartDto img : imglist) {
-//        imgMap.put(img.getPd_id(), img);
-//      }
-//      // map에 넣어준걸 다시  orderdetDto에 넣어 줌
-//      for (OrderDetDto order : list) {
-//        CartDto matchedCart = imgMap.get(order.getPd_id());
-//        if (matchedCart != null) {
-//          order.setCartDto(matchedCart);
-//        }
-//      }
 //      List<CartDto> Imglist =cartDao.getStk(c_id);
       m.addAttribute("list",list);
 //      m.addAttribute("Imglist",Imglist);
