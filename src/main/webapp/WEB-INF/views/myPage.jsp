@@ -5,16 +5,18 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>My Page</title>
 
     <style>
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+        }
+
         #myPage {
             margin: auto;
             width: 900px;
-
         }
-
         .none {
             text-decoration: none;
             cursor: pointer;
@@ -60,8 +62,6 @@
 
         .ma2 {
             font-size: 10px;
-            /* color: gray; */
-
         }
 
         #oneMonth {
@@ -103,6 +103,7 @@
 
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -187,7 +188,7 @@
                 <span class="ma2">0</span>
             </div>
         </div>
-    </div>
+    </div><br><br>
 
 </div>
 <jsp:include page="footer.jsp" flush="false" />
@@ -196,7 +197,7 @@
 
 
     function test(){
-        alert("테스트중입니다!")
+        alert("테스트중입니다")
     }
 </script>
 
