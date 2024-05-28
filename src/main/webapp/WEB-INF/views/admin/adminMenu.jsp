@@ -2,8 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="w3-sidebar w3-light-grey w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button no-event"><img src="/img/homerunball_logo.png" style="width:100%"></a>
-    <a href="<c:url value='/admin/main/#'/>" class="w3-bar-item w3-button">홈</a>
-    <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">제품 대시보드</a>
+    <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">대시보드</a>
     <a href="<c:url value='/admin/product/list'/>" class="w3-bar-item w3-button">제품목록</a>
     <a href="<c:url value='/admin/product/register'/>" class="w3-bar-item w3-button">제품등록</a>
     <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAcc1')">제품 관리 <i class="fa fa-caret-down"></i></button>
