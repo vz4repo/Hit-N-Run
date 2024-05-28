@@ -7,11 +7,10 @@
 <html lang="en">
 <head>
     <title>Home Run Ball</title>
-    <%--폰트 정해지면 바꾸기--%>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <style>
         body{
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: "IBM Plex Sans KR", sans-serif;
         }
 
         #loginform {
@@ -25,19 +24,16 @@
             padding-bottom: 2%;
             margin: 0 auto;
             margin-top: 200px;
-            /*margin-bottom: 50px;*/
         }
 
         .container {
             width: 400px;
-            /*height: 400px;*/
             margin: 0 auto;
             text-align: left;
         }
 
 
         .special-class {
-            /*width: 87%;*/
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -46,17 +42,6 @@
             box-sizing: border-box;
         }
 
-        /*button {*/
-        /*    width: 100%;*/
-        /*    height: 50px;*/
-        /*    padding: 10px;*/
-        /*    margin-bottom: 10px;*/
-        /*    border: none;*/
-        /*    cursor: pointer;*/
-        /*    border-radius: 5px;*/
-        /*    background-color: darkgreen;*/
-        /*    color: whitesmoke;*/
-        /*}*/
 
         .subBtn {
             width: 49%;
@@ -230,7 +215,7 @@
         <button type="submit" id="login">로그인</button>
 
         <div id="check">
-            <a id="forgot" onclick="test()" >아이디/비밀번호 찾기</a> <a id="regi" href="/register/add" style="margin-left: 220px">회원가입 </a>
+            <a id="forgot" onclick="test()" >비밀번호 찾기</a> <a id="regi" href="/register/add" style="margin-left: 280px">회원가입 </a>
         </div><br>
 
         <div class="buttonContainer">
