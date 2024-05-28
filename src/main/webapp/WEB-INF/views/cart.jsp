@@ -13,6 +13,7 @@
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
@@ -76,9 +77,9 @@
                                     <input type="hidden" name="c_id" id="update_c_id" data-cid="${cartDto.c_id}" value="${cartDto.c_id}"/>
                                     <input type="hidden" name="pd_id" id="update_pd_id" data-pdid="${cartDto.pd_id}"  value="${cartDto.pd_id}"/>
                                     <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" data-sizecd="${cartDto.pd_clsf_code}" value="${cartDto.pd_clsf_code}"/>
-                                    <button class="quantity_btn minus_btn"><i class="fas fa-caret-left"></i></button>
+                                    <button class="quantity_btn minus_btn"><i class="fas fa-minus"></i></button>
                                     <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" readonly/>
-                                    <button class="quantity_btn plus_btn"><i class="fas fa-caret-right"></i></button>
+                                    <button class="quantity_btn plus_btn"><i class="fas fa-plus"></i></button>
 
 <%--                                    <button class="quantity_modify_btn"  >변경</button>--%>
                                 </form>

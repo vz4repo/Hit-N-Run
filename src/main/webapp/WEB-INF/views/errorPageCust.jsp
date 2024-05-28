@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title> 잠시 기다려주세요 </title>
