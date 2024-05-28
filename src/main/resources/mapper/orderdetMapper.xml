@@ -88,20 +88,20 @@
     order by frst_reg_dt desc, od_det_seqnum desc
   </select>
 
-  <insert id="insert" parameterType="OrderDetDto">
-    INSERT INTO ord_det
-    (od_det_seqnum, od_id, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, sls_prc, od_qty)
-    select (select IFNULL(max(od_det_seqnum), 0) + 1 from ord_det where od_id = (select max(od_id) + 1 from ord))
+    <insert id="insert" parameterType="OrderDetDto">
+        INSERT INTO ord_det
+        (od_det_seqnum, od_id, c_id, pd_id, pd_clsf_cd, od_dt, pd_name, sls_prc, od_qty)
+        select (select IFNULL(max(od_det_seqnum), 0) + 1 from ord_det where od_id = (select max(od_id) + 1 from ord))
 --             ,(select CONCAT(DATE_FORMAT(CURDATE(), '%Y%m%d'), LPAD(IFNULL(max(substr(o.od_id, 9)),0)+1, 4, '0')) from ord o)
-         , (select LPAD(IFNULL(max(o.od_id), 0) + 1, 12, '0') from ord o)
-         , #{c_id}
-         , #{pd_id}
-         , #{pd_clsf_cd}
-         , now()
-         , #{pd_name}
-         , #{sls_prc}
-         , #{od_qty};
-  </insert>
+             , (select LPAD(IFNULL(max(o.od_id), 0) + 1, 12, '0') from ord o)
+             , #{c_id}
+             , #{pd_id}
+             , #{pd_clsf_cd}
+             , now()
+             , #{pd_name}
+             , #{sls_prc}
+             , #{od_qty};
+    </insert>
 
   <!--    <insert id="insert" parameterType="OrderDetDto">-->
   <!--        <selectKey keyProperty="od_det_seqnum" order="AFTER" resultType="java.lang.String">-->
@@ -112,7 +112,6 @@
   <!--        values-->
   <!--(#{od_det_seqnum},#{od_id}, #{c_id}, #{pd_id}, #{pd_clsf_cd}, #{od_dt},#{pd_name},#{sls_prc},#{od_qty},#{od_stat_cd},#{frst_reg_dt},#{frst_reg_id},#{last_mod_dt},#{last_mod_id})-->
   <!--    </insert>-->
-
 
   <update id="update" parameterType="OrderDetDto">
     update ord_det
@@ -138,6 +137,16 @@
     FROM ord_det
     WHERE od_id = #{od_Id}
   </select>
+
+  <update id="updateOrderStatus" parameterType="OrderDetDto">
+    update ord_det
+    set od_stat_cd = '04'           -- 주문취소신청
+    where od_id         = #{od_id}
+      and pd_id         = #{pd_id}
+      and pd_clsf_cd    = #{pd_clsf_cd}
+      and c_id          = #{c_id}
+    -- 1건 나와야 성공, 그 외에 뭐지?
+  </update>
 
   <select id="selectPaymentHistoryWithDateRange" parameterType="map" resultType="OrderDetDto">
     select od.od_id                   -- 주문id

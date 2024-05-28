@@ -12,8 +12,9 @@
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/cart.css'/>" rel="stylesheet"/>
     <%--   다니님 header, footer --%>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
-    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <title>장바구니</title>
@@ -21,10 +22,10 @@
 <body class="cart">
 <script>
     let msg = "${msg}";
-    if (msg == "CART_CNT_OVER") alert("대량주문은 전화문의 부탁드립니다.")
-    if (msg == "UPDATE_ERR") alert("수량변경에 실패하였습니다.")
-    if (msg == "DEL_ERR") alert("삭제에 실패하였습니다.")
-    if (msg == "INSERT_ERR") alert("장바구니 담기에 실패하였습니다.")
+    if(msg=="CART_CNT_OVER") alert("대량주문은 전화문의 부탁드립니다.")
+    if(msg=="UPDATE_ERR") alert("수량변경에 실패하였습니다.")
+    if(msg=="DEL_ERR") alert("삭제에 실패하였습니다.")
+    if(msg=="INSERT_ERR") alert("장바구니 담기에 실패하였습니다.")
 </script>
 <jsp:include page="header.jsp"/>
 <div class="head_cart">장바구니</div>
@@ -94,16 +95,12 @@
                         <td>
                             <div class="quantity_control">
                                 <form action="/cart/update" method="post" id="update_form">
-                                    <input type="hidden" name="c_id" id="update_c_id" data-cid="${cartDto.c_id}"
-                                           value="${cartDto.c_id}"/>
-                                    <input type="hidden" name="pd_id" id="update_pd_id" data-pdid="${cartDto.pd_id}"
-                                           value="${cartDto.pd_id}"/>
-                                    <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code"
-                                           data-sizecd="${cartDto.pd_clsf_code}" value="${cartDto.pd_clsf_code}"/>
-                                    <button class="quantity_btn minus_btn"><i class="fas fa-caret-left"></i></button>
-                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}"
-                                           readonly/>
-                                    <button class="quantity_btn plus_btn"><i class="fas fa-caret-right"></i></button>
+                                    <input type="hidden" name="c_id" id="update_c_id" data-cid="${cartDto.c_id}" value="${cartDto.c_id}"/>
+                                    <input type="hidden" name="pd_id" id="update_pd_id" data-pdid="${cartDto.pd_id}"  value="${cartDto.pd_id}"/>
+                                    <input type="hidden" name="pd_clsf_code" id="update_pd_clsf_code" data-sizecd="${cartDto.pd_clsf_code}" value="${cartDto.pd_clsf_code}"/>
+                                    <button class="quantity_btn minus_btn"><i class="fas fa-minus"></i></button>
+                                    <input type="text" name="cart_cnt" id="update_count" value="${cartDto.cart_cnt}" readonly/>
+                                    <button class="quantity_btn plus_btn"><i class="fas fa-plus"></i></button>
 
                                         <%--                                    <button class="quantity_modify_btn"  >변경</button>--%>
                                 </form>
@@ -268,12 +265,12 @@
             }
 
         /* plus 수량변경 */
-        $('.plus_btn').on('click change', function () {
-                /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
+        $('.plus_btn').on('click change', function() {
+            /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
                 let quantityInput = $(this).siblings('input[name="cart_cnt"]');
                 /* 수량의 value를 parseInt해준다 */
                 let quantity = parseInt(quantityInput.val());
-                if (quantity <= 100) {
+                if (quantity <=100){
                     quantity++;
                     /* 증가된 수량을 input 태그에 설정한다.*/
                     quantityInput.val(quantity);

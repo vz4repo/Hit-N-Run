@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
@@ -19,6 +20,7 @@
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -32,6 +34,8 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+<jsp:include page="myPageHeader.jsp"/>
+<br><br>
 <div class="head_order_det">주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
@@ -86,7 +90,8 @@
                                             <div>
                                                 <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
                                                     <img src="/img/product/${orderdetDto.pd_type_cd}/main/${orderdetDto.mn_img_fn}"
-                                                         alt="썸네일" onerror="this.onerror=null; this.src='/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}';"/>
+                                                         alt="썸네일" name="thumbnail"
+                                                         onerror="this.onerror=null; this.src='/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}';"/>
                                                 </a>
                                             </div>
                                             <ul class="info">
@@ -113,8 +118,7 @@
                                             <div class="order-number">
                                                 <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
                                                 <form id="orderForm" action="/orderDetail" style="display: none;">
-                                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId"
-                                                           id="orderId">
+                                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                                 </form>
                                             </div>
                                         </td>
@@ -128,14 +132,27 @@
                                         </td>
 
                                         <td class="order-status">
-                                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
                                             <!-- 구매상태 링크 -->
-                                            <button class="open-delivery-modal">배송조회</button>
+                                            <div class="open-order-step-modal">
+                                                <a href='javascript:void(0);'>${orderdetDto.od_stat_name}</a>
+                                            </div>
                                             <!-- 배송조회 버튼 -->
+                                            <button class="open-delivery-modal">배송조회</button>
+                                            <c:if test="${not fn:contains(orderdetDto.od_stat_name, '취소')}">
+                                                <%-- '취소' 있으면 버튼 출력 안함 --%>
+                                            <!-- 주문취소 버튼 -->
+                                                <!-- 주문취소 버튼 -->
+                                                <form method="POST" action="/order/cancel" style="display:inline;">
+                                                    <input type="hidden" name="od_id" value=${orderdetDto.od_id}>
+                                                    <input type="hidden" name="pd_id" value=${orderdetDto.pd_id}>
+                                                    <input type="hidden" name="pd_clsf_cd" value=${orderdetDto.pd_clsf_cd}>
+                                                    <button class="cancel-order-confirm-modal" type="submit">주문취소</button>
+                                                </form>
+                                            </c:if>
                                         </td>
                                     </tr>
-                                    <!-- 추가 주문 행을 여기에 추가 -->
-                                    </tbody>
+                                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                </tbody>
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
@@ -151,7 +168,7 @@
             <div class="modal-header">
                 <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
-                    Step<span class="order-step-subheader">주문단계</span>
+                    <span class="order-step-subheader">주문단계</span>
                     <!-- 주문단계 헤더 -->
                 </h2>
                 <!-- 모달 닫기 버튼 -->
@@ -170,23 +187,23 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>주문 일시</td>
                     </tr>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>입금 확인</td>
                     </tr>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>출고 요청</td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 08:52</td>
+                        <td>2024-05-11 08:52</td>
                         <td>출고 처리 중</td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 10:16</td>
+                        <td>2024-05-11 10:16</td>
                         <td>출고 완료</td>
                     </tr>
                     <!-- 추가 주문 단계 행을 여기에 추가 -->
@@ -237,56 +254,56 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>2023-12-13 13:54:02</td>
+                        <td>2024-05-13 13:54:02</td>
                         <td>강남개포주공</td>
                         <td>배송완료</td>
                         <td>010-9266-4597</td>
                         <td>010-8734-1963</td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 12:06:55</td>
+                        <td>2024-05-13 12:06:55</td>
                         <td>강남개포주공</td>
                         <td>배송출발 (배달예정시간 :14~16시)</td>
                         <td>010-9266-4597</td>
                         <td>010-8734-1963</td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 10:19:33</td>
+                        <td>2024-05-13 10:19:33</td>
                         <td>강남A</td>
                         <td>간선하차</td>
                         <td>031-751-1255</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 10:17:52</td>
+                        <td>2024-05-13 10:17:52</td>
                         <td>강남A</td>
                         <td>간선하차</td>
                         <td>031-751-1255</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 07:02:38</td>
+                        <td>2024-05-13 07:02:38</td>
                         <td>대전HUB</td>
                         <td>간선상차</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 06:56:06</td>
+                        <td>2024-05-13 06:56:06</td>
                         <td>대전HUB</td>
                         <td>간선상차</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-12 00:47:49</td>
+                        <td>2024-05-12 00:47:49</td>
                         <td>부천1</td>
                         <td>간선상차</td>
                         <td>032-528-1256</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 20:47:25</td>
+                        <td>2024-05-11 20:47:25</td>
                         <td>중산물류</td>
                         <td>집화처리</td>
                         <td>010-6565-8952</td>
@@ -378,11 +395,6 @@
                     </div>
                 </div>
             </div>
-            <%--            <section class="order__payment">
-                            <%@include file="payCheckout.jsp" %>
-                        </section>
-            --%>
-
 
             <script>
 
@@ -405,105 +417,120 @@
                     const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
                     const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
                     const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+                    const cancelOrderConfirmModal = document.querySelectorAll('.cancel-order-confirm-modal');
 
-                    /* 영수증 모달 */
-                    const receiptModal = document.querySelector('#receiptModal');
-                    const orderAmounts = document.querySelectorAll('.order-amount');
+                /* 영수증 모달 */
+                const receiptModal = document.querySelector('#receiptModal');
+                const orderAmounts = document.querySelectorAll('.order-amount');
 
-                    //주문상세내역 모달 열기
-                    openOrderIdModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            orderIdModal.style.display = 'flex';
-                        })
+                /*주문상세내역 모달 열기 */
+                openOrderIdModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    orderIdModal.style.display = 'flex';
+                  })
+                })
+
+                /* 주문 단계 모달 열기 */
+                openOrderStepModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    orderStepModal.style.display = 'flex';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '350px';
                     })
-
-                    // 주문 단계 모달 열기
-                    openOrderStepModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            orderStepModal.style.display = 'flex';
-                            modalContent.forEach((content) => {
-                                content.style.maxWidth = '350px';
-                            })
-                        });
-                    });
-
-                    // 배송 조회 모달 열기
-                    openDeliveryModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            deliveryModal.style.display = 'flex';
-                            modalContent.forEach((content) => {
-                                content.style.maxWidth = '1400px';
-                            })
-                        });
-                    });
-
-                    // 영수증 모달 열기
-                    orderAmounts.forEach((orderAmount) => {
-                        orderAmount.addEventListener('click', async () => {
-                            modalContent.forEach((content) => {
-                                content.style.maxWidth = '400px';
-                            });
-                            const orderId = orderAmount.getAttribute('data-order-id');
-                            const receiptContent = document.querySelector('#receiptContent');
-                            try {
-                                /* TODO: json 값 불러오기 */
-                                <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
-                                <%--const receiptHtml = await response.text();--%>
-                                <%--receiptContent.innerHTML = receiptHtml;--%>
-                                receiptModal.style.display = 'flex';
-                            } catch (error) {
-                                receiptContent.innerHTML = '영수증을 불러오는 데 실패했습니다.';
-                                receiptModal.style.display = 'flex';
-                            }
-                        });
-                    });
-
-                    // 모달 닫기
-                    closeModalButtons.forEach((button) => {
-                        button.addEventListener('click', () => {
-                            button.closest('.modal').style.display = 'none';
-                        });
-                    });
-
-                    window.addEventListener('click', (event) => {
-                        if (event.target === orderStepModal || event.target === deliveryModal ||
-                            event.target === receiptModal || event.target === orderIdModal) {
-                            event.target.style.display = 'none';
-                        }
-                    });
-
+                  });
                 });
 
-                /* 영수증 링크 복사 */
-                const copyLink = () => {
-                    const url = window.location.href;
-                    navigator.clipboard.writeText(url)
-                        .then(() => alert("링크가 복사되었습니다!"))
-                        .catch(err => alert("링크 복사에 실패했습니다."));
+                /* 배송 조회 모달 열기 */
+                openDeliveryModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    deliveryModal.style.display = 'flex';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '1400px';
+                    })
+                  });
+                });
+
+                /* 영수증 모달 열기 */
+                orderAmounts.forEach((orderAmount) => {
+                  orderAmount.addEventListener('click', async () => {
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '400px';
+                    });
+                    const orderId = orderAmount.getAttribute('data-order-id');
+                    const receiptContent = document.querySelector('#receiptContent');
+                    try {
+                      /* TODO: json 값 불러오기 */
+                      <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
+                      <%--const receiptHtml = await response.text();--%>
+                      <%--receiptContent.innerHTML = receiptHtml;--%>
+                      receiptModal.style.display = 'flex';
+                    } catch (error) {
+                      receiptContent.innerHTML = '영수증을 불러오는 데 실패했습니다.';
+                      receiptModal.style.display = 'flex';
+                    }
+                  });
+                });
+
+                /* 배송취소 확인 모달 열기 */
+                cancelOrderConfirmModal.forEach((button) => {
+                  button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    /* TODO : [제품명][주문일자][주문금액] 확인 필요할까? */
+                    let result = confirm("주문을 취소하시겠습니까?");
+                    if (result) {
+                          let form = button.closest('form');
+                          form.submit();
+                    }
+                    ;
+                  });
+                });
+
+                // 모달 닫기
+                closeModalButtons.forEach((button) => {
+                  button.addEventListener('click', () => {
+                    button.closest('.modal').style.display = 'none';
+                  });
+                });
+
+                window.addEventListener('click', (event) => {
+                  if (event.target === orderStepModal || event.target === deliveryModal ||
+                      event.target === receiptModal || event.target === orderIdModal) {
+                    event.target.style.display = 'none';
+                  }
+                });
+
+              });
+
+              /* 영수증 링크 복사 */
+              const copyLink = () => {
+                const url = window.location.href;
+                navigator.clipboard.writeText(url)
+                .then(() => alert("링크가 복사되었습니다!"))
+                .catch(err => alert("링크 복사에 실패했습니다."));
+              };
+
+              /* 영수증 프린트 */
+              const printReceipt = () => {
+                const printContents = document.querySelector('#receiptModal').innerHTML;
+                const originalContents = document.body.innerHTML;
+
+                /* 새로운 인쇄용 창 생성 */
+                const printWindow = window.open('', '_blank', 'width=800,height=800');
+                printWindow.document.write('<html><head><title>Print Receipt</title>');
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write(
+                    '<link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
+                printWindow.document.write('</head><body><div id="receiptModal" class="modal">');
+                printWindow.document.write(printContents);
+                printWindow.document.write('</div></body></html>');
+                printWindow.document.close();
+
+                /* 인쇄 완료 후 창 닫기 */
+                printWindow.onload = () => {
+                  printWindow.print();
+                  printWindow.close();
                 };
-
-                /* 영수증 프린트 */
-                const printReceipt = () => {
-                    const printContents = document.querySelector('#receiptModal').innerHTML;
-                    const originalContents = document.body.innerHTML;
-
-                    /* 새로운 인쇄용 창 생성 */
-                    const printWindow = window.open('', '_blank', 'width=800,height=800');
-                    printWindow.document.write('<html><head><title>Print Receipt</title>');
-                    printWindow.document.write(
-                        '<link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
-                    printWindow.document.write(
-                        '<link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>'); // 필요한 스타일 추가
-                    printWindow.document.write('</head><body><div id="receiptModal" class="modal">');
-                    printWindow.document.write(printContents);
-                    printWindow.document.write('</div></body></html>');
-                    printWindow.document.close();
-
-                    /* 인쇄 완료 후 창 닫기 */
-                    printWindow.onload = () => {
-                        printWindow.print();
-                        printWindow.close();
-                    };
 
                   /*  /!* 원 표시*!/
                     // Function to format the date

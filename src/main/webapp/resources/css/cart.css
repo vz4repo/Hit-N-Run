@@ -53,6 +53,7 @@
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
     text-align: center;
+    border: none;
 }
 
 
@@ -129,7 +130,6 @@ button:hover {
     display: inline;
     width: 190px;
     height: 48px;
-    line-height: 48px;
     background: none;
     margin: 10px;
 }
@@ -169,7 +169,6 @@ button:hover {
     height: 30px;
     font-weight: normal;
     border: 1px solid #b4b4b4;
-    line-height: 25px;
     text-align: center;
     background-color: white;
     color: #333;

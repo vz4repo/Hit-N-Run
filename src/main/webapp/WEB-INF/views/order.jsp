@@ -19,6 +19,7 @@
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -31,17 +32,20 @@
 <%-- 김수연 시작 --%>
 <style>
     #dlv-container {
-        display: flex;
-        align-items: center;
-        justify-content: start;
+        /*display: flex;*/ /* 이게 없어야 배송정보 - 배송지 변경 버튼 세로로 쌓임 */
+        /*align-items: center;*/
+        /*justify-content: start;*/
         padding-top: 1.35%;
     }
 
     .dlv-header {
         margin-left: 8%;
+        margin-bottom: 1.5%;
         margin-right: 3%;
         font-size: 15px;
         font-weight: 600;
+        display: flex;
+        align-items: center;
     }
 
     #dlv-container ul {
@@ -64,6 +68,12 @@
         background-color: #333;
         border-radius: 5px;
         cursor: pointer;
+        margin-left: 360px;
+    }
+
+    .btn-change-address :hover {
+      color: #fff;
+      background-color: #1b64da;
     }
 
     #dlv-container .select-request {
@@ -152,10 +162,10 @@
         margin: 10px 0;
     }
 
-    #addressModal .address-card .buttons {
-        display: flex;
-        justify-content: space-between;
-    }
+    /*#addressModal .address-card .buttons {*/
+        /*display: flex;*/
+        /*justify-content: space-between;*/
+    /*}*/
 
     #addressModal .address-card .buttons button {
         padding: 5px 10px;
@@ -192,26 +202,15 @@
     }
 
 
-    /*.close {*/
-    /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
+    /*#addressModal .dlv-select3 {*/
+    /*    padding: 5px 10px;*/
+    /*    border: 1px solid #333;*/
+    /*    color: #fff;*/
+    /*    background-color: #333;*/
+    /*    border-radius: 5px;*/
+    /*    cursor: pointer;*/
+    /*    margin-left: 10px;*/
     /*}*/
-
-
-    .header-container {
-        display: flex;
-        align-items: center; /* 수직 가운데 정렬 */
-        justify-content: space-between; /* 양쪽 끝에 배치 */
-        height: 50px; /* 높이 설정 (필요에 따라 조정) */
-        padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
-    }
-
-    .dlvN {
-        margin: 0; /* 기본 마진 제거 */
-        font-size: 20px; /* 폰트 크기 조정 */
-        line-height: 1; /* 줄 높이 조정 */
-        font-weight: bold; /* 글자를 두껍게 */
-        color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
-    }
 
     .close {
         cursor: pointer; /* 포인터 모양 */
@@ -221,6 +220,9 @@
         top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
     }
 
+    .dlv-header-content {
+        margin-left: 8%;
+    }
 
     #dlv-header-content label {
         width: 500px; /* 원하는 너비로 설정하세요 */
@@ -228,6 +230,27 @@
 
     .dlv-header-content tr {
         height: 30px;
+    }
+
+    button#setDfltAddrsetDfltAddr {
+        background-color: #073713;
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+
+    button#dlv-select3 {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
     }
 </style>
 <%-- 김수연 끝 --%>
@@ -246,54 +269,56 @@
     <%-- 김수연 시작 --%>
     <%-- 배송지 정보 section --%>
     <section id="dlv-container">
-        <div class="dlv-header">배송 정보</div>
-        <%-- 기본/선택 배송지 내용 출력 --%>
 
-        <%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
-        <%-- 김수연 0524 기본배송지 form 시작 --%>
+
+        <div class="dlv-header">
+            <div>배송정보</div>
+            <!-- 배송지 변경 버튼 -->
+            <button class="btn-change-address">배송지 변경</button>
+        </div>
+
+
         <div class="dlv-header-content">
-            <%-- TODO : 기본배송지 --%>
-            <table>
-                <colgroup>
-                    <col style="width: 150px">
-                    <col style="width: 400px">
-                </colgroup>
-                <tr>
-                    <td class="label">배송지</td>
-                    <td class="dlv-content">${defaultDto.adr_name}</td>
-                </tr>
-                <tr>
-                    <td class="label">이름/연락처</td>
-                    <td class="dlv-content">
-                        ${defaultDto.rcver} / ${defaultDto.rcver_phn}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">주소</td>
-                    <td class="dlv-content">
-                        (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">배송 요청사항</td>
-                    <td class="dlv-content">
-                        <select class="select-request" name="delivery_request" id="delivery_request">
-                            <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
-                            <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
-                            <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
-                            <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
-                            <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
-                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                            <option value="etc">직접 입력</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            <%-- 기본/선택 배송지 내용 출력 --%>
+                <table>
+                    <colgroup>
+                        <col style="width: 150px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <td class="label">배송지</td>
+                        <td class="dlv-content">${defaultDto.adr_name}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">이름/연락처</td>
+                        <td class="dlv-content">
+                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">주소</td>
+                        <td class="dlv-content">
+                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="label">배송 요청사항</td>
+                        <td class="dlv-content">
+                            <select class="select-request" name="delivery_request" id="delivery_request">
+                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                                <option value="etc">직접 입력</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
-        <!-- 배송지 변경 버튼 -->
-        <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -374,9 +399,6 @@
                         <td><span>무료배송</span></td>
                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
-                    <%--<c:if test="${!status.last}">
-                        <tr><td colspan="5"><hr></td></tr>
-                    </c:if>--%>
                 </c:forEach>
                 </tbody>
                 <tfoot>
@@ -385,31 +407,31 @@
                         <div class="tb__left"><span>[기본배송]</span></div>
                     </td>
                 </tr>
-                <tr>
+               <%-- <tr>
                     <td colspan="7">
-                        <div class="tb__right">
-                            <div class="totalSum">상품구매금액
-                                <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                            <div class="tb__right">
+                                <div class="totalSum">상품구매금액
+                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                                </div>
+                                <div class="grade">등급 할인
+                                    <span>없음</span>
+                                </div>
+                                <div class="cupon">쿠폰 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="point">적립금 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="card">카드사 할인
+                                    <span>없음</span>
+                                </div>
+                                <div>배송비 무료</div>
+                                <div class="odpayamt">최종 결제 금액
+                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                                </div>
                             </div>
-                            <div class="grade">등급 할인
-                                <span>없음</span>
-                            </div>
-                            <div class="cupon">쿠폰 사용
-                                <span>없음</span>
-                            </div>
-                            <div class="point">적립금 사용
-                                <span>없음</span>
-                            </div>
-                            <div class="card">카드사 할인
-                                <span>없음</span>
-                            </div>
-                            <div>배송비 무료</div>
-                            <div class="odpayamt">최종 결제 금액
-                                <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-                            </div>
-                        </div>
                     </td>
-                </tr>
+                </tr>--%>
                 </tfoot>
             </table>
         </form>
@@ -417,7 +439,43 @@
 </section>
 <%-- 결제 위젯 호출 --%>
 <section class="order__payment">
+    <div class="order__payment__wrapper">
     <%@include file="payCheckout.jsp" %>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
+    <div class="tb__right">
+        <div class="totalSum tb__right-item">
+            상품구매금액
+            <span class="priceFormat" id="totalSum"
+            >${cartDto.sls_prc * cartDto.cart_cnt}</span
+            >
+        </div>
+        <div class="grade tb__right-item">
+            등급 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="coupon tb__right-item">
+            쿠폰 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="point tb__right-item">
+            적립금 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="card tb__right-item">
+            카드사 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="dlv-fare tb__right-item">
+            배송비
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="odpayamt tb__right-item">
+            최종 결제 금액
+            <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+        </div>
+    </div>
+    </div>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
 </section>
 
 <%-- footer --%>
@@ -426,10 +484,15 @@
     $(document).ready(function () {
         $('.priceFormat').each(function () {
             let value = $(this).text();
-            value = value.replace(/,/g, '');
-            const numbericValue = parseInt(value);
-            const formatValue = numbericValue.toLocaleString('ko-KR');
-            $(this).text(formatValue + '원');
+            if(value === '없음'){
+              $(this).text('0원');
+              $(this).css('color', '#777');
+            }else {
+              value = value.replace(/,/g, '');
+              const numbericValue = parseInt(value);
+              const formatValue = numbericValue.toLocaleString('ko-KR');
+              $(this).text(formatValue + '원');
+            }
         })
     })
 
@@ -457,25 +520,26 @@
         const btn = document.querySelector('.btn-change-address');
         const closeModal = document.querySelector('#closeModal');
 
-        btn.addEventListener('click', () => {
-            addressModal.style.display = 'block';
-            $.ajax({
-                type: "GET",
-                url: `${contextPath}/delivery/deliveryList`,
-                success: function (response) {
-                    if (response.message) {
-                        $(".dlv-modal-container").html(`<p>${response.message}</p>`);
-                    } else {
-                        let htmlContent = '';
-                        response.list.forEach(listDto => {
-                            /*
-                            기본배송지 붙일때 쓸 태그
-                            <span className="default">기본배송지</span>
-                            */
-                            htmlContent += `
+    btn.addEventListener('click', () => {
+      addressModal.style.display = 'block';
+      $.ajax({
+        type: "GET",
+        url: `${contextPath}/delivery/deliveryList`,
+        success: function (response) {
+          if (response.message) {
+            $(".dlv-modal-container").html(`<p>${response.message}</p>`);
+          } else {
+            let htmlContent = '';
+            response.list.forEach(listDto => {
+              /*
+              기본배송지 붙일때 쓸 태그
+              <span className="default">기본배송지</span>
+              */
+              htmlContent += `
                             <div class="address-card">
                                 <div class="title">
-                                    (${'${listDto.rcver}'}) ${'${listDto.adr_name}'}
+                                    ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
+                                    <button class="3rd-dvlp" id="setDfltAddrsetDfltAddr" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">기본배송지</button>
                                 </div>
                                 <div class="details">
                                     ${'${listDto.rcver_phn}'}<br/>
@@ -483,59 +547,61 @@
                                 </div>
                                 <div class="buttons">
                                     <button class="dlv-select" addrId="${'${listDto.c_adr_list_id}'}">선택</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">수정</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">삭제</button>
                                 </div>
                             </div>
                         `;
-                        });
-                        $(".dlv-modal-container").html(htmlContent);
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error('Error fetching delivery list:', error);
-                    alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-                }
             });
-        });
+            $(".dlv-modal-container").html(htmlContent);
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error('Error fetching delivery list:', error);
+          alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+        }
+      });
+    });
 
-        closeModal.addEventListener('click', () => {
-            addressModal.style.display = 'none';
-        });
+    closeModal.addEventListener('click', () => {
+      addressModal.style.display = 'none';
+    });
 
-        window.addEventListener('click', (event) => {
-            if (event.target === addressModal) {
-                addressModal.style.display = 'none';
-            }
-        });
+    window.addEventListener('click', (event) => {
+      if (event.target === addressModal) {
+        addressModal.style.display = 'none';
+      }
+    });
 
-        /*
-    # 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
+    /*
+# 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
 
-    DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
-    이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
+DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
+이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
 
-    따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
-    이벤트 위임을 사용해야 합니다.
+따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
+이벤트 위임을 사용해야 합니다.
 
-    이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
-    이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
+이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
+이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
 
-    이벤트 위임을 사용하면
-    이벤트 핸들러를 상위 요소에 등록하고,
-    이벤트가 하위 요소로 위임되도록 합니다.
-        * */
-        document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
-            if (event.target.classList.contains('dlv-select')) {
-                const c_adr_list_id = event.target.getAttribute('addrId');
-                $.ajax({
-                    type: "GET",
-                    url: `${contextPath}/delivery/deliverySelected`,
-                    data: {dlvId: c_adr_list_id},
-                    success: function (response) {
-                        if (response.message) {
-                            $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
-                        } else {
-                            const selectedDto = response.selectedDto;
-                            const htmlContent = `
+이벤트 위임을 사용하면
+이벤트 핸들러를 상위 요소에 등록하고,
+이벤트가 하위 요소로 위임되도록 합니다.
+    * */
+    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+      if (event.target.classList.contains('dlv-select')) {
+        const c_adr_list_id = event.target.getAttribute('addrId');
+        $.ajax({
+          type: "GET",
+          url: `${contextPath}/delivery/deliverySelected`,
+          data: {dlvId: c_adr_list_id},
+          success: function (response) {
+            if (response.message) {
+              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+            } else {
+              const selectedDto = response.selectedDto;
+              const htmlContent = `
                  <table>
                     <colgroup>
                         <col style="width: 150px">
@@ -573,27 +639,23 @@
                     </tr>
                 </table>
                 `;
-                            $(".dlv-header-content").html(htmlContent);
-                            addressModal.style.display = 'none';
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error fetching selected delivery:', error);
-                        alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-                    }
-                });
+              $(".dlv-header-content").html(htmlContent);
+              addressModal.style.display = 'none';
             }
+          },
+          error: function (xhr, status, error) {
+            console.error('Error fetching selected delivery:', error);
+            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+          }
         });
-    })
+      }
+    });
+  })
 
+    function dlvBtn() {
+        alert('3차 개발 예정입니다.')
+    }
 
-    /* 김수연 추가 0524 시작 */
-    // function showDefaultDLV() {
-    //     return `
-    //           <dlv>안녕하세용</dlv>
-    //           `;
-    // }
-    /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>

@@ -4,18 +4,11 @@
 <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
 <header class="cart__header" id="cart__header">
-<%--    <div class="top_header">--%>
-<%--        <ul class="top_header_ul">--%>
-<%--            <a class="cart_link"  href="#"><li>고객센터</li></a>--%>
-<%--            <a class="cart_link" href="#"><li>관심</li></a>--%>
-<%--            <a class="cart_link" href="#"><li>알림</li></a>--%>
-<%--            <li><a class="cart_link" id="logoutLink" href="<c:url value='${loginOutLink}'/>">${loginOut}</a></li>--%>
-<%--        </ul>--%>
-<%--    </div>--%>
     <div class="main_header">
         <div class="bottom_header">
             <a href="/"><img src="/img/homerunball_logo.png" style="width:250px"></a>
             <jsp:include page="nav.jsp"/>
+
             <div>
                 <ul class="main_header_ul">
                     <div class="cart_link header__dropdown">
@@ -29,8 +22,9 @@
                             <a href="#">알림</a>
                         </div>
                     </div> <%--mypage--%>
-                    <a class="cart_link" href="#"><li><i class="fa fa-search fa-lg"></i></li></a> <%--검색--%>
+                    <a class="cart_link" id="search_btn"><li><i class="fa fa-search fa-lg"></i></li></a> <%--검색--%>
                     <a class="cart_link" href="/cart/list"><li><i class="fas fa-shopping-cart fa-lg"></i></li></a> <%--cart--%>
+                    <jsp:include page="search.jsp"/>
                 </ul>
             </div>
         </div>
@@ -52,6 +46,8 @@
             });
         }
     };
+
+
 
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {

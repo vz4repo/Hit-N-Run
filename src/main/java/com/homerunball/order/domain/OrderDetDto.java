@@ -54,7 +54,12 @@ public class OrderDetDto {
         this.last_mod_id = last_mod_id;
     }
 
-
+    public OrderDetDto(BigInteger od_id, Integer c_id, String pd_id, String pd_clsf_cd) {
+        this.od_id = od_id;
+        this. c_id =  c_id;
+        this.pd_id = pd_id;
+        this.pd_clsf_cd = pd_clsf_cd;
+    }
 
     private CartDto cartDto; // CartDto 필드 추가
 

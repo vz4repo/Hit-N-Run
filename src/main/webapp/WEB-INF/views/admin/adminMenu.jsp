@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="w3-sidebar w3-light-grey w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
     <a href="<c:url value='/admin/main'/>" class="w3-bar-item w3-button no-event"><img src="/img/homerunball_logo.png" style="width:100%"></a>
-    <a href="<c:url value='/admin/main/#'/>" class="w3-bar-item w3-button">홈</a>
-    <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">제품 대시보드</a>
+<%--    <a href="<c:url value='/admin/main/#'/>" class="w3-bar-item w3-button">홈</a>--%>
+    <a href="<c:url value='/admin/product/dashboard'/>" class="w3-bar-item w3-button">대시보드</a>
     <a href="<c:url value='/admin/product/list'/>" class="w3-bar-item w3-button">제품목록</a>
     <a href="<c:url value='/admin/product/register'/>" class="w3-bar-item w3-button">제품등록</a>
     <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAcc1')">제품 관리 <i class="fa fa-caret-down"></i></button>
@@ -15,7 +15,7 @@
     <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAcc2')">재고 관리 <i class="fa fa-caret-down"></i></button>
     <div id="demoAcc2" class="w3-hide w3-white">
         <a href="#" class="w3-bar-item w3-button">재고 목록</a>
-        <a href="<c:url value='/admin/stock/list'/>" class="w3-bar-item w3-button">재고등록수정</a>
+        <a href="<c:url value='/admin/stock/list'/>" class="w3-bar-item w3-button">재고등록/수정</a>
     </div>
 
     <button class="w3-button w3-block w3-left-align" onclick="myAccFunc('demoAcc3')">주문관리 <i class="fa fa-caret-down"></i></button>
@@ -75,7 +75,9 @@
             if (item.getAttribute('href') === currentUrl) {
                 if (!item.classList.contains('no-event')) {
                     item.classList.add('active');
-                    item.parentElement.classList.add('w3-show');
+                    if (item.parentElement.id !== 'mySidebar') {
+                        item.parentElement.classList.add('w3-show');
+                    }
                 }
             }
         });
