@@ -162,13 +162,30 @@
         });
 
         /*만약 입고 가격이 소비자가격보다보다 작으면 에러가 발생한다.*/
-        $('#rcpt_prc, #rtl_prc').on('blur', function () {
+/*        $('#rcpt_prc, #rtl_prc').on('blur', function () {
             let rcptPrc = $('#rcpt_prc').val();
             let rtlPrc = $('#rtl_prc').val();
 
             if (rcptPrc < rtlPrc) {
                 alert("입고 가격은 소비자가격보다 클 수 없습니다.");
                 $('#rcpt_prc').val('');
+            }
+        });*/
+
+        $('#rcpt_prc, #rtl_prc').on('change', function () {
+            let rcptPrc = $('#rcpt_prc').val();
+            let rtlPrc = $('#rtl_prc').val();
+
+            // 입력 값이 비어 있지 않은 경우에만 비교
+            if (rcptPrc !== '' && rtlPrc !== '') {
+                // 숫자로 변환하여 비교
+                rcptPrc = parseFloat(rcptPrc);
+                rtlPrc = parseFloat(rtlPrc);
+
+                if (rcptPrc > rtlPrc) {
+                    alert("입고 가격은 소비자가격보다 클 수 없습니다.");
+                    $('#rtl_prc').val('');
+                }
             }
         });
 
