@@ -152,16 +152,16 @@
     <h2>리뷰</h2>
     <table class="reviewTable">
         <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>평점</th></tr>
-        <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.28</td><td>★★★★★</td></tr>
-        <tr><td>9</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>★★</td></tr>
-        <tr><td>8</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>★★★★</td></tr>
-        <tr><td>7</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>★★★</td></tr>
-        <tr><td>6</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
-        <tr><td>5</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
-        <tr><td>4</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.24</td><td>★★</td></tr>
-        <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>★</td></tr>
-        <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>★★★</td></tr>
-        <tr><td>1</td><td>리뷰입니다.</td><td>김지훈</td><td>2024.05.21</td><td>★★★★★</td></tr>
+        <tr><td>10</td><td>포장도 신경써주시고 배송도 빠르게 잘 왔습니다.</td><td>김지훈</td><td>2024.05.28</td><td>★★★★★</td></tr>
+        <tr><td>9</td><td>다른 제품이 왔습니다.</td><td>김지훈</td><td>2024.05.27</td><td>★★</td></tr>
+        <tr><td>8</td><td>항상 잘 이용하고 있습니다.</td><td>김지훈</td><td>2024.05.26</td><td>★★★★</td></tr>
+        <tr><td>7</td><td>배송이 좀 걸리네요.</td><td>김지훈</td><td>2024.05.26</td><td>★★★</td></tr>
+        <tr><td>6</td><td>항상 잘 구매하고 있습니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
+        <tr><td>5</td><td>저렴한 가격에 잘 샀습니다.</td><td>김지훈</td><td>2024.05.25</td><td>★★★★</td></tr>
+        <tr><td>4</td><td>배송이 3주나 걸렸네요.</td><td>김지훈</td><td>2024.05.24</td><td>★★</td></tr>
+        <tr><td>3</td><td>제품이 파손되서 도착했습니다.</td><td>김지훈</td><td>2024.05.23</td><td>★</td></tr>
+        <tr><td>2</td><td>그럭 저럭 괜찮습니다.</td><td>김지훈</td><td>2024.05.22</td><td>★★★</td></tr>
+        <tr><td>1</td><td>빠른 배송 감사합니다.</td><td>김지훈</td><td>2024.05.21</td><td>★★★★★</td></tr>
     </table>
     <p> <a href="">&lt</a>
         <a href="">1</a>
@@ -181,18 +181,18 @@
 <%--제품 문의(구현 안함 3차때 추후 개발예정)--%>
 <div class="QnAContainer" id="QnAContainer">
     <h2>제품문의</h2>
-    <table class="QnATable">
+    <table class="QnATable" name="QnATable">
         <tr><th>일련번호</th><th>내용</th><th>작성자</th><th>작성일자</th><th>답변여부</th></tr>
-        <tr><td>10</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
-        <tr><td>9</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
-        <tr><td>8</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
-        <tr><td>7</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
-        <tr><td>6</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
-        <tr><td>5</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.25</td><td>답변완료✔</td></tr>
-        <tr><td>4</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.24</td><td>답변완료✔</td></tr>
-        <tr><td>3</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.23</td><td>답변완료✔</td></tr>
-        <tr><td>2</td><td>3차 개발 예정입니다.</td><td>김지훈</td><td>2024.05.22</td><td>답변대기중</td></tr>
-        <tr><td>1</td><td>제품문의입니다.</td><td>김지훈</td><td>2024.05.21</td><td>답변완료✔</td></tr>
+        <tr><td>10</td><td>DP 제품 할인은 안 하나요?</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
+        <tr><td>9</td><td>배송 문의드립니다. 급해서 그런데 혹시 오늘 회사에 방문하면 제품을 바로 받을수 있을까요?</td><td>김지훈</td><td>2024.05.27</td><td>답변대기중</td></tr>
+        <tr><td>8</td><td>배송 문의드립니다. 오늘 시키면 언제 제품을 받을수 있을까요?</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>7</td><td>AS보증 기간이 어떻게 되나요?</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>6</td><td>무게가 어떻게 되나요?</td><td>김지훈</td><td>2024.05.26</td><td>답변대기중</td></tr>
+        <tr><td>5</td><td>단체 주문도 가능할까요?</td><td>김지훈</td><td>2024.05.25</td><td>답변완료✔</td></tr>
+        <tr><td>4</td><td>색상 문의 드립니다.</td><td>김지훈</td><td>2024.05.24</td><td>답변완료✔</td></tr>
+        <tr><td>3</td><td>사이즈 문의 드립니다.</td><td>김지훈</td><td>2024.05.23</td><td>답변완료✔</td></tr>
+        <tr><td>2</td><td>제품의 추가 입고는 언제되나요?</td><td>김지훈</td><td>2024.05.22</td><td>답변대기중</td></tr>
+        <tr><td>1</td><td>제품 문의 드립니다.</td><td>김지훈</td><td>2024.05.21</td><td>답변완료✔</td></tr>
     </table>
     <p> <a href="">&lt</a>
         <a href="">1</a>
@@ -206,7 +206,7 @@
         <a href="">9</a>
         <a href="">10</a>
         <a href="">&gt</a></p>
-    <button class="writeQnABtn" onclick="writeQnABtn()">리뷰작성</button>
+    <button class="writeQnABtn" onclick="writeQnABtn()">제품문의작성</button>
 </div>
 <jsp:include page="footer.jsp" flush="false" />
 </body>
@@ -422,10 +422,22 @@
         salePriceElement.innerText = formatPrice(salePrice);
         retailPriceElement.innerText = formatPrice(retailPrice);
     }
-
     // DOMContentLoaded 이벤트를 사용하여 DOM이 완전히 로드된 후 실행
     document.addEventListener('DOMContentLoaded', (event) => {
         updatePrices();
+    });
+    // 답변완료 텍스트를 초록색으로 바꿔줌
+    document.addEventListener("DOMContentLoaded", function() {
+        var tables = document.getElementsByName('QnATable');
+
+        tables.forEach(function(table) {
+            var cells = table.getElementsByTagName('td');
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].innerText === '답변완료✔') {
+                    cells[i].classList.add('QnATableAnswered');
+                }
+            }
+        });
     });
 </script>
 </body>

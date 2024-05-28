@@ -197,6 +197,11 @@
 .reviewTable td:nth-child(2), .reviewTable td:nth-child(5){
     text-align:left;
 }
+.reviewTable td:nth-child(5){
+    color: gold;
+    font-size: 1.1em;
+    font-weight: bold;
+}
 .reviewTable th{
     background-color: whitesmoke;
 }
@@ -248,8 +253,11 @@
 .QnATable th:nth-child(2), .QnATable td:nth-child(2) {
     width: 70%;
 }
-.QnATable td:nth-child(2), .QnATable td:nth-child(5) {
+.QnATable td:nth-child(2), .QnATable td:nth-child(5) .QnATable th:nth-child(5){
     text-align:left;
+}
+.QnATable td:nth-child(5) {
+    font-weight: bold;
 }
 .QnATable th{
     background-color: whitesmoke;
@@ -351,4 +359,7 @@ body{overflow-x: hidden}
 .prdRltdTitle h2{
     font-size: 1.5em;
     text-align: center;
+}
+.QnATableAnswered{
+    color: darkgreen;
 }
