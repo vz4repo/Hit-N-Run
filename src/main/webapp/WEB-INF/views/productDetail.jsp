@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <title>홈런볼 제품 상세페이지</title>
 </head>
-<body>
+<body class="productDetail">
 <jsp:include page="header.jsp"/>
 <%--넘겨줄 정보를 담는다--%>
 <form id="purchaseInfo" method="post">
@@ -256,6 +255,7 @@
             });
         });
     });
+
     /*스크롤 바 위치 조정(기존에는 헤더와 겹쳤다)*/
     // function scrollToSection(event, sectionId) {
     //     event.preventDefault();
@@ -269,6 +269,7 @@
     //         behavior: 'smooth'
     //     });
     // }
+
     // 스크롤 내려갈 시 고정될 nav
     var navbar = document.getElementById("prdNavbar");
     var sticky = navbar.offsetTop;
