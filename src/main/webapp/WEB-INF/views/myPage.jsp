@@ -9,12 +9,14 @@
     <title>My Page</title>
 
     <style>
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+        }
+
         #myPage {
             margin: auto;
             width: 900px;
-
         }
-
         .none {
             text-decoration: none;
             cursor: pointer;
@@ -60,8 +62,6 @@
 
         .ma2 {
             font-size: 10px;
-            /* color: gray; */
-
         }
 
         #oneMonth {
@@ -187,7 +187,7 @@
                 <span class="ma2">0</span>
             </div>
         </div>
-    </div>
+    </div><br><br>
 
 </div>
 <jsp:include page="footer.jsp" flush="false" />
@@ -196,7 +196,7 @@
 
 
     function test(){
-        alert("테스트중입니다!")
+        alert("테스트중입니다")
     }
 </script>
 

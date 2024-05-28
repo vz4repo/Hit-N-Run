@@ -31,6 +31,7 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
+<jsp:include page="myPageHeader.jsp"/><br><br>
 <div class="head_order_det">주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
