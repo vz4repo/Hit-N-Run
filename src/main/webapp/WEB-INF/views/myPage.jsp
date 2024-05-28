@@ -1,111 +1,204 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+
+    <title>My Page</title>
+
+    <style>
+        body {
+            font-family: "IBM Plex Sans KR", sans-serif;
+        }
+
+        #myPage {
+            margin: auto;
+            width: 900px;
+        }
+        .none {
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 12px;
+            text-align: center;
+            color: dimgray;
+            font-weight: bold;
+        }
+
+        .myPageH {
+            border-bottom: 1px solid #ccc;
+            font-size: 13px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+            color: dimgray;
+            font-weight: bold;
+        }
+
+        .sp {
+            font-size: 15px;
+            margin: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .one {
+            display: flex;
+            justify-content: center;
+            margin-top: -15px
+        }
+
+        .one1 {
+            margin-top: -15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .ma {
+            margin-bottom: 11px;
+        }
+
+        .ma2 {
+            font-size: 10px;
+        }
+
+        #oneMonth {
+            font-size: 11px;
+            display: flex;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        #tong {
+            margin-top: 50px;
+        }
+
+        .date {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: gray;
+        }
+
+        #title1 {
+            /*font-size: 13px;*/
+            text-align: center;
+            /*color: dimgray;*/
+            font-weight: bold;
+            /*cursor: pointer;*/
+            /*text-decoration: none;*/
+            /*color: dimgray;*/
+            /*color: #000;*/
+        }
+
+        #title2{
+            cursor: pointer;
+            text-decoration: none;
+            color: dimgray;
+            font-size: 13px;
+        }
+
+    </style>
+
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
-    <title>My Page</title>
+
 </head>
-<style>
-    * {
-        font-family: "IBM Plex Sans KR", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    #myPage {
-        margin: auto;
-        width: 350px;
-        padding: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    }
-
-    #myPage li a {
-        text-decoration: none;
-        color: black;
-    }
-
-    #myPage li a:hover {
-        background-color: #ddd;
-    }
-
-    #myPage p {
-        font-size: 13px;
-    }
-
-    #myPage ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    #myPage li {
-        margin-bottom: 10px;
-        cursor: pointer;
-        font-size: 13px;
-    }
-
-    #myPage h5 {
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 5px;
-    }
-
-    #myPage ul {
-        display: block;
-    }
-</style>
 
 <body>
 <jsp:include page="header.jsp"/>
 <div id="myPage">
-    <p>
-        <%= session.getAttribute("c_name") %>님의 MY PAGE
-    </p>
-    <p>
-        <span style="float: left;">등급:</span>
-        <span style="float: right;"><%=session.getAttribute("grd_name")%></span><br>
-        <span style="float: left;">누적 금액:</span>
-        <span style="float: right;"><%=session.getAttribute("tot_amt")%>원(test)</span><br>
-        <span style="float: left;">가입 날짜:</span>
-        <span style="float: right;"><%= session.getAttribute("reg_dt")%></span><br>
-        <span style="float: left;">최근 로그인:</span>
-        <span style="float: right;"><%= session.getAttribute("login_dt")%></span><br>
-    </p>
-    <h5>INFO</h5>
-    <ul>
-        <li><a href="/mypage/info">개인정보 관리</a></li>
-        <li><a href="/mypage/pwdEdit">비밀번호 변경</a></li>
-        <li><a href="#">배송지 관리</a></li>
-        <li><a onclick="test()">회원탈퇴</a></li>
-    </ul>
+    <p id="title1"><a id="title2" href="/mypage/list"><%=session.getAttribute("c_name")%>님의 MY PAGE</a></p>
+    <div class="one1">
+        <div class="sp">
+            <span class="date">등급</span>
+            <span class="ma2">
+                    <%=session.getAttribute("grd_name")%>
+                </span>
+        </div>
+        <div class="sp">
+            <span class="date">누적 금액</span>
+            <span class="ma2">
+                    <%=session.getAttribute("tot_amt")%>원
+                </span>
+        </div>
+        <div class="sp">
+            <span class="date">찜</span>
+            <span class="ma2">0개</span>
+        </div>
+        <div class="sp">
+            <span class="date">쿠폰</span>
+            <span class="ma2">0개</span>
+        </div>
+        <div class="sp">
+            <span class="date">적립금</span>
+            <span class="ma2">0원</span>
+        </div>
+    </div>
 
-    <h5>ORDER</h5>
-    <ul>
-        <li><a href="/orderDetail">주문/배송조회</a></li>
-    </ul>
+    <div class="one">
+        <div class="sp">
+            <span><a class="none" href="/orderDetail">Order List</a></span>
+        </div>
+        <div class="sp">
+            <span><a class="none" onclick="test()">Wish List</a></span>
+        </div>
+        <div class="sp">
+            <span><a class="none" onclick="test()">Recently Viewed</a></span>
+        </div>
+        <div class="sp">
+            <span><a class="none" onclick="test()">Address</a></span>
+        </div>
+        <div class="sp">
+            <span><a class="none" href="/mypage/info">Edit Proflie</a></span>
+        </div>
+        <div class="sp">
+            <span><a class="none" href="/mypage/pwdEdit">Change Pwd</a></span>
+        </div>
+    </div>
 
-    <h5>ACTIVITY</h5>
+    <p class="myPageH">ACCOUNT<br><br><br></p>
+    <div id="tong">
+        <p id="oneMonth">나의 주문처리 현황 (최근 1개월 기준)</p>
 
-    <ul>
-        <li><a onclick="test()">리뷰 내역</a></li>
-        <li><a onclick="test()">1:1 문의내역</a></li>
-        <li><a onclick="test()">제품 문의내역</a></li>
-    </ul>
+        <div class="one">
+            <div class="sp">
+                <span class="ma">입금전</span>
+                <span class="ma2">0</span>
+            </div>
+            <div class="sp">
+                <span class="ma">결제 완료</span>
+                <span class="ma2">0</span>
+            </div>
+            <div class="sp">
+                <span class="ma">배송 준비중</span>
+                <span class="ma2">0</span>
+            </div>
+
+            <div class="sp">
+                <span class="ma">배송중</span>
+                <span class="ma2">0</span>
+            </div>
+            <div class="sp">
+                <span class="ma">배송완료</span>
+                <span class="ma2">0</span>
+            </div>
+        </div>
+    </div><br><br>
+
 </div>
 <jsp:include page="footer.jsp" flush="false" />
 
 <script>
-    let pwdClear = "${pwdClear}"
-    if(pwdClear==="pwdMsg2") {
-        alert("비밀번호 변경에 성공했습니다.")
-    }
+
 
     function test(){
-        alert("테스트중입니다!")
+        alert("테스트중입니다")
     }
 </script>
 
 </body>
+

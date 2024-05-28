@@ -22,6 +22,9 @@
         }
 
         .product-container tbody td:nth-of-type(1),
+        .product-container tbody td:nth-of-type(2),
+        .product-container tbody td:nth-of-type(4),
+        .product-container tbody td:nth-of-type(5),
         .product-container tbody td:nth-of-type(6),
         .product-container tbody td:nth-of-type(7),
         .product-container tbody td:nth-of-type(8),
@@ -54,7 +57,7 @@
             <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
             <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
         </div>
-        <div id="headline" class="header-title">재고 등록/수정</div>
+        <div id="headline" class="header-title">재고등록수정</div>
     </div>
     <%-- 재고관리를 위한 제품 검색 --%>
     <jsp:include page="../searchConditionForm.jsp" flush="false" />
@@ -70,22 +73,22 @@
                         <button type="button" class="sendBtnSmall" id="stockCreateManage">일괄등록</button>
                         <button type="button" class="sendBtnSmall" id="stockModifyManage">일괄수정</button>
                     </th>
-                    <th colspan="12">제품목록/재고등록</th>
+                    <th colspan="12">재고등록수정</th>
                 </tr>
                 <tr>
                     <th class="select_checkbox">전체<input type="checkbox" id="selectAll"></th>
                     <th class="pd_id">제품ID</th>
                     <th class="pd_name">제품명</th>
-                    <th class="frst_reg_dt">상품 등록일</th>
-                    <th class="pd_clsf_cd">제품사이즈</th>
-                    <th class="nml_stk_qty">정상재고 수량</th>
-                    <th class="rt_stk_qty">반품재고 수량</th>
-                    <th class="rgn_stk_qty">재생가능재고 수량</th>
-                    <th class="urgn_stk_qty">재생불가능재고 수량</th>
-                    <th class="sfty_stk_qty">안전재고 수량</th>
-                    <th class="odpmt_stk">가용재고</th>
-                    <th class="useStock">재고관리사용</th>
-                    <th class="createStock">개별재고등록</th>
+                    <th class="frst_reg_dt">상품<br>등록일</th>
+                    <th class="pd_clsf_cd">제품<br>사이즈</th>
+                    <th class="nml_stk_qty">정상<br>재고수량</th>
+                    <th class="rt_stk_qty">반품<br>재고수량</th>
+                    <th class="rgn_stk_qty">재생가능<br>재고수량</th>
+                    <th class="urgn_stk_qty">재생불가능<br>재고수량</th>
+                    <th class="sfty_stk_qty">안전<br>재고수량</th>
+                    <th class="odpmt_stk">가용<br>재고수량</th>
+                    <th class="useStock">재고관리<br>사용</th>
+                    <th class="createStock">개별재고<br>등록</th>
                 </tr>
             </thead>
             <tbody>
@@ -125,7 +128,7 @@
                     <td class="createStock">
                         <button type="button" class="sendBtnSmall createStockBtn" data-bs-toggle="modal" data-bs-target="#createModal" onclick="registModal('${status.index}', '${productDto.pd_id}', '${productDto.pd_name}')">등록</button>
                         <%--<button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">재고수정</button>--%>
-                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">수정</button>
+                        <button type="button" class="sendBtnSmall modifyStockBtn" data-bs-toggle="modal" data-bs-target="#modifyModal" onclick="updateModal('${status.index}', '${productDto.pd_id}')">수정</button>
                     </td>
                 </tr>
             </c:forEach>
@@ -141,7 +144,8 @@
         });
 
         $('.stockUse').each(function (index) {
-            getStockUse(index, 'used');
+            let stockUseValue = $(this).val();
+            getStockUse(index, stockUseValue);
         });
 
         /*제품 전체선택 버튼 클릭시 제품 전체 선택 기능*/

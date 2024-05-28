@@ -105,12 +105,18 @@ public class CartController {
     }
 
 
+
+
     @PostMapping("/insert")
     public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session, RedirectAttributes rattr) {
-        int c_id = 0;
         try {
-            /* 로그인한 고객의 email이 세션에있는지 확인한다 */
-            c_id = (int) session.getAttribute("c_id");
+            /* 비로그인 고객이 장바구니에 제품을 담아서 생기는 오류 */
+            /* 고객번호 c_id가 세션에 있는지 확인 */
+            Object c_idObj = session.getAttribute("c_id");
+            if (c_idObj == null) {
+                return "redirect:/cart/list";
+            }
+            int c_id = (Integer) c_idObj;
 
             cartDto.setC_id(c_id);
             cartDto.setPd_id(pd_id);
@@ -147,10 +153,12 @@ public class CartController {
         } catch (Exception e) {
             /* Insert에 실패할경우 메세지를 던진다 */
             e.printStackTrace();
-            rattr.addFlashAttribute("msg", "INSERT_ERR");
-            return "errorPage";
+            rattr.addFlashAttribute("errorMessage", "cart INSERT_ERR");
+            return "errorPageCust";
         }
     }
+
+
 
     /*고객 장바구니 load*/
     @GetMapping("/list")
