@@ -81,6 +81,57 @@ public class DeliveryController {
 
 
 
+    @GetMapping("/deliveryRegister")
+    public String newDLVForm() throws Exception {
+        try {
+
+            return "deliveryRegister";
+        } catch (Exception e) {
+            return "errorPageCust";
+        }
+    }
+
+    @PostMapping("/deliveryRegister")
+    public String registerNewsDLV(@SessionAttribute(name = "c_id")int sessionId, HttpServletRequest request, @ModelAttribute DeliveryDto deliveryDto) throws Exception {
+        try {
+            System.out.println("****************");
+            System.out.println("deliveryDto = " + deliveryDto.toString());
+
+
+            // 새로운 c_adr_list_id 값 조회
+//            int newId = findUnusedIdFromDatabase();
+
+
+            /* TODO : c_adr_list_id mapper에서 max+1 할지 고민 -> 이거 autoincrement돼서 c_adr_list_id set 안해도 됨 x */
+            /* deliveryRegister 페이지에서 입력받은 데이터 db에 저장시키기 */
+            DeliveryDto newAddr = deliveryDto;
+            newAddr.setC_id(sessionId);
+            newAddr.setAdr_name(deliveryDto.getAdr_name());
+            newAddr.setRcver(deliveryDto.getRcver());
+            newAddr.setRcver_phn(deliveryDto.getRcver_phn());
+            newAddr.setRcver_zip(deliveryDto.getRcver_zip());
+            newAddr.setRcver_adr(deliveryDto.getRcver_adr());
+
+            /* db 에 저장 */
+            deliveryDao.insert(newAddr);
+
+
+            return "order";
+        } catch (Exception e) {
+            return "errorPageCust";
+        }
+    }
+
+
+//    private int findUnusedIdFromDatabase() {
+//        // 데이터베이스에서 사용되지 않는 새로운 값 조회하는 쿼리
+//        String sql = "SELECT MAX(c_adr_list_id) + 1 FROM cust_adr_list";
+//        JdbcOperations jdbcTemplate = null;
+//        Integer newId = jdbcTemplate.queryForObject(sql, Integer.class);
+//        return newId != null ? newId : 1; // 조회된 값이 null인 경우 기본값으로 1을 반환
+//    }
+
+
 
 
 
