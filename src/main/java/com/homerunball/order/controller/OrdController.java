@@ -113,7 +113,6 @@ public class OrdController {
             /*상품 id를 담은 set(od_pd_qtyid)의 사이즈를 담아줌*/
             totalpd_qty = od_pd_qtyid.size();
 
-
             ord.setC_id(ord_det.getC_id());
             ord.setOd_pd_qty(totalpd_qty);
             ord.setOd_tot_qty(totalqty);
@@ -123,10 +122,12 @@ public class OrdController {
             ordDao.insert(ord);
 
             /*System.out.println("ord_det.getC_id()" +ord_det.getC_id());*/
-
+            System.out.println("ord1111" + ord);
 
             m.addAttribute("list", list);
+            m.addAttribute("ord", ord);
             /*m.addAttribute("stkList", stkList);*/
+            System.out.println("ordDao" + ord);
 
             /* 김수연 시작 */
             DeliveryDto defaultDto = deliveryDao.selecteDefault(sessionId);

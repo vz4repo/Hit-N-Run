@@ -61,19 +61,27 @@
                         </tr>
                         <tr>
                             <td><label for="rcpt_cp">입고처</label></td>
-                            <td><input type="text" class="validText"  id="rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요."></td>
+                            <td><input type="text" class="validText"  id="rcpt_cp" name="rcpt_cp" placeholder="입고처를 입력하세요.">
+                                <span id="rcptCpCnt">[0 / 20]</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="rcpt_prc">입고가격</label></td>
-                            <td><input type="text" class="validNumber" id="rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="rcpt_prc" name="rcpt_prc" placeholder="입고가격를 입력하세요.">
+                                <span id="rcptPrcCnt">[0 / 10]</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="rtl_prc">소비자가격</label></td>
-                            <td><input type="text" class="validNumber" id="rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="rtl_prc" name="rtl_prc" placeholder="소비자가격를 입력하세요.">
+                                <span id="rtlPrcCnt">[0 / 10]</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="sls_prc">판매가격</label></td>
-                            <td><input type="text" class="validNumber" id="sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요."></td>
+                            <td><input type="text" class="validNumber" id="sls_prc" name="sls_prc" placeholder="판매가격를 입력하세요.">
+                                <span id="slsPrcCnt">[0 / 10]</span>
+                            </td>
                         </tr>
                         <tr>
                             <td><label for="stk_plc_cd">재고위치코드</label></td>
@@ -93,6 +101,94 @@
         </div>
     </div>
     <script>
+        /*입고처 글자 수 세기*/
+        $("#rcpt_cp").keyup(function () {
+            let content = $(this).val();
+            $("#rcptCpCnt").text("[" + content.length + " / 20]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 20) {
+                alert("최대 20자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 20));
+                $('#rcptCpCnt').text("[20 / 20]");
+            }
+        });
+
+        /*입고가격 글자 수 세기*/
+        $("#rcpt_prc").keyup(function () {
+            let content = $(this).val();
+            $("#rcptPrcCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#rcptPrcCnt').text("[10 / 10]");
+            }
+        });
+
+        /*소비자가격 글자 수 세기*/
+        $("#rtl_prc").keyup(function () {
+            let content = $(this).val();
+            $("#rtlPrcCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#rtlPrcCnt').text("[10 / 10]");
+            }
+        });
+
+        /*판매가격 글자 수 세기*/
+        $("#sls_prc").keyup(function () {
+            let content = $(this).val();
+            $("#slsPrcCnt").text("[" + content.length + " / 10]"); /* 실시간 글자수 카운팅 */
+            if (content.length > 10) {
+                alert("최대 10자까지 입력 가능합니다.");
+                $(this).val(content.substring(0, 10));
+                $('#slsPrcCnt').text("[10 / 10]");
+            }
+        });
+
+        /*만약 입고일이 매입일보다보다 과거면 에러가 발생한다. 등록시에만 할까? 수정시에는?*/
+        $('#rcpt_dt, #pur_dt').on('blur', function () {
+            let rcptDate = $('#rcpt_dt').val();
+            let purDate = $('#pur_dt').val();
+
+            if (rcptDate && purDate) {
+                let rcptDateObj = new Date(rcptDate);
+                let purDateObj = new Date(purDate);
+
+                if (rcptDateObj < purDateObj) {
+                    alert("입고일은 매입일보다 이전일 수 없습니다.");
+                    $('#rcpt_dt').val('');
+                }
+            }
+        });
+
+        /*만약 입고 가격이 소비자가격보다보다 작으면 에러가 발생한다.*/
+/*        $('#rcpt_prc, #rtl_prc').on('blur', function () {
+            let rcptPrc = $('#rcpt_prc').val();
+            let rtlPrc = $('#rtl_prc').val();
+
+            if (rcptPrc < rtlPrc) {
+                alert("입고 가격은 소비자가격보다 클 수 없습니다.");
+                $('#rcpt_prc').val('');
+            }
+        });*/
+
+        $('#rcpt_prc, #rtl_prc').on('change', function () {
+            let rcptPrc = $('#rcpt_prc').val();
+            let rtlPrc = $('#rtl_prc').val();
+
+            // 입력 값이 비어 있지 않은 경우에만 비교
+            if (rcptPrc !== '' && rtlPrc !== '') {
+                // 숫자로 변환하여 비교
+                rcptPrc = parseFloat(rcptPrc);
+                rtlPrc = parseFloat(rtlPrc);
+
+                if (rcptPrc > rtlPrc) {
+                    alert("입고 가격은 소비자가격보다 클 수 없습니다.");
+                    $('#rtl_prc').val('');
+                }
+            }
+        });
+
         /* 재고등록 버튼을 누르면 모달창이 열린다. */
         function openRegisterModal(pdId, pdName, pdClsfCd) {
             // 모달창 초기화

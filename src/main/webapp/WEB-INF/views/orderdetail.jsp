@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,13 +13,14 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
-    <link href="<c:url value='/css/order.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/order_det.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/receiptStyle.css'/>" type="text/css" rel="stylesheet"/>
 
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -25,277 +28,31 @@
     <%-- [혁락] css 수정 시작 --%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
     <style>
-      .order-container {
-        width: 85%;
-        margin: 0 auto;
-      }
 
-      .orders {
-        width: 100%;
-        background-color: #fff;
-        border-radius: 8px;
-        overflow: hidden;
-        margin-top: 20px;
-      }
-
-      .orders table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-      }
-
-      .orders th,
-      .orders td {
-        padding: 10px;
-        text-align: center;
-        /*height: 70px;*/
-        box-sizing: border-box;
-        vertical-align: middle;
-        word-break: break-all;
-        border-spacing: 0;
-        margin: 0;
-        outline: none;
-      }
-
-      .orders th {
-        background-color: #f4f4f4;
-        text-align: center;
-        border-top: 2px solid #000;
-        border-bottom: 2px solid #000;
-      }
-
-      .orders td {
-        border-bottom: 1px solid #ddd;
-      }
-
-      .orders tr:hover {
-        background-color: #f9f9f9;
-      }
-
-      ul {
-        display: block;
-      }
-
-      .product-info img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-      }
-
-      .info {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .info .brand {
-        font-weight: bold;
-      }
-
-      .info .name {
-        font-size: 1.1em;
-      }
-
-      .info .name a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .info .name a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .info .option {
-        color: gray;
-      }
-
-      .order-status {
-        /*display: flex;*/
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .order-status a {
-        color: #007bff;
-        text-decoration: none;
-        margin-bottom: 5px;
-      }
-
-      .order-status a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-status button {
-        background-color: #f4f4f4;
-        border: 1px solid #ccc;
-        padding: 5px;
-        cursor: pointer;
-      }
-
-      .order-status button:hover {
-        background-color: #ddd;
-      }
-
-      .order-number a {
-        text-decoration: none;
-        color: black;
-      }
-
-      .order-number a:hover {
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      .order-amount span {
-        display: block;
-      }
-
-      /* 모달 스타일 */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-content {
-        background-color: #fff;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 100%;
-        max-width: 600px;
-        border-radius: 8px;
-        position: relative;
-      }
-
-      .modal-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-      }
-
-      .modal-header h2 {
-        margin: 0;
-      }
-
-      .close {
-        color: #aaa;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-
-      .close:hover,
-      .close:focus {
-        color: black;
-        text-decoration: none;
-      }
-
-      .modal-body {
-        margin-top: 20px;
-      }
-
-      .order-step-header {
-        font-size: 18px;
-        font-weight: bold;
-      }
-
-      .order-step-subheader {
-        color: gray;
-        margin-left: 10px;
-      }
-
-      .order-step-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
-
-      .order-step-table th,
-      .order-step-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .order-step-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
-
-      /* 배송 모달 스타일 */
-      .delivery-info {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-
-      .delivery-info th,
-      .delivery-info td {
-        border: none;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-info th {
-        width: 25%;
-        background-color: #f4f4f4;
-      }
-
-      .delivery-info td {
-        width: 25%;
-      }
-
-      .delivery-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .delivery-table th,
-      .delivery-table td {
-        border: 1px solid #ddd;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .delivery-table th {
-        background-color: #f4f4f4;
-        text-align: center;
-      }
     </style>
     <%-- [혁락] css 수정 끝 --%>
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-
+<jsp:include page="myPageHeader.jsp"/>
+<br><br>
+<div class="head_order_det">주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
     <div class="order-container">
-        <div class="orders">
-            <table>
+        <div class="orders tb__order">
+            <table class="order_det_table">
                 <colgroup>
                     <col width="30%"/>
-                    <col width="30%"/>
+                    <col width="20%"/>
                     <col width="15%"/>
                     <col width="15%"/>
-                    <col width="10%"/>
+                    <col width="20%"/>
                 </colgroup>
 
                 <thead>
                 <tr>
-                    <th>상품정보</th>
+                    <th>제품정보</th>
                     <!-- 상품 정보 헤더 -->
                     <th>주문일자</th>
                     <!-- 주문일자 헤더 -->
@@ -307,63 +64,100 @@
                     <!-- 주문 상태 헤더 -->
                 </tr>
                 </thead>
-                <tbody>
-                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
-                    <tr class="order-item-hist">
-                        <td class="product-info">
-                            <div>
-                                <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
-                                    <img src="/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}"
-                                         alt="썸네일" name="thumbnail"/>
-                                </a>
-                            </div>
-                            <ul class="info">
-                                <!-- 브랜드 이름 -->
-                                <li class="brand">
-                                    <span>${orderdetDto.brd_name}</span>
-                                </li>
-                                <!-- 상품 이름 -->
-                                <li class="name">
-                                    <a href="#">${orderdetDto.pd_name}</a>
-                                </li>
-                                <!-- 상품 옵션 -->
-                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
-                            </ul>
-                        </td>
 
-                        <!-- 주문일자 -->
-                        <td>
-                            <span data-oddt="${orderdetDto.od_dt}" class="od_dt">${orderdetDto.od_dt}</span>
-                        </td>
+                <c:choose>
+                    <c:when test="${list == null}"> <%-- 결과값 확인이 필요한 경우 --%>
+                        <tr>
+                            <td class="product-msg" colspan="5">
+                                <div>잠시 후 다시 요청해주세요. 같은 메세지가 반복되는 경우 고객센터로 연락바랍니다.(1540-0000)</div>
+                            </td>
+                        </tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:choose>
+                            <c:when test="${list.isEmpty()}"> <%-- 결과값이 없는 경우 --%>
+                                <tr>
+                                    <td class="product-msg" colspan="5">
+                                        <div>조회 결과가 없습니다.</div>
+                                    </td>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <tbody>
+                                <c:forEach var="orderdetDto" items="${list}" varStatus="status">
+                                    <tr class="order-item-hist">
+                                        <td class="product-info">
+                                            <div>
+                                                <a href="/product/detail?pd_id=${orderdetDto.pd_id}">
+                                                    <img src="/img/product/${orderdetDto.pd_type_cd}/main/${orderdetDto.mn_img_fn}"
+                                                         alt="썸네일" name="thumbnail"
+                                                         onerror="this.onerror=null; this.src='/img/product/${orderdetDto.pd_type_cd.toLowerCase()}/main/${orderdetDto.mn_img_fn}';"/>
+                                                </a>
+                                            </div>
+                                            <ul class="info">
+                                                <!-- 브랜드 이름 -->
+                                                <li class="brand">
+                                                    <span>${orderdetDto.brd_name}</span>
+                                                </li>
+                                                <!-- 상품 이름 -->
+                                                <li class="name">
+                                                    <a href="#">${orderdetDto.pd_name}</a>
+                                                </li>
+                                                <!-- 상품 옵션 -->
+                                                <li class="option">옵션/사이즈: ${orderdetDto.pd_clsf_cd}</li>
+                                            </ul>
+                                        </td>
 
-                        <!-- 주문번호 -->
-                        <td>
-                            <div class="order-number">
-                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
-                                <form id="orderForm" action="/orderDetail" style="display: none;">
-                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
-                                </form>
-                            </div>
-                        </td>
+                                        <!-- 주문일자 -->
+                                        <td>
+                                            <fmt:formatDate pattern="yyyy-MM-dd" value="${orderdetDto.od_dt}"/>
+                                        </td>
 
-                        <!-- 주문금액 및 수량 -->
-                        <td>
-                            <div class="order-amount" data-order-id="20231208212440001">
-                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
-                                <span>${orderdetDto.od_qty} 개</span>
-                            </div>
-                        </td>
+                                        <!-- 주문번호 -->
+                                        <td>
+                                            <div class="order-number">
+                                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                                <form id="orderForm" action="/orderDetail" style="display: none;">
+                                                    <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
+                                                </form>
+                                            </div>
+                                        </td>
 
-                        <td class="order-status">
-                            <a href="#" class="open-order-step-modal">${orderdetDto.od_stat_name}</a>
-                            <!-- 구매상태 링크 -->
-                            <button class="open-delivery-modal">배송조회</button>
-                            <!-- 배송조회 버튼 -->
-                        </td>
-                    </tr>
-                </c:forEach>
-                <!-- 추가 주문 행을 여기에 추가 -->
-                </tbody>
+                                        <!-- 주문금액 및 수량 -->
+                                        <td>
+                                            <div class="order-amount" data-order-id="">
+                                                <span class="priceFormat">${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                                <span>${orderdetDto.od_qty} 개</span>
+                                            </div>
+                                        </td>
+
+                                        <td class="order-status">
+                                            <!-- 구매상태 링크 -->
+                                            <div class="open-order-step-modal">
+                                                <a href='javascript:void(0);'>${orderdetDto.od_stat_name}</a>
+                                            </div>
+                                            <!-- 배송조회 버튼 -->
+                                            <button class="open-delivery-modal">배송조회</button>
+                                            <c:if test="${not fn:contains(orderdetDto.od_stat_name, '취소')}">
+                                                <%-- '취소' 있으면 버튼 출력 안함 --%>
+                                            <!-- 주문취소 버튼 -->
+                                                <!-- 주문취소 버튼 -->
+                                                <form method="POST" action="/order/cancel" style="display:inline;">
+                                                    <input type="hidden" name="od_id" value=${orderdetDto.od_id}>
+                                                    <input type="hidden" name="pd_id" value=${orderdetDto.pd_id}>
+                                                    <input type="hidden" name="pd_clsf_cd" value=${orderdetDto.pd_clsf_cd}>
+                                                    <button class="cancel-order-confirm-modal" type="submit">주문취소</button>
+                                                </form>
+                                            </c:if>
+                                        </td>
+                                    </tr>
+                                                    <!-- 추가 주문 행을 여기에 추가 -->
+                                </tbody>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:otherwise>
+                </c:choose>
             </table>
         </div>
     </div>
@@ -372,10 +166,12 @@
     <div id="orderStepModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
+                <!-- 주문상태 헤더 -->
                 <h2 class="order-step-header">
-                    Step<span class="order-step-subheader">주문단계</span>
+                    <span class="order-step-subheader">주문단계</span>
                     <!-- 주문단계 헤더 -->
                 </h2>
+                <!-- 모달 닫기 버튼 -->
                 <span class="close">&times;</span>
                 <!-- 모달 닫기 버튼 -->
             </div>
@@ -391,23 +187,23 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>주문 일시</td>
                     </tr>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>입금 확인</td>
                     </tr>
                     <tr>
-                        <td>2023-12-08 22:13</td>
+                        <td>2024-05-08 22:13</td>
                         <td>출고 요청</td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 08:52</td>
+                        <td>2024-05-11 08:52</td>
                         <td>출고 처리 중</td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 10:16</td>
+                        <td>2024-05-11 10:16</td>
                         <td>출고 완료</td>
                     </tr>
                     <!-- 추가 주문 단계 행을 여기에 추가 -->
@@ -458,56 +254,56 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>2023-12-13 13:54:02</td>
+                        <td>2024-05-13 13:54:02</td>
                         <td>강남개포주공</td>
                         <td>배송완료</td>
                         <td>010-9266-4597</td>
                         <td>010-8734-1963</td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 12:06:55</td>
+                        <td>2024-05-13 12:06:55</td>
                         <td>강남개포주공</td>
                         <td>배송출발 (배달예정시간 :14~16시)</td>
                         <td>010-9266-4597</td>
                         <td>010-8734-1963</td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 10:19:33</td>
+                        <td>2024-05-13 10:19:33</td>
                         <td>강남A</td>
                         <td>간선하차</td>
                         <td>031-751-1255</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 10:17:52</td>
+                        <td>2024-05-13 10:17:52</td>
                         <td>강남A</td>
                         <td>간선하차</td>
                         <td>031-751-1255</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 07:02:38</td>
+                        <td>2024-05-13 07:02:38</td>
                         <td>대전HUB</td>
                         <td>간선상차</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-13 06:56:06</td>
+                        <td>2024-05-13 06:56:06</td>
                         <td>대전HUB</td>
                         <td>간선상차</td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-12 00:47:49</td>
+                        <td>2024-05-12 00:47:49</td>
                         <td>부천1</td>
                         <td>간선상차</td>
                         <td>032-528-1256</td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td>2023-12-11 20:47:25</td>
+                        <td>2024-05-11 20:47:25</td>
                         <td>중산물류</td>
                         <td>집화처리</td>
                         <td>010-6565-8952</td>
@@ -599,54 +395,67 @@
                     </div>
                 </div>
             </div>
-            <%--            <section class="order__payment">
-                            <%@include file="payCheckout.jsp" %>
-                        </section>
-            --%>
-
 
             <script>
 
-              document.addEventListener('DOMContentLoaded', () => {
-                const orderStepModal = document.querySelector('#orderStepModal');
-                const deliveryModal = document.querySelector('#deliveryModal');
-                const orderIdModal = document.querySelector('#orderIdModal');
-                const closeModalButtons = document.querySelectorAll('.close');
-                let modalContent = document.querySelectorAll('.modal-content');
-                const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
-                const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
-                const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+                $(document).ready(function () {
+                    $('.priceFormat').each(function () {
+                        let value = $(this).text();
+                        value = value.replace(/,/g, '');
+                        const numbericValue = parseInt(value);
+                        const formatValue = numbericValue.toLocaleString('ko-KR');
+                        $(this).text(formatValue + '원');
+                    })
+                })
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const orderStepModal = document.querySelector('#orderStepModal');
+                    const deliveryModal = document.querySelector('#deliveryModal');
+                    const orderIdModal = document.querySelector('#orderIdModal');
+                    const closeModalButtons = document.querySelectorAll('.close');
+                    let modalContent = document.querySelectorAll('.modal-content');
+                    const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
+                    const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
+                    const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+                    const cancelOrderConfirmModal = document.querySelectorAll('.cancel-order-confirm-modal');
 
                 /* 영수증 모달 */
                 const receiptModal = document.querySelector('#receiptModal');
                 const orderAmounts = document.querySelectorAll('.order-amount');
 
-                //주문상세내역 모달 열기
+                /*주문상세내역 모달 열기 */
                 openOrderIdModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     orderIdModal.style.display = 'flex';
                   })
                 })
 
-                // 주문 단계 모달 열기
+                /* 주문 단계 모달 열기 */
                 openOrderStepModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     orderStepModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '350px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '350px';
+                    })
                   });
                 });
 
-                // 배송 조회 모달 열기
+                /* 배송 조회 모달 열기 */
                 openDeliveryModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
                     deliveryModal.style.display = 'flex';
-                    modalContent.style.maxWidth = '1400px';
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '1400px';
+                    })
                   });
                 });
 
-                // 영수증 모달 열기
+                /* 영수증 모달 열기 */
                 orderAmounts.forEach((orderAmount) => {
                   orderAmount.addEventListener('click', async () => {
+                    modalContent.forEach((content) => {
+                      content.style.maxWidth = '400px';
+                    });
                     const orderId = orderAmount.getAttribute('data-order-id');
                     const receiptContent = document.querySelector('#receiptContent');
                     try {
@@ -662,6 +471,20 @@
                   });
                 });
 
+                /* 배송취소 확인 모달 열기 */
+                cancelOrderConfirmModal.forEach((button) => {
+                  button.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    /* TODO : [제품명][주문일자][주문금액] 확인 필요할까? */
+                    let result = confirm("주문을 취소하시겠습니까?");
+                    if (result) {
+                          let form = button.closest('form');
+                          form.submit();
+                    }
+                    ;
+                  });
+                });
+
                 // 모달 닫기
                 closeModalButtons.forEach((button) => {
                   button.addEventListener('click', () => {
@@ -671,7 +494,7 @@
 
                 window.addEventListener('click', (event) => {
                   if (event.target === orderStepModal || event.target === deliveryModal ||
-                      event.target === receiptModal   || event.target === orderIdModal) {
+                      event.target === receiptModal || event.target === orderIdModal) {
                     event.target.style.display = 'none';
                   }
                 });
@@ -709,71 +532,75 @@
                   printWindow.close();
                 };
 
-                /* 원 표시*/
-                // Function to format the date
-                const formatDate = (isoDateString) => {
-                  const date = new Date(isoDateString);
+                  /*  /!* 원 표시*!/
+                    // Function to format the date
+                    const formatDate = (isoDateString) => {
+                        const date = new Date(isoDateString);
 
-                  // Format the date as yyyy.mm.dd
-                  const formattedDate = date.toLocaleDateString('ko-KR', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit'
-                  }).replace(/\. /g, '.');
+                        // Format the date as yyyy.mm.dd
+                        const formattedDate = date.toLocaleDateString('ko-KR', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit'
+                        }).replace(/\. /g, '.');
 
-                  // Format the time as HH:MM
-                  const formattedTime = date.toLocaleTimeString('ko-KR', {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    hour12: false
-                  });
+                        // Format the time as HH:MM
+                        const formattedTime = date.toLocaleTimeString('ko-KR', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: false
+                        });
 
-                  return `${'${formattedDate}'} ${'${formattedTime}'}`;
-                };
+                        return `${'${formattedDate}'} ${'${formattedTime}'}`;
+                    };
 
-                // Function to format the price
-                const formatPrice = (price) => `${'${price.toLocaleString("ko-KR")}'} 원`;
+                    // Function to format the price
+                    const formatPrice = (price) => `${'${price.toLocaleString("ko-KR")}'} 원`;
 
-                // Apply formatting to each transaction
-                document.querySelectorAll('.order-item-hist').forEach(transaction => {
-                  const dateElement = transaction.querySelector('.order-date');
-                  const priceElement = transaction.querySelector('.sls_prc');
+                    // Apply formatting to each transaction
+                    document.querySelectorAll('.order-item-hist').forEach(transaction => {
+                        const dateElement = transaction.querySelector('.order-date');
+                        const priceElement = transaction.querySelector('.sls_prc');
 
-                  const isoDateString = new Date(dateElement.textContent).toISOString();
-                  const price = parseInt(priceElement.textContent, 10);
+                        const isoDateString = new Date(dateElement.textContent).toISOString();
+                        const price = parseInt(priceElement.textContent, 10);
 
-                  dateElement.textContent = formatDate(isoDateString);
-                  priceElement.textContent = formatPrice(price);
-                });
+                        dateElement.textContent = formatDate(isoDateString);
+                        priceElement.textContent = formatPrice(price);
+                    });*/
 
-                /* TODO: od_dt 데이터 가져오기
-                $(document).ready(function () {
-                    $('.od_dt').each(function () {
-                        let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
-                        let today = new Date();
-                        let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
-                        $(this).text(dateFormat);
+
+
+
+
+                    /* TODO: od_dt 데이터 가져오기
+                    $(document).ready(function () {
+                        $('.od_dt').each(function () {
+                            let oddt = $(this).data("oddt"); /!* od_dt 데이터 가져오기 *!/
+                            let today = new Date();
+                            let dateFormat = today.getFullYear(oddt) + '.' + (today.getMonth(oddt) + 1) + '.' + today.getDate(oddt);
+                            $(this).text(dateFormat);
+                        })
                     })
-                })
-                */
+                    */
 
-                $(document).ready(function () {
-                  $('.od_dt').each(function () {
-                    let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
-
-                    // Date 객체로 변환하기 위해 oddt를 파싱
-                    let year = parseInt(oddt.substring(0, 4));
-                    let month = parseInt(oddt.substring(5, 7)) - 1; // JavaScript에서 월은 0부터 시작합니다.
-                    let day = parseInt(oddt.substring(8, 10));
-                    let date = new Date(year, month, day);
-
-                    // Date 객체를 원하는 형식으로 변환
-                    let dateFormat = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.'
-                        + date.getDate().toString().padStart(2, '0');
-                    $(this).text(dateFormat);
-                  });
-                });
-              }
+                    // $(document).ready(function () {
+                    //   $('.od_dt').each(function () {
+                    //     let oddt = $(this).data("oddt"); // od_dt 데이터 가져오기
+                    //
+                    //     // Date 객체로 변환하기 위해 oddt를 파싱
+                    //     let year = parseInt(oddt.substring(0, 4));
+                    //     let month = parseInt(oddt.substring(5, 7)) - 1; // JavaScript에서 월은 0부터 시작합니다.
+                    //     let day = parseInt(oddt.substring(8, 10));
+                    //     let date = new Date(year, month, day);
+                    //
+                    //     // Date 객체를 원하는 형식으로 변환
+                    //     let dateFormat = date.getFullYear() + '.' + (date.getMonth() + 1).toString().padStart(2, '0') + '.'
+                    //         + date.getDate().toString().padStart(2, '0');
+                    //     $(this).text(dateFormat);
+                    //   });
+                    // });
+                }
             </script>
 </main>
 <jsp:include page="footer.jsp"/>

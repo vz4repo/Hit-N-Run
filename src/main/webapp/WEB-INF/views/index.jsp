@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -64,7 +65,7 @@
     </style>
 </head>
 
-<body>
+<body class="index">
 <!-- ***** Preloader Start ***** -->
 <div id="preloader">
     <div class="jumper">
@@ -81,7 +82,7 @@
 <!-- ***** Header Area End ***** -->
 
 <!-- ***** Main Banner Area Start ***** -->
-<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel" style="padding-top: 95px">
+<div id="advertisement-carousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators visually-hidden">
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#advertisement-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -94,7 +95,7 @@
             <div class="carousel-caption advertiseCommentLeft">
                 <p class="text-uppercase advertiseComment">최상급 글러브</p>
                 <h1 class="display-1 fw-bolder text-capitalize">타티스 주니어 글러브 구매하기</h1>
-                <a href="/cart/list" class="btn btn-primary cartBtn">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary cartBtn">장바구니 담기</a>
             </div>
         </div>
         <div class="carousel-item c-item">
@@ -102,7 +103,7 @@
             <div class="carousel-caption top-1 advertiseCommentLeft">
                 <p class="text-uppercase advertiseComment">CLOUT AI BATS</p>
                 <h1 class="display-1 fw-bolder text-capitalize">THE HOTTEST ALLOY AROUND</h1>
-                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary">장바구니 담기</a>
             </div>
         </div>
         <div class="carousel-item c-item">
@@ -110,7 +111,7 @@
             <div class="carousel-caption top-1 advertiseCommentRight">
                 <p class="text-uppercase advertiseComment">Be Iconic</p>
                 <h1 class="display-1 fw-bolder text-capitalize">ICON USSSA BASEBALL BAT</h1>
-                <a href="/cart/list" class="btn btn-primary">Add to Cart</a>
+                <a href="/cart/list" class="btn btn-primary">장바구니 담기</a>
             </div>
         </div>
     </div>
@@ -476,7 +477,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="section-heading">
-                    <h2>홈런 소식을 구독하고 10% 할인을 받으세요</h2>
+                    <h2>홈런 소식을 구독하고 10% 할인 쿠폰을 받으세요</h2>
                     <span>홈런 소식지에 깜짝 할인 쿠폰도 숨어 있습니다.</span>
                 </div>
                 <form id="subscribe" action="" method="get">

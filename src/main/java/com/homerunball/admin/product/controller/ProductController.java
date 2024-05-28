@@ -3,7 +3,11 @@ package com.homerunball.admin.product.controller;
 import com.homerunball.admin.product.domain.ProductDto;
 import com.homerunball.admin.product.service.ProductService;
 import com.homerunball.admin.stock.service.StockService;
+import java.io.File;
+import java.io.IOException;
+import javax.servlet.FilterChain;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +28,9 @@ import java.util.*;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Value("#{properties['upload.path']}")
+    private String uploadPath;
 
     /*대시보드로 이동하는 메서드*/
     @GetMapping("/dashboard")
@@ -60,7 +69,10 @@ public class ProductController {
     추가할 제품이 한 개라면 제품을 추가한 뒤에 productList로 이동한다.
      */
     @PostMapping("/register")
-    public String register(ProductDto productDto, RedirectAttributes rattr, Model m) {
+    public String register(ProductDto productDto, RedirectAttributes rattr, Model m,
+        @RequestPart("mn_img_f") MultipartFile mainImage,
+        @RequestPart("det_img_f") MultipartFile detailImage) {
+
         /* 입력한 제조년월에 포함된 "-"를 ""로 교체한다. */
         productDto.setPd_mnf_date(productDto.getPd_mnf_date().replace("-",""));
 
@@ -104,6 +116,14 @@ public class ProductController {
 
             /*만약 판매 예정일이 제품 제조년월보다 과거면 에러가 발생한다.*/
 
+            /* 이미지 업로드 */
+//          path : <properties.upload.path>/<pd_type_cd>/main/<mn_img_fn>
+            String mainImagePath = uploadFile(mainImage);
+            productDto.setMn_img_fn(mainImage.getOriginalFilename());
+
+//          path : <properties.upload.path>/<pd_type_cd>/detail/<mn_img_fn>
+            String detailImagePath = uploadFile(detailImage);
+            productDto.setDet_img_fn(detailImage.getOriginalFilename());
 
             /* productRegister에서 입력받은 productDto를 사용해서 새로운 제품을 추가한다. */
             if (productService.create(productDto) != 1) throw new Exception("Register failed.");
@@ -119,6 +139,22 @@ public class ProductController {
             m.addAttribute("msg", "제품이 정상적으로 등록되지 않았습니다.");
             return "/admin/product/productRegister";
         }
+    }
+
+    /* 2024.05.25 [혁락] 파일 업로드 */
+    private String uploadFile(MultipartFile file) throws IOException {
+        if (file.isEmpty()) {
+            throw new IOException("파일이 비었습니다.");
+        }
+
+        /* TODO: 여기서도 exception 가능성 있는지 확인 필요 */
+        File targetFile = new File(uploadPath + File.separator + file.getOriginalFilename());
+        try {
+            file.transferTo(targetFile);
+        } catch (IOException e) {
+            throw new IOException("파일 업로드 실패 !!");
+        }
+        return targetFile.getAbsolutePath();
     }
 
     /*제품 관리 페이지로 이동한다.*/

@@ -105,6 +105,8 @@ public class CartController {
     }
 
 
+
+
     @PostMapping("/insert")
     public String insert(CartDto cartDto, String mn_img_fn, String pd_id, String pd_type_cd ,String pd_clsf_cd, Model m, HttpSession session, RedirectAttributes rattr) {
         try {
@@ -155,6 +157,8 @@ public class CartController {
             return "errorPageCust";
         }
     }
+
+
 
     /*고객 장바구니 load*/
     @GetMapping("/list")

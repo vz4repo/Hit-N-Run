@@ -1,5 +1,5 @@
 body:not(.index) {
-    padding-top: 150px;
+    margin-top: 150px;
 }
 
 .cart_link {
@@ -18,7 +18,7 @@ body:not(.index) {
     width: 100%;
     z-index: 100;
     background-color: white;
-    padding: 20px 0;
+    transition: top 0.5s;
 }
 
 
@@ -44,29 +44,24 @@ body:not(.index) {
     color: #4d4d59;
 }
 
-.top_header li:hover {
+.top_header li:hover,
+.header__dropdown-content a:hover{
     color: red;
     font-weight: bold;
+
 }
 
 .main_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1920px;
-    min-width: 1280px;
     width: 100%;
     padding: 0 3%;
 }
 
-.main_header h1 {
-    font-size: 35px;
-    font-weight: 900;
-    font-style: italic;
-}
 
-
-.main_header li {
+.main_header li,
+.header__dropbtn {
     margin: 17px;
     font-size: 19px;
 }
@@ -74,16 +69,48 @@ body:not(.index) {
 
 .main_header_ul {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.cart_link i {
+.cart_link i,
+.header__dropbtn{
     color: #4d4d59;
+    border: none !important;
+    background-color: white;
+    cursor: pointer;
 }
 
 .bottom_header {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     text-align: start;
     width: 100%;
+
 }
+
+/* DropDown 마이페이지 시작: */
+.header__dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 170px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+
+.header__dropdown-content a {
+    float: none;
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    margin: 17px;
+}
+
+.header__dropdown:hover .header__dropdown-content {
+    display: block;
+}
+/* dropDown 마이페이지 끝: */

@@ -19,6 +19,7 @@
     <%--   다니님 header, footer --%>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -30,217 +31,235 @@
 </head>
 <%-- 김수연 시작 --%>
 <style>
-  #dlv-container {
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      padding-top: 1.35%;
-  }
+    #dlv-container {
+        /*display: flex;*/ /* 이게 없어야 배송정보 - 배송지 변경 버튼 세로로 쌓임 */
+        /*align-items: center;*/
+        /*justify-content: start;*/
+        padding-top: 1.35%;
+    }
 
-  .dlv-header {
-      margin-left: 8%;
-      margin-right: 3%;
-      font-size: 15px;
-      font-weight: 600;
-  }
+    .dlv-header {
+        margin-left: 8%;
+        margin-bottom: 1.5%;
+        margin-right: 3%;
+        font-size: 15px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
 
-  #dlv-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+    #dlv-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
 
-  #dlv-container li {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-  }
+    #dlv-container li {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+    }
 
 
+    #dlv-container .btn-change-address {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 360px;
+    }
 
-  #dlv-container .btn-change-address {
-    padding: 5px 10px;
-    border: 1px solid #333;
-    color: #fff;
-    background-color: #333;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  #dlv-container .select-request {
-    width: auto;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-
-  #dlv-container .radio-group label {
-    margin-right: 10px;
-  }
-
-  #dlv-container .dlv-content ul {
-    display: block;
-  }
-
-  #dlv-container .dlv-content li {
-    padding: 4px;
-  }
-
-  /* Modal styles */
-  #addressModal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    padding-top: 60px;
-  }
-
-  #addressModal .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-  }
-
-  #addressModal .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  #addressModal .close:hover,
-  #addressModal .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  #addressModal .address-card {
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-  }
-
-  #addressModal .address-card .title {
-    font-weight: bold;
-    font-size: 20px; /* 13 -> 18 -> 20 */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  #addressModal .address-card .title .default {
-    color: #007bff;
-      /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
-    border: 1px solid #007bff;
-    padding: 2px 5px;
-    border-radius: 5px;
-  }
-
-  #addressModal .address-card .details {
-    font-size: 20px; /* 13 -> 18 -> 20 */
-    margin: 10px 0;
-  }
-
-  #addressModal .address-card .buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  #addressModal .address-card .buttons button {
-    padding: 5px 10px;
-    border: 1px solid #ddd;
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
-
-  #addressModal .address-card .buttons button {
-      padding: 5px 10px;
-      border: 1px solid #333;
+    .btn-change-address :hover {
       color: #fff;
-      background-color: #333;
-      cursor: pointer;
-      margin-left: 0px;
-  }
+      background-color: #1b64da;
+    }
 
-  #addressModal .add-new-address {
-    text-align: right;
-    margin: 10px 0;
-    color: #007bff;
-    cursor: pointer;
-  }
+    #dlv-container .select-request {
+        width: auto;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    #dlv-container .radio-group label {
+        margin-right: 10px;
+    }
+
+    #dlv-container .dlv-content ul {
+        display: block;
+    }
+
+    #dlv-container .dlv-content li {
+        padding: 4px;
+    }
+
+    /* Modal styles */
+    #addressModal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    #addressModal .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+    }
+
+    #addressModal .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    #addressModal .close:hover,
+    #addressModal .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    #addressModal .address-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+
+    #addressModal .address-card .title {
+        font-weight: bold;
+        font-size: 20px; /* 13 -> 18 -> 20 */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #addressModal .address-card .title .default {
+        color: #007bff;
+        /*font-size: 20px; !* 13 -> 18 -> 20 *!*/ /* -> 이거아님*/
+        border: 1px solid #007bff;
+        padding: 2px 5px;
+        border-radius: 5px;
+    }
+
+    #addressModal .address-card .details {
+        font-size: 20px; /* 13 -> 18 -> 20 */
+        margin: 10px 0;
+    }
+
+    /*#addressModal .address-card .buttons {*/
+        /*display: flex;*/
+        /*justify-content: space-between;*/
+    /*}*/
+
+    #addressModal .address-card .buttons button {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        cursor: pointer;
+    }
+
+    #addressModal .address-card .buttons button {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        cursor: pointer;
+        margin-left: 0px;
+    }
+
+    #addressModal .add-new-address {
+        text-align: right;
+        margin: 10px 0;
+        color: #007bff;
+        cursor: pointer;
+    }
 
 
-
-  #addressModal .dlv-select {
-      padding: 5px 10px;
-      border: 1px solid #333;
-      color: #fff;
-      background-color: #333;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 10px;
-  }
-
-
-  /*.close {*/
-  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
-  /*}*/
+    #addressModal .dlv-select {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
 
+    /*#addressModal .dlv-select3 {*/
+    /*    padding: 5px 10px;*/
+    /*    border: 1px solid #333;*/
+    /*    color: #fff;*/
+    /*    background-color: #333;*/
+    /*    border-radius: 5px;*/
+    /*    cursor: pointer;*/
+    /*    margin-left: 10px;*/
+    /*}*/
 
-  .header-container {
-      display: flex;
-      align-items: center; /* 수직 가운데 정렬 */
-      justify-content: space-between; /* 양쪽 끝에 배치 */
-      height: 50px; /* 높이 설정 (필요에 따라 조정) */
-      padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
-  }
+    .close {
+        cursor: pointer; /* 포인터 모양 */
+        font-size: 24px; /* 아이콘 크기 조정 */
+        line-height: 1; /* 줄 높이 조정 */
+        position: relative; /* 상대 위치 설정 */
+        top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
+    }
 
-  .dlvN {
-      margin: 0; /* 기본 마진 제거 */
-      font-size: 20px; /* 폰트 크기 조정 */
-      line-height: 1; /* 줄 높이 조정 */
-      font-weight: bold; /* 글자를 두껍게 */
-      color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
-  }
+    .dlv-header-content {
+        margin-left: 8%;
+    }
 
-  .close {
-      cursor: pointer; /* 포인터 모양 */
-      font-size: 24px; /* 아이콘 크기 조정 */
-      line-height: 1; /* 줄 높이 조정 */
-      position: relative; /* 상대 위치 설정 */
-      top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
-  }
+    #dlv-header-content label {
+        width: 500px; /* 원하는 너비로 설정하세요 */
+    }
+
+    .dlv-header-content tr {
+        height: 30px;
+    }
+
+    button#setDfltAddrsetDfltAddr {
+        background-color: #073713;
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 
 
-  #dlv-header-content label {
-      width: 500px; /* 원하는 너비로 설정하세요 */
-  }
-
-  .dlv-header-content tr  {
-      height: 30px;
-  }
+    button#dlv-select3 {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
 </style>
 <%-- 김수연 끝 --%>
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">Home-run() 주 문 서</a>
-    <hr class="first__under"/>
+    <a href="#" class="head_main">주 문/결 제</a>
     <div class="order__title">
-        <div class="head_order">Order / Payment</div>
+        <%--<div class="head_order">Order / Payment</div>--%>
         <div class="order__title__detail">
             <a href="/cart/list">장바구니 > </a>
             <a href="#">주문서</a>
@@ -250,13 +269,17 @@
     <%-- 김수연 시작 --%>
     <%-- 배송지 정보 section --%>
     <section id="dlv-container">
-        <div class="dlv-header">배송 정보</div>
-        <%-- 기본/선택 배송지 내용 출력 --%>
 
-<%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
-        <%-- 김수연 0524 기본배송지 form 시작 --%>
+
+        <div class="dlv-header">
+            <div>배송정보</div>
+            <!-- 배송지 변경 버튼 -->
+            <button class="btn-change-address">배송지 변경</button>
+        </div>
+
+
         <div class="dlv-header-content">
-            <%-- TODO : 기본배송지 --%>
+            <%-- 기본/선택 배송지 내용 출력 --%>
                 <table>
                     <colgroup>
                         <col style="width: 150px">
@@ -296,8 +319,6 @@
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
-        <!-- 배송지 변경 버튼 -->
-                <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
@@ -315,25 +336,21 @@
 </div>
 <section class="order__items">
     <hr class="first__under"/>
-    <div class="title__order">상품정보</div>
+    <div class="title__order">제품정보</div>
     <div class="tb__order">
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="20%"/>
                     <col width="50%"/>
                     <col width="10%"/>
-                    <col width="5%"/>
-                    <col width="5%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
                     <col width="10%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th scope="col">
-                        <div>이미지</div>
-                    </th>
-                    <th scope="col">
-                        <div>상품정보</div>
+                        <div>제품정보</div>
                     </th>
                     <th scope="col">
                         <div>판매가</div>
@@ -351,22 +368,36 @@
                 </thead>
                 <tbody>
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
-                    <tr>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
-                                     alt="이미지 준비 중 입니다"
-                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
-                            </a>
+                    <tr class="product-row">
+                        <td class="product-info">
+                            <div>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                    <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
+                                         alt="이미지 준비 중 입니다"
+                                         onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
+                                </a>
+                            </div>
+                            <ul class="info">
+                                <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                        <%--<span>${cartDto.brd_name}</span>--%>
+                                </li>
+                                <!-- 상품 이름 -->
+                                <li class="name">
+                                    <a href="#">${cartDto.pd_name}</a>
+                                </li>
+                                <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${cartDto.pd_clsf_code}</li>
+                            </ul>
                         </td>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
-                            <span>${cartDto.pd_clsf_code}</span>
-                        </td>
+                            <%--<td>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                                <span></span>
+                            </td>--%>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -376,17 +407,31 @@
                         <div class="tb__left"><span>[기본배송]</span></div>
                     </td>
                 </tr>
-                <tr>
+               <%-- <tr>
                     <td colspan="7">
-                        <div class="tb__right">
-                            <span>상품구매금액</span>
-                            <span>배송비 무료</span>
-                            <div>최종 결제 금액
-                                <span class="" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                            <div class="tb__right">
+                                <div class="totalSum">상품구매금액
+                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                                </div>
+                                <div class="grade">등급 할인
+                                    <span>없음</span>
+                                </div>
+                                <div class="cupon">쿠폰 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="point">적립금 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="card">카드사 할인
+                                    <span>없음</span>
+                                </div>
+                                <div>배송비 무료</div>
+                                <div class="odpayamt">최종 결제 금액
+                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                                </div>
                             </div>
-                        </div>
                     </td>
-                </tr>
+                </tr>--%>
                 </tfoot>
             </table>
         </form>
@@ -394,49 +439,86 @@
 </section>
 <%-- 결제 위젯 호출 --%>
 <section class="order__payment">
+    <div class="order__payment__wrapper">
     <%@include file="payCheckout.jsp" %>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
+    <div class="tb__right">
+        <div class="totalSum tb__right-item">
+            상품구매금액
+            <span class="priceFormat" id="totalSum"
+            >${cartDto.sls_prc * cartDto.cart_cnt}</span
+            >
+        </div>
+        <div class="grade tb__right-item">
+            등급 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="coupon tb__right-item">
+            쿠폰 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="point tb__right-item">
+            적립금 사용
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="card tb__right-item">
+            카드사 할인
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="dlv-fare tb__right-item">
+            배송비
+            <span class="priceFormat">없음</span>
+        </div>
+        <div class="odpayamt tb__right-item">
+            최종 결제 금액
+            <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+        </div>
+    </div>
+    </div>
+    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
 </section>
+
 <%-- footer --%>
 <%@include file="footer.jsp" %>
 <script>
-  $(document).ready(function () {
-    $('.priceFormat').each(function () {
-      let value = $(this).text();
-      value = value.replace(/,/g, '');
-      const numbericValue = parseInt(value);
-      const formatValue = numbericValue.toLocaleString('ko-KR');
-      $(this).text(formatValue + '원');
+    $(document).ready(function () {
+        $('.priceFormat').each(function () {
+            let value = $(this).text();
+            if(value === '없음'){
+              $(this).text('0원');
+              $(this).css('color', '#777');
+            }else {
+              value = value.replace(/,/g, '');
+              const numbericValue = parseInt(value);
+              const formatValue = numbericValue.toLocaleString('ko-KR');
+              $(this).text(formatValue + '원');
+            }
+        })
     })
 
 
+    /*테이블의 행 수를 계산*/
+    window.onload = function () {
+        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        let totalSum = 0;
 
+        rows.forEach(function (row) {
+            /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
+            const price = row.cells[4].innerText;
+            totalSum += parseInt(price.replace(/[^\d]/g, ''));
+        });
+        /*총합을 나타낼 위치*/
+        document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
+    }
 
-      /* 김수연 추가 0524 시작 */
-      // document.getElementsByClassName("dlv-header-content").innerHTML = showDefaultDLV();
-      /* 김수연 추가 0524 끝 */
-  })
-  /*테이블의 행 수를 계산*/
-  window.onload = function () {
-    const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
-    let totalSum = 0;
+    /* 배송지 요청 */
+    /* 배송지 modal */
+    document.addEventListener('DOMContentLoaded', () => {
+        const contextPath = '<%= request.getContextPath() %>';
 
-    rows.forEach(function (row) {
-      /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
-      const price = row.cells[5].innerText;
-      totalSum += parseInt(price.replace(/[^\d]/g, ''));
-    });
-    /*총합을 나타낼 위치*/
-    document.getElementById('totalSum').innerText = totalSum.toLocaleString('ko-KR') + '원';
-  }
-
-  /* 배송지 요청 */
-  /* 배송지 modal */
-  document.addEventListener('DOMContentLoaded', () => {
-    const contextPath = '<%= request.getContextPath() %>';
-
-    const addressModal = document.querySelector('#addressModal');
-    const btn = document.querySelector('.btn-change-address');
-    const closeModal = document.querySelector('#closeModal');
+        const addressModal = document.querySelector('#addressModal');
+        const btn = document.querySelector('.btn-change-address');
+        const closeModal = document.querySelector('#closeModal');
 
     btn.addEventListener('click', () => {
       addressModal.style.display = 'block';
@@ -456,7 +538,8 @@
               htmlContent += `
                             <div class="address-card">
                                 <div class="title">
-                                    (${'${listDto.rcver}'}) ${'${listDto.adr_name}'}
+                                    ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
+                                    <button class="3rd-dvlp" id="setDfltAddrsetDfltAddr" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">기본배송지</button>
                                 </div>
                                 <div class="details">
                                     ${'${listDto.rcver_phn}'}<br/>
@@ -464,6 +547,8 @@
                                 </div>
                                 <div class="buttons">
                                     <button class="dlv-select" addrId="${'${listDto.c_adr_list_id}'}">선택</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">수정</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">삭제</button>
                                 </div>
                             </div>
                         `;
@@ -567,14 +652,10 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
     });
   })
 
+    function dlvBtn() {
+        alert('3차 개발 예정입니다.')
+    }
 
-  /* 김수연 추가 0524 시작 */
-  // function showDefaultDLV() {
-  //     return `
-  //           <dlv>안녕하세용</dlv>
-  //           `;
-  // }
-  /* 김수연 추가 0524 끝 */
 </script>
 </body>
 </html>
