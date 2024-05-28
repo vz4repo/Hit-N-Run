@@ -67,7 +67,11 @@
         background-color: #333;
         border-radius: 5px;
         cursor: pointer;
-        margin-left: 360px;
+    }
+
+    .btn-change-address :hover {
+      color: #fff;
+      background-color: #1b64da;
     }
 
     #dlv-container .select-request {
@@ -233,7 +237,7 @@
     <section id="dlv-container">
 
 
-        <div class="dlv-header">
+        <div class="dlv-header" style="width: 150px">
             <div>배송정보</div>
             <!-- 배송지 변경 버튼 -->
             <button class="btn-change-address">배송지 변경</button>
