@@ -3,7 +3,7 @@ body.productDetail{
 }
 :root {
     --btn-width : 90%;
-    --btn-min-width : 100%;
+    --btn-min-width : 90%;
     --btn-height : 5vh;
     --btn-min-height : 5px;
     --menu-height : calc(var(--btn-height) * 8);
@@ -15,7 +15,7 @@ body.productDetail{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 90%;
+    width: var(--btn-width);
 }
 /*화면 상단 토글 메뉴*/
 .prdLabel {
@@ -372,4 +372,29 @@ body{overflow-x: hidden}
 }
 .QnATableAnswered{
     color: darkgreen;
+}
+.prdDetail{
+    display: flex;
+    width: 81%;
+}
+.prdDetail ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.prdDetail .title, .prdDetail .content{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.prdDetail .title{
+    text-align: left;
+    justify-content: flex-end;
+}
+.prdDetail .content{
+    text-align: right;
+}
+#rtl_prc{
+    text-decoration: line-through;
+    color: darkgray;
 }

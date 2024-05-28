@@ -30,21 +30,35 @@
                      onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/main/${prd.mn_img_fn}';">
         </div>
         <div class="productItemDsc">
-            <h2>${prd.pd_name}</h2>
-            <p>${prd.pd_ad_cmt}</p>
-            <p id="sale-price"><b>판매가격: </b><span id="sls_prc">${stkInfo.sls_prc}</span>원</p>
-            <p id="retail-price"><b>소비자가격: </b><span id="rtl_prc">${stkInfo.rtl_prc}</span>원</p>
-            <p><b>배송:</b> 무료배송</p>
-            <p><b>구매 주의사항</b></p>
-            <%--선택된 옵션으로 제품을 넘겨주기--%>
-            <p><b>옵션:</b>
-                <select id="mySelect" name="selectedOption">
-<%--                   서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
-<%--                   listStkOpt는 재고테이블을 리스트로 읽어옵니다--%>
-                   <c:forEach var="option" items="${listStkOpt}">
-                       <option value="${option.pd_clsf_cd}">${option.pd_clsf_cd}</option>
-                   </c:forEach>
-                </select>
+            <div class="prdDetailTitle">
+                <h2>${prd.pd_name}</h2>
+                <p>${prd.pd_ad_cmt}</p>
+            </div>
+            <div class="prdDetail">
+                <div class="title">
+                    <ul class="titleList">
+                        <li><b>판매가격: </b></li>
+                        <li><b>옵션: </b></li>
+<%--                        <li><b>배송:</b></li>--%>
+<%--                        <li><b>구매 주의사항</b></li>--%>
+                    </ul>
+                </div>
+                <div class="content">
+                    <ul class="contentList">
+<%--                        옵션--%>
+                        <li><select id="mySelect" name="selectedOption">
+                            <%--                   서버에서 list를 가져와서 가지고 있는 속성을 옵션으로 만든다--%>
+                            <%--                   listStkOpt는 재고테이블을 리스트로 읽어옵니다--%>
+                            <c:forEach var="option" items="${listStkOpt}">
+                                <option value="${option.pd_clsf_cd}">${option.pd_clsf_cd}</option>
+                            </c:forEach>
+<%--                        가격--%>
+                        </select></li>
+                        <li><span id="retail-price"><span id="rtl_prc">${stkInfo.rtl_prc}</span></span><span id="sale-price"><span id="sls_prc"> ${stkInfo.sls_prc}</span>원</span></li>
+<%--                        <li>무료배송</li>--%>
+                    </ul>
+                </div>
+            </div>
 <%--            input으로 필요한 정보 pd_id, pd_clsf_cd를 넘겨준다.--%>
                 <input id="pd_id" name="pd_id" value="${stkInfo.pd_id}" style="display: none">
                 <input id="pd_clsf_cd" name="pd_clsf_cd" style="display: none">
