@@ -148,7 +148,7 @@
     -- 1건 나와야 성공, 그 외에 뭐지?
   </update>
 
-  <select id="selectPaymentHistoryWithDateRange" parameterType="map" resultType="OrderDetDto">
+  <select id="selectOrderHistoryWithDateRange" parameterType="map" resultType="OrderDetDto">
     select od.od_id                   -- 주문id
          , od.pd_id                   -- 상품id
          , od.pd_clsf_cd              -- 상품옵션

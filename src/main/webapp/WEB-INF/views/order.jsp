@@ -251,8 +251,6 @@
                         <col style="width: 150px">
                         <col style="width: 400px">
                     </colgroup>
-
-
                     <tr>
                         <td class="label">배송지</td>
                         <td class="dlv-content">${defaultDto.adr_name}</td>
@@ -260,7 +258,7 @@
                     <tr>
                         <td class="label">이름/연락처</td>
                         <td class="dlv-content">
-                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">"${defaultDto.rcver_phn}</span>
                         </td>
                     </tr>
                     <tr>
@@ -359,38 +357,6 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-<%--                <tfoot>
-                <tr>
-                    <td colspan="1">
-                        <div class="tb__left"><span>[기본배송]</span></div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="7">
-                            <div class="tb__right">
-                                <div class="totalSum">상품구매금액
-                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
-                                </div>
-                                <div class="grade">등급 할인
-                                    <span>없음</span>
-                                </div>
-                                <div class="cupon">쿠폰 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="point">적립금 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="card">카드사 할인
-                                    <span>없음</span>
-                                </div>
-                                <div>배송비 무료</div>
-                                <div class="odpayamt">최종 결제 금액
-                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-                                </div>
-                            </div>
-                    </td>
-                </tr>
-                </tfoot>--%>
             </table>
         </form>
     </div>
@@ -430,6 +396,7 @@
         <div class="odpayamt tb__right-item">
             최종 결제 금액
             <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+            <input type="hidden" id="amount" value="${ord.od_pay_amt}"/>
         </div>
     </div>
     </div>

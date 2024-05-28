@@ -95,13 +95,15 @@ public class OrdDetController {
       return "redirect:/orderDetail";
   }
 
-
   /* 날짜 범위에 따른 주문내역 조회 */
   @GetMapping(value = "/order/list")
   @ResponseBody
   public List<OrderDetDto> getOrderList(@SessionAttribute(name = "c_id") int c_id
       , @RequestParam("fromDate") String fromDate
       , @RequestParam("toDate") String toDate) {
+
+    System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
+
     return orderDetService.selectOrderHistoryWithDateRange(c_id, fromDate, toDate);
   }
 }
