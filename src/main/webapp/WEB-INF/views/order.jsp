@@ -275,6 +275,7 @@
     <section id="dlv-container">
 
 
+        <%-- TODO: 150 --%>
         <div class="dlv-header" style="width: 150px">
             <div>배송정보</div>
             <!-- 배송지 변경 버튼 -->
@@ -340,25 +341,21 @@
 </div>
 <section class="order__items">
     <hr class="first__under"/>
-    <div class="title__order">상품정보</div>
+    <div class="title__order">제품정보</div>
     <div class="tb__order">
         <form action="/order">
             <table>
                 <colgroup>
-                    <col width="20%"/>
                     <col width="50%"/>
                     <col width="10%"/>
-                    <col width="5%"/>
-                    <col width="5%"/>
+                    <col width="15%"/>
+                    <col width="15%"/>
                     <col width="10%"/>
                 </colgroup>
                 <thead>
                 <tr>
                     <th scope="col">
-                        <div>이미지</div>
-                    </th>
-                    <th scope="col">
-                        <div>상품정보</div>
+                        <div>제품정보</div>
                     </th>
                     <th scope="col">
                         <div>판매가</div>
@@ -376,25 +373,71 @@
                 </thead>
                 <tbody>
                 <c:forEach var="cartDto" items="${list}" varStatus="status">
-                    <tr>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
-                                     alt="이미지 준비 중 입니다"
-                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
-                            </a>
+                    <tr class="product-row">
+                        <td class="product-info">
+                            <div>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                    <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
+                                         alt="이미지 준비 중 입니다"
+                                         onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
+                                </a>
+                            </div>
+                            <ul class="info">
+                                <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                        <%--<span>${cartDto.brd_name}</span>--%>
+                                </li>
+                                <!-- 상품 이름 -->
+                                <li class="name">
+                                    <a href="#">${cartDto.pd_name}</a>
+                                </li>
+                                <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${cartDto.pd_clsf_code}</li>
+                            </ul>
                         </td>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
-                            <span>${cartDto.pd_clsf_code}</span>
-                        </td>
+                            <%--<td>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                                <span></span>
+                            </td>--%>
                         <td><span class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td><span>${cartDto.cart_cnt}</span>개</td>
                         <td><span>무료배송</span></td>
-                         <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
+                        <td><span class="priceFormat" id="payAmt">${cartDto.sls_prc * cartDto.cart_cnt}</span></td>
                     </tr>
                 </c:forEach>
                 </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="1">
+                        <div class="tb__left"><span>[기본배송]</span></div>
+                    </td>
+                </tr>
+               <%-- <tr>
+                    <td colspan="7">
+                            <div class="tb__right">
+                                <div class="totalSum">상품구매금액
+                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                                </div>
+                                <div class="grade">등급 할인
+                                    <span>없음</span>
+                                </div>
+                                <div class="cupon">쿠폰 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="point">적립금 사용
+                                    <span>없음</span>
+                                </div>
+                                <div class="card">카드사 할인
+                                    <span>없음</span>
+                                </div>
+                                <div>배송비 무료</div>
+                                <div class="odpayamt">최종 결제 금액
+                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                                </div>
+                            </div>
+                    </td>
+                </tr>--%>
+                </tfoot>
             </table>
         </form>
     </div>
@@ -467,7 +510,7 @@
 
         rows.forEach(function (row) {
             /* 각 행의 6번째 td에서 판매가를 가져와서 총합구하기 */
-            const price = row.cells[5].innerText;
+            const price = row.cells[4].innerText;
             totalSum += parseInt(price.replace(/[^\d]/g, ''));
         });
         /*총합을 나타낼 위치*/
