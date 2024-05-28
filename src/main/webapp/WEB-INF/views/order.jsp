@@ -157,8 +157,8 @@
     }
 
     #addressModal .address-card .buttons {
-        display: flex;
-        justify-content: space-between;
+        /*display: flex;*/
+        /*justify-content: space-between;*/
     }
 
     #addressModal .address-card .buttons button {
@@ -195,6 +195,17 @@
         margin-left: 10px;
     }
 
+
+    /*#addressModal .dlv-select3 {*/
+    /*    padding: 5px 10px;*/
+    /*    border: 1px solid #333;*/
+    /*    color: #fff;*/
+    /*    background-color: #333;*/
+    /*    border-radius: 5px;*/
+    /*    cursor: pointer;*/
+    /*    margin-left: 10px;*/
+    /*}*/
+
     .close {
         cursor: pointer; /* 포인터 모양 */
         font-size: 24px; /* 아이콘 크기 조정 */
@@ -213,6 +224,27 @@
 
     .dlv-header-content tr {
         height: 30px;
+    }
+
+    button#setDfltAddrsetDfltAddr {
+        background-color: #073713;
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+
+    button#dlv-select3 {
+        padding: 5px 10px;
+        border: 1px solid #333;
+        color: #fff;
+        background-color: #333;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
     }
 </style>
 <%-- 김수연 끝 --%>
@@ -492,7 +524,8 @@
               htmlContent += `
                             <div class="address-card">
                                 <div class="title">
-                                    (${'${listDto.rcver}'}) ${'${listDto.adr_name}'}
+                                    ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
+                                    <button class="3rd-dvlp" id="setDfltAddrsetDfltAddr" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">기본배송지</button>
                                 </div>
                                 <div class="details">
                                     ${'${listDto.rcver_phn}'}<br/>
@@ -500,6 +533,8 @@
                                 </div>
                                 <div class="buttons">
                                     <button class="dlv-select" addrId="${'${listDto.c_adr_list_id}'}">선택</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">수정</button>
+                                    <button class="3rd-dvlp" id="dlv-select3" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">삭제</button>
                                 </div>
                             </div>
                         `;
@@ -602,6 +637,11 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
       }
     });
   })
+
+    function dlvBtn() {
+        alert('3차 개발 예정입니다.')
+    }
+
 </script>
 </body>
 </html>
