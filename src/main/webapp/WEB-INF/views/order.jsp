@@ -31,17 +31,20 @@
 <%-- 김수연 시작 --%>
 <style>
     #dlv-container {
-        display: flex;
-        align-items: center;
-        justify-content: start;
+        /*display: flex;*/ /* 이게 없어야 배송정보 - 배송지 변경 버튼 세로로 쌓임 */
+        /*align-items: center;*/
+        /*justify-content: start;*/
         padding-top: 1.35%;
     }
 
     .dlv-header {
         margin-left: 8%;
+        margin-bottom: 1.5%;
         margin-right: 3%;
         font-size: 15px;
         font-weight: 600;
+        display: flex;
+        align-items: center;
     }
 
     #dlv-container ul {
@@ -64,6 +67,7 @@
         background-color: #333;
         border-radius: 5px;
         cursor: pointer;
+        margin-left: 360px;
     }
 
     #dlv-container .select-request {
@@ -191,28 +195,6 @@
         margin-left: 10px;
     }
 
-
-  /*.close {*/
-  /*    cursor: pointer; !* 'x' 버튼에 커서 포인터 추가 *!*/
-  /*}*/
-
-
-    .header-container {
-        display: flex;
-        align-items: center; /* 수직 가운데 정렬 */
-        justify-content: space-between; /* 양쪽 끝에 배치 */
-        height: 50px; /* 높이 설정 (필요에 따라 조정) */
-        padding: 0 10px; /* 필요에 따라 좌우 패딩 조정 */
-    }
-
-    .dlvN {
-        margin: 0; /* 기본 마진 제거 */
-        font-size: 20px; /* 폰트 크기 조정 */
-        line-height: 1; /* 줄 높이 조정 */
-        font-weight: bold; /* 글자를 두껍게 */
-        color: rgba(0, 0, 0, 0.5); /* 글자 색상을 검은색으로, 투명도 0.7 */
-    }
-
     .close {
         cursor: pointer; /* 포인터 모양 */
         font-size: 24px; /* 아이콘 크기 조정 */
@@ -221,6 +203,9 @@
         top: -5px; /* 위로 이동 (필요에 따라 값 조정) */
     }
 
+    .dlv-header-content {
+        margin-left: 8%;
+    }
 
     #dlv-header-content label {
         width: 500px; /* 원하는 너비로 설정하세요 */
@@ -243,21 +228,27 @@
             <a href="#"> > 주문완료</a>
         </div>
     </div>
-    <%-- 김수연 시작 --%>
+    <%-- 김수연 0524 기본배송지 form 시작 --%>
     <%-- 배송지 정보 section --%>
     <section id="dlv-container">
-        <div class="dlv-header">배송 정보</div>
-        <%-- 기본/선택 배송지 내용 출력 --%>
 
-        <%--        <p>고객 배송지 번호 : ${defaultDto.c_adr_list_id}</p>--%>
-        <%-- 김수연 0524 기본배송지 form 시작 --%>
+
+        <div class="dlv-header">
+            <div>배송정보</div>
+            <!-- 배송지 변경 버튼 -->
+            <button class="btn-change-address">배송지 변경</button>
+        </div>
+
+
         <div class="dlv-header-content">
-            <%-- TODO : 기본배송지 --%>
+            <%-- 기본/선택 배송지 내용 출력 --%>
                 <table>
                     <colgroup>
                         <col style="width: 150px">
                         <col style="width: 400px">
                     </colgroup>
+
+
                     <tr>
                         <td class="label">배송지</td>
                         <td class="dlv-content">${defaultDto.adr_name}</td>
@@ -292,8 +283,6 @@
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
-        <!-- 배송지 변경 버튼 -->
-                <button class="btn-change-address">배송지 변경</button>
     </section>
 
     <!-- 배송지 목록 Modal -->
