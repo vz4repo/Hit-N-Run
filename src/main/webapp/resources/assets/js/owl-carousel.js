@@ -190,9 +190,9 @@
 		rewind: false,
 		checkVisibility: true,
 
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: true,
+		mouseDrag: false,
+		touchDrag: false,
+		pullDrag: false,
 		freeDrag: false,
 
 		margin: 0,
