@@ -35,18 +35,21 @@ public class OrdDetController {
 
   /* 주문 상세 페이지 */
   @GetMapping("/orderDetail")
-  public String orderDetail(Model m, HttpSession session, HttpServletRequest request) {
+  public String orderDetail(Model m, HttpSession session, HttpServletRequest request
+      , @RequestParam(value = "od_id", required = false) BigInteger od_id) {
+
     try {
       int c_id = (int) session.getAttribute("c_id");
-      List<OrderDetDto> list = orderdetDao.select(c_id);
 
-
-//      List<CartDto> Imglist =cartDao.getStk(c_id);
-      m.addAttribute("list", list);
-//      m.addAttribute("Imglist",Imglist);
-      System.out.println("list" + list);
-//      System.out.println("Imglist" + Imglist);
-
+      if (od_id == null) {
+        List<OrderDetDto> list = orderdetDao.select(c_id);
+        m.addAttribute("list", list);
+      } else {
+        /* TODO: od_id casting 예외 발생 가능성 */
+        List<OrderDetDto> list = orderdetDao.selectByOdId(c_id, od_id);
+        m.addAttribute("list", list);
+        return "paydetail";
+      }
     } catch (Exception e) {
       e.printStackTrace();
       m.addAttribute("errorMessage", "[주문 상세 정보]");
@@ -61,7 +64,7 @@ public class OrdDetController {
       , BigInteger od_id
       , HttpSession session
       , String pd_id
-      , String pd_clsf_cd  ) {
+      , String pd_clsf_cd) {
     /* 비로그인 고객이 배송취소를 하면 생기는 오류 */
     /* 고객번호 c_id가 세션에 있는지 확인 */
     Object c_idObj = session.getAttribute("c_id");
@@ -79,9 +82,8 @@ public class OrdDetController {
       model.addAttribute("errorMessage", "[주문 취소]");
       return "errorPageCust"; // 에러 페이지로 이동    }
     }
-      return "redirect:/orderDetail";
+    return "redirect:/orderDetail";
   }
-
 
   /* 날짜 범위에 따른 주문내역 조회 */
   @GetMapping(value = "/order/list")
@@ -89,6 +91,9 @@ public class OrdDetController {
   public List<OrderDetDto> getOrderList(@SessionAttribute(name = "c_id") int c_id
       , @RequestParam("fromDate") String fromDate
       , @RequestParam("toDate") String toDate) {
+
+    System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
+
     return orderDetService.selectOrderHistoryWithDateRange(c_id, fromDate, toDate);
   }
 }

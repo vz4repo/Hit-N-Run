@@ -171,21 +171,18 @@
 }
 
 
-/*.tb__right {
-    !*display: block;*!
-    text-align: right   ;
-    justify-content: space-evenly;
-    place-items: center center;
-    font-weight: bold;
-    font-size: 14px;
-#odpayamt{
-    font-size: larger;
-    font-weight: 900;
+.tb__right {
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.2);
 }
 
+/*
 .tb__order tfoot td,
 .tb__order tfoot tr{
     border-bottom: 1px solid black;
     padding: 10px;
 }
+*/
 
