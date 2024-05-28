@@ -63,6 +63,11 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
+    public int updateOrderStatus(OrderDetDto orderDetDto) throws Exception {
+        return session.update(NAMESPACE+ "updateOrderStatus", orderDetDto);
+    }
+
+    @Override
     public List<OrderDetDto> selectPaymentHistoryWithDateRange(Map<String, Object> localDateMap) {
         return session.selectList(NAMESPACE + "selectPaymentHistoryWithDateRange", localDateMap);
     }

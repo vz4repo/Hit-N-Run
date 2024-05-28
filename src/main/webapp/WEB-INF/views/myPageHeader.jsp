@@ -12,7 +12,6 @@
         #myPage {
             margin: auto;
             width: 900px;
-
         }
 
         .none {

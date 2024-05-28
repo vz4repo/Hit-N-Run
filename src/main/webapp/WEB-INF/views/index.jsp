@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -308,7 +309,7 @@
 <!-- ***** 추천 제품 끝 ***** -->
 
 <div id="content">
-    <section id="main_section">
+<%--    <section id="main_section">--%>
         <div id="king">
             <div class="interview">
                 <h2 class="product-category">선수 인터뷰</h2>
@@ -464,7 +465,7 @@
                 </div>
             </div>
         </div>
-    </section>
+<%--    </section>--%>
 </div>
 
 <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
@@ -539,6 +540,11 @@
         $(".wish-icon i").click(function () {
             $(this).toggleClass("fa-heart fa-heart-o");
         });
+
+        // $(".owl-stage .owl-item").css({
+        //     'width' : '420px',
+        //     'margin-right' : '15px'
+        // });
     });
 
     let slideIndex = 1;

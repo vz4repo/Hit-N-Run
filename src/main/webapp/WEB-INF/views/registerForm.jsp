@@ -6,9 +6,17 @@
 <html lang="en">
 
 <head>
-<%--    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">--%>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
+
+        body {
+            font-size: 11px;
+            font-family: "IBM Plex Sans KR", sans-serif;
+            font-style: normal;
+        }
+
         .container {
             width: 300px;
             margin: 0 auto;
@@ -47,7 +55,7 @@
             text-align: center;
             font-size: 20px;
             margin-bottom: 40px;
-            font-family: 'IBM Plex Sans', sans-serif;
+            /*font-family: 'IBM Plex Sans', sans-serif;*/
         }
 
         #myform {
@@ -65,11 +73,6 @@
 
         span {
             color: gray;
-        }
-
-        body {
-            font-size: 11px;
-            font-family: 'IBM Plex Sans', sans-serif;
         }
 
         .modal {
@@ -148,7 +151,7 @@
             font-size: 1em;
             width: 100%;
             box-sizing: border-box;
-            font-family: 'IBM Plex Sans', sans-serif;
+            /*font-family: 'IBM Plex Sans', sans-serif;*/
         }
 
         #email, #verify{

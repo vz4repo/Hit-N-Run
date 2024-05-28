@@ -8,15 +8,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
-
   <style>
+
+    body {
+      font-size: 11px;
+      font-family: "IBM Plex Sans KR", sans-serif;
+    }
+
+    /*.container {*/
+    /*  width: 600px;*/
+    /*  text-align: left;*/
+    /*  margin-left: 430px;*/
+    /*}*/
+
     .container {
       width: 600px;
-      /*margin: 0 auto;*/
+      margin: auto;
       text-align: left;
-      margin-left: 430px;
+      position: relative;
+      left: -90px;
     }
 
     .special-class {
@@ -44,10 +56,6 @@
 
     span {
       color: gray;
-    }
-
-    body {
-      font-size: 11px;
     }
 
     #continue {
@@ -80,6 +88,7 @@
 
   <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet" />
   <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet" />
+  <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
   <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
   <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
 </head>
@@ -96,7 +105,7 @@
         <input id="curPwd" class="special-class" type="password" name="curPwd" maxlength="15">
 
       <label class="pwdLabel">신규 비밀번호</label>
-      <div id="oneLine"><input id="newPwd" class="special-class" type="password" name="c_pwd" placeholder="영문/숫자 조합 (4자 이상 15자 이하)" maxlength="15" oninput="newPwdCheck(this.form)"><p id="pp">영문/숫자 조합 (4자 이상 15자 이하)</p></div>
+      <div id="oneLine"><input id="newPwd" class="special-class" type="password" name="c_pwd" maxlength="15" oninput="newPwdCheck(this.form)"><p id="pp">영문/숫자 조합 (4자 이상 15자 이하)</p></div>
       <p id="check-newPwd"></p>
 
       <label class="pwdLabel">신규 비밀번호 확인</label>
