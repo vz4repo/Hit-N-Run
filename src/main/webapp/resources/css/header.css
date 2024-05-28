@@ -113,7 +113,7 @@ body:not(.index) {
     display: block;
 }
 
-.hidden {
-    display: none;
-}
+.hidden { display: none;}
+#keywordResultList { list-style-type: none; padding: 0; }
+#keywordResultList li { cursor: pointer; }
 /* dropDown 마이페이지 끝: */

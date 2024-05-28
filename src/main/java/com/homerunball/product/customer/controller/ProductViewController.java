@@ -84,9 +84,8 @@ public class ProductViewController {
     @GetMapping("/search")
     @ResponseBody
     public ResponseEntity<?> search(@RequestParam String keyword) {
-        System.out.println("HI");
       try {
-          List<String> searchResultsList = productViewService.getByKeyword(keyword);
+          List<Map<String, Object>> searchResultsList = productViewService.getByKeyword(keyword);
           return new ResponseEntity<>(searchResultsList, HttpStatus.OK);
       } catch (Exception e) {
           e.printStackTrace();

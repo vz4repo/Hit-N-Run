@@ -3,6 +3,7 @@ package com.homerunball.product.customer.service;
 import com.homerunball.product.customer.dao.ProductViewDao;
 import com.homerunball.product.customer.domain.ProductViewDto;
 import com.homerunball.product.customer.domain.StockViewDto;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class ProductViewServiceImpl implements ProductViewService {
         return productViewDao.selectStkOpt(pd_id, pd_clsf_cd);
     }
     @Override
-    public List<String> getByKeyword(String keyword) throws Exception {
+    public List<Map<String, Object>> getByKeyword(String keyword) throws Exception {
         return productViewDao.findByKeyword(keyword);
     }
 }

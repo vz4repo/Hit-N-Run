@@ -19,5 +19,5 @@ public interface ProductViewDao {
 
     StockViewDto selectStkOpt(String pd_id, String pd_clsf_cd) throws Exception;
 
-    List<String> findByKeyword(String keyword) throws Exception;
+    List<Map<String, Object>> findByKeyword(String keyword) throws Exception;
 }

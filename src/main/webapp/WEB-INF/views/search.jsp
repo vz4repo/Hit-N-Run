@@ -7,7 +7,7 @@
             <div class="search_wrap">
                     <input class="MS_search_word input-keyword" id="search-input" type="text" name="search" value=""
                            placeholder="제품명을 입력하세요"/>
-                <ul id="keywordResultList"></ul>
+                <ul id="keywordResultList" class="hidden"></ul>
                 <a href="javascript:prev_search();search_submit();">
                     <i class="fa fa-search fa-lg"></i> <%--검색바--%>
                 </a>
@@ -86,9 +86,9 @@
           type: 'GET',
           data: {keyword: keyword},
           success: function (data) {
-            $('#keywordResultList').empty();
+            $('#keywordResultList').empty().removeClass('hidden');
             data.forEach(function (item) {
-              $('#keywordResultList').append('<li>' + item + '</li>');
+              $('#keywordResultList').append('<li data-id="' + item.pd_id + '">' + item.pd_name + '</li>');
             });
           },
           error: function (xhr, status, error) {
@@ -102,8 +102,13 @@
           }
         });
       } else {
-        $('#suggestions').empty();
+        $('#keywordResultList').empty().addClass('hidden');
       }
+    });
+    /* 선택 상품으로 상세페이지 이동 */
+    $('#keywordResultList').on('click', 'li', function () {
+      const pdId = $(this).data('id');
+      window.location.href = '/product/detail?pd_id=' + pdId;
     });
   });
 
