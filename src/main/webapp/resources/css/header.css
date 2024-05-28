@@ -59,7 +59,6 @@ body:not(.index) {
     padding: 0 3%;
 }
 
-
 .main_header li,
 .header__dropbtn {
     margin: 17px;
@@ -112,5 +111,9 @@ body:not(.index) {
 
 .header__dropdown:hover .header__dropdown-content {
     display: block;
+}
+
+.hidden {
+    display: none;
 }
 /* dropDown 마이페이지 끝: */

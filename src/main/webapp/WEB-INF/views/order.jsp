@@ -276,8 +276,8 @@
 
 
         <%-- TODO: 150 --%>
-        <div class="dlv-header" style="width: 150px">
-            <div>배송정보</div>
+        <div class="dlv-header">
+            <div  style="width: 150px">배송정보</div>
             <!-- 배송지 변경 버튼 -->
             <button class="btn-change-address">배송지 변경</button>
         </div>
@@ -545,7 +545,7 @@
                             <div class="address-card">
                                 <div class="title">
                                     ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
-                                    <button class="3rd-dvlp" id="setDfltAddrsetDfltAddr" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">기본배송지</button>
+                                    <div addrId="${'${listDto.c_adr_list_id}'}">기본배송지</div>
                                 </div>
                                 <div class="details">
                                     ${'${listDto.rcver_phn}'}<br/>
@@ -558,6 +558,7 @@
                                 </div>
                             </div>
                         `;
+              }
             });
             $(".dlv-modal-container").html(htmlContent);
           }

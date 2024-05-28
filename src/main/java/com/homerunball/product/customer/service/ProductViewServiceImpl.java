@@ -37,4 +37,8 @@ public class ProductViewServiceImpl implements ProductViewService {
     public StockViewDto readStkOptInfo(String pd_id, String pd_clsf_cd) throws Exception{
         return productViewDao.selectStkOpt(pd_id, pd_clsf_cd);
     }
+    @Override
+    public List<String> getByKeyword(String keyword) throws Exception {
+        return productViewDao.findByKeyword(keyword);
+    }
 }
