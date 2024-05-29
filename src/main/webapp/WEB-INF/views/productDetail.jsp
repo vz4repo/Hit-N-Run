@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
@@ -212,6 +213,7 @@
         <tr><td>3</td><td>제품이 파손되서 도착했습니다.</td><td>김지훈</td><td>2024.05.23</td><td>★</td></tr>
         <tr><td>2</td><td>그럭 저럭 괜찮습니다.</td><td>김지훈</td><td>2024.05.22</td><td>★★★</td></tr>
         <tr><td>1</td><td>빠른 배송 감사합니다.</td><td>김지훈</td><td>2024.05.21</td><td>★★★★★</td></tr>
+
     </table>
     <p> <a href="">&lt</a>
         <a href="">1</a>

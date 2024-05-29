@@ -7,6 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -42,7 +43,7 @@
         margin-left: 8%;
         margin-bottom: 1.5%;
         margin-right: 3%;
-        font-size: 15px;
+        font-size: 25px;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -297,7 +298,7 @@
                     <tr>
                         <td class="label">이름/연락처</td>
                         <td class="dlv-content">
-                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">"${defaultDto.rcver_phn}</span>
+                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">${defaultDto.rcver_phn}</span>
                         </td>
                     </tr>
                     <tr>
