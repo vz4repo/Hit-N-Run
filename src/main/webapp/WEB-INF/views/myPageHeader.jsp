@@ -17,13 +17,13 @@
         .none {
             text-decoration: none;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             text-align: center;
             color: dimgray;
             font-weight: bold;
         }
         .sp {
-            font-size: 15px;
+            font-size: 16px;
             margin: 40px;
             display: flex;
             flex-direction: column;
@@ -43,21 +43,19 @@
         }
 
         .ma2 {
-            font-size: 10px;
+            font-size: 11px;
             color: black;
         }
 
         .date {
-            font-size: 12px;
+            font-size: 13px;
             margin-bottom: 10px;
             color: gray;
         }
 
 
         #title1 {
-            /*font-size: 13px;*/
             text-align: center;
-            /*color: dimgray;*/
             font-weight: bold;
         }
 
@@ -65,7 +63,7 @@
             cursor: pointer;
             text-decoration: none;
             color: dimgray;
-            font-size: 13px;
+            font-size: 14px;
         }
 
     </style>
