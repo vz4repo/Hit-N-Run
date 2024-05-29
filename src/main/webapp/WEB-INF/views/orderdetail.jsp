@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -34,7 +35,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<jsp:include page="myPageHeader.jsp"/>
 <br><br>
 <div class="head_order_det">주문내역조회</div>
 <main>
@@ -116,7 +116,7 @@
                                         <!-- 주문번호 -->
                                         <td>
                                             <div class="order-number">
-                                                <a href="#" class="open_od_id_modal">${orderdetDto.od_id}</a>
+                                                <a href='<c:url value="/orderDetail?od_id=${orderdetDto.od_id}"/>' class="open_od_id_modal">${orderdetDto.od_id}</a>
                                                 <form id="orderForm" action="/orderDetail" style="display: none;">
                                                     <input type="hidden" data-odId="${orderdetDto.od_id}" name="orderId" id="orderId">
                                                 </form>
