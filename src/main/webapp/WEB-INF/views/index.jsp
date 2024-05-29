@@ -1142,7 +1142,7 @@
                                                 <i class="fa fa-arrow-right"></i>
                                                 </iselseif>
                                             </a>
-                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="#" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
+                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="/product/detail?pd_id=GLV000007-89" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
                                                     <span>
                                                     Buy Now
                                                     </span>
