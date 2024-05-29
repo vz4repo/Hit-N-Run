@@ -473,7 +473,7 @@ body.productDetail{
     height: 36px;
 }
 #mySelect {
-    width: 100%;
+    width: 30%;
 }
 .prdDtlInfo{
     padding-bottom: 20px;
@@ -498,5 +498,5 @@ body.productDetail{
     width: 85%;
 }
 #mySelect2{
-    width: 100%;
+    width: 30%;
 }
