@@ -8,6 +8,7 @@
     /*flex-direction: column;*/
     padding-bottom: 30px;
     border-bottom: 3px dotted #eee;
+    width: 100%;
 }
 
 #caption {
