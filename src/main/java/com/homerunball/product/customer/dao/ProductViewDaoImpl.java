@@ -47,4 +47,9 @@ public class ProductViewDaoImpl implements ProductViewDao {
     public List<Map<String, Object>> findByKeyword(String keyword) {
         return session.selectList(NAMESPACE+"findByKeyword", keyword);
     }
+
+    @Override
+    public List<Map<String, Object>> findByType(String pd_type_cd) throws Exception {
+        return session.selectList(NAMESPACE+"pd_type_cd", pd_type_cd);
+    }
 }
