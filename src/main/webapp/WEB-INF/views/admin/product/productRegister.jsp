@@ -333,8 +333,6 @@
                                 <label for="npd">신상품</label><br>
                                 <input type="checkbox" id="hpd" name="pd_chr_cd" value="H">
                                 <label for="hpd">인기 제품</label><br>
-                                <input type="checkbox" id="spd" name="pd_chr_cd" value="S">
-                                <label for="spd">스테디 셀러</label><br>
                                 <input type="checkbox" id="rpd" name="pd_chr_cd" value="R">
                                 <label for="rpd">추천 제품</label><br>
                                 <input type="hidden" name="pd_chr_cd" value="">
