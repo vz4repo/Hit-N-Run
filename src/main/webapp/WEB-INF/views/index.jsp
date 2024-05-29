@@ -309,8 +309,6 @@
 <!-- ***** 추천 제품 끝 ***** -->
 
 <div id="content">
-<%--    <section id="main_section">--%>
-        <div id="king">
             <div class="interview">
                 <h2 class="product-category">선수 인터뷰</h2>
 
@@ -464,8 +462,6 @@
                     <span class="dot" onclick="currentSlide2(5)"></span>
                 </div>
             </div>
-        </div>
-<%--    </section>--%>
 </div>
 
 <%--mainCategory에 필요한 페이지 include(css도 필요)--%>
