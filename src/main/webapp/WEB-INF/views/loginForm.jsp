@@ -8,6 +8,9 @@
 <head>
     <title>Home Run Ball</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
+
     <style>
         body{
             font-family: "IBM Plex Sans KR", sans-serif;
@@ -113,9 +116,7 @@
             pointer-events: none;
         }
 
-        #c_email {
-            padding-left: 50px;
-        }
+
 
         #pwdDiv {
             position: relative;
@@ -131,8 +132,8 @@
             pointer-events: none;
         }
 
-        #c_pwd {
-            padding-left: 50px;
+        #c_email, #c_pwd {
+            padding-left: 45px;
         }
 
         #login {
@@ -207,12 +208,12 @@
     <div id="loginDiv">
         <input value="${cookie.c_email.value}" id="c_email" name="c_email" class="special-class" type="text" maxlength="30"
                placeholder="homerun@ball.com" required>
-        <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/1540/1540316.png">
+        <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/2348/2348686.png">
     </div>
 
         <div id="pwdDiv">
             <input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="비밀번호" required>
-            <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/2827/2827914.png">
+            <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/4847/4847692.png">
         </div>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
