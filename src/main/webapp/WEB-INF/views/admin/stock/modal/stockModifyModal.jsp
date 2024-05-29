@@ -12,7 +12,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <form id="stockRegistForm">
+                <form id="stockModifyForm">
                     <table class="table table-striped">
                         <tbody>
                         <tr>
@@ -162,13 +162,30 @@
         });
 
         /*만약 입고 가격이 소비자가격보다보다 작으면 에러가 발생한다.*/
-        $('#modify_rcpt_prc, #modify_rtl_prc').on('blur', function () {
+  /*      $('#modify_rcpt_prc, #modify_rtl_prc').on('blur', function () {
             let modifyRcptPrc = $('#modify_rcpt_prc').val();
             let modifyRtlPrc = $('#modify_rtl_prc').val();
 
             if (modifyRcptPrc < modifyRtlPrc) {
                 alert("입고 가격은 소비자가격보다 클 수 없습니다.");
                 $('#modify_rcpt_prc').val('');
+            }
+        });*/
+        // modify_rcpt_prc 입고가격 modify_rtl_prc 소비자가격
+        $('#modify_rcpt_prc, #modify_rtl_prc').on('change', function () {
+            let modifyRcptPrc = $('#modify_rcpt_prc').val();
+            let modifyRtlPrc = $('#modify_rtl_prc').val();
+
+            // 입력 값이 비어 있지 않은 경우에만 비교
+            if (modifyRcptPrc !== '' && modifyRtlPrc !== '') {
+                // 숫자로 변환하여 비교
+                modifyRcptPrc = parseFloat(modifyRcptPrc);
+                modifyRtlPrc = parseFloat(modifyRtlPrc);
+
+                if (modifyRcptPrc > modifyRtlPrc) {
+                    alert("입고 가격은 소비자가격보다 클 수 없습니다.");
+                    $('#modify_rtl_prc').val('');
+                }
             }
         });
 

@@ -19,8 +19,6 @@ body:not(.index) {
     z-index: 100;
     background-color: white;
     transition: top 0.5s;
-    max-width: 1920px;
-    min-width: 1280px;
 }
 
 
@@ -60,13 +58,6 @@ body:not(.index) {
     width: 100%;
     padding: 0 3%;
 }
-
-.main_header h1 {
-    font-size: 35px;
-    font-weight: 900;
-    font-style: italic;
-}
-
 
 .main_header li,
 .header__dropbtn {
@@ -121,4 +112,8 @@ body:not(.index) {
 .header__dropdown:hover .header__dropdown-content {
     display: block;
 }
+
+.hidden { display: none;}
+#keywordResultList { list-style-type: none; padding: 0; }
+#keywordResultList li { cursor: pointer; }
 /* dropDown 마이페이지 끝: */

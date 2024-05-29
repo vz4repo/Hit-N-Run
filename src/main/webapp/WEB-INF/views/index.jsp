@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/header.css'/>" type="text/css" rel="stylesheet"/>
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/footer.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/nav.css'/>" type="text/css" rel="stylesheet"/>
 
@@ -535,6 +536,11 @@
         $(".wish-icon i").click(function () {
             $(this).toggleClass("fa-heart fa-heart-o");
         });
+
+        // $(".owl-stage .owl-item").css({
+        //     'width' : '420px',
+        //     'margin-right' : '15px'
+        // });
     });
 
     let slideIndex = 1;

@@ -72,7 +72,7 @@ public class ProductController {
     public String register(ProductDto productDto, RedirectAttributes rattr, Model m,
         @RequestPart("mn_img_f") MultipartFile mainImage,
         @RequestPart("det_img_f") MultipartFile detailImage) {
-        System.out.println(" [POST] register !! ");
+
         /* 입력한 제조년월에 포함된 "-"를 ""로 교체한다. */
         productDto.setPd_mnf_date(productDto.getPd_mnf_date().replace("-",""));
 
@@ -123,7 +123,7 @@ public class ProductController {
 
 //          path : <properties.upload.path>/<pd_type_cd>/detail/<mn_img_fn>
             String detailImagePath = uploadFile(detailImage);
-            productDto.setDet_img_fn(detailImagePath);
+            productDto.setDet_img_fn(detailImage.getOriginalFilename());
 
             /* productRegister에서 입력받은 productDto를 사용해서 새로운 제품을 추가한다. */
             if (productService.create(productDto) != 1) throw new Exception("Register failed.");

@@ -44,6 +44,14 @@ public class OrderDetDaoImpl implements OrderDetDao {
     }
 
     @Override
+    public List<OrderDetDto> selectByOdId(int c_id, BigInteger od_id) throws Exception {
+        Map<String, Object> map = new HashMap<>();
+        map.put("c_id", c_id);
+        map.put("od_id", od_id);
+        return session.selectList(NAMESPACE+"selectByOdId", map);
+    }
+
+    @Override
     public  List<OrderDetDto> idselect(BigInteger od_id) throws Exception {
         return session.selectList(NAMESPACE + "idselect", od_id);
     }
@@ -60,6 +68,11 @@ public class OrderDetDaoImpl implements OrderDetDao {
     @Override
     public int update(OrderDetDto ord_det) throws Exception {
         return session.update(NAMESPACE+"update", ord_det);
+    }
+
+    @Override
+    public int updateOrderStatus(OrderDetDto orderDetDto) throws Exception {
+        return session.update(NAMESPACE+ "updateOrderStatus", orderDetDto);
     }
 
     @Override

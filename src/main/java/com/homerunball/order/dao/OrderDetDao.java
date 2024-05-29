@@ -20,13 +20,16 @@ public interface OrderDetDao {
 
   List<OrderDetDto> select(int c_id) throws Exception;
 
+  List<OrderDetDto> selectByOdId(int c_id, BigInteger od_id) throws Exception;
+
   List<OrderDetDto> idselect(BigInteger od_id) throws Exception;
 
   List<OrderDetDto> selectAll() throws Exception;
 
-  int insert(OrderDetDto ord_det) throws Exception;
+  int insert(OrderDetDto orderDetDto) throws Exception;
 
-  int update(OrderDetDto ord_det) throws Exception;
+  int update(OrderDetDto orderDetDto) throws Exception;
 
+  int updateOrderStatus(OrderDetDto orderDetDto) throws Exception;
   List<OrderDetDto> selectPaymentHistoryWithDateRange(Map<String, Object> localDateMap);
 }

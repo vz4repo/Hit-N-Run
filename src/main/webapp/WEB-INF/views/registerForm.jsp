@@ -185,6 +185,19 @@
             justify-content: space-between;
         }
 
+        #gndLine {
+            display: flex;
+            justify-content: left;
+            margin-top: -5px;
+            margin-bottom: 5px;
+        }
+
+        #femaleLabel,
+        #maleLabel {
+            font-size: 11px;
+            margin-top: 8px;
+        }
+
 
     </style>
 
@@ -220,8 +233,17 @@
             <label>휴대폰</label>
             <input class="special-class" type="text" id="c_phn" name="c_phn" placeholder="&nbsp;-제외" maxlength="12" disabled>
             <label>성별</label>
-            <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성
-            <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>
+<%--            <input type="radio" id="female" name="c_gnd" value="여" disabled> 여성--%>
+<%--            <input type="radio" id="male" name="c_gnd" value="남" disabled> 남성<br><br>--%>
+
+            <div id="gndLine">
+                <input type="radio" id="female" name="c_gnd" value="여" disabled>
+                <label for="female" id="femaleLabel">여성</label>
+
+                <input type="radio" id="male" name="c_gnd" value="남" disabled>
+                <label for="male" id="maleLabel">남성</label><br>
+            </div>
+
             <label>생년월일</label>
             <input type="date" id="birth" name="c_birth" min="1900-01-01" max="2023-12-31" disabled><br><br>
 
@@ -559,7 +581,7 @@
                 verifyEmail();
                 setTimeout(function() {
                     $this.prop('disabled', false);
-                }, 3000); // 5초 후에 버튼 활성화
+                }, 7000);
             }
         });
     });
