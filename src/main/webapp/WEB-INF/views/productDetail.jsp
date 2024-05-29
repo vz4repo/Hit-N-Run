@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,15 +35,22 @@
         <div class="productItemDsc">
             <div class="prdDetailTitle">
                 <h2>${prd.pd_name}</h2>
-                <p>${prd.pd_ad_cmt}</p>
+                <c:set var="myValue" value="${prd.pd_ad_cmt}" />
+                <c:choose>
+                    <c:when test="${not empty myValue}">
+                        <p class="prdDetailTitlePara">${myValue}</p>
+                    </c:when>
+                    <c:otherwise>
+                        <p></p>
+                    </c:otherwise>
+                </c:choose>
             </div>
             <div class="prdDetail">
                 <div class="title">
                     <ul class="titleList">
-                        <li><b>판매가격: </b></li>
-                        <li><b>옵션: </b></li>
-<%--                        <li><b>배송:</b></li>--%>
-<%--                        <li><b>구매 주의사항</b></li>--%>
+                        <li><b>옵션 </b></li>
+                        <li><b>추가 상품 </b></li>
+                        <li><b>판매가 </b></li>
                     </ul>
                 </div>
                 <div class="content">
@@ -56,27 +64,53 @@
                             </c:forEach>
 <%--                        가격--%>
                         </select></li>
+                        <li><select id="mySelect2">
+                            <option>선택</option>
+                            <option>종이백</option>
+                            <option>선물박스</option>
+                        </select></li>
                         <li><span id="retail-price"><span id="rtl_prc">${stkInfo.rtl_prc}</span></span><span id="sale-price"><span id="sls_prc"> ${stkInfo.sls_prc}</span>원</span></li>
 <%--                        <li>무료배송</li>--%>
                     </ul>
                 </div>
+            </div>
+            <%--            바로구매 3차 개발 예정--%>
+            <div class="prdSubmitBtn">
+                <ul>
+                    <li class="buyBtnList">
+                        <button type="button" class="submitBtn">바로구매</button>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="cartBtnList">
+                        <button type="button" class="submitBtn" onclick="submitForm('cart')">
+                           장바구니 담기 <ion-icon name="bag-outline"></ion-icon>
+                        </button>
+                    </li>
+                    <li class="wishBtnList">
+                        <%--            찜하기 3차 개발 예정--%>
+                        <button type="button" id="heartIconBtn" class="prdWishBtn">
+                            <ion-icon id="heartIcon" name="heart-outline"></ion-icon>
+                        </button>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="sendGiftBtnList">
+                        <button type="button" class="sendGift">선물하기<ion-icon name="gift-outline"></ion-icon></button>
+                    </li>
+                </ul>
             </div>
 <%--            input으로 필요한 정보 pd_id, pd_clsf_cd를 넘겨준다.--%>
                 <input id="pd_id" name="pd_id" value="${stkInfo.pd_id}" style="display: none">
                 <input id="pd_clsf_cd" name="pd_clsf_cd" style="display: none">
                 <input id="mn_img_fn" name="mn_img_fn" value="${prd.mn_img_fn}" style="display: none">
                 <input id="pd_type_cd" name="pd_type_cd" value="${prd.pd_type_cd}" style="display: none">
-            </p>
-<%--            바로구매 3차 개발 예정--%>
-            <div class="prdSubmitBtn">
-                <button type="button" class="submitBtn">바로구매</button>
-                <button type="button" class="submitBtn" onclick="submitForm('cart')">
-                    <ion-icon name="bag-outline"></ion-icon>
-                </button>
-<%--            찜하기 3차 개발 예정--%>
-                <button type="button" id="heartIconBtn" class="prdWishBtn">
-                    <ion-icon id="heartIcon" name="heart-outline"></ion-icon>
-                </button>
+
+<%--            프로모션 정보--%>
+            <div class="prdDtlInfo">
+                <p><ion-icon name="rocket-outline"></ion-icon> 5만원 이상 구매시 무료배송</p>
+                <p><ion-icon name="create-outline"></ion-icon> 리뷰 작성시 적립금 지급</p>
+                <p><ion-icon name="diamond-outline"></ion-icon> 등급별 최대 10% 할인</p>
             </div>
 <%--            토글메뉴--%>
             <div class="prdContainer">
@@ -156,12 +190,13 @@
 </div>
 <%--제품 상세 내용--%>
 <div class="detailProductContainer" id="detailProductContainer">
+    <p class="title">상세 정보</p>
     <p class="image-container">
         <img src="/img/product/${prd.pd_type_cd}/detail/${prd.det_img_fn}"
              alt="이미지 준비 중 입니다"
              onerror="this.onerror=null; this.src='/img/product/${prd.pd_type_cd.toLowerCase()}/detail/${prd.det_img_fn}';" >
     </p>
-    <p>${prd.pd_smr_dsc}</p>
+    <p class="smr_dsc">${prd.pd_smr_dsc}</p>
 </div>
 <div class="reviewContainer" id="reviewContainer">
     <h2>리뷰</h2>
@@ -417,8 +452,10 @@
             // Remove the animation class after it ends to allow re-triggering
             setTimeout(() => {
                 icon.classList.remove('fillColor');
-            }, 1000); // Duration of the animation
-            // alert("3차 개발 예정입니다")
+                icon.style.color = 'red';
+            }, 1000);
+        } else {
+            icon.style.color = '#333';
         }
     });
     // 가격 정의
