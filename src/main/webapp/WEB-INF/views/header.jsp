@@ -4,6 +4,7 @@
 <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
 <header class="cart__header" id="cart__header">
+
     <div class="main_header">
         <div class="bottom_header">
             <a href="/"><img src="/img/homerunball_logo.png" style="width:250px"></a>
@@ -30,9 +31,9 @@
         </div>
 
     </div>
-
-
 </header>
+
+
 
 <script>
     window.onload = function() {
@@ -47,10 +48,6 @@
             });
         }
     };
-
-
-
-
 
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {

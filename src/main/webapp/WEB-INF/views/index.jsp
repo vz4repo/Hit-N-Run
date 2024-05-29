@@ -43,8 +43,10 @@
     <c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
     <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
+
     <link rel="icon" type="image/x-icon"
-          href="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw0de929af/products/ROMLBHOF-2.jpg?sw=800&sfrm=png&bgcolor=ebebeb">
+          href="/img/icon_logo.png">
+
 
     <style>
         /*캐러셀에 필요한 css*/
