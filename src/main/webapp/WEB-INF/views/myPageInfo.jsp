@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
     <style>
@@ -186,7 +186,7 @@
         #dropBtn {
             width: 100%;
             padding: 10px;
-            margin-top: 45px;
+            margin-top: 40px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
@@ -205,6 +205,7 @@
             justify-content: center;
             font-size: 13px;
             float: left;
+            margin-top: 5px;
         }
 
         #nowPwd {
