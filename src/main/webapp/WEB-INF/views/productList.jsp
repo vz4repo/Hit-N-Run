@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-  <h1>에러 페이지입니다</h1>
+제품 리스트 페이지
 </body>
 </html>

@@ -4,6 +4,7 @@
 <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
 <header class="cart__header" id="cart__header">
+
     <div class="main_header">
         <div class="bottom_header">
             <a href="/"><img src="/img/homerunball_logo.png" style="width:250px"></a>
@@ -30,9 +31,9 @@
         </div>
 
     </div>
-
-
 </header>
+
+
 
 <script>
     window.onload = function() {
@@ -40,14 +41,13 @@
             document.getElementById('logoutLink').addEventListener('click', function(event) {
                 event.preventDefault();
                 if (confirm('정말로 로그아웃을 하시겠습니까?')) {
+                    // window.location.href = event.target.href;
+                    alert('로그아웃이 되어 메인페이지로 이동합니다.');
                     window.location.href = event.target.href;
-                    alert('로그아웃이 되셨습니다.');
                 }
             });
         }
     };
-
-
 
     var prevScrollpos = window.pageYOffset;
     window.onscroll = function() {
