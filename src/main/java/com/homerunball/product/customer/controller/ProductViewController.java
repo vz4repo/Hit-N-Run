@@ -3,7 +3,6 @@ package com.homerunball.product.customer.controller;
 import com.homerunball.product.customer.domain.ProductViewDto;
 import com.homerunball.product.customer.domain.StockViewDto;
 import com.homerunball.product.customer.service.ProductViewService;
-import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,9 +97,9 @@ public class ProductViewController {
 
     /* 제품 타입에 따른 검색 */
     @GetMapping("/byType")
-    public String findByType(@RequestParam("pd_type_cd") String type, Model model) {
+    public String findByType(@RequestParam("pd_type_cd") String pd_type_cd, Model model) {
       try {
-        List<Map<String, Object>> result = productViewService.getByTpye(type);
+        List<Map<String, Object>> result = productViewService.getByType(pd_type_cd);
           model.addAttribute("result", result);
       } catch (Exception e) {
           /* TODO : 처리를 해야하지 않나 */
@@ -109,11 +108,11 @@ public class ProductViewController {
       return "productSearchList";
     }
 
-    @GetMapping("/byType/more")
+    @GetMapping("/byTypeMore")
     @ResponseBody
-    public ResponseEntity<?> getMoreProducts(@RequestParam("pd_type_cd") String type, @RequestParam("page") int page) {
+    public ResponseEntity<?> getMoreProducts(@RequestParam("pd_type_cd") String pd_type_cd, @RequestParam("page") int page) {
         try {
-            List<Map<String, Object>> result = productViewService.getByTpye(type);
+            List<Map<String, Object>> result = productViewService.getByType(pd_type_cd);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();

@@ -44,7 +44,7 @@ public class ProductViewServiceImpl implements ProductViewService {
     }
 
     @Override
-    public List<Map<String, Object>> getByTpye(String pd_type_cd) throws Exception {
+    public List<Map<String, Object>> getByType(String pd_type_cd) throws Exception {
         return productViewDao.findByType(pd_type_cd);
     }
 }

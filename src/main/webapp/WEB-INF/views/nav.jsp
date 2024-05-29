@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <nav class="navibar">
     <!-- 대분류 글러브-->
     <!-- 중분류 포지션 -->
     <div class="subnav">
-        <button class="sub__navBtn">글러브</button>
+        <%-- 2024.05.29 [혁락] 발표용 글러브 <a> 적용 --%>
+        <button class="sub__navBtn" pd_type="GLV"><a href="<c:url value="/product/byType?pd_type_cd=GLV"/>">글러브 </a>
+        </button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -114,7 +116,8 @@
         </div>
     </div>
     <div class="subnav">
-        <button class="sub__navBtn">의류</button>
+        <%-- 2024.05.29 [혁락] 발표용 의류 <a> 적용 --%>
+        <button class="sub__navBtn"><a href="<c:url value="/product/byType?pd_type_cd=APP"/>">의류 </a></button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
