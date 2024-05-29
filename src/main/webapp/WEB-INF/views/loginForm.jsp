@@ -10,11 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        body{
-            font-family: "IBM Plex Sans KR", sans-serif;
-        }
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
 
+    <style>
         #loginform {
             max-width: 500px;
             max-height: 500px;
@@ -63,6 +62,8 @@
             margin-bottom: 15px;
             font-size: 13px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         #emailRemember {
@@ -115,9 +116,7 @@
             pointer-events: none;
         }
 
-        #c_email {
-            padding-left: 50px;
-        }
+
 
         #pwdDiv {
             position: relative;
@@ -133,8 +132,8 @@
             pointer-events: none;
         }
 
-        #c_pwd {
-            padding-left: 50px;
+        #c_email, #c_pwd {
+            padding-left: 45px;
         }
 
         #login {
@@ -209,12 +208,12 @@
     <div id="loginDiv">
         <input value="${cookie.c_email.value}" id="c_email" name="c_email" class="special-class" type="text" maxlength="30"
                placeholder="homerun@ball.com" required>
-        <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/1540/1540316.png">
+        <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/2348/2348686.png">
     </div>
 
         <div id="pwdDiv">
             <input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="비밀번호" required>
-            <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/2827/2827914.png">
+            <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/4847/4847692.png">
         </div>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
@@ -226,7 +225,7 @@
         <button type="submit" id="login">로그인</button>
 
         <div id="check">
-            <a id="forgot" onclick="test()" >비밀번호 찾기</a> <a id="regi" href="/register/add" style="margin-left: 280px">회원가입 </a>
+            <a id="forgot" onclick="test()" >비밀번호 찾기</a> <a id="regi" href="/register/add">회원가입 </a>
         </div><br>
 
         <div class="buttonContainer">

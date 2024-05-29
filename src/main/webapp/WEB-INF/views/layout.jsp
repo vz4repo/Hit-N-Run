@@ -23,7 +23,7 @@
         <div class="right"><tiles:insertAttribute name="right" /></div>
 <%--        <div id="main"><tiles:insertAttribute name="main" /></div>--%>
         <!-- content -->
-        <div>    <%@include file="index.jsp"%></div>
+        <div>    <%@include file="copyofindex.jsp"%></div>
 <%--        <tiles:insertAttribute name="content"/>--%>
         <div class="footer"><tiles:insertAttribute name="footer" /></div>
 </div>

@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
     <style>
@@ -181,7 +185,7 @@
         #dropBtn {
             width: 100%;
             padding: 10px;
-            margin-top: 45px;
+            margin-top: 40px;
             border: none;
             cursor: pointer;
             border-radius: 5px;
@@ -200,6 +204,7 @@
             justify-content: center;
             font-size: 13px;
             float: left;
+            margin-top: 5px;
         }
 
         #nowPwd {

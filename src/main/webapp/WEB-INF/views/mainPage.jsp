@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <%--광고 배너 이미지--%>
+  <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 

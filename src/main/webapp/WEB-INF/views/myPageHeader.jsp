@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <title>My Page</title>
 
@@ -60,6 +61,7 @@
         #title1 {
             text-align: center;
             font-weight: bold;
+            /*margin-bottom: 20px;*/
         }
 
         #title2{
@@ -70,7 +72,7 @@
         }
 
     </style>
-
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
