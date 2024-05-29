@@ -9,8 +9,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
@@ -71,13 +72,13 @@
     }
 
     .btn-change-address :hover {
-      color: #fff;
-      background-color: #1b64da;
+        color: #fff;
+        background-color: #1b64da;
     }
 
     .btn-change-address :hover {
-      color: #fff;
-      background-color: #1b64da;
+        color: #fff;
+        background-color: #1b64da;
     }
 
     #dlv-container .select-request {
@@ -167,8 +168,8 @@
     }
 
     /*#addressModal .address-card .buttons {*/
-        /*display: flex;*/
-        /*justify-content: space-between;*/
+    /*display: flex;*/
+    /*justify-content: space-between;*/
     /*}*/
 
     #addressModal .address-card .buttons button {
@@ -285,42 +286,42 @@
 
         <div class="dlv-header-content">
             <%-- 기본/선택 배송지 내용 출력 --%>
-                <table>
-                    <colgroup>
-                        <col style="width: 150px">
-                        <col style="width: 400px">
-                    </colgroup>
-                    <tr>
-                        <td class="label">배송지</td>
-                        <td class="dlv-content">${defaultDto.adr_name}</td>
-                    </tr>
-                    <tr>
-                        <td class="label">이름/연락처</td>
-                        <td class="dlv-content">
-                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">"${defaultDto.rcver_phn}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">주소</td>
-                        <td class="dlv-content">
-                            (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="label">배송 요청사항</td>
-                        <td class="dlv-content">
-                            <select class="select-request" name="delivery_request" id="delivery_request">
-                                <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
-                                <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
-                                <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
-                                <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
-                                <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
-                                <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
-                                <option value="etc">직접 입력</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
+            <table>
+                <colgroup>
+                    <col style="width: 150px">
+                    <col style="width: 400px">
+                </colgroup>
+                <tr>
+                    <td class="label">배송지</td>
+                    <td class="dlv-content">${defaultDto.adr_name}</td>
+                </tr>
+                <tr>
+                    <td class="label">이름/연락처</td>
+                    <td class="dlv-content">
+                        <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">"${defaultDto.rcver_phn}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">주소</td>
+                    <td class="dlv-content">
+                        (${defaultDto.rcver_zip}) ${defaultDto.rcver_adr}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">배송 요청사항</td>
+                    <td class="dlv-content">
+                        <select class="select-request" name="delivery_request" id="delivery_request">
+                            <option value="" selected="selected">배송 시 요청사항을 선택해주세요</option>
+                            <option value="부재 시 경비실에 맡겨주세요">부재 시 경비실에 맡겨주세요</option>
+                            <option value="부재 시 택배함에 넣어주세요">부재 시 택배함에 넣어주세요</option>
+                            <option value="부재 시 집 앞에 놔주세요">부재 시 집 앞에 놔주세요</option>
+                            <option value="배송 전 연락 바랍니다">배송 전 연락 바랍니다</option>
+                            <option value="파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.">파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.</option>
+                            <option value="etc">직접 입력</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <%-- 김수연 0524 기본배송지 form 끝 --%>
@@ -412,31 +413,31 @@
                         <div class="tb__left"><span>[기본배송]</span></div>
                     </td>
                 </tr>
-               <%-- <tr>
-                    <td colspan="7">
-                            <div class="tb__right">
-                                <div class="totalSum">상품구매금액
-                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
-                                </div>
-                                <div class="grade">등급 할인
-                                    <span>없음</span>
-                                </div>
-                                <div class="cupon">쿠폰 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="point">적립금 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="card">카드사 할인
-                                    <span>없음</span>
-                                </div>
-                                <div>배송비 무료</div>
-                                <div class="odpayamt">최종 결제 금액
-                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-                                </div>
-                            </div>
-                    </td>
-                </tr>--%>
+                <%-- <tr>
+                     <td colspan="7">
+                             <div class="tb__right">
+                                 <div class="totalSum">상품구매금액
+                                     <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
+                                 </div>
+                                 <div class="grade">등급 할인
+                                     <span>없음</span>
+                                 </div>
+                                 <div class="cupon">쿠폰 사용
+                                     <span>없음</span>
+                                 </div>
+                                 <div class="point">적립금 사용
+                                     <span>없음</span>
+                                 </div>
+                                 <div class="card">카드사 할인
+                                     <span>없음</span>
+                                 </div>
+                                 <div>배송비 무료</div>
+                                 <div class="odpayamt">최종 결제 금액
+                                     <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                                 </div>
+                             </div>
+                     </td>
+                 </tr>--%>
                 </tfoot>
             </table>
         </form>
@@ -445,41 +446,41 @@
 <%-- 결제 위젯 호출 --%>
 <section class="order__payment">
     <div class="order__payment__wrapper">
-    <%@include file="payCheckout.jsp" %>
-    <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
-    <div class="tb__right">
-        <div class="totalSum tb__right-item">
-            상품구매금액
-            <span class="priceFormat" id="totalSum"
-            >${cartDto.sls_prc * cartDto.cart_cnt}</span
-            >
+        <%@include file="payCheckout.jsp" %>
+        <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
+        <div class="tb__right">
+            <div class="totalSum tb__right-item">
+                상품구매금액
+                <span class="priceFormat" id="totalSum"
+                >${cartDto.sls_prc * cartDto.cart_cnt}</span
+                >
+            </div>
+            <div class="grade tb__right-item">
+                등급 할인
+                <span class="priceFormat">없음</span>
+            </div>
+            <div class="coupon tb__right-item">
+                쿠폰 사용
+                <span class="priceFormat">없음</span>
+            </div>
+            <div class="point tb__right-item">
+                적립금 사용
+                <span class="priceFormat">없음</span>
+            </div>
+            <div class="card tb__right-item">
+                카드사 할인
+                <span class="priceFormat">없음</span>
+            </div>
+            <div class="dlv-fare tb__right-item">
+                배송비
+                <span class="priceFormat">없음</span>
+            </div>
+            <div class="odpayamt tb__right-item">
+                최종 결제 금액
+                <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+                <input type="hidden" id="amount" value="${ord.od_pay_amt}"/>
+            </div>
         </div>
-        <div class="grade tb__right-item">
-            등급 할인
-            <span class="priceFormat">없음</span>
-        </div>
-        <div class="coupon tb__right-item">
-            쿠폰 사용
-            <span class="priceFormat">없음</span>
-        </div>
-        <div class="point tb__right-item">
-            적립금 사용
-            <span class="priceFormat">없음</span>
-        </div>
-        <div class="card tb__right-item">
-            카드사 할인
-            <span class="priceFormat">없음</span>
-        </div>
-        <div class="dlv-fare tb__right-item">
-            배송비
-            <span class="priceFormat">없음</span>
-        </div>
-        <div class="odpayamt tb__right-item">
-            최종 결제 금액
-            <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-            <input type="hidden" id="amount" value="${ord.od_pay_amt}"/>
-        </div>
-    </div>
     </div>
     <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
 </section>
@@ -491,13 +492,13 @@
         $('.priceFormat').each(function () {
             let value = $(this).text();
             if(value === '없음'){
-              $(this).text('0원');
-              $(this).css('color', '#777');
+                $(this).text('0원');
+                $(this).css('color', '#777');
             }else {
-              value = value.replace(/,/g, '');
-              const numbericValue = parseInt(value);
-              const formatValue = numbericValue.toLocaleString('ko-KR');
-              $(this).text(formatValue + '원');
+                value = value.replace(/,/g, '');
+                const numbericValue = parseInt(value);
+                const formatValue = numbericValue.toLocaleString('ko-KR');
+                $(this).text(formatValue + '원');
             }
         })
     })
@@ -505,7 +506,7 @@
 
     /*테이블의 행 수를 계산*/
     window.onload = function () {
-        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        const rows = document.querySelectorAll('section.order__items .tb__order table tbody tr');
         let totalSum = 0;
 
         rows.forEach(function (row) {
@@ -526,22 +527,22 @@
         const btn = document.querySelector('.btn-change-address');
         const closeModal = document.querySelector('#closeModal');
 
-    btn.addEventListener('click', () => {
-      addressModal.style.display = 'block';
-      $.ajax({
-        type: "GET",
-        url: `${contextPath}/delivery/deliveryList`,
-        success: function (response) {
-          if (response.message) {
-            $(".dlv-modal-container").html(`<p>${response.message}</p>`);
-          } else {
-            let htmlContent = '';
-            response.list.forEach(listDto => {
-              /*
-              기본배송지 붙일때 쓸 태그
-              <span className="default">기본배송지</span>
-              */
-              htmlContent += `
+        btn.addEventListener('click', () => {
+            addressModal.style.display = 'block';
+            $.ajax({
+                type: "GET",
+                url: `${contextPath}/delivery/deliveryList`,
+                success: function (response) {
+                    if (response.message) {
+                        $(".dlv-modal-container").html(`<p>${response.message}</p>`);
+                    } else {
+                        let htmlContent = '';
+                        response.list.forEach(listDto => {
+                            /*
+                            기본배송지 붙일때 쓸 태그
+                            <span className="default">기본배송지</span>
+                            */
+                            htmlContent += `
                             <div class="address-card">
                                 <div class="title">
                                     ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
@@ -558,57 +559,56 @@
                                 </div>
                             </div>
                         `;
-              }
+                        });
+                        $(".dlv-modal-container").html(htmlContent);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching delivery list:', error);
+                    alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+                }
             });
-            $(".dlv-modal-container").html(htmlContent);
-          }
-        },
-        error: function (xhr, status, error) {
-          console.error('Error fetching delivery list:', error);
-          alert('배송지 목록을 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-        }
-      });
-    });
+        });
 
-    closeModal.addEventListener('click', () => {
-      addressModal.style.display = 'none';
-    });
+        closeModal.addEventListener('click', () => {
+            addressModal.style.display = 'none';
+        });
 
-    window.addEventListener('click', (event) => {
-      if (event.target === addressModal) {
-        addressModal.style.display = 'none';
-      }
-    });
+        window.addEventListener('click', (event) => {
+            if (event.target === addressModal) {
+                addressModal.style.display = 'none';
+            }
+        });
 
-    /*
-# 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
+        /*
+    # 이벤트 위임을 사용하여 동적으로 생성된 요소에 이벤트 핸들러 등록
 
-DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
-이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
+    DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
+    이벤트 핸들러를 등록하려는 요소가 존재하지 않으면 오류가 발생합니다.
 
-따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
-이벤트 위임을 사용해야 합니다.
+    따라서 동적으로 생성된 요소에 대해 이벤트 핸들러를 올바르게 등록하려면
+    이벤트 위임을 사용해야 합니다.
 
-이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
-이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
+    이벤트 위임을 사용하여 동적으로 생성된 .dlv-select 버튼에
+    이벤트 핸들러를 등록하도록 코드를 수정할 수 있습니다.
 
-이벤트 위임을 사용하면
-이벤트 핸들러를 상위 요소에 등록하고,
-이벤트가 하위 요소로 위임되도록 합니다.
-    * */
-    document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
-      if (event.target.classList.contains('dlv-select')) {
-        const c_adr_list_id = event.target.getAttribute('addrId');
-        $.ajax({
-          type: "GET",
-          url: `${contextPath}/delivery/deliverySelected`,
-          data: {dlvId: c_adr_list_id},
-          success: function (response) {
-            if (response.message) {
-              $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
-            } else {
-              const selectedDto = response.selectedDto;
-              const htmlContent = `
+    이벤트 위임을 사용하면
+    이벤트 핸들러를 상위 요소에 등록하고,
+    이벤트가 하위 요소로 위임되도록 합니다.
+        * */
+        document.querySelector('.dlv-modal-container').addEventListener('click', function (event) {
+            if (event.target.classList.contains('dlv-select')) {
+                const c_adr_list_id = event.target.getAttribute('addrId');
+                $.ajax({
+                    type: "GET",
+                    url: `${contextPath}/delivery/deliverySelected`,
+                    data: {dlvId: c_adr_list_id},
+                    success: function (response) {
+                        if (response.message) {
+                            $(".dlv-header-content").html(`<p>${'${response.message}'}</p>`);
+                        } else {
+                            const selectedDto = response.selectedDto;
+                            const htmlContent = `
                  <table>
                     <colgroup>
                         <col style="width: 150px">
@@ -646,18 +646,18 @@ DOMContentLoaded 이벤트 발생 시 DOM 요소를 찾기 때문에,
                     </tr>
                 </table>
                 `;
-              $(".dlv-header-content").html(htmlContent);
-              addressModal.style.display = 'none';
+                            $(".dlv-header-content").html(htmlContent);
+                            addressModal.style.display = 'none';
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching selected delivery:', error);
+                        alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+                    }
+                });
             }
-          },
-          error: function (xhr, status, error) {
-            console.error('Error fetching selected delivery:', error);
-            alert('선택한 배송지를 불러오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-          }
         });
-      }
-    });
-  })
+    })
 
     function dlvBtn() {
         alert('3차 개발 예정입니다.')
