@@ -6,8 +6,7 @@
     <!-- 중분류 포지션 -->
     <div class="subnav">
         <%-- 2024.05.29 [혁락] 발표용 글러브 <a> 적용 --%>
-        <button class="sub__navBtn" pd_type="GLV"><a href="<c:url value="/product/byType?pd_type_cd=GLV"/>">글러브 </a>
-        </button>
+        <button class="sub__navBtn" pd_type="GLV">글러브</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -48,7 +47,7 @@
     </div>
     <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  -->
     <div class="subnav">
-        <button class="sub__navBtn">배트</button>
+        <button class="sub__navBtn" pd_type="BAT">배트</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -73,7 +72,7 @@
     </div>
 
     <div class="subnav">
-        <button class="sub__navBtn">야구공</button>
+        <button class="sub__navBtn" pd_type="BAL">야구공</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -92,7 +91,7 @@
         </div>
     </div>
     <div class="subnav">
-        <button class="sub__navBtn">보호장비</button>
+        <button class="sub__navBtn" pd_type="PRO">보호장비</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -117,7 +116,7 @@
     </div>
     <div class="subnav">
         <%-- 2024.05.29 [혁락] 발표용 의류 <a> 적용 --%>
-        <button class="sub__navBtn"><a href="<c:url value="/product/byType?pd_type_cd=APP"/>">의류 </a></button>
+        <button class="sub__navBtn" pd_type="APP">의류</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -168,7 +167,7 @@
         </div>
     </div>
     <div class="subnav">
-        <button class="sub__navBtn">장갑</button>
+        <button class="sub__navBtn" pd_type="OGL">장갑</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -188,7 +187,7 @@
         </div>
     </div>
     <div class="subnav">
-        <button class="sub__navBtn">야구화</button>
+        <button class="sub__navBtn" pd_type="SHO">야구화</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
@@ -207,7 +206,7 @@
         </div>
     </div>
     <div class="subnav">
-        <button class="sub__navBtn">액세서리</button>
+        <button class="sub__navBtn" pd_type="ACC">액세서리</button>
         <div class="sub__nav__content">
             <div class="sub__nav__content__group">
                 <div class="mid">
