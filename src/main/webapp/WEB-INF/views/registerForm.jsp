@@ -1,13 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <style>
 
@@ -55,11 +53,10 @@
             text-align: center;
             font-size: 20px;
             margin-bottom: 40px;
-            /*font-family: 'IBM Plex Sans', sans-serif;*/
         }
 
         #myform {
-            max-width: 420px;
+            max-width: 500px;
             text-align: center;
             border: 3px solid #f1f1f1;
             border-radius: 50px;
@@ -158,7 +155,7 @@
             display: inline;
         }
         #verify{
-            margin-left: 158px;
+            float: right;
             margin-bottom: 5px;
         }
 

@@ -35,6 +35,7 @@
 
         .special-class {
             width: 100%;
+            height: 50px;
             padding: 10px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -62,14 +63,12 @@
             display: flex;
         }
 
-        #remember{
-            margin-right: 5px;
-            /*float: right;*/
-        }
-
-        #emailRemember{
+        #emailRemember {
+            display: flex;
+            justify-content: center;
             font-size: 12px;
             float: right;
+            margin-top: -15px;
         }
 
         .buttonContainer {
@@ -81,13 +80,12 @@
 
         .subBtn {
             display: flex;
-            align-items: center; /* 텍스트와 이미지를 세로 중앙으로 정렬 */
-            justify-content: center; /* 텍스트와 이미지를 수평으로 정렬 */
-            /*background-color: gainsboro;*/
+            align-items: center;
+            justify-content: center;
             color: black;
-            border: none; /* 버튼의 기본 테두리를 제거 */
+            border: none;
             cursor: pointer;
-            padding: 5px 10px; /* 버튼 내부 패딩을 추가하여 내용과 테두리 사이의 공간을 조절 */
+            padding: 5px 10px;
         }
 
         #forgot{
@@ -108,19 +106,15 @@
         #loginImg {
             position: absolute;
             left: 5px;
-            /* 이미지를 왼쪽으로 5px 이동시켜요. 이 값을 조절하여 원하는 위치에 맞출 수 있어요. */
             top: 40%;
-            /* 이미지를 수직으로 가운데에 위치시켜요. */
             transform: translateY(-50%);
-            height: 25px;
-            width: 25px;
+            height: 30px;
+            width: 30px;
             pointer-events: none;
-            /* 이미지 위에서의 이벤트를 비활성화해요. */
         }
 
         #c_email {
-            padding-left: 40px;
-            /* 이미지를 감안하여 왼쪽 패딩을 추가해요. */
+            padding-left: 50px;
         }
 
         #pwdDiv {
@@ -132,13 +126,13 @@
             left: 5px;
             top: 40%;
             transform: translateY(-50%);
-            height: 25px;
-            width: 25px;
+            height: 30px;
+            width: 30px;
             pointer-events: none;
         }
 
         #c_pwd {
-            padding-left: 40px;
+            padding-left: 50px;
         }
 
         #login {
@@ -155,18 +149,22 @@
             border: none;
              font-size: 15px;
             text-align: center;
-            -webkit-transition-duration: 0.4s;
+            -webkit-transition-duration: 0.2s;
             /* Safari */
-            transition-duration: 0.4s;
+            transition-duration: 0.2s;
             text-decoration: none;
             overflow: hidden;
             cursor: pointer;
 
         }
 
+        #login:hover {
+            background-color: seagreen; /* 마우스를 갖다 대면 배경색 변경 */
+        }
+
         #login:after {
             content: "";
-            background:  #073713;
+            background: darkgreen;
             display: block;
             position: absolute;
             padding-top: 300%;
@@ -174,7 +172,7 @@
             margin-left: -20px !important;
             margin-top: -120%;
             opacity: 0;
-            transition: all 0.8s
+            transition: all 1.5s
         }
 
         #login:active:after {
@@ -182,6 +180,16 @@
             margin: 0;
             opacity: 1;
             transition: 0s
+        }
+
+        #logo{
+            margin-top: 30px;
+        }
+
+        #emailLabel {
+            margin-top: 15px;
+            font-weight: 500;
+            color: black;
         }
 
 
@@ -192,7 +200,8 @@
 <div id="loginform">
     <form action="<c:url value='/login'/>" method="post" onsubmit="return">
 
-    <a href="/"><img src="/img/homerunball_logo.png" style="width:200px"></a><br><br><br><br><br>
+    <a href="/"><img id="logo" src="/img/homerunball_logo.png" style="width:200px"></a><br><br><br><br>
+
     <div class="container">
 
     <div id="loginDiv">
@@ -201,17 +210,17 @@
         <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/1540/1540316.png">
     </div>
 
-<%--        <div id="pwdDiv"><img id="pwdImg" style="height: 30px" width="30px" src="https://cdn-icons-png.flaticon.com/128/14/14478.png"><input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="Password" required></div>--%>
-<%--        --%>
-
         <div id="pwdDiv">
-            <input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="Password" required>
+            <input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="비밀번호" required>
             <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/2827/2827914.png">
         </div>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
+
         <div id="emailRemember">
-            <input type="checkbox" id="remember" name="rememberEmail" ${empty cookie.c_email.value ? "":"checked"}>이메일 저장</div><br><br>
+        <input type="checkbox" id="remember" name="rememberEmail"  ${empty cookie.c_email.value ? "":"checked"}>
+        <label for="remember" id="emailLabel">이메일 저장</label></div><br>
+
         <button type="submit" id="login">로그인</button>
 
         <div id="check">
@@ -219,9 +228,11 @@
         </div><br>
 
         <div class="buttonContainer">
-        <div class="subBtn" id="googleBtn" onclick="test()"> <img id="google" src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="50" height="50"></div>
-            <div class="subBtn" id="kakaoBtn" onclick="test()"> <img id="kakao" src="https://cdn-icons-png.flaticon.com/128/3669/3669973.png" width="50" height="50"></div>
-                <div class="subBtn" id="appleBtn" onclick="test()"> <img id="apple" src="https://cdn-icons-png.flaticon.com/128/0/747.png" width="50" height="50"></div>
+        <div class="subBtn" id="googleBtn" onclick="test()"> <img id="google" src="https://cdn-icons-png.flaticon.com/128/300/300221.png" width="40" height="40"></div>
+            <div class="subBtn" id="kakaoBtn" onclick="test()"> <img id="kakao" src="https://cdn-icons-png.flaticon.com/128/3669/3669973.png" width="40" height="40"></div>
+                <div class="subBtn" id="appleBtn" onclick="test()"> <img id="apple" src="https://cdn-icons-png.flaticon.com/128/0/747.png" width="40" height="40"></div>
+            <div class="subBtn" id="naverBtn" onclick="test()"> <img id="naver" src="/img/naverBtn.png" width="40" height="40"></div>
+
         </div>
 
     </div>
@@ -244,15 +255,6 @@
     if(pwdClear==="pwdMsg2") {
         alert("변경된 비밀번호로 다시 로그인해주세요.")
     }
-
-    <%--let pwdClear = "${pwdClear}";--%>
-    <%--if (pwdClear === "pwdMsg2") {--%>
-    <%--    let confirmation = confirm("로그아웃 후 새로운 비밀번호로 로그인 하시겠습니까?");--%>
-    <%--    if (!confirmation) {--%>
-    <%--        window.location.href = "/mypage/list";--%>
-    <%--    }--%>
-    <%--}--%>
-
 
     function test(){
             alert("테스트중입니다!")

@@ -20,7 +20,7 @@
         .none {
             text-decoration: none;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             text-align: center;
             color: dimgray;
             font-weight: bold;
@@ -28,7 +28,7 @@
 
         .myPageH {
             border-bottom: 1px solid #ccc;
-            font-size: 13px;
+            font-size: 14px;
             margin-top: 40px;
             margin-bottom: 60px;
             text-align: center;
@@ -37,7 +37,7 @@
         }
 
         .sp {
-            font-size: 15px;
+            font-size: 16px;
             margin: 40px;
             display: flex;
             flex-direction: column;
@@ -57,15 +57,15 @@
         }
 
         .ma {
-            margin-bottom: 11px;
+            margin-bottom: 10px;
         }
 
         .ma2 {
-            font-size: 10px;
+            font-size: 11px;
         }
 
         #oneMonth {
-            font-size: 11px;
+            font-size: 12px;
             display: flex;
             justify-content: center;
             font-weight: bold;
@@ -76,27 +76,21 @@
         }
 
         .date {
-            font-size: 12px;
+            font-size: 13px;
             margin-bottom: 10px;
             color: gray;
         }
 
         #title1 {
-            /*font-size: 13px;*/
             text-align: center;
-            /*color: dimgray;*/
             font-weight: bold;
-            /*cursor: pointer;*/
-            /*text-decoration: none;*/
-            /*color: dimgray;*/
-            /*color: #000;*/
         }
 
         #title2{
             cursor: pointer;
             text-decoration: none;
             color: dimgray;
-            font-size: 13px;
+            font-size: 14px;
         }
 
     </style>
