@@ -33,6 +33,27 @@
 .info {
     margin-left: 50px;
 }
+.info .brand {
+    font-weight: bold;
+}
+
+.info .name {
+    font-size: 1.1em;
+}
+
+.info .name a {
+    text-decoration: none;
+    color: black;
+}
+
+.info .name a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.info .option {
+    color: gray;
+}
 
 .order__title__detail a,
 .tb__order a{
@@ -118,13 +139,6 @@
     margin-left: 10px;
     font-size: 14px;
 }
-
-
-.tb__order img {
-    height: 110px;
-    width: 110px;
-}
-
 
 .order__title__detail {
     font-size: 15px;

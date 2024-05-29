@@ -45,21 +45,17 @@
     <table class="cart_tale">
         <colgroup>
             <col width="5%"/>
-            <col width="15%"/>
-            <col width="30%"/>
+            <col width="40%"/>
             <col width="10%"/>
             <col width="20%"/>
-            <col width="10%"/>
-            <col width="10%"/>
+            <col width="15%"/>
+            <col width="15%"/>
         </colgroup>
         <thead>
         <tr>
             <th><input type="checkbox" id="allChk" checked="checked"/></th>
             <th scope="col">
-                <div>이미지</div>
-            </th>
-            <th scope="col">
-                <div>상품정보</div>
+                <div>제품정보</div>
             </th>
             <th scope="col">
                 <div>판매가</div>
@@ -84,16 +80,26 @@
                 <c:forEach var="cartDto" items="${list}">
                     <tr class="product-row">
                         <td><input type="checkbox" class="chk" checked="checked" name="checkboxlength"/></td>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">
-                                <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
-                                     alt="이미지 준비 중 입니다"
-                                     onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
-                            <div name="size">사이즈: ${cartDto.pd_clsf_code}</div>
+                        <td class="product-info">
+                            <div>
+                                <a href="/product/detail?pd_id=${cartDto.pd_id}">
+                                    <img src="/img/product/${cartDto.pd_type_cd}/main/${cartDto.mn_img_fn}"
+                                         alt="이미지 준비 중 입니다"
+                                         onerror="this.onerror=null; this.src='/img/product/${cartDto.pd_type_cd.toLowerCase()}/main/${cartDto.mn_img_fn}';">
+                                </a>
+                            </div>
+                            <ul class="info">
+                                <!-- 브랜드 이름 -->
+                                <li class="brand">
+                                    <span>${cartDto.cd_name}</span>
+                                </li>
+                                <!-- 상품 이름 -->
+                                <li class="name">
+                                    <a href="/product/detail?pd_id=${cartDto.pd_id}">${cartDto.pd_name}</a>
+                                </li>
+                                <!-- 상품 옵션 -->
+                                <li class="option">옵션/사이즈: ${cartDto.pd_clsf_code}</li>
+                            </ul>
                         </td>
                         <td><span name="price" class="priceFormat">${cartDto.sls_prc}</span></td>
                         <td>
