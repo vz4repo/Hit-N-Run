@@ -21,9 +21,19 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <style>
-        .product-item picture{
-          width: 411px;
-          height: 411px;
+        picture{
+          overflow: hidden;
+          padding-bottom: 100%;
+          max-width: 428px;
+          max-height: 428px;
+          background-color: #EBEBEB;
+        }
+
+        picture > img{
+          max-width:  90%;
+          max-height: 90%;
+          top: 50%;
+          left: 50%;
         }
     </style>
     <title>홈런볼 제품 목록</title>
