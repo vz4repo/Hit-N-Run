@@ -7,15 +7,13 @@
 <html lang="en">
 <head>
     <title>Home Run Ball</title>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon"
           href="/img/icon_logo.png">
 
     <style>
-        body{
-            font-family: "IBM Plex Sans KR", sans-serif;
-        }
-
         #loginform {
             max-width: 500px;
             max-height: 500px;
@@ -64,6 +62,8 @@
             margin-bottom: 15px;
             font-size: 13px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         #emailRemember {
@@ -225,7 +225,7 @@
         <button type="submit" id="login">로그인</button>
 
         <div id="check">
-            <a id="forgot" onclick="test()" >비밀번호 찾기</a> <a id="regi" href="/register/add" style="margin-left: 280px">회원가입 </a>
+            <a id="forgot" onclick="test()" >비밀번호 찾기</a> <a id="regi" href="/register/add">회원가입 </a>
         </div><br>
 
         <div class="buttonContainer">

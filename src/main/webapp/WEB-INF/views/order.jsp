@@ -10,8 +10,9 @@
     <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 
     <link href="<c:url value='/css/payStyle.css'/>" type="text/css" rel="stylesheet"/>
     <link href="<c:url value='/css/reset.css'/>" type="text/css" rel="stylesheet"/>
@@ -72,13 +73,13 @@
     }
 
     .btn-change-address :hover {
-      color: #fff;
-      background-color: #1b64da;
+        color: #fff;
+        background-color: #1b64da;
     }
 
     .btn-change-address :hover {
-      color: #fff;
-      background-color: #1b64da;
+        color: #fff;
+        background-color: #1b64da;
     }
 
     #dlv-container .select-request {
@@ -262,7 +263,7 @@
 <body>
 <jsp:include page="header.jsp"/>
 <div class="order__header">
-    <a href="#" class="head_main">주 문/결 제</a>
+    <a href="#" class="head_main">주문/결제</a>
     <div class="order__title">
         <%--<div class="head_order">Order / Payment</div>--%>
         <div class="order__title__detail">
@@ -386,7 +387,7 @@
                             <ul class="info">
                                 <!-- 브랜드 이름 -->
                                 <li class="brand">
-                                        <%--<span>${cartDto.brd_name}</span>--%>
+                                        <span>${cartDto.cd_name}</span>
                                 </li>
                                 <!-- 상품 이름 -->
                                 <li class="name">
@@ -407,38 +408,6 @@
                     </tr>
                 </c:forEach>
                 </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="1">
-                        <div class="tb__left"><span>[기본배송]</span></div>
-                    </td>
-                </tr>
-               <%-- <tr>
-                    <td colspan="7">
-                            <div class="tb__right">
-                                <div class="totalSum">상품구매금액
-                                    <span class="priceFormat" id="totalSum">${cartDto.sls_prc * cartDto.cart_cnt}</span>
-                                </div>
-                                <div class="grade">등급 할인
-                                    <span>없음</span>
-                                </div>
-                                <div class="cupon">쿠폰 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="point">적립금 사용
-                                    <span>없음</span>
-                                </div>
-                                <div class="card">카드사 할인
-                                    <span>없음</span>
-                                </div>
-                                <div>배송비 무료</div>
-                                <div class="odpayamt">최종 결제 금액
-                                    <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
-                                </div>
-                            </div>
-                    </td>
-                </tr>--%>
-                </tfoot>
             </table>
         </form>
     </div>
@@ -506,7 +475,7 @@
 
     /*테이블의 행 수를 계산*/
     window.onload = function () {
-        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        const rows = document.querySelectorAll('section.order__items .tb__order table tbody tr');
         let totalSum = 0;
 
         rows.forEach(function (row) {
@@ -559,7 +528,7 @@
                                 </div>
                             </div>
                         `;
-              }
+
             });
             $(".dlv-modal-container").html(htmlContent);
           }
