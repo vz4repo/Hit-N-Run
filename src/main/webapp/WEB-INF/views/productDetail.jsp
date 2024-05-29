@@ -131,7 +131,7 @@
                     <li><b>제품 상태: </b>${prd.qlt_cd}</li>
                     <li><b>제조 국가: </b>${prd.origin}</li>
                     <li><b>브랜드: </b>${prd.brd_cd}</li>
-                    <li><b>제품 제조일자: </b>${prd.pd_mnf_date}</li>
+                    <li><b>제품 제조일자: </b><span id="formattedDate" data-date="${prd.pd_mnf_date}"></span></li>
                     <li><b>재질: </b>${prd.mtrl}</li>
                     <li><b>제품 무게: </b>${prd.wgh}</li>
                     <li><b>제조사: </b>${prd.mfr}</li>
@@ -492,6 +492,23 @@
                 }
             }
         });
+    });
+    function formatDateString(dateString) {
+        // 날짜 문자열을 변환
+        var year = dateString.substring(0, 4);
+        var month = dateString.substring(4, 6);
+        var day = dateString.substring(6, 8);
+
+        // 원하는 형식으로 변환
+        return year + "년 " + month + "월 " + day + "일";
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // HTML 데이터 속성에서 서버에서 가져온 날짜 문자열 읽기
+        var dateString = document.getElementById("formattedDate").getAttribute("data-date");
+        console.log(dateString); // 디버깅용으로 콘솔에 출력
+        // 날짜 형식을 변경하여 HTML 요소에 출력
+        document.getElementById("formattedDate").innerText = formatDateString(dateString);
     });
 </script>
 </body>
