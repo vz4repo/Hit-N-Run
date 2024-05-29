@@ -7,6 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
@@ -42,7 +43,7 @@
         margin-left: 8%;
         margin-bottom: 1.5%;
         margin-right: 3%;
-        font-size: 15px;
+        font-size: 25px;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -68,7 +69,11 @@
         background-color: #333;
         border-radius: 5px;
         cursor: pointer;
-        margin-left: 360px;
+    }
+
+    .btn-change-address :hover {
+      color: #fff;
+      background-color: #1b64da;
     }
 
     .btn-change-address :hover {
@@ -271,8 +276,9 @@
     <section id="dlv-container">
 
 
+        <%-- TODO: 150 --%>
         <div class="dlv-header">
-            <div>배송정보</div>
+            <div  style="width: 150px">배송정보</div>
             <!-- 배송지 변경 버튼 -->
             <button class="btn-change-address">배송지 변경</button>
         </div>
@@ -292,7 +298,7 @@
                     <tr>
                         <td class="label">이름/연락처</td>
                         <td class="dlv-content">
-                           ${defaultDto.rcver} / ${defaultDto.rcver_phn}
+                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">${defaultDto.rcver_phn}</span>
                         </td>
                     </tr>
                     <tr>
@@ -472,6 +478,7 @@
         <div class="odpayamt tb__right-item">
             최종 결제 금액
             <span class="priceFormat" id="odpayamt">${ord.od_pay_amt}</span>
+            <input type="hidden" id="amount" value="${ord.od_pay_amt}"/>
         </div>
     </div>
     </div>
@@ -539,7 +546,7 @@
                             <div class="address-card">
                                 <div class="title">
                                     ${'${listDto.rcver}'} (${'${listDto.adr_name}'})
-                                    <button class="3rd-dvlp" id="setDfltAddrsetDfltAddr" onclick="javascript:dlvBtn()" addrId="${'${listDto.c_adr_list_id}'}">기본배송지</button>
+                                    <div addrId="${'${listDto.c_adr_list_id}'}">기본배송지</div>
                                 </div>
                                 <div class="details">
                                     ${'${listDto.rcver_phn}'}<br/>
@@ -552,6 +559,7 @@
                                 </div>
                             </div>
                         `;
+              }
             });
             $(".dlv-modal-container").html(htmlContent);
           }
