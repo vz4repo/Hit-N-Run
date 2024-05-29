@@ -5,6 +5,7 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <title>My Page</title>
 
@@ -17,13 +18,13 @@
         .none {
             text-decoration: none;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 13px;
             text-align: center;
             color: dimgray;
             font-weight: bold;
         }
         .sp {
-            font-size: 15px;
+            font-size: 16px;
             margin: 40px;
             display: flex;
             flex-direction: column;
@@ -43,33 +44,32 @@
         }
 
         .ma2 {
-            font-size: 10px;
+            font-size: 11px;
             color: black;
         }
 
         .date {
-            font-size: 12px;
+            font-size: 13px;
             margin-bottom: 10px;
             color: gray;
         }
 
 
         #title1 {
-            /*font-size: 13px;*/
             text-align: center;
-            /*color: dimgray;*/
             font-weight: bold;
+            /*margin-bottom: 20px;*/
         }
 
         #title2{
             cursor: pointer;
             text-decoration: none;
             color: dimgray;
-            font-size: 13px;
+            font-size: 14px;
         }
 
     </style>
-
+    <link href="<c:url value='/css/search.css'/>" type="text/css" rel="stylesheet"/>
 </head>
 
 <body>
