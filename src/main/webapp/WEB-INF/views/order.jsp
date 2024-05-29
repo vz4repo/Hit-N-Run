@@ -505,7 +505,7 @@
 
     /*테이블의 행 수를 계산*/
     window.onload = function () {
-        const rows = document.querySelectorAll('body > section.order__items > div.tb__order > form > table > tbody > tr');
+        const rows = document.querySelectorAll('section.order__items .tb__order table tbody tr');
         let totalSum = 0;
 
         rows.forEach(function (row) {
@@ -558,7 +558,6 @@
                                 </div>
                             </div>
                         `;
-              }
             });
             $(".dlv-modal-container").html(htmlContent);
           }

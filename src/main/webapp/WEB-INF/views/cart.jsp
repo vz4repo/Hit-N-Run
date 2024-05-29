@@ -266,7 +266,7 @@
 
         /* plus 수량변경 */
         $('.plus_btn').on('click change', function() {
-            /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
+                /* 수량 input 태그를 찾아서 현재 수량을 가져온다. */
                 let quantityInput = $(this).siblings('input[name="cart_cnt"]');
                 /* 수량의 value를 parseInt해준다 */
                 let quantity = parseInt(quantityInput.val());
