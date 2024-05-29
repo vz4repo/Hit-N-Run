@@ -138,7 +138,6 @@
     let od_name = document.querySelector('#dlv-rcver').textContent;
     console.log("[btnPayment] " + amount +"|"+od_name);
 
-    /*
     paymentWidget.requestPayment({
       orderId: generateRandomString(),
       orderName: document.querySelector('#newOrderName').textContent,
@@ -146,10 +145,9 @@
       failUrl: window.location.origin + "/fail",
       customerEmail: 'hrkwon82@gmail.com',
       customerName: od_name
-      /!* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 *!/
+      /* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 */
     });
-*/
-
+/*
     paymentWidget.requestPayment({
       orderId: 't-orderId',
       orderName: 't-oderName',
@@ -157,7 +155,8 @@
       failUrl: window.location.origin + "/fail",
       customerEmail: 'hrkwon82@gmail.com',
       customerName: 't-od_name'
-      /* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 */
+      /!* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 *!/
+      */
     });
   });
 
