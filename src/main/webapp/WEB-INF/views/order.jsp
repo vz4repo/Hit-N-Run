@@ -43,7 +43,7 @@
         margin-left: 8%;
         margin-bottom: 1.5%;
         margin-right: 3%;
-        font-size: 15px;
+        font-size: 25px;
         font-weight: 600;
         display: flex;
         align-items: center;
@@ -298,7 +298,7 @@
                     <tr>
                         <td class="label">이름/연락처</td>
                         <td class="dlv-content">
-                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">"${defaultDto.rcver_phn}</span>
+                            <span id="dlv-rcver">${defaultDto.rcver}</span> / <span class="dlv-rcver_phn">${defaultDto.rcver_phn}</span>
                         </td>
                     </tr>
                     <tr>
