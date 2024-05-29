@@ -100,7 +100,7 @@
 <%--<div id="myform">--%>
     <form action="/mypage/pwdEdit" method="POST" onsubmit="return pwdEditCheck()">
     <div class="container">
-      <h1 id="pwdTitle">Change Pwd</h1><br><br>
+      <h1 id="pwdTitle">비밀번호 변경</h1><br><br>
 
         <label class="pwdLabel">현재 비밀번호</label>
         <input id="curPwd" class="special-class" type="password" name="curPwd" maxlength="15">
