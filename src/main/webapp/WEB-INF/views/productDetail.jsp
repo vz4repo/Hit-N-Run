@@ -358,7 +358,14 @@
         var sections = getSectionOffsets();
 
         if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky");
+            // 헤더의 top 값을 확인하여 클래스 추가
+            if (document.getElementById("cart__header").style.top == "-200px") {
+                navbar.classList.add("sticky2");
+                navbar.classList.remove("sticky");
+            } else {
+                navbar.classList.add("sticky");
+                navbar.classList.remove("sticky2");
+            }
 
             var currentSection = null;
             for (var section in sections) {
@@ -375,7 +382,7 @@
                 }
             }
         } else {
-            navbar.classList.remove("sticky");
+            navbar.classList.remove("sticky", "sticky2");
 
             navLinks.relatedProduct.classList.add("prdActive");
             for (var section in navLinks) {
@@ -386,10 +393,41 @@
         }
     }
 
-    document.addEventListener('DOMContentLoaded', (event) => {
+    var prevScrollpos = window.pageYOffset;
+    function handleHeaderScroll() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("cart__header").style.top = "0";
+        } else {
+            document.getElementById("cart__header").style.top = "-200px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 기능: QnATable 처리
+        var tables = document.getElementsByName('QnATable');
+        tables.forEach(function(table) {
+            var cells = table.getElementsByTagName('td');
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].innerText === '답변완료✔') {
+                    cells[i].classList.add('QnATableAnswered');
+                }
+            }
+        });
+
+        // 두 번째 기능: updatePrices 호출 및 초기 스크롤 상태 반영
         updatePrices();
         window.onscroll(); // 페이지 로드 시 초기 스크롤 상태를 반영
     });
+
+    // 스크롤 이벤트 핸들러 통합
+    window.onscroll = function () {
+        handleHeaderScroll();
+        if (typeof handleNavbarScroll === 'function') {
+            handleNavbarScroll();
+        }
+    };
 
     // 네비게이션 링크 클릭 시 스크롤 이동
     for (var section in navLinks) {

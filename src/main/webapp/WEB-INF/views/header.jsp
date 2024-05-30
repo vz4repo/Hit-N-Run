@@ -50,13 +50,6 @@
         }
 
         var prevScrollpos = window.pageYOffset;
-        window.onscroll = function () {
-            handleHeaderScroll();
-            if (typeof handleNavbarScroll === 'function') {
-                handleNavbarScroll();
-            }
-        };
-
         function handleHeaderScroll() {
             var currentScrollPos = window.pageYOffset;
             if (prevScrollpos > currentScrollPos) {
@@ -66,6 +59,13 @@
             }
             prevScrollpos = currentScrollPos;
         }
+
+        window.onscroll = function () {
+            handleHeaderScroll();
+            if (typeof handleNavbarScroll === 'function') {
+                handleNavbarScroll();
+            }
+        };
 
       /* 상품 대분류 목록 */
       document.addEventListener('DOMContentLoaded', (event) => {
