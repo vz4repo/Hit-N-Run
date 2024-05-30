@@ -98,7 +98,7 @@ body.productDetail{
 .image-container img {
     display: block;
     margin: 0 auto;
-    width: 80%;
+    width: 50%;
 }
 /*제품 대표이미지*/
 #mnImg{

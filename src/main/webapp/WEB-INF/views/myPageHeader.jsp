@@ -15,19 +15,19 @@
     <style>
         #myPage {
             margin: auto;
-            width: 900px;
+            /*width: 900px;*/
         }
 
         .none {
             text-decoration: none;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             text-align: center;
             color: dimgray;
             font-weight: bold;
         }
         .sp {
-            font-size: 16px;
+            /*font-size: 16px;*/
             margin: 40px;
             display: flex;
             flex-direction: column;
@@ -47,12 +47,12 @@
         }
 
         .ma2 {
-            font-size: 11px;
+            font-size: 12px;
             color: black;
         }
 
         .date {
-            font-size: 13px;
+            font-size: 14px;
             margin-bottom: 10px;
             color: gray;
         }
@@ -67,6 +67,7 @@
         #title2{
             cursor: pointer;
             text-decoration: none;
+            /*color: black;*/
             color: dimgray;
             font-size: 14px;
         }
@@ -107,22 +108,22 @@
 
     <div class="one">
         <div class="sp">
-            <span><a class="none" href="/orderDetail">Order List</a></span>
+            <span><a class="none" href="/orderDetail">주문 목록</a></span>
         </div>
         <div class="sp">
-            <span><a class="none" onclick="test()">Wish List</a></span>
+            <span><a class="none" onclick="test()">찜 목록</a></span>
         </div>
         <div class="sp">
-            <span><a class="none" onclick="test()">Recently Viewed</a></span>
+            <span><a class="none" onclick="test()">리뷰 목록</a></span>
         </div>
         <div class="sp">
-            <span><a class="none" onclick="test()">Address</a></span>
+            <span><a class="none" onclick="test()">배송지 목록</a></span>
         </div>
         <div class="sp">
-            <span><a class="none" href="/mypage/info">Edit Proflie</a></span>
+            <span><a class="none" href="/mypage/info">개인정보 수정</a></span>
         </div>
         <div class="sp">
-            <span><a class="none" href="/mypage/pwdEdit">Change Pwd</a></span>
+            <span><a class="none" href="/mypage/pwdEdit">비밀번호 수정</a></span>
         </div>
     </div>
 </div>
