@@ -5,9 +5,10 @@
     <form action="" name="search"> <%-- method=post --%>
         <fieldset class="search_fieldset">
             <div class="search_wrap">
-                <input class="MS_search_word input-keyword" id="search-input" type="text" name="search" value=""
-                       placeholder="제품명을 입력하세요"/>
-                <a href="javascript:prev_search();search_submit();">
+                    <input class="MS_search_word input-keyword" id="search-input" type="text" name="search" value=""
+                           placeholder="제품명을 입력하세요"/>
+                <ul id="keywordResultList" class="hidden"></ul>
+                <a href="javascript:prev_search();search_submit();" class="search-icon">
                     <i class="fa fa-search fa-lg"></i> <%--검색바--%>
                 </a>
                 <ul id="keywordResultList" class="hidden"></ul>
@@ -112,15 +113,15 @@
         });
     });
 
-    /* 검색때 display:none */
-    $(document).ready(function () {
-        $('#search-input').on('input', function () {
-            const keyword = $(this).val();
-            if (keyword.length > 0) {
-                $('.word, .color').addClass('hidden'); // display: none;
-            } else {
-                $('.word, .color').removeClass('hidden'); // display: block;
-            }
-        });
+  /* 검색때 display:none */
+  $(document).ready(function () {
+    $('#search-input').on('input', function () {
+      const keyword = $(this).val();
+      if (keyword.length > 0) {
+        $('.word, .color, .search-icon').addClass('hidden'); // display: none;
+      } else {
+        $('.word, .color, .search-icon').removeClass('hidden'); // display: block;
+      }
     });
+  });
 </script>

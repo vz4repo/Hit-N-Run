@@ -39,6 +39,7 @@
 	<context:component-scan base-package="com.homerunball">
 	</context:component-scan>
 
+	<!-- Interceptor mappings -->
 	<interceptors>
 		<interceptor>
 <!--			<mapping path="/mypage/list"/>-->
@@ -51,5 +52,43 @@
 			<beans:ref bean="custInterceptor"/>
 		</interceptor>
 	</interceptors>
+
+	<!--
+    &lt;!&ndash; CORS Configuration &ndash;&gt;
+    <beans:bean id="corsConfigurationSource" class="org.springframework.web.cors.UrlBasedCorsConfigurationSource">
+        <beans:property name="corsConfigurations">
+            <beans:map>
+                <beans:entry key="/**">
+                    <beans:bean class="org.springframework.web.cors.CorsConfiguration">
+                        <beans:property name="allowedOrigins">
+                            <beans:list>
+                                <beans:value>*</beans:value>
+                            </beans:list>
+                        </beans:property>
+                        <beans:property name="allowedMethods">
+                            <beans:list>
+                                <beans:value>GET</beans:value>
+                                <beans:value>POST</beans:value>
+                                <beans:value>PUT</beans:value>
+                                <beans:value>DELETE</beans:value>
+                                <beans:value>OPTIONS</beans:value>
+                            </beans:list>
+                        </beans:property>
+                        <beans:property name="allowedHeaders">
+                            <beans:list>
+                                <beans:value>*</beans:value>
+                            </beans:list>
+                        </beans:property>
+                        <beans:property name="allowCredentials" value="true"/>
+                    </beans:bean>
+                </beans:entry>
+            </beans:map>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean class="org.springframework.web.filter.CorsFilter">
+        <beans:constructor-arg ref="corsConfigurationSource"/>
+    </beans:bean>
+-->
 
 </beans:beans>

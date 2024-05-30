@@ -156,7 +156,7 @@
                     </div>
                     <div>
                         <span class="align-left">구매자:</span>
-                        <span class="align-right">홈런볼</span>
+                        <span class="align-right">김홈런</span>
                     </div>
                     <div>
                         <span class="align-left">구매상품:</span>

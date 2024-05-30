@@ -136,17 +136,30 @@
     paymentMethodWidget.updateAmount(amount);
 
     let od_name = document.querySelector('#dlv-rcver').textContent;
-    console.log("[btnPayment] " + amount +"|"+od_name);
+    console.log("[btnPayment] " + amount + "|" + od_name);
 
     paymentWidget.requestPayment({
       orderId: generateRandomString(),
-      orderName: document.querySelector("body > section.order__items > div.tb__order > form > table > tbody > tr:nth-child(1) > td:nth-child(2) > a").textContent,
+      orderName: document.querySelector('#newOrderName').textContent,
       successUrl: window.location.origin + "/success",
       failUrl: window.location.origin + "/fail",
-      customerEmail: 'hrkwon82@gmail.com',
+      customerEmail: 'homerunball46g@gmail.com',
       customerName: od_name
       /* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 */
     });
+    /*
+        paymentWidget.requestPayment({
+          orderId: 't-orderId',
+          orderName: 't-oderName',
+          successUrl: window.location.origin + "/success",
+          failUrl: window.location.origin + "/fail",
+          customerEmail: 'hrkwon82@gmail.com',
+          customerName: 't-od_name'
+          /!* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 *!/
+
+        });
+     */
+
   });
 
   /*결제 성공시(200) order테이블 insert*/

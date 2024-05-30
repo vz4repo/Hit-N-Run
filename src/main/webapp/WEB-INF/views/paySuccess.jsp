@@ -29,12 +29,14 @@
         </div>
         <div class="p-grid typography--p" style="margin-top: 50px">
             <div class="p-grid-col text--left"><b>결제금액</b></div>
-            <div class="p-grid-col text--right" id="amount"></div>
+            <div class="p-grid-col text--right" id="amount">1,700,000 원</div>
         </div>
-        <div class="p-grid typography--p" style="margin-top: 10px">
-            <div class="p-grid-col text--left"><b>주문번호</b></div>
-            <div class="p-grid-col text--right" id="orderId"></div>
-        </div>
+<%--
+            <div class="p-grid typography--p" style="margin-top: 10px">
+                    <div class="p-grid-col text--left"><b>주문번호</b></div>
+                    <div class="p-grid-col text--right" id="orderId"></div>
+            </div>
+--%>
         <div class="p-grid typography--p" style="margin-top: 10px; display: none">
             <div class="p-grid-col text--left"><b>paymentKey</b></div>
             <div class="p-grid-col text--right" id="paymentKey" style="white-space: initial; width: 250px"></div>
@@ -50,7 +52,7 @@
             <a href="/">
                 <button class="button" id="btnBackToHome">홈 화면</button>
             </a>
-            <a href="/orderDetail">
+            <a href="/orderDetail" style="text-decoration-line: none">
                 <button class="button" id="btnGotoOrderDetail">주문상세</button>
             </a>
         </div>
@@ -82,6 +84,7 @@
       orderId: urlParams.get("orderId"),
       amount: urlParams.get("amount"),
     };
+
     /* POST:confirn() */
     const response = await fetch("/confirm", {
       method: "POST",
@@ -121,16 +124,32 @@
   confirm().then(function (data) {
     /* 응답 정보 모두 출력 */
     responseElement.innerHTML = `<pre>${'${JSON.stringify(data, null, 4)}'}</pre>`;
-    /* 추가 */
-    requestedAtElement.textContent = data.requestedAt;
-    orderNameElement.textContent = data.orderName;
-    methodElement.textContent = data.method;
+
+    /* 날짜 전처리 */
+    let date = new Date(data.requestedAt);    /* 문자열을 Date 객체로 파싱 */
+    let options = {                 /* 문자열을 Date 객체로 파싱 */
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false
+    };
+    let formattedDate = date.toLocaleString('ko-KR', options).replace(/\. /g, '-').replace(/, /g, ' ');
+
+    /* 금액 전처리 */
+    let number = parseInt(urlParams.get("amount"), 10);    /* 숫자로 변환 */
+    let formattedNumber = new Intl.NumberFormat('en-US').format(number);    /* 금액 형식으로 변환 */
+
+    console.log(formattedNumber);
+    /* 화면 출력 */
+    requestedAtElement.textContent = formattedDate;     /* 결제일자 */
+    orderNameElement.textContent = data.orderName;      /* 주문명   */
+    methodElement.textContent = data.method;            /* 결제수단 */
+
+    /* 쿼리스트링 값 출력 */
+    orderIdElement.textContent = urlParams.get("orderId");
+    amountElement.textContent = formattedNumber + "원";
+    paymentKeyElement.textContent = urlParams.get("paymentKey");
   });
 
-  /* 쿼리스트링 값 */
-  orderIdElement.textContent = urlParams.get("orderId");
-  amountElement.textContent = urlParams.get("amount") + "원";
-  paymentKeyElement.textContent = urlParams.get("paymentKey");
 </script>
 </body>
 </html>
