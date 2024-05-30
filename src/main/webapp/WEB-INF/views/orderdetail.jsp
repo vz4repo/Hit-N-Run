@@ -237,6 +237,11 @@
                         <!-- 송장 번호 헤더 -->
                         <td>682218726753 (CJ대한통운)</td>
                     </tr>
+                    <tr>
+                        <th>배송메세지</th>
+                        <!-- 현재 상태 헤더 -->
+                        <td>"배송 전 연락 바랍니다"</td>
+                    </tr>
                     </tbody>
                 </table>
                 <table class="delivery-table">
