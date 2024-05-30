@@ -72,7 +72,7 @@
                             <option>종이백</option>
                             <option>선물박스</option>
                         </select></li>
-                        <li><span id="retail-price"><span id="rtl_prc">${stkInfo.rtl_prc}</span></span><span id="sale-price"><span id="sls_prc"> ${stkInfo.sls_prc}</span>원</span></li>
+                        <li class="prcDis"><span id="retail-price"><span id="rtl_prc">${stkInfo.rtl_prc}</span></span><span id="sale-price"><span id="sls_prc"> ${stkInfo.sls_prc}</span></span>원</li>
 <%--                        <li>무료배송</li>--%>
                     </ul>
                 </div>
@@ -166,27 +166,27 @@
     <div class="prdRltdTitle"><h2><b>고객들이 많이 조회한 연관 제품</b></h2></div>
     <div class="prdRltdContainer">
         <div class="prdRltd">
-            <a href="http://localhost:9090/product/detail?pd_id=APP000003-04">
-                <img src="/img/product/APP/main/APP000003-04.jpg"
+            <a href="http://localhost:9090/product/detail?pd_id=GLV000020-30">
+                <img src="/img/product/GLV/main/GLV000020-30.jpg"
                      alt="이미지 준비 중 입니다"
-                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-04.jpg';">
-                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (레드)</div>
+                     onerror="this.onerror=null; this.src='/img/product/glv/main/GLV000020-30.jpg';">
+                <div class="prdRltdName">롤링스 한정판 아버지의 날 REV1X 내야 장갑</div>
             </a>
         </div>
         <div class="prdRltd">
-            <a href="http://localhost:9090/product/detail?pd_id=APP000003-08">
-                <img src="/img/product/APP/main/APP000003-08.jpg"
+            <a href="http://localhost:9090/product/detail?pd_id=GLV000019-00">
+                <img src="/img/product/GLV/main/GLV000019-00.jpg"
                      alt="이미지 준비 중 입니다"
-                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-08.jpg';">
-                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (블루)</div>
+                     onerror="this.onerror=null; this.src='/img/product/glv/main/GLV000019-00.jpg';">
+                <div class="prdRltdName">롤링스 REV1X 11.75인치 내야 글러브</div>
             </a>
         </div>
         <div class="prdRltd">
-            <a href="http://localhost:9090/product/detail?pd_id=APP000003-30">
-                <img src="/img/product/APP/main/APP000003-30.jpg"
+            <a href="http://localhost:9090/product/detail?pd_id=GLV000018-67">
+                <img src="/img/product/GLV/main/GLV000018-67.jpg"
                      alt="이미지 준비 중 입니다"
-                     onerror="this.onerror=null; this.src='/img/product/app/main/APP000003-30.jpg';">
-                <div class="prdRltdName">사사키 ST-1801 승화 단추형 하계티 (핑크)</div>
+                     onerror="this.onerror=null; this.src='/img/product/glv/main/GLV000018-67.jpg';">
+                <div class="prdRltdName">REV1X 11.5인치 인필드 프로-I 웹 글러브</div>
             </a>
         </div>
     </div>
@@ -326,43 +326,40 @@
     // }
 
     // 스크롤 내려갈 시 고정될 nav
-    var navbar = document.getElementById("prdNavbar");
-    var sticky = navbar.offsetTop;
-    var navbarHeight = navbar.offsetHeight; // 네비게이션 바의 높이를 가져옵니다.
+    function handleNavbarScroll() {
+        var navbar = document.getElementById("prdNavbar");
+        if (!navbar) return; // 해당 요소가 없는 경우 함수 종료
 
-    function getHeaderHeight() {
-        var header = document.querySelector("header");
-        return header ? header.offsetHeight : 0;
-    }
+        var sticky = navbar.offsetTop;
+        var navbarHeight = navbar.offsetHeight;
 
-    // 각 섹션의 위치를 가져옵니다.
-    function getSectionOffsets() {
-        return {
-            relatedProduct: document.getElementById("relatedProductContainer").offsetTop,
-            detailProductContainer: document.getElementById("detailProductContainer").offsetTop,
-            reviewContainer: document.getElementById("reviewContainer").offsetTop,
-            QnAContainer: document.getElementById("QnAContainer").offsetTop
+        function getHeaderHeight() {
+            var header = document.querySelector("header");
+            return header ? header.offsetHeight : 0;
+        }
+
+        function getSectionOffsets() {
+            return {
+                relatedProduct: document.getElementById("relatedProductContainer").offsetTop,
+                detailProductContainer: document.getElementById("detailProductContainer").offsetTop,
+                reviewContainer: document.getElementById("reviewContainer").offsetTop,
+                QnAContainer: document.getElementById("QnAContainer").offsetTop
+            };
+        }
+
+        var navLinks = {
+            relatedProduct: document.getElementById("relatedNav"),
+            detailProductContainer: document.getElementById("detailNav"),
+            reviewContainer: document.getElementById("reviewNav"),
+            QnAContainer: document.getElementById("QnANav")
         };
-    }
 
-    // 해당 네비게이션 링크를 가져옵니다.
-    var navLinks = {
-        relatedProduct: document.getElementById("relatedNav"),
-        detailProductContainer: document.getElementById("detailNav"),
-        reviewContainer: document.getElementById("reviewNav"),
-        QnAContainer: document.getElementById("QnANav")
-    };
-
-    // 스크롤 이벤트가 발생할 때마다 실행됩니다.
-    window.onscroll = function() {
-        var headerHeight = getHeaderHeight(); // 동적으로 헤더 높이를 가져옵니다.
+        var headerHeight = getHeaderHeight();
         var sections = getSectionOffsets();
 
-        // Sticky nav
         if (window.pageYOffset >= sticky) {
             navbar.classList.add("sticky");
 
-            // 현재 스크롤 위치를 기준으로 active 클래스를 설정합니다.
             var currentSection = null;
             for (var section in sections) {
                 if (window.pageYOffset >= sections[section] - headerHeight - navbarHeight) {
@@ -370,7 +367,6 @@
                 }
             }
 
-            // 모든 네비게이션 링크에서 prdActive 클래스를 제거하고, 현재 섹션에만 추가합니다.
             for (var section in navLinks) {
                 if (section === currentSection) {
                     navLinks[section].classList.add("prdActive");
@@ -381,7 +377,6 @@
         } else {
             navbar.classList.remove("sticky");
 
-            // sticky 되기 전에는 항상 relatedPrd에 prdActive를 줍니다.
             navLinks.relatedProduct.classList.add("prdActive");
             for (var section in navLinks) {
                 if (section !== "relatedProduct") {
@@ -389,7 +384,12 @@
                 }
             }
         }
-    };
+    }
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        updatePrices();
+        window.onscroll(); // 페이지 로드 시 초기 스크롤 상태를 반영
+    });
 
     // 네비게이션 링크 클릭 시 스크롤 이동
     for (var section in navLinks) {
@@ -462,41 +462,56 @@
             icon.style.color = '#333';
         }
     });
-    // 가격 정의
+    // // 가격 정의
+    // function formatPrice(price) {
+    //     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // }
+    // // 답변완료 텍스트를 초록색으로 바꿔줌
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var tables = document.getElementsByName('QnATable');
+    //
+    //     tables.forEach(function(table) {
+    //         var cells = table.getElementsByTagName('td');
+    //         for (var i = 0; i < cells.length; i++) {
+    //             if (cells[i].innerText === '답변완료✔') {
+    //                 cells[i].classList.add('QnATableAnswered');
+    //             }
+    //         }
+    //     });
+    // });
+    // 가격을 포맷하는 함수 (예시)
     function formatPrice(price) {
-        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parseInt(price).toLocaleString('ko-KR');
     }
 
     // 가격 값을 포맷하여 업데이트하는 함수
     function updatePrices() {
         const salePriceElement = document.getElementById('sls_prc');
         const retailPriceElement = document.getElementById('rtl_prc');
+        const retailPriceContainer = document.getElementById('retail-price');
 
         // 원래 텍스트를 가져옴
         const salePrice = salePriceElement.innerText;
         const retailPrice = retailPriceElement.innerText;
 
-        // 포맷된 가격을 설정
+        // 가격을 비교
+        if (parseInt(salePrice) >= parseInt(retailPrice)) {
+            // sls_prc가 더 크거나 같은 경우 rtl_prc를 숨김
+            retailPriceContainer.style.display = 'none';
+            // 판매가의 글자 색상을 검정색으로 변경
+            salePriceElement.style.color = '#333';
+        } else {
+            // 포맷된 가격을 설정
+            retailPriceElement.innerText = formatPrice(retailPrice);
+        }
+        // salePrice는 항상 포맷하여 표시
         salePriceElement.innerText = formatPrice(salePrice);
-        retailPriceElement.innerText = formatPrice(retailPrice);
     }
-    // DOMContentLoaded 이벤트를 사용하여 DOM이 완전히 로드된 후 실행
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updatePrices();
-    });
-    // 답변완료 텍스트를 초록색으로 바꿔줌
-    document.addEventListener("DOMContentLoaded", function() {
-        var tables = document.getElementsByName('QnATable');
 
-        tables.forEach(function(table) {
-            var cells = table.getElementsByTagName('td');
-            for (var i = 0; i < cells.length; i++) {
-                if (cells[i].innerText === '답변완료✔') {
-                    cells[i].classList.add('QnATableAnswered');
-                }
-            }
-        });
-    });
+    // DOMContentLoaded 이벤트를 사용하여 DOM이 완전히 로드된 후 실행
+    // document.addEventListener('DOMContentLoaded', (event) => {
+    //     updatePrices();
+    // });
     function formatDateString(dateString) {
         // 날짜 문자열을 변환
         var year = dateString.substring(0, 4);
