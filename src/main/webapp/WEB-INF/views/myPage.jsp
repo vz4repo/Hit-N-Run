@@ -30,14 +30,16 @@
     <style>
         .myPageH {
             /* border-bottom: 1px solid #ccc; */
-            width: 800px;
-            font-size: 14px;
+            /*width: 800px;*/
+            font-size: 17px;
             margin: auto;
             margin-top: 40px;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             text-align: center;
-            color: dimgray;
-            font-weight: bold;
+            /*color: dimgray;*/
+            /*color: #22252a;*/
+            /*font-weight: bold;*/
+            color: black;
         }
 
         .sp {

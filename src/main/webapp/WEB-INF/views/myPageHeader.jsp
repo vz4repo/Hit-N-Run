@@ -15,19 +15,19 @@
     <style>
         #myPage {
             margin: auto;
-            width: 900px;
+            /*width: 900px;*/
         }
 
         .none {
             text-decoration: none;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
             text-align: center;
             color: dimgray;
             font-weight: bold;
         }
         .sp {
-            font-size: 16px;
+            /*font-size: 16px;*/
             margin: 40px;
             display: flex;
             flex-direction: column;
@@ -47,12 +47,12 @@
         }
 
         .ma2 {
-            font-size: 11px;
+            font-size: 12px;
             color: black;
         }
 
         .date {
-            font-size: 13px;
+            font-size: 14px;
             margin-bottom: 10px;
             color: gray;
         }
@@ -67,6 +67,7 @@
         #title2{
             cursor: pointer;
             text-decoration: none;
+            /*color: black;*/
             color: dimgray;
             font-size: 14px;
         }
