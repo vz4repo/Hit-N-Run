@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
     <!--[if gt IE 9]><!-->
     <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=764"></script>
     <script>
