@@ -184,7 +184,7 @@
                         <label for="productQuality">제품 상태</label></th>
                     <td>
                         <select name="qlt_cd" >
-                            <option value="NEW">신제품</option>
+                            <option value="NEW">새 제품</option>
                             <option value="USE">중고제품</option>
                             <option value="REF">리퍼제품</option>
                         </select>

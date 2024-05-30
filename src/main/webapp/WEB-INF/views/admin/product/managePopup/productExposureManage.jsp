@@ -136,7 +136,7 @@
                     </th>
                     <td>
                         <input type="checkbox" id="npd" name="pd_chr_cd" value="N">
-                        <label for="npd">신상품</label><br>
+                        <label for="npd">신제품</label><br>
                         <input type="checkbox" id="hpd" name="pd_chr_cd" value="H">
                         <label for="hpd">인기 제품</label><br>
                         <input type="checkbox" id="rpd" name="pd_chr_cd" value="R">
