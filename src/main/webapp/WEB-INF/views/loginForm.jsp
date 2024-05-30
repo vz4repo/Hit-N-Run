@@ -97,9 +97,8 @@
 
         #regi{
             cursor: pointer;
-            text-decoration: none; /* 밑줄 제거 */
-            color: #000; /* 링크 색상 */
-            /*float: right;*/
+            text-decoration: none;
+            color: #000;
         }
 
         #loginDiv {
@@ -117,18 +116,17 @@
         }
 
 
-
         #pwdDiv {
             position: relative;
         }
 
         #pwdImg {
             position: absolute;
-            left: 5px;
-            top: 40%;
+            left: 8px;
+            top: 43%;
             transform: translateY(-50%);
-            height: 30px;
-            width: 30px;
+            height: 25px;
+            width: 25px;
             pointer-events: none;
         }
 
@@ -151,7 +149,6 @@
              font-size: 15px;
             text-align: center;
             -webkit-transition-duration: 0.2s;
-            /* Safari */
             transition-duration: 0.2s;
             text-decoration: none;
             overflow: hidden;
@@ -192,8 +189,6 @@
             font-weight: 500;
             color: black;
         }
-
-
     </style>
 </head>
 
@@ -208,12 +203,12 @@
     <div id="loginDiv">
         <input value="${cookie.c_email.value}" id="c_email" name="c_email" class="special-class" type="text" maxlength="30"
                placeholder="homerun@ball.com" required>
-        <img id="loginImg" src="https://cdn-icons-png.flaticon.com/128/2348/2348686.png">
+        <img id="loginImg" src="https://cdn-icons-gif.flaticon.com/6450/6450921.gif">
     </div>
 
         <div id="pwdDiv">
             <input id="c_pwd" class="special-class" type="password" name="c_pwd" maxlength="15" placeholder="비밀번호" required>
-            <img id="pwdImg" src="https://cdn-icons-png.flaticon.com/128/4847/4847692.png">
+            <img id="pwdImg" src="https://cdn-icons-gif.flaticon.com/6451/6451023.gif">
         </div>
 
         <input type="hidden" name="toURL" value="${param.toURL}">
@@ -254,7 +249,7 @@
 
     let pwdClear = "${pwdClear}"
     if(pwdClear==="pwdMsg2") {
-        alert("변경된 비밀번호로 다시 로그인해주세요.")
+        alert("비밀번호 변경이 완료됐습니다. 변경된 비밀번호로 다시 로그인해주세요.")
     }
 
     function test(){

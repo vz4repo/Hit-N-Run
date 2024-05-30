@@ -292,15 +292,16 @@
 
 .modal-header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
 }
 
-.modal-header h2 {
-    margin: 0;
+.delivery_check {
+    margin: auto;
 }
+
 
 .close {
     color: #474747;
@@ -322,6 +323,7 @@
 .order-step-header {
     font-size: 18px;
     font-weight: bold;
+    margin:auto;
 }
 
 .order-step-subheader {
@@ -335,15 +337,23 @@
     margin-top: 10px;
 }
 
+.order-step-table tbody {
+    text-align: center;
+}
+
 .order-step-table th,
 .order-step-table td {
     border: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 .order-step-table th {
     background-color: #f4f4f4;
     text-align: center;
+}
+
+.order-item-hist {
+    border-bottom: 1px solid #ccc;
 }
 
 /* 배송 모달 스타일 */
@@ -374,11 +384,10 @@
     border-collapse: collapse;
 }
 
-.delivery-table th,
-.delivery-table td {
+.delivery-table th, .delivery-table td, .delivery-info tr, .delivery-info th, .delivery-info td {
     border: 1px solid #ddd;
     padding: 10px;
-    text-align: left;
+    text-align: center;
 }
 
 .delivery-table th {

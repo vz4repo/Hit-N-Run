@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
     <!--[if gt IE 9]><!-->
     <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=764"></script>
     <script>
@@ -53,8 +55,7 @@
     <c:set var="loginOutLink" value="${sessionScope.c_id==null ? '/login' : '/logout'}"/>
     <c:set var="loginOut" value="${sessionScope.c_id==null ? '로그인' : '로그아웃'}"/>
 
-    <link rel="icon" type="image/x-icon">
-
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <title>Homerunball</title>
     <meta name="description" content="Shop Rawlings Sporting Goods official website. Browse custom, gloves, bats, balls, gear, apparel, &amp; more here. We are the official glove, ball, &amp; helmet of MLB&reg;"/>
     <meta name="keywords" content="Rawlings, Rawlings sporting goods, Rawlings website, Rawlings official website, Rawlings sporting goods website"/>
@@ -669,7 +670,7 @@
                     <div class="experience-component experience-rawlings_layouts-slickslider">
                         <div id="slider-27b610afeda795d4e2b2934099" class="slick-component  background-white center-mode-full">
                             <div class="slicklayout-text_container">
-                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트 보러가기</span>
+                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트</span>
                                 <span class="slicklayout-copy"></span>
                             </div>
                             <div data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:true,&quot;cssEase&quot;:&quot;linear&quot;,&quot;slidesToScroll&quot;:1,&quot;fade&quot;:false,&quot;slidesToShow&quot;:1,&quot;mobileFirst&quot;:true,&quot;autoplay&quot;:true,&quot;autoplaySpeed&quot;:7000,&quot;responsive&quot;:[{&quot;breakpoint&quot;:544,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}}]}" class="slick-inner"></div>
