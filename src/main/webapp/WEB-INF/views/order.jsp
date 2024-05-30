@@ -169,8 +169,8 @@
     }
 
     /*#addressModal .address-card .buttons {*/
-    /*display: flex;*/
-    /*justify-content: space-between;*/
+        /*display: flex;*/
+        /*justify-content: space-between;*/
     /*}*/
 
     #addressModal .address-card .buttons button {

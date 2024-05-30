@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,6 +133,7 @@
                                                 <span>${orderdetDto.od_qty} 개</span>
                                             </div>
                                         </td>
+
                                         <td class="order-status">
                                             <!-- 구매상태 링크 -->
                                             <div class="open-order-step-modal">
