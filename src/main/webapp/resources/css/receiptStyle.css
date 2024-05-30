@@ -55,12 +55,12 @@
   line-height: 1.6;
 }
 
-#receiptModal .modal-body .info {
+#receiptModal .modal-body .info_receipt {
   display: flex;
   flex-direction: column;
 }
 
-#receiptModal .modal-body .info div {
+#receiptModal .modal-body .info_receipt  div {
   display: flex;
   justify-content: space-between;
   margin: 5px 0;
@@ -85,7 +85,7 @@
 
 #receiptModal .close {
   color: #aaa;
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
   cursor: pointer;
 }
