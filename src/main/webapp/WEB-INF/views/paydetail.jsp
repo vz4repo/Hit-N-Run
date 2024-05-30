@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -112,8 +113,7 @@
 
                                         <!-- 주문일자 -->
                                         <td>
-                                            <span data-oddt="${orderdetDto.od_dt}"
-                                                  class="od_dt">${orderdetDto.od_dt}</span>
+                                            <fmt:formatDate pattern="yyyy-MM-dd" value="${orderdetDto.od_dt}"/>
                                         </td>
 
                                         <!-- 주문번호 -->
@@ -128,8 +128,8 @@
 
                                         <!-- 주문금액 및 수량 -->
                                         <td>
-                                            <div class="order-amount" data-order-id="20231208212440001">
-                                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                            <div class="order-amount" data-order-id="">
+                                                <span class="priceFormat">${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
                                                 <span>${orderdetDto.od_qty} 개</span>
                                             </div>
                                         </td>
@@ -400,6 +400,16 @@
             </div>
 
             <script>
+
+                $(document).ready(function () {
+                    $('.priceFormat').each(function () {
+                        let value = $(this).text();
+                        value = value.replace(/,/g, '');
+                        const numbericValue = parseInt(value);
+                        const formatValue = numbericValue.toLocaleString('ko-KR');
+                        $(this).text(formatValue + '원');
+                    })
+                })
 
               document.addEventListener('DOMContentLoaded', () => {
                 const orderStepModal = document.querySelector('#orderStepModal');
