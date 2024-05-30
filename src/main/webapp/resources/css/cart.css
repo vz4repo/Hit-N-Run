@@ -15,11 +15,44 @@
     text-decoration: none;
     color: black;
 }
-.cart_tale img {
+.product-info {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left !important;
+}
+
+.product-info img {
     width: 100px;
     height: 110px;
     object-fit: scale-down;
     background-color: #ebebeb;
+}
+
+.info {
+    margin-left: 50px;
+}
+.info .brand {
+    font-weight: bold;
+}
+
+.info .name {
+    font-size: 1.1em;
+}
+
+.info .name a {
+    text-decoration: none;
+    color: black;
+}
+
+.info .name a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.info .option {
+    color: gray;
 }
 
 .cart_tale th,

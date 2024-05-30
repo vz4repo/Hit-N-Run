@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon"
+          href="/img/icon_logo.png">
     <!--[if gt IE 9]><!-->
     <script type="text/javascript" nonce="XOJ0BVE+zr3qdJZKBBAaLFbFzesxhK/xP1QmLnOdycs=" src="//lc.getunicorn.org?type=base-script&amp;request-id=764"></script>
     <script>
@@ -668,7 +670,7 @@
                     <div class="experience-component experience-rawlings_layouts-slickslider">
                         <div id="slider-27b610afeda795d4e2b2934099" class="slick-component  background-white center-mode-full">
                             <div class="slicklayout-text_container">
-                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트 보러가기</span>
+                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트</span>
                                 <span class="slicklayout-copy"></span>
                             </div>
                             <div data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:true,&quot;cssEase&quot;:&quot;linear&quot;,&quot;slidesToScroll&quot;:1,&quot;fade&quot;:false,&quot;slidesToShow&quot;:1,&quot;mobileFirst&quot;:true,&quot;autoplay&quot;:true,&quot;autoplaySpeed&quot;:7000,&quot;responsive&quot;:[{&quot;breakpoint&quot;:544,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}}]}" class="slick-inner"></div>
@@ -682,8 +684,8 @@
                     <div class="experience-component experience-rawlings_components-banner">
                         <figure id="e0d835c8953fc3fdbeafa94d98" class="component-figure  desktop-left mobile-top theme-light supercopy-gold">
                             <picture>
-                                <source data-srcset="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwf2ba729b/images/homepage/rawlings/february/Updated-Icon-Banner-1400x300.jpg" height="300" width="1400" media="(min-width: 992px)"/>
-                                <img class="component-image" alt src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw158c3734/images/lazyholders/1440-600-white.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwb871843b/images/homepage/rawlings/february/Updated-Icon-Banner-600x800.jpg"/>
+<%--                                <source data-srcset="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwf2ba729b/images/homepage/rawlings/february/Updated-Icon-Banner-1400x300.jpg" height="300" width="1400" media="(min-width: 992px)"/>--%>
+                                <img class="component-image" alt src="/img/advertisement/batimg.jpeg" data-src="/img/advertisement/batimg.jpeg"/>
                             </picture>
                             <figcaption class="banner-text_container">
                                 <div class="banner-text banner-text_superheading">
@@ -720,7 +722,7 @@
 
                                             <div class="image-container">
                                                 <a href="#">
-                                                    <img class="tile-image" src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw4b5ede42/products/RBB4I3-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw4b5ede42/products/RBB4I3-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" alt="2024 Rawlings Icon Limited Edition &quot;Glowstick&quot; BBCOR Bat" title="2024 Rawlings Icon Limited Edition &quot;Glowstick&quot; BBCOR Bat" itemprop="image"/>
+                                                    <img class="tile-image" src="/img/advertisement/batimg1.jpeg" alt="2024 Rawlings Icon Limited Edition &quot;Glowstick&quot; BBCOR Bat" title="2024 Rawlings Icon Limited Edition &quot;Glowstick&quot; BBCOR Bat" itemprop="image"/>
                                                 </a>
                                             </div>
 
@@ -756,7 +758,7 @@
 
                                             <div class="image-container">
                                                 <a href="#">
-                                                    <img class="tile-image" src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw6205c3c7/products/RBB3I3-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw6205c3c7/products/RBB3I3-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" alt="2023 Rawlings Icon BBCOR -3 Baseball Bat" title="2023 Rawlings Icon BBCOR -3 Baseball Bat" itemprop="image"/>
+                                                    <img class="tile-image" src="/img/advertisement/batimg2.jpeg" alt="2023 Rawlings Icon BBCOR -3 Baseball Bat" title="2023 Rawlings Icon BBCOR -3 Baseball Bat" itemprop="image"/>
                                                 </a>
                                             </div>
 
@@ -792,7 +794,7 @@
 
                                             <div class="image-container">
                                                 <a href="#">
-                                                    <img class="tile-image" src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dwcdf558df/products/RUT4I10-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dwcdf558df/products/RUT4I10-130.jpg?sw=450&amp;sh=450&amp;sm=fit&amp;sfrm=png&amp;bgcolor=ebebeb" alt="2024 Rawlings Icon USSSA Baseball Bat, -5, -8, -10" title="2024 Rawlings Icon USSSA Baseball Bat, -5, -8, -10" itemprop="image"/>
+                                                    <img class="tile-image" src="/img/advertisement/batimg3.jpeg" alt="2024 Rawlings Icon USSSA Baseball Bat, -5, -8, -10" title="2024 Rawlings Icon USSSA Baseball Bat, -5, -8, -10" itemprop="image"/>
                                                 </a>
                                             </div>
 
@@ -1077,7 +1079,7 @@
                                     <figure id="139fa622c51660014d2aac1127" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="139fa622c51660014d2aac1127-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwb46c3add/images/landing/custom-glove/players/custom-gloves-player-cards-trout-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/trout.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1117,7 +1119,7 @@
                                     <figure id="b1fb914d4ddd5fa9a7a52eb415" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw384c8852/images/landing/custom-glove/players/custom-gloves-player-cards-judge-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/judge.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1143,7 +1145,7 @@
                                                 <i class="fa fa-arrow-right"></i>
                                                 </iselseif>
                                             </a>
-                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="/product/detail?pd_id=GLV000007-89" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
+                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="/cart/list" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
                                                     <span>
                                                     Buy Now
                                                     </span>
@@ -1157,7 +1159,7 @@
                                     <figure id="0233887ec658f76b42ea0a3716" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="0233887ec658f76b42ea0a3716-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwb5a9e5ef/images/landing/custom-glove/Pro-Gameday-Models-arenado.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/arenado.jpg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1197,7 +1199,7 @@
                                     <figure id="3902d23e72bf0ea18c6b8dc2c8" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="3902d23e72bf0ea18c6b8dc2c8-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwc33589eb/images/landing/custom-glove/Pro-Gameday-Models-correa.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/correa.jpg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1237,7 +1239,7 @@
                                     <figure id="0dd613023b786b5085a72554fc" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="0dd613023b786b5085a72554fc-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw3b58f056/images/landing/custom-glove/players/custom-gloves-player-cards-acuna-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/acuna.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1277,7 +1279,7 @@
                                     <figure id="407147b869084c5efc58d2b2d0" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="407147b869084c5efc58d2b2d0-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw9a58a259/images/landing/custom-glove/Pro-Gameday-Models-turner.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/turner.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1317,7 +1319,7 @@
                                     <figure id="c9b94c385b08b4ceae77cc55b9" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="c9b94c385b08b4ceae77cc55b9-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwe8417e84/images/landing/custom-glove/Pro-Gameday-Models-Machado.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/Machado.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1357,7 +1359,7 @@
                                     <figure id="df5e02425ad9816cc75056c909" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="df5e02425ad9816cc75056c909-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw916797ef/images/landing/custom-glove/Pro-Gameday-Models-degrom.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/degrom.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1397,7 +1399,7 @@
                                     <figure id="92089351bc1dff0289fbdd92a1" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="92089351bc1dff0289fbdd92a1-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwd6b3c783/images/landing/custom-glove/players/custom-gloves-player-cards-torres-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/torres.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1437,7 +1439,7 @@
                                     <figure id="af603b4a472dda0412602ebc0d" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="af603b4a472dda0412602ebc0d-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw624c0b0b/images/landing/custom-glove/players/custom-gloves-player-cards-realmuto-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/realmuto.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1477,7 +1479,7 @@
                                     <figure id="e056adc19da9ece0ff0fa107b4" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize Corey's" href="#" aria-labelledby="e056adc19da9ece0ff0fa107b4-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize Corey's" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw4930f7c0/images/landing/custom-glove/seager-600-800.jpg"/>
+                                                <img class="copyblock-image" alt="Customize Corey's" src="/img/player/seager.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1510,7 +1512,7 @@
                                     <figure id="d5beda4604c89bb0fc5ee844d2" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="d5beda4604c89bb0fc5ee844d2-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwe77d95fa/images/landing/custom-glove/Pro-Gameday-Models-tatis.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/tatis.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1550,7 +1552,7 @@
                                     <figure id="2f86cffd9f3d21b550de1efbae" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="2f86cffd9f3d21b550de1efbae-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw74a56707/images/landing/custom-glove/players/custom-gloves-player-cards-harper-600.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/harper.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1590,7 +1592,7 @@
                                     <figure id="640728e1851f66fbd8952548d5" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="640728e1851f66fbd8952548d5-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwdfbc32c9/images/landing/custom-glove/Pro-Gameday-Models-pena.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/pena.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1630,7 +1632,7 @@
                                     <figure id="68d64786d570b0e87c9a119235" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="68d64786d570b0e87c9a119235-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw1f79ca6c/images/landing/custom-glove/Pro-Gameday-Models-cruz.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/cruz.jpeg" />
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1670,7 +1672,7 @@
                                     <figure id="3a2369a98d02ceec19d2869dd4" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="3a2369a98d02ceec19d2869dd4-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwae0ef0b7/images/landing/custom-glove/bellinger-600-800.jpg"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/bellinger.jpeg"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1710,7 +1712,7 @@
                                     <figure id="7668e78601ce0d4b4cbc2a30d5" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="7668e78601ce0d4b4cbc2a30d5-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwbbfb1c8b/images/landing/custom-glove/Pro-Gameday-Models-crawford.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/crawford.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1750,7 +1752,7 @@
                                     <figure id="4a3ca90ae290e7837668aef27e" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="4a3ca90ae290e7837668aef27e-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw48f2c01f/images/landing/custom-glove/Pro-Gameday-Models-rizzo.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/rizzo.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1790,7 +1792,7 @@
                                     <figure id="52dda9eda29ab52ff863523cfb" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="52dda9eda29ab52ff863523cfb-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwab8ba0be/images/landing/custom-glove/Pro-Gameday-Models-semien.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/semien.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1830,7 +1832,7 @@
                                     <figure id="9cef0b16cb9984c87f515632ab" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="9cef0b16cb9984c87f515632ab-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw1d816b2e/images/landing/custom-glove/Pro-Gameday-Models-carroll.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/carroll.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1870,7 +1872,7 @@
                                     <figure id="a537e92477c8dc467c778ea380" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="a537e92477c8dc467c778ea380-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw22cc6870/images/landing/custom-glove/Pro-Gameday-Models-wong.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/wong.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">
@@ -1910,7 +1912,7 @@
                                     <figure id="89a91e95df75299820736164ec" class="copyblock-figure  desktop-center mobile-center theme-dark supercopy-gold">
                                         <picture>
                                             <a title="Customize" href="#" aria-labelledby="89a91e95df75299820736164ec-copyblock-text_heading">
-                                                <img class="copyblock-image" alt="Customize" src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw93f9eef5/images/lazyholders/450-300-gray.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dw5a5ee116/images/landing/custom-glove/Pro-Gameday-Models-India.png"/>
+                                                <img class="copyblock-image" alt="Customize" src="/img/player/India.png"/>
                                             </a>
                                         </picture>
                                         <figcaption class="copyblock-text_container">

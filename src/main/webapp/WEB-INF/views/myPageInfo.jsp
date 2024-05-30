@@ -235,7 +235,7 @@
 <div id="myform">
     <form action="/mypage/info" method="POST" onsubmit="return formCheck()">
         <div class="container">
-            <h1 id="loginTitle">Edit Profile</h1>
+            <h1 id="loginTitle">개인정보 수정</h1>
             <p id="check-result"></p>
             <label class="infoLabel">이메일*</label>
             <input class="special-class" type="text" id="c_email" name="c_email" value="<%= session.getAttribute("c_email")%>" disabled>
