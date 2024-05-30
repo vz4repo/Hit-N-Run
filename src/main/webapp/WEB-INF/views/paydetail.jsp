@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,8 +38,6 @@
 </head>
 <body>
 <jsp:include page="header.jsp"/>
-<jsp:include page="myPageHeader.jsp"/>
-<br><br>
 <div class="head_order_det">단일 주문내역조회</div>
 <main>
     <!-- 주문 목록 섹션 -->
@@ -112,8 +112,9 @@
 
                                         <!-- 주문일자 -->
                                         <td>
-                                            <span data-oddt="${orderdetDto.od_dt}"
-                                                  class="od_dt">${orderdetDto.od_dt}</span>
+                                            <span data-oddt="${orderdetDto.od_dt}" class="od_dt">
+                                                    <fmt:formatDate value="${orderdetDto.od_dt}" pattern="yyyy-MM-dd" />
+                                            </span>
                                         </td>
 
                                         <!-- 주문번호 -->

@@ -81,7 +81,7 @@
             <div class="prdSubmitBtn">
                 <ul>
                     <li class="buyBtnList">
-                        <button type="button" class="submitBtn">바로구매</button>
+                        <button type="button" class="submitBtn btn-instant-buy">바로구매</button>
                     </li>
                 </ul>
                 <ul>
@@ -513,6 +513,18 @@
         console.log(dateString); // 디버깅용으로 콘솔에 출력
         // 날짜 형식을 변경하여 HTML 요소에 출력
         document.getElementById("formattedDate").innerText = formatDateString(dateString);
+    });
+
+    /* 2024.05.30 [혁락] 바로구매->장바구니 임시연결 */
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const subNavBtn = document.querySelectorAll('.btn-instant-buy');
+
+      subNavBtn.forEach((subNav) => {
+        subNav.addEventListener('click', (event) => {
+          const pd_type = subNav.getAttribute('pd_type');
+          window.location.href = "/product/byType?pd_type_cd=" + pd_type;
+        });
+      })
     });
 </script>
 </body>
