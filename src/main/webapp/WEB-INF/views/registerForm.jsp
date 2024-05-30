@@ -5,7 +5,9 @@
 <html lang="en">
 
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <link rel="icon" type="image/x-icon"
           href="/img/icon_logo.png">
@@ -110,8 +112,10 @@
 
         #close,
         #close2 {
-            font-size: 22px;
+            /*font-size: 22px;*/
+            font-size: 30px;
             float: right;
+            /*text-align: center;*/
             cursor: pointer;
         }
 
@@ -270,7 +274,7 @@
 
 <div id="myModal" class="modal">
     <div class="modal-content">
-        <span id="close" onclick="closeModal()" >&times;</span>
+<%--        <span id="close" onclick="closeModal()" >&times;</span>--%>
         <h3>홈런볼 이용약관</h3><br>
         <p>제1조(목적)</p>
         <p>이 약관은 홈런볼 회사(전자상거래 사업자)가 운영하는 홈런볼 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련 서비스(이하 “서비스”라 한다)를 이용함에 있어
@@ -417,15 +421,15 @@
         <p>이용자는 다음 행위를 하여서는 안 됩니다.</p>
         <p>1. 신청 또는 변경시 허위 내용의 등록</p>
         <p>2. 타인의 정보 도용</p>
-        <p>3. 외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는 행위</p><br>
+        <p>3. 외설 또는 폭력적인 메시지, 화상, 음성, 기타 공서양속에 반하는 정보를 몰에 공개 또는 게시하는 행위</p>
 
-        <p>(부칙) 2024년 04월 22일부터 시행합니다. (2024.04.22 개정)</p>
+        <p>(부칙) 2024년 04월 22일부터 시행합니다. (2024.04.22 개정) <span id="close" onclick="closeModal()" >&times;</span> </p>
     </div>
 </div>
 
 <div id="myModal2" class="modal">
     <div class="modal-content">
-        <span id="close2" onclick="closeModal2()">&times;</span>
+<%--        <span id="close2" onclick="closeModal2()">&times;</span>--%>
         <h3>홈런볼 개인정보 수집 및 이용</h3><br>
 
         <p>(주)홈런볼은 고객님의 개인정보를 중요시하며, “정보통신망 이용촉진 및 정보보호” 에 관한 법률을 준수하고 있습니다.</p>
@@ -470,9 +474,9 @@
         <p> * 위탁업무 내용: PG사 위탁내용</p><br>
 
         <p> 제 6조 이용자의 권리</p>
-        <p> * 이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며, 탈퇴를 요청할 수도 있습니다.</p>
-        <p> * 이용자들의 개인정보 조회, 수정을 위해서는 “개인정보변경”(또는 “회원정보수정” 등)을 가입해지(동의철회)를 위해서는 “회원탈퇴”를 클릭하여 본인 확인절차를 거치신 후 직접 열람,
-            정정 또는 탈퇴가 가능합니다.</p><br>
+        <p> * 이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며, 탈퇴를 요청할 수도 있습니다. <span id="close2" onclick="closeModal2()">&times;</span></p>
+    <br>
+
     </div>
 </div>
 
