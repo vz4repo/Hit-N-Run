@@ -17,7 +17,7 @@
 
     <style>
         .myPageH {
-            border-bottom: 1px solid #ccc;
+            /* border-bottom: 1px solid #ccc; */
             width: 800px;
             font-size: 14px;
             margin: auto;
@@ -39,7 +39,13 @@
         .one {
             display: flex;
             justify-content: center;
-            margin-top: -15px
+            margin-top: -15px;/
+        }
+
+        .box {
+            margin: auto;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+            width: 850px;
         }
 
         .ma {
@@ -82,8 +88,10 @@
 <jsp:include page="header.jsp"/>
 <jsp:include page="myPageHeader.jsp"/>
 
-    <p class="myPageH">주문 내역<br><br><br></p>
-    <div id="tong">
+<p class="myPageH">주문 내역<br></p>
+<div id="tong">
+    <div class="box">
+        <br>
         <p id="oneMonth">나의 주문처리 현황 (최근 1개월 기준)</p>
 
         <div class="one">
@@ -109,62 +117,68 @@
                 <span class="ma2">0</span>
             </div>
         </div>
+    </div>
+</div>
 
-        <p class="myPageH">리뷰 내역<br><br><br></p>
+<p class="myPageH">리뷰 내역<br></p>
+<div class="box"><br>
+    <p id="oneMonth2">나의 리뷰처리 현황 (최근 1개월 기준)</p>
 
-        <p id="oneMonth2">나의 리뷰처리 현황 (최근 1개월 기준)</p>
+    <div class="one">
+        <div class="sp">
+            <span class="ma">일반 리뷰</span>
+            <span class="ma2">0</span>
+        </div>
+        <div class="sp">
+            <span class="ma">사진 리뷰</span>
+            <span class="ma2">0</span>
+        </div>
 
-        <div class="one">
-            <div class="sp">
-                <span class="ma">일반 리뷰</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">사진 리뷰</span>
-                <span class="ma2">0</span>
-            </div>
-
-            <div class="sp">
+        <div class="sp">
             <span class="ma">작성 가능한 리뷰</span>
             <span class="ma2">0</span>
         </div>
-            <div class="sp">
-                <span class="ma">승인 대기</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">승인 완료</span>
-                <span class="ma2">0</span>
-            </div>
+        <div class="sp">
+            <span class="ma">승인 대기</span>
+            <span class="ma2">0</span>
+        </div>
+        <div class="sp">
+            <span class="ma">승인 완료</span>
+            <span class="ma2">0</span>
+        </div>
+    </div>
+</div>
+
+
+
+<p class="myPageH">문의 내역<br></p>
+<div class="box"><br>
+    <p id="oneMonth3">나의 문의처리 현황 (최근 1개월 기준)</p>
+
+    <div class="one">
+
+        <div class="sp">
+            <span class="ma">1:1 문의</span>
+            <span class="ma2">0</span>
         </div>
 
-        <p class="myPageH">문의 내역<br><br><br></p>
-
-        <p id="oneMonth3">나의 문의처리 현황 (최근 1개월 기준)</p>
-
-        <div class="one">
-
-            <div class="sp">
-                <span class="ma">1:1 문의</span>
-                <span class="ma2">0</span>
-            </div>
-
-            <div class="sp">
-                <span class="ma">상품 문의</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">SNS 문의</span>
-                <span class="ma2">0</span>
-            </div>
-            <div class="sp">
-                <span class="ma">문의 답변</span>
-                <span class="ma2">0</span>
-            </div>
-        </div><br><br>
-
-
+        <div class="sp">
+            <span class="ma">상품 문의</span>
+            <span class="ma2">0</span>
+        </div>
+        <div class="sp">
+            <span class="ma">SNS 문의</span>
+            <span class="ma2">0</span>
+        </div>
+        <div class="sp">
+            <span class="ma">문의 답변</span>
+            <span class="ma2">0</span>
+        </div>
     </div>
+</div><br><br>
+
+
+</div>
 </div>
 <jsp:include page="footer.jsp" flush="false" />
 
