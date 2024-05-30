@@ -33,8 +33,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
     <%--제품 진열--%>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -682,7 +684,7 @@
                         <figure id="e0d835c8953fc3fdbeafa94d98" class="component-figure  desktop-left mobile-top theme-light supercopy-gold">
                             <picture>
                                 <source data-srcset="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwf2ba729b/images/homepage/rawlings/february/Updated-Icon-Banner-1400x300.jpg" height="300" width="1400" media="(min-width: 992px)"/>
-                                <img class="component-image" alt src="/on/demandware.static/Sites-rawlings-consolidated-Site/-/default/dw158c3734/images/lazyholders/1440-600-white.png" data-src="https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-rawlings-consolidated-Library/default/dwb871843b/images/homepage/rawlings/february/Updated-Icon-Banner-600x800.jpg"/>
+                                <img class="component-image" alt src="/img/advertisement/batimg.jpeg" data-src="/img/advertisement/batimg.jpeg"/>
                             </picture>
                             <figcaption class="banner-text_container">
                                 <div class="banner-text banner-text_superheading">
@@ -1142,7 +1144,7 @@
                                                 <i class="fa fa-arrow-right"></i>
                                                 </iselseif>
                                             </a>
-                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="/product/detail?pd_id=GLV000007-89" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
+                                            <a class="copyblock-button btn btn-outline-secondary button-icon" title="Buy Now" href="/cart/list" aria-labelledby="b1fb914d4ddd5fa9a7a52eb415-copyblock-text_heading">
                                                     <span>
                                                     Buy Now
                                                     </span>
