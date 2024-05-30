@@ -669,7 +669,7 @@
                     <div class="experience-component experience-rawlings_layouts-slickslider">
                         <div id="slider-27b610afeda795d4e2b2934099" class="slick-component  background-white center-mode-full">
                             <div class="slicklayout-text_container">
-                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트 보러가기</span>
+                                <span class="slicklayout-headline">프로 선수들에게 가장 인기 많은 배트</span>
                                 <span class="slicklayout-copy"></span>
                             </div>
                             <div data-slick="{&quot;arrows&quot;:true,&quot;dots&quot;:true,&quot;cssEase&quot;:&quot;linear&quot;,&quot;slidesToScroll&quot;:1,&quot;fade&quot;:false,&quot;slidesToShow&quot;:1,&quot;mobileFirst&quot;:true,&quot;autoplay&quot;:true,&quot;autoplaySpeed&quot;:7000,&quot;responsive&quot;:[{&quot;breakpoint&quot;:544,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}},{&quot;breakpoint&quot;:1200,&quot;settings&quot;:{&quot;slidesToShow&quot;:1,&quot;slidesToScroll&quot;:1,&quot;autoplay&quot;:true,&quot;arrows&quot;:true,&quot;dots&quot;:true}}]}" class="slick-inner"></div>
