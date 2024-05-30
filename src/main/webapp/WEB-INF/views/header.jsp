@@ -39,7 +39,6 @@
 </header>
 <script>
   window.onload = function () {
-
     if ("${sessionScope.c_id}" !== "") {
       document.getElementById('logoutLink').addEventListener('click', function (event) {
         event.preventDefault();
@@ -52,26 +51,15 @@
     }
       var prevScrollpos = window.pageYOffset;
       window.onscroll = function () {
-          var currentScrollPos = window.pageYOffset;
-          if (prevScrollpos > currentScrollPos) {
-              document.getElementById("cart__header").style.top = "0";
-          } else {
-              document.getElementById("cart__header").style.top = "-200px";
-          }
-          prevScrollpos = currentScrollPos;
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+          document.getElementById("cart__header").style.top = "0";
+        } else {
+          document.getElementById("cart__header").style.top = "-200px";
+        }
+        prevScrollpos = currentScrollPos;
       }
   };
-
-  // var prevScrollpos = window.pageYOffset;
-  // window.onscroll = function () {
-  //   var currentScrollPos = window.pageYOffset;
-  //   if (prevScrollpos > currentScrollPos) {
-  //     document.getElementById("cart__header").style.top = "0";
-  //   } else {
-  //     document.getElementById("cart__header").style.top = "-200px";
-  //   }
-  //   prevScrollpos = currentScrollPos;
-  // }
 
   /* 상품 대분류 목록 */
   document.addEventListener('DOMContentLoaded', (event) => {
