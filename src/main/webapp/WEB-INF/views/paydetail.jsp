@@ -46,15 +46,15 @@
             <table class="order_det_table">
                 <colgroup>
                     <col width="30%"/>
-                    <col width="30%"/>
+                    <col width="20%"/>
                     <col width="15%"/>
                     <col width="15%"/>
-                    <col width="10%"/>
+                    <col width="20%"/>
                 </colgroup>
 
                 <thead>
                 <tr>
-                    <th>상품정보</th>
+                    <th>제품정보</th>
                     <!-- 상품 정보 헤더 -->
                     <th>주문일자</th>
                     <!-- 주문일자 헤더 -->
@@ -130,11 +130,10 @@
                                         <!-- 주문금액 및 수량 -->
                                         <td>
                                             <div class="order-amount" data-order-id="20231208212440001">
-                                                <span>${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
+                                                <span class="priceFormat">${orderdetDto.sls_prc * orderdetDto.od_qty}</span>
                                                 <span>${orderdetDto.od_qty} 개</span>
                                             </div>
                                         </td>
-
                                         <td class="order-status">
                                             <!-- 구매상태 링크 -->
                                             <div class="open-order-step-modal">
@@ -190,17 +189,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>2024-05-08 22:13</td>
+                    <tr class="order-status-datetime">
+                        <td>2024-05-31 15:25</td>
                         <td>주문 일시</td>
                     </tr>
-                    <tr>
-                        <td>2024-05-08 22:13</td>
+                    <tr class="order-status-datetime">
+                        <td>2024-05-31 15:25</td>
                         <td>입금 확인</td>
                     </tr>
-                    <tr>
-                        <td>2024-05-08 22:13</td>
+                    <tr class="order-status-datetime">
+                        <td>2024-05-31 15:25</td>
                         <td>출고 요청</td>
+<%--
                     </tr>
                     <tr>
                         <td>2024-05-11 08:52</td>
@@ -210,6 +210,7 @@
                         <td>2024-05-11 10:16</td>
                         <td>출고 완료</td>
                     </tr>
+--%>
                     <!-- 추가 주문 단계 행을 여기에 추가 -->
                     </tbody>
                 </table>
@@ -232,7 +233,7 @@
                     <tr>
                         <th>현재 상태</th>
                         <!-- 현재 상태 헤더 -->
-                        <td>구매확정</td>
+                        <td>주문완료</td>
                     </tr>
                     <tr>
                         <th>송장 번호</th>
@@ -257,6 +258,7 @@
                     </tr>
                     </thead>
                     <tbody>
+<%--
                     <tr>
                         <td>2024-05-13 13:54:02</td>
                         <td>강남개포주공</td>
@@ -313,6 +315,10 @@
                         <td>010-6565-8952</td>
                         <td></td>
                     </tr>
+--%>
+                    <tr>
+                       <td colspan="5" style="text-align: center"> 배송 준비중 입니다</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -347,7 +353,7 @@
                     <hr/>
                     <div>
                         <span class="align-left">카드종류:</span>
-                        <span class="align-right">신한</span>
+                        <span class="align-right">비씨</span>
                     </div>
                     <div>
                         <span class="align-left">카드번호:</span>
@@ -359,7 +365,7 @@
                     </div>
                     <div>
                         <span class="align-left">승인번호:</span>
-                        <span class="align-right">36952716</span>
+                        <span class="align-right">00000000</span>
                     </div>
                     <hr/>
                     <div>
@@ -367,7 +373,7 @@
                         <span class="align-right">249,240원</span>
                     </div>
                     <div>
-                        <span class="align-left">2023-11-02 16:43:37</span>
+                        <span class="align-left pay-requestedAt">2024-05-31 16:43:37</span>
                     </div>
                     <div class="highlight">
                         <span class="align-left">취소:</span>
@@ -402,16 +408,26 @@
 
             <script>
 
-              document.addEventListener('DOMContentLoaded', () => {
-                const orderStepModal = document.querySelector('#orderStepModal');
-                const deliveryModal = document.querySelector('#deliveryModal');
-                const orderIdModal = document.querySelector('#orderIdModal');
-                const closeModalButtons = document.querySelectorAll('.close');
-                let modalContent = document.querySelectorAll('.modal-content');
-                const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
-                const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
-                const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
-                const cancelOrderConfirmModal = document.querySelectorAll('.cancel-order-confirm-modal');
+                $(document).ready(function () {
+                    $('.priceFormat').each(function () {
+                        let value = $(this).text();
+                        value = value.replace(/,/g, '');
+                        const numbericValue = parseInt(value);
+                        const formatValue = numbericValue.toLocaleString('ko-KR');
+                        $(this).text(formatValue + '원');
+                    })
+                })
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const orderStepModal = document.querySelector('#orderStepModal');
+                    const deliveryModal = document.querySelector('#deliveryModal');
+                    const orderIdModal = document.querySelector('#orderIdModal');
+                    const closeModalButtons = document.querySelectorAll('.close');
+                    let modalContent = document.querySelectorAll('.modal-content');
+                    const openOrderStepModalButtons = document.querySelectorAll('.open-order-step-modal');
+                    const openDeliveryModalButtons = document.querySelectorAll('.open-delivery-modal');
+                    const openOrderIdModalButtons = document.querySelectorAll('.open-od_id-modal')
+                    const cancelOrderConfirmModal = document.querySelectorAll('.cancel-order-confirm-modal');
 
                 /* 영수증 모달 */
                 const receiptModal = document.querySelector('#receiptModal');
@@ -457,6 +473,27 @@
                       <%--const response = await fetch(`/receipt?order=${orderId}`);--%>
                       <%--const receiptHtml = await response.text();--%>
                       <%--receiptContent.innerHTML = receiptHtml;--%>
+                      /* TODO: 수정예정 !!*/
+                      // 현재 시간 가져오기
+                      let currentDate = new Date();
+
+                      // 2분 빼기
+                      currentDate.setMinutes(currentDate.getMinutes() - 2);
+
+                      // yyyy-MM-dd hh:mm:ss 형식으로 변환
+                      let year = currentDate.getFullYear();
+                      let month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1 필요
+                      let day = ('0' + currentDate.getDate()).slice(-2);
+                      let hours = ('0' + currentDate.getHours()).slice(-2);
+                      let minutes = ('0' + currentDate.getMinutes()).slice(-2);
+                      let seconds = ('0' + currentDate.getSeconds()).slice(-2);
+
+                      let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+                      console.log("[receipt]: at "+formattedDate);
+                      // 클래스 값 설정
+                      document.querySelector('.pay-requestedAt').innerText = formattedDate;
+
                       receiptModal.style.display = 'flex';
                     } catch (error) {
                       receiptContent.innerHTML = '영수증을 불러오는 데 실패했습니다.';

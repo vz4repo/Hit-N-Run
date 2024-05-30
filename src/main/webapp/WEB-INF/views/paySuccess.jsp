@@ -31,10 +31,12 @@
             <div class="p-grid-col text--left"><b>결제금액</b></div>
             <div class="p-grid-col text--right" id="amount"></div>
         </div>
-        <div class="p-grid typography--p" style="margin-top: 10px">
-            <div class="p-grid-col text--left"><b>주문번호</b></div>
-            <div class="p-grid-col text--right" id="orderId"></div>
-        </div>
+<%--
+            <div class="p-grid typography--p" style="margin-top: 10px">
+                    <div class="p-grid-col text--left"><b>주문번호</b></div>
+                    <div class="p-grid-col text--right" id="orderId"></div>
+            </div>
+--%>
         <div class="p-grid typography--p" style="margin-top: 10px; display: none">
             <div class="p-grid-col text--left"><b>paymentKey</b></div>
             <div class="p-grid-col text--right" id="paymentKey" style="white-space: initial; width: 250px"></div>
