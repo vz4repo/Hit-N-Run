@@ -29,7 +29,7 @@
         </div>
         <div class="p-grid typography--p" style="margin-top: 50px">
             <div class="p-grid-col text--left"><b>결제금액</b></div>
-            <div class="p-grid-col text--right" id="amount"></div>
+            <div class="p-grid-col text--right" id="amount">1,700,000 원</div>
         </div>
 <%--
             <div class="p-grid typography--p" style="margin-top: 10px">
@@ -138,6 +138,7 @@
     let number = parseInt(urlParams.get("amount"), 10);    /* 숫자로 변환 */
     let formattedNumber = new Intl.NumberFormat('en-US').format(number);    /* 금액 형식으로 변환 */
 
+    console.log(formattedNumber);
     /* 화면 출력 */
     requestedAtElement.textContent = formattedDate;     /* 결제일자 */
     orderNameElement.textContent = data.orderName;      /* 주문명   */

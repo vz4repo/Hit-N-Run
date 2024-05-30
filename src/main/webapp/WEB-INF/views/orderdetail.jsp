@@ -350,7 +350,7 @@
                     </div>
                     <div>
                         <span class="align-left">구매상품:</span>
-                        <span class="align-right">미즈노 반팔 하계티 네이비 32MAA15614NV</span>
+                        <span class="align-right">롤링스 애런 저지 PRO PREFERRED 외야수 글러브 외 1개</span>
                     </div>
                     <hr/>
                     <div>
@@ -359,7 +359,7 @@
                     </div>
                     <div>
                         <span class="align-left">카드번호:</span>
-                        <span class="align-right">51073776****472*</span>
+                        <span class="align-right">40740750****013*</span>
                     </div>
                     <div>
                         <span class="align-left">할부:</span>
@@ -372,7 +372,7 @@
                     <hr/>
                     <div>
                         <span class="align-left">승인:</span>
-                        <span class="align-right">249,240원</span>
+                        <span class="align-right">1,700,000원</span>
                     </div>
                     <div>
                         <span class="align-left pay-requestedAt">2024-05-31 16:43:37</span>
@@ -387,7 +387,7 @@
                     <hr/>
                     <div>
                         <span class="align-left">공급가액:</span>
-                        <span class="align-right">224,316원</span>
+                        <span class="align-right">1,530,000원</span>
                     </div>
                     <div>
                         <span class="align-left">면세가액:</span>
@@ -395,7 +395,7 @@
                     </div>
                     <div>
                         <span class="align-left">부가세:</span>
-                        <span class="align-right">24,924원</span>
+                        <span class="align-right">170,000원</span>
                     </div>
                     <div>
                         <span class="align-left">과세제외액:</span>
@@ -403,7 +403,7 @@
                     </div>
                     <div class="total-amount">
                         <span class="align-left">합계:</span>
-                        <span class="align-right">249,240원</span>
+                        <span class="align-right">1,700,000원</span>
                     </div>
                 </div>
             </div>
