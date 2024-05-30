@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/assets/css/style.css">
     <!-- End layout styles -->
 
-    <title>제품 대시보드</title>
+    <title>대시보드</title>
 
     <style>
         <%@include file="/resources/css/adminMenu.css" %>

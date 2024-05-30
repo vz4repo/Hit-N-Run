@@ -37,7 +37,6 @@ public class OrdDetController {
   @GetMapping("/orderDetail")
   public String orderDetail(Model m, HttpSession session, HttpServletRequest request
       , @RequestParam(value = "od_id", required = false) BigInteger od_id) {
-
     try {
       int c_id = (int) session.getAttribute("c_id");
 

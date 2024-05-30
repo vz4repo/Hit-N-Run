@@ -331,7 +331,7 @@
                             <th>제품 특성(선택)</th>
                             <td>
                                 <input type="checkbox" id="npd" name="pd_chr_cd" value="N">
-                                <label for="npd">신상품</label><br>
+                                <label for="npd">신제품</label><br>
                                 <input type="checkbox" id="hpd" name="pd_chr_cd" value="H">
                                 <label for="hpd">인기 제품</label><br>
                                 <input type="checkbox" id="rpd" name="pd_chr_cd" value="R">
@@ -448,7 +448,7 @@
                             <th>제품 상태</th>
                             <td>
                                 <select name="qlt_cd" required>
-                                    <option value="NEW">신제품</option>
+                                    <option value="NEW">새 제품</option>
                                     <option value="USE">중고제품</option>
                                     <option value="REF">리퍼제품</option>
                                 </select>
