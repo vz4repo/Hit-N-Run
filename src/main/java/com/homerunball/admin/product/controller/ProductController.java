@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Controller
-@RequestMapping("/admin/product")
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -35,7 +35,7 @@ public class ProductController {
     /*대시보드로 이동하는 메서드*/
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        return "/admin/product/productDashboard";
+        return "/product/productDashboard";
     }
 
     /*등록된 제품을 출력하는 메서드*/
@@ -51,7 +51,7 @@ public class ProductController {
         } catch (Exception e) {
             return "errorPage";
         }
-        return "/admin/product/productList";
+        return "/product/productList";
     }
 
     /*
@@ -59,7 +59,7 @@ public class ProductController {
      */
     @GetMapping("/register")
     public String register(Model m) {
-        return "/admin/product/productRegister";
+        return "/product/productRegister";
     }
 
     /*
@@ -129,15 +129,15 @@ public class ProductController {
             if (productService.create(productDto) != 1) throw new Exception("Register failed.");
 
             rattr.addFlashAttribute("msg", "제품이 정상적으로 등록되었습니다.");
-            return "redirect:/admin/product/list";
+            return "redirect:/product/list";
         } catch (DuplicateKeyException e) {
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품ID가 중복되었습니다.");
-            return "/admin/product/productRegister";
+            return "/product/productRegister";
         } catch (Exception e) {
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품이 정상적으로 등록되지 않았습니다.");
-            return "/admin/product/productRegister";
+            return "/product/productRegister";
         }
     }
 
@@ -170,7 +170,7 @@ public class ProductController {
         } catch (Exception e) {
             return "errorPage";
         }
-        return "/admin/product/productManage";
+        return "/product/productManage";
     }
 
     /*선택된 제품에 대한 수정사항을 반영한다.*/
@@ -259,24 +259,24 @@ public class ProductController {
             rattr.addFlashAttribute("selectedContent", selectedContent);
             rattr.addFlashAttribute(productDto);
             rattr.addFlashAttribute("msg", "체크한 항목에 값을 입력해주세요.");
-            /*return "redirect:/admin/product/manage";*/
+            /*return "redirect:/product/manage";*/
             /*이전 페이지로 이동한다.*/
             return "redirect:"+referer;
         } catch (DataIntegrityViolationException e) {
             rattr.addFlashAttribute(productDto);
             rattr.addFlashAttribute("msg", "수정할 값을 잘못 입력하셨습니다.");
-            return "redirect:/admin/product/manage";
+            return "redirect:/product/manage";
         } catch (Exception e) {
             m.addAttribute(productDto);
             m.addAttribute("msg", "제품의 내용을 수정하는 데 실패하였습니다.");
             return "errorPage";
         }
-        return "redirect:/admin/product/manage";
+        return "redirect:/product/manage";
     }
 
     @GetMapping("/manage/exposure")
     public String productExposure(ProductDto productDto, Model m) {
-        return "/admin/product/managePopup/productExposureManage";
+        return "/product/managePopup/productExposureManage";
     }
 
     /*제품의 표시 설정을 변경하기 위한 메서드*/
@@ -300,7 +300,7 @@ public class ProductController {
                 /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
                 if (productDto.getPd_id() == "") {
                     rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
-                    return "redirect:/admin/product/manage";
+                    return "redirect:/product/manage";
                 }
 
                 String[] pdArr = productDto.getPd_id().split(",");
@@ -325,7 +325,7 @@ public class ProductController {
             return "errorPage";
         }
 
-        return "/admin/product/managePopup/productExposureManage";
+        return "/product/managePopup/productExposureManage";
     }
 
     /*제품의 기초 정보를 수정하기 위한 메서드*/
@@ -349,7 +349,7 @@ public class ProductController {
                 /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
                 if (productDto.getPd_id() == "") {
                     rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
-                    return "redirect:/admin/product/manage";
+                    return "redirect:/product/manage";
                 }
 
                 String[] pdArr = productDto.getPd_id().split(",");
@@ -374,7 +374,7 @@ public class ProductController {
             return "errorPage";
         }
 
-        return "/admin/product/managePopup/manageBasicInformation";
+        return "/product/managePopup/manageBasicInformation";
     }
 
     /*판매 정보를 수정하기 위한 메서드*/
@@ -398,7 +398,7 @@ public class ProductController {
                 /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
                 if (productDto.getPd_id() == "") {
                     rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
-                    return "redirect:/admin/product/manage";
+                    return "redirect:/product/manage";
                 }
 
                 String[] pdArr = productDto.getPd_id().split(",");
@@ -423,7 +423,7 @@ public class ProductController {
             return "errorPage";
         }
 
-        return "/admin/product/managePopup/manageSalesInformation";
+        return "/product/managePopup/manageSalesInformation";
     }
 
     /*이미지를 등록한 내용을 수정하기 위한 메서드*/
@@ -447,7 +447,7 @@ public class ProductController {
                 /*만약 선택된 제품이 없다면 제품을 선택해달라는 메시지를 보낸다.*/
                 if (productDto.getPd_id() == "") {
                     rattr.addFlashAttribute("msg", "수정할 제품을 선택해주세요.");
-                    return "redirect:/admin/product/manage";
+                    return "redirect:/product/manage";
                 }
 
                 String[] pdArr = productDto.getPd_id().split(",");
@@ -472,7 +472,7 @@ public class ProductController {
             return "errorPage";
         }
 
-        return "/admin/product/managePopup/manageImageRegistration";
+        return "/product/managePopup/manageImageRegistration";
     }
 
     /*진열하지 않은 제품들의 목록을 보여준다.*/
@@ -490,7 +490,7 @@ public class ProductController {
             /*에러가 발생하면 에러 페이지로 이동한다.*/
             return "errorPage";
         }
-        return "/admin/product/showHiddenProduct";
+        return "/product/showHiddenProduct";
     }
 
     /*진열이 제외된 제품들을 다시 진열한다.*/
@@ -503,7 +503,7 @@ public class ProductController {
             /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
             if(pdIds == "") {
                 rattr.addFlashAttribute("msg", "선택된 제품이 없습니다.");
-                return "redirect:/admin/product/showHiddenProductList";
+                return "redirect:/product/showHiddenProductList";
             }
 
             /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
@@ -520,7 +520,7 @@ public class ProductController {
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
         }
-        return "redirect:/admin/product/showHiddenProductList";
+        return "redirect:/product/showHiddenProductList";
     }
 
     /*진열하고 있지 않은 제품들 중에서 선택된 제품들을 삭제한다.*/
@@ -533,7 +533,7 @@ public class ProductController {
             /*만약 선택된 제품이 없다면 선택된 제품이 없다는 메시지 보내기*/
             if(pdIds == "") {
                 rattr.addFlashAttribute("msg", "선택된 제품이 없습니다.");
-                return "redirect:/admin/product/showHiddenProductList";
+                return "redirect:/product/showHiddenProductList";
             }
 
             /*selectedProduct: pdIds를 리스트의 형식으로 저장하는 변수*/
@@ -549,6 +549,6 @@ public class ProductController {
             m.addAttribute("msg", "에러가 발생했습니다.");
             return "errorPage";
         }
-        return "redirect:/admin/product/list";
+        return "redirect:/product/list";
     }
 }

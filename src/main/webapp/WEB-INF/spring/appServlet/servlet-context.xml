@@ -15,11 +15,6 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/**" location="/resources/" />
 
-	<!-- Tiles -->
-	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
-		<beans:property name="order" value="2" />
-	</beans:bean>
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -27,68 +22,6 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 
-<!-- tiles configuration file path	-->
-	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-		<beans:property name="definitions">
-			<beans:list>
-				<beans:value>/WEB-INF/spring/tiles.xml</beans:value>
-			</beans:list>
-		</beans:property>
-	</beans:bean>
-
 	<context:component-scan base-package="com.homerunball">
 	</context:component-scan>
-
-	<!-- Interceptor mappings -->
-	<interceptors>
-		<interceptor>
-<!--			<mapping path="/mypage/list"/>-->
-			<mapping path="/mypage/**"/>
-			<mapping path="/cart/list"/>
-<!--			<mapping path="/cart/insert"/>-->
-<!--			<mapping path="/cart/**"/>-->
-			<mapping path="/payment"/>
-			<mapping path="/orderDetail"/>
-			<beans:ref bean="custInterceptor"/>
-		</interceptor>
-	</interceptors>
-
-	<!--
-    &lt;!&ndash; CORS Configuration &ndash;&gt;
-    <beans:bean id="corsConfigurationSource" class="org.springframework.web.cors.UrlBasedCorsConfigurationSource">
-        <beans:property name="corsConfigurations">
-            <beans:map>
-                <beans:entry key="/**">
-                    <beans:bean class="org.springframework.web.cors.CorsConfiguration">
-                        <beans:property name="allowedOrigins">
-                            <beans:list>
-                                <beans:value>*</beans:value>
-                            </beans:list>
-                        </beans:property>
-                        <beans:property name="allowedMethods">
-                            <beans:list>
-                                <beans:value>GET</beans:value>
-                                <beans:value>POST</beans:value>
-                                <beans:value>PUT</beans:value>
-                                <beans:value>DELETE</beans:value>
-                                <beans:value>OPTIONS</beans:value>
-                            </beans:list>
-                        </beans:property>
-                        <beans:property name="allowedHeaders">
-                            <beans:list>
-                                <beans:value>*</beans:value>
-                            </beans:list>
-                        </beans:property>
-                        <beans:property name="allowCredentials" value="true"/>
-                    </beans:bean>
-                </beans:entry>
-            </beans:map>
-        </beans:property>
-    </beans:bean>
-
-    <beans:bean class="org.springframework.web.filter.CorsFilter">
-        <beans:constructor-arg ref="corsConfigurationSource"/>
-    </beans:bean>
--->
-
 </beans:beans>

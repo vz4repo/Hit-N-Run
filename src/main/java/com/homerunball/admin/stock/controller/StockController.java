@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/admin/stock")
+@RequestMapping("/stock")
 public class StockController {
 
     @Autowired
@@ -37,7 +37,7 @@ public class StockController {
                              @RequestParam(value="keyword", required=false) String keyword,
                              @RequestParam(required = false, defaultValue="1") int num) throws Exception {
 
-        return "/admin/stock/stockList";
+        return "/stock/stockList";
     }
 
     /*재고관리 페이지에서 등록된 제품을 전체 조회할 때 사용하는 메서드*/
@@ -57,7 +57,7 @@ public class StockController {
             model.addAttribute("msg", "LIST_ERR");
             return "errorPage";
         }
-        return "/admin/stock/stockList";
+        return "/stock/stockList";
     }
 
     /* 제품의 재고 사이즈를 조회하여 재고 수량을 조회하는 메서드 */
@@ -179,7 +179,7 @@ public class StockController {
             return "duplicate";
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/admin/product/list";
+            return "redirect:/product/list";
         }
         return "register success";
     }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/* 2024.05.xx [혁락] multipart upload 공부용 컨트롤러 */
 @Controller
 public class FileUploadController {
 
