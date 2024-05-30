@@ -76,7 +76,7 @@ body {
 
 .sub__nav__content a:hover {
     color: rgba(223,4,29,0.5);
-    border-bottom: 1px solid red;
+    /*border-bottom: 1px solid red;*/
 }
 
 .subnav:hover .sub__nav__content {
