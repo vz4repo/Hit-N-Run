@@ -49,28 +49,29 @@
         }
       });
     }
+      var prevScrollpos = window.pageYOffset;
+      window.onscroll = function () {
+          var currentScrollPos = window.pageYOffset;
+          if (prevScrollpos > currentScrollPos) {
+              document.getElementById("cart__header").style.top = "0";
+          } else {
+              document.getElementById("cart__header").style.top = "-200px";
+          }
+          prevScrollpos = currentScrollPos;
+      }
+
+      /* 상품 대분류 목록 */
+      document.addEventListener('DOMContentLoaded', (event) => {
+          const subNavBtn = document.querySelectorAll('.sub__navBtn');
+
+          subNavBtn.forEach((subNav) => {
+              subNav.addEventListener('click', (event) => {
+                  const pd_type = subNav.getAttribute('pd_type');
+                  window.location.href = "/product/byType?pd_type_cd=" + pd_type;
+              });
+          })
+      });
   };
 
-  var prevScrollpos = window.pageYOffset;
-  window.onscroll = function () {
-    var currentScrollPos = window.pageYOffset;
-    if (prevScrollpos > currentScrollPos) {
-      document.getElementById("cart__header").style.top = "0";
-    } else {
-      document.getElementById("cart__header").style.top = "-200px";
-    }
-    prevScrollpos = currentScrollPos;
-  }
 
-  /* 상품 대분류 목록 */
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const subNavBtn = document.querySelectorAll('.sub__navBtn');
-
-    subNavBtn.forEach((subNav) => {
-      subNav.addEventListener('click', (event) => {
-        const pd_type = subNav.getAttribute('pd_type');
-        window.location.href = "/product/byType?pd_type_cd=" + pd_type;
-      });
-    })
-  });
 </script>
