@@ -143,7 +143,7 @@
       orderName: document.querySelector('#newOrderName').textContent,
       successUrl: window.location.origin + "/success",
       failUrl: window.location.origin + "/fail",
-      customerEmail: 'hrkwon82@gmail.com',
+      customerEmail: 'homerunball46g@gmail.com',
       customerName: od_name
       /* ,customerMobilePhone: '01012345678' // 핸드폰결제 미사용 */
     });
