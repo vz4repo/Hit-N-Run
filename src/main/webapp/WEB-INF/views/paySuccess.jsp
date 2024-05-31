@@ -29,7 +29,7 @@
         </div>
         <div class="p-grid typography--p" style="margin-top: 50px">
             <div class="p-grid-col text--left"><b>결제금액</b></div>
-            <div class="p-grid-col text--right" id="amount">1,600,000 원</div>
+            <div class="p-grid-col text--right" id="amount">1,700,000 원</div>
         </div>
 <%--
             <div class="p-grid typography--p" style="margin-top: 10px">
