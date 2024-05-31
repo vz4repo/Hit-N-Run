@@ -375,7 +375,7 @@
                     <hr/>
                     <div>
                         <span class="align-left">승인:</span>
-                        <span class="align-right">1,700,000원</span>
+                        <span class="align-right">1,600,000원</span>
                     </div>
                     <div>
                         <span class="align-left pay-requestedAt">2024-05-31 16:43:37</span>
@@ -390,7 +390,7 @@
                     <hr/>
                     <div>
                         <span class="align-left">공급가액:</span>
-                        <span class="align-right">1,530,000원</span>
+                        <span class="align-right">1,440,000원</span>
                     </div>
                     <div>
                         <span class="align-left">면세가액:</span>
@@ -398,7 +398,7 @@
                     </div>
                     <div>
                         <span class="align-left">부가세:</span>
-                        <span class="align-right">170,000원</span>
+                        <span class="align-right">160,000원</span>
                     </div>
                     <div>
                         <span class="align-left">과세제외액:</span>
@@ -406,7 +406,7 @@
                     </div>
                     <div class="total-amount">
                         <span class="align-left">합계:</span>
-                        <span class="align-right">1,700,000원</span>
+                        <span class="align-right">1,600,000원</span>
                     </div>
                 </div>
             </div>
