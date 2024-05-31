@@ -38,38 +38,45 @@
     </div>
 </header>
 <script>
-  window.onload = function () {
-    if ("${sessionScope.c_id}" !== "") {
-      document.getElementById('logoutLink').addEventListener('click', function (event) {
-        event.preventDefault();
-        if (confirm('정말로 로그아웃을 하시겠습니까?')) {
-          // window.location.href = event.target.href;
-          alert('로그아웃이 되어 메인페이지로 이동합니다.');
-          window.location.href = event.target.href;
+    window.onload = function () {
+        if ("${sessionScope.c_id}" !== "") {
+            document.getElementById('logoutLink').addEventListener('click', function (event) {
+                event.preventDefault();
+                if (confirm('정말로 로그아웃을 하시겠습니까?')) {
+                    alert('로그아웃이 되어 메인페이지로 이동합니다.');
+                    window.location.href = event.target.href;
+                }
+            });
         }
-      });
-    }
-      var prevScrollpos = window.pageYOffset;
-      window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-          document.getElementById("cart__header").style.top = "0";
-        } else {
-          document.getElementById("cart__header").style.top = "-200px";
+
+        var prevScrollpos = window.pageYOffset;
+        function handleHeaderScroll() {
+            var currentScrollPos = window.pageYOffset;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("cart__header").style.top = "0";
+            } else {
+                document.getElementById("cart__header").style.top = "-200px";
+            }
+            prevScrollpos = currentScrollPos;
         }
-        prevScrollpos = currentScrollPos;
-      }
-  };
 
-  /* 상품 대분류 목록 */
-  document.addEventListener('DOMContentLoaded', (event) => {
-    const subNavBtn = document.querySelectorAll('.sub__navBtn');
+        window.onscroll = function () {
+            handleHeaderScroll();
+            if (typeof handleNavbarScroll === 'function') {
+                handleNavbarScroll();
+            }
+        };
 
-    subNavBtn.forEach((subNav) => {
-      subNav.addEventListener('click', (event) => {
-        const pd_type = subNav.getAttribute('pd_type');
-        window.location.href = "/product/byType?pd_type_cd=" + pd_type;
+      /* 상품 대분류 목록 */
+      document.addEventListener('DOMContentLoaded', (event) => {
+        const subNavBtn = document.querySelectorAll('.sub__navBtn');
+
+        subNavBtn.forEach((subNav) => {
+          subNav.addEventListener('click', (event) => {
+            const pd_type = subNav.getAttribute('pd_type');
+            window.location.href = "/product/byType?pd_type_cd=" + pd_type;
+          });
+        })
       });
-    })
-  });
+    };
 </script>

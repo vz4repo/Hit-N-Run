@@ -81,7 +81,7 @@
             <div class="prdSubmitBtn">
                 <ul>
                     <li class="buyBtnList">
-                        <button type="button" class="submitBtn btn-instant-buy">바로구매</button>
+                        <button type="button" class="submitBtn">바로구매</button>
                     </li>
                 </ul>
                 <ul>
@@ -326,43 +326,47 @@
     // }
 
     // 스크롤 내려갈 시 고정될 nav
-    var navbar = document.getElementById("prdNavbar");
-    var sticky = navbar.offsetTop;
-    var navbarHeight = navbar.offsetHeight; // 네비게이션 바의 높이를 가져옵니다.
+    function handleNavbarScroll() {
+        var navbar = document.getElementById("prdNavbar");
+        if (!navbar) return; // 해당 요소가 없는 경우 함수 종료
 
-    function getHeaderHeight() {
-        var header = document.querySelector("header");
-        return header ? header.offsetHeight : 0;
-    }
+        var sticky = navbar.offsetTop;
+        var navbarHeight = navbar.offsetHeight;
 
-    // 각 섹션의 위치를 가져옵니다.
-    function getSectionOffsets() {
-        return {
-            relatedProduct: document.getElementById("relatedProductContainer").offsetTop,
-            detailProductContainer: document.getElementById("detailProductContainer").offsetTop,
-            reviewContainer: document.getElementById("reviewContainer").offsetTop,
-            QnAContainer: document.getElementById("QnAContainer").offsetTop
+        function getHeaderHeight() {
+            var header = document.querySelector("header");
+            return header ? header.offsetHeight : 0;
+        }
+
+        function getSectionOffsets() {
+            return {
+                relatedProduct: document.getElementById("relatedProductContainer").offsetTop,
+                detailProductContainer: document.getElementById("detailProductContainer").offsetTop,
+                reviewContainer: document.getElementById("reviewContainer").offsetTop,
+                QnAContainer: document.getElementById("QnAContainer").offsetTop
+            };
+        }
+
+        var navLinks = {
+            relatedProduct: document.getElementById("relatedNav"),
+            detailProductContainer: document.getElementById("detailNav"),
+            reviewContainer: document.getElementById("reviewNav"),
+            QnAContainer: document.getElementById("QnANav")
         };
-    }
 
-    // 해당 네비게이션 링크를 가져옵니다.
-    var navLinks = {
-        relatedProduct: document.getElementById("relatedNav"),
-        detailProductContainer: document.getElementById("detailNav"),
-        reviewContainer: document.getElementById("reviewNav"),
-        QnAContainer: document.getElementById("QnANav")
-    };
-
-    // 스크롤 이벤트가 발생할 때마다 실행됩니다.
-    window.onscroll = function() {
-        var headerHeight = getHeaderHeight(); // 동적으로 헤더 높이를 가져옵니다.
+        var headerHeight = getHeaderHeight();
         var sections = getSectionOffsets();
 
-        // Sticky nav
         if (window.pageYOffset >= sticky) {
-            navbar.classList.add("sticky");
+            // 헤더의 top 값을 확인하여 클래스 추가
+            if (document.getElementById("cart__header").style.top == "-200px") {
+                navbar.classList.add("sticky2");
+                navbar.classList.remove("sticky");
+            } else {
+                navbar.classList.add("sticky");
+                navbar.classList.remove("sticky2");
+            }
 
-            // 현재 스크롤 위치를 기준으로 active 클래스를 설정합니다.
             var currentSection = null;
             for (var section in sections) {
                 if (window.pageYOffset >= sections[section] - headerHeight - navbarHeight) {
@@ -370,7 +374,6 @@
                 }
             }
 
-            // 모든 네비게이션 링크에서 prdActive 클래스를 제거하고, 현재 섹션에만 추가합니다.
             for (var section in navLinks) {
                 if (section === currentSection) {
                     navLinks[section].classList.add("prdActive");
@@ -379,15 +382,50 @@
                 }
             }
         } else {
-            navbar.classList.remove("sticky");
+            navbar.classList.remove("sticky", "sticky2");
 
-            // sticky 되기 전에는 항상 relatedPrd에 prdActive를 줍니다.
             navLinks.relatedProduct.classList.add("prdActive");
             for (var section in navLinks) {
                 if (section !== "relatedProduct") {
                     navLinks[section].classList.remove("prdActive");
                 }
             }
+        }
+    }
+
+    var prevScrollpos = window.pageYOffset;
+    function handleHeaderScroll() {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            document.getElementById("cart__header").style.top = "0";
+        } else {
+            document.getElementById("cart__header").style.top = "-200px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 첫 번째 기능: QnATable 처리
+        var tables = document.getElementsByName('QnATable');
+        tables.forEach(function(table) {
+            var cells = table.getElementsByTagName('td');
+            for (var i = 0; i < cells.length; i++) {
+                if (cells[i].innerText === '답변완료✔') {
+                    cells[i].classList.add('QnATableAnswered');
+                }
+            }
+        });
+
+        // 두 번째 기능: updatePrices 호출 및 초기 스크롤 상태 반영
+        updatePrices();
+        window.onscroll(); // 페이지 로드 시 초기 스크롤 상태를 반영
+    });
+
+    // 스크롤 이벤트 핸들러 통합
+    window.onscroll = function () {
+        handleHeaderScroll();
+        if (typeof handleNavbarScroll === 'function') {
+            handleNavbarScroll();
         }
     };
 
@@ -509,9 +547,9 @@
     }
 
     // DOMContentLoaded 이벤트를 사용하여 DOM이 완전히 로드된 후 실행
-    document.addEventListener('DOMContentLoaded', (event) => {
-        updatePrices();
-    });
+    // document.addEventListener('DOMContentLoaded', (event) => {
+    //     updatePrices();
+    // });
     function formatDateString(dateString) {
         // 날짜 문자열을 변환
         var year = dateString.substring(0, 4);
@@ -528,18 +566,6 @@
         console.log(dateString); // 디버깅용으로 콘솔에 출력
         // 날짜 형식을 변경하여 HTML 요소에 출력
         document.getElementById("formattedDate").innerText = formatDateString(dateString);
-    });
-
-    /* 2024.05.30 [혁락] 바로구매->장바구니 임시연결 */
-    document.addEventListener('DOMContentLoaded', (event) => {
-      const subNavBtn = document.querySelectorAll('.btn-instant-buy');
-
-      subNavBtn.forEach((subNav) => {
-        subNav.addEventListener('click', (event) => {
-          const pd_type = subNav.getAttribute('pd_type');
-          window.location.href = "/product/byType?pd_type_cd=" + pd_type;
-        });
-      })
     });
 </script>
 </body>
