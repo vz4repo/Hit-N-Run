@@ -1,11 +1,6 @@
-* {
-    font-family: "IBM Plex Sans KR", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-}
-
-
-table {
+.tb__order table {
+    /* 2024.05.21 [혁락] 85% -> 55%*/
+    /* 2024.05.22 [다니] 55% -> 85%*/
     width: 85%;
     margin: 0 auto;
     text-align: left;
@@ -14,21 +9,89 @@ table {
     color: #777;
 }
 
-a {
+.product-info {
+    margin-left: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    text-align: left !important;
+}
+
+.product-info img {
+    width: 100px;
+    height: 110px;
+    object-fit: scale-down;
+    background-color: #ebebeb;
+}
+
+.info {
+    margin-left: 50px;
+}
+.info .brand {
+    font-weight: bold;
+}
+
+.info .name {
+    font-size: 1.1em;
+}
+
+.info .name a {
     text-decoration: none;
     color: black;
 }
 
-th, td {
+.info .name a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.info .option {
+    color: gray;
+}
+
+.order__title__detail a,
+.tb__order a{
+    text-decoration: none;
+    color: black;
+}
+
+.priceFormat {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.head_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(51, 51, 51);
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 9px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    cursor: auto;
+}
+
+.tb__order th,
+.tb__order td {
     text-align: center;
 }
 
-td {
-    padding: 15px 0;
+.tb__order td {
+    padding: 18px 0;
     vertical-align: middle;
+    font-size: 16px;
 }
 
-hr {
+.tb__order td a {
+    color: black;
+    text-decoration: none;
+}
+
+.tb__order hr {
     width: 85%;
     height: 1px;
     border: 0;
@@ -36,27 +99,17 @@ hr {
 }
 
 .first__under {
-    margin-top: 40px;
-    margin-bottom: 40px;
+    margin-top: 20px;
 }
 
-thead th {
-    padding: 7px 0 6px;
-    background-color: #fff;
-    border-top: 2px solid #ddd;
-    font-weight: normal;
-    color: #4d4d59;
-    border-bottom: 1px solid #ddd;
-}
-
-.head_main {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    font-size: 12px;
-    line-height: 1.35;
-    color: #777;
-    margin-left: 100px;
+.tb__order thead th {
+    padding: 11px 0;
+    background-color: #333;
+    color: white;
+    border-top: 2px solid #000;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .head_order {
@@ -66,28 +119,23 @@ thead th {
 }
 
 .order__title {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
     align-items: center;
-    margin: 0 130px;
-    margin-top: 130px;
+    margin: 1% 8%;
     color: rgb(51, 51, 51);
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 1.4px;
-    justify-content: space-between;
-    text-align: center;
+    text-align: right;
     white-space: nowrap;
 }
 
-img {
-    height: 80px;
-    width: 80px;
+.label {
+    margin-left: 10px;
+    font-size: 14px;
 }
 
-
 .order__title__detail {
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .order__title__detail a:first-child {
@@ -98,26 +146,52 @@ img {
     color: #8d8d8d;
 }
 
-
-
 .title__order {
     margin-left: 8%;
-    font-size: 15px;
+    font-size: 25px;
     font-weight: 600;
     margin-bottom: 10px;
+    margin-top: 3%;
+}
+
+.tb__right div {
+    padding: 15px 15px 15px 25px;
+    width: 300px;
+}
+.totalSum,
+.odpayamt,
+.coupon,
+.grade,
+.card,
+.point,
+.dlv-fare{
+    display: flex;
+    justify-content: space-between;
+}
+
+#odpayamt {
+    font-size: larger;
+    font-weight: 900;
+}
+
+.product-row {
+    border-bottom: 1px solid #ccc;
 }
 
 
 .tb__right {
-    display: grid;
-    grid-template-columns: repeat(4, 33%);
-    place-items: center center;
-    font-weight: bold;
-    font-size: 14px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.2);
+    height: fit-content;
 }
 
-tfoot td, tfoot tr{
-    border-bottom: 1px solid #a3a3a3;
+/*
+.tb__order tfoot td,
+.tb__order tfoot tr{
+    border-bottom: 1px solid black;
     padding: 10px;
 }
+*/
 

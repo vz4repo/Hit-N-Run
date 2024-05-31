@@ -15,28 +15,32 @@ public class CustDaoImpl implements CustDao {
     private static String namespace = "com.homerunball.customer.dao.CustDao.";
 
     @Override
-    public int deleteCust(String c_email) {
+    public int deleteCust(String c_email)throws Exception {
         return session.delete(namespace + "delete", c_email);
     }
 
     @Override
-    public CustDto selectEmail(String c_email) {return session.selectOne(namespace + "selectEmail", c_email);}
+    public CustDto selectEmail(String c_email)throws Exception
+    {return session.selectOne(namespace + "selectEmail", c_email);}
 
 
     @Override
-    public CustDto selectID(int c_id) {return session.selectOne(namespace + "selectID", c_id);}
+    public CustDto selectID(int c_id)throws Exception
+    {return session.selectOne(namespace + "selectID", c_id);}
 
 
     @Override
-    public int insert(CustDto custdto) {
+    public int insert(CustDto custdto)throws Exception {
         return session.insert(namespace + "insert", custdto);
     }
 
     @Override
-    public int updateAll(CustDto custdto) { return session.update(namespace + "updateAll", custdto);
+    public int updateAll(CustDto custdto) throws Exception
+    { return session.update(namespace + "updateAll", custdto);
     }
     @Override
-    public int updatePwd(CustDto custDto) { return session.update(namespace + "updatePwd", custDto);
+    public int updatePwd(CustDto custDto) throws Exception
+    { return session.update(namespace + "updatePwd", custDto);
     }
 
     @Override
@@ -45,13 +49,14 @@ public class CustDaoImpl implements CustDao {
     }
 //
     @Override
-    public int updateLoginDt(String c_email) {
+    public int updateLoginDt(String c_email)throws Exception {
         return session.update(namespace + "updateLoginDt", c_email);
     }
 
 
     @Override
-    public CustDto grdNameJoin(int c_id) {return session.selectOne(namespace+ "grdNameJoin", c_id);}
+    public CustDto grdNameJoin(int c_id) throws Exception
+    {return session.selectOne(namespace+ "grdNameJoin", c_id);}
 
 
 }

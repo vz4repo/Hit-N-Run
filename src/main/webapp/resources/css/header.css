@@ -1,28 +1,27 @@
-body{
-    height: 100vh;
-    padding-top: 200px;
+body:not(.index) {
+    margin-top: 150px;
 }
 
-a {
-    text-decoration: none;
-    color: black;
+.cart_link {
+    text-decoration: none !important;
+    color: black !important;
 }
 
-header {
-    position: fixed;
+.cart__header {
+    position: fixed !important;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
     z-index: 100;
     background-color: white;
+    transition: top 0.5s;
 }
 
 
 .top_header {
     display: grid;
     justify-content: end;
-    margin-right: 5%;
 }
 
 .top_header_ul,
@@ -38,38 +37,80 @@ header {
 
 .top_header li {
     margin: 10px;
-    font-size: 12px;
+    font-size: 15px;
     color: #4d4d59;
 }
 
+.top_header li:hover,
+.header__dropdown-content a:hover{
+    color: red;
+    font-weight: bold;
+
+}
+
 .main_header {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
+    display: flex;
     justify-content: space-between;
-    margin: 0px 8%;
+    align-items: center;
+    width: 100%;
+    padding: 0 3%;
 }
 
-.main_header h1 {
-    font-size: 35px;
-    font-weight: 900;
-    font-style: italic;
-}
-
-
-.main_header li {
+.main_header li,
+.header__dropbtn {
     margin: 17px;
     font-size: 19px;
 }
 
-.main_header_ul a:first-child {
-    font-weight: bold;
-}
 
 .main_header_ul {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
-i {
+.cart_link i,
+.header__dropbtn{
     color: #4d4d59;
+    border: none !important;
+    background-color: white;
+    cursor: pointer;
 }
+
+.bottom_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: start;
+    width: 100%;
+
+}
+
+/* DropDown 마이페이지 시작: */
+.header__dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 170px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+}
+
+.header__dropdown-content a {
+    float: none;
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    margin: 17px;
+}
+
+.header__dropdown:hover .header__dropdown-content {
+    display: block;
+}
+
+.hidden { display: none;}
+#keywordResultList { list-style-type: none; padding: 0; }
+#keywordResultList li { cursor: pointer; }
+/* dropDown 마이페이지 끝: */

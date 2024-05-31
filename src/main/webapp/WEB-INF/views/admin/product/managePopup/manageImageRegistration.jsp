@@ -3,16 +3,25 @@
 
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        <%@include file="/resources/css/adminMenu.css"%>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            text-align: left;
+        <%@include file="/resources/css/adminMenu.css" %>
+        <%@include file="/resources/css/adminDefaultTable.css" %>
+        .productManageImageRegistration-container {
+            width: 100%;
+            margin: 20px 0px;
+            display: inline-block;
+            text-align: center;
         }
 
+        .productManageImageRegistration-container td {
+            text-align: left;
+            padding-left: 20px;
+        }
         strong {
             font-weight: bold;
             color: #1b64da;
@@ -21,6 +30,38 @@
         textarea {
             width: 100%;
             height: 200px;
+        }
+
+
+        .buttons {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .registerBtn, .cancelBtn {
+            padding: 10px;
+            font-size: 13px;
+            border-radius: 4px;
+            border: 1px solid #000000;
+            cursor: pointer;
+        }
+        .registerBtn {
+            color: white;
+            background-color: #585858;
+        }
+
+        .cancelBtn {
+            color: #000000;
+            background-color: white;
+        }
+
+        .cancelBtn:hover {
+            background: #0b7dda;
+            color: white;
+        }
+
+        .registerBtn:hover {
+            background: #0b7dda;
         }
     </style>
     <title>ImageRegistration</title>
@@ -32,30 +73,48 @@
     <% } %>
 </head>
 <body>
-<jsp:include page="../../adminMenu.jsp" flush="false" />
-<div class="main">
-    <h1>이미지 등록 일괄변경</h1>
-    <form id="registerForm" action="<c:url value='/admin/product/manage'/>" method="post">
+<jsp:include page="../../adminMenu.jsp" flush="false"/>
+<div id="main">
+    <div class="w3-dark-grey header-container">
+        <div class="w3-dark-grey header-button">
+            <button id="openNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_open()">&#9776;</button>
+            <button id="closeNav" class="w3-button w3-dark-grey w3-xlarge" onclick="w3_close()" style="display:none">&times;</button>
+        </div>
+        <div id="headline" class="header-title">이미지 등록 일괄변경</div>
+    </div>
+
+    <div class="w3-container productManageImageRegistration-container">
+        <form id="registerForm" action="<c:url value='/admin/product/manage'/>" method="post">
         <div class="product_content">
-            <table style="width:100%">
+            <table>
                 <tr>
-                    <th colspan="2">
+                    <td colspan="3">
                         총 <strong>${selectedProductCount}</strong>개 제품의 이미지 등록 정보를 일괄 변경합니다.
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th colspan="2">
+                    <td colspan="3">
                         <input type="checkbox" id="selectAll"><label for="selectAll">전체 선택</label>
-                    </th>
+                    </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="mainImageFile" value="mn_img_fn"><label for="mainImageFile">대표 이미지</label></th>
+                    <th style="width: 50px;">
+                        <input type="checkbox" name="selectedContent" id="mainImageFile" value="mn_img_fn">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="mainImageFile">대표 이미지</label>
+                    </th>
                     <td>
                         <input type="file" name="mn_img_fn" />
                     </td>
                 </tr>
                 <tr>
-                    <th><input type="checkbox" name="selectedContent" id="detailImageFile" value="det_img_fn"><label for="detailImageFile">상세 이미지</label></th>
+                    <th style="width: 50px;">
+                        <input type="checkbox" name="selectedContent" id="detailImageFile" value="det_img_fn">
+                    </th>
+                    <th style="width: 200px;">
+                        <label for="detailImageFile">상세 이미지</label>
+                    </th>
                     <td>
                         <input type="file" name="det_img_fn" />
                     </td>
@@ -69,6 +128,7 @@
             <button type="button" class="cancelBtn" id="cancelBtn">취소</button>
         </div>
     </form>
+    </div>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script>

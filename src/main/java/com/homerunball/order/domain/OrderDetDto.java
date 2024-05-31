@@ -24,11 +24,15 @@ public class OrderDetDto {
     private Date last_mod_dt;
     private String last_mod_id;
 
+    /* 2024.05.23 [혁락] 추가 */
+    private String brd_name;
+    private String od_stat_name;
+    /* end  2024.05.23 [혁락] 추가 */
+
 
     public OrderDetDto(){}
 
     public  OrderDetDto(Integer c_id){
-
         this(c_id, "", "", new Date(), "",0,0,"","","", new Date(),"", new Date(), "");
     }
 
@@ -50,7 +54,12 @@ public class OrderDetDto {
         this.last_mod_id = last_mod_id;
     }
 
-
+    public OrderDetDto(BigInteger od_id, Integer c_id, String pd_id, String pd_clsf_cd) {
+        this.od_id = od_id;
+        this. c_id =  c_id;
+        this.pd_id = pd_id;
+        this.pd_clsf_cd = pd_clsf_cd;
+    }
 
     private CartDto cartDto; // CartDto 필드 추가
 
@@ -75,7 +84,7 @@ public class OrderDetDto {
                 ", pd_id='" + pd_id + '\'' +
                 ", pd_clsf_cd='" + pd_clsf_cd + '\'' +
                 ", c_id='" + c_id + '\'' +
-                ", od_dt=" + od_dt +
+                ", od_dt=" + String.format("%tF",od_dt) +
                 ", pd_name='" + pd_name + '\'' +
                 ", sls_prc=" + sls_prc +
                 ", od_qty=" + od_qty +
@@ -212,4 +221,23 @@ public class OrderDetDto {
     public void setLast_mod_id(String last_mod_id) {
         this.last_mod_id = last_mod_id;
     }
+
+
+    /* 2024.05.23 [혁락] 추가 */
+    public String getBrd_name() {
+        return brd_name;
+    }
+
+    public void setBrd_name(String brd_name) {
+        this.brd_name = brd_name;
+    }
+
+    public String getOd_stat_name() {
+        return od_stat_name;
+    }
+
+    public void setOd_stat_name(String od_stat_name) {
+        this.od_stat_name = od_stat_name;
+    }
+    /* end  2024.05.23 [혁락] 추가 */
 }

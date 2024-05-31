@@ -24,6 +24,13 @@
       <param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
+    <!-- multipart -->
+    <multipart-config>
+      <location>/path/to/tmp</location>
+      <max-file-size>5242880</max-file-size>
+      <max-request-size>10500000</max-request-size>
+      <file-size-threshold>1048576</file-size-threshold>
+    </multipart-config>
   </servlet>
 
   <servlet-mapping>
@@ -34,15 +41,18 @@
   <!-- 임시 404 에러 페이지 -->
   <error-page>
     <error-code>404</error-code>
-    <location>/error/404.html</location>
+    <location>/WEB-INF/views/error/404.html</location>
+  </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/WEB-INF/views/error/404.html</location>
   </error-page>
 
   <!-- 임시 500 에러 페이지 -->
   <error-page>
     <error-code>500</error-code>
-    <location>/error/500.html</location>
+    <location>/WEB-INF/views/error/500.html</location>
   </error-page>
-
 
   <!-- 한글 변환 필터 시작 -->
   <filter>

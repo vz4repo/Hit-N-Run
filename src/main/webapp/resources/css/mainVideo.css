@@ -1,11 +1,18 @@
-* {
-    margin: 0;
-}
+
+/*컨텐츠 두개 삭제, 킹 세션 삭제*/
 
 #content {
     display: flex;
-    justify-content: space-between;
-    text-align: center;
+    justify-content: center;
+    /*align-items: center;*/
+    /*flex-direction: column;*/
+    padding-bottom: 30px;
+    border-bottom: 3px dotted #eee;
+    width: 100%;
+}
+
+#caption {
+    color: white;
 }
 
 .interview {
@@ -15,10 +22,7 @@
 
 .mySlides {
     display: none;
-}
-
-.cursor {
-    cursor: pointer;
+    margin-bottom: -4px;
 }
 
 .cc {
@@ -35,6 +39,7 @@
 .column {
     float: left;
     width: 16.66%;
+    cursor: pointer;
 }
 
 .demo {
@@ -65,6 +70,7 @@
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
+
 .prev2 {
     left: 0;
     border-radius: 3px 0 0 3px;
@@ -74,32 +80,32 @@
     right: 0;
     border-radius: 3px 0 0 3px;
 }
+
 .dot {
     position: relative;
-    top: 5px;
+    top: 20px;
     left: 0;
     cursor: pointer;
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
 
 }
-.videoDot > .active,
+
+.videoDot>.active,
 .dot:hover {
     background-color: #717171;
 }
 
-#king {
-    display: flex;
-    width: 1130px;
-    margin: 0;
-}
+/*#king {*/
+/*    display: flex;*/
+/*}*/
 
 .interview,
 .video {
-    width: 50%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -128,26 +134,9 @@
     margin-top: 7px;
     font-size: 14px;
     color: dimgray;
-}
-
-li {
-    list-style: none;
-}
-
-body {
-    font-family: "Open Sans", sans-serif;
-}
-
-h2 {
-    color: #000;
-    font-size: 26px;
-    font-weight: 300;
     text-align: center;
-    text-transform: uppercase;
-    position: relative;
-    margin: 30px 0 60px;
 }
 
-.productName {
-    height: 40px;
+.videoDot {
+    top: 30px;
 }

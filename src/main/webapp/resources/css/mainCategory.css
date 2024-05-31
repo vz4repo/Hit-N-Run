@@ -1,3 +1,22 @@
+@media (min-width: 768px) {
+    .category {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+}
+
+.main-category-container {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.main-category {
+    padding-bottom: 30px;
+    margin-right: 10px;
+    margin-left: 10px;
+    /*border-bottom: 3px dotted #eee;*/
+}
+
 .img-fluid {
     width: 100%;
     height: auto;
@@ -11,4 +30,8 @@
     color: white;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.main-category-text {
+    font-weight: bold;
 }

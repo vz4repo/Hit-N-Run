@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <link rel="icon" type="image/x-icon" href="/img/icon_logo.png">
     <meta charset="UTF-8"/>
     <title>결제내역 확인서</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -48,7 +49,6 @@
       }
 
       .modal-header h2 {
-        margin: 0;
         font-size: 24px;
       }
 
@@ -156,7 +156,7 @@
                     </div>
                     <div>
                         <span class="align-left">구매자:</span>
-                        <span class="align-right">홈런볼</span>
+                        <span class="align-right">김홈런</span>
                     </div>
                     <div>
                         <span class="align-left">구매상품:</span>
@@ -222,7 +222,7 @@
             <div class="modal-footer">
                 <strong>이용상점</strong>
                 <p>
-                    주식회사 홈런볼 | 대표자명: 김지훈 | 사업자등록번호: 999-81-00612 | 전화: 1544-1544 | 주소: 서울특별시 강남구 미왕빌딩 A
+                    주식회사 홈런볼 | 대표자명: 김지훈 | 사업자등록번호: 999-81-00612 | 전화: 1540-0000 | 주소: 서울특별시 강남구 미왕빌딩 A
                 </p>
                 <strong>결제서비스업체</strong>
                 <p>

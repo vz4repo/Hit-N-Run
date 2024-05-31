@@ -1,39 +1,47 @@
-.search-container, .product-container, .stock-container {
+.search-container {
     width: 100%;
     margin: 20px 0px;
     display: inline-block;
     text-align: center;
 }
 
+.search-container tbody tr:nth-of-type(3) select {
+    margin-right: 30px;
+}
+
+.search-container td {
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* 검색에서 SELECT 옵션, input 설정 */
 .search-option {
     outline: none;
-    margin: 0 5px;
     border: 1px solid #ccc;
     padding: 5px;
+    font-size: 13px;
 }
 
 .search-option > option {
     text-align: center;
 }
 
-.search-input {
+.search-input, .search-inputDate{
     color: gray;
     background-color: white;
     border: 1px solid #ccc;
     height: 100%;
-    width: 300px;
-    font-size: 15px;
+    font-size: 13px;
     padding: 5px;
 }
 
+.search-input {
+    width: 300px;
+}
+
 .search-inputDate {
-    color: gray;
-    background-color: white;
-    border: 1px solid #ccc;
-    height: 100%;
-    width: 100px;
-    font-size: 15px;
-    padding: 5px;
+    width: 120px;
+    text-align: center;
 }
 
 .search-input::placeholder {
@@ -53,16 +61,17 @@
 }
 
 .sendBtn, .cancelBtn {
+    width: 90px;
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 13px;
 }
 
-.sendBtnSmall, .cancelBtnSmall {
+.sendBtnSmall {
     padding: 5px 10px;
-    font-size: 10px;
+    font-size: 13px;
 }
 
-.cancelBtn, .cancelBtnSmall {
+.cancelBtn {
     border-radius: 4px;
     border: 1px solid #000000;
     background-color: white;
@@ -70,19 +79,75 @@
     color: #000000;
 }
 
-.cancelBtn:hover, .cancelBtnSmall:hover {
+.cancelBtn:hover {
     background: #0b7dda;
     color: white;
 }
 
-.sendBtn:hover, .sendBtnSmall:hover {
+.sendBtn:hover {
     background: #0b7dda;
 }
 
-.buttons {
-    text-align: center;
+/* The container */
+.radio-container {
+    position: relative;
+    padding: 2px 30px 2px 25px;
+    cursor: pointer;
+    font-size: 13px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+/*    display: block;*/
+/*    margin-bottom: 12px;*/
 }
 
-.clickButton {
-    display: inline-block;
+/* Hide the browser's default radio button */
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 5px;
+    left: 0px;
+    height: 15px;
+    width: 15px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.radio-container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.radio-container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-container .checkmark:after {
+    top: 3.5px;
+    left: 3.5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
 }

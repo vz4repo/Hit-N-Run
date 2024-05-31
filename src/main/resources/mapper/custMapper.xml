@@ -8,8 +8,8 @@
 
 <!-- 회원가입   -->
     <insert id="insert" parameterType="CustDto">
-        insert into cust(c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, sms_agr, email_agr)
-        values (#{c_email}, #{c_pwd}, #{c_name}, #{c_birth}, #{c_gnd}, #{c_phn}, #{c_zip}, #{c_road_a}, #{c_jibun_a}, #{c_det_a}, #{sms_agr}, #{email_agr})
+        insert into cust(c_email, c_pwd, c_name, c_birth, c_gnd, c_phn, c_zip, c_road_a, c_jibun_a, c_det_a, sms_agr, email_agr, c_adr_list_id)
+        values (#{c_email}, #{c_pwd}, #{c_name}, #{c_birth}, #{c_gnd}, #{c_phn}, #{c_zip}, #{c_road_a}, #{c_jibun_a}, #{c_det_a}, #{sms_agr}, #{email_agr}, 1)
 
     </insert>
 
@@ -39,7 +39,7 @@
 <!--고객 정보 변경-->
     <update id="updateAll" parameterType="CustDto">
         update cust
-        set  c_phn = #{c_phn}, c_zip = #{c_zip}, c_road_a = #{c_road_a}, c_jibun_a = #{c_jibun_a}, c_det_a = #{c_det_a}, sms_agr = #{sms_agr}, email_agr = #{email_agr}
+        set  c_phn = #{c_phn}, c_birth = #{c_birth}, c_zip = #{c_zip}, c_road_a = #{c_road_a}, c_jibun_a = #{c_jibun_a}, c_det_a = #{c_det_a}, sms_agr = #{sms_agr}, email_agr = #{email_agr}
         where c_id = #{c_id}
     </update>
 
