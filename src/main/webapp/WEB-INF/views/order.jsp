@@ -307,7 +307,9 @@
 
         <%-- TODO: 150 --%>
         <div class="dlv-header">
-            <div  style="width: 150px">배송정보</div>
+            <div  style="width: 150px">
+                <i class="fas fa-truck "> 배송 </i>
+            </div>
             <!-- 배송지 변경 버튼 -->
             <button class="btn-change-address">배송지 변경</button>
         </div>
@@ -371,7 +373,9 @@
 </div>
 <section class="order__items">
     <hr class="first__under"/>
-    <div class="title__order">제품정보</div>
+    <div class="title__order">
+        <i class="fas fa-box-open "> 제품 </i>
+    </div>
     <div class="tb__order">
         <form action="/order">
             <table>
@@ -441,8 +445,11 @@
     </div>
 </section>
 <%-- 결제 위젯 호출 --%>
+<div class="title__order">
+    <i class="far fa-credit-card " style="font-weight: 900;"> 결제 </i>
+</div>
 <section class="order__payment">
-    <div class="order__payment__wrapper">
+    <div class="order__payment__wrapper" style="margin-top: 0">
     <%@include file="payCheckout.jsp" %>
     <%-- 2024.05.27 [혁락] grid 관련 추가 --%>
     <div class="tb__right">
