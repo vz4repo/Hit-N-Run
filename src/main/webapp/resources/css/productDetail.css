@@ -175,6 +175,18 @@ body.productDetail{
     height: 50px;
     align-items: center;
 }
+.sticky2{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 98;
+    height: 50px;
+    align-items: center;
+}
+
+#prdNavbar {
+    transition: top 0.72s; /* 0.3s은 예시로 원하는 시간으로 조정 가능 */
+}
 
 /* 리뷰작성 버튼 */
 .reviewContainer{
