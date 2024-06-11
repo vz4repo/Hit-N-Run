@@ -24,104 +24,105 @@ import java.util.List;
 @Controller
 @RequestMapping("/delivery") /* 원하는 url을 사용해서 해당 메서드 실행할수있게 해줌 */
 public class DeliveryController {
-    @Autowired /* 의존성 주입 */
-            DeliveryDao deliveryDao;
-    @Autowired
-    DeliveryService deliveryService;
+
+  @Autowired /* 의존성 주입 */
+  DeliveryDao deliveryDao;
+  @Autowired
+  DeliveryService deliveryService;
 
 
-    /* 2024.05.21 [혁락] 요청이 겹쳐서 앞에 '_' 추가 */
-    @GetMapping("/deliveryList")
-    public ResponseEntity<Map<String, Object>> deliveryList(@SessionAttribute(name = "c_id") int sessionId) {
-        Map<String, Object> response = new HashMap<>();
-        try {
-            List<DeliveryDto> list = deliveryService.readAll(sessionId);
-            if (list.isEmpty()) {
-                response.put("message", "조회된 내용이 없습니다.");
-            } else {
-                response.put("list", list);
-            }
-            System.out.println("response = " + response);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            response.put("error", "배송지 정보를 불러오는 중 오류가 발생했습니다.");
+  /* 2024.05.21 [혁락] 요청이 겹쳐서 앞에 '_' 추가 */
+  @GetMapping("/deliveryList")
+  public ResponseEntity<Map<String, Object>> deliveryList(@SessionAttribute(name = "c_id") int sessionId) {
+    Map<String, Object> response = new HashMap<>();
+    try {
+      List<DeliveryDto> list = deliveryService.readAll(sessionId);
+      if (list.isEmpty()) {
+        response.put("message", "조회된 내용이 없습니다.");
+      } else {
+        response.put("list", list);
+      }
+      /* TODO: sysout 대신 Logger */
+      /*System.out.println("response = " + response);*/
+      return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      response.put("error", "배송지 정보를 불러오는 중 오류가 발생했습니다.");
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-            /* 여기까지가 형략님 원래코드 */
+      /* 여기까지가 형략님 원래코드 */
 
-            /* 김수연 추가 0523 */
-            return ResponseEntity.status(HttpStatus.SEE_OTHER)
-                    .location(URI.create("/errorPageCust"))
-                    .build();
-        }
+      /* 김수연 추가 0523 */
+      return ResponseEntity.status(HttpStatus.SEE_OTHER)
+          .location(URI.create("/errorPageCust"))
+          .build();
     }
+  }
 
-    @GetMapping("/deliverySelected")
-    public ResponseEntity<Map<String, Object>> selectedList(@SessionAttribute(name = "c_id") int sessionId, @RequestParam("dlvId") Integer dlvId) {
-        Map<String, Object> response = new HashMap<>();
-        try {
-            DeliveryDto selectedDto = deliveryService.read(sessionId, dlvId);
-            if (selectedDto == null) {
-                response.put("message", "선택한 배송지 정보가 없습니다.");
-            } else {
-                response.put("selectedDto", selectedDto);
-            }
-            System.out.println("response = " + response);
-            return ResponseEntity.ok(response);
-        } catch (Exception e) {
-            response.put("error", "선택한 배송지 정보를 불러오는 중 오류가 발생했습니다.");
+  @GetMapping("/deliverySelected")
+  public ResponseEntity<Map<String, Object>> selectedList(@SessionAttribute(name = "c_id") int sessionId,
+      @RequestParam("dlvId") Integer dlvId) {
+    Map<String, Object> response = new HashMap<>();
+    try {
+      DeliveryDto selectedDto = deliveryService.read(sessionId, dlvId);
+      if (selectedDto == null) {
+        response.put("message", "선택한 배송지 정보가 없습니다.");
+      } else {
+        response.put("selectedDto", selectedDto);
+      }
+      /* TODO: sysout 대신 Logger */
+      /*System.out.println("response = " + response);*/
+      return ResponseEntity.ok(response);
+    } catch (Exception e) {
+      response.put("error", "선택한 배송지 정보를 불러오는 중 오류가 발생했습니다.");
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-            /* 여기까지가 형략님 원래코드 */
+      /* 여기까지가 형략님 원래코드 */
 
-            /* 김수연 추가 0523 */
-            return ResponseEntity.status(HttpStatus.SEE_OTHER)
-                    .location(URI.create("/errorPageCust"))
-                    .build();
-        }
+      /* 김수연 추가 0523 */
+      return ResponseEntity.status(HttpStatus.SEE_OTHER)
+          .location(URI.create("/errorPageCust"))
+          .build();
     }
+  }
 
 
+  @GetMapping("/deliveryRegister")
+  public String newDLVForm() throws Exception {
+    try {
 
-    @GetMapping("/deliveryRegister")
-    public String newDLVForm() throws Exception {
-        try {
-
-            return "deliveryRegister";
-        } catch (Exception e) {
-            return "errorPageCust";
-        }
+      return "deliveryRegister";
+    } catch (Exception e) {
+      return "errorPageCust";
     }
+  }
 
-    @PostMapping("/deliveryRegister")
-    public String registerNewsDLV(@SessionAttribute(name = "c_id")int sessionId, HttpServletRequest request, @ModelAttribute DeliveryDto deliveryDto) throws Exception {
-        try {
-            System.out.println("****************");
-            System.out.println("deliveryDto = " + deliveryDto.toString());
+  @PostMapping("/deliveryRegister")
+  public String registerNewsDLV(@SessionAttribute(name = "c_id") int sessionId, HttpServletRequest request,
+      @ModelAttribute DeliveryDto deliveryDto) throws Exception {
+    try {
+      /* TODO: sysout 대신 Logger */
+      /*System.out.println("deliveryDto = " + deliveryDto.toString());*/
 
-
-            // 새로운 c_adr_list_id 값 조회
+      // 새로운 c_adr_list_id 값 조회
 //            int newId = findUnusedIdFromDatabase();
 
 
-            /* TODO : c_adr_list_id mapper에서 max+1 할지 고민 -> 이거 autoincrement돼서 c_adr_list_id set 안해도 됨 x */
-            /* deliveryRegister 페이지에서 입력받은 데이터 db에 저장시키기 */
-            DeliveryDto newAddr = deliveryDto;
-            newAddr.setC_id(sessionId);
-            newAddr.setAdr_name(deliveryDto.getAdr_name());
-            newAddr.setRcver(deliveryDto.getRcver());
-            newAddr.setRcver_phn(deliveryDto.getRcver_phn());
-            newAddr.setRcver_zip(deliveryDto.getRcver_zip());
-            newAddr.setRcver_adr(deliveryDto.getRcver_adr());
+      /* TODO : c_adr_list_id mapper에서 max+1 할지 고민 -> 이거 autoincrement돼서 c_adr_list_id set 안해도 됨 x */
+      /* deliveryRegister 페이지에서 입력받은 데이터 db에 저장시키기 */
+      DeliveryDto newAddr = deliveryDto;
+      newAddr.setC_id(sessionId);
+      newAddr.setAdr_name(deliveryDto.getAdr_name());
+      newAddr.setRcver(deliveryDto.getRcver());
+      newAddr.setRcver_phn(deliveryDto.getRcver_phn());
+      newAddr.setRcver_zip(deliveryDto.getRcver_zip());
+      newAddr.setRcver_adr(deliveryDto.getRcver_adr());
 
-            /* db 에 저장 */
-            deliveryDao.insert(newAddr);
+      /* db 에 저장 */
+      deliveryDao.insert(newAddr);
 
-
-            return "order";
-        } catch (Exception e) {
-            return "errorPageCust";
-        }
+      return "order";
+    } catch (Exception e) {
+      return "errorPageCust";
     }
-
+  }
 
 //    private int findUnusedIdFromDatabase() {
 //        // 데이터베이스에서 사용되지 않는 새로운 값 조회하는 쿼리
@@ -135,8 +136,8 @@ public class DeliveryController {
 
 
 
-    /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
-    /* 유저 개인의 배송지 전체 목록 띄우는 */
+  /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
+  /* 유저 개인의 배송지 전체 목록 띄우는 */
 //    @GetMapping("/_deliveryList")
 //    public String deliveryList(@SessionAttribute(name = "c_id")int sessionId, DeliveryDto dto, Model model) throws Exception {
 //
@@ -158,7 +159,7 @@ public class DeliveryController {
 //        return "deliveryList";
 //    }
 
-    /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
+  /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
 //    @GetMapping("/_deliverySelected")
 //    public String selectedList(@SessionAttribute(name = "c_id")int sessionId, Model model, DeliveryDto dto, @RequestParam("dlvId") Integer dlvId) throws Exception {
 //        try {
@@ -178,7 +179,7 @@ public class DeliveryController {
 //        return "deliveryList";
 //    }
 
-    /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
+  /* 2024.05.21 [혁락] 안쓰는 요청 앞에 '_' 추가 */
 //    @GetMapping("/__")
 //    public String selectedDefault(@SessionAttribute(name = "c_id")int sessionId, Model model) throws Exception {
 //        try {
@@ -216,8 +217,6 @@ public class DeliveryController {
 //        }
 //        return "deliveryShowDeflt";
 //    }
-
-
 
 //    @GetMapping("/deliveryAddrInput")
 //    public String newAddrInput() throws Exception {

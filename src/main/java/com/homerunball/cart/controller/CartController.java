@@ -146,7 +146,8 @@ public class CartController {
                 /* 존재하지않을경우 장바구니에 insert 실행 */
                 cartDao.insert(cartDto);
             }
-            System.out.println("insert:" + cartDto);
+            /* TODO: sysout 대신 Logger */
+            /*System.out.println("insert:" + cartDto);*/
 
             m.addAttribute("cartDto", cartDto);
             return "redirect:/cart/list";
@@ -172,9 +173,9 @@ public class CartController {
             List<CartDto> list = cartDao.getStk(c_id);
 
 //            List<ProductDto> prdImg = cartDao.getProductImg()
-            System.out.println("stklist=========="+list);
+            /* TODO: sysout 대신 Logger */
+            /*System.out.println("stklist=========="+list);*/
 
-            System.out.println();
 
             /* Cart가 null 일경우 장바구니에 담긴 상품이 없다고 뷰애서 출력 */
             if(list.isEmpty()) {

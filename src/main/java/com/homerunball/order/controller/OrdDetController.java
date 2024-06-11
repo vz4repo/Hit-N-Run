@@ -91,7 +91,8 @@ public class OrdDetController {
       , @RequestParam("fromDate") String fromDate
       , @RequestParam("toDate") String toDate) {
 
-    System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
+    /* TODO: sysout 대신 Logger */
+    /*System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);*/
 
     return orderDetService.selectOrderHistoryWithDateRange(c_id, fromDate, toDate);
   }

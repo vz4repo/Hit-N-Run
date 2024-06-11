@@ -63,12 +63,14 @@ Make sure to test the configuration in a staging environment to tweak it accordi
 
   <Loggers>
     <!-- Application Logger -->
-    <Logger name="com.homerunball" level="debug" additivity="false">
+    <Logger name="com.homerunball" level="info" additivity="false">
+      <AppenderRef ref="Console"/>
       <AppenderRef ref="Async"/>
     </Logger>
 
     <!-- Third-party Libraries Logger -->
     <Logger name="org.springframework" level="info" additivity="false">
+      <AppenderRef ref="Console"/>
       <AppenderRef ref="Async"/>
     </Logger>
 

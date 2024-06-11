@@ -68,9 +68,12 @@ public class ProductViewController {
             StockViewDto stkOptInfo = productViewService.readStkOptInfo(pd_id, pd_clsf_cd);
             List<StockViewDto> listStkOpt = productViewService.getListStkId(pd_id);
 
+            /* TODO: sysout 대신 Logger */
+            /*
             System.out.println("pd_id = " + pd_id);
             System.out.println("pd_clsf_cd = " + pd_clsf_cd);
             System.out.println("listStkOpt.get(0) = " + listStkOpt.get(0).getPd_clsf_cd());
+            */
 
             m.addAttribute("stkOptInfo", stkOptInfo);
         } catch (Exception e) {

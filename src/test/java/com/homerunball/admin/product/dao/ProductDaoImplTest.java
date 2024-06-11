@@ -23,7 +23,8 @@ public class ProductDaoImplTest {
     /* productDao가 연결되었는지 테스트하기 */
     @Test
     public void linkTest() {
-        System.out.println("ProductDao = " + productDao);
+        /* TODO: sysout 대신 Logger */
+        /*System.out.println("ProductDao = " + productDao);*/
         assertTrue(productDao != null);
     }
 

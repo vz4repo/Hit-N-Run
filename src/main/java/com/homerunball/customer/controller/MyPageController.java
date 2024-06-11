@@ -113,7 +113,8 @@ public class MyPageController {
     @PostMapping("/info")
     public String modify(@Validated @ModelAttribute("myPageInfoValidator") CustDto custDto, BindingResult result, HttpServletRequest request, String c_zip, String c_road_a, String c_jibun_a, String c_det_a, String c_phn, String c_birth, String sms_agr, String email_agr) {
         try {
-            System.out.println("자스를 통과한 에러가 있나요?! = " + result);
+                /* TODO: sysout 대신 Logger */
+            /*System.out.println("자스를 통과한 에러가 있나요?! = " + result);*/
             if (result.hasErrors()) {
                 return "myPageInfo";
             }
@@ -132,7 +133,8 @@ public class MyPageController {
 
             custDao.updateAll(custDto);
 
-            System.out.println(custDto.toStringV1());
+                /* TODO: sysout 대신 Logger */
+            /*System.out.println(custDto.toStringV1());*/
 
             return "redirect:/mypage/list";
         } catch (Exception E) {
@@ -154,10 +156,12 @@ public class MyPageController {
 
     @PostMapping("/pwdEdit")
     public String pwdModify(@Validated @ModelAttribute("PwdChangeValidator") CustDto custDto, BindingResult result, HttpServletRequest request, String c_pwd, String curPwd, RedirectAttributes msg) {
+            /* TODO: sysout 대신 Logger */
         /*System.out.println("자스를 통과한 에러가 있나요?! = " + result);*/
 
         try {
-            System.out.println("자스를 통과한 에러가 있나요?! = " + result);
+                /* TODO: sysout 대신 Logger */
+            /*System.out.println("자스를 통과한 에러가 있나요?! = " + result);*/
 
             if (result.hasErrors()) {
                 return "pwdEdit";

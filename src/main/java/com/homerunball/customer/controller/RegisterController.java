@@ -47,15 +47,19 @@ public class RegisterController {
     @ResponseBody
     public String mailCheck(String email, HttpServletRequest request) {
      try{
-        System.out.println("[dev]이메일 인증 요청이 들어옴!");
-        System.out.println("[dev]이메일 인증 이메일 : " + email + "[dev]이메일 END==");
+            /* TODO: sysout 대신 Logger */
+         /*System.out.println("[dev]이메일 인증 요청이 들어옴!");*/
+            /* TODO: sysout 대신 Logger */
+         /*System.out.println("[dev]이메일 인증 이메일 : " + email + "[dev]이메일 END==");*/
 
         String verificationCode = custService.joinEmail(email); // 이메일로 인증번호 발송
-        System.out.println("[dev]자바로 받아온 인증번호:  " + verificationCode);
+            /* TODO: sysout 대신 Logger */
+         /*System.out.println("[dev]자바로 받아온 인증번호:  " + verificationCode);*/
 
         HttpSession session = request.getSession();
         session.setAttribute("verificationCode", verificationCode); // 세션에 인증번호 저장
-        System.out.println("[dev]검증용 저장 인증번호: " + session.getAttribute("verificationCode"));
+            /* TODO: sysout 대신 Logger */
+         /*System.out.println("[dev]검증용 저장 인증번호: " + session.getAttribute("verificationCode"));*/
 
         return verificationCode;
      } catch (Exception e) {
@@ -65,7 +69,8 @@ public class RegisterController {
 
     @PostMapping("/add")
     public String save(@Valid CustDto custDto, BindingResult result, RedirectAttributes Successful, @RequestParam("c_email2") String userInputCode, HttpServletRequest request) {
-        System.out.println("자스를 통과한 이메일, 비밀번호, 핸드폰 번호 에러가 있나요? = " + result);
+            /* TODO: sysout 대신 Logger */
+        /*System.out.println("자스를 통과한 이메일, 비밀번호, 핸드폰 번호 에러가 있나요? = " + result);*/
         try {
             if (result.hasErrors()) {
                 return "registerForm";
@@ -73,8 +78,10 @@ public class RegisterController {
             HttpSession session = request.getSession();
             String savedVerificationCode = (String) session.getAttribute("verificationCode");
 
-            System.out.println("넘어와라: " + savedVerificationCode);
-            System.out.println("입력 값: " + userInputCode);
+                /* TODO: sysout 대신 Logger */
+            /*System.out.println("넘어와라: " + savedVerificationCode);*/
+                /* TODO: sysout 대신 Logger */
+            /*System.out.println("입력 값: " + userInputCode);*/
 
             if (savedVerificationCode != null && savedVerificationCode.equals(userInputCode)) {
                 // 인증번호 일치 시 회원가입 진행
@@ -84,7 +91,8 @@ public class RegisterController {
                 if (custDto.getEmail_agr() == null) {
                     custDto.setEmail_agr("N");
                 }
-                System.out.println("회원가입 정보 = " + custDto);
+                    /* TODO: sysout 대신 Logger */
+                /*System.out.println("회원가입 정보 = " + custDto);*/
                 Successful.addFlashAttribute("signUpClear", "msg");
 
                 custDto.setC_pwd(custService.pwdEncrypt(custDto.getC_pwd()));
@@ -96,7 +104,8 @@ public class RegisterController {
 //                return "redirect:/";
             } else {
                 // 인증번호 불일치 시 회원가입 폼으로 이동
-                System.out.println("인증번호 잘못 입력하셨다구요");
+                    /* TODO: sysout 대신 Logger */
+                /*System.out.println("인증번호 잘못 입력하셨다구요");*/
                 return "registerForm";
             }
         } catch (Exception e) {

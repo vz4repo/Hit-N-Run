@@ -35,8 +35,6 @@ public class PaymentServiceImpl implements PaymentService {
     localDateMap.put("fromDate", parsedfromDate.atTime(LocalTime.MIN));
     localDateMap.put("toDate",     parsedtoDate.atTime(LocalTime.MAX));
 
-    System.out.println("localDateMap.toString() = " + localDateMap.toString());
-
     return paymentDao.selectPaymentHistoryWithDateRange(localDateMap);
   }
 }

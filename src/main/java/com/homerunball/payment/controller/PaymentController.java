@@ -150,7 +150,8 @@ public class PaymentController {
         , @RequestParam("fromDate") String fromDate
         , @RequestParam("toDate") String toDate) throws Exception {
         logger.info("[paymentController] :: /pay/list ");
-        System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);
+        /* TODO: sysout 대신 Logger */
+        /*System.out.printf("c_id: %d, fromDate: %s, toDate: %s", c_id, fromDate, toDate);*/
 
         return paymentService.selectPaymentHistoryWithDateRange(c_id, fromDate, toDate);
     }

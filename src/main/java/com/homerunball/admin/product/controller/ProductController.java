@@ -178,7 +178,8 @@ public class ProductController {
     public String manage(ProductDto productDto, @RequestParam("productList") String productID, String selectedContent, RedirectAttributes rattr, HttpServletRequest request, Model m, String pd_chr_cd) {
         /*이전 페이지의 url을 referer에 저장한다.*/
         String referer = request.getHeader("Referer");
-        System.out.println("referer = " + referer);
+        /* TODO: sysout 대신 Logger */
+        /*System.out.println("referer = " + referer);*/
         try {
             /*
             productNumber가 selectedProduct라면
@@ -250,7 +251,8 @@ public class ProductController {
             Iterator iteratorMap = productMap.entrySet().iterator();
             while (iteratorMap.hasNext()) {
                 Map.Entry entry = (Map.Entry) iteratorMap.next();
-                System.out.println(entry.getKey() + " = " + entry.getValue());
+                /* TODO: sysout 대신 Logger */
+                /*System.out.println(entry.getKey() + " = " + entry.getValue());*/
             }
             productService.modifyContent(productMap);
             rattr.addFlashAttribute("msg", "제품의 내용을 성공적으로 수정하였습니다.");
